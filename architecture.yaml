@@ -1,0 +1,810 @@
+# Concept MRI - Architecture Tracking Document
+# Status: todo | in_progress | done | blocked
+# Priority: critical | high | medium | low
+
+meta:
+  project: "Concept MRI - OpenAI Hackathon"
+  version: "1.4"
+  target_model: "ossb20b (OpenAI MoE)"
+  timeline: "7 days"
+  updated: "2025-01-04"
+  constraints:
+    - "Two token inputs only"
+    - "Several thousand words max"
+    - "User-supplied API keys for LLM labeling"
+
+# Critical Workflow Clarifications
+workflow:
+  probe_vs_experiment:
+    - "**Probes populate data lake:** Run MoE capture on contexts → write Parquet (routing + PCA128)"
+    - "**Experiments analyze word lists:** Select word subsets from populated data for analysis"
+    - "**NO probe re-running:** Experiments consume existing captures, never re-run probes"
+    - "**LLM labeling:** Applied to BOTH cluster cards AND archetypal path narratives"
+
+  data_flow:
+    - "Probe: contexts → MoE routing → lake artifacts (reusable)"
+    - "Experiment: word lists → highway selection → cohort export → clustering/CTA → labeling"
+    - "Analysis: clusters get LLM labels, paths get LLM narratives"
+
+# Core Infrastructure & Setup
+infrastructure:
+  project_setup:
+    status: todo
+    priority: critical
+    tasks:
+      - name: "Initialize repository structure"
+        status: todo
+        files: ["README.md", "requirements.txt", "pyproject.toml"]
+      - name: "Set up development environment"
+        status: todo
+        files: [".env.example", "docker-compose.yml", "Makefile"]
+      - name: "Configure logging and error handling"
+        status: todo
+        priority: critical
+        files: ["src/utils/logging.py", "src/utils/errors.py"]
+        hackathon_scope:
+          logging:
+            - "Single JSON logger with timestamps"
+            - "Console output only (no file rotation for MVP)"
+            - "Three levels: ERROR, INFO, DEBUG"
+            - "Request timing and memory usage"
+            - "MoE routing decisions and clustering progress"
+          error_handling:
+            - "Try/catch with context logging"
+            - "Graceful degradation (skip failed clusters, continue)"
+            - "User-friendly error messages in API responses"
+
+  data_layer:
+    status: todo
+    priority: critical
+    description: "Parquet + DuckDB storage with PCA128 features"
+    tasks:
+      - name: "Data schemas and contracts"
+        status: todo
+        files: ["src/schemas/", "src/io_parquet.py", "src/duck.py"]
+      - name: "Manifest and ID system"
+        status: todo
+        files: ["src/manifests.py", "src/ids.py"]
+
+# Backend Services (Python FastAPI)
+backend:
+  api_server:
+    status: todo
+    priority: critical
+    files: ["src/api/main.py", "src/api/routers/"]
+    endpoints:
+      # PROBES (atomic capture -> lake)
+      - path: "/api/probes"
+        method: "POST"
+        status: todo
+        priority: critical
+        body: "{ contexts:[str], targets_file:str, layers:[int] }"
+        returns: "{ capture_id, model_hash, lake_paths }"
+        description: "Run probe capture (K=1 routing + PCA128). Writes Parquet to lake."
+
+      - path: "/api/probes"
+        method: "GET"
+        status: todo
+        priority: high
+        returns: "[{ capture_id, created_at, contexts:[str], layers:[int] }]"
+        description: "List available captures."
+
+      - path: "/api/probes/{id}"
+        method: "GET"
+        status: todo
+        priority: high
+        returns: "{ manifest, lake_paths }"
+        description: "Fetch capture manifest & file paths."
+
+      # EXPERIMENTS (consume captures -> highways/cohort/cluster/cta)
+      - path: "/api/experiments"
+        method: "POST"
+        status: todo
+        priority: critical
+        body: "{ capture_id:str, label?:str }"
+        returns: "{ experiment_id }"
+        description: "Create an experiment bound to an existing capture. No capture re-run."
+
+      - path: "/api/experiments/{id}/highways"
+        method: "POST"
+        status: todo
+        priority: critical
+        returns: "{ highways_json_path, stats, window_used:[int,int,int] }"
+        description: "Compute ExpertHighways from the experiment's capture (first window auto-selected)."
+
+      - path: "/api/experiments/{id}/cohort"
+        method: "POST"
+        status: todo
+        priority: critical
+        body: "{ highway_signature:'L6E2→L7E3→L8E1', context:str }"
+        returns: "{ cohort_path }"
+        description: "Export cohort for the selected highway+context within this experiment."
+
+      - path: "/api/experiments/{id}/cluster"
+        method: "POST"
+        status: todo
+        priority: critical
+        body: "{ algo:'kmeans'|'hierarchical', k_per_layer:{L6:int,...} }"
+        returns: "{ models:[...], assignments_paths:[...], window_used:[int,int,int] }"
+        description: "Cluster cohort features on the auto-selected first window."
+
+      - path: "/api/experiments/{id}/cta"
+        method: "POST"
+        status: todo
+        priority: critical
+        returns: "{ paths_path, survival_path, window_used:[int,int,int] }"
+        description: "CTA (macro paths + survival/confusion) on first window."
+
+      - path: "/api/experiments/{id}/rules/ets"
+        method: "POST"
+        status: todo
+        priority: high
+        returns: "{ rules_path }"
+        description: "Generate ETS rules (faithful thresholds + prec/cov + CIs)."
+        
+      - path: "/api/experiments/{id}/rules/clr"
+        method: "POST"
+        status: todo
+        priority: high
+        returns: "{ rules_path }"
+        description: "Generate CLR rules (lineage rules + prec/cov)."
+
+      - path: "/api/experiments/{id}/label"
+        method: "POST"
+        status: todo
+        priority: high
+        returns: "{ clusters_path }"
+        description: "Generate LLM labels for clusters (short_label, dominant, secondary, outliers, provenance)."
+
+      - path: "/api/experiments"
+        method: "GET"
+        status: todo
+        priority: high
+        returns: "[{ id, created_at, capture_id, label?, window_used?, last_stage? }]"
+        description: "List experiments for quick open in UI."
+
+      - path: "/api/experiments/{id}"
+        method: "GET"
+        status: todo
+        priority: high
+        returns: "{ manifest, artifact_paths }"
+        description: "Manifest/artifact lookup for loaders."
+        
+      # TRANSFORMATION MATRIX (routing similarity; optional clip)
+      - path: "/api/transform/matrix"
+        method: "POST"
+        status: todo
+        priority: high
+        body: "{ capture_id:str, contexts:[str] }"
+        returns: "{ labels:[str], matrix:[[float]], mode:'routing' }"
+        description: "Compute pairwise JS similarity between highway distributions (first window)."
+
+  services:
+    # PROBES
+    capture_service:
+      status: todo
+      priority: critical
+      file: "src/services/probes/capture.py"
+      description: "Run K=1 routing + PCA128 and write lake artifacts."
+      features:
+        - name: "Activation hooks (post-residual) + router top-1 stats"
+          status: todo
+        - name: "PCA per layer (fit/apply) -> PCA128 features"
+          status: todo
+        - name: "NF4 quant + micro-batch backoff"
+          status: todo
+        - name: "Capture manifest (capture_id, contexts, layers)"
+          status: todo
+      dependencies: ["transformers", "bitsandbytes", "accelerate"]
+
+    # EXPERIMENTS
+    highways_service:
+      status: todo
+      priority: critical
+      file: "src/services/experiments/highways.py"
+      description: "Compute P(Eℓ+1|Eℓ), coverage, stickiness, ambiguity from capture routing."
+      features:
+        - name: "First window auto-select & persist to experiment manifest"
+          status: todo
+        - name: "Expert transition probabilities"
+          status: todo
+        - name: "Coverage and stickiness metrics"
+          status: todo
+        - name: "Highway ambiguity detection"
+          status: todo
+        - name: "ExpertHighways.json export"
+          status: todo
+
+    cohort_service:
+      status: todo
+      priority: critical
+      file: "src/services/experiments/cohorts.py"
+      description: "Select probe_ids by highway_signature+context; write cohort parquet in experiment."
+      highway_signature_format: "L{layer}E{expert} notation (e.g., L6E2→L7E3→L8E1)"
+      features:
+        - name: "Highway signature matching"
+          status: todo
+        - name: "Cohort parquet export"
+          status: todo
+        - name: "Cohort manifest badges (highway_signature, context_tokens)"
+          status: todo
+
+    cluster_service:
+      status: todo
+      priority: critical
+      file: "src/services/experiments/cluster/"
+      description: "Cluster cohort features (first window only)."
+      components:
+        - name: "base.py (ClusterBackend interface)"
+          status: todo
+        - name: "kmeans.py (MiniBatch)"
+          status: todo
+        - name: "hierarchical.py (Ward)"
+          status: todo
+      features:
+        - name: "k-per-layer"
+          status: todo
+        - name: "Model + assignments persistence"
+          status: todo
+
+    cta_service:
+      status: todo
+      priority: critical
+      file: "src/services/experiments/cta.py"
+      description: "CTA macro paths + survival/confusion (≥5% coverage)."
+      features:
+        - name: "Paths + examples writer"
+          status: todo
+        - name: "Survival/confusion metrics"
+          status: todo
+        - name: "5% coverage filter"
+          status: todo
+
+    rules_service:
+      status: todo
+      priority: high
+      files: ["src/services/experiments/rules/ets.py", "src/services/experiments/rules/clr.py"]
+      description: "ETS (faithful) + CLR (lineage) for cluster cards."
+      features:
+        - name: "Explainable Threshold Similarity"
+          status: todo
+        - name: "Cluster Lineage Rules"
+          status: todo
+        - name: "Precision/coverage with CIs"
+          status: todo
+
+    labeling_service:
+      status: todo
+      priority: high
+      file: "src/services/experiments/labeling.py"
+      description: "LLM + stats → cards AND archetypal path narratives. Two-stage process: 1) Label clusters, 2) Use cluster labels to generate path narratives."
+      features:
+        - name: "Cluster semantic labeling with ontology grouping"
+          status: todo
+          details: "Dominant/secondary/outlier analysis with structured JSON output"
+        - name: "Archetypal path narrative generation"
+          status: todo
+          details: "Takes cluster labels + path info → generates conceptual journey narratives"
+        - name: "Two-stage LLM workflow"
+          status: todo
+          details: "Stage 1: Cluster labeling → Stage 2: Path labeling (uses cluster results)"
+        - name: "Provenance tracking (which LLM generated which labels)"
+          status: todo
+        - name: "Structured output validation"
+          status: todo
+          details: "Validate JSON schemas for both cluster and path labels"
+
+    transform_service:
+      status: todo
+      priority: high
+      file: "src/services/experiments/transform.py"
+      description: "Routing similarity utilities (first window only)."
+      features:
+        - name: "routing_distribution(capture_id, context)"
+          status: todo
+        - name: "js_similarity(distA, distB)"
+          status: todo
+
+    bundle_service:
+      status: todo
+      priority: low
+      file: "src/services/bundle.py"
+      description: "Experiment bundling and replay"
+      features:
+        - name: "Zip experiment directory"
+          status: todo
+        - name: "Manifest validation"
+          status: todo
+        - name: "Replay without hidden state"
+          status: todo
+
+# Frontend (React + TypeScript)
+frontend:
+  setup:
+    status: todo
+    priority: critical
+    description: "React + Vite + TypeScript + Tailwind"
+    files: ["frontend/package.json", "frontend/vite.config.ts", "frontend/tailwind.config.js"]
+
+  components:
+    workspace_page:
+      status: todo
+      priority: critical
+      file: "frontend/src/pages/WorkspacePage.tsx"
+      features:
+        - name: "New Probe"
+          status: todo
+        - name: "New Experiment (choose capture)"
+          status: todo
+        - name: "Open Experiment"
+          status: todo
+        - name: "Recent experiments"
+          status: todo
+
+    new_probe_dialog:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/NewProbeDialog.tsx"
+      description: "Atomic probe capture; writes to lake; shows output paths."
+
+    experiment_flow:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/ExperimentFlow.tsx"
+      steps:
+        - name: "Select Capture & Inputs"
+          status: todo
+          notes: "Pick an existing capture; select contexts/targets subset if desired."
+        - name: "Expert Highways"
+          status: todo
+          notes: "Compute from capture; auto-select first window; show Sankey."
+        - name: "Select Highway → Export Cohort"
+          status: todo
+          notes: "Token List + badges (Highway Signature, Context). Writes cohort in this experiment."
+        - name: "Clustering/CTA (first window only)"
+          status: todo
+          notes: "k-per-layer; KMeans/Hierarchical."
+        - name: "Explore & Label"
+          status: todo
+          notes: "Latent Sankey (macro→micro), Cluster Cards (ETS/CLR + LLM), PCA3D tab."
+
+    expert_explorer:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/ExpertExplorer.tsx"
+      features:
+        - name: "Expert Sankey visualization (ECharts)"
+          status: todo
+          library: "echarts"
+        - name: "Context filter (1 or 2 contexts from capture)"
+          status: todo
+        - name: "Diff toggle (ΔP on edges + Top Δ table)"
+          status: todo
+        - name: "Badges: Highway Signature + Context"
+          status: todo
+        - name: "Expert Card tabs (Overview|Clusters|PCA3D|Rules)"
+          status: todo
+        - name: "Token List panel with Export Cohort"
+          status: todo
+        - name: "Run clustering button"
+          status: todo
+
+    latent_explorer:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/LatentExplorer.tsx"
+      features:
+        - name: "Window badge (read-only, Next/Prev disabled)"
+          status: todo
+        - name: "k-per-layer controls (first window only)"
+          status: todo
+        - name: "Latent Sankey + Path Drawer + Cluster Cards"
+          status: todo
+
+    visualizations:
+      sankey_charts:
+        status: todo
+        priority: high
+        file: "frontend/src/components/charts/SankeyChart.tsx"
+        library: "echarts"
+        features:
+          - name: "Expert highway flow visualization"
+            status: todo
+          - name: "Latent cluster flow visualization"
+            status: todo
+          - name: "Interactive edge selection"
+            status: todo
+
+      pca_3d:
+        status: todo
+        priority: medium
+        file: "frontend/src/components/charts/PCA3D.tsx"
+        library: "plotly"
+        features:
+          - name: "3D scatter plot of PCA128 features"
+            status: todo
+          - name: "Cluster color coding"
+            status: todo
+          - name: "Interactive exploration"
+            status: todo
+
+    cards:
+      cluster_cards:
+        status: todo
+        priority: high
+        file: "frontend/src/components/cards/ClusterCard.tsx"
+        description: "Population + ETS (faithful) & CLR (lineage); LLM labels (dominant/secondary/outliers + provenance)"
+        features:
+          - name: "Population statistics"
+            status: todo
+          - name: "ETS rules (faithful thresholds + prec/cov + CIs)"
+            status: todo
+          - name: "CLR rules (lineage rules + prec/cov)"
+            status: todo
+          - name: "LLM-generated labels with provenance"
+            status: todo
+            format: "{ short_label, dominant, secondary, outliers, breakdown }"
+          - name: "Dominant/secondary/outlier examples"
+            status: todo
+          - name: "Dominant/secondary/outlier token examples"
+            status: todo
+
+  pages:
+    transformation_matrix:
+      status: todo
+      priority: high
+      file: "frontend/src/pages/TransformationMatrix.tsx"
+      description: "Context similarity (routing mode) for the selected capture."
+      features:
+        - name: "Heatmap (ECharts) with labels"
+          status: todo
+        - name: "Load contexts from chosen capture"
+          status: todo
+        - name: "Cell click navigates to ExperimentFlow focused on that context"
+          status: todo
+
+# Core Algorithms
+algorithms:
+  window_selection:
+    status: todo
+    priority: critical
+    description: "Auto-select first CTA window deterministically"
+    implementation: "src/algorithms/window_selection.py"
+    algorithm: |
+      def select_first_window(captured_layers):
+          for L in sorted(captured_layers):
+              if {L, L+1, L+2}.issubset(captured_layers):
+                  return (L, L+1, L+2)
+          raise ValueError("Need three consecutive layers")
+
+  expert_highways:
+    status: todo
+    priority: high
+    description: "Compute expert transition probabilities"
+    implementation: "src/algorithms/expert_analysis.py"
+    metrics:
+      - "P(Expert_l+1 | Expert_l)"
+      - "Coverage percentage"
+      - "Stickiness score"
+      - "Ambiguity percentage"
+
+  concept_trajectory:
+    status: todo
+    priority: critical
+    description: "CTA analysis on selected cohort"
+    implementation: "src/algorithms/cta.py"
+    features:
+      - "Macro path computation"
+      - "Survival analysis"
+      - "Confusion matrices"
+      - "Path coverage filtering (≥5%)"
+
+# CLIs (thin wrappers; stdout prints output paths)
+cli:
+  probe:
+    status: todo
+    priority: medium
+    file: "src/cli/probe.py"
+    command: "cmri probe --contexts ctx.csv --targets targets.csv --layers 6,7,8"
+
+  exp_new:
+    status: todo
+    priority: medium
+    file: "src/cli/exp_new.py"
+    command: "cmri exp-new --capture <capture_id>"
+
+  exp_highways:
+    status: todo
+    priority: medium
+    file: "src/cli/exp_highways.py"
+    command: "cmri exp-highways --exp <id>"
+
+  exp_cohort:
+    status: todo
+    priority: medium
+    file: "src/cli/exp_cohort.py"
+    command: 'cmri exp-cohort --exp <id> --highway "L6E2→L7E3→L8E1" --context "the"'
+
+  exp_cluster:
+    status: todo
+    priority: medium
+    file: "src/cli/exp_cluster.py"
+    command: "cmri exp-cluster --exp <id> --algo kmeans --k-per-layer L6=3 L7=4 L8=3"
+
+  exp_cta:
+    status: todo
+    priority: medium
+    file: "src/cli/exp_cta.py"
+    command: "cmri exp-cta --exp <id>"
+
+  exp_rules:
+    status: todo
+    priority: medium
+    file: "src/cli/exp_rules.py"
+    command: "cmri exp-rules --exp <id> --mode ets|clr"
+
+  exp_label:
+    status: todo
+    priority: medium
+    file: "src/cli/exp_label.py"
+    command: "cmri exp-label --exp <id>"
+
+  transform_matrix:
+    status: todo
+    priority: medium
+    file: "src/cli/transform_matrix.py"
+    command: "cmri transform-matrix --capture <capture_id> --contexts the,a,an"
+
+# Data Schemas
+schemas:
+  tokens:
+    status: todo
+    priority: critical
+    file: "src/schemas/tokens.py"
+    fields: ["probe_id","context_text","target_text","context_token_ids","target_token_id","freq_bin?","pos_guess?"]
+    notes: "Per-probe only (no per-layer)."
+
+  routing:
+    status: todo
+    priority: critical
+    file: "src/schemas/routing.py"
+    fields: ["probe_id","layer","expert_top1_id","gate_top1_p","gate_entropy","margin"]
+    removed_fields: ["routing_weights","expert_output"]
+    notes: "K=1 routing only; used by highways & routing similarity."
+
+  features_pca128:
+    status: todo
+    priority: critical
+    file: "src/schemas/features_pca128.py"
+    fields: ["probe_id","layer","pca128","pca_version","fit_sample_n"]
+
+  capture_manifest:
+    status: todo
+    priority: critical
+    file: "src/schemas/capture_manifest.py"
+    fields: ["schema_version","capture_id","model_hash","contexts","layers","created_at"]
+
+  cohort_manifest:
+    status: todo
+    priority: critical
+    file: "src/schemas/cohort_manifest.py"
+    fields: ["schema_version","experiment_id","capture_id","highway_signature","context_tokens","created_at"]
+
+  experiment_manifest:
+    status: todo
+    priority: critical
+    file: "src/schemas/experiment_manifest.py"
+    fields: ["schema_version","experiment_id","capture_id","window_used","clustering","created_at"]
+
+  clustering:
+    status: todo
+    priority: critical
+    file: "src/schemas/clustering.py"
+    fields: ["experiment_id", "layer", "cluster_id", "centroid", "population"]
+    cluster_labeling_scheme:
+      format: "L{layer}E{expert}C{cluster}{granularity}"
+      examples: 
+        - "L1E3C2M" (Layer 1, Expert 3, Cluster 2, Macro)
+        - "L1E3C2m" (Layer 1, Expert 3, Cluster 2, micro)
+      description: "Hierarchical identifier for cluster cards with macro/micro granularity"
+
+  paths:
+    status: todo
+    priority: high
+    file: "src/schemas/paths.py"
+    fields: ["path_signature", "coverage", "survival_rate", "examples"]
+
+# Testing & Validation
+testing:
+  unit_tests:
+    status: todo
+    priority: medium
+    coverage_target: "80%"
+    files: ["tests/test_capture.py", "tests/test_clustering.py", "tests/test_cta.py"]
+
+  integration_tests:
+    status: todo
+    priority: medium
+    scenarios:
+      - "End-to-end capture → highways → cohort → CTA"
+      - "Window auto-selection edge cases"
+      - "k-per-layer clustering validation"
+
+  acceptance_tests:
+    status: todo
+    priority: high
+    criteria:
+      - "Capture: row counts match probes × layers"
+      - "Expert Highways: edges sum correctly"
+      - "Clustering: k-per-layer refreshes visualizations"
+      - "Latent Explorer: ≥5% coverage paths rendered"
+      - "Bundle: replay restores exact state"
+
+# Deployment & DevOps
+deployment:
+  docker:
+    status: todo
+    priority: medium
+    files: ["Dockerfile", "docker-compose.yml"]
+    services: ["api", "frontend", "gpu-worker"]
+
+  monitoring:
+    status: todo  
+    priority: low
+    features:
+      - "GPU memory monitoring"
+      - "API response times"
+      - "Error rate tracking"
+
+# Demo Scenarios (Critical for Hackathon)
+demo_scenarios:
+  single_highway_single_context:
+    status: todo
+    priority: critical
+    description: "Core demo: exploring a single highway with a single context token"
+    flow:
+      - "New Probe → capture contexts/targets"
+      - "New Experiment → select capture"
+      - "Expert Highways → auto-select first window"
+      - "Click highway edge → Token List with badges"
+      - "Export Cohort for that highway+context"
+      - "Clustering/CTA → k-per-layer controls"
+      - "Latent Explorer → Sankey (macro→micro) + Cluster Cards"
+
+  two_experts_different_contexts:
+    status: todo
+    priority: high
+    description: "Comparison demo: exploring two different experts with different context tokens"
+    flow:
+      - "Use existing capture with multiple contexts"
+      - "Expert Explorer → Context filter (select 2 contexts)"
+      - "Enable Diff toggle → show ΔP edges + Top Δ table"
+      - "Compare expert routing patterns between contexts"
+      - "Export cohorts for different highways"
+      - "Side-by-side cluster analysis"
+
+  transformation_analysis:
+    status: todo
+    priority: high
+    description: "Multi-context comparison using transformation matrix"
+    flow:
+      - "Transformation Matrix page → load capture contexts"
+      - "Heatmap visualization of context similarity (routing mode)"
+      - "Click heatmap cell → navigate to ExperimentFlow"
+      - "Focus analysis on selected context pair"
+      - "Demonstrate routing distribution similarities/differences"
+
+# Documentation
+documentation:
+  api_docs:
+    status: todo
+    priority: medium
+    description: "FastAPI auto-generated OpenAPI docs"
+
+  user_guide:
+    status: todo
+    priority: low
+    file: "docs/user_guide.md"
+    sections: ["Getting Started", "Expert Explorer", "Latent Explorer"]
+
+  demo_recordings:
+    status: todo
+    priority: critical
+    description: "Record all three demo scenarios for hackathon presentation"
+    videos:
+      - "Single highway exploration (core workflow)"
+      - "Two-expert comparison with diff toggle"
+      - "Transformation matrix → focused analysis"
+
+# Dependencies & Environment
+dependencies:
+  python:
+    version: "3.11"
+    core: ["fastapi", "uvicorn", "transformers", "torch"]
+    ml: ["scikit-learn", "numpy", "pandas"] 
+    storage: ["pyarrow", "duckdb"]
+    quantization: ["bitsandbytes", "accelerate"]
+    status: todo
+
+  frontend:
+    node_version: "18+"
+    core: ["react", "typescript", "vite", "tailwindcss"]
+    charts: ["echarts", "plotly.js"]
+    status: todo
+
+# Risk Mitigation
+risks:
+  gpu_memory:
+    severity: high
+    mitigation: "NF4 quantization + micro-batch floor=4"
+    status: todo
+
+  timeline_pressure:
+    severity: medium
+    mitigation: "First window only constraint"
+    status: planned
+
+  model_compatibility:
+    severity: medium
+    mitigation: "Flexible MoE detection and hooks"
+    status: todo
+
+# LLM Labeling Prompt Template (v1.4)
+llm_labeling:
+  cluster_labeling_prompt:
+    template: |
+      You are labeling a cluster of words from a language model's latent space.
+      Task: provide a concise human-readable label and a structured breakdown.
+      
+      Input:
+      - Cluster tokens: {token_list}
+      - Population stats: {stats_summary}
+      
+      Instructions:
+      1. Group by higher-order ontology (examples): 
+         - Animate objects (animals, people, living beings)
+         - Inanimate objects (vehicles, tools, artifacts, places, food items, …)
+         - Abstract concepts (qualities, emotions, ideas, relations)
+         - Function words (pronouns, determiners, auxiliaries, prepositions, …)
+         - Other
+      2. Identify dominant meaning, secondary meanings, and outliers.
+      3. Return:
+         - short_label (2–5 words)
+         - breakdown (counts or %)
+         - outliers list
+      4. If uncertain, short_label = "Unknown" and return raw groups only.
+      
+      Output (JSON):
+      {
+        "short_label": "Animate Objects (Animals)",
+        "dominant": "Animals",
+        "secondary": ["Vehicles"],
+        "outliers": ["sandwich"],
+        "breakdown": {"Animals": 6, "Vehicles": 2, "Food": 1}
+      }
+
+  archetypal_path_labeling_prompt:
+    template: |
+      You are creating narrative labels for archetypal paths in a neural network's concept trajectory analysis.
+      Task: Generate a coherent narrative that describes the conceptual journey through expert clusters.
+      
+      Input:
+      - Path signature: {path_signature}
+      - Cluster labels along path: {cluster_labels}
+      - Coverage percentage: {coverage}
+      - Example tokens: {example_tokens}
+      
+      Instructions:
+      1. Analyze the progression of cluster labels from start to end of the path
+      2. Identify the conceptual transformation or journey represented
+      3. Create a narrative that explains WHY this path exists (what linguistic/semantic pattern it captures)
+      4. Use the cluster labels as anchor points in your narrative
+      5. Keep narratives concise but informative (2-4 sentences)
+      
+      Output (JSON):
+      {
+        "path_narrative": "Concrete nouns evolve through spatial relationships to abstract locational concepts",
+        "transformation_type": "Semantic abstraction",
+        "key_transition": "Physical objects → Spatial relations → Abstract location",
+        "linguistic_pattern": "Noun phrase processing with increasing abstraction"
+      }

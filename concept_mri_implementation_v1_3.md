@@ -61,7 +61,7 @@ Steps (shown as sections, not a wizard):
    - **Expert Sankey** over `[L0→L1→L2]`; tooltips: coverage, stickiness, ambiguous%.  
    - **Context filter (1 or 2 contexts)** from the same capture.  
    - **Diff toggle**: if 2 contexts selected, show **ΔP** on edges and a small “Top Δ highways” table.  
-   - Click a highway → **Token List** opens with **badges**: **Highway Signature** (e.g., `E6-2→E7-3→E8-1`) and **Context**.
+   - Click a highway → **Token List** opens with **badges**: **Highway Signature** (e.g., `L6E2→L7E3→L8E1`) and **Context**.
 
 3. **Export Cohort** (inside this experiment)  
    - Writes `experiments/<id>/cohort/…` + `cohort_manifest.json` (includes *Highway Signature*, *Context Tokens*).
@@ -125,7 +125,7 @@ POST /api/experiments/{id}/highways
   -> { highways_json_path, stats, window_used:[L0,L1,L2] }
 
 POST /api/experiments/{id}/cohort
-  body: { highway_signature:str, context:str }
+  body: { highway_signature:str, context:str }  # Format: "L6E2→L7E3→L8E1"
   -> { cohort_path }
 
 POST /api/experiments/{id}/cluster
@@ -163,7 +163,7 @@ POST /api/transform/matrix
 cmri probe   --contexts ctx.csv --targets targets.csv --layers 6,7,8
 cmri exp-new --capture <capture_id>
 cmri exp-highways --exp <id>
-cmri exp-cohort   --exp <id> --highway "E6-2→E7-3→E8-1" --context "the"
+cmri exp-cohort   --exp <id> --highway "L6E2→L7E3→L8E1" --context "the"
 cmri exp-cluster  --exp <id> --algo kmeans --k-per-layer L6=3 L7=4 L8=3
 cmri exp-cta      --exp <id>
 cmri exp-rules    --exp <id> --mode ets|clr
