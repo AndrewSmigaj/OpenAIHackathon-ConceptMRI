@@ -1,220 +1,361 @@
-# Concept MRI — Implementation Plan (v1.3, window consistency)
+# Concept MRI — Implementation Plan (v1.4, probe-separated, experiment-centric)
 
-> **Purpose (for AI coders & the team):** Implement the MVP that follows the exact demo flow: **MoE routing first → select one expert highway → export cohort → clustering/CTA on that cohort**, with **k‑per‑layer** controls, **LLM‑assisted labeling**, and **Expert & Latent explorers**.  
-> **Window rule (MVP):** The system **always computes and shows only the first CTA window**, auto‑selected. Next/Prev window controls are **visible but disabled**.  
-> **Guardrails:** Do **not** change requirements. Do **not** add scope. All edits go through the PM (you).  
-> **Developer ethos:** Make the codebase easy for humans who use AI assistants to build and maintain.
+> **Purpose (for AI coders & the team):** Build the MVP of Concept MRI that follows **your exact flow**:
+> - **Probes are separate**: a probe capture writes *all inputs* needed for analyses (routing+features), **not** clustering/CTA.
+> - **Experiments consume captures**: within **one experiment**, you do Expert Highways → select one highway → **export cohort (inside the experiment)** → Clustering/CTA (first window only) → Rules/Labels.
+> - **Two-token regime**, **K=1** expert routing. **First CTA window only** (auto-selected and read-only). No “wizard” language — call it **Experiment Flow**.
+> - Optional views to support clips: **Context Diff** in Expert Explorer; **Transformation Matrix** (routing mode) for contexts.
 
----
-
-## 0) Non‑Functional Requirements (NFRs)
-1) **AI‑Coder Friendly**
-   - Plain, stable **file contracts** (Parquet/JSON) with explicit schemas (Appendix A).
-   - Self‑describing **manifests** + example payloads.
-   - Minimal infra: local **DuckDB** over Parquet.
-   - Small, idempotent **CLIs**; clear stdout of output paths.
-   - Deterministic defaults (`seed=1`, **first window auto**); effective‑config logs.
-   - Short, typed functions with docstrings and interface notes for copilots.
-2) **Performance & Resource**
-   - 16 GB GPU, 32 GB RAM; bitsandbytes **NF4**, Accelerate offload; **OOM backoff** (micro‑batch floor=4).
-   - MVP computes clustering/CTA **only on the first CTA window**; Next/Prev controls **disabled**.
-3) **Reproducibility & Portability**
-   - All artifacts include `{schema_version, model_hash, capture_id|experiment_id, config_hash, code_commit, created_at}`.
-   - **Bundle** export per experiment; replay without hidden state.
-4) **Process**
-   - Follow this plan; UX copy and flows are **fixed** unless approved.
+> **Guardrails:** Do **not** change requirements. Do **not** add scope. Ask before altering UX copy or flows. All defaults deterministic (`seed=1`).
 
 ---
 
-## 1) Terms (to prevent misread)
-- **Highway (generic):** a **path through macro clusters** (rough clustering) across layers. Raise **k** to split further.  
-- **Expert Highway:** a token’s **top‑1 expert** sequence across layers (K=1 routing).  
-- **Latent Highway:** macro cluster path inside the **selected expert space** (from the cohort).  
-- **Cohort:** exported tokens traveling a chosen expert highway; used as input to a **new analysis** (it does **not** filter the current run).  
-- **First CTA window (MVP):** the system auto‑selects a window once per experiment and uses it everywhere (Wizard, Latent Explorer, APIs).
-
-**Auto‑selection rule (deterministic):**  
-- If layers `[6,7,8]` are captured, use **[6,7,8]**.  
-- Else, choose the **smallest starting layer** `L` such that `[L, L+1, L+2]` exists in the captured set.  
-- Record the chosen window in the experiment **manifest** and display it read‑only in the UI.
+## 0) Locked Rules (do not drift)
+- **Probes** are standalone and write lake artifacts (routing K=1, PCA128 features). No clustering/CTA in probes.
+- **Experiments** are the whole analysis: consume a capture → highways → cohort → clustering/CTA → cards/labels → export bundle.
+- **First CTA window only** (auto-selected triplet `[L0,L1,L2]`; persisted as `window_used`; Next/Prev shown disabled).
+- **Two-token inputs**; **MoE routing K=1**; per-expert interpretations; **k-per-layer** controls for clustering.
+- **Backends** (MVP): KMeans (MiniBatch, default) and Hierarchical (Ward). ETS/CLR rules on cards; LLM-assisted labels.
+- **No side-by-side compare screen**. Routing **diff** and **matrix** are single views you can open/close to record clips.
 
 ---
 
-## 2) System Architecture (MVP)
-- **Frontend:** React + Vite + TypeScript + Tailwind. Charts: **ECharts** (Sankey), **Plotly** (3D PCA).  
-- **Backend:** Python 3.11, **FastAPI** + Uvicorn. GPU tasks in workers (plain Python).  
-- **Data:** Parquet + **DuckDB**. PCA128 features stored in the lake; PCA params per layer persisted.  
-- **Model Runtime:** HF Transformers, bitsandbytes (NF4), Accelerate `device_map="auto"`.
+## 1) System Architecture (MVP)
+- **Frontend:** React + Vite + TypeScript + Tailwind. Visuals: **ECharts** (Sankey, heatmap), **Plotly** (3D PCA).
+- **Backend:** Python 3.11, **FastAPI** + Uvicorn. GPU tasks in plain Python workers.
+- **Data:** Parquet on disk + **DuckDB** for queries. PCA params per layer persisted.
+- **Runtime:** HF Transformers, bitsandbytes **NF4**, Accelerate `device_map="auto"`. Micro-batch backoff (floor=4).
 
-**Services (modules):**
-`capture_svc`, `highways_svc`, `cohort_svc`, `cluster_svc`, `cta_svc`, `rules_svc`, `label_svc`, `bundle_svc`.
-
----
-
-## 3) UX Surfaces & Flows
-
-### 3.1 Workspace (landing)
-Buttons: **[ New Probe ] [ New Analysis ] [ Open Bundle ] [ Resume ]**.  
-Panels: Recent Experiments; Status (GPU OK, last probe time).
-
-### 3.2 New Probe (atomic)
-Fields: Context tokens (multi), Targets file (CSV/JSON), Layers (default 6–8).  
-Run: **MoE capture** → post‑residual → PCA128; router top‑1 stats.  
-Output: Lake artifacts + capture manifest; **Open in Expert Explorer** button.
-
-**Acceptance:** Parquet files present; counts match probes × layers; PCA128 & routing rows align by `probe_id`/`layer`.
-
-### 3.3 Experiment Wizard (analysis)
-Stepper:
-1) **Contexts & Targets** (choose from lake or upload list)  
-2) **Run MoE (Expert Routing)** (skip if capture exists; else run)  
-3) **Select Highway & Export Cohort** (Expert Sankey → click edge → **Token List** → **Export Cohort**)  
-4) **Clustering/CTA on Cohort**  
-   - Choose **KMeans** (default) or **Hierarchical**; set **k**/**k‑per‑layer**.  
-   - **Window:** *First CTA window (auto‑selected, read‑only; displayed for clarity).*  
-   - **MVP:** compute only this window; UI shows Next/Prev controls **disabled**.  
-5) **Explore** (open explorers)
-
-**State:** Step N writes artifacts and invalidates N+; wizard shows file paths and the chosen window in a side panel.
-
-### 3.4 Expert Explorer
-Views: **Expert Sankey (L..L+2)**; highways‑only toggle; tooltips (coverage, stickiness, ambiguous%).  
-Expert Card tabs: Overview | Clusters | 3D PCA | Rules.  
-**Token List** panel: tokens on selected highway; **[Export Cohort]**.  
-**Primary action:** **Run clustering on this highway** → jump to Wizard step 4 with that cohort preloaded (uses the **same first window** as recorded in manifest).
-
-### 3.5 Latent Explorer
-Defaults: compute/show the **first CTA window**; Next/Prev controls visible but **disabled**.  
-Features: **Latent Sankey** (macro first; drill to micro), **Path Drawer** (examples), **Cluster Cards** (Population + **LLM labels** with dominant/secondary/outliers + provenance).  
-**k‑per‑layer** inputs for the (read‑only) first window; **Re‑Run** button.
-
-**Acceptance:** Changing k‑per‑layer re‑clusters first window and refreshes visuals & cards.
-
-### 3.6 Token Explorer (tool)
-Inspect a token’s embedding, neighbors, lineage, and labels. Open via search or cards.
+**Services (top-level modules):**
+- `probes/` → `capture_service` (routing + PCA128 to lake)
+- `experiments/` → `highways_service`, `cohort_service`, `cluster_service`, `cta_service`, `rules_service`, `labeling_service`, `transform_service` (routing similarity utilities), `bundle_service`
 
 ---
 
-## 4) Data Flow (end‑to‑end)
-1) **Capture Lake:** tokens, routing (K=1), features (PCA128) by layer; PCA models persisted.  
-2) **Export Cohort:** from a selected expert highway.  
-3) **Clustering (first window only):** KMeans/Hierarchical using PCA128; **k‑per‑layer** supported for those layers.  
-4) **CTA:** macro paths + survival/confusion; ≥5% coverage filter.  
-5) **Rules & Cards:** ETS (faithful) + CLR (lineage); LLM labels with dominant/secondary/outliers.  
-6) **Bundle:** zip experiment directory.
+## 2) UX Surfaces & Flows
+
+### 2.1 Workspace (landing)
+Buttons: **[ New Probe ]  [ New Experiment ]  [ Open Experiment ]  [ Open Transformation Matrix ]**
+Panels: Recent Experiments, Recent Captures, Status (GPU OK, last probe time).
+
+**Acceptance:** Buttons route correctly; both recents load immediately.
 
 ---
 
-## 5) API Endpoints (FastAPI)
-```http
-POST /api/capture           -> { capture_id, model_hash, lake_paths }
-POST /api/highways          -> { highways_json_path, stats }
-POST /api/cohort/export     -> { cohort_path }
+### 2.2 New Probe (atomic, standalone)
+Fields: Context tokens (multi / CSV), Targets file (CSV/JSON), Layers (default 6–8).  
+Action: Run capture → record **post-residual activations → PCA128** per layer, and **router top‑1 stats** per layer.  
+Output: `data/lake/<capture_id>/...` + `capture_manifest.json`. UI shows **Open Experiment** on success.
 
-# Window is implicit (first only). No window arg in MVP.
-POST /api/cluster           -> { models: [...], assignments_paths: [...], window_used: [L,L+1,L+2] }
-POST /api/cta               -> { paths_path, survival_path, window_used: [L,L+1,L+2] }
+**Acceptance:** Row counts = probes × layers; routing & features align by `(probe_id, layer)`.
 
-POST /api/rules/ets|clr     -> { rules_path }
-POST /api/label             -> { clusters_path }
-GET  /api/experiment/{id}   -> manifest & paths (includes window_used)
-GET  /api/capture/{id}      -> manifest & paths
+---
+
+### 2.3 New Experiment → **Experiment Flow** (consumes a capture)
+Steps (shown as sections, not a wizard):
+1. **Select Capture & Inputs**  
+   - Pick an existing **capture**. Optionally narrow to a subset of contexts/targets.  
+   - The **first CTA window** is auto-selected and shown read-only (`window_used`).
+
+2. **Expert Highways** (from capture)  
+   - **Expert Sankey** over `[L0→L1→L2]`; tooltips: coverage, stickiness, ambiguous%.  
+   - **Context filter (1 or 2 contexts)** from the same capture.  
+   - **Diff toggle**: if 2 contexts selected, show **ΔP** on edges and a small “Top Δ highways” table.  
+   - Click a highway → **Token List** opens with **badges**: **Highway Signature** (e.g., `E6-2→E7-3→E8-1`) and **Context**.
+
+3. **Export Cohort** (inside this experiment)  
+   - Writes `experiments/<id>/cohort/…` + `cohort_manifest.json` (includes *Highway Signature*, *Context Tokens*).
+
+4. **Clustering/CTA (first window only)**  
+   - Choose backend (**KMeans** or **Hierarchical**).  
+   - Set **k-per-layer** (for `[L0,L1,L2]` only).  
+   - Run clustering → run CTA (macro paths + survival/confusion; coverage filter ≥5%).
+
+5. **Explore & Label**  
+   - **Latent Explorer**: **macro paths**; drill to **two latent paths** (k=2) for the “zoom” clip.  
+   - **Cluster Cards**: Population + **ETS (faithful)** & **CLR (lineage)**; LLM labels (dominant / secondary / outliers + provenance).  
+   - **3D PCA (per expert)** tab: color=cluster; size=margin; lasso filters.
+
+6. **Export Bundle** (zip of experiment directory).
+
+**Acceptance:** Each section writes artifacts; re-running **Clustering** invalidates CTA + cards only.
+
+---
+
+### 2.4 Transformation Matrix (routing mode; optional clip)
+- Opens from Workspace or the Experiment Flow toolbar.  
+- Select 2–10 contexts from a **capture**; backend computes pairwise **JS similarity** between **highway distributions** (first window).  
+- **Heatmap** (ECharts); optional dendrogram (backlog). Clicking a cell opens Experiment Flow focused on that context.
+
+**Acceptance:** Matrix returns values in `[0,1]`, symmetric; labels match selected contexts.
+
+---
+
+## 3) Data Flow (end-to-end)
+1) **Probe** → Lake: `tokens.parquet`, `routing/layer=*`, `features_pca128/layer=*`, `capture_manifest.json`.
+2) **Experiment** consumes capture: compute **ExpertHighways.json** (`window_used` persisted).
+3) **Export Cohort**: select probes by **(Highway Signature, Context)** → write cohort parquet + manifest.
+4) **Clustering (first window)**: fit on PCA128 for `[L0,L1,L2]` with **k-per-layer**; write models + assignments.
+5) **CTA**: aggregate macro paths + survival/confusion; path examples.
+6) **Rules/Labels**: ETS & CLR JSON; Cluster Cards with LLM labels.
+7) **Bundle**: zip experiment dir.
+
+---
+
+## 4) APIs (FastAPI, stable, experiment-centric)
+
+### Probes (standalone capture)
+```
+POST /api/probes
+  body: { contexts:[str], targets_file:str, layers:[int] }
+  -> { capture_id, model_hash, lake_paths }
+
+GET  /api/probes
+GET  /api/probes/{id}
+  -> { manifest, lake_paths }
+```
+
+### Experiments (consume capture; no re-capture)
+```
+POST /api/experiments
+  body: { capture_id:str, label?:str }
+  -> { experiment_id }
+
+POST /api/experiments/{id}/highways
+  -> { highways_json_path, stats, window_used:[L0,L1,L2] }
+
+POST /api/experiments/{id}/cohort
+  body: { highway_signature:str, context:str }
+  -> { cohort_path }
+
+POST /api/experiments/{id}/cluster
+  body: { algo:'kmeans'|'hierarchical', k_per_layer:{L0:int, L1:int, L2:int} }
+  -> { models:[...], assignments_paths:[...], window_used:[L0,L1,L2] }
+
+POST /api/experiments/{id}/cta
+  -> { paths_path, survival_path, window_used:[L0,L1,L2] }
+
+POST /api/experiments/{id}/rules/ets
+POST /api/experiments/{id}/rules/clr
+  -> { rules_path }
+
+POST /api/experiments/{id}/label
+  -> { clusters_path }
+
+GET  /api/experiments
+  -> [{ id, created_at, capture_id, label?, window_used?, last_stage? }]
+
+GET  /api/experiments/{id}
+  -> { manifest, artifact_paths }
+```
+
+### Routing similarity (for optional clips; routing mode only)
+```
+POST /api/transform/matrix
+  body: { capture_id:str, contexts:[str] }
+  -> { labels:[str], matrix:[[float]], mode:'routing' }
 ```
 
 ---
 
-## 6) CLIs (thin wrappers)
-Mirror the API with **no `--window` flag in MVP**:
+## 5) CLIs (thin wrappers; stdout prints output paths)
 ```
-cmri cluster --experiment <exp> --algo kmeans --k-per-layer L6=3 L7=4 L8=3
-cmri cta --experiment <exp>
+cmri probe   --contexts ctx.csv --targets targets.csv --layers 6,7,8
+cmri exp-new --capture <capture_id>
+cmri exp-highways --exp <id>
+cmri exp-cohort   --exp <id> --highway "E6-2→E7-3→E8-1" --context "the"
+cmri exp-cluster  --exp <id> --algo kmeans --k-per-layer L6=3 L7=4 L8=3
+cmri exp-cta      --exp <id>
+cmri exp-rules    --exp <id> --mode ets|clr
+cmri exp-label    --exp <id>
+cmri transform-matrix --capture <capture_id> --contexts the,a,an
 ```
-Both commands print the **window_used** they auto‑selected (e.g., `[6,7,8]`).
 
 ---
 
-## 7) Module Plan (Python)
-- `capture.py` — activation hooks, router stats, PCA per layer (fit/apply if absent).
-- `highways.py` — P(Eℓ+1|Eℓ), coverage, stickiness/ambiguity; write `ExpertHighways.json`.
-- `cohorts.py` — select probe_ids by highway signature; write cohort parquet.
-- `cluster/` — `kmeans.py`, `hierarchical.py`, `base.py` (**ClusterBackend** interface).  
-  - **Window selection** occurs once in `cluster.py` based on manifest & captured layers; stored into manifest as `window_used`.
-- `cta.py` — macro paths & metrics; read `window_used`; write `paths.parquet`, `survival.parquet`.
-- `rules/ets.py`, `rules/clr.py` — emit rules with precision/coverage + CIs.
-- `labeling.py` — LLM + stats labeling; write `cards/clusters.parquet`.
-- `cards.py` — write experts/clusters/archetypes parquet.
-- `manifests.py`, `ids.py`, `io_parquet.py`, `duck.py` — utilities.
+## 6) Modules (Python)
+
+```
+src/services/
+  probes/
+    capture.py            # K=1 routing + PCA128; NF4; backoff; capture_manifest
+  experiments/
+    highways.py           # P(Eℓ+1|Eℓ), coverage, stickiness, ambiguity; window_used
+    cohorts.py            # select_by(highway_signature, context) -> parquet + manifest
+    cluster/
+      base.py             # ClusterBackend Protocol
+      kmeans.py           # MiniBatch
+      hierarchical.py     # Ward
+    cta.py                # macro paths, survival/confusion, examples
+    rules/
+      ets.py              # thresholds over prior layer units (faithful)
+      clr.py              # lineage over parent clusters/experts (readable)
+    labeling.py           # LLM + stats → cards
+    transform.py          # routing_distribution, js_similarity (first window)
+    bundle.py
+core/
+  io_parquet.py manifests.py ids.py duck.py config.py types.py pca.py
+```
 
 ---
 
-## 8) Core Algorithms (pseudocode)
+## 7) Schemas (MVP; lean; with badges)
+
+**tokens** (`lake/tokens.parquet`)
+- `probe_id`, `context_text`, `target_text`, `context_token_ids`, `target_token_id`, `freq_bin?`, `pos_guess?`
+
+**routing** (`lake/routing/layer=*/…`)
+- `probe_id`, `layer`, `expert_top1_id`, `gate_top1_p`, `gate_entropy`, `margin`  
+  *(No `routing_weights` or `expert_output` in MVP.)*
+
+**features_pca128** (`lake/features_pca128/layer=*/…`)
+- `probe_id`, `layer`, `pca128`, `pca_version`, `fit_sample_n`
+
+**capture_manifest.json**
+- `schema_version`, `capture_id`, `model_hash`, `contexts`, `layers`, `created_at`
+
+**experiment_manifest.json**
+- `schema_version`, `experiment_id`, `capture_id`, `window_used:[L0,L1,L2]`, `clustering:{algo,k_per_layer}`, `created_at`
+
+**cohort_manifest.json**
+- `schema_version`, `experiment_id`, `capture_id`, `highway_signature`, `context_tokens`, `created_at`
+
+**clusters/** (per layer in window)
+- `model.parquet` (algo, params, metrics), `assignments.parquet` (`probe_id`, `cluster_id`)
+
+**cta/** 
+- `paths.parquet` (`path_signature`, `coverage`, `examples[]`), `survival.parquet`
+
+**rules/** 
+- `ets.json` (faithful thresholds + prec/cov + CIs), `clr.json` (lineage rules + prec/cov)
+
+**cards/** 
+- `clusters.parquet` (population stats + LLM labels: `short_label`, `dominant`, `secondary`, `outliers`, `provenance`)
+
+---
+
+## 8) Core Algorithms (pseudocode snippets)
+
+**Window selection (first only)**
 ```python
-def select_first_window(captured_layers: list[int]) -> tuple[int, int, int]:
-    # pick smallest L s.t. L, L+1, L+2 exist
+def select_first_window(captured_layers: list[int]) -> tuple[int,int,int]:
     for L in sorted(set(captured_layers)):
         if {L, L+1, L+2}.issubset(captured_layers):
             return (L, L+1, L+2)
-    raise ValueError("Need three consecutive layers for first window")
+    raise ValueError("Need three consecutive layers")
+```
 
-def cluster(exp_id, algo, k_per_layer):
-    L0, L1, L2 = select_first_window(load_captured_layers(exp_id))
-    for L in (L0, L1, L2):
-        X = load_features_for_cohort(exp_id, L)         # PCA128
-        model, labels, metrics = fit_cluster(algo, X, k_per_layer[L])
-        write_cluster_model(exp_id, L, model, labels, metrics)
-    write_manifest_window_used(exp_id, [L0, L1, L2])
+**Routing similarity (routing mode)**
+```python
+def routing_distribution(capture_id: str, context: str) -> dict[str, float]:
+    # Count highways in first window, normalize to probability
+    ...
 
-def cta(exp_id):
-    L0, L1, L2 = read_manifest_window_used(exp_id)
-    seqs = sequences_of_cluster_ids(exp_id, (L0, L2))   # per probe_id
-    paths = aggregate_paths(seqs, min_cov=0.05)
-    survival = survival_confusion(seqs)
-    write_paths(exp_id, paths); write_survival(exp_id, survival)
+def js_similarity(p: dict, q: dict) -> float:
+    # 1 - Jensen–Shannon distance over aligned support
+    ...
 ```
 
 ---
 
-## 9) Frontend Component Map (React)
+## 9) Testing & Acceptance
+
+**Unit**
+- Capture: correct row counts; PCA128 present; routing fields aligned.
+- Cluster backends: deterministic labels for toy inputs; k-per-layer errors are actionable.
+- Transform: routing_distribution normalized; js_similarity ∈ [0,1], symmetric.
+
+**Integration**
+- Probe → Experiment → Highways → Cohort → Cluster → CTA → Cards → Bundle (golden run on `samples/`).
+- First-window rule: manifests include `window_used`; Latent Explorer shows badge; Next/Prev disabled.
+- Expert Explorer: ΔP appears when selecting two contexts; “Top Δ highways” table populates.
+
+**Acceptance (visual)**
+- Expert Sankey tooltips: coverage, stickiness, ambiguous%; badges show Context + Highway Signature.
+- Latent Sankey: macro paths visible; 2‑path zoom works; Cluster Cards show LLM labels with dominant/secondary/outliers.
+
+---
+
+## 10) Demo Storyboard (exact sequence to record)
+
+**Clip 1 — New Probe (fast)**
+1) Run **New Probe** for context `the` (and optionally `a`), targets file. Show “Capture complete.”
+
+**Clip 2 — Start Experiment (select capture)**
+2) **New Experiment**, choose the capture. The header shows **Window Used: [L6,L7,L8]** (read-only).
+
+**Clip 3 — Expert Highways**
+3) Show **Expert Sankey**; narrate coverage/stickiness.  
+4) *(Optional sub‑clip)* Select contexts `the` & `a`; toggle **Diff** → ΔP tooltips + **Top Δ highways** mini-table.
+
+**Clip 4 — Select Highway → Export Cohort**
+5) Click a dominant highway → **Token List**; badges show **Highway Signature** & **Context**.  
+6) Click **Export Cohort** (inside this experiment).
+
+**Clip 5 — Clustering/CTA (first window)**
+7) Choose **KMeans**; set **k-per-layer** (e.g., `[3,4,3]`). Run clustering → CTA.  
+8) Open **Latent Explorer**: show **macro paths**; then **zoom to two latent paths** (k=2).
+
+**Clip 6 — Cluster Cards + PCA**
+9) Open **Cluster Cards**: Population + **ETS/CLR** + **LLM labels** (dominant/secondary/outliers).  
+10) Open **3D PCA (per expert)** tab to illustrate geometry; quick lasso highlight.
+
+**Clip 7 — (Optional) Transformation Matrix**
+11) From Workspace, open **Transformation Matrix** (routing mode) for the capture; show similar contexts cluster (heatmap). Click a cell to jump back to the Experiment Flow (if desired).
+
+**Clip 8 — Export Bundle**
+12) Export bundle to show reproducibility.
+
+---
+
+## 11) 7‑Day Build Plan (MVP)
+- **Day 1–2:** Probes (capture) → Highways end‑to‑end; Experiment Flow skeleton; Sankey renders.
+- **Day 3:** Cohort export + k‑per‑layer clustering (first window) + CTA (macro paths + survival).
+- **Day 4:** Latent Explorer (macro→micro), Path Drawer, badges; manifest wiring.
+- **Day 5:** Cluster Cards (Population + ETS/CLR), LLM labels; 3D PCA tab.
+- **Day 6:** Context Diff in Expert Explorer; Transformation Matrix (routing mode); polish; golden tests.
+- **Day 7:** Record demo clips; bundle export; paper cuts.
+
+---
+
+## 12) AI‑Coder Maintainability Kit (unchanged essence)
+- **Repo layout:** feature folders; `probes/` separate from `experiments/`.
+- **Tooling:** `ruff`, `black` (100 cols), `mypy --strict`, `pytest -q`, `nbstripout`.
+- **Make targets:** `setup`, `test`, `run-api`, `run-ui`, `fmt`, `typecheck`, `data-sample`.
+- **Contracts:** Pydantic configs/manifests; Protocols for backends; docstrings with `AI_CONTRACT` notes.
+- **Golden tests:** run `samples/` pipeline; determinism checks; JSONL structured logs.
+
+---
+
+## Appendix A — Labeling Prompt (cluster cards)
 ```
-App
- ├─ WorkspacePage
- ├─ ExpertExplorer
- │   ├─ ExpertSankey (ECharts)
- │   ├─ ExpertCardTabs {Overview|Clusters|PCA3D|Rules}
- │   └─ TokenListPanel [Export Cohort] [Run clustering on this highway]
- └─ LatentExplorer
-     ├─ LatentSankey (macro→micro; **window_used** shown read‑only)
-     ├─ PathDrawer
-     └─ ClusterCards (LLM labels + stats)
+You are labeling a cluster of words from a language model’s latent space.
+Task: provide a concise human-readable label and a structured breakdown.
+
+Input:
+- Cluster tokens: {token_list}
+- Population stats: {stats_summary}
+
+Instructions:
+1. Group by higher-order ontology (examples): 
+   - Animate objects (animals, people, living beings)
+   - Inanimate objects (vehicles, tools, artifacts, places, food items, …)
+   - Abstract concepts (qualities, emotions, ideas, relations)
+   - Function words (pronouns, determiners, auxiliaries, prepositions, …)
+   - Other
+2. Identify dominant meaning, secondary meanings, and outliers.
+3. Return:
+   - short_label (2–5 words)
+   - breakdown (counts or %)
+   - outliers list
+4. If uncertain, short_label = "Unknown" and return raw groups only.
+
+Output (JSON):
+{
+  "short_label": "Animate Objects (Animals)",
+  "dominant": "Animals",
+  "secondary": ["Vehicles"],
+  "outliers": ["sandwich"],
+  "breakdown": {"Animals": 6, "Vehicles": 2, "Food": 1}
+}
 ```
-**UI Note:** In Wizard step 4 and Latent Explorer, display **“Window used: [L0,L1,L2] (auto‑selected)”** and keep Next/Prev disabled.
-
----
-
-## 10) Testing & Acceptance
-- **Capture:** row counts match; routing + PCA128 aligned.  
-- **Expert Highways:** edges sum correctly; Token List matches selection; cohort export writes files.  
-- **Clustering:** k‑per‑layer recompute refreshes Sankey + cards for the **auto‑selected first window**; manifest contains `window_used`.  
-- **Latent Explorer:** paths ≥5% coverage rendered; Path Drawer examples present; Next/Prev disabled; window badge shown.  
-- **Labeling:** Cluster Cards have `short_label`, `dominant`, `secondary`, `outliers`, `provenance="llm"`.  
-- **Bundle:** contains manifest + paths; replay restores visuals with the **same window_used**.
-
----
-
-## 11) 7‑Day Build Plan
-1–2: Capture + Highways end‑to‑end; Expert Sankey; Export Cohort.  
-3–4: Clustering (k‑per‑layer) + CTA on **auto first window** + Latent Sankey + Path Drawer.  
-5: Cluster Cards with LLM labels; ETS/CLR JSON emitted.  
-6: UI polish; PCA3D tab; disabled window controls; Bundle export.  
-7: Record clips: highways → cohort export → latent CTA → two‑path zoom.
-
----
-
-## 12) AI‑Coder Maintainability Kit (unchanged)
-(Repo layout, tooling, interfaces, tests, logging, scripts, contribution guard — same as v1.2.)
-
----
-
-## Appendix A — Schemas & Prompt (unchanged scope)
-- Schemas match the data contracts (tokens, routing, features_pca128, clustering, CTA, rules, cards).  
-- Labeling Prompt included for cluster/path cards.
