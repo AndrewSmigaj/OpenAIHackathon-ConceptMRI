@@ -28,6 +28,26 @@ workflow:
 
 # Core Infrastructure & Setup
 infrastructure:
+  directory_structure:
+    status: todo
+    priority: critical
+    description: "Root project directory organization"
+    layout: |
+      OpenAIHackathon-ConceptMRI/
+      ├── backend/               # Python backend
+      │   ├── src/              # Source code
+      │   ├── tests/            # Backend tests
+      │   └── requirements.txt  # Python deps
+      ├── frontend/             # React frontend
+      ├── data/                 # Data storage
+      │   ├── lake/            # Probe captures
+      │   ├── experiments/     # Experiment artifacts
+      │   └── models/          # MoE model cache
+      ├── notebooks/           # Dev notebooks
+      ├── samples/             # Test data
+      ├── scripts/             # Setup/maintenance
+      └── docker-compose.yml   # Container orchestration
+
   project_setup:
     status: todo
     priority: critical
@@ -41,7 +61,7 @@ infrastructure:
       - name: "Configure logging and error handling"
         status: todo
         priority: critical
-        files: ["src/utils/logging.py", "src/utils/errors.py"]
+        files: ["backend/src/utils/logging.py", "backend/src/utils/errors.py"]
         hackathon_scope:
           logging:
             - "Single JSON logger with timestamps"
@@ -61,17 +81,17 @@ infrastructure:
     tasks:
       - name: "Data schemas and contracts"
         status: todo
-        files: ["src/schemas/", "src/io_parquet.py", "src/duck.py"]
+        files: ["backend/src/schemas/", "backend/src/core/io_parquet.py", "backend/src/core/duck.py"]
       - name: "Manifest and ID system"
         status: todo
-        files: ["src/manifests.py", "src/ids.py"]
+        files: ["backend/src/core/manifests.py", "backend/src/core/ids.py", "backend/src/core/types.py"]
 
 # Backend Services (Python FastAPI)
 backend:
   api_server:
     status: todo
     priority: critical
-    files: ["src/api/main.py", "src/api/routers/"]
+    files: ["backend/src/api/main.py", "backend/src/api/routers/"]
     endpoints:
       # PROBES (atomic capture -> lake)
       - path: "/api/probes"
@@ -184,7 +204,7 @@ backend:
     capture_service:
       status: todo
       priority: critical
-      file: "src/services/probes/capture.py"
+      file: "backend/src/services/probes/capture.py"
       description: "Run K=1 routing + PCA128 and write lake artifacts."
       features:
         - name: "Activation hooks (post-residual) + router top-1 stats"
@@ -201,7 +221,7 @@ backend:
     highways_service:
       status: todo
       priority: critical
-      file: "src/services/experiments/highways.py"
+      file: "backend/src/services/experiments/highways.py"
       description: "Compute P(Eℓ+1|Eℓ), coverage, stickiness, ambiguity from capture routing."
       features:
         - name: "First window auto-select & persist to experiment manifest"
@@ -218,7 +238,7 @@ backend:
     cohort_service:
       status: todo
       priority: critical
-      file: "src/services/experiments/cohorts.py"
+      file: "backend/src/services/experiments/cohorts.py"
       description: "Select probe_ids by highway_signature+context; write cohort parquet in experiment."
       highway_signature_format: "L{layer}E{expert} notation (e.g., L6E2→L7E3→L8E1)"
       features:
@@ -232,7 +252,7 @@ backend:
     cluster_service:
       status: todo
       priority: critical
-      file: "src/services/experiments/cluster/"
+      file: "backend/src/services/experiments/cluster/"
       description: "Cluster cohort features (first window only)."
       components:
         - name: "base.py (ClusterBackend interface)"
@@ -250,7 +270,7 @@ backend:
     cta_service:
       status: todo
       priority: critical
-      file: "src/services/experiments/cta.py"
+      file: "backend/src/services/experiments/cta.py"
       description: "CTA macro paths + survival/confusion (≥5% coverage)."
       features:
         - name: "Paths + examples writer"
@@ -276,7 +296,7 @@ backend:
     labeling_service:
       status: todo
       priority: high
-      file: "src/services/experiments/labeling.py"
+      file: "backend/src/services/experiments/labeling.py"
       description: "LLM + stats → cards AND archetypal path narratives. Two-stage process: 1) Label clusters, 2) Use cluster labels to generate path narratives."
       features:
         - name: "Cluster semantic labeling with ontology grouping"
@@ -297,7 +317,7 @@ backend:
     transform_service:
       status: todo
       priority: high
-      file: "src/services/experiments/transform.py"
+      file: "backend/src/services/experiments/transform.py"
       description: "Routing similarity utilities (first window only)."
       features:
         - name: "routing_distribution(capture_id, context)"
@@ -308,7 +328,7 @@ backend:
     bundle_service:
       status: todo
       priority: low
-      file: "src/services/bundle.py"
+      file: "backend/src/services/bundle.py"
       description: "Experiment bundling and replay"
       features:
         - name: "Zip experiment directory"
@@ -469,7 +489,7 @@ algorithms:
     status: todo
     priority: critical
     description: "Auto-select first CTA window deterministically"
-    implementation: "src/algorithms/window_selection.py"
+    implementation: "backend/src/algorithms/window_selection.py"
     algorithm: |
       def select_first_window(captured_layers):
           for L in sorted(captured_layers):
@@ -481,7 +501,7 @@ algorithms:
     status: todo
     priority: high
     description: "Compute expert transition probabilities"
-    implementation: "src/algorithms/expert_analysis.py"
+    implementation: "backend/src/algorithms/expert_analysis.py"
     metrics:
       - "P(Expert_l+1 | Expert_l)"
       - "Coverage percentage"
@@ -492,7 +512,7 @@ algorithms:
     status: todo
     priority: critical
     description: "CTA analysis on selected cohort"
-    implementation: "src/algorithms/cta.py"
+    implementation: "backend/src/algorithms/cta.py"
     features:
       - "Macro path computation"
       - "Survival analysis"
@@ -504,55 +524,55 @@ cli:
   probe:
     status: todo
     priority: medium
-    file: "src/cli/probe.py"
+    file: "backend/src/cli/probe.py"
     command: "cmri probe --contexts ctx.csv --targets targets.csv --layers 6,7,8"
 
   exp_new:
     status: todo
     priority: medium
-    file: "src/cli/exp_new.py"
+    file: "backend/src/cli/exp_new.py"
     command: "cmri exp-new --capture <capture_id>"
 
   exp_highways:
     status: todo
     priority: medium
-    file: "src/cli/exp_highways.py"
+    file: "backend/src/cli/exp_highways.py"
     command: "cmri exp-highways --exp <id>"
 
   exp_cohort:
     status: todo
     priority: medium
-    file: "src/cli/exp_cohort.py"
+    file: "backend/src/cli/exp_cohort.py"
     command: 'cmri exp-cohort --exp <id> --highway "L6E2→L7E3→L8E1" --context "the"'
 
   exp_cluster:
     status: todo
     priority: medium
-    file: "src/cli/exp_cluster.py"
+    file: "backend/src/cli/exp_cluster.py"
     command: "cmri exp-cluster --exp <id> --algo kmeans --k-per-layer L6=3 L7=4 L8=3"
 
   exp_cta:
     status: todo
     priority: medium
-    file: "src/cli/exp_cta.py"
+    file: "backend/src/cli/exp_cta.py"
     command: "cmri exp-cta --exp <id>"
 
   exp_rules:
     status: todo
     priority: medium
-    file: "src/cli/exp_rules.py"
+    file: "backend/src/cli/exp_rules.py"
     command: "cmri exp-rules --exp <id> --mode ets|clr"
 
   exp_label:
     status: todo
     priority: medium
-    file: "src/cli/exp_label.py"
+    file: "backend/src/cli/exp_label.py"
     command: "cmri exp-label --exp <id>"
 
   transform_matrix:
     status: todo
     priority: medium
-    file: "src/cli/transform_matrix.py"
+    file: "backend/src/cli/transform_matrix.py"
     command: "cmri transform-matrix --capture <capture_id> --contexts the,a,an"
 
 # Data Schemas
@@ -560,14 +580,14 @@ schemas:
   tokens:
     status: todo
     priority: critical
-    file: "src/schemas/tokens.py"
+    file: "backend/src/schemas/tokens.py"
     fields: ["probe_id","context_text","target_text","context_token_ids","target_token_id","freq_bin?","pos_guess?"]
     notes: "Per-probe only (no per-layer)."
 
   routing:
     status: todo
     priority: critical
-    file: "src/schemas/routing.py"
+    file: "backend/src/schemas/routing.py"
     fields: ["probe_id","layer","expert_top1_id","gate_top1_p","gate_entropy","margin"]
     removed_fields: ["routing_weights","expert_output"]
     notes: "K=1 routing only; used by highways & routing similarity."
@@ -575,31 +595,31 @@ schemas:
   features_pca128:
     status: todo
     priority: critical
-    file: "src/schemas/features_pca128.py"
+    file: "backend/src/schemas/features_pca128.py"
     fields: ["probe_id","layer","pca128","pca_version","fit_sample_n"]
 
   capture_manifest:
     status: todo
     priority: critical
-    file: "src/schemas/capture_manifest.py"
+    file: "backend/src/schemas/capture_manifest.py"
     fields: ["schema_version","capture_id","model_hash","contexts","layers","created_at"]
 
   cohort_manifest:
     status: todo
     priority: critical
-    file: "src/schemas/cohort_manifest.py"
+    file: "backend/src/schemas/cohort_manifest.py"
     fields: ["schema_version","experiment_id","capture_id","highway_signature","context_tokens","created_at"]
 
   experiment_manifest:
     status: todo
     priority: critical
-    file: "src/schemas/experiment_manifest.py"
+    file: "backend/src/schemas/experiment_manifest.py"
     fields: ["schema_version","experiment_id","capture_id","window_used","clustering","created_at"]
 
   clustering:
     status: todo
     priority: critical
-    file: "src/schemas/clustering.py"
+    file: "backend/src/schemas/clustering.py"
     fields: ["experiment_id", "layer", "cluster_id", "centroid", "population"]
     cluster_labeling_scheme:
       format: "L{layer}E{expert}C{cluster}{granularity}"
@@ -611,7 +631,7 @@ schemas:
   paths:
     status: todo
     priority: high
-    file: "src/schemas/paths.py"
+    file: "backend/src/schemas/paths.py"
     fields: ["path_signature", "coverage", "survival_rate", "examples"]
 
 # Testing & Validation
