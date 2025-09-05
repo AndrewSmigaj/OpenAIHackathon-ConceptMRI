@@ -5,13 +5,23 @@
 meta:
   project: "Concept MRI - OpenAI Hackathon"
   version: "1.4"
-  target_model: "ossb20b (OpenAI MoE)"
+  target_model: "gpt-oss-20b (OpenAI MoE)"
+  model_details:
+    - "1.8B total parameters (inspected: not 21B as initially assumed)"
+    - "24 layers, 32 experts per layer, K=4 routing (not K=1)" 
+    - "Uses MXFP4 quantization, fits in 16GB GPU memory"
+    - "Available at: openai/gpt-oss-20b on Hugging Face"
+    - "Apache 2.0 license"
+    - "Analysis Strategy: Capture K=4 routing, analyze top-1 expert per layer"
   timeline: "7 days"
   updated: "2025-01-04"
   constraints:
     - "Two token inputs only"
     - "Several thousand words max"
     - "User-supplied API keys for LLM labeling"
+    - "K=4 routing: Capture all 4 experts, analyze top-1 weighted expert per layer"
+    - "Highway paths: Top-1 expert chains (e.g. L6E2→L7E15→L8E7)"
+    - "Future expansion: Full K=4 expert combination analysis available"
 
 # Critical Workflow Clarifications
 workflow:
@@ -25,11 +35,15 @@ workflow:
     - "Probe: contexts → MoE routing → lake artifacts (reusable)"
     - "Experiment: word lists → highway selection → cohort export → clustering/CTA → labeling"
     - "Analysis: clusters get LLM labels, paths get LLM narratives"
+    - "Dual Transformation Analysis:"
+    - "  1) Expert Highway Routing: How contexts transform MoE routing patterns across experts"
+    - "  2) Individual Highway Latent: Context→target transformation within specific highway's space"
+    - "Multi-Experiment Demo: Run separate experiments to showcase each transformation type"
 
 # Core Infrastructure & Setup
 infrastructure:
   directory_structure:
-    status: todo
+    status: done
     priority: critical
     description: "Root project directory organization"
     layout: |
@@ -48,15 +62,43 @@ infrastructure:
       ├── scripts/             # Setup/maintenance
       └── docker-compose.yml   # Container orchestration
 
+  model_setup:
+    status: done
+    priority: critical
+    description: "gpt-oss-20b model download and testing"
+    tasks:
+      - name: "System requirements check"
+        status: done
+        file: "scripts/check_system.py"
+        notes: "RTX 5070 Ti 16GB confirmed adequate"
+      - name: "Model download script"
+        status: done
+        file: "scripts/setup_gpt_oss_20b.py"
+      - name: "Model download (20GB)"
+        status: done
+        notes: "Downloaded from openai/gpt-oss-20b"
+      - name: "Basic model loading test"
+        status: done
+        file: "scripts/test_quantized_model.py"
+        notes: "Working with MXFP4 quantization on RTX 5070 Ti (~5s load time, ~14GB GPU)"
+      - name: "MoE architecture inspection"
+        status: done
+        file: "scripts/inspect_moe_structure.py"
+        notes: "24 layers, 32 experts/layer, K=4 routing, GptOssTopKRouter class identified"
+      - name: "Activation hook development"
+        status: done
+        files: ["scripts/test_routing_capture_fixed.py", "scripts/test_routing_capture.py", "scripts/test_routing_minimal.py"]
+        notes: "RoutingCapture class implemented with forward hooks for router + MLP modules. Captures K=4 routing, extracts top-1 + statistics."
+
   project_setup:
-    status: todo
+    status: done
     priority: critical
     tasks:
       - name: "Initialize repository structure"
-        status: todo
+        status: done
         files: ["README.md", "requirements.txt", "pyproject.toml"]
       - name: "Set up development environment"
-        status: todo
+        status: done
         files: [".env.example", "docker-compose.yml", "Makefile"]
       - name: "Configure logging and error handling"
         status: todo
@@ -75,13 +117,30 @@ infrastructure:
             - "User-friendly error messages in API responses"
 
   data_layer:
-    status: todo
+    status: in_progress
     priority: critical
     description: "Parquet + DuckDB storage with PCA128 features"
     tasks:
       - name: "Data schemas and contracts"
-        status: todo
-        files: ["backend/src/schemas/", "backend/src/core/io_parquet.py", "backend/src/core/duck.py"]
+        status: done
+        files: ["backend/src/schemas/"]
+        completed_files:
+          - "backend/src/schemas/tokens.py"
+          - "backend/src/schemas/routing.py"
+          - "backend/src/schemas/expert_internal_activations.py"
+          - "backend/src/schemas/expert_output_states.py"
+          - "backend/src/schemas/features_pca128.py"
+      - name: "Parquet I/O utilities"
+        status: done
+        files:
+          - "backend/src/core/parquet_writer.py"
+          - "backend/src/core/parquet_reader.py"
+          - "backend/src/core/data_lake.py"
+      - name: "Shared utilities"
+        status: done
+        files:
+          - "backend/src/utils/numpy_utils.py"
+          - "backend/src/utils/parquet_utils.py"
       - name: "Manifest and ID system"
         status: todo
         files: ["backend/src/core/manifests.py", "backend/src/core/ids.py", "backend/src/core/types.py"]
@@ -136,9 +195,18 @@ backend:
         method: "POST"
         status: todo
         priority: critical
-        body: "{ highway_signature:'L6E2→L7E3→L8E1', context:str }"
+        body: "{ highway_signature:'L6E2→L7E3→L8E1', contexts:[str], mode?:'single'|'multi' }"
         returns: "{ cohort_path }"
-        description: "Export cohort for the selected highway+context within this experiment."
+        description: "Export cohort for selected highway+context(s). Enhanced to support context-target filtering."
+
+      - path: "/api/experiments/{id}/highway-analysis"
+        method: "GET"
+        status: todo
+        priority: critical
+        params: "{ highway_signature:str }"
+        returns: "{ contexts_targets:{ [context]:{ targets:[str], share:float } } }"
+        description: "Get (context, target) pairs that flow through specified highway. Simple data query."
+
 
       - path: "/api/experiments/{id}/cluster"
         method: "POST"
@@ -190,30 +258,92 @@ backend:
         returns: "{ manifest, artifact_paths }"
         description: "Manifest/artifact lookup for loaders."
         
-      # TRANSFORMATION MATRIX (routing similarity; optional clip)
-      - path: "/api/transform/matrix"
+      # EXPERT HIGHWAY ROUTING TRANSFORMATION
+      - path: "/api/transform/routing-matrix"
         method: "POST"
         status: todo
         priority: high
         body: "{ capture_id:str, contexts:[str] }"
         returns: "{ labels:[str], matrix:[[float]], mode:'routing' }"
-        description: "Compute pairwise JS similarity between highway distributions (first window)."
+        description: "Expert Highway Routing Analysis: How different contexts transform MoE routing patterns."
+
+      # INDIVIDUAL HIGHWAY LATENT TRANSFORMATION  
+      - path: "/api/experiments/{id}/highway-latent-transform"
+        method: "POST"
+        status: todo
+        priority: high
+        body: "{ highway_signature:str, context_token:str, target_tokens:[str] }"
+        returns: "{ transformation_data:[[float]], target_labels:[str], basis:'latent_space' }"
+        description: "Individual Highway Latent Analysis: Context→target transformation within specific highway's space."
+
+      # EXPERT INTERNAL CLUSTERING
+      - path: "/api/experiments/{id}/expert-internal-clustering"
+        method: "POST"
+        status: todo
+        priority: high
+        body: "{ layer:int, expert_id:int, clustering_algo:'kmeans'|'hierarchical', k:int }"
+        returns: "{ clusters, pca_3d_data, specialization_analysis, cluster_cards }"
+        description: "Analyze individual expert's internal FF concept organization with 3D PCA and clustering."
+
+      # EXPERT OUTPUT CLUSTERING + CTA INTEGRATION
+      - path: "/api/experiments/{id}/expert-output-clustering"
+        method: "POST"
+        status: todo
+        priority: high
+        body: "{ clustering_algo:'kmeans'|'hierarchical', k:int, auto_cta:boolean }"
+        returns: "{ clusters, pca_3d_data, cta_results?, trajectory_sankey_data }"
+        description: "Cluster collective expert output latent space with optional real-time CTA integration."
+
+      # LLM INSIGHTS AND REPORT GENERATION
+      - path: "/api/experiments/{id}/llm-insights"
+        method: "POST"
+        status: todo
+        priority: high
+        body: "{ analysis_type:'summary'|'expert_specialization'|'trajectory_analysis'|'custom', custom_prompt?:str }"
+        returns: "{ insights, generated_analysis, report_sections, visualizations }"
+        description: "Generate AI-powered insights and analysis reports for expert and trajectory findings."
+
+      - path: "/api/experiments/{id}/llm-insights/ask"
+        method: "POST"
+        status: todo
+        priority: high
+        body: "{ question:str, context_data?:object }"
+        returns: "{ answer, supporting_evidence, related_findings }"
+        description: "Custom question-answering about experiment analysis results."
 
   services:
     # PROBES
     capture_service:
-      status: todo
+      status: in_progress
       priority: critical
       file: "backend/src/services/probes/capture.py"
-      description: "Run K=1 routing + PCA128 and write lake artifacts."
+      description: "Run K=4 routing capture + PCA128 + expert internal FF activations."
+      prototype_files: ["scripts/test_routing_capture_fixed.py"]
       features:
-        - name: "Activation hooks (post-residual) + router top-1 stats"
+        - name: "Activation hooks (GptOssTopKRouter) + capture K=4 routing (32 experts/layer)"
+          status: done
+          notes: "RoutingCapture class implemented with forward hooks for router modules"
+        - name: "Expert highway extraction with top-1 routing"
+          status: done
+          notes: "extract_highways() method creates L{layer}E{expert} signatures"
+        - name: "Routing statistics (entropy, margin, expert usage)"
+          status: done
+          notes: "Computes gate entropy, top1-top2 margin, expert usage statistics"
+        - name: "Expert internal FF activation hooks (intermediate states)"
           status: todo
+          notes: "Hook model.layers.{i}.mlp.experts.{j} for internal clustering analysis"
         - name: "PCA per layer (fit/apply) -> PCA128 features"
           status: todo
-        - name: "NF4 quant + micro-batch backoff"
+        - name: "Expert output state capture (collective latent space)"
+          status: in_progress
+          notes: "Post-MLP activation hook implemented, needs PCA integration"
+        - name: "MXFP4 quantization compatible + micro-batch backoff"
+          status: done
+          notes: "Works with BitsAndBytesConfig NF4 quantization + device mapping"
+        - name: "Integration with data lake storage (Parquet)"
           status: todo
-        - name: "Capture manifest (capture_id, contexts, layers)"
+          notes: "Connect RoutingCapture with BatchWriter and schemas"
+        - name: "Capture manifest (capture_id, contexts, layers, routing_mode='K4_top1')"
           status: todo
       dependencies: ["transformers", "bitsandbytes", "accelerate"]
 
@@ -222,31 +352,41 @@ backend:
       status: todo
       priority: critical
       file: "backend/src/services/experiments/highways.py"
-      description: "Compute P(Eℓ+1|Eℓ), coverage, stickiness, ambiguity from capture routing."
+      description: "Compute P(Eℓ+1|Eℓ) using top-1 experts from K=4 routing data."
       features:
         - name: "First window auto-select & persist to experiment manifest"
           status: todo
-        - name: "Expert transition probabilities"
+        - name: "Top-1 expert transition probabilities P(E_top1_l+1|E_top1_l)"
           status: todo
-        - name: "Coverage and stickiness metrics"
+          notes: "Use expert_top1_id field from routing schema for highway computation"
+        - name: "Coverage and stickiness metrics (top-1 expert paths)"
           status: todo
-        - name: "Highway ambiguity detection"
+        - name: "Highway signature format: L{layer}E{top1_expert} (e.g. L6E2→L7E15→L8E7)"
           status: todo
-        - name: "ExpertHighways.json export"
+        - name: "ExpertHighways.json export with top-1 routing"
           status: todo
+        - name: "Optional: K=4 full routing analysis for future expansion"
+          status: todo
+          notes: "Store full expert_top4_ids data for potential multi-expert highway analysis"
 
     cohort_service:
       status: todo
       priority: critical
       file: "backend/src/services/experiments/cohorts.py"
-      description: "Select probe_ids by highway_signature+context; write cohort parquet in experiment."
+      description: "Select probe_ids by highway_signature+context(s); write cohort parquet in experiment. Supports both single-context and within-highway multi-context analysis."
       highway_signature_format: "L{layer}E{expert} notation (e.g., L6E2→L7E3→L8E1)"
       features:
         - name: "Highway signature matching"
           status: todo
-        - name: "Cohort parquet export"
+        - name: "Single context cohort export (original workflow)"
           status: todo
-        - name: "Cohort manifest badges (highway_signature, context_tokens)"
+        - name: "Multi-context cohort export (within-highway analysis)"
+          status: todo
+          notes: "Export cohort containing multiple contexts but constrained to same highway"
+        - name: "Highway analysis: (context, target) pair enumeration"
+          status: todo
+          notes: "For Highway Panel display - which contexts and targets use this highway"
+        - name: "Cohort manifest badges (highway_signature, context_tokens, mode)"
           status: todo
 
     cluster_service:
@@ -265,6 +405,42 @@ backend:
         - name: "k-per-layer"
           status: todo
         - name: "Model + assignments persistence"
+          status: todo
+
+    expert_internal_clustering_service:
+      status: todo
+      priority: high
+      file: "backend/src/services/experiments/expert_internal_clustering.py"
+      description: "Cluster individual expert's internal FF activations to understand expert specialization."
+      features:
+        - name: "Extract expert internal activations for specific layer+expert"
+          status: todo
+          notes: "Get FF intermediate states for Layer X, Expert Y"
+        - name: "3D PCA analysis of expert internal concept organization"
+          status: todo
+        - name: "K-means/hierarchical clustering of expert internal patterns"
+          status: todo
+        - name: "Expert specialization analysis (what concepts this expert handles)"
+          status: todo
+        - name: "Generate expert internal cluster cards with LLM labeling"
+          status: todo
+
+    expert_output_clustering_service:
+      status: todo
+      priority: high
+      file: "backend/src/services/experiments/expert_output_clustering.py"
+      description: "Cluster collective expert output latent space and integrate with CTA analysis."
+      features:
+        - name: "Collect expert output states across layers (collective latent space)"
+          status: todo
+        - name: "3D PCA visualization of expert output latent space"
+          status: todo
+        - name: "Interactive clustering with real-time CTA integration"
+          status: todo
+          notes: "Clustering results automatically feed into CTA analysis"
+        - name: "Concept trajectory analysis through clustered latent regions"
+          status: todo
+        - name: "Sankey diagram generation for cluster transitions"
           status: todo
 
     cta_service:
@@ -314,16 +490,59 @@ backend:
           status: todo
           details: "Validate JSON schemas for both cluster and path labels"
 
-    transform_service:
+    llm_insights_service:
       status: todo
       priority: high
-      file: "backend/src/services/experiments/transform.py"
-      description: "Routing similarity utilities (first window only)."
+      file: "backend/src/services/experiments/llm_insights.py"
+      description: "AI-powered analysis and report generation for expert specialization and concept trajectory findings."
+      features:
+        - name: "Automated expert specialization analysis"
+          status: todo
+          notes: "Generate insights about what each expert has learned to handle"
+        - name: "Context transformation pattern analysis"
+          status: todo
+          notes: "Analyze how different contexts change expert routing patterns"
+        - name: "Concept trajectory narrative generation"
+          status: todo
+          notes: "Create coherent stories about concept evolution through latent space"
+        - name: "Custom question answering about analysis results"
+          status: todo
+          notes: "Allow scientists to ask specific questions about their findings"
+        - name: "Research report compilation and export"
+          status: todo
+          notes: "Generate comprehensive reports combining all analysis types"
+        - name: "Multi-domain correlation insights"
+          status: todo
+          notes: "Find relationships between expert specialization, highway patterns, and latent trajectories"
+
+    expert_routing_transform_service:
+      status: todo
+      priority: high
+      file: "backend/src/services/transform/expert_routing.py"
+      description: "Expert Highway Routing Transformation: How contexts change MoE routing patterns."
       features:
         - name: "routing_distribution(capture_id, context)"
           status: todo
-        - name: "js_similarity(distA, distB)"
+        - name: "context_routing_similarity_matrix(contexts)"
           status: todo
+        - name: "expert_transition_differences(context_a, context_b)"
+          status: todo
+
+    highway_latent_transform_service:
+      status: todo
+      priority: high
+      file: "backend/src/services/transform/highway_latent.py"
+      description: "Individual Highway Latent Transformation: Context→target analysis within highway's space."
+      features:
+        - name: "extract_highway_context_targets(experiment_id, highway_signature, context)"
+          status: todo
+          notes: "Find targets that pair with specific context in this highway"
+        - name: "compute_context_target_trajectories(context, targets, highway_signature)"
+          status: todo
+          notes: "Analyze how context transforms target trajectories in highway's latent space"
+        - name: "latent_transformation_clustering(context_target_cohort)"
+          status: todo
+          notes: "Cluster on context to show target trajectory shifts"
 
     bundle_service:
       status: todo
@@ -378,15 +597,21 @@ frontend:
         - name: "Expert Highways"
           status: todo
           notes: "Compute from capture; auto-select first window; show Sankey."
-        - name: "Select Highway → Export Cohort"
+        - name: "Context-Target Highway Analysis (NEW)"
           status: todo
-          notes: "Token List + badges (Highway Signature, Context). Writes cohort in this experiment."
-        - name: "Clustering/CTA (first window only)"
+          notes: "Click highway → Context Transformation View shows context-target pairs. First demo: one context → one target list."
+        - name: "Export Context-Target Cohort"
           status: todo
-          notes: "k-per-layer; KMeans/Hierarchical."
+          notes: "Export cohort filtered by highway + context + targets for transformation analysis."
+        - name: "Context Transformation Clustering"
+          status: todo
+          notes: "Cluster on first context to analyze how context transforms target trajectories in latent space."
+        - name: "Transformation Shift Analysis"
+          status: todo
+          notes: "Compare how different contexts shift target token trajectories within same highway's computational pathway."
         - name: "Explore & Label"
           status: todo
-          notes: "Latent Sankey (macro→micro), Cluster Cards (ETS/CLR + LLM), PCA3D tab."
+          notes: "Enhanced Latent Sankey showing context→target transformations, Cluster Cards with context-specific patterns."
 
     expert_explorer:
       status: todo
@@ -408,6 +633,33 @@ frontend:
           status: todo
         - name: "Run clustering button"
           status: todo
+
+    highway_panel:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/HighwayPanel.tsx"
+      description: "Context Transformation View for analyzing how contexts transform target trajectories within highways."
+      features:
+        - name: "Highway selection from Expert Sankey clicks"
+          status: todo
+          notes: "Click highway edge → open Context Transformation View for that signature"
+        - name: "Context→Target pairs display"
+          status: todo
+          notes: "Show context-target pairs that flow through this highway"
+          format: |
+            Highway: L6E2→L7E3→L8E1 (Context Transformation View)
+            Context "the" → Target List: ["cat", "dog", "house"] (45% coverage)
+            Context "a" → Target List: ["cat", "dog", "tree"] (32% coverage)
+            [First Demo: Focus on single context → single target list]
+        - name: "Context-target cohort export"
+          status: todo
+          notes: "Export cohort containing only context-target pairs for transformation clustering"
+        - name: "Transformation clustering trigger"
+          status: todo
+          notes: "Cluster on first context to show how context shifts target trajectories in latent space"
+        - name: "Context comparison visualization"
+          status: todo
+          notes: "Show how different contexts transform same targets differently within highway"
 
     latent_explorer:
       status: todo
@@ -470,17 +722,17 @@ frontend:
             status: todo
 
   pages:
-    transformation_matrix:
+    expert_routing_transform:
       status: todo
       priority: high
-      file: "frontend/src/pages/TransformationMatrix.tsx"
-      description: "Context similarity (routing mode) for the selected capture."
+      file: "frontend/src/pages/ExpertRoutingTransform.tsx"
+      description: "Expert Highway Routing Transformation: How contexts change MoE routing patterns."
       features:
-        - name: "Heatmap (ECharts) with labels"
+        - name: "Routing similarity heatmap (ECharts)"
           status: todo
-        - name: "Load contexts from chosen capture"
+        - name: "Context comparison controls"
           status: todo
-        - name: "Cell click navigates to ExperimentFlow focused on that context"
+        - name: "Expert transition difference visualization"
           status: todo
 
 # Core Algorithms
@@ -578,25 +830,61 @@ cli:
 # Data Schemas
 schemas:
   tokens:
-    status: todo
+    status: done
     priority: critical
     file: "backend/src/schemas/tokens.py"
-    fields: ["probe_id","context_text","target_text","context_token_ids","target_token_id","freq_bin?","pos_guess?"]
-    notes: "Per-probe only (no per-layer)."
+    fields: ["probe_id","context_text","target_text","context_token_id","target_token_id"]
+    notes: "Simple index table linking probe_id to context-target pairs. MVP version without freq_bin/pos_guess."
 
   routing:
-    status: todo
+    status: done
     priority: critical
     file: "backend/src/schemas/routing.py"
-    fields: ["probe_id","layer","expert_top1_id","gate_top1_p","gate_entropy","margin"]
+    fields: ["probe_id","layer","expert_top4_ids","expert_top4_weights","expert_top1_id","expert_top1_weight","gate_entropy","routing_aux_loss","captured_at"]
     removed_fields: ["routing_weights","expert_output"]
-    notes: "K=1 routing only; used by highways & routing similarity."
+    notes: "K=4 routing capture implemented with top-1 extraction. Includes validation and helper methods."
 
   features_pca128:
-    status: todo
+    status: done
     priority: critical
     file: "backend/src/schemas/features_pca128.py"
-    fields: ["probe_id","layer","pca128","pca_version","fit_sample_n"]
+    fields: ["probe_id","layer","pca128"]
+    notes: "Simplified PCA features schema for MVP. Version tracking deferred."
+
+  expert_internal_activations:
+    status: done
+    priority: high
+    file: "backend/src/schemas/expert_internal_activations.py"
+    fields: ["probe_id","layer","expert_id","ff_intermediate_state","activation_dims","captured_at"]
+    notes: "Expert internal FF activations implemented with validation and analysis methods"
+
+  expert_output_states:
+    status: done
+    priority: high
+    file: "backend/src/schemas/expert_output_states.py"
+    fields: ["probe_id","layer","expert_output_state","post_expert_dims"]
+    notes: "Collective expert output states implemented with cosine similarity and normalization methods"
+
+  expert_internal_clusters:
+    status: todo
+    priority: high
+    file: "backend/src/schemas/expert_internal_clusters.py"
+    fields: ["experiment_id","layer","expert_id","cluster_id","cluster_center","population","specialization_label","pca_3d_coords"]
+    notes: "Individual expert internal clustering results with 3D PCA coordinates"
+
+  expert_output_clusters:
+    status: todo
+    priority: high
+    file: "backend/src/schemas/expert_output_clusters.py"
+    fields: ["experiment_id","cluster_id","cluster_center","population","concept_trajectory_label","pca_3d_coords","cta_integration_data"]
+    notes: "Collective expert output clustering results with CTA integration data"
+
+  llm_insights:
+    status: todo
+    priority: high
+    file: "backend/src/schemas/llm_insights.py"
+    fields: ["experiment_id","insight_type","generated_at","llm_model","insights_text","supporting_data","report_sections","visualization_configs"]
+    notes: "LLM-generated insights and analysis reports with supporting evidence"
 
   capture_manifest:
     status: todo
@@ -608,7 +896,15 @@ schemas:
     status: todo
     priority: critical
     file: "backend/src/schemas/cohort_manifest.py"
-    fields: ["schema_version","experiment_id","capture_id","highway_signature","context_tokens","created_at"]
+    fields: ["schema_version","experiment_id","capture_id","highway_signature","context_tokens","target_tokens","cohort_mode","created_at"]
+    cohort_modes:
+      - name: "single_context"
+        description: "Original workflow - single context analysis within highway"
+      - name: "context_target_transformation"
+        description: "Context-target transformation analysis - cluster on context to analyze target trajectory shifts"
+      - name: "multi_context_highway"
+        description: "Multi-context analysis for comparative transformation study"
+    notes: "context_tokens and target_tokens arrays support context→target pairing for transformation analysis"
 
   experiment_manifest:
     status: todo
@@ -643,8 +939,13 @@ testing:
     files: ["tests/test_capture.py", "tests/test_clustering.py", "tests/test_cta.py"]
 
   integration_tests:
-    status: todo
+    status: in_progress
     priority: medium
+    completed_tests:
+      - name: "Parquet round-trip test"
+        file: "scripts/test_capture_simulation.py"
+        status: done
+        notes: "Validates multi-layer capture with probe_id linkage"
     scenarios:
       - "End-to-end capture → highways → cohort → CTA"
       - "Window auto-selection edge cases"
@@ -703,16 +1004,29 @@ demo_scenarios:
       - "Export cohorts for different highways"
       - "Side-by-side cluster analysis"
 
-  transformation_analysis:
+  expert_routing_transformation_analysis:
     status: todo
     priority: high
-    description: "Multi-context comparison using transformation matrix"
+    description: "Expert Highway Routing Transformation: How contexts change MoE expert routing patterns"
     flow:
-      - "Transformation Matrix page → load capture contexts"
-      - "Heatmap visualization of context similarity (routing mode)"
-      - "Click heatmap cell → navigate to ExperimentFlow"
-      - "Focus analysis on selected context pair"
-      - "Demonstrate routing distribution similarities/differences"
+      - "Expert Routing Transform page → load capture contexts"
+      - "Routing similarity heatmap → compare context routing patterns" 
+      - "Expert transition differences → visualize how contexts change expert highways"
+      - "Click patterns → navigate to specific context experiment"
+      - "Demonstrate how context transforms MoE routing decisions"
+
+  individual_highway_latent_analysis:
+    status: todo
+    priority: critical
+    description: "Individual Highway Latent Transformation: Context→target analysis within highway's space"
+    flow:
+      - "Expert Highways → click specific highway edge (e.g., L6E2→L7E3→L8E1)"
+      - "Highway panel opens → shows context→target pairs using this highway"
+      - "Select context 'the' → shows target list ['cat', 'dog', 'house']"
+      - "Export highway-specific cohort → filtered by highway+context+targets"
+      - "Run latent transformation clustering → cluster on context to show target trajectory shifts" 
+      - "Visualize how context transforms target trajectories within this highway's latent space"
+      - "Demonstrates context-driven transformation constrained to specific computational pathway"
 
 # Documentation
 documentation:
