@@ -29,8 +29,8 @@ class CaptureManifest:
     model_name: str             # Model used for capture
     
     # Category assignments for multi-category analysis
-    context_category_assignments: Optional[Dict[str, str]] = None  # {"the": "determiners", "a": "determiners"}
-    target_category_assignments: Optional[Dict[str, str]] = None   # {"cat": "animals", "dog": "pets"}
+    context_category_assignments: Optional[Dict[str, List[str]]] = None  # {"the": ["determiners"], "patient": ["medical", "pos_pure_n"]}
+    target_category_assignments: Optional[Dict[str, List[str]]] = None   # {"cat": ["animals"], "patient": ["medical", "pos_pure_n"]}
     
     @classmethod
     def from_parquet_dict(cls, data: dict) -> 'CaptureManifest':
@@ -104,8 +104,8 @@ def create_capture_manifest(
     layers_captured: List[int],
     probe_count: int,
     model_name: str = "gpt-oss-20b",
-    context_category_assignments: Optional[Dict[str, str]] = None,
-    target_category_assignments: Optional[Dict[str, str]] = None
+    context_category_assignments: Optional[Dict[str, List[str]]] = None,
+    target_category_assignments: Optional[Dict[str, List[str]]] = None
 ) -> CaptureManifest:
     """Create capture manifest for session tracking with category assignments."""
     return CaptureManifest(

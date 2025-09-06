@@ -11,7 +11,7 @@
 
 meta:
   project: "Concept MRI - OpenAI Hackathon"
-  version: "1.4"
+  version: "1.5"
   target_model: "gpt-oss-20b (OpenAI MoE)"
   model_details:
     - "1.8B total parameters (inspected: not 21B as initially assumed)"
@@ -23,6 +23,7 @@ meta:
     - "CRITICAL: Quantized model uses Mxfp4GptOssExperts - no individual expert modules"
     - "Hook Strategy: MLP combined hook for routing + experts collective hook for processing"
     - "Individual expert analysis not possible - collective expert patterns only"
+    - "NEW: Multi-category word membership for rich context disambiguation demos"
   timeline: "7 days"
   updated: "2025-01-06"
   constraints:
@@ -365,10 +366,10 @@ backend:
           notes: "Integrated WordNetMiner for flexible word source mining: custom lists, POS-pure words, synset hyponyms"
         - name: "Multi-category session creation"
           status: done
-          notes: "create_multi_category_session() method supports multiple word sources with automatic category assignment"
+          notes: "create_session_from_sources() method supports multiple word sources with automatic category assignment and preserves all category memberships"
         - name: "Category assignment storage"
           status: done
-          notes: "Category assignments stored in CaptureManifest and survive Parquet serialization/deserialization"
+          notes: "Multi-category assignments (Dict[str, List[str]]) stored in CaptureManifest and survive Parquet serialization/deserialization with full category preservation"
         - name: "Session-based capture management" 
           status: done
           notes: "Complete session lifecycle: create -> capture -> finalize. Supports both simple and multi-category sessions."
@@ -1002,11 +1003,13 @@ schemas:
     file: "backend/src/schemas/capture_manifest.py"
     fields: ["capture_session_id","session_name","contexts","targets","layers_captured","probe_count","created_at","model_name","context_category_assignments","target_category_assignments"]
     completed_features:
-      - "Multi-category probe support with JSON-serialized category assignment dictionaries"
+      - "Multi-category probe support with Dict[str, List[str]] format for preserving all category memberships"
       - "Parquet roundtrip serialization with to_parquet_dict() and from_parquet_dict() methods"
-      - "WordNet integration for semantic category tracking"
+      - "WordNet integration for semantic category tracking with automatic category aggregation"
       - "UI-ready session metadata for experiment selection"
-    test_validation: "End-to-end tested with real GPT-OSS-20B captures, category assignments survive Parquet serialization"
+      - "Word source mining integration: custom lists, POS-pure words, WordNet hyponyms"
+      - "Category preservation across multiple sources - words can belong to multiple categories"
+    test_validation: "End-to-end tested with real GPT-OSS-20B captures, multi-category assignments survive full Parquet serialization cycle"
 
   cohort_manifest:
     status: todo

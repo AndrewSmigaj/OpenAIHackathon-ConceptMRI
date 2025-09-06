@@ -119,7 +119,7 @@ def test_category_assignments_parquet():
             }
         ]
         
-        session_id = service.create_multi_category_session(
+        session_id = service.create_session_from_sources(
             session_name="Category_Test_E2E",
             context_sources=context_sources,
             target_sources=target_sources
@@ -156,9 +156,9 @@ def test_category_assignments_parquet():
         print(f"   📋 Context categories: {manifest.context_category_assignments}")
         print(f"   📋 Target categories: {manifest.target_category_assignments}")
         
-        # Verify expected categories
-        expected_context_cats = {"the": "determiner"}
-        expected_target_cats = {"cat": "animals", "dog": "animals", "car": "objects", "book": "objects"}
+        # Verify expected categories (now list-valued)
+        expected_context_cats = {"the": ["determiner"]}
+        expected_target_cats = {"cat": ["animals"], "dog": ["animals"], "car": ["objects"], "book": ["objects"]}
         
         if manifest.context_category_assignments == expected_context_cats:
             print("   ✅ Context categories correct")
@@ -167,7 +167,7 @@ def test_category_assignments_parquet():
         
         # Check target categories (subset since we only captured some)
         target_cats_correct = True
-        for word, expected_cat in [("cat", "animals"), ("car", "objects")]:
+        for word, expected_cat in [("cat", ["animals"]), ("car", ["objects"])]:
             if manifest.target_category_assignments.get(word) != expected_cat:
                 target_cats_correct = False
                 break

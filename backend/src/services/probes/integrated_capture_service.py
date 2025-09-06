@@ -162,8 +162,8 @@ class IntegratedCaptureService:
         print(f"🚀 IntegratedCaptureService initialized for layers {self.layers_to_capture}")
     
     def create_session(self, session_name: str, contexts: List[str], targets: List[str], 
-                      context_category_assignments: Optional[Dict[str, str]] = None,
-                      target_category_assignments: Optional[Dict[str, str]] = None) -> str:
+                      context_category_assignments: Optional[Dict[str, List[str]]] = None,
+                      target_category_assignments: Optional[Dict[str, List[str]]] = None) -> str:
         """
         Create new capture session with context-target word lists and optional category assignments.
         
@@ -171,8 +171,8 @@ class IntegratedCaptureService:
             session_name: Human-readable session name
             contexts: List of context words
             targets: List of target words
-            context_category_assignments: Optional mapping of context words to categories  
-            target_category_assignments: Optional mapping of target words to categories
+            context_category_assignments: Optional mapping of context words to category lists
+            target_category_assignments: Optional mapping of target words to category lists
         
         Returns:
             Unique session ID
@@ -612,68 +612,62 @@ class IntegratedCaptureService:
         else:
             raise ValueError(f"Unknown word source: {word_source}")
     
-    def create_multi_category_session(self, session_name: str, 
-                                    context_sources: List[Dict], 
-                                    target_sources: List[Dict]) -> str:
+    def create_session_from_sources(self, session_name: str, 
+                                   context_sources: List[Dict[str, any]], 
+                                   target_sources: List[Dict[str, any]]) -> str:
         """
-        Create session with multiple word categories using different mining sources.
+        Create session by mining words from multiple sources with category preservation.
         
         Args:
             session_name: Human-readable session name
-            context_sources: List of source definitions for context words
-            target_sources: List of source definitions for target words
-            
-        Each source dict contains:
-            - source_type: "custom", "pos_pure", or "synset_hyponyms"
-            - source_params: Parameters for the source
+            context_sources: List of word source configurations for contexts
+            target_sources: List of word source configurations for targets
             
         Returns:
             Unique session ID
         """
-        print(f"🌟 Creating multi-category session: {session_name}")
+        # Mine and aggregate contexts
+        contexts, context_categories = self._aggregate_word_sources(context_sources)
         
-        # Mine words from all context sources
-        all_contexts = []
-        context_category_assignments = {}
+        # Mine and aggregate targets  
+        targets, target_categories = self._aggregate_word_sources(target_sources)
         
-        for source in context_sources:
-            source_type = source.get("source_type")
-            source_params = source.get("source_params", {})
-            
-            words, category_label = self._mine_from_source(source_type, source_params)
-            all_contexts.extend(words)
-            
-            # Assign category to each word
-            for word in words:
-                context_category_assignments[word] = category_label
-            
-            print(f"  📝 Context category '{category_label}': {len(words)} words")
-        
-        # Mine words from all target sources  
-        all_targets = []
-        target_category_assignments = {}
-        
-        for source in target_sources:
-            source_type = source.get("source_type")
-            source_params = source.get("source_params", {})
-            
-            words, category_label = self._mine_from_source(source_type, source_params)
-            all_targets.extend(words)
-            
-            # Assign category to each word
-            for word in words:
-                target_category_assignments[word] = category_label
-            
-            print(f"  🎯 Target category '{category_label}': {len(words)} words")
-        
-        # Create session with category assignments
-        session_id = self.create_session(
+        # Create session with aggregated results
+        return self.create_session(
             session_name=session_name,
-            contexts=all_contexts,
-            targets=all_targets,
-            context_category_assignments=context_category_assignments,
-            target_category_assignments=target_category_assignments
+            contexts=contexts,
+            targets=targets,
+            context_category_assignments=context_categories,
+            target_category_assignments=target_categories
         )
+    
+    def _aggregate_word_sources(self, word_sources: List[Dict[str, any]]) -> Tuple[List[str], Dict[str, List[str]]]:
+        """
+        Mine words from multiple sources and preserve all category memberships.
         
-        print(f"✅ Multi-category session created: {len(all_contexts)} contexts × {len(all_targets)} targets = {len(all_contexts) * len(all_targets)} pairs")
-        return session_id
+        Args:
+            word_sources: List of word source configurations
+            
+        Returns:
+            Tuple of (unique_words, category_assignments)
+        """
+        all_words = []
+        category_assignments = {}
+        
+        for source in word_sources:
+            source_type = source.get("source_type")
+            source_params = source.get("source_params", {})
+            
+            words, category_label = self._mine_from_source(source_type, source_params)
+            all_words.extend(words)
+            
+            # Preserve all category memberships for each word
+            for word in words:
+                if word not in category_assignments:
+                    category_assignments[word] = []
+                if category_label not in category_assignments[word]:
+                    category_assignments[word].append(category_label)
+        
+        unique_words = list(set(all_words))
+        return unique_words, category_assignments
+    
