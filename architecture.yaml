@@ -152,6 +152,17 @@ infrastructure:
         files:
           - "backend/src/utils/numpy_utils.py"
           - "backend/src/utils/parquet_utils.py"
+          - "backend/src/utils/errors.py"
+          - "backend/src/utils/memory_utils.py"
+      - name: "WordNet mining utility"
+        status: todo
+        file: "backend/src/utils/wordnet_mining.py"
+        description: "Simple utility for mining semantic category pairs from WordNet"
+        features:
+          - "Mine hyponyms from synsets (e.g., animal.n.01 → cat, dog, mouse)"
+          - "Single-token validation with tokenizer"
+          - "Predefined demo word sets (DEMO_ANIMALS, DEMO_COLORS, etc.)"
+          - "POS-based mining (nouns vs verbs for 'the' context comparisons)"
       - name: "Manifest and ID system"
         status: todo
         files: ["backend/src/core/manifests.py", "backend/src/core/ids.py", "backend/src/core/types.py"]
@@ -292,9 +303,10 @@ backend:
         method: "POST"
         status: todo
         priority: high
-        body: "{ layer:int, expert_id:int, clustering_algo:'kmeans'|'hierarchical', k:int }"
-        returns: "{ clusters, pca_3d_data, specialization_analysis, cluster_cards }"
-        description: "Analyze individual expert's internal FF concept organization with 3D PCA and clustering."
+        body: "{ layer:int, clustering_algo:'kmeans'|'hierarchical', k:int }"
+        returns: "{ clusters, pca_3d_data, collective_analysis, cluster_cards }"
+        description: "Analyze collective expert processing patterns with 3D PCA and clustering (quantized MoE limitation)."
+        notes: "Individual expert analysis not possible with Mxfp4GptOssExperts - collective patterns only"
 
       # EXPERT OUTPUT CLUSTERING + CTA INTEGRATION
       - path: "/api/experiments/{id}/expert-output-clustering"
@@ -424,18 +436,18 @@ backend:
         - name: "Model + assignments persistence"
           status: todo
 
-    expert_internal_clustering_service:
+    collective_expert_clustering_service:
       status: todo
       priority: high
-      file: "backend/src/services/experiments/expert_internal_clustering.py"
-      description: "Cluster individual expert's internal FF activations to understand expert specialization."
+      file: "backend/src/services/experiments/collective_expert_clustering.py"
+      description: "Cluster collective expert processing outputs from quantized MoE (individual expert analysis not possible)."
       features:
-        - name: "Extract expert internal activations for specific layer+expert"
+        - name: "Extract collective expert outputs for specific layers"
           status: todo
-          notes: "Get FF intermediate states for Layer X, Expert Y"
-        - name: "3D PCA analysis of expert internal concept organization"
+          notes: "Get collective expert processing states from Mxfp4GptOssExperts"
+        - name: "3D PCA analysis of collective expert concept organization"
           status: todo
-        - name: "K-means/hierarchical clustering of expert internal patterns"
+        - name: "K-means/hierarchical clustering of collective expert patterns"
           status: todo
         - name: "Expert specialization analysis (what concepts this expert handles)"
           status: todo
@@ -713,6 +725,38 @@ frontend:
           status: todo
 
     visualizations:
+      coloring_system:
+        status: todo
+        priority: high
+        file: "frontend/src/utils/coloringUtils.ts"
+        description: "Flexible coloring approaches for Sankey diagrams and 3D PCA plots"
+        modes:
+          - name: "Semantic Category"
+            description: "Color by WordNet hyponym categories (animals=green, colors=blue, etc.)"
+            notes: "Mixed clusters shown in gray to avoid misleading visualization"
+          - name: "POS Comparison"
+            description: "Color by part-of-speech ('the noun' vs 'the verb' routing)"
+            notes: "Nouns=blue, Verbs=orange - shows grammatical routing differences"
+          - name: "Embedding Distance"
+            description: "Continuous gradient based on cosine similarity or PCA position"
+            notes: "Smooth gradients reveal latent space organization"
+          - name: "Activation Magnitude"
+            description: "Heatmap coloring (high=red, low=blue) for activation strength"
+            notes: "Shows 'hot' vs 'cold' expert paths"
+          - name: "Context-Target Pairs"
+            description: "Color by context→target category combinations"
+            notes: "DETERMINER→ANIMAL vs ADJECTIVE→ANIMAL get different colors"
+        features:
+          - name: "Interactive mode switching"
+            status: todo
+            notes: "Dropdown to switch coloring mode without reloading data"
+          - name: "Mixed cluster handling"
+            status: todo
+            notes: "Gray coloring or transparency for clusters with no dominant category"
+          - name: "Category purity indicators"
+            status: todo
+            notes: "Opacity or saturation based on category purity percentage"
+      
       sankey_charts:
         status: todo
         priority: high
