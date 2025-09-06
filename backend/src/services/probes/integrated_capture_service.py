@@ -14,17 +14,17 @@ from datetime import datetime
 import uuid
 
 # Schema imports
-from backend.src.schemas.tokens import TokenRecord, create_token_record
-from backend.src.schemas.routing import RoutingRecord, create_routing_record
-from backend.src.schemas.expert_internal_activations import ExpertInternalActivation, create_expert_internal_activation
-from backend.src.schemas.expert_output_states import ExpertOutputState, create_expert_output_state
-from backend.src.schemas.capture_manifest import CaptureManifest, create_capture_manifest
+from schemas.tokens import TokenRecord, create_token_record
+from schemas.routing import RoutingRecord, create_routing_record
+from schemas.expert_internal_activations import ExpertInternalActivation, create_expert_internal_activation
+from schemas.expert_output_states import ExpertOutputState, create_expert_output_state
+from schemas.capture_manifest import CaptureManifest, create_capture_manifest
 
 # Core services
-from backend.src.services.probes.routing_capture import EnhancedRoutingCapture
-from backend.src.services.probes.probe_ids import generate_probe_id, generate_capture_id
-from backend.src.core.parquet_writer import BatchWriter
-from backend.src.utils.wordnet_mining import WordNetMiner
+from services.probes.routing_capture import EnhancedRoutingCapture
+from services.probes.probe_ids import generate_probe_id, generate_capture_id
+from core.parquet_writer import BatchWriter
+from utils.wordnet_mining import WordNetMiner
 
 
 class SessionState(Enum):

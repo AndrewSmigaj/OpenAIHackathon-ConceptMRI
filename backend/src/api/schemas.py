@@ -24,14 +24,16 @@ class ProbeRequest(BaseModel):
 class ProbeResponse(BaseModel):
     """Response after creating probe session."""
     session_id: str
-    manifest: Dict[str, Any]
-    execution_url: str
-    summary: Dict[str, Any]
+    total_pairs: int
+    contexts: List[str]
+    targets: List[str]
+    categories: Dict[str, Dict[str, List[str]]]  # {"contexts": {...}, "targets": {...}}
 
 
 class ExecutionResponse(BaseModel):
     """Response after starting session execution."""
     started: bool
+    probe_ids: List[str]
     status_url: str
     estimated_time: Optional[str] = None
 
@@ -41,4 +43,23 @@ class StatusResponse(BaseModel):
     session_id: str
     state: str
     progress: Dict[str, Any]
-    categories: Dict[str, Any]
+    manifest: Optional[Dict[str, Any]] = None
+    data_lake_paths: Optional[Dict[str, str]] = None
+
+
+class SessionListResponse(BaseModel):
+    """Response for listing sessions."""
+    session_id: str
+    session_name: str
+    created_at: str
+    probe_count: int
+    contexts: List[str]
+    targets: List[str]
+    state: str
+
+
+class SessionDetailResponse(BaseModel):
+    """Response for session details."""
+    manifest: Dict[str, Any]
+    data_lake_paths: Dict[str, str]
+    categories: Dict[str, Dict[str, List[str]]]

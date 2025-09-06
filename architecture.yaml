@@ -11,7 +11,7 @@
 
 meta:
   project: "Concept MRI - OpenAI Hackathon"
-  version: "1.5"
+  version: "1.6"
   target_model: "gpt-oss-20b (OpenAI MoE)"
   model_details:
     - "1.8B total parameters (inspected: not 21B as initially assumed)"
@@ -24,6 +24,7 @@ meta:
     - "Hook Strategy: MLP combined hook for routing + experts collective hook for processing"
     - "Individual expert analysis not possible - collective expert patterns only"
     - "NEW: Multi-category word membership for rich context disambiguation demos"
+    - "NEW: Complete FastAPI server with 5 working probes endpoints"
   timeline: "7 days"
   updated: "2025-01-06"
   constraints:
@@ -178,32 +179,58 @@ infrastructure:
 # Backend Services (Python FastAPI)
 backend:
   api_server:
-    status: todo
+    status: done
     priority: critical
-    files: ["backend/src/api/main.py", "backend/src/api/routers/"]
+    files: ["backend/src/api/main.py", "backend/src/api/routers/probes.py", "backend/src/api/schemas.py", "backend/src/api/dependencies.py"]
+    completed_features:
+      - "FastAPI server with CORS middleware"
+      - "Model dependency injection with proper path resolution"
+      - "Complete probes router with 5 endpoints"
+      - "Multi-category WordSource support integrated with IntegratedCaptureService"
+      - "Error handling for GPU/model loading failures"
+      - "Session lifecycle management (create → execute → status)"
     endpoints:
-      # PROBES (atomic capture -> lake)
+      # PROBES (session-based capture with multi-category support)
       - path: "/api/probes"
         method: "POST"
-        status: todo
+        status: done
         priority: critical
-        body: "{ session_name:str, contexts:[str], targets:[str], layers:[int] }"
-        returns: "{ session_id, manifest, lake_paths }"
-        description: "Create capture session and run batch MoE capture. Writes all schemas to data lake with coordinated BatchWriters."
+        body: "{ session_name:str, context_sources:[WordSource], target_sources:[WordSource] }"
+        returns: "{ session_id, total_pairs, contexts:[str], targets:[str], categories:{} }"
+        description: "Create session from WordSource objects (custom, pos_pure, synset_hyponyms). Uses create_session_from_sources() with multi-category preservation."
+
+      - path: "/api/probes/{session_id}/execute"
+        method: "POST"
+        status: done
+        priority: critical
+        returns: "{ started:bool, probe_ids:[str], status_url:str }"
+        description: "Execute all context-target pairs for session using capture_session_batch()."
+
+      - path: "/api/probes/{session_id}/status"
+        method: "GET"
+        status: done
+        priority: critical
+        returns: "{ session_id, state, progress:{}, manifest?:{}, data_lake_paths?:{} }"
+        description: "Monitor session progress. Auto-finalizes and returns manifest + paths when completed."
 
       - path: "/api/probes"
         method: "GET"
-        status: todo
+        status: done
         priority: high
-        returns: "[{ capture_id, created_at, contexts:[str], layers:[int] }]"
-        description: "List available captures."
+        returns: "[{ session_id, session_name, created_at, probe_count, contexts:[str], targets:[str], state }]"
+        description: "List all available capture sessions for experiment creation."
 
-      - path: "/api/probes/{id}"
+      - path: "/api/probes/{session_id}"
         method: "GET"
-        status: todo
+        status: done
         priority: high
-        returns: "{ manifest, lake_paths }"
-        description: "Fetch capture manifest & file paths."
+        returns: "{ manifest:{}, data_lake_paths:{}, categories:{} }"
+        description: "Get complete session details including full manifest and Parquet file paths."
+    test_validation:
+      - "Server starts successfully with GPT-OSS-20B model loading"
+      - "Session creation works with real WordSource mining"
+      - "Multi-category assignments preserved in API responses"
+      - "All endpoints return proper HTTP status codes and error handling"
 
       # EXPERIMENTS (consume captures -> highways/cohort/cluster/cta)
       - path: "/api/experiments"
@@ -1221,8 +1248,8 @@ dependencies:
     storage: ["pyarrow", "duckdb"]
     quantization: ["bitsandbytes", "accelerate"]
     nlp: ["nltk"]
-    status: in_progress
-    notes: "Core dependencies installed and working, nltk added for WordNet integration"
+    status: done
+    notes: "All dependencies installed and working, FastAPI server operational with GPT-OSS-20B model integration"
 
   frontend:
     node_version: "18+"
