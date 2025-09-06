@@ -17,6 +17,7 @@ class RoutingRecord:
     # Core identifiers
     probe_id: str               # Links to tokens and features
     layer: int                  # Layer number (0-23 for GPT-OSS-20B)
+    token_position: int         # Token position in sequence (0=context, 1=target)
     
     # K=4 routing data (full capture for future expansion)
     expert_top4_ids: Tuple[int, int, int, int]        # Top-4 expert IDs [0-31]
@@ -28,7 +29,6 @@ class RoutingRecord:
     
     # Routing metrics
     gate_entropy: float         # Uncertainty measure: -sum(p * log(p))
-    routing_aux_loss: float     # Auxiliary routing loss
     
     # Metadata
     captured_at: str            # ISO timestamp for debugging
@@ -77,12 +77,12 @@ class RoutingRecord:
         return cls(
             probe_id=data['probe_id'],
             layer=data['layer'],
+            token_position=data['token_position'],
             expert_top4_ids=tuple(data['expert_top4_ids']),
             expert_top4_weights=tuple(data['expert_top4_weights']),
             expert_top1_id=data['expert_top1_id'],
             expert_top1_weight=data['expert_top1_weight'],
             gate_entropy=data['gate_entropy'],
-            routing_aux_loss=data['routing_aux_loss'],
             captured_at=data['captured_at']
         )
 
@@ -91,12 +91,12 @@ class RoutingRecord:
 ROUTING_PARQUET_SCHEMA = {
     "probe_id": "string",
     "layer": "int32",
+    "token_position": "int32",
     "expert_top4_ids": "list<int32>",
     "expert_top4_weights": "list<float>",
     "expert_top1_id": "int32", 
     "expert_top1_weight": "float",
     "gate_entropy": "float",
-    "routing_aux_loss": "float",
     "captured_at": "string"
 }
 
@@ -104,8 +104,8 @@ ROUTING_PARQUET_SCHEMA = {
 def create_routing_record(
     probe_id: str,
     layer: int,
+    token_position: int,
     routing_weights: np.ndarray,  # Shape: [32] for all experts
-    routing_aux_loss: float,
     captured_at: Optional[str] = None
 ) -> RoutingRecord:
     """
@@ -114,8 +114,8 @@ def create_routing_record(
     Args:
         probe_id: Unique probe identifier
         layer: Layer number (0-23)
+        token_position: Token position in sequence (0=context, 1=target)
         routing_weights: Full routing weights for all 32 experts
-        routing_aux_loss: Auxiliary routing loss
         captured_at: Capture timestamp (defaults to now)
     
     Returns:
@@ -144,33 +144,43 @@ def create_routing_record(
     return RoutingRecord(
         probe_id=probe_id,
         layer=layer,
+        token_position=token_position,
         expert_top4_ids=expert_top4_ids,
         expert_top4_weights=expert_top4_weights,
         expert_top1_id=expert_top1_id,
         expert_top1_weight=expert_top1_weight,
         gate_entropy=float(gate_entropy),
-        routing_aux_loss=float(routing_aux_loss),
         captured_at=captured_at
     )
 
 
-def highway_signature(routing_records: List[RoutingRecord]) -> str:
+def highway_signature(routing_records: List[RoutingRecord], target_tokens_only: bool = True) -> str:
     """
     Generate highway signature from routing records.
     
     Args:
-        routing_records: Ordered list of routing records for consecutive layers
+        routing_records: List of routing records for consecutive layers
+        target_tokens_only: If True, only use target token (position=1) records for demo
     
     Returns:
-        Highway signature like "L6E2→L7E15→L8E7"
+        Highway signature like "L1E2→L2E15→L3E7" (for target token routing)
         
     Raises:
-        ValueError: If layers are not consecutive
+        ValueError: If layers are not consecutive or missing target token records
     """
     if not routing_records:
         return ""
     
-    sorted_records = sorted(routing_records, key=lambda r: r.layer)
+    # Filter to target tokens only for demo (position=1)
+    if target_tokens_only:
+        target_records = [r for r in routing_records if r.token_position == 1]
+        if not target_records:
+            raise ValueError("No target token routing records found (token_position=1)")
+        records_to_use = target_records
+    else:
+        records_to_use = routing_records
+    
+    sorted_records = sorted(records_to_use, key=lambda r: r.layer)
     
     # Check for consecutive layers
     for i in range(1, len(sorted_records)):

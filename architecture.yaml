@@ -443,6 +443,28 @@ backend:
         - name: "Sankey diagram generation for cluster transitions"
           status: todo
 
+    expert_clustering_service:
+      status: todo
+      priority: medium
+      file: "backend/src/services/experiments/expert_clustering.py"
+      description: "Cluster experts by usage patterns and analyze token paths through expert clusters."
+      features:
+        - name: "Expert usage pattern analysis"
+          status: todo
+          notes: "Analyze which experts are used together across tokens"
+        - name: "Expert similarity clustering" 
+          status: todo
+          notes: "Cluster experts by co-activation patterns and routing behavior"
+        - name: "Token path analysis through expert clusters"
+          status: todo
+          notes: "Track tokens that use same expert clusters vs those that diverge"
+        - name: "Expert cluster transition visualization"
+          status: todo
+          notes: "Show how tokens move between expert clusters across layers"
+        - name: "Expert specialization convergence analysis"
+          status: todo
+          notes: "Identify tokens that converge to same expert clusters (similar processing)"
+
     cta_service:
       status: todo
       priority: critical

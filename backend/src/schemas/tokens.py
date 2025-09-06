@@ -12,6 +12,7 @@ class TokenRecord:
     """Index linking probe_id to context-target token pairs."""
     
     probe_id: str            # Links to all MoE activation data for this pair
+    capture_session_id: str  # Groups related captures for experiment selection
     context_text: str        # Context word (e.g., "the")
     target_text: str         # Target word (e.g., "cat") 
     context_token_id: int    # Tokenized context
@@ -26,6 +27,7 @@ class TokenRecord:
 # Parquet schema definition
 TOKENS_PARQUET_SCHEMA = {
     "probe_id": "string",
+    "capture_session_id": "string",
     "context_text": "string", 
     "target_text": "string",
     "context_token_id": "int32",
@@ -35,6 +37,7 @@ TOKENS_PARQUET_SCHEMA = {
 
 def create_token_record(
     probe_id: str,
+    capture_session_id: str,
     context_text: str,
     target_text: str, 
     context_token_id: int,
@@ -43,6 +46,7 @@ def create_token_record(
     """Create token record linking probe_id to context-target pair."""
     return TokenRecord(
         probe_id=probe_id,
+        capture_session_id=capture_session_id,
         context_text=context_text,
         target_text=target_text,
         context_token_id=context_token_id,
