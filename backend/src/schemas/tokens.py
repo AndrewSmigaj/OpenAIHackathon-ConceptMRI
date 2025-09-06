@@ -9,7 +9,7 @@ from dataclasses import dataclass
 
 @dataclass
 class TokenRecord:
-    """Index linking probe_id to context-target token pairs."""
+    """Index linking probe_id to context-target token pairs with category metadata."""
     
     probe_id: str            # Links to all MoE activation data for this pair
     capture_session_id: str  # Groups related captures for experiment selection
@@ -17,10 +17,11 @@ class TokenRecord:
     target_text: str         # Target word (e.g., "cat") 
     context_token_id: int    # Tokenized context
     target_token_id: int     # Tokenized target
+    
 
     @classmethod
     def from_parquet_dict(cls, data: dict) -> 'TokenRecord':
-        """Reconstruct from Parquet dictionary (no special deserialization needed)."""
+        """Reconstruct from Parquet dictionary."""
         return cls(**data)
 
 

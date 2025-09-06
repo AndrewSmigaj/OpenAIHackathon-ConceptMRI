@@ -24,6 +24,7 @@ from backend.src.schemas.capture_manifest import CaptureManifest, create_capture
 from backend.src.services.probes.routing_capture import EnhancedRoutingCapture
 from backend.src.services.probes.probe_ids import generate_probe_id, generate_capture_id
 from backend.src.core.parquet_writer import BatchWriter
+from backend.src.utils.wordnet_mining import WordNetMiner
 
 
 class SessionState(Enum):
@@ -155,16 +156,23 @@ class IntegratedCaptureService:
         self.sessions_dir = Path(data_lake_path) / "_sessions"
         self.sessions_dir.mkdir(parents=True, exist_ok=True)
         
+        # WordNet mining integration
+        self.wordnet_miner = WordNetMiner(tokenizer)
+        
         print(f"🚀 IntegratedCaptureService initialized for layers {self.layers_to_capture}")
     
-    def create_session(self, session_name: str, contexts: List[str], targets: List[str]) -> str:
+    def create_session(self, session_name: str, contexts: List[str], targets: List[str], 
+                      context_category_assignments: Optional[Dict[str, str]] = None,
+                      target_category_assignments: Optional[Dict[str, str]] = None) -> str:
         """
-        Create new capture session with context-target word lists.
+        Create new capture session with context-target word lists and optional category assignments.
         
         Args:
             session_name: Human-readable session name
             contexts: List of context words
-            targets: List of target words  
+            targets: List of target words
+            context_category_assignments: Optional mapping of context words to categories  
+            target_category_assignments: Optional mapping of target words to categories
         
         Returns:
             Unique session ID
@@ -200,6 +208,8 @@ class IntegratedCaptureService:
             "session_name": session_name,
             "contexts": contexts,
             "targets": targets,
+            "context_category_assignments": context_category_assignments,
+            "target_category_assignments": target_category_assignments,
             "layers_captured": self.layers_to_capture,
             "total_pairs": total_pairs,
             "created_at": datetime.now().isoformat(),
@@ -493,13 +503,20 @@ class IntegratedCaptureService:
                 targets=metadata["targets"],
                 layers_captured=self.layers_to_capture,
                 probe_count=session_status.completed_pairs,
-                model_name="gpt-oss-20b"
+                model_name="gpt-oss-20b",
+                context_category_assignments=metadata.get("context_category_assignments"),
+                target_category_assignments=metadata.get("target_category_assignments")
             )
             
-            # Write manifest to data lake
+            # Write manifest to data lake (special handling for category JSON serialization)
             manifest_path = Path(self.data_lake_path) / session_id / "capture_manifest.parquet"
-            with BatchWriter(str(manifest_path)) as manifest_writer:
-                manifest_writer.add_record(manifest)
+            manifest_dict = manifest.to_parquet_dict()
+            
+            # Write directly as a single-record table
+            import pyarrow as pa
+            import pyarrow.parquet as pq
+            table = pa.Table.from_pylist([manifest_dict])
+            pq.write_table(table, manifest_path)
             
             # Update session state
             session_status.state = SessionState.COMPLETED
@@ -549,3 +566,114 @@ class IntegratedCaptureService:
         self._cleanup_routing_capture()
         
         print(f"🛑 Session {session_id} aborted")
+    
+    def _mine_from_source(self, word_source: str, source_params: dict) -> Tuple[List[str], str]:
+        """
+        Mine words from different sources: custom, pos_pure, or synset_hyponyms.
+        
+        Args:
+            word_source: "custom", "pos_pure", or "synset_hyponyms"
+            source_params: Parameters specific to the source type
+            
+        Returns:
+            Tuple of (word_list, category_label)
+        """
+        if word_source == "custom":
+            # Custom word list provided by user
+            words = source_params.get("words", [])
+            label = source_params.get("label", "custom")
+            return words, label
+            
+        elif word_source == "pos_pure":
+            # POS-pure words (words that are only nouns, only verbs, etc.)
+            pos = source_params.get("pos", "n")
+            max_words = source_params.get("max_words", 30)
+            words = self.wordnet_miner.mine_pos_pure_words(pos, max_words)
+            label = f"pos_pure_{pos}"
+            return words, label
+            
+        elif word_source == "synset_hyponyms":
+            # WordNet hyponym mining (unambiguous or all words)
+            synset_id = source_params.get("synset_id")
+            max_depth = source_params.get("max_depth", 2)
+            unambiguous_only = source_params.get("unambiguous_only", True)
+            
+            if not synset_id:
+                raise ValueError("synset_id required for synset_hyponyms source")
+            
+            if unambiguous_only:
+                words = self.wordnet_miner.mine_unambiguous_words(synset_id, max_depth)
+            else:
+                words = self.wordnet_miner.mine_all_words(synset_id, max_depth)
+            
+            label = synset_id
+            return words, label
+            
+        else:
+            raise ValueError(f"Unknown word source: {word_source}")
+    
+    def create_multi_category_session(self, session_name: str, 
+                                    context_sources: List[Dict], 
+                                    target_sources: List[Dict]) -> str:
+        """
+        Create session with multiple word categories using different mining sources.
+        
+        Args:
+            session_name: Human-readable session name
+            context_sources: List of source definitions for context words
+            target_sources: List of source definitions for target words
+            
+        Each source dict contains:
+            - source_type: "custom", "pos_pure", or "synset_hyponyms"
+            - source_params: Parameters for the source
+            
+        Returns:
+            Unique session ID
+        """
+        print(f"🌟 Creating multi-category session: {session_name}")
+        
+        # Mine words from all context sources
+        all_contexts = []
+        context_category_assignments = {}
+        
+        for source in context_sources:
+            source_type = source.get("source_type")
+            source_params = source.get("source_params", {})
+            
+            words, category_label = self._mine_from_source(source_type, source_params)
+            all_contexts.extend(words)
+            
+            # Assign category to each word
+            for word in words:
+                context_category_assignments[word] = category_label
+            
+            print(f"  📝 Context category '{category_label}': {len(words)} words")
+        
+        # Mine words from all target sources  
+        all_targets = []
+        target_category_assignments = {}
+        
+        for source in target_sources:
+            source_type = source.get("source_type")
+            source_params = source.get("source_params", {})
+            
+            words, category_label = self._mine_from_source(source_type, source_params)
+            all_targets.extend(words)
+            
+            # Assign category to each word
+            for word in words:
+                target_category_assignments[word] = category_label
+            
+            print(f"  🎯 Target category '{category_label}': {len(words)} words")
+        
+        # Create session with category assignments
+        session_id = self.create_session(
+            session_name=session_name,
+            contexts=all_contexts,
+            targets=all_targets,
+            context_category_assignments=context_category_assignments,
+            target_category_assignments=target_category_assignments
+        )
+        
+        print(f"✅ Multi-category session created: {len(all_contexts)} contexts × {len(all_targets)} targets = {len(all_contexts) * len(all_targets)} pairs")
+        return session_id

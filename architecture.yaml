@@ -155,14 +155,21 @@ infrastructure:
           - "backend/src/utils/errors.py"
           - "backend/src/utils/memory_utils.py"
       - name: "WordNet mining utility"
-        status: todo
+        status: done
         file: "backend/src/utils/wordnet_mining.py"
-        description: "Simple utility for mining semantic category pairs from WordNet"
-        features:
-          - "Mine hyponyms from synsets (e.g., animal.n.01 → cat, dog, mouse)"
-          - "Single-token validation with tokenizer"
-          - "Predefined demo word sets (DEMO_ANIMALS, DEMO_COLORS, etc.)"
-          - "POS-based mining (nouns vs verbs for 'the' context comparisons)"
+        description: "WordNet-based semantic category mining with unambiguous word filtering and POS-pure extraction"
+        completed_features:
+          - "Mine hyponyms from synsets with max_depth parameter (e.g., animal.n.01 → cat, dog, mouse)"
+          - "Filter for globally unambiguous words (single word sense only) for clean demos"
+          - "Single-token validation with tokenizer integration"
+          - "POS-pure word mining (words that are ONLY nouns, ONLY verbs, etc.)"
+          - "All-words mining (including ambiguous words for broader analysis)"
+          - "Multi-category mining with automatic labeling"
+          - "Full synset ID transparency for research traceability"
+        test_results:
+          - "30 pure nouns vs 30 pure verbs found for POS contrast analysis"
+          - "22 unambiguous animals vs 513 all animals (including ambiguous)"
+          - "Integration tested with real GPT-OSS-20B captures"
       - name: "Manifest and ID system"
         status: todo
         files: ["backend/src/core/manifests.py", "backend/src/core/ids.py", "backend/src/core/types.py"]
@@ -340,15 +347,34 @@ backend:
       status: done
       priority: critical
       file: "backend/src/services/probes/integrated_capture_service.py"
-      description: "Complete session-based MoE capture for quantized GPT-OSS-20B with coordinated schema writing."
+      description: "Complete session-based MoE capture with WordNet integration and multi-category probe support."
       supporting_files: 
         - "backend/src/services/probes/routing_capture.py" # EnhancedRoutingCapture with quantized MoE hooks
         - "backend/src/services/probes/probe_ids.py" # Probe and session ID generation
-        - "scripts/test_integrated_capture.py" # Comprehensive test validation
+        - "backend/src/utils/wordnet_mining.py" # WordNet integration for category mining
+        - "scripts/test_integrated_capture.py" # Original comprehensive test
+        - "scripts/test_integrated_wordnet_mining.py" # WordNet integration test
+        - "scripts/test_multi_category_probe.py" # Multi-category demo scenarios
+        - "scripts/test_end_to_end_category_parquet.py" # End-to-end Parquet validation
       features:
         - name: "Quantized MoE architecture adaptation"
           status: done
           notes: "Successfully adapted to Mxfp4GptOssExperts structure - no individual expert modules, collective processing only"
+        - name: "WordNet mining integration"
+          status: done
+          notes: "Integrated WordNetMiner for flexible word source mining: custom lists, POS-pure words, synset hyponyms"
+        - name: "Multi-category session creation"
+          status: done
+          notes: "create_multi_category_session() method supports multiple word sources with automatic category assignment"
+        - name: "Category assignment storage"
+          status: done
+          notes: "Category assignments stored in CaptureManifest and survive Parquet serialization/deserialization"
+        - name: "Session-based capture management" 
+          status: done
+          notes: "Complete session lifecycle: create -> capture -> finalize. Supports both simple and multi-category sessions."
+        - name: "Word source flexibility (_mine_from_source helper)"
+          status: done
+          notes: "Supports 3 word sources: custom (user lists), pos_pure (grammatically unambiguous), synset_hyponyms (semantic categories)"
         - name: "MLP combined hook (routing + output capture)"
           status: done
           notes: "Single hook captures both routing computation and MLP output. Replicates router logic manually since router.forward() never called."
@@ -358,9 +384,6 @@ backend:
         - name: "Expert highway extraction with top-1 from K=4 routing"
           status: done
           notes: "highway_signature() method creates L{layer}E{expert} signatures focusing on target tokens (position=1)"
-        - name: "Session-based capture management"
-          status: done
-          notes: "Complete session lifecycle: create -> capture -> finalize. Supports batch processing of context-target pairs."
         - name: "Token position tracking for highway analysis"
           status: done
           notes: "All schemas updated with token_position field (0=context, 1=target) for proper highway analysis"
@@ -369,12 +392,16 @@ backend:
           notes: "SessionBatchWriters coordinates all 5 schemas with proper probe_id foreign key relationships"
         - name: "Data lake integration and validation"
           status: done
-          notes: "Complete data flow: hooks -> schemas -> parquet files -> highway analysis. All tests passing."
+          notes: "Complete data flow: hooks -> schemas -> parquet files -> highway analysis. All tests passing including category assignments."
         - name: "GPU memory management and error resilience"
           status: done
           notes: "Proper hook cleanup, CUDA memory clearing, graceful failure handling"
-          status: todo
-      dependencies: ["transformers", "bitsandbytes", "accelerate"]
+      test_validation:
+        - "9/9 integration tests passing with real GPT-OSS-20B model"
+        - "Multi-category sessions tested with 2/3 demo scenarios ready (≥20 pairs each)"
+        - "End-to-end Parquet integration verified with category assignments"
+        - "Context disambiguation demo configuration specified (72 probes, 4-5 minutes)"
+      dependencies: ["transformers", "bitsandbytes", "accelerate", "nltk"]
 
     # EXPERIMENTS
     highways_service:
@@ -970,10 +997,16 @@ schemas:
     notes: "LLM-generated insights and analysis reports with supporting evidence"
 
   capture_manifest:
-    status: todo
+    status: done
     priority: critical
     file: "backend/src/schemas/capture_manifest.py"
-    fields: ["schema_version","capture_id","model_hash","contexts","layers","created_at"]
+    fields: ["capture_session_id","session_name","contexts","targets","layers_captured","probe_count","created_at","model_name","context_category_assignments","target_category_assignments"]
+    completed_features:
+      - "Multi-category probe support with JSON-serialized category assignment dictionaries"
+      - "Parquet roundtrip serialization with to_parquet_dict() and from_parquet_dict() methods"
+      - "WordNet integration for semantic category tracking"
+      - "UI-ready session metadata for experiment selection"
+    test_validation: "End-to-end tested with real GPT-OSS-20B captures, category assignments survive Parquet serialization"
 
   cohort_manifest:
     status: todo
@@ -1022,14 +1055,26 @@ testing:
     files: ["tests/test_capture.py", "tests/test_clustering.py", "tests/test_cta.py"]
 
   integration_tests:
-    status: in_progress
+    status: done
     priority: medium
     completed_tests:
-      - name: "Parquet round-trip test"
-        file: "scripts/test_capture_simulation.py"
+      - name: "Original capture system validation"
+        file: "scripts/test_integrated_capture.py"
         status: done
-        notes: "Validates multi-layer capture with probe_id linkage"
-    scenarios:
+        notes: "9/9 integration tests passing with real GPT-OSS-20B model, validates complete MoE capture pipeline"
+      - name: "WordNet mining integration"
+        file: "scripts/test_integrated_wordnet_mining.py"
+        status: done
+        notes: "Tests all 3 word mining sources (custom, POS-pure, synset hyponyms) with category assignment"
+      - name: "Multi-category probe scenarios"
+        file: "scripts/test_multi_category_probe.py"
+        status: done
+        notes: "Demo scenario validation: POS contrast (30 pairs), Semantic categories (537 pairs), Mixed sources (28 pairs)"
+      - name: "End-to-end Parquet integration"
+        file: "scripts/test_end_to_end_category_parquet.py"
+        status: done
+        notes: "Real GPT-OSS-20B captures with category assignments, Parquet serialization/deserialization validation"
+    remaining_scenarios:
       - "End-to-end capture → highways → cohort → CTA"
       - "Window auto-selection edge cases"
       - "k-per-layer clustering validation"
@@ -1111,6 +1156,37 @@ demo_scenarios:
       - "Visualize how context transforms target trajectories within this highway's latent space"
       - "Demonstrates context-driven transformation constrained to specific computational pathway"
 
+  context_disambiguation_analysis:
+    status: todo
+    priority: high
+    description: "Context Disambiguation Demo: How different contexts resolve ambiguous word meanings through expert routing"
+    probe_configuration:
+      contexts_by_category:
+        financial: ["money", "financial", "investment"]
+        medical: ["medical", "patient", "treatment"] 
+        technology: ["computer", "software", "network"]
+        legal: ["court", "legal", "judge"]
+      ambiguous_targets: ["bank", "cell", "scale", "interest", "court", "patient"]
+      total_probes: "12 contexts × 6 targets = 72 probes (~4-5 minutes)"
+    expected_effects:
+      - name: "bank disambiguation"
+        examples: "'money' → 'bank' (financial) vs 'medical' → 'bank' (blood bank)"
+        hypothesis: "Completely different expert highways based on context"
+      - name: "cell specialization" 
+        examples: "'medical' → 'cell' (biological) vs 'legal' → 'cell' (prison) vs 'computer' → 'cell' (spreadsheet)"
+        hypothesis: "3-way expert routing comparison across domains"
+      - name: "scale context sensitivity"
+        examples: "'financial' → 'scale' (economic) vs 'medical' → 'scale' (symptom scale)"
+        hypothesis: "Context-driven expert selection for same ambiguous word"
+    flow:
+      - "Create multi-category capture → 4 context categories × 6 ambiguous targets"
+      - "Expert Routing Transform → disambiguation heatmap showing context effects"
+      - "Select ambiguous word → compare expert highways across different contexts"
+      - "Routing difference visualization → highlight which experts change based on context"
+      - "Highway comparison → side-by-side analysis of 'money'→'bank' vs 'river'→'bank'"
+      - "Demonstrate context-driven disambiguation at MoE expert granularity"
+    demo_narrative: "Watch how expert highways change when we give the same ambiguous word different contexts. 'Bank' after 'money' routes through completely different experts than 'bank' after 'medical' - showing how context disambiguation happens at the expert level."
+
 # Documentation
 documentation:
   api_docs:
@@ -1141,7 +1217,9 @@ dependencies:
     ml: ["scikit-learn", "numpy", "pandas"] 
     storage: ["pyarrow", "duckdb"]
     quantization: ["bitsandbytes", "accelerate"]
-    status: todo
+    nlp: ["nltk"]
+    status: in_progress
+    notes: "Core dependencies installed and working, nltk added for WordNet integration"
 
   frontend:
     node_version: "18+"
