@@ -1,6 +1,13 @@
 # Concept MRI - Architecture Tracking Document
 # Status: todo | in_progress | done | blocked
 # Priority: critical | high | medium | low
+#
+# ✅ MAJOR MILESTONE: Complete MoE Data Capture System Working!
+# - All 9/9 integration tests passing with real GPT-OSS-20B model
+# - Session-based capture with coordinated schema writing
+# - Highway analysis generating signatures like "L0E6→L1E28→L2E14"  
+# - Data lake with 30 records per schema (routing, expert internal, expert output)
+# - Adapted successfully to quantized Mxfp4GptOssExperts architecture
 
 meta:
   project: "Concept MRI - OpenAI Hackathon"
@@ -13,8 +20,11 @@ meta:
     - "Available at: openai/gpt-oss-20b on Hugging Face"
     - "Apache 2.0 license"
     - "Analysis Strategy: Capture K=4 routing, analyze top-1 expert per layer"
+    - "CRITICAL: Quantized model uses Mxfp4GptOssExperts - no individual expert modules"
+    - "Hook Strategy: MLP combined hook for routing + experts collective hook for processing"
+    - "Individual expert analysis not possible - collective expert patterns only"
   timeline: "7 days"
-  updated: "2025-01-04"
+  updated: "2025-01-06"
   constraints:
     - "Two token inputs only"
     - "Several thousand words max"
@@ -88,7 +98,7 @@ infrastructure:
       - name: "Activation hook development"
         status: done
         files: ["scripts/test_routing_capture_fixed.py", "scripts/test_routing_capture.py", "scripts/test_routing_minimal.py"]
-        notes: "RoutingCapture class implemented with forward hooks for router + MLP modules. Captures K=4 routing, extracts top-1 + statistics."
+        notes: "EnhancedRoutingCapture class implemented for quantized MoE. MLP combined hook captures routing directly, experts collective hook captures post-expert processing."
 
   project_setup:
     status: done
@@ -117,19 +127,20 @@ infrastructure:
             - "User-friendly error messages in API responses"
 
   data_layer:
-    status: in_progress
+    status: done
     priority: critical
-    description: "Parquet + DuckDB storage with PCA128 features"
+    description: "Parquet storage with integrated capture service and token position tracking"
     tasks:
       - name: "Data schemas and contracts"
         status: done
         files: ["backend/src/schemas/"]
         completed_files:
-          - "backend/src/schemas/tokens.py"
-          - "backend/src/schemas/routing.py"
-          - "backend/src/schemas/expert_internal_activations.py"
-          - "backend/src/schemas/expert_output_states.py"
-          - "backend/src/schemas/features_pca128.py"
+          - "backend/src/schemas/tokens.py" # Updated with capture_session_id
+          - "backend/src/schemas/routing.py" # Updated with token_position tracking
+          - "backend/src/schemas/expert_internal_activations.py" # Updated for quantized MoE collective experts
+          - "backend/src/schemas/expert_output_states.py" # Updated with token_position
+          - "backend/src/schemas/features_pca128.py" # For experiment-time PCA
+          - "backend/src/schemas/capture_manifest.py" # Session metadata for UI integration
       - name: "Parquet I/O utilities"
         status: done
         files:
@@ -157,9 +168,9 @@ backend:
         method: "POST"
         status: todo
         priority: critical
-        body: "{ contexts:[str], targets_file:str, layers:[int] }"
-        returns: "{ capture_id, model_hash, lake_paths }"
-        description: "Run probe capture (K=1 routing + PCA128). Writes Parquet to lake."
+        body: "{ session_name:str, contexts:[str], targets:[str], layers:[int] }"
+        returns: "{ session_id, manifest, lake_paths }"
+        description: "Create capture session and run batch MoE capture. Writes all schemas to data lake with coordinated BatchWriters."
 
       - path: "/api/probes"
         method: "GET"
@@ -313,37 +324,43 @@ backend:
 
   services:
     # PROBES
-    capture_service:
-      status: in_progress
+    integrated_capture_service:
+      status: done
       priority: critical
-      file: "backend/src/services/probes/capture.py"
-      description: "Run K=4 routing capture + PCA128 + expert internal FF activations."
-      prototype_files: ["scripts/test_routing_capture_fixed.py"]
+      file: "backend/src/services/probes/integrated_capture_service.py"
+      description: "Complete session-based MoE capture for quantized GPT-OSS-20B with coordinated schema writing."
+      supporting_files: 
+        - "backend/src/services/probes/routing_capture.py" # EnhancedRoutingCapture with quantized MoE hooks
+        - "backend/src/services/probes/probe_ids.py" # Probe and session ID generation
+        - "scripts/test_integrated_capture.py" # Comprehensive test validation
       features:
-        - name: "Activation hooks (GptOssTopKRouter) + capture K=4 routing (32 experts/layer)"
+        - name: "Quantized MoE architecture adaptation"
           status: done
-          notes: "RoutingCapture class implemented with forward hooks for router modules"
-        - name: "Expert highway extraction with top-1 routing"
+          notes: "Successfully adapted to Mxfp4GptOssExperts structure - no individual expert modules, collective processing only"
+        - name: "MLP combined hook (routing + output capture)"
           status: done
-          notes: "extract_highways() method creates L{layer}E{expert} signatures"
-        - name: "Routing statistics (entropy, margin, expert usage)"
+          notes: "Single hook captures both routing computation and MLP output. Replicates router logic manually since router.forward() never called."
+        - name: "Experts collective hook (post-expert processing)"
           status: done
-          notes: "Computes gate entropy, top1-top2 margin, expert usage statistics"
-        - name: "Expert internal FF activation hooks (intermediate states)"
-          status: todo
-          notes: "Hook model.layers.{i}.mlp.experts.{j} for internal clustering analysis"
-        - name: "PCA per layer (fit/apply) -> PCA128 features"
-          status: todo
-        - name: "Expert output state capture (collective latent space)"
-          status: in_progress
-          notes: "Post-MLP activation hook implemented, needs PCA integration"
-        - name: "MXFP4 quantization compatible + micro-batch backoff"
+          notes: "Captures collective expert processing output for latent analysis. Works with flattened tensor shapes."
+        - name: "Expert highway extraction with top-1 from K=4 routing"
           status: done
-          notes: "Works with BitsAndBytesConfig NF4 quantization + device mapping"
-        - name: "Integration with data lake storage (Parquet)"
-          status: todo
-          notes: "Connect RoutingCapture with BatchWriter and schemas"
-        - name: "Capture manifest (capture_id, contexts, layers, routing_mode='K4_top1')"
+          notes: "highway_signature() method creates L{layer}E{expert} signatures focusing on target tokens (position=1)"
+        - name: "Session-based capture management"
+          status: done
+          notes: "Complete session lifecycle: create -> capture -> finalize. Supports batch processing of context-target pairs."
+        - name: "Token position tracking for highway analysis"
+          status: done
+          notes: "All schemas updated with token_position field (0=context, 1=target) for proper highway analysis"
+        - name: "Coordinated schema writing with BatchWriters"
+          status: done
+          notes: "SessionBatchWriters coordinates all 5 schemas with proper probe_id foreign key relationships"
+        - name: "Data lake integration and validation"
+          status: done
+          notes: "Complete data flow: hooks -> schemas -> parquet files -> highway analysis. All tests passing."
+        - name: "GPU memory management and error resilience"
+          status: done
+          notes: "Proper hook cleanup, CUDA memory clearing, graceful failure handling"
           status: todo
       dependencies: ["transformers", "bitsandbytes", "accelerate"]
 

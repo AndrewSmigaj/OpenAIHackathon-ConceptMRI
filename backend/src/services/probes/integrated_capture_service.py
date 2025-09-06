@@ -141,9 +141,9 @@ class IntegratedCaptureService:
         self.data_lake_path = data_lake_path
         self.batch_size = batch_size
         
-        # Default to first window [1,2,3] for demo
+        # Default to first window [0,1,2] for demo
         if layers_to_capture is None:
-            layers_to_capture = [1, 2, 3]
+            layers_to_capture = [0, 1, 2]
         self.layers_to_capture = layers_to_capture
         
         # Session management
@@ -372,23 +372,27 @@ class IntegratedCaptureService:
                 )
                 routing_records.append(routing_record)
             
-            # Convert expert internal activations (only active experts from hooks)
-            for expert_key, expert_data in self.routing_capture.expert_internal_data.items():
-                if expert_data["layer"] == layer:
-                    expert_id = expert_data["expert_id"]
+            # Convert collective expert data (quantized model provides collective processing)
+            collective_key = f"layer_{layer}_experts_collective"
+            if collective_key in self.routing_capture.expert_internal_data:
+                expert_data = self.routing_capture.expert_internal_data[collective_key]
+                
+                # Experts output is flattened [batch*seq, hidden], need to reshape
+                collective_output = expert_data["collective_output"]  # Shape: [2, 2880] for batch=1, seq=2
+                
+                # For each token position, create a record representing collective expert processing
+                for token_position in range(2):
+                    token_output = collective_output[token_position, :]  # Shape: [2880]
                     
-                    # For each token position
-                    for token_position in range(2):
-                        ff_intermediate = expert_data["ff_intermediate_state"][0, token_position, :]  # Remove batch dim
-                        
-                        expert_internal_record = create_expert_internal_activation(
-                            probe_id=probe_id,
-                            layer=layer,
-                            expert_id=expert_id,
-                            token_position=token_position,
-                            ff_intermediate_state=ff_intermediate.numpy()
-                        )
-                        expert_internal_records.append(expert_internal_record)
+                    # Create a single record representing collective expert processing for this layer
+                    expert_internal_record = create_expert_internal_activation(
+                        probe_id=probe_id,
+                        layer=layer,
+                        expert_id=-1,  # Use -1 to indicate collective/all experts
+                        token_position=token_position,
+                        ff_intermediate_state=token_output.numpy()
+                    )
+                    expert_internal_records.append(expert_internal_record)
             
             # Convert expert output states (collective)
             if layer_key in self.routing_capture.activation_data:

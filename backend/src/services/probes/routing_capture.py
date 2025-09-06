@@ -29,9 +29,9 @@ class EnhancedRoutingCapture:
         self.activation_data = {}     # For ExpertOutputState schema  
         self.expert_internal_data = {} # For ExpertInternalActivation schema
         
-        # Default to first window [1,2,3] but configurable via UI
+        # Default to first window [0,1,2] but configurable via UI
         if layers_to_capture is None:
-            layers_to_capture = [1, 2, 3]  # First window for MVP
+            layers_to_capture = [0, 1, 2]  # First window for MVP
         
         self.layers_to_capture = layers_to_capture
         print(f"Enhanced capture for layers: {self.layers_to_capture}")
@@ -42,44 +42,55 @@ class EnhancedRoutingCapture:
             try:
                 layer = self.model.model.layers[layer_idx]
                 
-                # 1. Router hook (K=4 routing)
-                router_hook = layer.mlp.router.register_forward_hook(
-                    self._make_router_hook(layer_idx)
-                )
-                self.hooks.append(router_hook)
-                
-                # 2. MLP collective output hook  
+                # 1. MLP hook (captures both routing computation and output)
                 mlp_hook = layer.mlp.register_forward_hook(
-                    self._make_activation_hook(layer_idx)
+                    self._make_mlp_combined_hook(layer_idx)
                 )
                 self.hooks.append(mlp_hook)
                 
-                # 3. All 32 expert hooks (only K=4 will fire per layer)
-                for expert_id in range(32):
-                    expert_hook = layer.mlp.experts[expert_id].register_forward_hook(
-                        self._make_expert_internal_hook(layer_idx, expert_id)
-                    )
-                    self.hooks.append(expert_hook)
+                # 3. Experts module hook (captures collective expert processing)
+                # Note: Quantized model has single experts module, not individual experts
+                experts_hook = layer.mlp.experts.register_forward_hook(
+                    self._make_experts_collective_hook(layer_idx)
+                )
+                self.hooks.append(experts_hook)
                 
-                print(f"✅ Registered {1 + 1 + 32} hooks for layer {layer_idx}")
+                print(f"✅ Registered {1 + 1} hooks for layer {layer_idx} (mlp combined + experts)")
                 
             except Exception as e:
                 print(f"❌ Failed to register hooks for layer {layer_idx}: {e}")
     
-    def _make_router_hook(self, layer_id: int):
-        """Create K=4 routing hook for a specific layer."""
-        def routing_hook(module, input, output):
+    def _make_mlp_combined_hook(self, layer_id: int):
+        """Create combined MLP hook that extracts routing and output data."""
+        def mlp_combined_hook(module, input, output):
             try:
-                # Router output is routing weights
-                if isinstance(output, tuple):
-                    routing_weights = output[0]  # [batch_size, seq_len, num_experts]
+                # Extract input hidden states
+                if isinstance(input, tuple):
+                    hidden_states = input[0]
                 else:
-                    routing_weights = output
+                    hidden_states = input
+                
+                # Compute routing weights manually (replicating MLP forward logic)
+                batch_size, seq_len, hidden_dim = hidden_states.shape
+                hidden_states_flat = hidden_states.reshape(-1, hidden_dim)
+                
+                # Compute router logits using router weights directly
+                router_logits = torch.nn.functional.linear(
+                    hidden_states_flat, 
+                    module.router.weight, 
+                    module.router.bias
+                )
+                
+                # Reshape back to [batch, seq, num_experts]
+                router_logits = router_logits.reshape(batch_size, seq_len, -1)
+                
+                # Convert to probabilities
+                routing_weights = torch.softmax(router_logits, dim=-1)
                 
                 # Convert to CPU for analysis
                 routing_weights_cpu = routing_weights.detach().cpu()
                 
-                # Get K=4 expert decisions (FIXED: was K=1 in prototype)
+                # Get K=4 expert decisions
                 top4_probs, top4_experts = torch.topk(routing_weights_cpu, k=4, dim=-1)
                 
                 # Compute routing statistics
@@ -95,55 +106,46 @@ class EnhancedRoutingCapture:
                     "num_experts": routing_weights_cpu.shape[-1]
                 }
                 
-            except Exception as e:
-                print(f"❌ Router hook error (layer {layer_id}): {e}")
-        
-        return routing_hook
-    
-    def _make_activation_hook(self, layer_id: int):
-        """Create activation hook for capturing collective expert output states."""
-        def activation_hook(module, input, output):
-            try:
-                # MLP output is the collective expert output (post-routing combination)
+                # Also store MLP output (collective expert output)
                 if isinstance(output, tuple):
-                    expert_output_state = output[0]
+                    mlp_output = output[0]
                 else:
-                    expert_output_state = output
+                    mlp_output = output
                 
-                # Store collective expert output for ExpertOutputState schema
                 self.activation_data[f"layer_{layer_id}"] = {
-                    "expert_output_state": expert_output_state.detach().cpu(),  # Full 2880D
-                    "shape": expert_output_state.shape
+                    "expert_output_state": mlp_output.detach().cpu(),  # Full 2880D
+                    "shape": mlp_output.shape
                 }
                 
             except Exception as e:
-                print(f"❌ Activation hook error (layer {layer_id}): {e}")
+                print(f"❌ MLP combined hook error (layer {layer_id}): {e}")
         
-        return activation_hook
+        return mlp_combined_hook
     
-    def _make_expert_internal_hook(self, layer_id: int, expert_id: int):
-        """Create hook for individual expert FF intermediate states."""
-        def expert_internal_hook(module, input, output):
+    
+    def _make_experts_collective_hook(self, layer_id: int):
+        """Create hook for collective experts module (quantized model)."""
+        def experts_collective_hook(module, input, output):
             try:
-                # Expert FF intermediate state (before output projection)
+                # Collective experts processing output
                 if isinstance(output, tuple):
-                    ff_intermediate = output[0]
+                    collective_expert_output = output[0]
                 else:
-                    ff_intermediate = output
+                    collective_expert_output = output
                 
-                # Store for ExpertInternalActivation schema
-                key = f"layer_{layer_id}_expert_{expert_id}"
+                # Store collective expert processing data
+                key = f"layer_{layer_id}_experts_collective"
                 self.expert_internal_data[key] = {
                     "layer": layer_id,
-                    "expert_id": expert_id,
-                    "ff_intermediate_state": ff_intermediate.detach().cpu(),
-                    "shape": ff_intermediate.shape
+                    "expert_type": "collective",  # Mark as collective rather than individual
+                    "collective_output": collective_expert_output.detach().cpu(),
+                    "shape": collective_expert_output.shape
                 }
                 
             except Exception as e:
-                print(f"❌ Expert internal hook error (L{layer_id}E{expert_id}): {e}")
+                print(f"❌ Experts collective hook error (L{layer_id}): {e}")
         
-        return expert_internal_hook
+        return experts_collective_hook
     
     def _compute_entropy(self, routing_weights: torch.Tensor) -> torch.Tensor:
         """Compute entropy of routing distribution."""

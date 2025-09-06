@@ -15,12 +15,13 @@ from utils.parquet_utils import deserialize_array_from_parquet
 
 @dataclass
 class ExpertInternalActivation:
-    """Individual expert FF intermediate states for expert specialization analysis."""
+    """Expert FF intermediate states for expert specialization analysis."""
     
     # Core identifiers
     probe_id: str               # Links to routing and tokens data
     layer: int                  # Layer number (0-23 for GPT-OSS-20B)
-    expert_id: int              # Specific expert (0-31)
+    expert_id: int              # Specific expert (0-31, or -1 for collective in quantized models)
+    token_position: int         # Token position in sequence (0=context, 1=target)
     
     # Activation data
     ff_intermediate_state: np.ndarray  # FF activation before output projection
@@ -31,13 +32,17 @@ class ExpertInternalActivation:
     
     def __post_init__(self):
         """Validate activation data consistency."""
-        context = f"Probe {self.probe_id} Layer {self.layer} Expert {self.expert_id}"
+        context = f"Probe {self.probe_id} Layer {self.layer} Expert {self.expert_id} Token {self.token_position}"
         
         if not (0 <= self.layer <= 23):
             raise ValueError(f"{context}: Layer {self.layer} out of range [0, 23]")
         
-        if not (0 <= self.expert_id <= 31):
-            raise ValueError(f"{context}: Expert ID {self.expert_id} out of range [0, 31]")
+        # Allow expert_id = -1 for collective experts in quantized models
+        if not ((-1 <= self.expert_id <= 31)):
+            raise ValueError(f"{context}: Expert ID {self.expert_id} out of range [-1, 31]")
+        
+        if not (0 <= self.token_position <= 1):
+            raise ValueError(f"{context}: Token position {self.token_position} out of range [0, 1]")
         
         if self.ff_intermediate_state is None:
             raise ValueError(f"{context}: FF intermediate state cannot be None")
@@ -90,6 +95,7 @@ class ExpertInternalActivation:
             probe_id=data['probe_id'],
             layer=data['layer'],
             expert_id=data['expert_id'],
+            token_position=data['token_position'],
             ff_intermediate_state=ff_intermediate_state,
             activation_dims=tuple(data['activation_dims']),
             captured_at=data['captured_at']
@@ -101,6 +107,7 @@ EXPERT_INTERNAL_PARQUET_SCHEMA = {
     "probe_id": "string",
     "layer": "int32",
     "expert_id": "int32",
+    "token_position": "int32",
     "ff_intermediate_state": "list<float>",  # Better compression than binary
     "activation_dims": "list<int32>",
     "captured_at": "string"
@@ -111,6 +118,7 @@ def create_expert_internal_activation(
     probe_id: str,
     layer: int,
     expert_id: int,
+    token_position: int,
     ff_intermediate_state: np.ndarray,
     captured_at: Optional[str] = None
 ) -> ExpertInternalActivation:
@@ -120,7 +128,8 @@ def create_expert_internal_activation(
     Args:
         probe_id: Unique probe identifier
         layer: Layer number (0-23)
-        expert_id: Expert ID (0-31)
+        expert_id: Expert ID (0-31, or -1 for collective in quantized models)
+        token_position: Token position in sequence (0=context, 1=target)
         ff_intermediate_state: FF activation before output projection
         captured_at: Capture timestamp (defaults to now)
     
@@ -140,6 +149,7 @@ def create_expert_internal_activation(
         probe_id=probe_id,
         layer=layer,
         expert_id=expert_id,
+        token_position=token_position,
         ff_intermediate_state=ff_intermediate_state,
         activation_dims=activation_dims,
         captured_at=captured_at
