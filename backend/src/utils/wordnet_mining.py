@@ -20,10 +20,18 @@ class WordNetMiner:
         """Download WordNet data if needed."""
         try:
             wordnet.synsets('test')
-        except LookupError:
-            print("📚 Downloading WordNet data...")
-            nltk.download('wordnet')
-            nltk.download('omw-1.4')  # Open Multilingual Wordnet
+        except (LookupError, AttributeError) as e:
+            if "LookupError" in str(type(e)):
+                print("📚 Downloading WordNet data...")
+                nltk.download('wordnet')
+                nltk.download('omw-1.4')  # Open Multilingual Wordnet
+            else:
+                # Fix NLTK lazy loader corruption
+                print("🔧 Fixing WordNet corpus loader...")
+                import importlib
+                importlib.reload(nltk.corpus.wordnet)
+                from nltk.corpus import wordnet as reloaded_wordnet
+                globals()['wordnet'] = reloaded_wordnet
     
     def mine_unambiguous_words(self, synset_id: str, max_depth: int = 2) -> List[str]:
         """Mine globally unambiguous single-token words from synset hierarchy."""

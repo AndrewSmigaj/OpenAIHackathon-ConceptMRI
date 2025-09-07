@@ -183,11 +183,12 @@ backend:
     priority: critical
     files: ["backend/src/api/main.py", "backend/src/api/routers/probes.py", "backend/src/api/schemas.py", "backend/src/api/dependencies.py"]
     completed_features:
-      - "FastAPI server with CORS middleware"
-      - "Model dependency injection with proper path resolution"
+      - "FastAPI server with CORS middleware (allow_origins=['*'] for development)"
+      - "Startup model loading with FastAPI lifespan events - reliable single initialization"
+      - "Model dependency injection with absolute path resolution matching test scripts"
       - "Complete probes router with 5 endpoints"
       - "Multi-category WordSource support integrated with IntegratedCaptureService"
-      - "Error handling for GPU/model loading failures"
+      - "Fixed model loading instability - startup loading eliminates concurrent initialization issues"
       - "Session lifecycle management (create → execute → status)"
     endpoints:
       # PROBES (session-based capture with multi-category support)
@@ -687,29 +688,42 @@ frontend:
     files_implemented:
       - "frontend/src/types/api.ts - TypeScript interfaces for all backend schemas"
       - "frontend/src/api/client.ts - Complete API client with ConceptMriApiClient class"
-      - "frontend/src/App.tsx - Test interface with API connection verification"
+      - "frontend/src/App.tsx - React Router setup with WorkspacePage and placeholder experiment route"
+      - "frontend/src/pages/WorkspacePage.tsx - Complete workspace interface with ActionCard and Modal components"
+      - "frontend/src/components/ActionCard.tsx - Reusable action card component with 4 color variants"
+      - "frontend/src/components/Modal.tsx - Accessible modal component replacing browser alerts"
+      - "frontend/src/components/icons/Icons.tsx - SVG icon components (Flask, ChartBar, Clock, ChartPie)"
+      - "frontend/src/constants/workspace.ts - Constants for magic numbers (MAX_RECENT_SESSIONS)"
       - "frontend/tailwind.config.js - Vite-compatible configuration"
       - "frontend/postcss.config.js - Fixed @tailwindcss/postcss plugin setup"
 
   pages:
     workspace_page:
-      status: todo
+      status: done
       priority: critical
       file: "frontend/src/pages/WorkspacePage.tsx"
-      description: "Main interface for probe/experiment management and setup"
+      description: "Main interface for probe/experiment management and setup - refactored with reusable components"
       features:
         - name: "New Probe Button"
-          status: todo
-          notes: "Opens dialog for WordNet integration + custom word sources"
+          status: done
+          notes: "Opens modal dialog (placeholder for future WordNet integration)"
         - name: "New Experiment Button"
-          status: todo
-          notes: "Choose existing probe data, configure analysis parameters"
-        - name: "Open Experiment"
-          status: todo
-          notes: "Navigate to ExperimentView for analysis interface"
+          status: done
+          notes: "Navigates to experiment view or shows 'no sessions' modal"
         - name: "Recent Sessions List"
-          status: todo
-          notes: "Quick access to existing probes and experiments"
+          status: done
+          notes: "Displays up to 5 recent sessions with loading states and error handling"
+        - name: "Statistics Card"
+          status: done
+          notes: "Shows session count, probe count, and last activity"
+        - name: "Status Bar"
+          status: done
+          notes: "Backend connection status with refresh button"
+      components_used:
+        - "ActionCard component for New Probe and New Experiment"
+        - "Modal component for dialogs (replaces browser alerts)"
+        - "Reusable SVG icons (FlaskIcon, ChartBarIcon, ClockIcon, ChartPieIcon)"
+        - "Constants from workspace.ts (MAX_RECENT_SESSIONS)"
 
     experiment_view:
       status: todo
@@ -725,11 +739,55 @@ frontend:
         └── Details Panel (cohorts, expert descriptions)
 
   components:
+    action_card:
+      status: done
+      priority: critical
+      file: "frontend/src/components/ActionCard.tsx"
+      description: "Reusable card component for main actions with icons, descriptions, and buttons"
+      features:
+        - "4 color variants (blue, green, purple, orange)"
+        - "Loading and disabled states"
+        - "TypeScript interfaces with proper prop typing"
+        - "Consistent Tailwind styling with hover effects"
+        - "Accessibility with ARIA labels and focus states"
+
+    modal:
+      status: done
+      priority: critical  
+      file: "frontend/src/components/Modal.tsx"
+      description: "Reusable modal component replacing browser alerts"
+      features:
+        - "Backdrop click to close"
+        - "Escape key support"
+        - "ARIA modal attributes (role, aria-modal, aria-labelledby)"
+        - "Portal-like overlay with z-index management"
+        - "TypeScript props with ReactNode children"
+
+    icons:
+      status: done
+      priority: critical
+      file: "frontend/src/components/icons/Icons.tsx" 
+      description: "Reusable SVG icon components with accessibility"
+      features:
+        - "FlaskIcon, ChartBarIcon, ClockIcon, ChartPieIcon"
+        - "Consistent sizing with customizable className prop"
+        - "ARIA labels and role attributes"
+        - "Extracted from inline SVG bloat in WorkspacePage"
+
+    constants:
+      status: done
+      priority: low
+      file: "frontend/src/constants/workspace.ts"
+      description: "Constants for WorkspacePage to replace magic numbers"
+      features:
+        - "MAX_RECENT_SESSIONS = 5 (replaces hardcoded .slice(0, 5))"
+        - "Simple approach - only essential constants for MVP"
+
     new_probe_dialog:
       status: todo
       priority: critical
-      file: "frontend/src/components/NewProbeDialog.tsx"
-      description: "Probe creation with WordNet ontology integration and custom sources"
+      file: "frontend/src/components/NewProbeDialog.tsx" 
+      description: "Probe creation with WordNet ontology integration and custom sources (placeholder modal exists)"
 
     experiment_control_panel:
       status: todo
