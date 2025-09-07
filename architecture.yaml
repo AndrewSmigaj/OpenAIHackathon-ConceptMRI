@@ -666,79 +666,168 @@ backend:
 # Frontend (React + TypeScript)
 frontend:
   setup:
-    status: todo
+    status: done
     priority: critical
-    description: "React + Vite + TypeScript + Tailwind"
-    files: ["frontend/package.json", "frontend/vite.config.ts", "frontend/tailwind.config.js"]
+    description: "React + Vite + TypeScript + Tailwind CSS with API integration"
+    files: ["frontend/package.json", "frontend/vite.config.ts", "frontend/tailwind.config.js", "frontend/postcss.config.js"]
+    completed_features:
+      - "React 19.1.1 + TypeScript with Vite 7.1.4 build system"
+      - "Tailwind CSS 4.1.13 with PostCSS integration (@tailwindcss/postcss)"
+      - "TypeScript interfaces matching backend Pydantic schemas"
+      - "API client with error handling and utility methods"
+      - "Working API connection test interface"
+      - "Fixed verbatimModuleSyntax: true compatibility with import type syntax"
+      - "Visualization libraries: ECharts 5.6.0, Plotly.js 3.1.0, React Router 7.8.2"
+    technical_notes:
+      - "TypeScript config uses verbatimModuleSyntax: true requiring import type {} for interfaces"
+      - "API types exported with export type {} syntax for Vite compatibility"
+      - "PostCSS configuration properly set up for Tailwind 4.x"
+      - "Development server runs on localhost:5174 with hot module replacement"
+      - "All TypeScript interface imports resolved with proper type-only import syntax"
+    files_implemented:
+      - "frontend/src/types/api.ts - TypeScript interfaces for all backend schemas"
+      - "frontend/src/api/client.ts - Complete API client with ConceptMriApiClient class"
+      - "frontend/src/App.tsx - Test interface with API connection verification"
+      - "frontend/tailwind.config.js - Vite-compatible configuration"
+      - "frontend/postcss.config.js - Fixed @tailwindcss/postcss plugin setup"
 
-  components:
+  pages:
     workspace_page:
       status: todo
       priority: critical
       file: "frontend/src/pages/WorkspacePage.tsx"
+      description: "Main interface for probe/experiment management and setup"
       features:
-        - name: "New Probe"
+        - name: "New Probe Button"
           status: todo
-        - name: "New Experiment (choose capture)"
+          notes: "Opens dialog for WordNet integration + custom word sources"
+        - name: "New Experiment Button"
           status: todo
+          notes: "Choose existing probe data, configure analysis parameters"
         - name: "Open Experiment"
           status: todo
-        - name: "Recent experiments"
+          notes: "Navigate to ExperimentView for analysis interface"
+        - name: "Recent Sessions List"
           status: todo
+          notes: "Quick access to existing probes and experiments"
 
+    experiment_view:
+      status: todo
+      priority: critical
+      file: "frontend/src/pages/ExperimentView.tsx"
+      description: "Main analysis interface with tabs and control panels"
+      layout: |
+        ExperimentView Layout:
+        ├── Control Panel (word selection, colors, config)
+        ├── Tab Navigation (Expert Highways | Latent Space)
+        ├── Main Content Area (tab-specific visualizations)
+        ├── LLM Analysis Panel (shared across tabs)
+        └── Details Panel (cohorts, expert descriptions)
+
+  components:
     new_probe_dialog:
       status: todo
       priority: critical
       file: "frontend/src/components/NewProbeDialog.tsx"
-      description: "Atomic probe capture; writes to lake; shows output paths."
+      description: "Probe creation with WordNet ontology integration and custom sources"
 
-    experiment_flow:
+    experiment_control_panel:
       status: todo
       priority: critical
-      file: "frontend/src/components/ExperimentFlow.tsx"
-      steps:
-        - name: "Select Capture & Inputs"
-          status: todo
-          notes: "Pick an existing capture; select contexts/targets subset if desired."
-        - name: "Expert Highways"
-          status: todo
-          notes: "Compute from capture; auto-select first window; show Sankey."
-        - name: "Context-Target Highway Analysis (NEW)"
-          status: todo
-          notes: "Click highway → Context Transformation View shows context-target pairs. First demo: one context → one target list."
-        - name: "Export Context-Target Cohort"
-          status: todo
-          notes: "Export cohort filtered by highway + context + targets for transformation analysis."
-        - name: "Context Transformation Clustering"
-          status: todo
-          notes: "Cluster on first context to analyze how context transforms target trajectories in latent space."
-        - name: "Transformation Shift Analysis"
-          status: todo
-          notes: "Compare how different contexts shift target token trajectories within same highway's computational pathway."
-        - name: "Explore & Label"
-          status: todo
-          notes: "Enhanced Latent Sankey showing context→target transformations, Cluster Cards with context-specific patterns."
-
-    expert_explorer:
-      status: todo
-      priority: critical
-      file: "frontend/src/components/ExpertExplorer.tsx"
+      file: "frontend/src/components/ExperimentControlPanel.tsx"
+      description: "Shared controls for word selection, color schemes, and analysis configuration"
       features:
-        - name: "Expert Sankey visualization (ECharts)"
+        - name: "Word Selection Controls"
           status: todo
-          library: "echarts"
-        - name: "Context filter (1 or 2 contexts from capture)"
+          notes: "Choose target tokens from probe data (e.g., 30-30 POS data + 'the' context)"
+        - name: "Color Scheme Selector" 
           status: todo
-        - name: "Diff toggle (ΔP on edges + Top Δ table)"
+          notes: "Dropdown for visualization coloring modes (semantic, POS, etc.)"
+        - name: "Multiple Context Selection"
           status: todo
-        - name: "Badges: Highway Signature + Context"
+          notes: "Select multiple context tokens for comparative routing analysis"
+
+    # TAB 1: Expert Highways - Route exploration and clickable analysis
+    expert_highways_tab:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/ExpertHighwaysTab.tsx"
+      description: "Top-1 expert routes with clickable routes/experts for cohort and description analysis"
+      features:
+        - name: "Expert Routes Visualization"
           status: todo
-        - name: "Expert Card tabs (Overview|Clusters|PCA3D|Rules)"
+          notes: "Generate top-1 routes for target tokens, display as clickable Sankey (ECharts)"
+        - name: "Clickable Route Interaction"
           status: todo
-        - name: "Token List panel with Export Cohort"
+          notes: "Click route → show cohort for that route in details panel"
+        - name: "Clickable Expert Interaction" 
           status: todo
-        - name: "Run clustering button"
+          notes: "Click expert → show description of tokens/contexts it handles"
+        - name: "Multiple Context Support"
           status: todo
+          notes: "Select multiple contexts to show comparative route sets"
+
+    # TAB 2: Latent Space - Expert output analysis with clustering and PCA
+    latent_space_tab:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/LatentSpaceTab.tsx"
+      description: "Expert outputs analysis with clustering, PCA visualization, and trajectory analysis"
+      features:
+        - name: "Expert Output Clustering Interface"
+          status: todo
+          notes: "Controls for k-means/hierarchical clustering with k-per-layer configuration"
+        - name: "3D PCA Visualization"
+          status: todo
+          notes: "Interactive 3D scatter plot of expert outputs with cluster coloring"
+        - name: "Trajectory Analysis Integration"
+          status: todo
+          notes: "Real-time CTA integration for trajectory computation and path analysis"
+        - name: "Cluster Detail Cards"
+          status: todo
+          notes: "Display cluster populations, centroids, and semantic labels from LLM analysis"
+        - name: "Context-Target Trajectory Visualization"
+          status: todo
+          notes: "Show how contexts transform target trajectories in latent space"
+
+    # SHARED PANELS - Used across both tabs
+    llm_analysis_panel:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/LLMAnalysisPanel.tsx"
+      description: "Shared AI-powered insights panel for expert specialization and trajectory analysis"
+      features:
+        - name: "Expert Specialization Analysis"
+          status: todo
+          notes: "LLM-generated descriptions of what each expert has learned to handle"
+        - name: "Trajectory Narrative Generation"
+          status: todo
+          notes: "AI-generated coherent stories about concept evolution through latent space"
+        - name: "Custom Question Interface"
+          status: todo
+          notes: "Allow researchers to ask specific questions about findings"
+        - name: "Report Export Functionality"
+          status: todo
+          notes: "Generate and export comprehensive analysis reports"
+
+    details_panel:
+      status: todo
+      priority: critical
+      file: "frontend/src/components/DetailsPanel.tsx"
+      description: "Context-sensitive details panel showing cohorts, expert descriptions, and cluster information"
+      features:
+        - name: "Cohort Display"
+          status: todo
+          notes: "Show word cohorts for selected routes/highways with category information"
+        - name: "Expert Description Cards"
+          status: todo
+          notes: "Detailed information about clicked experts and their specializations"
+        - name: "Cluster Information"
+          status: todo
+          notes: "Display cluster statistics, populations, and semantic labels"
+        - name: "Category Analysis"
+          status: todo
+          notes: "Show category distributions and purity metrics for selections"
 
     highway_panel:
       status: todo
@@ -1137,22 +1226,45 @@ deployment:
 
 # Demo Scenarios (Critical for Hackathon)
 demo_scenarios:
-  single_highway_single_context:
+  probe_creation_demonstration:
     status: todo
     priority: critical
-    description: "Core demo: exploring a single highway with a single context token"
+    description: "Brief demonstration of probe creation with WordNet ontology integration"
     flow:
-      - "New Probe → capture contexts/targets"
-      - "New Experiment → select capture"
-      - "Expert Highways → auto-select first window"
-      - "Click highway edge → Token List with badges"
-      - "Export Cohort for that highway+context"
-      - "Clustering/CTA → k-per-layer controls"
-      - "Latent Explorer → Sankey (macro→micro) + Cluster Cards"
+      - "Workspace page → New Probe button"
+      - "Demonstrate WordNet integration as ontology source"
+      - "Show custom word list creation option"
+      - "Create probe session and execute MoE captures"
+      - "Quick overview of resulting data structures"
+    duration: "2-3 minutes"
+    purpose: "Show foundation data collection capabilities"
+
+  pos_analysis_demonstration:
+    status: todo
+    priority: critical
+    description: "Main demo: 30-30 adjective/noun analysis with 'the' context using experiment view tabs"
+    flow:
+      - "Workspace page → New Experiment → Load POS probe data (30-30 adj/nouns + 'the' context)"
+      - "Expert Highways Tab:"
+      - "  - Show expert routing patterns for adjectives vs nouns with 'the' context"
+      - "  - Click specific highway routes → Details panel shows cohorts"
+      - "  - Click individual experts → Details panel shows expert specialization descriptions"  
+      - "  - Demonstrate multiple context selection for comparative analysis"
+      - "Latent Space Tab:"
+      - "  - Show expert output clustering with k-per-layer controls"
+      - "  - 3D PCA visualization with POS-based coloring (adj=blue, noun=green)"
+      - "  - Trajectory analysis showing context-target transformation patterns"
+      - "  - Cluster detail cards with LLM-generated semantic labels"
+      - "LLM Analysis Panel (shared across tabs):"
+      - "  - Expert specialization insights: what each expert learned to handle"
+      - "  - Trajectory narratives: how contexts transform targets through latent space"
+      - "  - Custom question interface for deeper analysis"
+    duration: "8-10 minutes"
+    purpose: "Demonstrate complete analysis workflow across both tab interfaces"
 
   two_experts_different_contexts:
     status: todo
-    priority: high
+    priority: post-mvp
     description: "Comparison demo: exploring two different experts with different context tokens"
     flow:
       - "Use existing capture with multiple contexts"
@@ -1164,7 +1276,7 @@ demo_scenarios:
 
   expert_routing_transformation_analysis:
     status: todo
-    priority: high
+    priority: post-mvp
     description: "Expert Highway Routing Transformation: How contexts change MoE expert routing patterns"
     flow:
       - "Expert Routing Transform page → load capture contexts"
@@ -1175,7 +1287,7 @@ demo_scenarios:
 
   individual_highway_latent_analysis:
     status: todo
-    priority: critical
+    priority: post-mvp
     description: "Individual Highway Latent Transformation: Context→target analysis within highway's space"
     flow:
       - "Expert Highways → click specific highway edge (e.g., L6E2→L7E3→L8E1)"
@@ -1255,7 +1367,16 @@ dependencies:
     node_version: "18+"
     core: ["react", "typescript", "vite", "tailwindcss"]
     charts: ["echarts", "plotly.js"]
-    status: todo
+    status: done
+    installed_versions:
+      - "react: 19.1.1"
+      - "typescript: 5.8.3" 
+      - "vite: 7.1.2"
+      - "tailwindcss: 4.1.13"
+      - "echarts: 5.6.0, echarts-for-react: 3.0.2"
+      - "plotly.js: 3.1.0, react-plotly.js: 2.6.0"
+      - "react-router-dom: 7.8.2"
+    notes: "All dependencies installed and working, development server operational with API client integration"
 
 # Risk Mitigation
 risks:
