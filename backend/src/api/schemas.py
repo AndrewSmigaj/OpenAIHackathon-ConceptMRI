@@ -63,3 +63,69 @@ class SessionDetailResponse(BaseModel):
     manifest: Dict[str, Any]
     data_lake_paths: Dict[str, str]
     categories: Dict[str, Dict[str, List[str]]]
+
+
+# Experiment Analysis Schemas
+class AnalyzeRoutesRequest(BaseModel):
+    """Request to analyze expert routes for a session."""
+    session_id: str
+    window_layers: List[int]
+    filter_config: Optional[Dict[str, Any]] = None
+    top_n_routes: int = 20
+
+
+class SankeyNode(BaseModel):
+    """Sankey diagram node."""
+    name: str
+    layer: int
+    expert: int
+
+
+class SankeyLink(BaseModel):
+    """Sankey diagram link."""
+    source: int
+    target: int
+    value: int
+    probability: float
+
+
+class TopRoute(BaseModel):
+    """Top route with statistics."""
+    signature: str
+    count: int
+    coverage: float
+    avg_confidence: float
+    example_tokens: List[Dict[str, str]]
+
+
+class RouteAnalysisResponse(BaseModel):
+    """Response for route analysis."""
+    session_id: str
+    window_layers: List[int]
+    nodes: List[SankeyNode]
+    links: List[SankeyLink]
+    top_routes: List[TopRoute]
+    statistics: Dict[str, Any]
+
+
+class RouteDetailsResponse(BaseModel):
+    """Response for specific route details."""
+    signature: str
+    window_layers: List[int]
+    tokens: List[Dict[str, str]]
+    count: int
+    coverage: float
+    avg_confidence: float
+    category_breakdown: Dict[str, Any]
+
+
+class ExpertDetailsResponse(BaseModel):
+    """Response for expert specialization details."""
+    layer: int
+    expert_id: int
+    node_name: str
+    tokens: List[Dict[str, str]]
+    total_tokens: int
+    usage_rate: float
+    avg_confidence: float
+    category_breakdown: Dict[str, Any]

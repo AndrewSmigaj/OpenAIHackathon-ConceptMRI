@@ -29,6 +29,63 @@ const PRESET_CONFIGS = {
       { source_type: 'pos_pure' as const, source_params: { pos: 'v', max_words: 30 }}
     ]
   },
+  noun_complexity: {
+    name: 'Noun Complexity Analysis',
+    description: 'Simple vs complex noun routing patterns (100 probes)',
+    contexts: [
+      { source_type: 'custom' as const, source_params: { words: ['the'], label: 'determiner' }}
+    ],
+    targets: [
+      { source_type: 'custom' as const, source_params: { 
+        words: ['car', 'door', 'food', 'water', 'fire', 'sun', 'moon', 'tree', 'bird', 'fish', 
+               'house', 'ball', 'hand', 'foot', 'head', 'eye', 'ear', 'nose', 'face', 'arm',
+               'book', 'chair', 'table', 'bed', 'room', 'wall', 'road', 'park', 'shop', 'game',
+               'cat', 'dog', 'baby', 'man', 'woman', 'boy', 'girl', 'mother', 'father', 'friend',
+               'apple', 'bread', 'milk', 'cake', 'tea', 'cup', 'plate', 'knife', 'fork', 'spoon'], 
+        label: 'simple_nouns' 
+      }},
+      { source_type: 'custom' as const, source_params: { 
+        words: ['architecture', 'philosophy', 'technology', 'democracy', 'government', 'education', 'communication',
+               'administration', 'organization', 'investigation', 'development', 'implementation', 'achievement', 'measurement',
+               'establishment', 'arrangement', 'requirement', 'environment', 'management', 'advertisement', 'entertainment',
+               'relationship', 'opportunity', 'responsibility', 'understanding', 'performance', 'temperature', 'information',
+               'population', 'generation', 'destination', 'imagination', 'conversation', 'celebration', 'preparation',
+               'consideration', 'recommendation', 'representation', 'transformation', 'collaboration', 'concentration',
+               'demonstration', 'specification', 'documentation', 'configuration', 'authorization', 'authentication',
+               'multiplication', 'construction', 'destruction', 'instruction'],
+        label: 'complex_nouns' 
+      }}
+    ]
+  },
+  pos_comparison: {
+    name: 'POS Comparison - Very + Adjectives/Adverbs',
+    description: 'Compare adjective vs adverb routing with intensifier (100 probes)',
+    contexts: [
+      { source_type: 'custom' as const, source_params: { words: ['very'], label: 'intensifier' }}
+    ],
+    targets: [
+      { source_type: 'custom' as const, source_params: { 
+        words: ['adaptive', 'analytic', 'angular', 'avoidable', 'aware', 'digital', 'finite', 'illegal',
+               'many', 'minimal', 'random', 'solar', 'urban', 'viral', 'allergenic', 'continental',
+               'continuous', 'eligible', 'existent', 'financial', 'inclusive', 'modifiable', 'mutable',
+               'optional', 'postal', 'racial', 'renal', 'semantic', 'successful', 'undefined',
+               'unexpected', 'unsigned', 'unsupported', 'utile', 'vascular', 'vedic', 'cutaneous',
+               'doctoral', 'forgettable', 'immutable', 'intestinal', 'ovine', 'phonic', 'precedented',
+               'tractive', 'genic', 'onymous', 'otic', 'actable', 'agonal', 'biotic'], 
+        label: 'adjectives' 
+      }},
+      { source_type: 'custom' as const, source_params: { 
+        words: ['ably', 'actively', 'actually', 'afar', 'again', 'alee', 'almost', 'along',
+               'already', 'also', 'always', 'amain', 'anon', 'approximately', 'around', 'astern',
+               'before', 'below', 'between', 'but', 'conditionally', 'currently', 'either', 'erst',
+               'especially', 'ever', 'finally', 'formerly', 'fortunately', 'fully', 'hopefully',
+               'however', 'implicitly', 'infra', 'instead', 'lief', 'maybe', 'mostly', 'necessarily',
+               'never', 'non', 'normally', 'not', 'oft', 'often', 'once', 'particularly', 'perhaps',
+               'possibly', 'probably'], 
+        label: 'adverbs' 
+      }}
+    ]
+  },
   semantic_categories: {
     name: 'Semantic Categories',
     description: 'Animals vs artifacts routing',
@@ -72,7 +129,7 @@ const PRESET_CONFIGS = {
 export default function NewProbeDialog({ isOpen = true, onClose, onSuccess }: NewProbeDialogProps) {
   const [step, setStep] = useState<Step>('config')
   const [sessionName, setSessionName] = useState('')
-  const [layers, setLayers] = useState<number[]>([0, 1, 2])
+  const [layers, setLayers] = useState<number[]>(Array.from({length: 24}, (_, i) => i))
   const [wordSources, setWordSources] = useState<WordSourceConfig[]>([])
   const [error, setError] = useState<string | null>(null)
   const [isExecuting, setIsExecuting] = useState(false)

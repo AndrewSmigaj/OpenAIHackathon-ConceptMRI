@@ -6,7 +6,7 @@ FastAPI server for Concept MRI - Minimal working implementation.
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.routers import probes
+from api.routers import probes, experiments
 from api.dependencies import initialize_capture_service
 
 @asynccontextmanager
@@ -33,6 +33,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(probes.router, prefix="/api")
+app.include_router(experiments.router, prefix="/api")
 
 @app.get("/")
 async def root():

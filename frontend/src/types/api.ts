@@ -99,6 +99,83 @@ interface SessionDetailResponse {
     targets: Record<string, string[]>;
   };
 }
+
+// Expert Route Analysis Types
+interface TokenExample {
+  context: string
+  target: string
+  probe_id: string
+}
+
+interface RouteStatistics {
+  total_routes: number
+  total_probes: number
+  routes_coverage: number
+  window_layers: number[]
+  [key: string]: any // Allow additional backend fields
+}
+
+interface AnalyzeRoutesRequest {
+  session_id: string
+  window_layers: number[]
+  filter_config?: {
+    context_categories?: string[]
+    target_categories?: string[]
+  }
+  top_n_routes: number
+}
+
+interface SankeyNode {
+  name: string
+  layer: number
+  expert: number
+}
+
+interface SankeyLink {
+  source: number
+  target: number
+  value: number
+  probability: number
+}
+
+interface TopRoute {
+  signature: string
+  count: number
+  coverage: number
+  avg_confidence: number
+  example_tokens: TokenExample[]
+}
+
+interface RouteAnalysisResponse {
+  session_id: string
+  window_layers: number[]
+  nodes: SankeyNode[]
+  links: SankeyLink[]
+  top_routes: TopRoute[]
+  statistics: RouteStatistics
+}
+
+interface RouteDetailsResponse {
+  signature: string
+  window_layers: number[]
+  tokens: TokenExample[]
+  count: number
+  coverage: number
+  avg_confidence: number
+  category_breakdown: Record<string, any>
+}
+
+interface ExpertDetailsResponse {
+  layer: number
+  expert_id: number
+  node_name: string
+  tokens: TokenExample[]
+  total_tokens: number
+  usage_rate: number
+  avg_confidence: number
+  category_breakdown: Record<string, any>
+}
+
 // Export all types for Vite compatibility - updated
 export type {
   WordSource,
@@ -108,5 +185,14 @@ export type {
   CaptureManifest,
   SessionStatus,
   SessionListItem,
-  SessionDetailResponse
+  SessionDetailResponse,
+  TokenExample,
+  RouteStatistics,
+  AnalyzeRoutesRequest,
+  RouteAnalysisResponse,
+  SankeyNode,
+  SankeyLink,
+  TopRoute,
+  RouteDetailsResponse,
+  ExpertDetailsResponse
 };

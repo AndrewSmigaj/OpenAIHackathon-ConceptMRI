@@ -838,10 +838,20 @@ frontend:
         - "Integration with SessionDetailResponse category structure"
 
     new_probe_dialog:
-      status: todo
+      status: done
       priority: critical
       file: "frontend/src/components/NewProbeDialog.tsx" 
-      description: "Probe creation with WordNet ontology integration and custom sources (placeholder modal exists)"
+      description: "Complete probe creation interface with multi-step workflow and WordNet integration"
+      features:
+        - "Multi-step workflow: config → sources → review → confirm → execute"
+        - "Three word source types: custom lists, POS-pure words, WordNet synsets"
+        - "Preset configurations for common demo scenarios (POS, semantic, disambiguation)"
+        - "Real-time API integration with session creation and execution"
+        - "Progress tracking with visual progress bars and time estimation"
+        - "Synset ID validation and error handling"
+        - "Layer selection controls with defaults"
+        - "Category label preservation throughout workflow"
+        - "Actual probe count display with execution time estimates"
 
     experiment_control_panel:
       status: todo
@@ -883,14 +893,23 @@ frontend:
 
     # TAB 1: Expert Highways - Route exploration and clickable analysis
     expert_highways_tab:
-      status: todo
+      status: done
       priority: critical
-      file: "frontend/src/components/ExpertHighwaysTab.tsx"
-      description: "Top-1 expert routes with clickable routes/experts for cohort and description analysis"
+      file: "frontend/src/pages/ExperimentPage.tsx"
+      description: "Expert route analysis with API integration, flexible window support, and real-time statistics - integrated into ExperimentPage"
       features:
+        - name: "Expert Routes API Integration"
+          status: done
+          notes: "Real-time API calls to backend expert route analysis service with loading/error states"
+        - name: "Flexible Window Layer Support" 
+          status: done
+          notes: "Support for both 2-layer ([0,1], [1,2]) and 3-layer ([0,1,2], [1,2,3]) analysis windows"
+        - name: "Real-time Route Statistics"
+          status: done  
+          notes: "Live display of route counts, probe coverage, and window analysis with dynamic updates"
         - name: "Expert Routes Visualization"
           status: todo
-          notes: "Generate top-1 routes for target tokens, display as clickable Sankey (ECharts)"
+          notes: "ECharts Sankey component to replace current placeholder (data integration complete)"
         - name: "Clickable Route Interaction"
           status: todo
           notes: "Click route → show cohort for that route in details panel"

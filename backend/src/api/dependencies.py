@@ -14,12 +14,14 @@ project_root = backend_src.parent.parent     # project root
 sys.path.insert(0, str(backend_src))
 
 from services.probes.integrated_capture_service import IntegratedCaptureService
+from services.experiments.expert_route_analysis import ExpertRouteAnalysisService
 from utils.wordnet_mining import WordNetMiner
 
 
-# Global service instance (simple approach)
+# Global service instances (simple approach)
 _capture_service = None
 _wordnet_miner = None
+_route_analysis_service = None
 
 
 async def initialize_capture_service():
@@ -76,3 +78,15 @@ def get_capture_service() -> IntegratedCaptureService:
         raise RuntimeError("Capture service not initialized. Should be initialized at startup.")
     
     return _capture_service
+
+
+def get_route_analysis_service() -> ExpertRouteAnalysisService:
+    """Get the route analysis service (lazy initialization)."""
+    global _route_analysis_service
+    
+    if _route_analysis_service is None:
+        # Initialize with same data lake path as capture service
+        data_lake_path = project_root / "data" / "lake"
+        _route_analysis_service = ExpertRouteAnalysisService(str(data_lake_path))
+    
+    return _route_analysis_service

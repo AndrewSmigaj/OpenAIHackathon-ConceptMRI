@@ -5,7 +5,11 @@ import type {
   ExecutionResponse,
   SessionStatus,
   SessionListItem,
-  SessionDetailResponse
+  SessionDetailResponse,
+  AnalyzeRoutesRequest,
+  RouteAnalysisResponse,
+  RouteDetailsResponse,
+  ExpertDetailsResponse
 } from '../types/api';
 
 const API_BASE_URL = 'http://localhost:8000/api';
@@ -158,6 +162,63 @@ class ConceptMriApiClient {
     const createResponse = await this.createProbeSession(request);
     await this.executeProbeSession(createResponse.session_id);
     return this.pollSessionUntilComplete(createResponse.session_id, onProgress);
+  }
+
+  // Expert Route Analysis Methods
+
+  /**
+   * Analyze expert routes for a session within specified window layers
+   * @param request - Route analysis request with session_id, window_layers, filters, etc.
+   * @returns Route analysis response with Sankey data and statistics
+   * @throws ApiError with status 404 if session not found, 500 for server errors
+   */
+  async analyzeRoutes(request: AnalyzeRoutesRequest): Promise<RouteAnalysisResponse> {
+    return this.request<RouteAnalysisResponse>('/experiments/analyze-routes', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+  }
+
+  /**
+   * Get detailed information about a specific expert route
+   * @param sessionId - Session identifier
+   * @param signature - Route signature (e.g., "L0E18→L1E11→L2E14")
+   * @param windowLayers - Array of layer numbers (e.g., [0, 1, 2])
+   * @returns Detailed route information with tokens and category breakdown
+   * @throws ApiError with status 400 for invalid layers, 404 if route not found
+   */
+  async getRouteDetails(
+    sessionId: string, 
+    signature: string, 
+    windowLayers: number[]
+  ): Promise<RouteDetailsResponse> {
+    const params = new URLSearchParams({
+      session_id: sessionId,
+      signature: signature,
+      window_layers: windowLayers.join(',')
+    });
+    return this.request<RouteDetailsResponse>(`/experiments/route-details?${params.toString()}`);
+  }
+
+  /**
+   * Get expert specialization details
+   * @param sessionId - Session identifier
+   * @param layer - Layer number (e.g., 0, 1, 2)
+   * @param expertId - Expert identifier (e.g., 18, 11, 14)
+   * @returns Expert specialization information with usage statistics
+   * @throws ApiError with status 404 if expert not found
+   */
+  async getExpertDetails(
+    sessionId: string,
+    layer: number, 
+    expertId: number
+  ): Promise<ExpertDetailsResponse> {
+    const params = new URLSearchParams({
+      session_id: sessionId,
+      layer: layer.toString(),
+      expert_id: expertId.toString()
+    });
+    return this.request<ExpertDetailsResponse>(`/experiments/expert-details?${params.toString()}`);
   }
 }
 

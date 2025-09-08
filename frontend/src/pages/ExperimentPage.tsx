@@ -1,10 +1,34 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import type { SessionListItem, SessionDetailResponse } from '../types/api'
+import type { 
+  SessionListItem, 
+  SessionDetailResponse, 
+  RouteAnalysisResponse,
+  AnalyzeRoutesRequest 
+} from '../types/api'
 import { apiClient } from '../api/client'
 import { FlaskIcon, ChartBarIcon } from '../components/icons/Icons'
 import WordFilterPanel, { type FilterState } from '../components/WordFilterPanel'
 import FilteredWordDisplay from '../components/FilteredWordDisplay'
+
+/**
+ * Convert frontend FilterState to backend filter_config format.
+ * Empty sets mean "include all" (no filtering), so we return undefined.
+ * Non-empty sets mean "include words with ANY matching category".
+ */
+function convertFilterState(filterState: FilterState): AnalyzeRoutesRequest['filter_config'] {
+  const filterConfig: NonNullable<AnalyzeRoutesRequest['filter_config']> = {};
+  
+  if (filterState.contextCategories.size > 0) {
+    filterConfig.context_categories = Array.from(filterState.contextCategories);
+  }
+  if (filterState.targetCategories.size > 0) {
+    filterConfig.target_categories = Array.from(filterState.targetCategories);
+  }
+
+  // Return undefined if no filters applied (empty object means include all)
+  return Object.keys(filterConfig).length > 0 ? filterConfig : undefined;
+}
 
 interface LLMAnalysisProps {
   sessionId: string
@@ -190,15 +214,55 @@ function ColorControls({ colorScheme, onChange }: { colorScheme: string, onChang
 function ExpertHighwaysTab({ 
   sessionId, 
   sessionData, 
-  filterState 
+  filterState,
+  colorScheme,
+  topRoutes,
+  windowLayers
 }: { 
   sessionId: string
   sessionData: SessionDetailResponse | null
   filterState: FilterState
+  colorScheme: string
+  topRoutes: number
+  windowLayers: number[]
 }) {
-  const [colorScheme, setColorScheme] = useState('semantic')
-  const [topRoutes, setTopRoutes] = useState(10)
   const [selectedCard, setSelectedCard] = useState<{ type: 'expert' | 'highway', data: any } | null>(null)
+  const [routeData, setRouteData] = useState<RouteAnalysisResponse | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  // Load route analysis data when dependencies change
+  useEffect(() => {
+    if (!sessionId || !sessionData) {
+      setRouteData(null)
+      return
+    }
+
+    const loadRoutes = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        const request: AnalyzeRoutesRequest = {
+          session_id: sessionId,
+          window_layers: windowLayers,
+          filter_config: convertFilterState(filterState),
+          top_n_routes: topRoutes
+        }
+        
+        const response = await apiClient.analyzeRoutes(request)
+        setRouteData(response)
+      } catch (err) {
+        console.error('Failed to load routes:', err)
+        setError(err instanceof Error ? err.message : 'Failed to load routes')
+        setRouteData(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadRoutes()
+  }, [sessionId, sessionData, filterState, windowLayers, topRoutes])
 
   const handleSankeyClick = (elementType: 'expert' | 'route', data: any) => {
     setSelectedCard({ 
@@ -208,61 +272,73 @@ function ExpertHighwaysTab({
   }
 
   return (
-    <div className="flex space-x-8 h-full">
-      {/* Left Controls */}
-      <div className="w-64 space-y-8">
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <ColorControls colorScheme={colorScheme} onChange={setColorScheme} />
+    <div className="bg-white rounded-xl shadow-sm p-6 h-full">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h3 className="text-xl font-semibold text-gray-900">Expert Routing Pathways</h3>
+          <p className="text-sm text-gray-600 mt-1">Click experts or routes to see details</p>
         </div>
-        
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h4 className="font-medium text-gray-900 mb-4">Visualization Config</h4>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Top Routes
-            </label>
-            <input
-              type="number"
-              value={topRoutes}
-              onChange={(e) => setTopRoutes(parseInt(e.target.value))}
-              min="5"
-              max="50"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-        </div>
+        <ChartBarIcon className="w-6 h-6 text-blue-600" />
       </div>
-
-      {/* Center Sankey */}
-      <div className="flex-1">
-        <div className="bg-white rounded-xl shadow-md p-8 h-full">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900">Expert Routing Pathways</h3>
-              <p className="text-sm text-gray-600 mt-1">Click experts or routes to see details</p>
+      
+      {/* Route Analysis Visualization */}
+      <div className="flex-1 bg-gray-50 rounded-lg min-h-[400px]">
+        {loading ? (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading expert routes...</p>
+              <p className="text-sm text-gray-500 mt-1">Analyzing layers {windowLayers.join('→')}</p>
             </div>
-            <ChartBarIcon className="w-6 h-6 text-blue-600" />
           </div>
-          
-          {/* Interactive Sankey Placeholder */}
-          <div className="h-full bg-gray-50 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-300 cursor-pointer"
-               onClick={() => handleSankeyClick('expert', { expertId: 'E14', population: 45, coverage: 23, specialization: 'Abstract concepts' })}>
+        ) : error ? (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ChartBarIcon className="w-6 h-6 text-red-600" />
+              </div>
+              <p className="text-red-600 font-medium">Failed to load routes</p>
+              <p className="text-sm text-gray-500 mt-1">{error}</p>
+            </div>
+          </div>
+        ) : routeData ? (
+          <div className="p-4 h-full">
+            {/* Basic Data Display with Real Statistics */}
+            <div className="bg-white rounded-lg border-2 border-dashed border-gray-300 h-full flex items-center justify-center cursor-pointer"
+                 onClick={() => handleSankeyClick('expert', { expertId: 'E14', population: 45, coverage: 23, specialization: 'Abstract concepts' })}>
+              <div className="text-center">
+                <ChartBarIcon className="w-16 h-16 text-blue-500 mx-auto mb-4" />
+                <p className="text-gray-900 font-medium text-lg">Expert Route Analysis Ready</p>
+                <p className="text-sm text-gray-600 mt-2">
+                  Found {routeData.statistics.total_routes} routes across {routeData.statistics.total_probes} probes
+                </p>
+                <p className="text-xs text-gray-500 mt-1">
+                  Layers {windowLayers.join('→')} • Coverage: {(routeData.statistics.routes_coverage * 100).toFixed(1)}%
+                </p>
+                <p className="text-xs text-blue-600 mt-2">Click to interact (Sankey visualization coming soon)</p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center h-full">
             <div className="text-center">
               <ChartBarIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500 font-medium text-lg">Interactive Expert Routing Sankey</p>
-              <p className="text-sm text-gray-400 mt-2">Click to test expert card</p>
+              <p className="text-gray-500 font-medium text-lg">Select a completed session</p>
+              <p className="text-sm text-gray-400 mt-2">Expert route analysis will appear here</p>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
-      {/* Right Context-Sensitive Card */}
-      <div className="w-80">
-        <ContextSensitiveCard 
-          cardType={selectedCard?.type || 'expert'}
-          selectedData={selectedCard?.data}
-        />
-      </div>
+      {/* Context-Sensitive Card integrated */}
+      {selectedCard && (
+        <div className="mt-6 pt-6 border-t border-gray-200">
+          <ContextSensitiveCard 
+            cardType={selectedCard.type}
+            selectedData={selectedCard.data}
+          />
+        </div>
+      )}
     </div>
   )
 }
@@ -270,18 +346,23 @@ function ExpertHighwaysTab({
 function LatentSpaceTab({ 
   sessionId, 
   sessionData, 
-  filterState 
+  filterState,
+  colorScheme,
+  windowLayers,
+  layerClusterCounts,
+  clusteringMethod
 }: { 
   sessionId: string
   sessionData: SessionDetailResponse | null
   filterState: FilterState
+  colorScheme: string
+  windowLayers: number[]
+  layerClusterCounts: {[key: number]: number}
+  clusteringMethod: string
 }) {
-  const [colorScheme, setColorScheme] = useState('semantic')
-  const [clusterCount, setClusterCount] = useState(8)
-  const [clusteringMethod, setClusteringMethod] = useState('kmeans')
   const [selectedCard, setSelectedCard] = useState<{ type: 'cluster' | 'route', data: any } | null>(null)
 
-  const handleSankeyClick = (elementType: 'cluster' | 'trajectory', data: any) => {
+  const handleVisualizationClick = (elementType: 'cluster' | 'trajectory', data: any) => {
     setSelectedCard({ 
       type: elementType === 'cluster' ? 'cluster' : 'route', 
       data 
@@ -289,97 +370,67 @@ function LatentSpaceTab({
   }
 
   return (
-    <div className="flex space-x-8 h-full">
-      {/* Left Controls */}
-      <div className="w-64 space-y-8">        
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h4 className="font-medium text-gray-900 mb-4">Clustering Controls</h4>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Clusters (K)
-              </label>
-              <input
-                type="number"
-                value={clusterCount}
-                onChange={(e) => setClusterCount(parseInt(e.target.value))}
-                min="2"
-                max="20"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Method
-              </label>
-              <select
-                value={clusteringMethod}
-                onChange={(e) => setClusteringMethod(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="kmeans">K-Means</option>
-                <option value="hierarchical">Hierarchical</option>
-                <option value="dbscan">DBSCAN</option>
-              </select>
-            </div>
-            
-            <button className="w-full px-4 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-sm">
-              Run Clustering
-            </button>
-          </div>
+    <div className="bg-white rounded-xl shadow-sm p-6 h-full">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h3 className="text-xl font-semibold text-gray-900">Latent Space Analysis</h3>
+          <p className="text-sm text-gray-600 mt-1">Cluster trajectories and stepped PCA visualization</p>
         </div>
-
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <ColorControls colorScheme={colorScheme} onChange={setColorScheme} />
-        </div>
+        <ChartBarIcon className="w-6 h-6 text-blue-600" />
       </div>
-
-      {/* Center Visualizations */}
-      <div className="flex-1">
-        <div className="grid grid-rows-2 gap-6 h-full">
-          {/* Trajectory Sankey */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Cluster Trajectory Routes</h3>
-              <ChartBarIcon className="w-6 h-6 text-blue-600" />
-            </div>
-            
-            <div className="h-full bg-gray-50 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-300 cursor-pointer"
-                 onClick={() => handleSankeyClick('cluster', { clusterId: 'C3', population: 67, coverage: 15, label: 'Abstract concepts' })}>
-              <div className="text-center">
-                <ChartBarIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                <p className="text-gray-500 font-medium">Interactive Trajectory Sankey</p>
-                <p className="text-sm text-gray-400 mt-1">Click to test cluster card</p>
-              </div>
-            </div>
+      
+      <div className="flex flex-col h-full space-y-6">
+        {/* Trajectory Sankey - Clusters and Paths */}
+        <div className="bg-gray-50 rounded-lg p-4 flex-1">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-lg font-semibold text-gray-900">Cluster Trajectory Routes</h4>
+            <ChartBarIcon className="w-5 h-5 text-blue-600" />
           </div>
           
-          {/* PCA 3D */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">3D PCA Visualization</h3>
-              <ChartBarIcon className="w-6 h-6 text-blue-600" />
+          <div className="h-full bg-white rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 cursor-pointer min-h-[200px]"
+               onClick={() => handleVisualizationClick('cluster', { clusterId: 'C3', population: 67, coverage: 15, label: 'Abstract concepts' })}>
+            <div className="text-center">
+              <ChartBarIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <p className="text-gray-500 font-medium">Cluster Trajectory Sankey</p>
+              <p className="text-sm text-gray-400 mt-1">
+                Layers {windowLayers.join('→')} • {clusteringMethod}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">
+                K: {windowLayers.map(layer => `L${layer}=${layerClusterCounts[layer] || 6}`).join(', ')}
+              </p>
             </div>
-            
-            <div className="h-full bg-gray-50 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-300">
-              <div className="text-center">
-                <ChartBarIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                <p className="text-gray-500 font-medium">3D PCA Plot</p>
-                <p className="text-sm text-gray-400 mt-1">With cluster coloring</p>
-              </div>
+          </div>
+        </div>
+        
+        {/* Stepped PCA Plot - All Three Layers */}
+        <div className="bg-gray-50 rounded-lg p-4 flex-1">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-lg font-semibold text-gray-900">Stepped PCA Plot</h4>
+            <ChartBarIcon className="w-5 h-5 text-blue-600" />
+          </div>
+          
+          <div className="h-full bg-white rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 min-h-[200px]">
+            <div className="text-center">
+              <ChartBarIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <p className="text-gray-500 font-medium">Stepped PCA Visualization</p>
+              <p className="text-sm text-gray-400 mt-1">Layers {windowLayers.join(' → ')}</p>
+              <p className="text-xs text-gray-400 mt-1">
+                With paths • Color: {colorScheme}
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Right Context-Sensitive Card */}
-      <div className="w-80">
-        <ContextSensitiveCard 
-          cardType={selectedCard?.type || 'cluster'}
-          selectedData={selectedCard?.data}
-        />
-      </div>
+      {/* Context-Sensitive Card integrated */}
+      {selectedCard && (
+        <div className="mt-6 pt-6 border-t border-gray-200">
+          <ContextSensitiveCard 
+            cardType={selectedCard.type}
+            selectedData={selectedCard.data}
+          />
+        </div>
+      )}
     </div>
   )
 }
@@ -396,6 +447,34 @@ export default function ExperimentPage() {
     contextCategories: new Set(),
     targetCategories: new Set()
   })
+
+  // Shared controls
+  const [colorScheme, setColorScheme] = useState('semantic')
+  const [windowLayers, setWindowLayers] = useState<number[]>([0, 1])
+  
+  // Expert tab controls
+  const [topRoutes, setTopRoutes] = useState(10)
+  
+  // Latent tab controls  
+  const [layerClusterCounts, setLayerClusterCounts] = useState<{[key: number]: number}>({
+    0: 6,
+    1: 8, 
+    2: 6
+  })
+  const [clusteringMethod, setClusteringMethod] = useState('kmeans')
+
+  // Helper to update cluster counts when window changes
+  const updateWindowLayers = (newWindow: number[]) => {
+    setWindowLayers(newWindow)
+    // Initialize cluster counts for new layers if not set
+    const newCounts = { ...layerClusterCounts }
+    newWindow.forEach(layer => {
+      if (!(layer in newCounts)) {
+        newCounts[layer] = 6 // default cluster count
+      }
+    })
+    setLayerClusterCounts(newCounts)
+  }
 
   useEffect(() => {
     loadSessions()
@@ -513,56 +592,43 @@ export default function ExperimentPage() {
       </div>
 
       <div className="flex h-[calc(100vh-88px)]">
-        {/* Left Sidebar */}
-        <div className="w-80 bg-white shadow-sm border-r flex flex-col">
+        {/* Left Sidebar - Session, Tabs, Controls */}
+        <div className="w-72 bg-white shadow-sm border-r flex flex-col">
           {/* Session Selector */}
-          <div className="p-8 border-b">
-            <h3 className="text-lg font-semibold text-gray-900 mb-6">Session</h3>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Probe Session
-              </label>
-              <select
-                value={selectedSession}
-                onChange={(e) => setSelectedSession(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">Select a completed session...</option>
-                {sessions.filter(s => s.state === 'completed').map((session) => (
-                  <option key={session.session_id} value={session.session_id}>
-                    {session.session_name}
-                  </option>
-                ))}
-              </select>
-              {selectedSessionData && (
-                <p className="text-sm text-gray-500 mt-2">
-                  {selectedSessionData.probe_count} probes • {formatDate(selectedSessionData.created_at)}
-                </p>
-              )}
-              
-              <button
-                onClick={() => {/* Session already loads via dropdown selection */}}
-                disabled={!selectedSession}
-                className="w-full mt-4 px-4 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors shadow-sm"
-              >
-                Create Experiment
-              </button>
-            </div>
+          <div className="p-6 border-b">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Session</h3>
+            <select
+              value={selectedSession}
+              onChange={(e) => setSelectedSession(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">Select a completed session...</option>
+              {sessions.filter(s => s.state === 'completed').map((session) => (
+                <option key={session.session_id} value={session.session_id}>
+                  {session.session_name}
+                </option>
+              ))}
+            </select>
+            {selectedSessionData && (
+              <p className="text-xs text-gray-500 mt-2">
+                {selectedSessionData.probe_count} probes • {formatDate(selectedSessionData.created_at)}
+              </p>
+            )}
           </div>
 
           {/* Tab Navigation */}
-          <div className="p-8 border-b">
-            <h3 className="text-lg font-semibold text-gray-900 mb-6">Analysis Type</h3>
+          <div className="p-6 border-b">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Analysis Type</h3>
             <div className="space-y-2">
               <button
                 onClick={() => setActiveTab('expert')}
-                className={`w-full flex items-center p-4 rounded-xl transition-colors shadow-sm ${
+                className={`w-full flex items-center p-3 rounded-lg transition-colors ${
                   activeTab === 'expert'
                     ? 'bg-blue-50 text-blue-700 border border-blue-200'
                     : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <ChartBarIcon className="w-5 h-5 mr-3" />
+                <ChartBarIcon className="w-4 h-4 mr-2" />
                 <div className="text-left">
                   <p className="font-medium text-sm">Expert Highways</p>
                   <p className="text-xs opacity-75">MoE routing patterns</p>
@@ -571,13 +637,13 @@ export default function ExperimentPage() {
               
               <button
                 onClick={() => setActiveTab('latent')}
-                className={`w-full flex items-center p-4 rounded-xl transition-colors shadow-sm ${
+                className={`w-full flex items-center p-3 rounded-lg transition-colors ${
                   activeTab === 'latent'
                     ? 'bg-blue-50 text-blue-700 border border-blue-200'
                     : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <ChartBarIcon className="w-5 h-5 mr-3" />
+                <ChartBarIcon className="w-4 h-4 mr-2" />
                 <div className="text-left">
                   <p className="font-medium text-sm">Latent Space</p>
                   <p className="text-xs opacity-75">Cluster trajectories</p>
@@ -586,76 +652,195 @@ export default function ExperimentPage() {
             </div>
           </div>
 
-          {/* Word Filters */}
-          {selectedSession && sessionDetails && (
-            <div className="p-8 border-b">
-              <WordFilterPanel
-                sessionData={sessionDetails}
-                selectedFilters={filterState}
-                onFiltersChange={setFilterState}
-                isLoading={!sessionDetails}
-              />
+          {/* Controls Section */}
+          {selectedSession && (
+            <div className="p-6 border-b flex-1">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Controls</h3>
+              
+              <div className="space-y-4">
+                {/* Shared Controls */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Color Scheme</label>
+                  <select
+                    value={colorScheme}
+                    onChange={(e) => setColorScheme(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="semantic">Semantic Category</option>
+                    <option value="pos">POS Comparison</option>
+                    <option value="embedding">Embedding Distance</option>
+                    <option value="activation">Activation Magnitude</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Window Layers</label>
+                  <select
+                    value={windowLayers.join(',')}
+                    onChange={(e) => {
+                      const layers = e.target.value.split(',').map(Number)
+                      updateWindowLayers(layers)
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <optgroup label="2-Layer Windows">
+                      <option value="0,1">Layers 0→1</option>
+                      <option value="1,2">Layers 1→2</option>
+                      <option value="2,3">Layers 2→3</option>
+                      <option value="3,4">Layers 3→4</option>
+                    </optgroup>
+                    <optgroup label="3-Layer Windows">
+                      <option value="0,1,2">Layers 0→1→2</option>
+                      <option value="1,2,3">Layers 1→2→3</option>
+                      <option value="2,3,4">Layers 2→3→4</option>
+                      <option value="3,4,5">Layers 3→4→5</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                {/* Expert Tab Controls */}
+                {activeTab === 'expert' && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Top Routes</label>
+                    <input
+                      type="number"
+                      value={topRoutes}
+                      onChange={(e) => setTopRoutes(parseInt(e.target.value))}
+                      min="5"
+                      max="50"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                )}
+
+                {/* Latent Tab Controls */}
+                {activeTab === 'latent' && (
+                  <>
+                    <div className="border-t border-gray-200 pt-4">
+                      <h4 className="text-sm font-semibold text-gray-700 mb-3">Per-Layer Clustering</h4>
+                      {windowLayers.map((layer) => (
+                        <div key={layer} className="mb-3">
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Layer {layer} Clusters (K)
+                          </label>
+                          <input
+                            type="number"
+                            value={layerClusterCounts[layer] || 6}
+                            onChange={(e) => {
+                              const newCounts = { ...layerClusterCounts }
+                              newCounts[layer] = parseInt(e.target.value)
+                              setLayerClusterCounts(newCounts)
+                            }}
+                            min="2"
+                            max="20"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Clustering Method</label>
+                      <select
+                        value={clusteringMethod}
+                        onChange={(e) => setClusteringMethod(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="kmeans">K-Means</option>
+                        <option value="hierarchical">Hierarchical</option>
+                        <option value="dbscan">DBSCAN</option>
+                      </select>
+                    </div>
+                    
+                    <button className="w-full px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                      Run Clustering
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
           )}
 
-          {/* Filtered Words Display */}
-          {selectedSession && sessionDetails && (
-            <div className="p-8 border-b">
-              <FilteredWordDisplay
-                sessionData={sessionDetails}
-                filterState={filterState}
-                isLoading={!sessionDetails}
-              />
-            </div>
-          )}
-
-          {/* Quick Stats */}
+          {/* Session Stats */}
           {selectedSessionData && (
-            <div className="p-8 border-b">
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">Session Info</h3>
-              <div className="space-y-3">
+            <div className="p-6">
+              <h3 className="text-sm font-semibold text-gray-700 mb-3">Session Info</h3>
+              <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Probes</span>
-                  <span className="font-semibold text-gray-900">{selectedSessionData.probe_count}</span>
+                  <span className="text-xs text-gray-600">Probes</span>
+                  <span className="font-medium text-sm text-gray-900">{selectedSessionData.probe_count}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Status</span>
-                  <span className="font-semibold text-gray-900">{selectedSessionData.state}</span>
+                  <span className="text-xs text-gray-600">Status</span>
+                  <span className="font-medium text-sm text-gray-900">{selectedSessionData.state}</span>
                 </div>
               </div>
             </div>
           )}
         </div>
 
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col">
+        {/* Main Content Area - 3 Column Layout */}
+        <div className="flex-1 flex">
           {selectedSession ? (
             <>
-              <div className="flex-1 p-8">
-                {activeTab === 'expert' && (
-                  <ExpertHighwaysTab 
-                    sessionId={selectedSession}
-                    sessionData={sessionDetails}
-                    filterState={filterState}
-                  />
-                )}
-                {activeTab === 'latent' && (
-                  <LatentSpaceTab 
-                    sessionId={selectedSession}
-                    sessionData={sessionDetails}
-                    filterState={filterState}
-                  />
+              {/* Middle Column - Word Lists */}
+              <div className="w-96 bg-gray-50 border-r p-6 space-y-6">
+                {sessionDetails && (
+                  <>
+                    <WordFilterPanel
+                      sessionData={sessionDetails}
+                      selectedFilters={filterState}
+                      onFiltersChange={setFilterState}
+                      isLoading={!sessionDetails}
+                    />
+                    
+                    <FilteredWordDisplay
+                      sessionData={sessionDetails}
+                      filterState={filterState}
+                      isLoading={!sessionDetails}
+                    />
+                  </>
                 )}
               </div>
-              
-              {/* LLM Analysis Panel - Shared */}
-              <div className="border-t bg-white p-8">
-                <LLMAnalysisPanel sessionId={selectedSession} analysisType={activeTab} />
+
+              {/* Right Column - Visualization + LLM Analysis */}
+              <div className="flex-1 flex flex-col">
+                <div className="flex-1 p-6">
+                  {activeTab === 'expert' && (
+                    <ExpertHighwaysTab 
+                      sessionId={selectedSession}
+                      sessionData={sessionDetails}
+                      filterState={filterState}
+                      colorScheme={colorScheme}
+                      topRoutes={topRoutes}
+                      windowLayers={windowLayers}
+                    />
+                  )}
+                  {activeTab === 'latent' && (
+                    <LatentSpaceTab 
+                      sessionId={selectedSession}
+                      sessionData={sessionDetails}
+                      filterState={filterState}
+                      colorScheme={colorScheme}
+                      windowLayers={windowLayers}
+                      layerClusterCounts={layerClusterCounts}
+                      clusteringMethod={clusteringMethod}
+                    />
+                  )}
+                </div>
+                
+                {/* LLM Analysis Panel - Below Visualization */}
+                <div className="border-t bg-white p-6">
+                  <LLMAnalysisPanel sessionId={selectedSession} analysisType={activeTab} />
+                </div>
               </div>
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center">
-              <p className="text-gray-500">Please select a probe session to begin analysis.</p>
+              <div className="text-center">
+                <FlaskIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-500 text-lg">Please select a probe session to begin analysis</p>
+              </div>
             </div>
           )}
         </div>
