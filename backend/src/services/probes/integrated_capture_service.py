@@ -136,7 +136,8 @@ class IntegratedCaptureService:
     """
     
     def __init__(self, model, tokenizer, layers_to_capture: Optional[List[int]] = None, 
-                 data_lake_path: str = "data/lake", batch_size: int = 1000):
+                 data_lake_path: str = "data/lake", batch_size: int = 1000,
+                 wordnet_miner: Optional[WordNetMiner] = None):
         self.model = model
         self.tokenizer = tokenizer
         self.data_lake_path = data_lake_path
@@ -156,8 +157,12 @@ class IntegratedCaptureService:
         self.sessions_dir = Path(data_lake_path) / "_sessions"
         self.sessions_dir.mkdir(parents=True, exist_ok=True)
         
-        # WordNet mining integration
-        self.wordnet_miner = WordNetMiner(tokenizer)
+        # Use provided WordNet miner or create new one (for backwards compatibility)
+        if wordnet_miner is not None:
+            self.wordnet_miner = wordnet_miner
+        else:
+            # Fallback for tests or direct instantiation
+            self.wordnet_miner = WordNetMiner(tokenizer)
         
         print(f"🚀 IntegratedCaptureService initialized for layers {self.layers_to_capture}")
     
@@ -274,7 +279,18 @@ class IntegratedCaptureService:
             Generated probe_id
         """
         if session_id not in self.active_sessions:
-            raise ValueError(f"Session {session_id} is not active")
+            # Try to load session from disk and restore it
+            session_file = self.sessions_dir / f"{session_id}.json"
+            if session_file.exists():
+                with open(session_file, 'r') as f:
+                    metadata = json.load(f)
+                # Only restore if session is still active
+                if metadata["state"] == "active":
+                    self._restore_session(session_id, metadata)
+                else:
+                    raise ValueError(f"Session {session_id} is not active (state: {metadata['state']})")
+            else:
+                raise ValueError(f"Session {session_id} not found")
         
         session_status = self.active_sessions[session_id]
         if session_status.state != SessionState.ACTIVE:
@@ -468,6 +484,11 @@ class IntegratedCaptureService:
                     continue
         
         print(f"✅ Batch capture complete: {len(successful_probes)}/{len(contexts) * len(targets)} successful")
+        
+        # Finalize session to write Parquet files and update state
+        self.finalize_session(session_id)
+        print(f"✅ Session {session_id} finalized - Parquet files written")
+        
         return successful_probes
     
     def finalize_session(self, session_id: str) -> CaptureManifest:

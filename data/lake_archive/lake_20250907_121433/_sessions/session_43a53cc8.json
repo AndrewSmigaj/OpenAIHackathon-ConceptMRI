@@ -1,0 +1,22 @@
+{
+  "session_id": "session_43a53cc8",
+  "session_name": "demo_test_session",
+  "contexts": [
+    "the",
+    "a"
+  ],
+  "targets": [
+    "cat",
+    "dog"
+  ],
+  "layers_captured": [
+    0,
+    1,
+    2
+  ],
+  "total_pairs": 4,
+  "created_at": "2025-09-05T19:24:38.557864",
+  "state": "completed",
+  "completed_pairs": 5,
+  "failed_pairs": 0
+}

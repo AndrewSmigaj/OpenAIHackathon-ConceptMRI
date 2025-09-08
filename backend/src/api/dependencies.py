@@ -14,15 +14,17 @@ project_root = backend_src.parent.parent     # project root
 sys.path.insert(0, str(backend_src))
 
 from services.probes.integrated_capture_service import IntegratedCaptureService
+from utils.wordnet_mining import WordNetMiner
 
 
 # Global service instance (simple approach)
 _capture_service = None
+_wordnet_miner = None
 
 
 async def initialize_capture_service():
     """Initialize capture service at startup."""
-    global _capture_service
+    global _capture_service, _wordnet_miner
     
     if _capture_service is not None:
         return  # Already initialized
@@ -47,12 +49,18 @@ async def initialize_capture_service():
             trust_remote_code=True
         )
         
-        # Initialize service
+        # Initialize WordNet first (can be slow)
+        print("📚 Initializing WordNet data...")
+        _wordnet_miner = WordNetMiner(tokenizer)
+        print("✅ WordNet ready")
+        
+        # Initialize service with pre-initialized WordNet
         _capture_service = IntegratedCaptureService(
             model=model,
             tokenizer=tokenizer,
             layers_to_capture=[0, 1, 2],
-            data_lake_path=str(data_lake_path)
+            data_lake_path=str(data_lake_path),
+            wordnet_miner=_wordnet_miner
         )
         
         print("✅ Capture service ready")

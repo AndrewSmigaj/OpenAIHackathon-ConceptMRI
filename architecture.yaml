@@ -8,6 +8,12 @@
 # - Highway analysis generating signatures like "L0E6→L1E28→L2E14"  
 # - Data lake with 30 records per schema (routing, expert internal, expert output)
 # - Adapted successfully to quantized Mxfp4GptOssExperts architecture
+# ✅ NEW MILESTONE: Complete End-to-End Probe Creation and Data Capture!
+# - React frontend with probe creation UI fully working
+# - Session creation → execution → finalization pipeline complete
+# - Real activation data captured: 360 records with 2880-dimensional vectors
+# - All Parquet files written with substantial data (2MB+ activation files)
+# - Session state management and UI integration working properly
 
 meta:
   project: "Concept MRI - OpenAI Hackathon"
@@ -227,6 +233,10 @@ backend:
         priority: high
         returns: "{ manifest:{}, data_lake_paths:{}, categories:{} }"
         description: "Get complete session details including full manifest and Parquet file paths."
+        bug_fixes:
+          - "Fixed category field name mismatch - API now reads context_category_assignments and target_category_assignments from stored metadata"
+          - "Fixed 404 errors for completed sessions by handling both active and finalized sessions"
+          - "Enhanced error handling with separate ValueError, FileNotFoundError, and generic exception paths"
     test_validation:
       - "Server starts successfully with GPT-OSS-20B model loading"
       - "Session creation works with real WordSource mining"
@@ -688,12 +698,15 @@ frontend:
     files_implemented:
       - "frontend/src/types/api.ts - TypeScript interfaces for all backend schemas"
       - "frontend/src/api/client.ts - Complete API client with ConceptMriApiClient class"
-      - "frontend/src/App.tsx - React Router setup with WorkspacePage and placeholder experiment route"
+      - "frontend/src/App.tsx - Complete React Router setup with WorkspacePage and ExperimentPage routes"
       - "frontend/src/pages/WorkspacePage.tsx - Complete workspace interface with ActionCard and Modal components"
       - "frontend/src/components/ActionCard.tsx - Reusable action card component with 4 color variants"
       - "frontend/src/components/Modal.tsx - Accessible modal component replacing browser alerts"
       - "frontend/src/components/icons/Icons.tsx - SVG icon components (Flask, ChartBar, Clock, ChartPie)"
       - "frontend/src/constants/workspace.ts - Constants for magic numbers (MAX_RECENT_SESSIONS)"
+      - "frontend/src/pages/ExperimentPage.tsx - Complete experiment analysis interface with word filtering"
+      - "frontend/src/components/WordFilterPanel.tsx - Category-based word filtering with checkboxes"
+      - "frontend/src/components/FilteredWordDisplay.tsx - Display filtered words with their categories"
       - "frontend/tailwind.config.js - Vite-compatible configuration"
       - "frontend/postcss.config.js - Fixed @tailwindcss/postcss plugin setup"
 
@@ -709,7 +722,7 @@ frontend:
           notes: "Opens modal dialog (placeholder for future WordNet integration)"
         - name: "New Experiment Button"
           status: done
-          notes: "Navigates to experiment view or shows 'no sessions' modal"
+          notes: "Navigates to /experiment route with ExperimentPage component"
         - name: "Recent Sessions List"
           status: done
           notes: "Displays up to 5 recent sessions with loading states and error handling"
@@ -725,18 +738,32 @@ frontend:
         - "Reusable SVG icons (FlaskIcon, ChartBarIcon, ClockIcon, ChartPieIcon)"
         - "Constants from workspace.ts (MAX_RECENT_SESSIONS)"
 
-    experiment_view:
-      status: todo
+    experiment_page:
+      status: done
       priority: critical
-      file: "frontend/src/pages/ExperimentView.tsx"
-      description: "Main analysis interface with tabs and control panels"
+      file: "frontend/src/pages/ExperimentPage.tsx"
+      description: "Complete analysis interface with session selector, word filtering, and dual-tab layout with interactive Sankey-driven cards"
       layout: |
-        ExperimentView Layout:
-        ├── Control Panel (word selection, colors, config)
-        ├── Tab Navigation (Expert Highways | Latent Space)
-        ├── Main Content Area (tab-specific visualizations)
-        ├── LLM Analysis Panel (shared across tabs)
-        └── Details Panel (cohorts, expert descriptions)
+        ExperimentPage Layout:
+        ├── Left Sidebar (w-80):
+        │   ├── Session Selector (dropdown for completed sessions)
+        │   ├── Analysis Type Tabs (Expert Highways | Latent Space)
+        │   ├── WordFilterPanel (category checkboxes with counts)
+        │   ├── FilteredWordDisplay (context/target words with categories)
+        │   └── Session Info (probe count, status)
+        ├── Main Content Area:
+        │   ├── Expert Highways Tab:
+        │   │   ├── Layout: Controls (left) | Interactive Expert Sankey (center) | Context-sensitive Cards (right)
+        │   │   │   ├── Left: Color controls + visualization config
+        │   │   │   ├── Center: Expert Routing Sankey (click experts/routes)
+        │   │   │   └── Right: Expert Card (click expert) OR Highway Card (click route)
+        │   ├── Latent Space Tab:
+        │   │   ├── Layout: Controls (left) | Interactive Trajectory Sankey + PCA 3D (center) | Context-sensitive Cards (right)
+        │   │   │   ├── Left: Clustering controls + Color controls
+        │   │   │   ├── Center: Trajectory Sankey + PCA 3D plot (click clusters/routes)
+        │   │   │   └── Right: Cluster Card (click cluster) OR Route Card (click trajectory)
+        │   └── Bottom: LLM Analysis Panel (shared between tabs)
+        └── Interaction Pattern: Select session → Filter words → Configure visualization → Click Sankey elements → See context-sensitive cards → Generate LLM analysis
 
   components:
     action_card:
@@ -783,6 +810,33 @@ frontend:
         - "MAX_RECENT_SESSIONS = 5 (replaces hardcoded .slice(0, 5))"
         - "Simple approach - only essential constants for MVP"
 
+    word_filter_panel:
+      status: done
+      priority: critical
+      file: "frontend/src/components/WordFilterPanel.tsx"
+      description: "Category-based word filtering with interactive checkboxes and counts - React hooks properly configured"
+      features:
+        - "FilterState interface with Set<string> for efficient lookups"
+        - "Dynamic category counting from SessionDetailResponse data"
+        - "Context and target category sections with individual toggles"
+        - "Select All / Clear All functionality for each category type"
+        - "Live filtering pair count display and current filter summary"
+        - "Proper TypeScript integration with useMemo for performance"
+        - "Fixed React hoisting issue - filtering logic moved inline to useMemo"
+
+    filtered_word_display:
+      status: done
+      priority: critical
+      file: "frontend/src/components/FilteredWordDisplay.tsx"
+      description: "Display filtered context and target words with their categories"
+      features:
+        - "Real-time filtering based on FilterState from WordFilterPanel"
+        - "Separate context and target word sections with counts"
+        - "Word-category mapping display (e.g., 'cat' [animals, pos])"
+        - "Total possible pairs calculation for filtered results"
+        - "Loading states and empty data handling"
+        - "Integration with SessionDetailResponse category structure"
+
     new_probe_dialog:
       status: todo
       priority: critical
@@ -805,6 +859,28 @@ frontend:
           status: todo
           notes: "Select multiple context tokens for comparative routing analysis"
 
+    word_filter_panel:
+      status: todo
+      priority: high
+      file: "frontend/src/components/WordFilterPanel.tsx"
+      description: "Category-based filtering interface for context-target pairs"
+      features:
+        - name: "Context Categories Filter"
+          status: todo
+          notes: "Checkbox list with counts (e.g., 'determiner (1)', 'financial (12)')"
+        - name: "Target Categories Filter" 
+          status: todo
+          notes: "Checkbox list with counts (e.g., 'animals (23)', 'nouns (30)')"
+        - name: "Filter Summary Display"
+          status: todo
+          notes: "Show 'X/Y pairs selected' based on active filters"
+        - name: "Clear All / Select All buttons"
+          status: todo
+          notes: "Quick filtering shortcuts for each category section"
+        - name: "Category color indicators"
+          status: todo
+          notes: "Small colored dots next to category names matching visualization colors"
+
     # TAB 1: Expert Highways - Route exploration and clickable analysis
     expert_highways_tab:
       status: todo
@@ -824,6 +900,12 @@ frontend:
         - name: "Multiple Context Support"
           status: todo
           notes: "Select multiple contexts to show comparative route sets"
+        - name: "Word Category Filtering Integration"
+          status: todo
+          notes: "Integrate WordFilterPanel in left sidebar for filtering context-target pairs"
+        - name: "Blended Color Visualization"
+          status: todo
+          notes: "Apply blended coloring to Sankey visualization based on filtered target token categories"
 
     # TAB 2: Latent Space - Expert output analysis with clustering and PCA
     latent_space_tab:
@@ -847,6 +929,12 @@ frontend:
         - name: "Context-Target Trajectory Visualization"
           status: todo
           notes: "Show how contexts transform target trajectories in latent space"
+        - name: "Word Category Filtering Integration"
+          status: todo
+          notes: "Integrate WordFilterPanel in left sidebar for filtering context-target pairs"
+        - name: "Blended Color Visualization"
+          status: todo
+          notes: "Apply blended coloring to PCA plots and trajectory Sankey based on filtered categories"
 
     # SHARED PANELS - Used across both tabs
     llm_analysis_panel:
@@ -886,6 +974,12 @@ frontend:
         - name: "Category Analysis"
           status: todo
           notes: "Show category distributions and purity metrics for selections"
+        - name: "Pie chart category breakdowns"
+          status: todo
+          notes: "Add pie charts to expert cards, highway cards, cluster cards, and route cards"
+        - name: "Blended color indicators"
+          status: todo
+          notes: "Show computed blended colors alongside detailed category breakdowns"
 
     highway_panel:
       status: todo
@@ -933,9 +1027,12 @@ frontend:
         file: "frontend/src/utils/coloringUtils.ts"
         description: "Flexible coloring approaches for Sankey diagrams and 3D PCA plots"
         modes:
-          - name: "Semantic Category"
-            description: "Color by WordNet hyponym categories (animals=green, colors=blue, etc.)"
-            notes: "Mixed clusters shown in gray to avoid misleading visualization"
+          - name: "Target Token Categories"
+            description: "Color by target token categories (animals=green, nouns=blue, etc.)"
+            notes: "Primary analysis focus - shows how target tokens route through expert highways"
+          - name: "Context Token Categories"
+            description: "Color by context token categories (determiner=purple, financial=red, etc.)"
+            notes: "Shows how different contexts influence routing patterns"
           - name: "POS Comparison"
             description: "Color by part-of-speech ('the noun' vs 'the verb' routing)"
             notes: "Nouns=blue, Verbs=orange - shows grammatical routing differences"
@@ -945,16 +1042,16 @@ frontend:
           - name: "Activation Magnitude"
             description: "Heatmap coloring (high=red, low=blue) for activation strength"
             notes: "Shows 'hot' vs 'cold' expert paths"
-          - name: "Context-Target Pairs"
-            description: "Color by context→target category combinations"
-            notes: "DETERMINER→ANIMAL vs ADJECTIVE→ANIMAL get different colors"
+          - name: "Context-Target Pairs (Future)"
+            description: "Color by context-category → target-category combinations"
+            notes: "Advanced mode: DETERMINER→ANIMAL vs FINANCIAL→AMBIGUOUS_WORDS get different colors"
         features:
           - name: "Interactive mode switching"
             status: todo
             notes: "Dropdown to switch coloring mode without reloading data"
-          - name: "Mixed cluster handling"
+          - name: "Blended color visualization"
             status: todo
-            notes: "Gray coloring or transparency for clusters with no dominant category"
+            notes: "Mix colors based on category percentages using transparency/alpha blending (40% green + 35% blue + 25% red)"
           - name: "Category purity indicators"
             status: todo
             notes: "Opacity or saturation based on category purity percentage"
@@ -1004,6 +1101,63 @@ frontend:
           - name: "Dominant/secondary/outlier examples"
             status: todo
           - name: "Dominant/secondary/outlier token examples"
+            status: todo
+          - name: "Category breakdown pie chart"
+            status: todo
+            notes: "Small pie chart showing precise category percentages for detailed analysis"
+          - name: "Blended color indicator"
+            status: todo
+            notes: "Show the computed blended color alongside pie chart for reference"
+
+      expert_cards:
+        status: todo
+        priority: high
+        file: "frontend/src/components/cards/ExpertCard.tsx"
+        description: "Expert specialization information with category breakdown"
+        features:
+          - name: "Expert specialization display"
+            status: todo
+            notes: "Show what types of tokens/contexts this expert handles"
+          - name: "Population and coverage statistics"
+            status: todo
+          - name: "Category breakdown pie chart"
+            status: todo
+            notes: "Show category composition for tokens routed to this expert"
+          - name: "Blended color indicator"
+            status: todo
+
+      highway_cards:
+        status: todo
+        priority: high
+        file: "frontend/src/components/cards/HighwayCard.tsx"
+        description: "Highway route information with flow analysis"
+        features:
+          - name: "Route signature display"
+            status: todo
+            notes: "Show highway path (e.g., L6E2→L7E15→L8E7)"
+          - name: "Flow coverage and statistics"
+            status: todo
+          - name: "Category breakdown pie chart"
+            status: todo
+            notes: "Show category composition for context-target pairs using this highway"
+          - name: "Blended color indicator"
+            status: todo
+
+      route_cards:
+        status: todo
+        priority: high
+        file: "frontend/src/components/cards/RouteCard.tsx"
+        description: "Trajectory route information for latent space analysis"
+        features:
+          - name: "Trajectory path information"
+            status: todo
+            notes: "Show cluster transition paths and survival rates"
+          - name: "Route coverage metrics"
+            status: todo
+          - name: "Category breakdown pie chart"
+            status: todo
+            notes: "Show category composition for tokens following this trajectory"
+          - name: "Blended color indicator"
             status: todo
 
   pages:

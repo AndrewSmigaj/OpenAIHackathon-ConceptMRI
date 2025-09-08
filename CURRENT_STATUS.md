@@ -1,44 +1,53 @@
 # Current Status - OpenAI Hackathon Concept MRI
 
-## Where We Are
-We were in the middle of setting up the GPT-OSS-20B model for the Concept MRI project when Claude froze and we had to restart.
+## Critical Blocker: Modal Positioning Issue
+**NewProbeDialog modal appears off-screen, cut-off, too small** - prevents testing probe creation flow. User criticized "program by coincidence" CSS attempts. Need simple positioning fix.
 
-## What We've Accomplished
-- ✅ GPU available: NVIDIA GeForce RTX 5070 Ti (15.9 GB)
-- ✅ Python 3.10.12 working with required ML packages installed:
-  - torch 2.8.0
-  - transformers 4.56.1 
-  - bitsandbytes 0.47.0
-  - accelerate 1.10.1
-- ✅ Original GPT-OSS-20B model downloaded (~13GB in data/models/gpt-oss-20b/)
-- ✅ Multiple test scripts created in scripts/ directory
-- ✅ WSL .wslconfig file created to allocate 24GB memory
+## What's Working
+- ✅ Backend server running on port 8000 with GPT-OSS-20B loaded successfully
+- ✅ Frontend dev server on port 5173 
+- ✅ WorkspacePage with integrated NewProbeDialog component
+- ✅ Complete probe creation wizard implemented (800+ lines)
+- ✅ TypeScript API interfaces fixed (pos_tag→pos, synset_name→synset_id)
+- ✅ Old probe sessions archived to /archive/
 
-## ✅ RESOLVED: Model is Working!
-GPT-OSS-20B is now successfully running with MXFP4 quantization directly on the RTX 5070 Ti GPU.
-- Model loads in ~5 seconds
-- Inference is working correctly
-- Using quantized model (no dequantization needed)
-- Memory usage: ~14GB GPU allocation
+## Probe Creation Implementation Status
+**NewProbeDialog.tsx** - COMPLETE but blocked by modal positioning:
+- Multi-step wizard: config → sources → review → confirm → executing  
+- Three demo presets matching architecture.yaml
+- Two-phase execution (create → show counts → execute)
+- WordNet integration (synsets, hyponyms, POS-pure)
+- Form validation and error handling
+
+## Key Technical Understanding
+- **Probe Sessions** vs **Experiments** are separate workflows
+- Experiments SELECT probe sessions to analyze (not single lens)
+- MoE capture → Parquet storage → Expert/Latent analysis
+- Demo flow: POS contrast, semantic categories, context disambiguation
+- Two analysis tabs: Expert Highways (Sankey) + Latent Space (3D PCA)
+
+## Files Modified
+- `frontend/src/types/api.ts` - Fixed critical interface bugs
+- `frontend/src/components/NewProbeDialog.tsx` - Complete implementation  
+- `frontend/src/pages/WorkspacePage.tsx` - Integrated dialog
+- `frontend/src/components/Modal.tsx` - Broken positioning needs fix
 
 ## Immediate Next Steps
-1. **✅ Model Loading**: Working with `python3 scripts/test_quantized_model.py`
-2. **Next: Implement MoE routing capture hooks**
-3. **Build the probe capture service** for Concept Trajectory Analysis
+1. **FIX MODAL POSITIONING** - simple CSS solution (mx-auto + mt-8)
+2. Test end-to-end probe creation once modal works
+3. Restructure UI: grid layout → sidebar + main panel design  
+4. Build ExperimentPage with 2-tab analysis interface
+5. Design experiment data API endpoints for Parquet reading
 
-## Files Ready to Use
-- `scripts/dequantize_model.py` - Converts MXFP4 to BF16 (memory limits adjusted for WSL)
-- `scripts/test_model_loading_fixed.py` - Tests model loading with RTX 5070 Ti optimizations
-- `backend/requirements.txt` - All dependencies specified
-- `architecture.yaml` - Project architecture tracking
+## UI Design Direction  
+- Desktop-focused hackathon MVP
+- Sidebar navigation (not grid cards)
+- Separate probe creation from experiment analysis
+- Clean demo recording experience
 
-## Goal
-Get the dequantized GPT-OSS-20B model working so we can:
-1. Implement MoE routing capture hooks
-2. Build the probe capture service for Concept Trajectory Analysis
-3. Continue with the hackathon demo workflows
+## Demo Scenarios Ready
+1. **POS Contrast**: determiner context → noun/verb targets
+2. **Semantic Categories**: WordNet synset hyponyms analysis  
+3. **Context Disambiguation**: same word, different contexts
 
-## Memory Configuration
-- Requested: 24GB in .wslconfig 
-- Currently available: ~16GB (needs WSL restart)
-- GPU: 15.9GB VRAM available
+## Context: This is day X of 7-day hackathon. Primary goal is working probe→experiment demo flow for video recording.

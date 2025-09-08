@@ -3,11 +3,18 @@
 interface WordSource {
   source_type: 'custom' | 'pos_pure' | 'synset_hyponyms';
   source_params: {
-    words?: string[];
-    label?: string;
-    pos_tag?: string;
-    synset_name?: string;
-    max_words?: number;
+    // For custom word lists
+    words?: string[];      // Array of words to include
+    label?: string;        // Category label (default: "custom")
+    
+    // For POS-pure words (words that are ONLY one part of speech)
+    pos?: string;          // Part of speech: 'n' (noun), 'v' (verb), 'a' (adj), 'r' (adv)
+    max_words?: number;    // Maximum words to mine (default: 30)
+    
+    // For WordNet synset hyponyms (semantic categories)
+    synset_id?: string;    // WordNet synset ID (e.g., "animal.n.01")
+    max_depth?: number;    // Hyponym tree depth (default: 2)
+    unambiguous_only?: boolean; // Filter to single-sense words only (default: true)
   };
 }
 
