@@ -3,7 +3,16 @@
  * Supports 1-2 axis selection with meaningful color combinations
  */
 
-export type ColorAxis = 'sentiment' | 'concreteness' | 'pos';
+// Temporary backwards compatibility
+export type ColorAxis = 'sentiment' | 'concreteness' | 'pos' | 'action-content';
+
+// Mapping of old axis types to category pairs
+const AXIS_CATEGORY_MAP: Record<ColorAxis, { neg: string; pos: string }> = {
+  sentiment: { neg: 'negative', pos: 'positive' },
+  concreteness: { neg: 'abstract', pos: 'concrete' },
+  pos: { neg: 'nouns', pos: 'verbs' },
+  'action-content': { neg: 'action', pos: 'content' }
+};
 
 interface RGBColor {
   r: number;
@@ -11,124 +20,76 @@ interface RGBColor {
   b: number;
 }
 
-// Base color definitions for each axis - vibrant, high contrast colors
-const AXIS_COLORS: Record<ColorAxis, Record<string, RGBColor>> = {
-  sentiment: {
-    positive: { r: 34, g: 197, b: 94 },    // Vibrant Green
-    negative: { r: 239, g: 68, b: 68 },    // Vibrant Red  
-    neutral: { r: 99, g: 102, b: 241 }     // Vibrant Blue (not grey!)
-  },
-  concreteness: {
-    concrete: { r: 59, g: 130, b: 246 },   // Strong Blue
-    abstract: { r: 245, g: 158, b: 11 }    // Strong Orange
-  },
-  pos: {
-    nouns: { r: 139, g: 69, b: 19 },       // Brown
-    verbs: { r: 220, g: 38, b: 127 }       // Magenta
-  }
-};
+// Available gradient schemes
+export type GradientScheme = 'red-blue' | 'yellow-cyan' | 'purple-green' | 'orange-teal' | 'pink-lime';
 
-// Category mappings for each axis
-const AXIS_CATEGORIES: Record<ColorAxis, string[]> = {
-  sentiment: ['positive', 'negative', 'neutral'],
-  concreteness: ['concrete', 'abstract'],
-  pos: ['nouns', 'verbs']
+export const GRADIENT_SCHEMES: Record<GradientScheme, { negative: RGBColor; positive: RGBColor; name: string }> = {
+  'red-blue': {
+    negative: { r: 220, g: 38, b: 127 },    // Deep Red
+    positive: { r: 59, g: 130, b: 246 },    // Blue
+    name: 'Red → Blue'
+  },
+  'yellow-cyan': {
+    negative: { r: 255, g: 193, b: 7 },     // Bright Yellow
+    positive: { r: 6, g: 182, b: 212 },     // Bright Cyan
+    name: 'Yellow → Cyan'
+  },
+  'purple-green': {
+    negative: { r: 147, g: 51, b: 234 },    // Purple
+    positive: { r: 34, g: 197, b: 94 },     // Green
+    name: 'Purple → Green'
+  },
+  'orange-teal': {
+    negative: { r: 249, g: 115, b: 22 },    // Orange
+    positive: { r: 20, g: 184, b: 166 },    // Teal
+    name: 'Orange → Teal'
+  },
+  'pink-lime': {
+    negative: { r: 236, g: 72, b: 153 },    // Pink
+    positive: { r: 132, g: 204, b: 22 },    // Lime
+    name: 'Pink → Lime'
+  }
 };
 
 /**
- * Calculate axis position based on category distribution
- * Returns value from -1 to +1 representing position on divergent axis
+ * Calculate position based on two selected categories
+ * Returns value from -1 to +1 representing position between negative and positive categories
  */
-export function calculateAxisPosition(categoryDistribution: Record<string, number>, axis: ColorAxis): number {
-  const axisCategories = AXIS_CATEGORIES[axis];
-  
-  // Get total count for this axis
-  let totalCount = 0;
-  const counts: Record<string, number> = {};
-  
-  axisCategories.forEach(cat => {
-    counts[cat] = categoryDistribution[cat] || 0;
-    totalCount += counts[cat];
-  });
+export function calculateCategoryPosition(
+  categoryDistribution: Record<string, number>, 
+  negativeCategory: string, 
+  positiveCategory: string
+): number {
+  const negCount = categoryDistribution[negativeCategory] || 0;
+  const posCount = categoryDistribution[positiveCategory] || 0;
+  const totalCount = negCount + posCount;
   
   if (totalCount === 0) {
-    return 0; // Neutral/middle position
+    return 0; // Neutral position
   }
   
-  switch (axis) {
-    case 'sentiment':
-      // Positive-Negative axis with neutral as middle
-      const posRatio = counts['positive'] / totalCount;
-      const negRatio = counts['negative'] / totalCount;
-      
-      // Position: -1 (fully negative) through 0 (neutral) to +1 (fully positive)
-      return posRatio - negRatio;
-      
-    case 'concreteness':
-      // Binary axis: concrete vs abstract
-      const concreteRatio = counts['concrete'] / totalCount;
-      const abstractRatio = counts['abstract'] / totalCount;
-      
-      // Position: -1 (fully abstract) to +1 (fully concrete)
-      return concreteRatio - abstractRatio;
-      
-    case 'pos':
-      // Binary axis: nouns vs verbs
-      const nounRatio = counts['nouns'] / totalCount;
-      const verbRatio = counts['verbs'] / totalCount;
-      
-      // Position: -1 (fully nouns) to +1 (fully verbs)
-      return verbRatio - nounRatio;
-      
-    default:
-      return 0;
-  }
+  const posRatio = posCount / totalCount;
+  const negRatio = negCount / totalCount;
+  
+  // Position: -1 (fully negative category) to +1 (fully positive category)
+  return posRatio - negRatio;
 }
 
 /**
- * Get color for axis position using divergent gradient
+ * Get color for gradient position using specified gradient scheme
  */
-export function getDivergentAxisColor(position: number, axis: ColorAxis): RGBColor {
+export function getGradientColor(position: number, gradientScheme: GradientScheme = 'red-blue'): RGBColor {
   // Clamp position to [-1, 1]
   position = Math.max(-1, Math.min(1, position));
   
-  const axisColors = AXIS_COLORS[axis];
+  const gradient = GRADIENT_SCHEMES[gradientScheme];
   
-  switch (axis) {
-    case 'sentiment':
-      if (Math.abs(position) < 0.05) {
-        // Very close to neutral
-        return axisColors.neutral;
-      } else if (position > 0) {
-        // Interpolate from neutral to positive
-        const t = position;
-        return blendColors(axisColors.neutral, axisColors.positive, 1 - t, t);
-      } else {
-        // Interpolate from neutral to negative  
-        const t = Math.abs(position);
-        return blendColors(axisColors.neutral, axisColors.negative, 1 - t, t);
-      }
-      
-    case 'concreteness':
-      const t = (position + 1) / 2; // Map [-1,1] to [0,1]
-      return blendColors(axisColors.abstract, axisColors.concrete, 1 - t, t);
-      
-    case 'pos':
-      const tPos = (position + 1) / 2; // Map [-1,1] to [0,1]  
-      return blendColors(axisColors.nouns, axisColors.verbs, 1 - tPos, tPos);
-      
-    default:
-      return { r: 99, g: 102, b: 241 }; // Fallback
-  }
+  // Map position [-1, 1] to [0, 1] for interpolation
+  const t = (position + 1) / 2;
+  
+  return blendColors(gradient.negative, gradient.positive, 1 - t, t);
 }
 
-/**
- * Get the RGB color for a single axis using category distribution
- */
-export function getAxisColor(categoryDistribution: Record<string, number>, axis: ColorAxis): RGBColor {
-  const position = calculateAxisPosition(categoryDistribution, axis);
-  return getDivergentAxisColor(position, axis);
-}
 
 /**
  * Blend two RGB colors using additive blending
@@ -153,74 +114,66 @@ export function rgbToHex(color: RGBColor): string {
 }
 
 /**
- * Get the final blended color for a node based on selected axes and category distribution
+ * Get the final blended color for a node based on selected categories and distribution
  */
 export function getNodeColor(
   categoryDistribution: Record<string, number>,
-  primaryAxis: ColorAxis, 
-  secondaryAxis?: ColorAxis
+  primaryNegCategory: string,
+  primaryPosCategory: string,
+  secondaryNegCategory?: string,
+  secondaryPosCategory?: string,
+  primaryGradient: GradientScheme = 'red-blue',
+  secondaryGradient: GradientScheme = 'yellow-cyan'
 ): string {
-  if (!secondaryAxis) {
-    // Single axis - return gradient color based on distribution
-    const color = getAxisColor(categoryDistribution, primaryAxis);
-    return rgbToHex(color);
+  // Calculate primary axis position and color
+  const primaryPosition = calculateCategoryPosition(categoryDistribution, primaryNegCategory, primaryPosCategory);
+  const primaryColor = getGradientColor(primaryPosition, primaryGradient);
+  
+  if (!secondaryNegCategory || !secondaryPosCategory) {
+    // Single axis - return primary gradient color
+    return rgbToHex(primaryColor);
   }
   
-  // Dual axis - blend gradient colors from both axes
-  const color1 = getAxisColor(categoryDistribution, primaryAxis);
-  const color2 = getAxisColor(categoryDistribution, secondaryAxis);
+  // Dual axis - blend gradient colors from both axes with equal weighting
+  const secondaryPosition = calculateCategoryPosition(categoryDistribution, secondaryNegCategory, secondaryPosCategory);
+  const secondaryColor = getGradientColor(secondaryPosition, secondaryGradient);
   
-  // Blend with primary axis weighted more heavily
-  const blendedColor = blendColors(color1, color2, 0.6, 0.4);
+  // Equal weighting for both axes
+  const blendedColor = blendColors(primaryColor, secondaryColor, 0.5, 0.5);
   return rgbToHex(blendedColor);
 }
 
 /**
- * Get a preview showing gradient extremes and key points for the selected axis combination
+ * Get a preview showing gradient extremes and key points for the selected categories
  */
-export function getColorPreview(primaryAxis: ColorAxis, secondaryAxis?: ColorAxis): Record<string, string> {
+export function getColorPreview(
+  primaryNegCategory: string,
+  primaryPosCategory: string,
+  secondaryNegCategory?: string,
+  secondaryPosCategory?: string,
+  primaryGradient: GradientScheme = 'red-blue',
+  secondaryGradient: GradientScheme = 'yellow-cyan'
+): Record<string, string> {
   const preview: Record<string, string> = {};
   
-  if (!secondaryAxis) {
+  if (!secondaryNegCategory || !secondaryPosCategory) {
     // Single axis preview - show gradient extremes and middle
-    switch (primaryAxis) {
-      case 'sentiment':
-        preview['Very Negative'] = rgbToHex(getDivergentAxisColor(-1, primaryAxis));
-        preview['Neutral'] = rgbToHex(getDivergentAxisColor(0, primaryAxis));
-        preview['Very Positive'] = rgbToHex(getDivergentAxisColor(1, primaryAxis));
-        break;
-      case 'concreteness':
-        preview['Very Abstract'] = rgbToHex(getDivergentAxisColor(-1, primaryAxis));
-        preview['Mixed'] = rgbToHex(getDivergentAxisColor(0, primaryAxis));
-        preview['Very Concrete'] = rgbToHex(getDivergentAxisColor(1, primaryAxis));
-        break;
-      case 'pos':
-        preview['All Nouns'] = rgbToHex(getDivergentAxisColor(-1, primaryAxis));
-        preview['Mixed'] = rgbToHex(getDivergentAxisColor(0, primaryAxis));
-        preview['All Verbs'] = rgbToHex(getDivergentAxisColor(1, primaryAxis));
-        break;
-    }
+    preview[`All ${primaryNegCategory}`] = rgbToHex(getGradientColor(-1, primaryGradient));
+    preview['Mixed'] = rgbToHex(getGradientColor(0, primaryGradient));
+    preview[`All ${primaryPosCategory}`] = rgbToHex(getGradientColor(1, primaryGradient));
   } else {
     // Dual axis preview - show combinations of extremes
-    const getAxisLabel = (axis: ColorAxis, position: number) => {
-      switch (axis) {
-        case 'sentiment':
-          return position === -1 ? 'Neg' : position === 0 ? 'Neu' : 'Pos';
-        case 'concreteness':
-          return position === -1 ? 'Abs' : position === 0 ? 'Mix' : 'Con';
-        case 'pos':
-          return position === -1 ? 'N' : position === 0 ? 'Mix' : 'V';
-      }
-    };
-    
     const positions = [-1, 0, 1];
+    const getLabel = (pos: number, negCat: string, posCat: string) => {
+      return pos === -1 ? negCat.substring(0, 3) : pos === 0 ? 'Mix' : posCat.substring(0, 3);
+    };
     
     positions.forEach((pos1) => {
       positions.forEach((pos2) => {
-        const color1 = getDivergentAxisColor(pos1, primaryAxis);
-        const color2 = getDivergentAxisColor(pos2, secondaryAxis);
-        const blended = blendColors(color1, color2, 0.6, 0.4);
-        const label = `${getAxisLabel(primaryAxis, pos1)}+${getAxisLabel(secondaryAxis, pos2)}`;
+        const color1 = getGradientColor(pos1, primaryGradient);
+        const color2 = getGradientColor(pos2, secondaryGradient);
+        const blended = blendColors(color1, color2, 0.5, 0.5);
+        const label = `${getLabel(pos1, primaryNegCategory, primaryPosCategory)}+${getLabel(pos2, secondaryNegCategory, secondaryPosCategory)}`;
         preview[label] = rgbToHex(blended);
       });
     });
@@ -229,16 +182,48 @@ export function getColorPreview(primaryAxis: ColorAxis, secondaryAxis?: ColorAxi
   return preview;
 }
 
-/**
- * Get readable label for axis
- */
+
+// Backwards compatibility wrappers
 export function getAxisLabel(axis: ColorAxis): string {
   switch (axis) {
     case 'sentiment': return 'Sentiment';
     case 'concreteness': return 'Concreteness';
     case 'pos': return 'Part of Speech';
+    case 'action-content': return 'Action-Content';
     default: return axis;
   }
+}
+
+export function getAxisColor(categoryDistribution: Record<string, number>, axis: ColorAxis): RGBColor {
+  const { neg, pos } = AXIS_CATEGORY_MAP[axis];
+  const position = calculateCategoryPosition(categoryDistribution, neg, pos);
+  return getGradientColor(position, 'red-blue');
+}
+
+export function getDivergentAxisColor(position: number, axis: ColorAxis): RGBColor {
+  return getGradientColor(position, 'red-blue');
+}
+
+// getNodeColor with ColorAxis and gradient support
+export function getNodeColorWithGradients(
+  categoryDistribution: Record<string, number>,
+  primaryAxis: ColorAxis,
+  secondaryAxis?: ColorAxis,
+  primaryGradient: GradientScheme = 'red-blue',
+  secondaryGradient: GradientScheme = 'yellow-cyan'
+): string {
+  const primary = AXIS_CATEGORY_MAP[primaryAxis];
+  const secondary = secondaryAxis ? AXIS_CATEGORY_MAP[secondaryAxis] : undefined;
+  
+  return getNodeColor(categoryDistribution, primary.neg, primary.pos, secondary?.neg, secondary?.pos, primaryGradient, secondaryGradient);
+}
+
+// Legacy getColorPreview with ColorAxis
+export function getColorPreviewLegacy(primaryAxis: ColorAxis, secondaryAxis?: ColorAxis): Record<string, string> {
+  const primary = AXIS_CATEGORY_MAP[primaryAxis];
+  const secondary = secondaryAxis ? AXIS_CATEGORY_MAP[secondaryAxis] : undefined;
+  
+  return getColorPreview(primary.neg, primary.pos, secondary?.neg, secondary?.pos, 'red-blue', 'yellow-cyan');
 }
 
 /**

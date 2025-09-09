@@ -188,11 +188,6 @@ export default function WordFilterPanel({
                     <span className="text-sm text-gray-700 capitalize">
                       {category.name} ({category.wordCount})
                     </span>
-                    {selectedFilters.balanceCategories && selectedFilters.contextCategories.has(category.name) && (
-                      <span className="text-xs text-blue-600 font-medium">
-                        → {Math.min(category.wordCount, selectedFilters.maxWordsPerCategory)} sampled
-                      </span>
-                    )}
                   </div>
                 </label>
               ))}
@@ -236,11 +231,6 @@ export default function WordFilterPanel({
                     <span className="text-sm text-gray-700 capitalize">
                       {category.name} ({category.wordCount})
                     </span>
-                    {selectedFilters.balanceCategories && selectedFilters.targetCategories.has(category.name) && (
-                      <span className="text-xs text-blue-600 font-medium">
-                        → {Math.min(category.wordCount, selectedFilters.maxWordsPerCategory)} sampled
-                      </span>
-                    )}
                   </div>
                 </label>
               ))}

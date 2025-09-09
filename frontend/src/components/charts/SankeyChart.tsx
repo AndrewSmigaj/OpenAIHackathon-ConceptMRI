@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import type { SankeyNode, SankeyLink } from '../../types/api';
-import { getNodeColor, getTrafficVisualProperties, type ColorAxis } from '../../utils/colorBlending';
+import { getNodeColorWithGradients, getTrafficVisualProperties, type ColorAxis, type GradientScheme } from '../../utils/colorBlending';
 
 interface SankeyChartProps {
   nodes: SankeyNode[];
   links: SankeyLink[];
   primaryAxis: ColorAxis;
   secondaryAxis?: ColorAxis;
+  primaryGradient?: GradientScheme;
+  secondaryGradient?: GradientScheme;
   onNodeClick?: (nodeId: string, nodeData: SankeyNode) => void;
   onLinkClick?: (linkData: SankeyLink) => void;
   height?: number;
@@ -19,6 +21,8 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
   links,
   primaryAxis,
   secondaryAxis,
+  primaryGradient = 'red-blue',
+  secondaryGradient = 'yellow-cyan',
   onNodeClick,
   onLinkClick,
   height = 600,
@@ -98,7 +102,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
       name: node.name,
       value: node.token_count,
       itemStyle: {
-        color: getNodeColor(node.category_distribution, primaryAxis, secondaryAxis)
+        color: getNodeColorWithGradients(node.category_distribution, primaryAxis, secondaryAxis, primaryGradient, secondaryGradient)
       },
       // Store original data for tooltips
       originalData: node
@@ -111,7 +115,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     const sankeyLinks = links.map(link => {
       // Use the route's own category distribution for coloring instead of source node
       const linkColor = link.category_distribution && Object.keys(link.category_distribution).length > 0 ?
-        getNodeColor(link.category_distribution, primaryAxis, secondaryAxis) : '#5470c6';
+        getNodeColorWithGradients(link.category_distribution, primaryAxis, secondaryAxis, primaryGradient, secondaryGradient) : '#5470c6';
       
       // Get traffic-based visual properties
       const { opacity, lineWidth } = getTrafficVisualProperties(link.value, maxLinkValue);

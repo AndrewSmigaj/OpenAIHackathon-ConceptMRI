@@ -14,7 +14,8 @@ import * as echarts from 'echarts'
 import WordFilterPanel, { type FilterState } from '../components/WordFilterPanel'
 import FilteredWordDisplay from '../components/FilteredWordDisplay'
 import SankeyChart from '../components/charts/SankeyChart'
-import { getColorPreview, getAxisLabel, type ColorAxis } from '../utils/colorBlending'
+import MultiSankeyView from '../components/charts/MultiSankeyView'
+import { getColorPreviewLegacy as getColorPreview, getAxisLabel, type ColorAxis, type GradientScheme, GRADIENT_SCHEMES } from '../utils/colorBlending'
 
 /**
  * Sample words randomly from a category
@@ -137,16 +138,22 @@ interface StatisticalAnalysis {
     category: string
     count: number
     percentage: number
-    expected: number
-    chiSquareContribution: number
   }>
-  chiSquareStatistic: number
-  degreesOfFreedom: number
-  isSignificant: boolean
+  entropy: number
+  normalizedEntropy: number
+  diversity: string
   dominantCategory: string
+  concentrationRatio: number
+  testStatistic: number
+  pValue: number
+  isSignificant: boolean
+  testType: string
 }
 
-function calculateChiSquare(distribution: Record<string, number>): StatisticalAnalysis {
+// @ts-ignore
+import jStat from 'jStat'
+
+function calculateStatisticalAnalysis(distribution: Record<string, number>): StatisticalAnalysis {
   const categories = Object.keys(distribution)
   const counts = Object.values(distribution)
   const totalTokens = counts.reduce((sum, count) => sum + count, 0)
@@ -155,52 +162,115 @@ function calculateChiSquare(distribution: Record<string, number>): StatisticalAn
     return {
       totalTokens: 0,
       categoryStats: [],
-      chiSquareStatistic: 0,
-      degreesOfFreedom: 0,
+      entropy: 0,
+      normalizedEntropy: 0,
+      diversity: 'No data',
+      dominantCategory: 'None',
+      concentrationRatio: 0,
+      testStatistic: 0,
+      pValue: 1,
       isSignificant: false,
-      dominantCategory: 'None'
+      testType: 'None'
     }
   }
 
-  // Expected frequency under null hypothesis (equal distribution)
-  const expectedPerCategory = totalTokens / categories.length
-  
-  // Calculate chi-square statistic
-  let chiSquareStatistic = 0
+  // Calculate category statistics
   const categoryStats = categories.map((category, index) => {
-    const observed = counts[index]
-    const expected = expectedPerCategory
-    const contribution = Math.pow(observed - expected, 2) / expected
-    chiSquareStatistic += contribution
-    
+    const count = counts[index]
     return {
       category,
-      count: observed,
-      percentage: (observed / totalTokens) * 100,
-      expected,
-      chiSquareContribution: contribution
+      count,
+      percentage: (count / totalTokens) * 100,
+      probability: count / totalTokens
+    }
+  }).sort((a, b) => b.count - a.count)
+
+  // Calculate Shannon entropy: H = -Σ(p * log2(p))
+  let entropy = 0
+  categoryStats.forEach(stat => {
+    if (stat.probability > 0) {
+      entropy -= stat.probability * Math.log2(stat.probability)
     }
   })
 
-  const degreesOfFreedom = categories.length - 1
-  // Critical value for p < 0.05 with df degrees of freedom (simplified approximation)
-  const criticalValue = degreesOfFreedom === 1 ? 3.84 : (degreesOfFreedom === 2 ? 5.99 : 7.81)
-  const isSignificant = chiSquareStatistic > criticalValue
+  // Normalize entropy (0 = completely concentrated, 1 = perfectly uniform)
+  const maxEntropy = Math.log2(categories.length)
+  const normalizedEntropy = maxEntropy > 0 ? entropy / maxEntropy : 0
 
-  // Find dominant category
-  const dominantCategory = categoryStats.reduce((max, stat) => 
-    stat.count > max.count ? stat : max
-  ).category
+  // Classify diversity based on normalized entropy
+  let diversity: string
+  if (normalizedEntropy < 0.3) {
+    diversity = 'Highly concentrated'
+  } else if (normalizedEntropy < 0.6) {
+    diversity = 'Moderately concentrated' 
+  } else if (normalizedEntropy < 0.85) {
+    diversity = 'Well distributed'
+  } else {
+    diversity = 'Uniformly distributed'
+  }
+
+  const dominantCategory = categoryStats[0].category
+  const concentrationRatio = categoryStats[0].percentage
+
+  // Statistical test based on number of categories
+  let testStatistic = 0
+  let pValue: number
+  let isSignificant = false
+  let testType = ''
+  
+  if (categories.length === 2) {
+    // Two categories: binomial test against 50% null hypothesis
+    const dominantCount = categoryStats[0].count
+    const expectedP = 0.5
+    const observedP = dominantCount / totalTokens
+    
+    // Normal approximation to binomial: z = (p̂ - p0) / √(p0(1-p0)/n)
+    const standardError = Math.sqrt(expectedP * (1 - expectedP) / totalTokens)
+    testStatistic = Math.abs(observedP - expectedP) / standardError
+    
+    // Two-tailed p-value using normal CDF
+    pValue = 2 * (1 - jStat.normal.cdf(testStatistic, 0, 1))
+    isSignificant = pValue < 0.05
+    testType = 'Binomial test'
+    
+  } else if (categories.length >= 3) {
+    // Three or more categories: chi-square goodness of fit against uniform
+    const expectedPerCategory = totalTokens / categories.length
+    
+    categoryStats.forEach(stat => {
+      const observed = stat.count
+      const expected = expectedPerCategory
+      testStatistic += Math.pow(observed - expected, 2) / expected
+    })
+    
+    const degreesOfFreedom = categories.length - 1
+    pValue = 1 - jStat.chisquare.cdf(testStatistic, degreesOfFreedom)
+    isSignificant = pValue < 0.05
+    testType = 'Chi-square goodness of fit'
+    
+  } else {
+    // Single category: no statistical test possible
+    testStatistic = 0
+    pValue = 1
+    isSignificant = false
+    testType = 'Single category (no test)'
+  }
 
   return {
     totalTokens,
-    categoryStats: categoryStats.sort((a, b) => b.count - a.count),
-    chiSquareStatistic,
-    degreesOfFreedom,
+    categoryStats: categoryStats.map(({ probability, ...rest }) => rest), // Remove probability from output
+    entropy,
+    normalizedEntropy,
+    diversity,
+    dominantCategory,
+    concentrationRatio,
+    testStatistic,
+    pValue,
     isSignificant,
-    dominantCategory
+    testType
   }
 }
+
 
 interface LLMAnalysisProps {
   sessionId: string
@@ -403,7 +473,7 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
     return (
       <div className="bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 p-8 text-center">
         <div className="text-gray-500">
-          <ChartBarIcon className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+          <ChartBarIcon style={{ width: '16px', height: '16px' }} className="mx-auto mb-2 text-gray-300" />
           <p className="font-medium">Click {cardType === 'expert' || cardType === 'highway' ? 'expert or route' : 'cluster or trajectory'}</p>
           <p className="text-sm mt-1">to see details here</p>
         </div>
@@ -434,7 +504,7 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
   }
 
   // Calculate statistics for expert cards with rich data
-  const analysis = categoryDistribution ? calculateChiSquare(categoryDistribution) : null
+  const analysis = categoryDistribution ? calculateStatisticalAnalysis(categoryDistribution) : null
 
   const handleGenerateLabel = async () => {
     setIsGeneratingLabel(true)
@@ -456,7 +526,7 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
           )}
         </div>
         <div className="flex items-center space-x-2">
-          <ChartBarIcon className="w-5 h-5 text-blue-600" />
+          <ChartBarIcon style={{ width: '12px', height: '12px' }} className="text-blue-600" />
           <button
             onClick={handleGenerateLabel}
             disabled={isGeneratingLabel}
@@ -560,17 +630,29 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
 
             {activeTab === 'statistics' && analysis && (
               <div className="space-y-4">
-                {/* Chi-Square Test */}
+                {/* Statistical Analysis */}
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-blue-900 mb-2">Chi-Square Analysis</h4>
+                  <h4 className="font-medium text-blue-900 mb-2">Statistical Analysis</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-blue-700">χ² statistic:</span>
-                      <span className="font-mono text-blue-900">{analysis.chiSquareStatistic.toFixed(3)}</span>
+                      <span className="text-blue-700">Entropy:</span>
+                      <span className="font-mono text-blue-900">{analysis.entropy.toFixed(3)} bits</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-700">Degrees of freedom:</span>
-                      <span className="font-mono text-blue-900">{analysis.degreesOfFreedom}</span>
+                      <span className="text-blue-700">Diversity:</span>
+                      <span className="font-medium text-blue-900">{analysis.diversity}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-700">Test:</span>
+                      <span className="text-blue-900">{analysis.testType}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-700">Test statistic:</span>
+                      <span className="font-mono text-blue-900">{analysis.testStatistic.toFixed(3)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-700">p-value:</span>
+                      <span className="font-mono text-blue-900">{analysis.pValue < 0.001 ? '<0.001' : analysis.pValue.toFixed(4)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-blue-700">Significant (p &lt; 0.05):</span>
@@ -592,8 +674,8 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
                           <span className="text-sm text-gray-600">{stat.percentage.toFixed(1)}%</span>
                         </div>
                         <div className="flex justify-between text-xs text-gray-500">
-                          <span>Observed: {stat.count}</span>
-                          <span>Expected: {stat.expected.toFixed(1)}</span>
+                          <span>Count: {stat.count}</span>
+                          <span>Percentage: {stat.percentage.toFixed(1)}%</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                           <div 
@@ -691,11 +773,24 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
 interface ColorControlsProps {
   primaryAxis: ColorAxis
   secondaryAxis?: ColorAxis
+  primaryGradient: GradientScheme
+  secondaryGradient: GradientScheme
   onPrimaryChange: (axis: ColorAxis) => void
   onSecondaryChange: (axis: ColorAxis | undefined) => void
+  onPrimaryGradientChange: (gradient: GradientScheme) => void
+  onSecondaryGradientChange: (gradient: GradientScheme) => void
 }
 
-function ColorControls({ primaryAxis, secondaryAxis, onPrimaryChange, onSecondaryChange }: ColorControlsProps) {
+function ColorControls({ 
+  primaryAxis, 
+  secondaryAxis, 
+  primaryGradient, 
+  secondaryGradient, 
+  onPrimaryChange, 
+  onSecondaryChange, 
+  onPrimaryGradientChange, 
+  onSecondaryGradientChange 
+}: ColorControlsProps) {
   const colorPreview = getColorPreview(primaryAxis, secondaryAxis)
   
   return (
@@ -733,6 +828,36 @@ function ColorControls({ primaryAxis, secondaryAxis, onPrimaryChange, onSecondar
         </select>
       </div>
       
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Primary Gradient
+        </label>
+        <select
+          value={primaryGradient}
+          onChange={(e) => onPrimaryGradientChange(e.target.value as GradientScheme)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        >
+          {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
+            <option key={key} value={key}>{scheme.name}</option>
+          ))}
+        </select>
+      </div>
+      
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Secondary Gradient
+        </label>
+        <select
+          value={secondaryGradient}
+          onChange={(e) => onSecondaryGradientChange(e.target.value as GradientScheme)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        >
+          {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
+            <option key={key} value={key}>{scheme.name}</option>
+          ))}
+        </select>
+      </div>
+      
       {/* Color Preview */}
       <div className="pt-2 border-t border-gray-200">
         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -760,8 +885,11 @@ function ExpertHighwaysTab({
   filterState,
   primaryAxis,
   secondaryAxis,
+  primaryGradient,
+  secondaryGradient,
   topRoutes,
-  windowLayers,
+  selectedRange,
+  onRangeChange,
   showAllRoutes
 }: { 
   sessionId: string
@@ -769,47 +897,14 @@ function ExpertHighwaysTab({
   filterState: FilterState
   primaryAxis: ColorAxis
   secondaryAxis?: ColorAxis
+  primaryGradient: GradientScheme
+  secondaryGradient: GradientScheme
   topRoutes: number
-  windowLayers: number[]
+  selectedRange: string
+  onRangeChange: (range: string) => void
   showAllRoutes: boolean
 }) {
   const [selectedCard, setSelectedCard] = useState<{ type: 'expert' | 'highway', data: any } | null>(null)
-  const [routeData, setRouteData] = useState<RouteAnalysisResponse | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  // Load route analysis data when dependencies change
-  useEffect(() => {
-    if (!sessionId || !sessionData) {
-      setRouteData(null)
-      return
-    }
-
-    const loadRoutes = async () => {
-      try {
-        setLoading(true)
-        setError(null)
-        
-        const request: AnalyzeRoutesRequest = {
-          session_id: sessionId,
-          window_layers: windowLayers,
-          filter_config: convertFilterState(filterState, sessionData),
-          top_n_routes: showAllRoutes ? 1000 : topRoutes // Use large number for "all"
-        }
-        
-        const response = await apiClient.analyzeRoutes(request)
-        setRouteData(response)
-      } catch (err) {
-        console.error('Failed to load routes:', err)
-        setError(err instanceof Error ? err.message : 'Failed to load routes')
-        setRouteData(null)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadRoutes()
-  }, [sessionId, sessionData, filterState, windowLayers, topRoutes, showAllRoutes])
 
   const handleSankeyClick = (elementType: 'expert' | 'route', data: any) => {
     setSelectedCard({ 
@@ -819,89 +914,37 @@ function ExpertHighwaysTab({
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 h-full">
-      <div className="flex items-center justify-between mb-6">
+    <div className="bg-white rounded-xl shadow-sm p-4 h-full">
+      <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-xl font-semibold text-gray-900">Expert Routing Pathways</h3>
-          <p className="text-sm text-gray-600 mt-1">Click experts or routes to see details</p>
+          <h3 className="text-lg font-semibold text-gray-900">Expert Routing Pathways</h3>
+          <p className="text-xs text-gray-600 mt-1">Click experts or routes to see details</p>
         </div>
-        <ChartBarIcon className="w-6 h-6 text-blue-600" />
+        <ChartBarIcon style={{ width: '12px', height: '12px' }} className="text-blue-600" />
       </div>
       
-      {/* Route Analysis Visualization */}
-      <div className="bg-gray-50 rounded-lg" style={{ height: '500px' }}>
-        {loading ? (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">Loading expert routes...</p>
-              <p className="text-sm text-gray-500 mt-1">Analyzing layers {windowLayers.join('→')}</p>
-            </div>
-          </div>
-        ) : error ? (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ChartBarIcon className="w-6 h-6 text-red-600" />
-              </div>
-              <p className="text-red-600 font-medium">Failed to load routes</p>
-              <p className="text-sm text-gray-500 mt-1">{error}</p>
-            </div>
-          </div>
-        ) : routeData ? (
-          <div className="p-4 h-full">
-            {/* Real Sankey Visualization */}
-            <SankeyChart
-              nodes={routeData.nodes}
-              links={routeData.links}
-              primaryAxis={primaryAxis}
-              secondaryAxis={secondaryAxis}
-              onNodeClick={(nodeId, nodeData) => {
-                // Pass the full rich SankeyNode data
-                handleSankeyClick('expert', {
-                  ...nodeData,  // Full SankeyNode data
-                  // Add computed fields for backward compatibility
-                  expertId: nodeData.expert_id,
-                  population: nodeData.token_count,
-                  coverage: Math.round((nodeData.token_count / routeData.statistics.total_probes) * 100),
-                  _fullData: nodeData,  // Mark this as rich data
-                  _totalProbes: routeData.statistics.total_probes
-                })
-              }}
-              onLinkClick={(linkData) => {
-                // Find the corresponding TopRoute data for richer information
-                const routeInfo = routeData.top_routes.find(r => r.signature === linkData.route_signature)
-                handleSankeyClick('route', {
-                  ...linkData,  // Full SankeyLink data
-                  // Add route info if available
-                  ...(routeInfo || {}),
-                  // Add computed fields for backward compatibility
-                  signature: linkData.route_signature,
-                  flow: linkData.value,
-                  coverage: Math.round((linkData.value / routeData.statistics.total_probes) * 100),
-                  _fullData: linkData,  // Mark this as rich data
-                  _routeInfo: routeInfo,  // Additional route statistics
-                  _totalProbes: routeData.statistics.total_probes
-                })
-              }}
-              width={700}
-              height={400}
-            />
-          </div>
-        ) : (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <ChartBarIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500 font-medium text-lg">Select a completed session</p>
-              <p className="text-sm text-gray-400 mt-2">Expert route analysis will appear here</p>
-            </div>
-          </div>
-        )}
+      {/* Multi-Sankey Route Analysis Visualization */}
+      <div className="bg-gray-50 rounded-lg p-6">
+        <MultiSankeyView
+          sessionId={sessionId}
+          sessionData={sessionData}
+          filterState={filterState}
+          primaryAxis={primaryAxis}
+          secondaryAxis={secondaryAxis}
+          primaryGradient={primaryGradient}
+          secondaryGradient={secondaryGradient}
+          showAllRoutes={showAllRoutes}
+          topRoutes={topRoutes}
+          selectedRange={selectedRange}
+          onRangeChange={onRangeChange}
+          onNodeClick={(data) => handleSankeyClick('expert', data)}
+          onLinkClick={(data) => handleSankeyClick('route', data)}
+        />
       </div>
 
       {/* Context-Sensitive Card integrated */}
       {selectedCard && (
-        <div className="mt-6 pt-6 border-t border-gray-200">
+        <div className="mt-4 pt-4 border-t border-gray-200">
           <ContextSensitiveCard 
             cardType={selectedCard.type}
             selectedData={selectedCard.data}
@@ -941,27 +984,27 @@ function LatentSpaceTab({
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 h-full">
-      <div className="flex items-center justify-between mb-6">
+    <div className="bg-white rounded-xl shadow-sm p-4 h-full">
+      <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-xl font-semibold text-gray-900">Latent Space Analysis</h3>
-          <p className="text-sm text-gray-600 mt-1">Cluster trajectories and stepped PCA visualization</p>
+          <h3 className="text-lg font-semibold text-gray-900">Latent Space Analysis</h3>
+          <p className="text-xs text-gray-600 mt-1">Cluster trajectories and stepped PCA visualization</p>
         </div>
-        <ChartBarIcon className="w-6 h-6 text-blue-600" />
+        <ChartBarIcon style={{ width: '12px', height: '12px' }} className="text-blue-600" />
       </div>
       
-      <div className="flex flex-col h-full space-y-6">
+      <div className="flex flex-col h-full space-y-4">
         {/* Trajectory Sankey - Clusters and Paths */}
-        <div className="bg-gray-50 rounded-lg p-4 flex-1">
+        <div className="bg-gray-50 rounded-lg p-6 flex-1">
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-lg font-semibold text-gray-900">Cluster Trajectory Routes</h4>
-            <ChartBarIcon className="w-5 h-5 text-blue-600" />
+            <ChartBarIcon style={{ width: '12px', height: '12px' }} className="text-blue-600" />
           </div>
           
           <div className="h-full bg-white rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 cursor-pointer min-h-[200px]"
                onClick={() => handleVisualizationClick('cluster', { clusterId: 'C3', population: 67, coverage: 15, label: 'Abstract concepts' })}>
             <div className="text-center">
-              <ChartBarIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <ChartBarIcon style={{ width: '16px', height: '16px' }} className="text-gray-400 mx-auto mb-1" />
               <p className="text-gray-500 font-medium">Cluster Trajectory Sankey</p>
               <p className="text-sm text-gray-400 mt-1">
                 Layers {windowLayers.join('→')} • {clusteringMethod}
@@ -974,15 +1017,15 @@ function LatentSpaceTab({
         </div>
         
         {/* Stepped PCA Plot - All Three Layers */}
-        <div className="bg-gray-50 rounded-lg p-4 flex-1">
+        <div className="bg-gray-50 rounded-lg p-6 flex-1">
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-lg font-semibold text-gray-900">Stepped PCA Plot</h4>
-            <ChartBarIcon className="w-5 h-5 text-blue-600" />
+            <ChartBarIcon style={{ width: '12px', height: '12px' }} className="text-blue-600" />
           </div>
           
           <div className="h-full bg-white rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300 min-h-[200px]">
             <div className="text-center">
-              <ChartBarIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <ChartBarIcon style={{ width: '16px', height: '16px' }} className="text-gray-400 mx-auto mb-1" />
               <p className="text-gray-500 font-medium">Stepped PCA Visualization</p>
               <p className="text-sm text-gray-400 mt-1">Layers {windowLayers.join(' → ')}</p>
               <p className="text-xs text-gray-400 mt-1">
@@ -995,7 +1038,7 @@ function LatentSpaceTab({
 
       {/* Context-Sensitive Card integrated */}
       {selectedCard && (
-        <div className="mt-6 pt-6 border-t border-gray-200">
+        <div className="mt-4 pt-4 border-t border-gray-200">
           <ContextSensitiveCard 
             cardType={selectedCard.type}
             selectedData={selectedCard.data}
@@ -1024,7 +1067,10 @@ export default function ExperimentPage() {
   // Shared controls
   const [primaryAxis, setPrimaryAxis] = useState<ColorAxis>('sentiment')
   const [secondaryAxis, setSecondaryAxis] = useState<ColorAxis | undefined>('concreteness')
+  const [primaryGradient, setPrimaryGradient] = useState<GradientScheme>('red-blue')
+  const [secondaryGradient, setSecondaryGradient] = useState<GradientScheme>('yellow-cyan')
   const [windowLayers, setWindowLayers] = useState<number[]>([0, 1])
+  const [selectedRange, setSelectedRange] = useState<string>('range1')
   
   // Expert tab controls
   const [topRoutes, setTopRoutes] = useState(10)
@@ -1168,60 +1214,52 @@ export default function ExperimentPage() {
 
       <div className="flex h-[calc(100vh-88px)]">
         {/* Left Sidebar - Session, Tabs, Controls */}
-        <div className="w-72 bg-white shadow-sm border-r flex flex-col">
+        <div className="bg-white shadow-sm border-r flex flex-col sidebar-narrow">
           {/* Session Selector */}
-          <div className="p-6 border-b">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Session</h3>
+          <div className="p-2 border-b">
             <select
               value={selectedSession}
               onChange={(e) => setSelectedSession(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
-              <option value="">Select a completed session...</option>
+              <option value="">Select session...</option>
               {sessions.filter(s => s.state === 'completed').map((session) => (
                 <option key={session.session_id} value={session.session_id}>
                   {session.session_name}
                 </option>
               ))}
             </select>
-            {selectedSessionData && (
-              <p className="text-xs text-gray-500 mt-2">
-                {selectedSessionData.probe_count} probes • {formatDate(selectedSessionData.created_at)}
-              </p>
-            )}
           </div>
 
           {/* Tab Navigation */}
-          <div className="p-6 border-b">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Analysis Type</h3>
-            <div className="space-y-2">
+          <div className="p-3 border-b">
+            <h3 className="text-xs font-semibold text-gray-900 mb-2">Analysis Type</h3>
+            <div className="space-y-1">
               <button
                 onClick={() => setActiveTab('expert')}
-                className={`w-full flex items-center p-3 rounded-lg transition-colors ${
+                className={`w-full flex items-center px-3 py-2 rounded-md text-sm transition-colors ${
                   activeTab === 'expert'
                     ? 'bg-blue-50 text-blue-700 border border-blue-200'
                     : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <ChartBarIcon className="w-4 h-4 mr-2" />
-                <div className="text-left">
-                  <p className="font-medium text-sm">Expert Highways</p>
-                  <p className="text-xs opacity-75">MoE routing patterns</p>
+                <ChartBarIcon style={{ width: '10px', height: '10px' }} className="mr-1 flex-shrink-0" />
+                <div className="text-left min-w-0">
+                  <p className="font-medium text-xs">Expert Highways</p>
                 </div>
               </button>
               
               <button
                 onClick={() => setActiveTab('latent')}
-                className={`w-full flex items-center p-3 rounded-lg transition-colors ${
+                className={`w-full flex items-center px-3 py-2 rounded-md text-sm transition-colors ${
                   activeTab === 'latent'
                     ? 'bg-blue-50 text-blue-700 border border-blue-200'
                     : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <ChartBarIcon className="w-4 h-4 mr-2" />
-                <div className="text-left">
-                  <p className="font-medium text-sm">Latent Space</p>
-                  <p className="text-xs opacity-75">Cluster trajectories</p>
+                <ChartBarIcon style={{ width: '10px', height: '10px' }} className="mr-1 flex-shrink-0" />
+                <div className="text-left min-w-0">
+                  <p className="font-medium text-xs">Latent Space</p>
                 </div>
               </button>
             </div>
@@ -1229,17 +1267,23 @@ export default function ExperimentPage() {
 
           {/* Controls Section */}
           {selectedSession && (
-            <div className="p-6 border-b flex-1">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Controls</h3>
+            <div className="p-3 border-b flex-1">
+              <h3 className="text-xs font-semibold text-gray-900 mb-2">Controls</h3>
               
               <div className="space-y-4">
                 {/* Shared Controls */}
-                <ColorControls 
+                <div className="border-t border-gray-200 pt-3 mt-3">
+                  <ColorControls 
                   primaryAxis={primaryAxis}
                   secondaryAxis={secondaryAxis}
+                  primaryGradient={primaryGradient}
+                  secondaryGradient={secondaryGradient}
                   onPrimaryChange={setPrimaryAxis}
                   onSecondaryChange={setSecondaryAxis}
-                />
+                  onPrimaryGradientChange={setPrimaryGradient}
+                  onSecondaryGradientChange={setSecondaryGradient}
+                  />
+                </div>
 
                 {/* Balanced Sampling Controls */}
                 <div className="pt-4 border-t border-gray-200">
@@ -1430,8 +1474,8 @@ export default function ExperimentPage() {
 
           {/* Session Stats */}
           {selectedSessionData && (
-            <div className="p-6">
-              <h3 className="text-sm font-semibold text-gray-700 mb-3">Session Info</h3>
+            <div className="p-4">
+              <h3 className="text-xs font-semibold text-gray-700 mb-2">Session Info</h3>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-gray-600">Probes</span>
@@ -1451,7 +1495,7 @@ export default function ExperimentPage() {
           {selectedSession ? (
             <>
               {/* Middle Column - Word Lists */}
-              <div className="w-96 bg-gray-50 border-r p-6 space-y-6">
+              <div className="bg-gray-50 border-r p-4 space-y-4 word-panel-narrow">
                 {sessionDetails && (
                   <>
                     <WordFilterPanel
@@ -1472,7 +1516,7 @@ export default function ExperimentPage() {
 
               {/* Right Column - Visualization + LLM Analysis */}
               <div className="flex-1 flex flex-col">
-                <div className="flex-1 p-6">
+                <div className="flex-1 p-4">
                   {activeTab === 'expert' && (
                     <ExpertHighwaysTab 
                       sessionId={selectedSession}
@@ -1480,8 +1524,11 @@ export default function ExperimentPage() {
                       filterState={filterState}
                       primaryAxis={primaryAxis}
                       secondaryAxis={secondaryAxis}
+                      primaryGradient={primaryGradient}
+                      secondaryGradient={secondaryGradient}
                       topRoutes={topRoutes}
-                      windowLayers={windowLayers}
+                      selectedRange={selectedRange}
+                      onRangeChange={setSelectedRange}
                       showAllRoutes={showAllRoutes}
                     />
                   )}
@@ -1500,7 +1547,7 @@ export default function ExperimentPage() {
                 </div>
                 
                 {/* LLM Analysis Panel - Below Visualization */}
-                <div className="border-t bg-white p-6">
+                <div className="border-t bg-white p-4">
                   <LLMAnalysisPanel sessionId={selectedSession} analysisType={activeTab} />
                 </div>
               </div>
