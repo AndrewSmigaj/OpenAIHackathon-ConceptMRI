@@ -103,6 +103,8 @@ class SankeyLink(BaseModel):
     value: int
     probability: float
     route_signature: str
+    category_distribution: Dict[str, int]
+    token_count: int
 
 
 class TopRoute(BaseModel):

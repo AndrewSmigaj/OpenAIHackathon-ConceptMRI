@@ -26,6 +26,16 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
 }) => {
   const chartRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
+  const nodesRef = useRef(nodes);
+  const linksRef = useRef(links);
+  const onNodeClickRef = useRef(onNodeClick);
+  const onLinkClickRef = useRef(onLinkClick);
+
+  // Update refs when props change
+  nodesRef.current = nodes;
+  linksRef.current = links;
+  onNodeClickRef.current = onNodeClick;
+  onLinkClickRef.current = onLinkClick;
 
   useEffect(() => {
     if (!chartRef.current) return;
@@ -35,17 +45,17 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
 
     // Handle click events
     const handleClick = (params: any) => {
-      if (params.dataType === 'node' && onNodeClick) {
-        const node = nodes.find(n => n.id === params.data.id);
+      if (params.dataType === 'node' && onNodeClickRef.current) {
+        const node = nodesRef.current.find(n => n.id === params.data.id);
         if (node) {
-          onNodeClick(params.data.id, node);
+          onNodeClickRef.current(params.data.id, node);
         }
-      } else if (params.dataType === 'edge' && onLinkClick) {
-        const link = links.find(l => 
+      } else if (params.dataType === 'edge' && onLinkClickRef.current) {
+        const link = linksRef.current.find(l => 
           l.source === params.data.source && l.target === params.data.target
         );
         if (link) {
-          onLinkClick(link);
+          onLinkClickRef.current(link);
         }
       }
     };
@@ -63,7 +73,20 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
       window.removeEventListener('resize', handleResize);
       chartInstance.current?.dispose();
     };
-  }, [onNodeClick, onLinkClick]);
+  }, []);
+
+  // Resize chart when container dimensions might change
+  useEffect(() => {
+    const resizeChart = () => {
+      if (chartInstance.current) {
+        setTimeout(() => {
+          chartInstance.current?.resize();
+        }, 100);
+      }
+    };
+    
+    resizeChart();
+  }, [width, height]);
 
   // Update chart when data or colors change
   useEffect(() => {
@@ -86,9 +109,9 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     
     // Prepare link data with colors and traffic-based styling
     const sankeyLinks = links.map(link => {
-      const sourceNode = nodes.find(n => n.id === link.source);
-      const linkColor = sourceNode ? 
-        getNodeColor(sourceNode.category_distribution, primaryAxis, secondaryAxis) : '#5470c6';
+      // Use the route's own category distribution for coloring instead of source node
+      const linkColor = link.category_distribution && Object.keys(link.category_distribution).length > 0 ?
+        getNodeColor(link.category_distribution, primaryAxis, secondaryAxis) : '#5470c6';
       
       // Get traffic-based visual properties
       const { opacity, lineWidth } = getTrafficVisualProperties(link.value, maxLinkValue);

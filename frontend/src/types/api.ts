@@ -152,6 +152,8 @@ interface SankeyLink {
   value: number
   probability: number
   route_signature: string
+  category_distribution: Record<string, number>
+  token_count: number
 }
 
 interface TopRoute {

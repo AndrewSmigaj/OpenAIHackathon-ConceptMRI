@@ -409,7 +409,7 @@ class ExpertRouteAnalysisService:
                 })
                 node_index[node_name] = len(nodes) - 1
         
-        # Build enhanced links for ECharts
+        # Build enhanced links for ECharts with category distributions
         links = []
         for source in transitions:
             total_from_source = sum(transitions[source].values())
@@ -417,12 +417,39 @@ class ExpertRouteAnalysisService:
                 # Generate route signature for this link
                 route_signature = f"{source}→{target}"
                 
+                # Calculate category distribution for this specific route
+                route_category_counts = defaultdict(int)
+                route_token_count = 0
+                
+                # Find all tokens that use this specific route
+                for signature, route_info in routes.items():
+                    if signature == route_signature:
+                        for token_info in route_info["tokens"]:
+                            probe_id = token_info["probe_id"]
+                            token_record = token_lookup.get(probe_id)
+                            if token_record:
+                                target_text = token_record.target_text
+                                
+                                # Get categories for target token, filtered if config provided
+                                target_categories = manifest.target_category_assignments.get(target_text, [])
+                                
+                                # Apply same filtering as nodes
+                                if filter_config and "target_categories" in filter_config and filter_config["target_categories"]:
+                                    target_categories = [cat for cat in target_categories if cat in filter_config["target_categories"]]
+                                
+                                # Count categories for this route
+                                for category in target_categories:
+                                    route_category_counts[category] += 1
+                                    route_token_count += 1
+                
                 links.append({
                     "source": source,
                     "target": target,
                     "value": count,
                     "probability": count / total_from_source if total_from_source > 0 else 0,
-                    "route_signature": route_signature
+                    "route_signature": route_signature,
+                    "category_distribution": dict(route_category_counts),
+                    "token_count": route_token_count
                 })
         
         return {"nodes": nodes, "links": links}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import type { 
   SessionListItem, 
@@ -9,7 +9,8 @@ import type {
   SankeyLink
 } from '../types/api'
 import { apiClient } from '../api/client'
-import { FlaskIcon, ChartBarIcon } from '../components/icons/Icons'
+import { FlaskIcon, ChartBarIcon, SparklesIcon } from '../components/icons/Icons'
+import * as echarts from 'echarts'
 import WordFilterPanel, { type FilterState } from '../components/WordFilterPanel'
 import FilteredWordDisplay from '../components/FilteredWordDisplay'
 import SankeyChart from '../components/charts/SankeyChart'
@@ -130,6 +131,77 @@ function convertFilterState(
   return Object.keys(filterConfig).length > 0 ? filterConfig : undefined;
 }
 
+interface StatisticalAnalysis {
+  totalTokens: number
+  categoryStats: Array<{
+    category: string
+    count: number
+    percentage: number
+    expected: number
+    chiSquareContribution: number
+  }>
+  chiSquareStatistic: number
+  degreesOfFreedom: number
+  isSignificant: boolean
+  dominantCategory: string
+}
+
+function calculateChiSquare(distribution: Record<string, number>): StatisticalAnalysis {
+  const categories = Object.keys(distribution)
+  const counts = Object.values(distribution)
+  const totalTokens = counts.reduce((sum, count) => sum + count, 0)
+  
+  if (categories.length === 0 || totalTokens === 0) {
+    return {
+      totalTokens: 0,
+      categoryStats: [],
+      chiSquareStatistic: 0,
+      degreesOfFreedom: 0,
+      isSignificant: false,
+      dominantCategory: 'None'
+    }
+  }
+
+  // Expected frequency under null hypothesis (equal distribution)
+  const expectedPerCategory = totalTokens / categories.length
+  
+  // Calculate chi-square statistic
+  let chiSquareStatistic = 0
+  const categoryStats = categories.map((category, index) => {
+    const observed = counts[index]
+    const expected = expectedPerCategory
+    const contribution = Math.pow(observed - expected, 2) / expected
+    chiSquareStatistic += contribution
+    
+    return {
+      category,
+      count: observed,
+      percentage: (observed / totalTokens) * 100,
+      expected,
+      chiSquareContribution: contribution
+    }
+  })
+
+  const degreesOfFreedom = categories.length - 1
+  // Critical value for p < 0.05 with df degrees of freedom (simplified approximation)
+  const criticalValue = degreesOfFreedom === 1 ? 3.84 : (degreesOfFreedom === 2 ? 5.99 : 7.81)
+  const isSignificant = chiSquareStatistic > criticalValue
+
+  // Find dominant category
+  const dominantCategory = categoryStats.reduce((max, stat) => 
+    stat.count > max.count ? stat : max
+  ).category
+
+  return {
+    totalTokens,
+    categoryStats: categoryStats.sort((a, b) => b.count - a.count),
+    chiSquareStatistic,
+    degreesOfFreedom,
+    isSignificant,
+    dominantCategory
+  }
+}
+
 interface LLMAnalysisProps {
   sessionId: string
   selectedContext?: string
@@ -218,6 +290,115 @@ function LLMAnalysisPanel({ sessionId, selectedContext, analysisType }: LLMAnaly
 }
 
 function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardProps) {
+  const [activeTab, setActiveTab] = useState<'overview' | 'statistics' | 'examples'>('overview')
+  const pieChartRef = useRef<HTMLDivElement>(null)
+  const chartInstanceRef = useRef<echarts.ECharts | null>(null)
+  const [isGeneratingLabel, setIsGeneratingLabel] = useState(false)
+  const [customLabel, setCustomLabel] = useState<string>('')
+  
+  // Type-safe detection of rich data from Sankey clicks
+  const hasRichData = Boolean(selectedData?._fullData)
+  const isExpert = cardType === 'expert' || cardType === 'highway'
+  const isRoute = cardType === 'route' || cardType === 'highway'
+
+  // Safely extract category distribution for experts
+  const categoryDistribution = hasRichData && isExpert && selectedData?.category_distribution 
+    ? selectedData.category_distribution as Record<string, number>
+    : null
+
+  // Reset tab when selectedData changes
+  useEffect(() => {
+    setActiveTab('overview')
+    setCustomLabel('')
+  }, [selectedData])
+
+  // Initialize ECharts pie chart
+  useEffect(() => {
+    if (categoryDistribution && pieChartRef.current && activeTab === 'overview') {
+      // Dispose existing chart
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.dispose()
+        chartInstanceRef.current = null
+      }
+
+      try {
+        const chart = echarts.init(pieChartRef.current)
+        chartInstanceRef.current = chart
+        
+        const data = Object.entries(categoryDistribution)
+          .filter(([_, count]) => count > 0) // Only include categories with data
+          .map(([category, count]) => ({
+            name: category,
+            value: count
+          }))
+        
+        const option = {
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            textStyle: {
+              fontSize: 11
+            }
+          },
+          series: [{
+            name: 'Categories',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            center: ['65%', '50%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 4,
+              borderColor: '#fff',
+              borderWidth: 2
+            },
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 14,
+                fontWeight: 'bold'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: data,
+            color: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4']
+          }]
+        }
+        
+        chart.setOption(option)
+
+        // Handle window resize
+        const handleResize = () => chart.resize()
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+          window.removeEventListener('resize', handleResize)
+        }
+      } catch (error) {
+        console.error('Failed to initialize pie chart:', error)
+      }
+    }
+  }, [categoryDistribution, activeTab])
+
+  // Cleanup chart on unmount
+  useEffect(() => {
+    return () => {
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.dispose()
+        chartInstanceRef.current = null
+      }
+    }
+  }, [])
+
   if (!selectedData) {
     return (
       <div className="bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 p-8 text-center">
@@ -231,6 +412,19 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
   }
 
   const getCardTitle = () => {
+    if (hasRichData) {
+      switch (cardType) {
+        case 'expert': 
+          return `Expert ${selectedData.name || selectedData.expertId || 'E?'}`
+        case 'highway': 
+          return `Route ${selectedData.signature || 'L?E?→L?E?'}`
+        case 'cluster': 
+          return `Cluster ${selectedData.clusterId || 'C?'}`
+        case 'route': 
+          return `Route ${selectedData.signature || 'L?E?→L?E?'}`
+      }
+    }
+    // Fallback titles
     switch (cardType) {
       case 'expert': return `Expert ${selectedData.expertId || 'E?'}`
       case 'highway': return `Highway Route`
@@ -239,51 +433,257 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
     }
   }
 
+  // Calculate statistics for expert cards with rich data
+  const analysis = categoryDistribution ? calculateChiSquare(categoryDistribution) : null
+
+  const handleGenerateLabel = async () => {
+    setIsGeneratingLabel(true)
+    // TODO: Implement LLM labeling API call
+    setTimeout(() => {
+      setCustomLabel(`AI-generated label for ${getCardTitle()}`)
+      setIsGeneratingLabel(false)
+    }, 2000)
+  }
+
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">{getCardTitle()}</h3>
-        <ChartBarIcon className="w-5 h-5 text-blue-600" />
-      </div>
-      
-      <div className="space-y-4">
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-600">Population</span>
-          <span className="font-medium text-gray-900">{selectedData.population || 'Unknown'}</span>
+    <div className="bg-white rounded-xl shadow-md p-6 h-full flex flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900">{getCardTitle()}</h3>
+          {hasRichData && typeof selectedData.layer === 'number' && (
+            <p className="text-sm text-gray-500">Layer {selectedData.layer}</p>
+          )}
         </div>
-        
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-600">Coverage</span>
-          <span className="font-medium text-gray-900">{selectedData.coverage || '0'}%</span>
-        </div>
-        
-        {cardType === 'expert' && (
-          <div className="pt-4 border-t border-gray-200">
-            <span className="text-sm text-gray-600">Specialization</span>
-            <p className="text-gray-900 mt-1">{selectedData.specialization || 'Not analyzed'}</p>
-          </div>
-        )}
-        
-        {cardType === 'highway' && (
-          <div className="pt-4 border-t border-gray-200">
-            <span className="text-sm text-gray-600">Route Signature</span>
-            <p className="text-gray-900 font-mono text-sm mt-1">{selectedData.signature || 'L?E?→L?E?'}</p>
-          </div>
-        )}
-        
-        {(cardType === 'cluster' || cardType === 'route') && (
-          <div className="pt-4 border-t border-gray-200">
-            <span className="text-sm text-gray-600">Label</span>
-            <p className="text-gray-900 mt-1">{selectedData.label || 'Not labeled'}</p>
-          </div>
-        )}
-        
-        <div className="pt-4 border-t border-gray-200">
-          <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-            Export Cohort
+        <div className="flex items-center space-x-2">
+          <ChartBarIcon className="w-5 h-5 text-blue-600" />
+          <button
+            onClick={handleGenerateLabel}
+            disabled={isGeneratingLabel}
+            className="p-1 text-purple-600 hover:text-purple-700 disabled:text-gray-400 disabled:cursor-not-allowed"
+            title="Generate LLM Label"
+          >
+            <SparklesIcon className={`w-4 h-4 ${isGeneratingLabel ? 'animate-spin' : ''}`} />
           </button>
         </div>
       </div>
+
+      {/* Custom Label if available */}
+      {customLabel && (
+        <div className="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
+          <p className="text-sm font-medium text-purple-800">LLM Label:</p>
+          <p className="text-sm text-purple-700 mt-1">{customLabel}</p>
+        </div>
+      )}
+
+      {/* Enhanced content for rich data */}
+      {hasRichData ? (
+        <>
+          {/* Tabs */}
+          <div className="flex border-b border-gray-200 mb-4">
+            {[
+              { key: 'overview', label: 'Overview' },
+              { key: 'statistics', label: 'Statistics' },
+              { key: 'examples', label: 'Examples' }
+            ].map(tab => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key as any)}
+                className={`px-3 py-2 text-sm font-medium border-b-2 ${
+                  activeTab === tab.key
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab Content */}
+          <div className="flex-1 overflow-auto">
+            {activeTab === 'overview' && (
+              <div className="space-y-4">
+                {categoryDistribution && Object.keys(categoryDistribution).length > 0 && (
+                  <>
+                    {/* Pie Chart */}
+                    <div className="h-48">
+                      <div ref={pieChartRef} className="w-full h-full" />
+                    </div>
+
+                    {/* Key Statistics */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-gray-50 p-3 rounded-lg">
+                        <p className="text-xs text-gray-500">Total Tokens</p>
+                        <p className="text-lg font-semibold text-gray-900">
+                          {typeof selectedData.token_count === 'number' ? selectedData.token_count : 0}
+                        </p>
+                      </div>
+                      <div className="bg-gray-50 p-3 rounded-lg">
+                        <p className="text-xs text-gray-500">Coverage</p>
+                        <p className="text-lg font-semibold text-gray-900">
+                          {typeof selectedData.coverage === 'number' ? selectedData.coverage : 0}%
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {isRoute && (
+                  <div className="space-y-3">
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-xs text-gray-500">Flow Volume</p>
+                      <p className="text-lg font-semibold text-gray-900">
+                        {selectedData.value || selectedData.count || 0}
+                      </p>
+                    </div>
+                    {typeof selectedData.avg_confidence === 'number' && (
+                      <div className="bg-gray-50 p-3 rounded-lg">
+                        <p className="text-xs text-gray-500">Avg Confidence</p>
+                        <p className="text-lg font-semibold text-gray-900">
+                          {(selectedData.avg_confidence * 100).toFixed(1)}%
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Specialization */}
+                {selectedData.specialization && (
+                  <div className="pt-3 border-t border-gray-200">
+                    <p className="text-xs text-gray-500 mb-1">Specialization</p>
+                    <p className="text-sm text-gray-700">{selectedData.specialization}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'statistics' && analysis && (
+              <div className="space-y-4">
+                {/* Chi-Square Test */}
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h4 className="font-medium text-blue-900 mb-2">Chi-Square Analysis</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-blue-700">χ² statistic:</span>
+                      <span className="font-mono text-blue-900">{analysis.chiSquareStatistic.toFixed(3)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-700">Degrees of freedom:</span>
+                      <span className="font-mono text-blue-900">{analysis.degreesOfFreedom}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blue-700">Significant (p &lt; 0.05):</span>
+                      <span className={`font-medium ${analysis.isSignificant ? 'text-green-600' : 'text-red-600'}`}>
+                        {analysis.isSignificant ? 'Yes' : 'No'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Category Breakdown */}
+                <div>
+                  <h4 className="font-medium text-gray-900 mb-3">Category Breakdown</h4>
+                  <div className="space-y-2">
+                    {analysis.categoryStats.map(stat => (
+                      <div key={stat.category} className="bg-gray-50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-sm font-medium text-gray-900 capitalize">{stat.category}</span>
+                          <span className="text-sm text-gray-600">{stat.percentage.toFixed(1)}%</span>
+                        </div>
+                        <div className="flex justify-between text-xs text-gray-500">
+                          <span>Observed: {stat.count}</span>
+                          <span>Expected: {stat.expected.toFixed(1)}</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                          <div 
+                            className="bg-blue-500 h-2 rounded-full" 
+                            style={{ width: `${Math.min(stat.percentage, 100)}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'examples' && (
+              <div className="space-y-4">
+                <h4 className="font-medium text-gray-900">Examples</h4>
+                {isExpert && Array.isArray(selectedData.context_target_pairs) && selectedData.context_target_pairs.length > 0 ? (
+                  <div className="space-y-3">
+                    {selectedData.context_target_pairs.map((pair: any, index: number) => (
+                      <div key={index} className="bg-gray-50 p-3 rounded-lg">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <span className="text-sm font-medium text-gray-900">"{pair.context || 'N/A'}"</span>
+                          <span className="text-gray-400">→</span>
+                          <span className="text-xs text-gray-500">
+                            {typeof pair.target_count === 'number' ? pair.target_count : 0} targets
+                          </span>
+                        </div>
+                        {Array.isArray(pair.targets) && (
+                          <div className="flex flex-wrap gap-1">
+                            {pair.targets.slice(0, 8).map((target: string) => (
+                              <span key={target} className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                                {target}
+                              </span>
+                            ))}
+                            {pair.targets.length > 8 && (
+                              <span className="text-xs text-gray-500">+{pair.targets.length - 8} more</span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : isRoute && Array.isArray(selectedData.example_tokens) && selectedData.example_tokens.length > 0 ? (
+                  <div className="space-y-3">
+                    {selectedData.example_tokens.slice(0, 5).map((token: any, index: number) => (
+                      <div key={index} className="bg-gray-50 p-3 rounded-lg">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-sm font-medium text-gray-900">"{token.context || 'N/A'}"</span>
+                          <span className="text-gray-400">→</span>
+                          <span className="text-sm font-medium text-gray-900">"{token.target || 'N/A'}"</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-500">No examples available</p>
+                )}
+              </div>
+            )}
+          </div>
+        </>
+      ) : (
+        // Basic display for simple data
+        <div className="space-y-4">
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">Population</span>
+            <span className="font-medium text-gray-900">{selectedData.population || 'Unknown'}</span>
+          </div>
+          
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">Coverage</span>
+            <span className="font-medium text-gray-900">{selectedData.coverage || '0'}%</span>
+          </div>
+          
+          {selectedData.specialization && (
+            <div className="pt-4 border-t border-gray-200">
+              <span className="text-sm text-gray-600">Specialization</span>
+              <p className="text-gray-900 mt-1">{selectedData.specialization}</p>
+            </div>
+          )}
+          
+          {selectedData.signature && (
+            <div className="pt-4 border-t border-gray-200">
+              <span className="text-sm text-gray-600">Route Signature</span>
+              <p className="text-gray-900 font-mono text-sm mt-1">{selectedData.signature}</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -429,7 +829,7 @@ function ExpertHighwaysTab({
       </div>
       
       {/* Route Analysis Visualization */}
-      <div className="flex-1 bg-gray-50 rounded-lg min-h-[400px]">
+      <div className="bg-gray-50 rounded-lg" style={{ height: '500px' }}>
         {loading ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
@@ -457,19 +857,31 @@ function ExpertHighwaysTab({
               primaryAxis={primaryAxis}
               secondaryAxis={secondaryAxis}
               onNodeClick={(nodeId, nodeData) => {
+                // Pass the full rich SankeyNode data
                 handleSankeyClick('expert', {
+                  ...nodeData,  // Full SankeyNode data
+                  // Add computed fields for backward compatibility
                   expertId: nodeData.expert_id,
                   population: nodeData.token_count,
                   coverage: Math.round((nodeData.token_count / routeData.statistics.total_probes) * 100),
-                  specialization: `Layer ${nodeData.layer} specialist`,
-                  categories: nodeData.categories
+                  _fullData: nodeData,  // Mark this as rich data
+                  _totalProbes: routeData.statistics.total_probes
                 })
               }}
               onLinkClick={(linkData) => {
+                // Find the corresponding TopRoute data for richer information
+                const routeInfo = routeData.top_routes.find(r => r.signature === linkData.route_signature)
                 handleSankeyClick('route', {
+                  ...linkData,  // Full SankeyLink data
+                  // Add route info if available
+                  ...(routeInfo || {}),
+                  // Add computed fields for backward compatibility
                   signature: linkData.route_signature,
                   flow: linkData.value,
-                  coverage: Math.round((linkData.value / routeData.statistics.total_probes) * 100)
+                  coverage: Math.round((linkData.value / routeData.statistics.total_probes) * 100),
+                  _fullData: linkData,  // Mark this as rich data
+                  _routeInfo: routeInfo,  // Additional route statistics
+                  _totalProbes: routeData.statistics.total_probes
                 })
               }}
               width={700}
