@@ -4,6 +4,8 @@ import type { SessionDetailResponse } from '../types/api'
 export interface FilterState {
   contextCategories: Set<string>
   targetCategories: Set<string>
+  balanceCategories: boolean
+  maxWordsPerCategory: number
 }
 
 interface WordFilterPanelProps {
@@ -182,11 +184,15 @@ export default function WordFilterPanel({
                     onChange={() => handleContextToggle(category.name)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                   />
-                  <div className="ml-3 flex items-center">
-                    {/* TODO: Add color dot indicator */}
+                  <div className="ml-3 flex items-center justify-between w-full">
                     <span className="text-sm text-gray-700 capitalize">
                       {category.name} ({category.wordCount})
                     </span>
+                    {selectedFilters.balanceCategories && selectedFilters.contextCategories.has(category.name) && (
+                      <span className="text-xs text-blue-600 font-medium">
+                        → {Math.min(category.wordCount, selectedFilters.maxWordsPerCategory)} sampled
+                      </span>
+                    )}
                   </div>
                 </label>
               ))}
@@ -226,11 +232,15 @@ export default function WordFilterPanel({
                     onChange={() => handleTargetToggle(category.name)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                   />
-                  <div className="ml-3 flex items-center">
-                    {/* TODO: Add color dot indicator */}
+                  <div className="ml-3 flex items-center justify-between w-full">
                     <span className="text-sm text-gray-700 capitalize">
                       {category.name} ({category.wordCount})
                     </span>
+                    {selectedFilters.balanceCategories && selectedFilters.targetCategories.has(category.name) && (
+                      <span className="text-xs text-blue-600 font-medium">
+                        → {Math.min(category.wordCount, selectedFilters.maxWordsPerCategory)} sampled
+                      </span>
+                    )}
                   </div>
                 </label>
               ))}
@@ -267,6 +277,11 @@ export default function WordFilterPanel({
             {selectedFilters.targetCategories.size > 0 && (
               <p className="text-xs text-gray-500 mt-1">
                 Targets: {Array.from(selectedFilters.targetCategories).join(', ')}
+              </p>
+            )}
+            {selectedFilters.balanceCategories && (
+              <p className="text-xs text-blue-600 font-medium mt-2">
+                🎯 Balanced sampling: max {selectedFilters.maxWordsPerCategory} words per category
               </p>
             )}
           </div>

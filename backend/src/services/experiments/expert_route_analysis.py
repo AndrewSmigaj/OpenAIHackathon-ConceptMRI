@@ -53,11 +53,15 @@ class ExpertRouteAnalysisService:
         # Extract expert routes for target tokens in specified window
         routes = self._extract_target_routes(routing_records, token_records, window_layers)
         
-        # Build transition matrix and Sankey data
-        sankey_data = self._build_sankey_data(routes)
+        # Get top routes first
+        top_routes_data = self._analyze_top_routes(routes, top_n_routes)
         
-        # Get top routes with statistics
-        top_routes = self._analyze_top_routes(routes, top_n_routes)
+        # Filter routes to only top N for Sankey visualization
+        top_route_signatures = {route["signature"] for route in top_routes_data}
+        filtered_routes = {sig: routes[sig] for sig in top_route_signatures if sig in routes}
+        
+        # Build transition matrix and Sankey data with filtered routes
+        sankey_data = self._build_sankey_data(filtered_routes, token_records, manifest, filter_config)
         
         # Calculate overall statistics
         statistics = self._calculate_statistics(routes, routing_records, window_layers)
@@ -67,7 +71,7 @@ class ExpertRouteAnalysisService:
             "window_layers": window_layers,
             "nodes": sankey_data["nodes"],
             "links": sankey_data["links"],
-            "top_routes": top_routes,
+            "top_routes": top_routes_data,
             "statistics": statistics
         }
     
@@ -187,9 +191,13 @@ class ExpertRouteAnalysisService:
         filter_config: Dict[str, Any]
     ) -> Tuple[List[RoutingRecord], List[TokenRecord]]:
         """Apply category-based filtering to records."""
+        print(f"🔍 _apply_filters called with filter_config: {filter_config}")
+        
         if not manifest or not filter_config:
+            print("🔍 No filtering applied - returning all records")
             return routing_records, token_records
         
+        print(f"🔍 Starting filtering with {len(token_records)} token records")
         filtered_probe_ids = set()
         
         for token in token_records:
@@ -205,6 +213,16 @@ class ExpertRouteAnalysisService:
             if "target_categories" in filter_config and filter_config["target_categories"]:
                 target_cats = manifest.target_category_assignments.get(token.target_text, [])
                 if not any(cat in filter_config["target_categories"] for cat in target_cats):
+                    include = False
+            
+            # Check specific context words filter (NEW)
+            if "context_words" in filter_config and filter_config["context_words"]:
+                if token.context_text not in filter_config["context_words"]:
+                    include = False
+            
+            # Check specific target words filter (NEW)
+            if "target_words" in filter_config and filter_config["target_words"]:
+                if token.target_text not in filter_config["target_words"]:
                     include = False
             
             if include:
@@ -281,53 +299,157 @@ class ExpertRouteAnalysisService:
         
         return dict(routes)
     
-    def _build_sankey_data(self, routes: Dict[str, Dict]) -> Dict[str, Any]:
-        """Build Sankey diagram data from routes."""
-        # Count transitions
+    def _build_sankey_data(
+        self, 
+        routes: Dict[str, Dict],
+        token_records: List[TokenRecord],
+        manifest: CaptureManifest,
+        filter_config: Optional[Dict] = None
+    ) -> Dict[str, Any]:
+        """Build enhanced Sankey diagram data with category aggregation."""
+        # Count transitions and track token flows
         transitions = defaultdict(lambda: defaultdict(int))
         layer_experts = defaultdict(set)
+        expert_tokens = defaultdict(lambda: defaultdict(list))  # expert -> category -> tokens
+        expert_context_targets = defaultdict(lambda: defaultdict(set))  # expert -> context -> targets
+        
+        # Create token lookup
+        token_lookup = {t.probe_id: t for t in token_records}
         
         for signature, route_info in routes.items():
             parts = signature.split("→")
             
-            # Track all experts by layer
+            # Track all experts by layer and collect tokens for each expert
             for part in parts:
                 layer = int(part[1:part.index('E')])
                 expert = int(part[part.index('E')+1:])
                 layer_experts[layer].add(expert)
+                
+                # Collect tokens that flow through this expert
+                for token_info in route_info["tokens"]:
+                    probe_id = token_info["probe_id"]
+                    token_record = token_lookup.get(probe_id)
+                    if token_record:
+                        context = token_record.context_text
+                        target = token_record.target_text
+                        
+                        # Get categories for target token, filtered if config provided
+                        target_categories = manifest.target_category_assignments.get(target, [])
+                        
+                        # Filter categories based on filter_config if present
+                        if filter_config and "target_categories" in filter_config and filter_config["target_categories"]:
+                            target_categories = [cat for cat in target_categories if cat in filter_config["target_categories"]]
+                        
+                        # Store tokens by category for this expert
+                        for category in target_categories:
+                            expert_tokens[part][category].append({
+                                "context": context,
+                                "target": target,
+                                "probe_id": probe_id
+                            })
+                        
+                        # Track context-target pairs
+                        expert_context_targets[part][context].add(target)
             
             # Count transitions between consecutive parts
             for i in range(len(parts) - 1):
                 transitions[parts[i]][parts[i + 1]] += route_info["count"]
         
-        # Build nodes for ECharts
+        # Build enhanced nodes for ECharts
         nodes = []
         node_index = {}
         
         for layer in sorted(layer_experts.keys()):
             for expert in sorted(layer_experts[layer]):
                 node_name = f"L{layer}E{expert}"
+                
+                # Aggregate categories and calculate statistics
+                all_categories = set()
+                category_counts = defaultdict(int)
+                total_tokens = 0
+                
+                expert_key = node_name
+                if expert_key in expert_tokens:
+                    for category, tokens in expert_tokens[expert_key].items():
+                        all_categories.add(category)
+                        category_counts[category] = len(tokens)
+                        total_tokens += len(tokens)
+                
+                # Get most common categories (top 3)
+                top_categories = sorted(
+                    category_counts.items(), 
+                    key=lambda x: x[1], 
+                    reverse=True
+                )[:3]
+                dominant_categories = [cat for cat, count in top_categories if count > 0]
+                
+                # Generate specialization description
+                specialization = self._generate_specialization(dominant_categories, category_counts, total_tokens)
+                
+                # Build context-target pairs summary
+                context_target_pairs = []
+                if expert_key in expert_context_targets:
+                    for context, targets in expert_context_targets[expert_key].items():
+                        context_target_pairs.append({
+                            "context": context,
+                            "targets": sorted(list(targets))[:5],  # Limit to top 5
+                            "target_count": len(targets)
+                        })
+                
                 nodes.append({
                     "name": node_name,
+                    "id": node_name,
                     "layer": layer,
-                    "expert": expert
+                    "expert_id": expert,
+                    "token_count": total_tokens,
+                    "categories": dominant_categories,
+                    "category_distribution": dict(category_counts),
+                    "specialization": specialization,
+                    "context_target_pairs": context_target_pairs[:3]  # Limit for performance
                 })
                 node_index[node_name] = len(nodes) - 1
         
-        # Build links for ECharts
+        # Build enhanced links for ECharts
         links = []
         for source in transitions:
             total_from_source = sum(transitions[source].values())
             for target, count in transitions[source].items():
-                if source in node_index and target in node_index:
-                    links.append({
-                        "source": node_index[source],
-                        "target": node_index[target],
-                        "value": count,
-                        "probability": count / total_from_source if total_from_source > 0 else 0
-                    })
+                # Generate route signature for this link
+                route_signature = f"{source}→{target}"
+                
+                links.append({
+                    "source": source,
+                    "target": target,
+                    "value": count,
+                    "probability": count / total_from_source if total_from_source > 0 else 0,
+                    "route_signature": route_signature
+                })
         
         return {"nodes": nodes, "links": links}
+    
+    def _generate_specialization(
+        self, 
+        dominant_categories: List[str], 
+        category_counts: Dict[str, int], 
+        total_tokens: int
+    ) -> str:
+        """Generate human-readable specialization description for an expert."""
+        if not dominant_categories or total_tokens == 0:
+            return "No clear specialization"
+        
+        # Get percentages for top categories
+        top_category = dominant_categories[0]
+        top_percentage = (category_counts[top_category] / total_tokens) * 100
+        
+        if len(dominant_categories) == 1:
+            return f"Specializes in {top_category} ({top_percentage:.0f}%)"
+        elif len(dominant_categories) == 2:
+            second_category = dominant_categories[1] 
+            second_percentage = (category_counts[second_category] / total_tokens) * 100
+            return f"Handles {top_category} ({top_percentage:.0f}%) and {second_category} ({second_percentage:.0f}%)"
+        else:
+            # Three categories
+            return f"Processes {top_category} ({top_percentage:.0f}%) plus {len(dominant_categories)-1} other types"
     
     def _analyze_top_routes(
         self,

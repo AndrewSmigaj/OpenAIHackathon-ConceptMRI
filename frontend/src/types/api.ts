@@ -115,27 +115,43 @@ interface RouteStatistics {
   [key: string]: any // Allow additional backend fields
 }
 
+interface FilterConfig {
+  context_categories?: string[]
+  target_categories?: string[]
+  context_words?: string[]      // NEW: Specific context words  
+  target_words?: string[]       // NEW: Specific target words
+  max_per_category?: number     // NEW: For UI reference
+}
+
 interface AnalyzeRoutesRequest {
   session_id: string
   window_layers: number[]
-  filter_config?: {
-    context_categories?: string[]
-    target_categories?: string[]
-  }
+  filter_config?: FilterConfig
   top_n_routes: number
 }
 
 interface SankeyNode {
   name: string
+  id: string
   layer: number
-  expert: number
+  expert_id: number
+  token_count: number
+  categories: string[]
+  category_distribution: Record<string, number>
+  specialization: string
+  context_target_pairs: Array<{
+    context: string
+    targets: string[]
+    target_count: number
+  }>
 }
 
 interface SankeyLink {
-  source: number
-  target: number
+  source: string
+  target: string
   value: number
   probability: number
+  route_signature: string
 }
 
 interface TopRoute {
@@ -188,6 +204,7 @@ export type {
   SessionDetailResponse,
   TokenExample,
   RouteStatistics,
+  FilterConfig,
   AnalyzeRoutesRequest,
   RouteAnalysisResponse,
   SankeyNode,

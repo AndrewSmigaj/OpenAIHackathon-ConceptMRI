@@ -66,27 +66,43 @@ class SessionDetailResponse(BaseModel):
 
 
 # Experiment Analysis Schemas
+class FilterConfig(BaseModel):
+    """Configuration for filtering probes by categories and specific words."""
+    context_categories: Optional[List[str]] = None
+    target_categories: Optional[List[str]] = None
+    context_words: Optional[List[str]] = None  # NEW: Specific context words
+    target_words: Optional[List[str]] = None   # NEW: Specific target words
+    max_per_category: Optional[int] = None     # NEW: For UI reference
+
+
 class AnalyzeRoutesRequest(BaseModel):
     """Request to analyze expert routes for a session."""
     session_id: str
     window_layers: List[int]
-    filter_config: Optional[Dict[str, Any]] = None
+    filter_config: Optional[FilterConfig] = None
     top_n_routes: int = 20
 
 
 class SankeyNode(BaseModel):
-    """Sankey diagram node."""
+    """Sankey diagram node with enhanced data."""
     name: str
+    id: str
     layer: int
-    expert: int
+    expert_id: int
+    token_count: int
+    categories: List[str]
+    category_distribution: Dict[str, int]
+    specialization: str
+    context_target_pairs: List[Dict[str, Any]]
 
 
 class SankeyLink(BaseModel):
-    """Sankey diagram link."""
-    source: int
-    target: int
+    """Sankey diagram link with enhanced data."""
+    source: str
+    target: str
     value: int
     probability: float
+    route_signature: str
 
 
 class TopRoute(BaseModel):

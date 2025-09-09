@@ -4,19 +4,102 @@ import type {
   SessionListItem, 
   SessionDetailResponse, 
   RouteAnalysisResponse,
-  AnalyzeRoutesRequest 
+  AnalyzeRoutesRequest,
+  SankeyNode,
+  SankeyLink
 } from '../types/api'
 import { apiClient } from '../api/client'
 import { FlaskIcon, ChartBarIcon } from '../components/icons/Icons'
 import WordFilterPanel, { type FilterState } from '../components/WordFilterPanel'
 import FilteredWordDisplay from '../components/FilteredWordDisplay'
+import SankeyChart from '../components/charts/SankeyChart'
+import { getColorPreview, getAxisLabel, type ColorAxis } from '../utils/colorBlending'
+
+/**
+ * Sample words randomly from a category
+ */
+function sampleWordsFromCategory(words: string[], maxCount: number): string[] {
+  if (words.length <= maxCount) return [...words];
+  
+  // Fisher-Yates shuffle and take first N
+  const shuffled = [...words];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, maxCount);
+}
+
+/**
+ * Apply balanced sampling to get word lists per category
+ */
+function applyBalancedSampling(
+  sessionData: SessionDetailResponse, 
+  filterState: FilterState
+): { contextWords?: string[], targetWords?: string[] } {
+  console.log('🎯 applyBalancedSampling called:', {
+    balanceCategories: filterState.balanceCategories,
+    maxWordsPerCategory: filterState.maxWordsPerCategory,
+    selectedContextCategories: Array.from(filterState.contextCategories),
+    selectedTargetCategories: Array.from(filterState.targetCategories)
+  });
+
+  if (!filterState.balanceCategories || !sessionData) {
+    console.log('🎯 Not sampling - balanceCategories disabled or no sessionData');
+    return {};
+  }
+
+  const selectedContextCategories = Array.from(filterState.contextCategories);
+  const selectedTargetCategories = Array.from(filterState.targetCategories);
+  
+  // Sample context words
+  let contextWords: string[] = [];
+  if (selectedContextCategories.length > 0) {
+    selectedContextCategories.forEach(category => {
+      const wordsInCategory = Object.keys(sessionData.categories.contexts)
+        .filter(word => sessionData.categories.contexts[word].includes(category));
+      console.log(`🎯 Context category "${category}": ${wordsInCategory.length} words available`);
+      const sampledWords = sampleWordsFromCategory(wordsInCategory, filterState.maxWordsPerCategory);
+      console.log(`🎯 Context category "${category}": sampled ${sampledWords.length} words`);
+      contextWords.push(...sampledWords);
+    });
+  }
+  
+  // Sample target words
+  let targetWords: string[] = [];
+  if (selectedTargetCategories.length > 0) {
+    selectedTargetCategories.forEach(category => {
+      const wordsInCategory = Object.keys(sessionData.categories.targets)
+        .filter(word => sessionData.categories.targets[word].includes(category));
+      console.log(`🎯 Target category "${category}": ${wordsInCategory.length} words available`);
+      const sampledWords = sampleWordsFromCategory(wordsInCategory, filterState.maxWordsPerCategory);
+      console.log(`🎯 Target category "${category}": sampled ${sampledWords.length} words`);
+      targetWords.push(...sampledWords);
+    });
+  }
+
+  const result = {
+    contextWords: contextWords.length > 0 ? contextWords : undefined,
+    targetWords: targetWords.length > 0 ? targetWords : undefined
+  };
+  
+  console.log('🎯 applyBalancedSampling result:', {
+    contextWordsCount: result.contextWords?.length || 0,
+    targetWordsCount: result.targetWords?.length || 0
+  });
+
+  return result;
+}
 
 /**
  * Convert frontend FilterState to backend filter_config format.
  * Empty sets mean "include all" (no filtering), so we return undefined.
  * Non-empty sets mean "include words with ANY matching category".
  */
-function convertFilterState(filterState: FilterState): AnalyzeRoutesRequest['filter_config'] {
+function convertFilterState(
+  filterState: FilterState, 
+  sessionData?: SessionDetailResponse
+): AnalyzeRoutesRequest['filter_config'] {
   const filterConfig: NonNullable<AnalyzeRoutesRequest['filter_config']> = {};
   
   if (filterState.contextCategories.size > 0) {
@@ -25,6 +108,23 @@ function convertFilterState(filterState: FilterState): AnalyzeRoutesRequest['fil
   if (filterState.targetCategories.size > 0) {
     filterConfig.target_categories = Array.from(filterState.targetCategories);
   }
+
+  // Apply balanced sampling if enabled
+  if (filterState.balanceCategories && sessionData) {
+    console.log('🎯 convertFilterState: calling applyBalancedSampling');
+    const sampledWords = applyBalancedSampling(sessionData, filterState);
+    if (sampledWords.contextWords) {
+      filterConfig.context_words = sampledWords.contextWords;
+      console.log(`🎯 convertFilterState: added ${sampledWords.contextWords.length} context words`);
+    }
+    if (sampledWords.targetWords) {
+      filterConfig.target_words = sampledWords.targetWords;
+      console.log(`🎯 convertFilterState: added ${sampledWords.targetWords.length} target words`);
+    }
+    filterConfig.max_per_category = filterState.maxWordsPerCategory;
+  }
+
+  console.log('🎯 convertFilterState final result:', filterConfig);
 
   // Return undefined if no filters applied (empty object means include all)
   return Object.keys(filterConfig).length > 0 ? filterConfig : undefined;
@@ -188,24 +288,67 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
   )
 }
 
-function ColorControls({ colorScheme, onChange }: { colorScheme: string, onChange: (scheme: string) => void }) {
+interface ColorControlsProps {
+  primaryAxis: ColorAxis
+  secondaryAxis?: ColorAxis
+  onPrimaryChange: (axis: ColorAxis) => void
+  onSecondaryChange: (axis: ColorAxis | undefined) => void
+}
+
+function ColorControls({ primaryAxis, secondaryAxis, onPrimaryChange, onSecondaryChange }: ColorControlsProps) {
+  const colorPreview = getColorPreview(primaryAxis, secondaryAxis)
+  
   return (
     <div className="space-y-4">
       <h4 className="font-medium text-gray-900">Color Controls</h4>
+      
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Color Scheme
+          Primary Axis
         </label>
         <select
-          value={colorScheme}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          value={primaryAxis}
+          onChange={(e) => onPrimaryChange(e.target.value as ColorAxis)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         >
-          <option value="semantic">Semantic Category</option>
-          <option value="pos">POS Comparison</option>
-          <option value="embedding">Embedding Distance</option>
-          <option value="activation">Activation Magnitude</option>
+          <option value="sentiment">Sentiment</option>
+          <option value="concreteness">Concreteness</option>
+          <option value="pos">Part of Speech</option>
         </select>
+      </div>
+      
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Secondary Axis (Optional)
+        </label>
+        <select
+          value={secondaryAxis || ''}
+          onChange={(e) => onSecondaryChange(e.target.value ? e.target.value as ColorAxis : undefined)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="">None (Pure Colors)</option>
+          <option value="sentiment" disabled={primaryAxis === 'sentiment'}>Sentiment</option>
+          <option value="concreteness" disabled={primaryAxis === 'concreteness'}>Concreteness</option>
+          <option value="pos" disabled={primaryAxis === 'pos'}>Part of Speech</option>
+        </select>
+      </div>
+      
+      {/* Color Preview */}
+      <div className="pt-2 border-t border-gray-200">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Color Preview
+        </label>
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          {Object.entries(colorPreview).slice(0, 8).map(([label, color]) => (
+            <div key={label} className="flex items-center space-x-2">
+              <div 
+                className="w-4 h-4 rounded border border-gray-300" 
+                style={{ backgroundColor: color }}
+              />
+              <span className="text-gray-600 truncate">{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -215,16 +358,20 @@ function ExpertHighwaysTab({
   sessionId, 
   sessionData, 
   filterState,
-  colorScheme,
+  primaryAxis,
+  secondaryAxis,
   topRoutes,
-  windowLayers
+  windowLayers,
+  showAllRoutes
 }: { 
   sessionId: string
   sessionData: SessionDetailResponse | null
   filterState: FilterState
-  colorScheme: string
+  primaryAxis: ColorAxis
+  secondaryAxis?: ColorAxis
   topRoutes: number
   windowLayers: number[]
+  showAllRoutes: boolean
 }) {
   const [selectedCard, setSelectedCard] = useState<{ type: 'expert' | 'highway', data: any } | null>(null)
   const [routeData, setRouteData] = useState<RouteAnalysisResponse | null>(null)
@@ -246,8 +393,8 @@ function ExpertHighwaysTab({
         const request: AnalyzeRoutesRequest = {
           session_id: sessionId,
           window_layers: windowLayers,
-          filter_config: convertFilterState(filterState),
-          top_n_routes: topRoutes
+          filter_config: convertFilterState(filterState, sessionData),
+          top_n_routes: showAllRoutes ? 1000 : topRoutes // Use large number for "all"
         }
         
         const response = await apiClient.analyzeRoutes(request)
@@ -262,7 +409,7 @@ function ExpertHighwaysTab({
     }
 
     loadRoutes()
-  }, [sessionId, sessionData, filterState, windowLayers, topRoutes])
+  }, [sessionId, sessionData, filterState, windowLayers, topRoutes, showAllRoutes])
 
   const handleSankeyClick = (elementType: 'expert' | 'route', data: any) => {
     setSelectedCard({ 
@@ -303,21 +450,31 @@ function ExpertHighwaysTab({
           </div>
         ) : routeData ? (
           <div className="p-4 h-full">
-            {/* Basic Data Display with Real Statistics */}
-            <div className="bg-white rounded-lg border-2 border-dashed border-gray-300 h-full flex items-center justify-center cursor-pointer"
-                 onClick={() => handleSankeyClick('expert', { expertId: 'E14', population: 45, coverage: 23, specialization: 'Abstract concepts' })}>
-              <div className="text-center">
-                <ChartBarIcon className="w-16 h-16 text-blue-500 mx-auto mb-4" />
-                <p className="text-gray-900 font-medium text-lg">Expert Route Analysis Ready</p>
-                <p className="text-sm text-gray-600 mt-2">
-                  Found {routeData.statistics.total_routes} routes across {routeData.statistics.total_probes} probes
-                </p>
-                <p className="text-xs text-gray-500 mt-1">
-                  Layers {windowLayers.join('→')} • Coverage: {(routeData.statistics.routes_coverage * 100).toFixed(1)}%
-                </p>
-                <p className="text-xs text-blue-600 mt-2">Click to interact (Sankey visualization coming soon)</p>
-              </div>
-            </div>
+            {/* Real Sankey Visualization */}
+            <SankeyChart
+              nodes={routeData.nodes}
+              links={routeData.links}
+              primaryAxis={primaryAxis}
+              secondaryAxis={secondaryAxis}
+              onNodeClick={(nodeId, nodeData) => {
+                handleSankeyClick('expert', {
+                  expertId: nodeData.expert_id,
+                  population: nodeData.token_count,
+                  coverage: Math.round((nodeData.token_count / routeData.statistics.total_probes) * 100),
+                  specialization: `Layer ${nodeData.layer} specialist`,
+                  categories: nodeData.categories
+                })
+              }}
+              onLinkClick={(linkData) => {
+                handleSankeyClick('route', {
+                  signature: linkData.route_signature,
+                  flow: linkData.value,
+                  coverage: Math.round((linkData.value / routeData.statistics.total_probes) * 100)
+                })
+              }}
+              width={700}
+              height={400}
+            />
           </div>
         ) : (
           <div className="flex items-center justify-center h-full">
@@ -347,7 +504,8 @@ function LatentSpaceTab({
   sessionId, 
   sessionData, 
   filterState,
-  colorScheme,
+  primaryAxis,
+  secondaryAxis,
   windowLayers,
   layerClusterCounts,
   clusteringMethod
@@ -355,7 +513,8 @@ function LatentSpaceTab({
   sessionId: string
   sessionData: SessionDetailResponse | null
   filterState: FilterState
-  colorScheme: string
+  primaryAxis: ColorAxis
+  secondaryAxis?: ColorAxis
   windowLayers: number[]
   layerClusterCounts: {[key: number]: number}
   clusteringMethod: string
@@ -415,7 +574,7 @@ function LatentSpaceTab({
               <p className="text-gray-500 font-medium">Stepped PCA Visualization</p>
               <p className="text-sm text-gray-400 mt-1">Layers {windowLayers.join(' → ')}</p>
               <p className="text-xs text-gray-400 mt-1">
-                With paths • Color: {colorScheme}
+                {getAxisLabel(primaryAxis)}{secondaryAxis ? ` × ${getAxisLabel(secondaryAxis)}` : ''}
               </p>
             </div>
           </div>
@@ -445,15 +604,19 @@ export default function ExperimentPage() {
   const [error, setError] = useState<string | null>(null)
   const [filterState, setFilterState] = useState<FilterState>({
     contextCategories: new Set(),
-    targetCategories: new Set()
+    targetCategories: new Set(),
+    balanceCategories: false,
+    maxWordsPerCategory: 100
   })
 
   // Shared controls
-  const [colorScheme, setColorScheme] = useState('semantic')
+  const [primaryAxis, setPrimaryAxis] = useState<ColorAxis>('sentiment')
+  const [secondaryAxis, setSecondaryAxis] = useState<ColorAxis | undefined>('concreteness')
   const [windowLayers, setWindowLayers] = useState<number[]>([0, 1])
   
   // Expert tab controls
   const [topRoutes, setTopRoutes] = useState(10)
+  const [showAllRoutes, setShowAllRoutes] = useState(false)
   
   // Latent tab controls  
   const [layerClusterCounts, setLayerClusterCounts] = useState<{[key: number]: number}>({
@@ -659,18 +822,54 @@ export default function ExperimentPage() {
               
               <div className="space-y-4">
                 {/* Shared Controls */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Color Scheme</label>
-                  <select
-                    value={colorScheme}
-                    onChange={(e) => setColorScheme(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="semantic">Semantic Category</option>
-                    <option value="pos">POS Comparison</option>
-                    <option value="embedding">Embedding Distance</option>
-                    <option value="activation">Activation Magnitude</option>
-                  </select>
+                <ColorControls 
+                  primaryAxis={primaryAxis}
+                  secondaryAxis={secondaryAxis}
+                  onPrimaryChange={setPrimaryAxis}
+                  onSecondaryChange={setSecondaryAxis}
+                />
+
+                {/* Balanced Sampling Controls */}
+                <div className="pt-4 border-t border-gray-200">
+                  <h4 className="font-medium text-gray-900 mb-3">Balanced Sampling</h4>
+                  
+                  <div className="space-y-3">
+                    <label className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        checked={filterState.balanceCategories}
+                        onChange={(e) => setFilterState(prev => ({
+                          ...prev,
+                          balanceCategories: e.target.checked
+                        }))}
+                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      />
+                      <span className="text-sm font-medium text-gray-700">Balance Categories</span>
+                    </label>
+                    
+                    {filterState.balanceCategories && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Max Words per Category
+                        </label>
+                        <input
+                          type="number"
+                          value={filterState.maxWordsPerCategory}
+                          onChange={(e) => setFilterState(prev => ({
+                            ...prev,
+                            maxWordsPerCategory: parseInt(e.target.value) || 100
+                          }))}
+                          min="10"
+                          max="1000"
+                          step="10"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Randomly sample up to this many words per category
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div>
@@ -688,29 +887,85 @@ export default function ExperimentPage() {
                       <option value="1,2">Layers 1→2</option>
                       <option value="2,3">Layers 2→3</option>
                       <option value="3,4">Layers 3→4</option>
+                      <option value="4,5">Layers 4→5</option>
+                      <option value="5,6">Layers 5→6</option>
+                      <option value="6,7">Layers 6→7</option>
+                      <option value="7,8">Layers 7→8</option>
+                      <option value="8,9">Layers 8→9</option>
+                      <option value="9,10">Layers 9→10</option>
+                      <option value="10,11">Layers 10→11</option>
+                      <option value="11,12">Layers 11→12</option>
+                      <option value="12,13">Layers 12→13</option>
+                      <option value="13,14">Layers 13→14</option>
+                      <option value="14,15">Layers 14→15</option>
+                      <option value="15,16">Layers 15→16</option>
+                      <option value="16,17">Layers 16→17</option>
+                      <option value="17,18">Layers 17→18</option>
+                      <option value="18,19">Layers 18→19</option>
+                      <option value="19,20">Layers 19→20</option>
+                      <option value="20,21">Layers 20→21</option>
+                      <option value="21,22">Layers 21→22</option>
+                      <option value="22,23">Layers 22→23</option>
                     </optgroup>
                     <optgroup label="3-Layer Windows">
                       <option value="0,1,2">Layers 0→1→2</option>
                       <option value="1,2,3">Layers 1→2→3</option>
                       <option value="2,3,4">Layers 2→3→4</option>
                       <option value="3,4,5">Layers 3→4→5</option>
+                      <option value="4,5,6">Layers 4→5→6</option>
+                      <option value="5,6,7">Layers 5→6→7</option>
+                      <option value="6,7,8">Layers 6→7→8</option>
+                      <option value="7,8,9">Layers 7→8→9</option>
+                      <option value="8,9,10">Layers 8→9→10</option>
+                      <option value="9,10,11">Layers 9→10→11</option>
+                      <option value="10,11,12">Layers 10→11→12</option>
+                      <option value="11,12,13">Layers 11→12→13</option>
+                      <option value="12,13,14">Layers 12→13→14</option>
+                      <option value="13,14,15">Layers 13→14→15</option>
+                      <option value="14,15,16">Layers 14→15→16</option>
+                      <option value="15,16,17">Layers 15→16→17</option>
+                      <option value="16,17,18">Layers 16→17→18</option>
+                      <option value="17,18,19">Layers 17→18→19</option>
+                      <option value="18,19,20">Layers 18→19→20</option>
+                      <option value="19,20,21">Layers 19→20→21</option>
+                      <option value="20,21,22">Layers 20→21→22</option>
+                      <option value="21,22,23">Layers 21→22→23</option>
                     </optgroup>
                   </select>
                 </div>
 
                 {/* Expert Tab Controls */}
                 {activeTab === 'expert' && (
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Top Routes</label>
-                    <input
-                      type="number"
-                      value={topRoutes}
-                      onChange={(e) => setTopRoutes(parseInt(e.target.value))}
-                      min="5"
-                      max="50"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </div>
+                  <>
+                    <div>
+                      <label className="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2">
+                        <input
+                          type="checkbox"
+                          checked={showAllRoutes}
+                          onChange={(e) => setShowAllRoutes(e.target.checked)}
+                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        />
+                        <span>Show All Routes</span>
+                      </label>
+                      <p className="text-xs text-gray-500 mb-3">
+                        {showAllRoutes ? 'Displaying all available routes' : `Limited to top ${topRoutes} routes`}
+                      </p>
+                    </div>
+                    
+                    {!showAllRoutes && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Top Routes</label>
+                        <input
+                          type="number"
+                          value={topRoutes}
+                          onChange={(e) => setTopRoutes(parseInt(e.target.value))}
+                          min="5"
+                          max="100"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                      </div>
+                    )}
+                  </>
                 )}
 
                 {/* Latent Tab Controls */}
@@ -811,9 +1066,11 @@ export default function ExperimentPage() {
                       sessionId={selectedSession}
                       sessionData={sessionDetails}
                       filterState={filterState}
-                      colorScheme={colorScheme}
+                      primaryAxis={primaryAxis}
+                      secondaryAxis={secondaryAxis}
                       topRoutes={topRoutes}
                       windowLayers={windowLayers}
+                      showAllRoutes={showAllRoutes}
                     />
                   )}
                   {activeTab === 'latent' && (
@@ -821,7 +1078,8 @@ export default function ExperimentPage() {
                       sessionId={selectedSession}
                       sessionData={sessionDetails}
                       filterState={filterState}
-                      colorScheme={colorScheme}
+                      primaryAxis={primaryAxis}
+                      secondaryAxis={secondaryAxis}
                       windowLayers={windowLayers}
                       layerClusterCounts={layerClusterCounts}
                       clusteringMethod={clusteringMethod}

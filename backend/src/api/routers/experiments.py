@@ -38,10 +38,15 @@ async def analyze_expert_routes(
     }
     """
     try:
+        # Convert FilterConfig to dict if present
+        filter_config_dict = None
+        if request.filter_config:
+            filter_config_dict = request.filter_config.dict(exclude_none=True)
+        
         result = service.analyze_session_routes(
             session_id=request.session_id,
             window_layers=request.window_layers,
-            filter_config=request.filter_config,
+            filter_config=filter_config_dict,
             top_n_routes=request.top_n_routes
         )
         
