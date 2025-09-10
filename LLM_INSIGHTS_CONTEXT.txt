@@ -1,0 +1,692 @@
+LLM INSIGHTS PANEL - COMPLETE IMPLEMENTATION CONTEXT
+=======================================================
+
+## OVERVIEW
+Building LLM insights panel for Expert Analysis tab in ExperimentPage.tsx
+Goal: Automatically discover patterns in MoE expert routing (sentiment, POS, semantic clustering)
+Currently has placeholder implementation - need to replace with real LLM analysis
+
+## CURRENT ARCHITECTURE UNDERSTANDING
+
+### Frontend Structure:
+- ExperimentPage.tsx: Main experiment interface with Expert/Latent tabs
+- MultiSankeyView.tsx: Displays 6 Sankey charts in parallel, calls apiClient.analyzeRoutes()
+- LLMAnalysisPanel: Current placeholder (lines 286-360 in ExperimentPage.tsx)
+- ContextSensitiveCard: Shows expert details with statistical analysis
+
+### Backend API:
+- /api/experiments/analyze-routes: Returns RouteAnalysisResponse with nodes, links, statistics
+- Already calculates statistical significance (binomial/chi-square tests)
+- Data includes category distributions and context-target pairs
+
+### Available Data Structures:
+```typescript
+interface SankeyNode {
+  name: string
+  id: string  
+  layer: number
+  expert_id: number
+  token_count: number
+  categories: string[]
+  category_distribution: Record<string, number>  // KEY DATA
+  specialization: string
+  context_target_pairs: Array<{
+    context: string
+    targets: string[]
+    target_count: number
+  }>
+}
+
+interface SankeyLink {
+  source: string
+  target: string
+  value: number
+  probability: number
+  route_signature: string
+  category_distribution: Record<string, number>  // KEY DATA
+  token_count: number
+}
+
+interface RouteAnalysisResponse {
+  session_id: string
+  window_layers: number[]
+  nodes: SankeyNode[]
+  links: SankeyLink[]
+  top_routes: TopRoute[]
+  statistics: RouteStatistics
+}
+```
+
+## IMPLEMENTATION PLAN
+
+### 1. Backend Service (Python)
+File: /backend/src/services/experiments/llm_insights_service.py
+
+```python
+from typing import List, Dict, Any, Optional, Tuple
+import numpy as np
+from scipy import stats
+import json
+import logging
+from openai import AsyncOpenAI
+from anthropic import AsyncAnthropic
+
+class LLMInsightsService:
+    def __init__(self, data_lake_path: str):
+        self.data_lake_path = data_lake_path
+    
+    async def analyze_expert_specialization(
+        self, 
+        nodes: List[Dict[str, Any]],
+        api_key: str,
+        provider: str = "openai"
+    ) -> Dict[str, Any]:
+        """Analyze what each expert specializes in based on category distributions."""
+        insights = []
+        
+        for node in nodes:
+            dist = node.get("category_distribution", {})
+            if not dist:
+                continue
+                
+            # Calculate chi-square test
+            chi2, p_value = self._test_category_distribution(dist)
+            
+            # Only include significant patterns
+            if p_value < 0.05:
+                pattern = self._identify_pattern(dist)
+                insights.append({
+                    "expert": node["name"],
+                    "layer": node["layer"],
+                    "expert_id": node["expert_id"],
+                    "pattern": pattern,
+                    "confidence": 1 - p_value,
+                    "token_count": node.get("token_count", 0),
+                    "examples": node.get("context_target_pairs", [])[:5]
+                })
+        
+        # Generate LLM narrative
+        narrative = await self._generate_expert_narrative(insights, api_key, provider)
+        
+        return {
+            "insights": insights,
+            "narrative": narrative,
+            "total_experts": len(nodes),
+            "significant_patterns": len(insights)
+        }
+    
+    def _test_category_distribution(self, dist: Dict[str, int]) -> Tuple[float, float]:
+        """Chi-square test for uniform distribution."""
+        if not dist or len(dist) < 2:
+            return 0.0, 1.0
+        
+        observed = list(dist.values())
+        total = sum(observed)
+        if total == 0:
+            return 0.0, 1.0
+            
+        expected = [total / len(observed)] * len(observed)
+        chi2, p_value = stats.chisquare(observed, expected)
+        return float(chi2), float(p_value)
+    
+    def _identify_pattern(self, dist: Dict[str, int]) -> Dict[str, Any]:
+        """Identify the dominant pattern in a distribution."""
+        total = sum(dist.values())
+        if total == 0:
+            return {"type": "empty", "dominant": None}
+        
+        # Calculate percentages
+        percentages = {k: (v / total * 100) for k, v in dist.items()}
+        
+        # Find dominant category
+        dominant = max(percentages.items(), key=lambda x: x[1])
+        
+        # Determine pattern type
+        if dominant[1] > 70:
+            pattern_type = "highly_specialized"
+        elif dominant[1] > 50:
+            pattern_type = "specialized"
+        elif max(percentages.values()) - min(percentages.values()) < 10:
+            pattern_type = "generalist"
+        else:
+            pattern_type = "mixed"
+        
+        return {
+            "type": pattern_type,
+            "dominant": dominant[0],
+            "dominance": dominant[1],
+            "distribution": percentages
+        }
+    
+    async def _generate_expert_narrative(
+        self, 
+        insights: List[Dict],
+        api_key: str,
+        provider: str
+    ) -> str:
+        """Generate narrative using LLM."""
+        if not insights:
+            return "No significant expert specialization patterns found."
+        
+        prompt = f"""Analyze these expert routing patterns in a MoE neural network:
+
+{json.dumps(insights, indent=2)}
+
+Generate insights about:
+1. What types of concepts each expert has specialized in
+2. Why certain experts show strong category preferences  
+3. Interesting patterns or unexpected specializations
+4. Statistical significance of the patterns (confidence scores provided)
+
+Format as 3-4 clear, concise insights for researchers.
+Focus on actionable discoveries, not just descriptions."""
+
+        try:
+            if provider == "openai":
+                client = AsyncOpenAI(api_key=api_key)
+                response = await client.chat.completions.create(
+                    model="gpt-4",
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.7,
+                    max_tokens=500
+                )
+                return response.choices[0].message.content
+            else:  # anthropic
+                client = AsyncAnthropic(api_key=api_key)
+                response = await client.messages.create(
+                    model="claude-3-sonnet-20240229",
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=500
+                )
+                return response.content[0].text
+        except Exception as e:
+            logger.error(f"LLM API error: {e}")
+            return f"Error generating insights: {str(e)}"
+
+    async def discover_routing_patterns(
+        self,
+        nodes: List[Dict[str, Any]], 
+        links: List[Dict[str, Any]],
+        top_routes: List[Dict[str, Any]],
+        api_key: str,
+        provider: str
+    ) -> Dict[str, Any]:
+        """Discover routing patterns across all data."""
+        patterns = {
+            "sentiment_routing": self._analyze_sentiment_routing(nodes),
+            "pos_specialization": self._analyze_pos_routing(nodes),
+            "semantic_clustering": self._analyze_semantic_clusters(nodes),
+            "statistical_outliers": self._find_statistical_outliers(nodes)
+        }
+        
+        # Use LLM to generate insights about discovered patterns
+        narrative = await self._generate_pattern_insights(patterns, api_key, provider)
+        
+        return {
+            "patterns": patterns,
+            "narrative": narrative,
+            "statistics": {
+                "total_patterns": sum(1 for p in patterns.values() if p),
+                "nodes_analyzed": len(nodes),
+                "routes_analyzed": len(top_routes)
+            }
+        }
+    
+    def _analyze_sentiment_routing(self, nodes):
+        """Find sentiment-based routing patterns."""
+        positive_experts = []
+        negative_experts = []
+        
+        for node in nodes:
+            dist = node.get("category_distribution", {})
+            if "positive" in dist and "negative" in dist:
+                total = dist["positive"] + dist["negative"]
+                if total > 20:  # Minimum threshold
+                    ratio = dist["positive"] / (dist["negative"] + 1)
+                    if ratio > 3:  # 3:1 positive ratio
+                        positive_experts.append({
+                            "expert": node["name"],
+                            "positive_count": dist["positive"],
+                            "negative_count": dist["negative"],
+                            "ratio": ratio
+                        })
+                    elif ratio < 0.33:  # 1:3 negative ratio
+                        negative_experts.append({
+                            "expert": node["name"],
+                            "positive_count": dist["positive"],
+                            "negative_count": dist["negative"],
+                            "ratio": ratio
+                        })
+        
+        return {
+            "positive_specialists": positive_experts,
+            "negative_specialists": negative_experts,
+            "divergence_detected": len(positive_experts) > 0 or len(negative_experts) > 0
+        }
+
+    def _analyze_pos_routing(self, nodes):
+        """Find part-of-speech based routing patterns."""
+        pos_patterns = {}
+        
+        for node in nodes:
+            dist = node.get("category_distribution", {})
+            total = sum(dist.values())
+            if total == 0:
+                continue
+                
+            for pos in ["nouns", "verbs", "adjectives", "adverbs"]:
+                if pos in dist:
+                    concentration = dist[pos] / total
+                    if concentration > 0.6:  # 60% concentration
+                        if pos not in pos_patterns:
+                            pos_patterns[pos] = []
+                        pos_patterns[pos].append({
+                            "expert": node["name"],
+                            "concentration": concentration,
+                            "token_count": dist[pos],
+                            "total_tokens": total
+                        })
+        
+        return pos_patterns
+```
+
+### 2. API Endpoint (Python)
+Add to /backend/src/api/routers/experiments.py:
+
+```python
+from pydantic import BaseModel
+from typing import Literal
+
+class LLMInsightsRequest(BaseModel):
+    session_id: str
+    window_layers: List[int]
+    nodes: List[Dict[str, Any]]
+    links: List[Dict[str, Any]]  
+    top_routes: List[Dict[str, Any]]
+    insight_type: Literal["expert_specialization", "pattern_discovery", "comparative"]
+    api_key: str
+    provider: Literal["openai", "anthropic"] = "openai"
+
+class LLMInsightsResponse(BaseModel):
+    insights: List[Dict[str, Any]]
+    patterns: Optional[Dict[str, Any]]
+    narrative: str
+    statistics: Dict[str, Any]
+
+@router.post("/experiments/llm-insights", response_model=LLMInsightsResponse)
+async def generate_llm_insights(
+    request: LLMInsightsRequest,
+    service: LLMInsightsService = Depends(get_llm_insights_service)
+):
+    """Generate LLM insights from route analysis data."""
+    try:
+        if request.insight_type == "expert_specialization":
+            result = await service.analyze_expert_specialization(
+                nodes=request.nodes,
+                api_key=request.api_key,
+                provider=request.provider
+            )
+        elif request.insight_type == "pattern_discovery":
+            result = await service.discover_routing_patterns(
+                nodes=request.nodes,
+                links=request.links,
+                top_routes=request.top_routes,
+                api_key=request.api_key,
+                provider=request.provider
+            )
+        else:  # comparative
+            result = await service.generate_comparative_analysis(
+                nodes=request.nodes,
+                links=request.links,
+                api_key=request.api_key,
+                provider=request.provider
+            )
+        
+        return LLMInsightsResponse(
+            insights=result.get("insights", []),
+            patterns=result.get("patterns"),
+            narrative=result.get("narrative", ""),
+            statistics=result.get("statistics", {})
+        )
+        
+    except Exception as e:
+        logger.error(f"LLM insights generation failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Need dependency injection
+def get_llm_insights_service() -> LLMInsightsService:
+    return LLMInsightsService(data_lake_path=settings.DATA_LAKE_PATH)
+```
+
+### 3. Frontend Types (TypeScript)
+Add to /frontend/src/types/api.ts:
+
+```typescript
+interface LLMInsightsRequest {
+  session_id: string
+  window_layers: number[]
+  nodes: SankeyNode[]
+  links: SankeyLink[]
+  top_routes: TopRoute[]
+  insight_type: 'expert_specialization' | 'pattern_discovery' | 'comparative'
+  api_key: string
+  provider: 'openai' | 'anthropic'
+}
+
+interface LLMInsight {
+  expert: string
+  pattern: {
+    type: string
+    dominant: string
+    dominance: number
+    distribution: Record<string, number>
+  }
+  confidence: number
+  examples: Array<{
+    context: string
+    targets: string[]
+  }>
+}
+
+interface LLMInsightsResponse {
+  insights: LLMInsight[]
+  patterns?: {
+    sentiment_routing?: {
+      positive_specialists: Array<{expert: string, ratio: number}>
+      negative_specialists: Array<{expert: string, ratio: number}>
+      divergence_detected: boolean
+    }
+    pos_specialization?: Record<string, Array<{expert: string, concentration: number}>>
+    semantic_clustering?: any
+  }
+  narrative: string
+  statistics: {
+    total_experts: number
+    significant_patterns: number
+  }
+}
+```
+
+### 4. Frontend API Client (TypeScript)
+Add to /frontend/src/api/client.ts:
+
+```typescript
+async generateLLMInsights(request: LLMInsightsRequest): Promise<LLMInsightsResponse> {
+  return this.request<LLMInsightsResponse>('/experiments/llm-insights', {
+    method: 'POST',
+    body: JSON.stringify(request),
+  });
+}
+```
+
+### 5. Enhanced LLMAnalysisPanel (React/TypeScript)
+Replace placeholder in ExperimentPage.tsx:
+
+```typescript
+function LLMAnalysisPanel({ 
+  sessionId, 
+  routeData,
+  analysisType 
+}: {
+  sessionId: string
+  routeData: RouteAnalysisResponse | null
+  analysisType: 'expert' | 'latent'
+}) {
+  const [apiKey, setApiKey] = useState('')
+  const [provider, setProvider] = useState<'openai' | 'anthropic'>('openai')
+  const [insights, setInsights] = useState<LLMInsightsResponse | null>(null)
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const handleAnalyze = async () => {
+    if (!apiKey.trim()) {
+      setError('Please enter your API key')
+      return
+    }
+    
+    if (!routeData) {
+      setError('No route data available')
+      return
+    }
+    
+    setIsAnalyzing(true)
+    setError(null)
+    
+    try {
+      const response = await apiClient.generateLLMInsights({
+        session_id: sessionId,
+        window_layers: routeData.window_layers,
+        nodes: routeData.nodes,
+        links: routeData.links,
+        top_routes: routeData.top_routes,
+        insight_type: analysisType === 'expert' ? 'expert_specialization' : 'pattern_discovery',
+        api_key: apiKey,
+        provider: provider
+      })
+      
+      setInsights(response)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Analysis failed')
+    } finally {
+      setIsAnalyzing(false)
+    }
+  }
+
+  return (
+    <div className="bg-white rounded-xl shadow-md p-8">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="text-xl font-semibold text-gray-900">
+          LLM Analysis - {analysisType === 'expert' ? 'Expert Pathways' : 'Cluster Routes'}
+        </h3>
+        <FlaskIcon className="w-6 h-6 text-blue-600" />
+      </div>
+      
+      {!insights ? (
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              API Provider
+            </label>
+            <select
+              value={provider}
+              onChange={(e) => setProvider(e.target.value as 'openai' | 'anthropic')}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="openai">OpenAI (GPT-4)</option>
+              <option value="anthropic">Anthropic (Claude)</option>
+            </select>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              API Key
+            </label>
+            <input
+              type="password"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+              placeholder={provider === 'openai' ? 'sk-...' : 'sk-ant-...'}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p className="text-sm text-gray-500 mt-2">
+              Your key is not stored and only used for this analysis request
+            </p>
+          </div>
+          
+          {error && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-800 text-sm">{error}</p>
+            </div>
+          )}
+          
+          <button
+            onClick={handleAnalyze}
+            disabled={isAnalyzing || !apiKey.trim()}
+            className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors shadow-sm"
+          >
+            {isAnalyzing ? 'Analyzing...' : `Generate Analysis`}
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {/* Pattern Discovery Section */}
+          {insights.patterns && (
+            <div className="mb-4">
+              <h4 className="text-lg font-semibold text-gray-900 mb-3">Discovered Patterns</h4>
+              
+              {insights.patterns.sentiment_routing?.divergence_detected && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-3">
+                  <div className="flex items-center mb-2">
+                    <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded font-medium">
+                      Sentiment Divergence
+                    </span>
+                    <span className="ml-2 text-sm text-blue-600">Statistically Significant</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 mt-3">
+                    {insights.patterns.sentiment_routing.positive_specialists.length > 0 && (
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 mb-1">Positive Specialists:</p>
+                        {insights.patterns.sentiment_routing.positive_specialists.map((expert, i) => (
+                          <p key={i} className="text-xs text-gray-600">
+                            {expert.expert} (ratio: {expert.ratio.toFixed(1)}:1)
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                    {insights.patterns.sentiment_routing.negative_specialists.length > 0 && (
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 mb-1">Negative Specialists:</p>
+                        {insights.patterns.sentiment_routing.negative_specialists.map((expert, i) => (
+                          <p key={i} className="text-xs text-gray-600">
+                            {expert.expert} (ratio: 1:{(1/expert.ratio).toFixed(1)})
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              
+              {insights.patterns.pos_specialization && Object.keys(insights.patterns.pos_specialization).length > 0 && (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <span className="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded font-medium mb-3">
+                    POS Specialization
+                  </span>
+                  <div className="grid grid-cols-2 gap-4">
+                    {Object.entries(insights.patterns.pos_specialization).map(([pos, specialists]) => (
+                      <div key={pos}>
+                        <p className="text-sm font-medium text-gray-700 mb-1 capitalize">{pos} Specialists:</p>
+                        {specialists.slice(0, 3).map((expert, i) => (
+                          <p key={i} className="text-xs text-gray-600">
+                            {expert.expert} ({(expert.concentration * 100).toFixed(1)}%)
+                          </p>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+          
+          {/* Statistical Summary */}
+          <div className="bg-gray-50 rounded-lg p-4">
+            <h4 className="text-sm font-semibold text-gray-900 mb-2">Analysis Summary</h4>
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <p className="text-lg font-bold text-gray-900">{insights.statistics.total_experts || 0}</p>
+                <p className="text-xs text-gray-600">Experts Analyzed</p>
+              </div>
+              <div>
+                <p className="text-lg font-bold text-gray-900">{insights.statistics.significant_patterns || 0}</p>
+                <p className="text-xs text-gray-600">Significant Patterns</p>
+              </div>
+              <div>
+                <p className="text-lg font-bold text-gray-900">
+                  {insights.statistics.total_experts ? 
+                    Math.round((insights.statistics.significant_patterns / insights.statistics.total_experts) * 100) : 0}%
+                </p>
+                <p className="text-xs text-gray-600">Specialization Rate</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* LLM Narrative */}
+          <div>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">LLM Analysis</h4>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <p className="text-gray-800 leading-relaxed whitespace-pre-line">{insights.narrative}</p>
+            </div>
+          </div>
+          
+          <button
+            onClick={() => setInsights(null)}
+            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+          >
+            Generate New Analysis
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+## INTEGRATION STEPS
+
+### 1. Create Backend Service
+- Create `/backend/src/services/experiments/llm_insights_service.py`
+- Add statistical analysis methods
+- Implement pattern discovery algorithms
+- Add LLM client integration
+
+### 2. Add API Endpoint  
+- Add schemas to `/backend/src/api/schemas.py`
+- Add endpoint to `/backend/src/api/routers/experiments.py`
+- Add dependency injection for service
+
+### 3. Update Frontend
+- Add types to `/frontend/src/types/api.ts`
+- Add API method to `/frontend/src/api/client.ts`
+- Replace LLMAnalysisPanel in ExperimentPage.tsx
+
+### 4. Test Integration
+- Test with real route data from MultiSankeyView
+- Verify pattern discovery works
+- Test with user-provided OpenAI key
+
+## EXPECTED INSIGHTS TO DISCOVER
+
+### 1. Sentiment Routing Patterns:
+- "Expert L0E18 shows 87% specialization for positive sentiment (p < 0.001)"
+- "Negative sentiment routes through distinct pathway L0E5→L1E12→L2E7"
+
+### 2. POS Specialization:
+- "Nouns concentrate in experts L0E10-15 with 92% purity"
+- "Verbs show distributed routing across 12 experts"
+
+### 3. Semantic Coherence:
+- "Animal category shows 94% routing consistency through L0E7"
+- "Abstract concepts fragment across multiple pathways"
+
+## CURRENT TODO STATUS
+1. [completed] Understand current implementation  
+2. [completed] Design LLM insights API endpoints
+3. [in_progress] Create backend LLM insights service
+4. [pending] Add API endpoints for LLM insights
+5. [pending] Update frontend API client
+6. [pending] Implement LLMAnalysisPanel component
+7. [pending] Test LLM insights with real data
+
+## KEY FILES TO MODIFY
+- `/backend/src/services/experiments/llm_insights_service.py` (NEW)
+- `/backend/src/api/routers/experiments.py` (ADD ENDPOINT)
+- `/backend/src/api/schemas.py` (ADD TYPES)
+- `/frontend/src/types/api.ts` (ADD TYPES)
+- `/frontend/src/api/client.ts` (ADD METHOD)
+- `/frontend/src/pages/ExperimentPage.tsx` (REPLACE PANEL)
+
+## ENVIRONMENT SETUP
+- .env file already exists with OPENAI_API_KEY placeholder
+- User provides API key via frontend interface
+- Need to update .env file OR implement frontend-only key handling

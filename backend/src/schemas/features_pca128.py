@@ -13,11 +13,12 @@ from utils.parquet_utils import deserialize_array_from_parquet
 
 
 @dataclass
-class PCAFeatures:
+class PCAFeatureRecord:
     """128-dimensional PCA features per probe and layer."""
     
     probe_id: str              # Links to tokens and activation data
     layer: int                 # Layer number (0-23)
+    token_position: int        # Token position (0=context, 1=target)
     pca128: np.ndarray         # 128-dimensional PCA features
     
     def __post_init__(self):
@@ -29,7 +30,7 @@ class PCAFeatures:
         return self.pca128[:3]
 
     @classmethod
-    def from_parquet_dict(cls, data: dict) -> 'PCAFeatures':
+    def from_parquet_dict(cls, data: dict) -> 'PCAFeatureRecord':
         """Reconstruct from Parquet dictionary with numpy array deserialization."""
         # PCA128 is a 1D array, so dims are just the length
         pca128 = deserialize_array_from_parquet(data['pca128'], (len(data['pca128']),))
@@ -37,6 +38,7 @@ class PCAFeatures:
         return cls(
             probe_id=data['probe_id'],
             layer=data['layer'],
+            token_position=data['token_position'],
             pca128=pca128
         )
 
@@ -45,14 +47,16 @@ class PCAFeatures:
 FEATURES_PCA128_PARQUET_SCHEMA = {
     "probe_id": "string",
     "layer": "int32",
+    "token_position": "int32",
     "pca128": "list<float>"        # 128-dimensional features
 }
 
 
-def create_pca_features(probe_id: str, layer: int, pca128: np.ndarray) -> PCAFeatures:
+def create_pca_features(probe_id: str, layer: int, token_position: int, pca128: np.ndarray) -> PCAFeatureRecord:
     """Create PCA features record."""
-    return PCAFeatures(
+    return PCAFeatureRecord(
         probe_id=probe_id,
         layer=layer,
+        token_position=token_position,
         pca128=ensure_numpy_array(pca128)
     )

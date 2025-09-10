@@ -15,6 +15,8 @@ sys.path.insert(0, str(backend_src))
 
 from services.probes.integrated_capture_service import IntegratedCaptureService
 from services.experiments.expert_route_analysis import ExpertRouteAnalysisService
+from services.experiments.cluster_route_analysis import ClusterRouteAnalysisService
+from services.experiments.llm_insights_service import LLMInsightsService
 from utils.wordnet_mining import WordNetMiner
 
 
@@ -22,6 +24,8 @@ from utils.wordnet_mining import WordNetMiner
 _capture_service = None
 _wordnet_miner = None
 _route_analysis_service = None
+_cluster_analysis_service = None
+_llm_insights_service = None
 
 
 async def initialize_capture_service():
@@ -60,7 +64,7 @@ async def initialize_capture_service():
         _capture_service = IntegratedCaptureService(
             model=model,
             tokenizer=tokenizer,
-            layers_to_capture=[0, 1, 2],
+            layers_to_capture=list(range(24)),
             data_lake_path=str(data_lake_path),
             wordnet_miner=_wordnet_miner
         )
@@ -90,3 +94,27 @@ def get_route_analysis_service() -> ExpertRouteAnalysisService:
         _route_analysis_service = ExpertRouteAnalysisService(str(data_lake_path))
     
     return _route_analysis_service
+
+
+def get_cluster_analysis_service() -> ClusterRouteAnalysisService:
+    """Get the cluster analysis service (lazy initialization)."""
+    global _cluster_analysis_service
+    
+    if _cluster_analysis_service is None:
+        # Initialize with same data lake path as capture service
+        data_lake_path = project_root / "data" / "lake"
+        _cluster_analysis_service = ClusterRouteAnalysisService(str(data_lake_path))
+    
+    return _cluster_analysis_service
+
+
+def get_llm_insights_service() -> LLMInsightsService:
+    """Get the LLM insights service (lazy initialization)."""
+    global _llm_insights_service
+    
+    if _llm_insights_service is None:
+        # Initialize with same data lake path as capture service
+        data_lake_path = project_root / "data" / "lake"
+        _llm_insights_service = LLMInsightsService(str(data_lake_path))
+    
+    return _llm_insights_service
