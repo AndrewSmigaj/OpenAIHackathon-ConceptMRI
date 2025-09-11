@@ -152,6 +152,7 @@ interface SankeyNode {
   token_count: number
   categories: string[]
   category_distribution: Record<string, number>
+  axis_distributions?: Record<string, Record<string, number>>
   specialization: string
   context_target_pairs: Array<{
     context: string

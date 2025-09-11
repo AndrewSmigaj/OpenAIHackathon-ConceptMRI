@@ -15,6 +15,21 @@ from schemas.tokens import TokenRecord
 from schemas.capture_manifest import CaptureManifest
 
 
+# Simple category axis pairs for percentage calculations
+CATEGORY_AXES = {
+    "grammatical": ["nouns", "verbs"],
+    "sentiment": ["positive", "negative", "neutral"],
+    "abstraction": ["concrete", "abstract"],
+    "conceptual": ["temporal", "cognitive"],
+}
+
+# Reverse mapping for quick lookup
+CATEGORY_TO_AXIS = {}
+for axis_name, categories in CATEGORY_AXES.items():
+    for cat in categories:
+        CATEGORY_TO_AXIS[cat] = axis_name
+
+
 class ExpertRouteAnalysisService:
     """Service for analyzing expert routing patterns from probe captures."""
     
@@ -386,6 +401,16 @@ class ExpertRouteAnalysisService:
                 # Generate specialization description
                 specialization = self._generate_specialization(dominant_categories, category_counts, total_tokens)
                 
+                # Calculate axis-based distributions
+                axis_distributions = {}
+                for axis_name, axis_categories in CATEGORY_AXES.items():
+                    axis_counts = {cat: category_counts.get(cat, 0) for cat in axis_categories}
+                    axis_total = sum(axis_counts.values())
+                    if axis_total > 0:
+                        axis_percentages = {cat: (count/axis_total)*100 for cat, count in axis_counts.items() if count > 0}
+                        if axis_percentages:
+                            axis_distributions[axis_name] = axis_percentages
+                
                 # Build context-target pairs summary
                 context_target_pairs = []
                 if expert_key in expert_context_targets:
@@ -404,6 +429,7 @@ class ExpertRouteAnalysisService:
                     "token_count": total_tokens,
                     "categories": dominant_categories,
                     "category_distribution": dict(category_counts),
+                    "axis_distributions": axis_distributions,
                     "specialization": specialization,
                     "context_target_pairs": context_target_pairs[:3]  # Limit for performance
                 })
@@ -460,23 +486,45 @@ class ExpertRouteAnalysisService:
         category_counts: Dict[str, int], 
         total_tokens: int
     ) -> str:
-        """Generate human-readable specialization description for an expert."""
+        """Generate human-readable specialization description with axis-aware percentages."""
         if not dominant_categories or total_tokens == 0:
             return "No clear specialization"
         
-        # Get percentages for top categories
-        top_category = dominant_categories[0]
-        top_percentage = (category_counts[top_category] / total_tokens) * 100
+        # Group categories by axis for proper percentage calculation
+        axis_groups = defaultdict(lambda: {"categories": {}, "total": 0})
         
-        if len(dominant_categories) == 1:
-            return f"Specializes in {top_category} ({top_percentage:.0f}%)"
-        elif len(dominant_categories) == 2:
-            second_category = dominant_categories[1] 
-            second_percentage = (category_counts[second_category] / total_tokens) * 100
-            return f"Handles {top_category} ({top_percentage:.0f}%) and {second_category} ({second_percentage:.0f}%)"
-        else:
-            # Three categories
-            return f"Processes {top_category} ({top_percentage:.0f}%) plus {len(dominant_categories)-1} other types"
+        for category, count in category_counts.items():
+            if category in CATEGORY_TO_AXIS:
+                axis = CATEGORY_TO_AXIS[category]
+                axis_groups[axis]["categories"][category] = count
+                axis_groups[axis]["total"] += count
+        
+        # Build description parts for each axis
+        descriptions = []
+        
+        for axis_name in ["grammatical", "sentiment", "abstraction", "conceptual"]:
+            if axis_name not in axis_groups:
+                continue
+                
+            axis_data = axis_groups[axis_name]
+            if axis_data["total"] == 0:
+                continue
+            
+            # Get dominant category in this axis
+            dominant = max(axis_data["categories"].items(), key=lambda x: x[1])
+            percentage = (dominant[1] / axis_data["total"]) * 100
+            
+            # Only include if significant
+            if percentage > 60:
+                descriptions.append(f"{dominant[0]} ({percentage:.0f}%)")
+        
+        if not descriptions:
+            # Fall back to global percentages if no clear axis dominance
+            top_category = dominant_categories[0]
+            top_percentage = (category_counts[top_category] / total_tokens) * 100
+            return f"Mixed: {top_category} ({top_percentage:.0f}%)"
+        
+        return " & ".join(descriptions)
     
     def _analyze_top_routes(
         self,

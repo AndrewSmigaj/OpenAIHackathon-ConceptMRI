@@ -600,19 +600,40 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
                         <h4 className="font-medium text-gray-900 mb-3 text-sm">Category Distribution</h4>
                         <div className="space-y-3 max-h-60 overflow-y-auto">
                           {(() => {
-                            // Group categories by axes
+                            // Define category axes
+                            const categoryAxes = {
+                              'Grammatical': ['nouns', 'verbs'],
+                              'Sentiment': ['positive', 'negative', 'neutral'],
+                              'Abstraction': ['concrete', 'abstract'],
+                              'Conceptual': ['temporal', 'cognitive']
+                            }
+                            
+                            // Calculate axis-based percentages from existing category_distribution
+                            const axisDistributions = []
+                            
+                            for (const [axisName, axisCategories] of Object.entries(categoryAxes)) {
+                              const axisStats = analysis.categoryStats.filter(s => axisCategories.includes(s.category))
+                              if (axisStats.length > 0) {
+                                // Calculate total for this axis
+                                const axisTotal = axisStats.reduce((sum, stat) => sum + stat.count, 0)
+                                // Recalculate percentages within this axis
+                                const axisPercents = axisStats.map(stat => ({
+                                  ...stat,
+                                  percentage: axisTotal > 0 ? (stat.count / axisTotal) * 100 : 0
+                                }))
+                                axisDistributions.push({ name: axisName, stats: axisPercents })
+                              }
+                            }
+                            
+                            // Also check for any old-style categories
                             const posAxis = analysis.categoryStats.filter(s => ['content', 'function'].includes(s.category))
                             const complexityAxis = analysis.categoryStats.filter(s => ['simple', 'complex'].includes(s.category))
-                            const nounsAxis = analysis.categoryStats.filter(s => ['nouns', 'verbs', 'adjectives'].includes(s.category))
-                            const temporalAxis = analysis.categoryStats.filter(s => ['temporal', 'cognitive'].includes(s.category))
                             
-                            const axes = []
-                            if (posAxis.length > 0) axes.push({ name: 'POS', stats: posAxis })
-                            if (complexityAxis.length > 0) axes.push({ name: 'Complexity', stats: complexityAxis })
-                            if (nounsAxis.length > 0) axes.push({ name: 'Word Type', stats: nounsAxis })
-                            if (temporalAxis.length > 0) axes.push({ name: 'Temporal/Cognitive', stats: temporalAxis })
+                            // Add old-style categories if they exist
+                            if (posAxis.length > 0) axisDistributions.push({ name: 'POS', stats: posAxis })
+                            if (complexityAxis.length > 0) axisDistributions.push({ name: 'Complexity', stats: complexityAxis })
                             
-                            return axes.map(axis => (
+                            return axisDistributions.map(axis => (
                               <div key={axis.name} className="border border-gray-200 rounded-lg p-3">
                                 <h5 className="font-medium text-gray-800 mb-2 text-xs">{axis.name}</h5>
                                 <div className="space-y-2">

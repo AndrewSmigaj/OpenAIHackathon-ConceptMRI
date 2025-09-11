@@ -1,13 +1,14 @@
 # Concept MRI - Development Makefile
 
-.PHONY: help setup test run-api run-ui fmt typecheck clean data-sample
+.PHONY: help setup test run-api run-ui dev fmt typecheck clean data-sample
 
 help:
 	@echo "Available commands:"
 	@echo "  setup        - Set up development environment"
-	@echo "  test         - Run tests"
+	@echo "  dev          - Run both backend and frontend (requires 2 terminals)"
 	@echo "  run-api      - Start FastAPI backend"
 	@echo "  run-ui       - Start React frontend"
+	@echo "  test         - Run tests"
 	@echo "  fmt          - Format code with black"
 	@echo "  typecheck    - Run mypy type checking"
 	@echo "  lint         - Run ruff linting"
@@ -17,9 +18,19 @@ help:
 setup:
 	@echo "Setting up Python environment..."
 	pip install -r backend/requirements.txt
+	@echo "Setting up Frontend environment..."
+	cd frontend && npm install
 	@echo "Creating data directories..."
 	mkdir -p data/lake data/experiments data/models
-	@echo "Setup complete!"
+	@echo "Downloading NLTK data..."
+	python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')"
+	@echo "Setup complete! Don't forget to add your API keys to .env file"
+
+dev:
+	@echo "Starting both backend and frontend..."
+	@echo "Please run these commands in separate terminals:"
+	@echo "  Terminal 1: make run-api"
+	@echo "  Terminal 2: make run-ui"
 
 test:
 	@echo "Running tests..."
@@ -27,12 +38,11 @@ test:
 
 run-api:
 	@echo "Starting FastAPI backend..."
-	cd backend && uvicorn src.api.main:app --reload --port 8000
+	cd backend/src && python3 -m uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
 
 run-ui:
 	@echo "Starting React frontend..."
-	@echo "Frontend not yet implemented"
-	# cd frontend && npm run dev
+	cd frontend && npm run dev
 
 fmt:
 	@echo "Formatting Python code..."

@@ -17,6 +17,21 @@ from schemas.capture_manifest import CaptureManifest
 from schemas.features_pca128 import PCAFeatureRecord
 
 
+# Simple category axis pairs for percentage calculations
+CATEGORY_AXES = {
+    "grammatical": ["nouns", "verbs"],
+    "sentiment": ["positive", "negative", "neutral"],
+    "abstraction": ["concrete", "abstract"],
+    "conceptual": ["temporal", "cognitive"],
+}
+
+# Reverse mapping for quick lookup
+CATEGORY_TO_AXIS = {}
+for axis_name, categories in CATEGORY_AXES.items():
+    for cat in categories:
+        CATEGORY_TO_AXIS[cat] = axis_name
+
+
 class ClusterRouteAnalysisService:
     """Service for analyzing cluster routing patterns from PCA features."""
     

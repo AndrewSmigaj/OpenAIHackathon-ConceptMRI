@@ -87,6 +87,17 @@ class LLMInsightsService:
 
 You have been provided with complete routing data from {data_summary['total_windows']} consecutive layer transitions (windows).
 
+IMPORTANT - CATEGORY AXES:
+Categories are organized into opposing axes. When analyzing percentages, calculate within each axis:
+- Grammatical axis: nouns vs verbs (should sum to 100% within grammatical tokens)
+- Sentiment axis: positive vs negative vs neutral (should sum to 100% within sentiment tokens)
+- Abstraction axis: concrete vs abstract (should sum to 100% within abstraction tokens)
+- Conceptual axis: temporal vs cognitive (should sum to 100% within conceptual tokens)
+
+For example, if an expert has 60 nouns and 40 verbs, it's 60% nouns ON THE GRAMMATICAL AXIS.
+If it also has 30 positive and 10 negative tokens, it's 75% positive ON THE SENTIMENT AXIS.
+These are SEPARATE calculations - don't mix axes when computing percentages.
+
 ROUTING WINDOWS DATA:
 Each window contains:
 - nodes: Expert nodes with their category distributions and context-target pairs
@@ -100,7 +111,7 @@ COMPLETE DATA:
 USER'S ANALYSIS REQUEST:
 {user_prompt}
 
-Please analyze the expert routing patterns based on the user's request. Focus on discovering interesting patterns in how experts specialize in different categories, how routing patterns change across layers, and any semantic or linguistic insights you can derive from the context-target pairs and category distributions."""
+Please analyze the expert routing patterns based on the user's request. When discussing category distributions, be careful to calculate percentages within each axis separately. Focus on discovering interesting patterns in how experts specialize in different categories, how routing patterns change across layers, and any semantic or linguistic insights you can derive from the context-target pairs and category distributions."""
 
         try:
             if provider == "openai":
