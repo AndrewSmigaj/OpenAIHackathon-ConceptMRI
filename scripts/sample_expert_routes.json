@@ -1,0 +1,392 @@
+{
+  "session_id": "cd2361b6",
+  "top_routes": [
+    {
+      "signature": "L0E18\u2192L1E11\u2192L2E14",
+      "count": 4,
+      "coverage": 0.06666666666666667,
+      "avg_confidence": 0.08201953241352314,
+      "example_tokens": [
+        {
+          "context": "the",
+          "target": "delivery"
+        },
+        {
+          "context": "the",
+          "target": "disable"
+        },
+        {
+          "context": "the",
+          "target": "entity"
+        },
+        {
+          "context": "the",
+          "target": "modify"
+        }
+      ]
+    },
+    {
+      "signature": "L0E18\u2192L1E11\u2192L2E12",
+      "count": 4,
+      "coverage": 0.06666666666666667,
+      "avg_confidence": 0.07276787476198912,
+      "example_tokens": [
+        {
+          "context": "the",
+          "target": "refresh"
+        },
+        {
+          "context": "the",
+          "target": "arrival"
+        },
+        {
+          "context": "the",
+          "target": "implementation"
+        },
+        {
+          "context": "the",
+          "target": "interaction"
+        }
+      ]
+    },
+    {
+      "signature": "L0E11\u2192L1E28\u2192L2E12",
+      "count": 2,
+      "coverage": 0.03333333333333333,
+      "avg_confidence": 0.08178471876754513,
+      "example_tokens": [
+        {
+          "context": "the",
+          "target": "someone"
+        },
+        {
+          "context": "the",
+          "target": "feat"
+        }
+      ]
+    },
+    {
+      "signature": "L0E18\u2192L1E4\u2192L2E14",
+      "count": 2,
+      "coverage": 0.03333333333333333,
+      "avg_confidence": 0.07868517864063523,
+      "example_tokens": [
+        {
+          "context": "the",
+          "target": "receive"
+        },
+        {
+          "context": "the",
+          "target": "reduce"
+        }
+      ]
+    },
+    {
+      "signature": "L0E18\u2192L1E11\u2192L2E31",
+      "count": 2,
+      "coverage": 0.03333333333333333,
+      "avg_confidence": 0.10319972328074067,
+      "example_tokens": [
+        {
+          "context": "the",
+          "target": "achievement"
+        },
+        {
+          "context": "the",
+          "target": "emit"
+        }
+      ]
+    }
+  ],
+  "sankey_data": {
+    "nodes": [
+      {
+        "name": "L0E1",
+        "layer": 0,
+        "expert": 1
+      },
+      {
+        "name": "L0E2",
+        "layer": 0,
+        "expert": 2
+      },
+      {
+        "name": "L0E4",
+        "layer": 0,
+        "expert": 4
+      },
+      {
+        "name": "L0E5",
+        "layer": 0,
+        "expert": 5
+      },
+      {
+        "name": "L0E8",
+        "layer": 0,
+        "expert": 8
+      },
+      {
+        "name": "L0E9",
+        "layer": 0,
+        "expert": 9
+      },
+      {
+        "name": "L0E10",
+        "layer": 0,
+        "expert": 10
+      },
+      {
+        "name": "L0E11",
+        "layer": 0,
+        "expert": 11
+      },
+      {
+        "name": "L0E13",
+        "layer": 0,
+        "expert": 13
+      },
+      {
+        "name": "L0E14",
+        "layer": 0,
+        "expert": 14
+      },
+      {
+        "name": "L0E17",
+        "layer": 0,
+        "expert": 17
+      },
+      {
+        "name": "L0E18",
+        "layer": 0,
+        "expert": 18
+      },
+      {
+        "name": "L0E20",
+        "layer": 0,
+        "expert": 20
+      },
+      {
+        "name": "L0E26",
+        "layer": 0,
+        "expert": 26
+      },
+      {
+        "name": "L0E28",
+        "layer": 0,
+        "expert": 28
+      },
+      {
+        "name": "L1E0",
+        "layer": 1,
+        "expert": 0
+      },
+      {
+        "name": "L1E1",
+        "layer": 1,
+        "expert": 1
+      },
+      {
+        "name": "L1E3",
+        "layer": 1,
+        "expert": 3
+      },
+      {
+        "name": "L1E4",
+        "layer": 1,
+        "expert": 4
+      },
+      {
+        "name": "L1E8",
+        "layer": 1,
+        "expert": 8
+      }
+    ],
+    "links": [
+      {
+        "source": 14,
+        "target": 20,
+        "value": 1,
+        "probability": 0.3333333333333333
+      },
+      {
+        "source": 14,
+        "target": 26,
+        "value": 1,
+        "probability": 0.3333333333333333
+      },
+      {
+        "source": 14,
+        "target": 21,
+        "value": 1,
+        "probability": 0.3333333333333333
+      },
+      {
+        "source": 20,
+        "target": 34,
+        "value": 1,
+        "probability": 1.0
+      },
+      {
+        "source": 11,
+        "target": 21,
+        "value": 11,
+        "probability": 0.44
+      },
+      {
+        "source": 11,
+        "target": 18,
+        "value": 4,
+        "probability": 0.16
+      },
+      {
+        "source": 11,
+        "target": 16,
+        "value": 1,
+        "probability": 0.04
+      },
+      {
+        "source": 11,
+        "target": 26,
+        "value": 6,
+        "probability": 0.24
+      },
+      {
+        "source": 11,
+        "target": 19,
+        "value": 1,
+        "probability": 0.04
+      },
+      {
+        "source": 11,
+        "target": 23,
+        "value": 2,
+        "probability": 0.08
+      },
+      {
+        "source": 21,
+        "target": 34,
+        "value": 6,
+        "probability": 0.2857142857142857
+      },
+      {
+        "source": 21,
+        "target": 33,
+        "value": 6,
+        "probability": 0.2857142857142857
+      },
+      {
+        "source": 21,
+        "target": 38,
+        "value": 6,
+        "probability": 0.2857142857142857
+      },
+      {
+        "source": 21,
+        "target": 31,
+        "value": 1,
+        "probability": 0.047619047619047616
+      },
+      {
+        "source": 21,
+        "target": 30,
+        "value": 1,
+        "probability": 0.047619047619047616
+      },
+      {
+        "source": 21,
+        "target": 37,
+        "value": 1,
+        "probability": 0.047619047619047616
+      },
+      {
+        "source": 10,
+        "target": 21,
+        "value": 1,
+        "probability": 0.5
+      },
+      {
+        "source": 10,
+        "target": 26,
+        "value": 1,
+        "probability": 0.5
+      },
+      {
+        "source": 7,
+        "target": 25,
+        "value": 1,
+        "probability": 0.14285714285714285
+      },
+      {
+        "source": 7,
+        "target": 26,
+        "value": 3,
+        "probability": 0.42857142857142855
+      },
+      {
+        "source": 7,
+        "target": 23,
+        "value": 1,
+        "probability": 0.14285714285714285
+      },
+      {
+        "source": 7,
+        "target": 21,
+        "value": 2,
+        "probability": 0.2857142857142857
+      },
+      {
+        "source": 25,
+        "target": 34,
+        "value": 1,
+        "probability": 0.5
+      },
+      {
+        "source": 25,
+        "target": 30,
+        "value": 1,
+        "probability": 0.5
+      },
+      {
+        "source": 9,
+        "target": 22,
+        "value": 1,
+        "probability": 0.5
+      },
+      {
+        "source": 9,
+        "target": 21,
+        "value": 1,
+        "probability": 0.5
+      },
+      {
+        "source": 22,
+        "target": 32,
+        "value": 1,
+        "probability": 1.0
+      },
+      {
+        "source": 13,
+        "target": 28,
+        "value": 1,
+        "probability": 1.0
+      },
+      {
+        "source": 28,
+        "target": 38,
+        "value": 1,
+        "probability": 1.0
+      },
+      {
+        "source": 6,
+        "target": 17,
+        "value": 1,
+        "probability": 0.25
+      }
+    ]
+  },
+  "statistics": {
+    "total_routes": 48,
+    "unique_experts": 39,
+    "total_transitions": 64
+  }
+}

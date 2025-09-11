@@ -12,11 +12,21 @@ from api.dependencies import initialize_capture_service
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: Load model once
+    print("DEBUG: Entering lifespan function")
     print("🚀 Starting Concept MRI API - loading model...")
-    await initialize_capture_service()
-    print("✅ Model loaded successfully - API ready")
+    try:
+        print("DEBUG: About to call initialize_capture_service()")
+        await initialize_capture_service()
+        print("DEBUG: initialize_capture_service() completed successfully")
+        print("✅ Model loaded successfully - API ready")
+    except Exception as e:
+        print(f"DEBUG: Exception caught: {e}")
+        print(f"❌ Model loading failed: {e}")
+        print("✅ API started in limited mode")
+    print("DEBUG: About to yield")
     yield
     # Shutdown: cleanup if needed
+    print("DEBUG: Entering shutdown")
     print("🛑 Shutting down Concept MRI API")
 
 # Create FastAPI app

@@ -14,10 +14,16 @@
 # - Real activation data captured: 360 records with 2880-dimensional vectors
 # - All Parquet files written with substantial data (2MB+ activation files)
 # - Session state management and UI integration working properly
+# ✅ LATEST MILESTONE: Complete Visualization System with Gradient Selection!
+# - Interactive Sankey charts with ECharts integration
+# - 5 gradient schemes with primary/secondary axis selection
+# - MultiSankeyView component for 6-window parallel analysis
+# - 4 ColorAxis options including new action-content axis
+# - Complete Expert Highways tab with real-time visualization
 
 meta:
   project: "Concept MRI - OpenAI Hackathon"
-  version: "1.6"
+  version: "2.0"
   target_model: "gpt-oss-20b (OpenAI MoE)"
   model_details:
     - "1.8B total parameters (inspected: not 21B as initially assumed)"
@@ -32,7 +38,7 @@ meta:
     - "NEW: Multi-category word membership for rich context disambiguation demos"
     - "NEW: Complete FastAPI server with 5 working probes endpoints"
   timeline: "7 days"
-  updated: "2025-01-06"
+  updated: "2025-01-09"
   constraints:
     - "Two token inputs only"
     - "Several thousand words max"
@@ -707,8 +713,11 @@ frontend:
       - "frontend/src/pages/ExperimentPage.tsx - Complete experiment analysis interface with word filtering"
       - "frontend/src/components/WordFilterPanel.tsx - Category-based word filtering with checkboxes"
       - "frontend/src/components/FilteredWordDisplay.tsx - Display filtered words with their categories"
+      - "frontend/src/components/charts/SankeyChart.tsx - Interactive Sankey chart with gradient support and click handlers"
+      - "frontend/src/components/charts/MultiSankeyView.tsx - Multi-layer route analysis with 6 consecutive Sankey charts"
+      - "frontend/src/utils/colorBlending.ts - Comprehensive color system with 5 gradient schemes and action-content axis"
       - "frontend/tailwind.config.js - Vite-compatible configuration"
-      - "frontend/postcss.config.js - Fixed @tailwindcss/postcss plugin setup"
+      - "frontend/src/theme.css - Tailwind 4.x theme configuration"
 
   pages:
     workspace_page:
@@ -742,7 +751,7 @@ frontend:
       status: done
       priority: critical
       file: "frontend/src/pages/ExperimentPage.tsx"
-      description: "Complete analysis interface with session selector, word filtering, and dual-tab layout with interactive Sankey-driven cards"
+      description: "Complete analysis interface with session selector, word filtering, gradient selection, dual-tab layout with interactive Sankey-driven cards, and MultiSankeyView component"
       layout: |
         ExperimentPage Layout:
         ├── Left Sidebar (w-80):
@@ -837,6 +846,52 @@ frontend:
         - "Loading states and empty data handling"
         - "Integration with SessionDetailResponse category structure"
 
+    charts:
+      sankey_chart:
+        status: done
+        priority: critical
+        file: "frontend/src/components/charts/SankeyChart.tsx"
+        description: "Interactive ECharts Sankey visualization with gradient support, click handlers, and traffic-based styling"
+        features:
+          - "ECharts-based Sankey diagram with customizable width/height"
+          - "Support for 5 gradient schemes (red-blue, yellow-cyan, purple-green, orange-teal, pink-lime)"
+          - "Primary/secondary axis coloring with gradient blending"
+          - "Interactive node and link click handlers with data passing"
+          - "Traffic-based visual properties (opacity and line width scaling)"
+          - "Comprehensive tooltips showing node and route information"
+          - "Real-time chart resizing and proper cleanup on unmount"
+
+      multi_sankey_view:
+        status: done
+        priority: critical
+        file: "frontend/src/components/charts/MultiSankeyView.tsx"
+        description: "Multi-layer route analysis displaying 6 consecutive 2-layer Sankey charts with range selection"
+        features:
+          - "4 layer ranges covering layers 0-23 with 6 consecutive 2-layer windows each"
+          - "Range selector dropdown (Layers 0-5, 5-11, 11-17, 17-23)"
+          - "Parallel API loading for all 6 windows in selected range"
+          - "Individual loading/error states per window with proper error handling"
+          - "Real-time statistics display (route count, total probes per window)"
+          - "Grid layout (6 columns) with compact chart sizing (180x260px)"
+          - "Click handler forwarding to parent components with enhanced data"
+          - "Filter state integration with convertFilterState helper function"
+
+    utils:
+      color_blending:
+        status: done
+        priority: critical
+        file: "frontend/src/utils/colorBlending.ts"
+        description: "Comprehensive color system with additive RGB blending, 5 gradient schemes, and 4 categorical axes"
+        features:
+          - "4 ColorAxis options: sentiment, concreteness, pos, action-content"
+          - "5 GradientScheme options with distinct RGB color pairs"
+          - "Category-based position calculation (-1 to +1 mapping)"
+          - "Additive RGB color blending for dual-axis visualization"
+          - "Traffic-based visual properties (opacity/lineWidth scaling)"
+          - "Backwards compatibility wrappers for existing code"
+          - "Color preview generation for UI color scheme selection"
+          - "Hex color conversion for ECharts integration"
+
     new_probe_dialog:
       status: done
       priority: critical
@@ -896,7 +951,7 @@ frontend:
       status: done
       priority: critical
       file: "frontend/src/pages/ExperimentPage.tsx"
-      description: "Expert route analysis with API integration, flexible window support, and real-time statistics - integrated into ExperimentPage"
+      description: "Expert route analysis with complete visualization system, gradient selection, and interactive Sankey charts"
       features:
         - name: "Expert Routes API Integration"
           status: done
@@ -908,23 +963,23 @@ frontend:
           status: done  
           notes: "Live display of route counts, probe coverage, and window analysis with dynamic updates"
         - name: "Expert Routes Visualization"
-          status: todo
-          notes: "ECharts Sankey component to replace current placeholder (data integration complete)"
-        - name: "Clickable Route Interaction"
-          status: todo
-          notes: "Click route → show cohort for that route in details panel"
-        - name: "Clickable Expert Interaction" 
-          status: todo
-          notes: "Click expert → show description of tokens/contexts it handles"
-        - name: "Multiple Context Support"
-          status: todo
-          notes: "Select multiple contexts to show comparative route sets"
+          status: done
+          notes: "Complete ECharts Sankey visualization with MultiSankeyView for 6-window analysis"
+        - name: "Gradient Selection System"
+          status: done
+          notes: "5 gradient schemes with primary/secondary gradient dropdowns for customizable visualization"
+        - name: "ColorAxis Selection"
+          status: done
+          notes: "4 axis options (sentiment, concreteness, pos, action-content) with category-based coloring"
+        - name: "Interactive Click Handlers"
+          status: done
+          notes: "Complete click handling for nodes and links with data forwarding to parent components"
         - name: "Word Category Filtering Integration"
-          status: todo
-          notes: "Integrate WordFilterPanel in left sidebar for filtering context-target pairs"
-        - name: "Blended Color Visualization"
-          status: todo
-          notes: "Apply blended coloring to Sankey visualization based on filtered target token categories"
+          status: done
+          notes: "WordFilterPanel fully integrated in left sidebar with real-time filter state updates"
+        - name: "Traffic-based Visual Properties"
+          status: done
+          notes: "Logarithmic scaling for link opacity and width based on traffic volume"
 
     # TAB 2: Latent Space - Expert output analysis with clustering and PCA
     latent_space_tab:

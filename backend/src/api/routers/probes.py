@@ -79,6 +79,9 @@ async def execute_probe_session(
         )
         
     except Exception as e:
+        import traceback
+        logger.error(f"💥 Failed to execute session {session_id}: {type(e).__name__}: {str(e)}")
+        logger.error(f"🔍 Execution error traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=f"Failed to execute session: {str(e)}")
 
 

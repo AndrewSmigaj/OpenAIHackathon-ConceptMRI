@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import SankeyChart from './SankeyChart'
-import type { RouteAnalysisResponse } from '../../types/api'
+import type { RouteAnalysisResponse, ClusteringConfig } from '../../types/api'
 import type { ColorAxis, GradientScheme } from '../../utils/colorBlending'
 import type { FilterState } from '../WordFilterPanel'
 import { apiClient } from '../../api/client'
+import { LAYER_RANGES } from '../../constants/layerRanges'
 
 interface MultiSankeyViewProps {
   sessionId: string
@@ -19,55 +20,14 @@ interface MultiSankeyViewProps {
   onRangeChange?: (range: string) => void
   onNodeClick?: (nodeData: any) => void
   onLinkClick?: (linkData: any) => void
+  onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
+  // Clustering mode support
+  mode?: 'expert' | 'cluster'
+  clusteringConfig?: ClusteringConfig
+  manualTrigger?: boolean  // If true, only loads when runAnalysis is called externally
+  onAnalysisReady?: (runAnalysis: () => void) => void  // Callback to provide runAnalysis function to parent
 }
 
-// Define 4 layer ranges, each containing 6 consecutive 2-layer windows
-const LAYER_RANGES = {
-  'range1': {
-    label: 'Layers 0-5',
-    windows: [
-      { id: '0-1', layers: [0, 1], label: '0→1' },
-      { id: '1-2', layers: [1, 2], label: '1→2' },
-      { id: '2-3', layers: [2, 3], label: '2→3' },
-      { id: '3-4', layers: [3, 4], label: '3→4' },
-      { id: '4-5', layers: [4, 5], label: '4→5' },
-      { id: '5-6', layers: [5, 6], label: '5→6' }
-    ]
-  },
-  'range2': {
-    label: 'Layers 5-11', 
-    windows: [
-      { id: '5-6', layers: [5, 6], label: '5→6' },
-      { id: '6-7', layers: [6, 7], label: '6→7' },
-      { id: '7-8', layers: [7, 8], label: '7→8' },
-      { id: '8-9', layers: [8, 9], label: '8→9' },
-      { id: '9-10', layers: [9, 10], label: '9→10' },
-      { id: '10-11', layers: [10, 11], label: '10→11' }
-    ]
-  },
-  'range3': {
-    label: 'Layers 11-17',
-    windows: [
-      { id: '11-12', layers: [11, 12], label: '11→12' },
-      { id: '12-13', layers: [12, 13], label: '12→13' },
-      { id: '13-14', layers: [13, 14], label: '13→14' },
-      { id: '14-15', layers: [14, 15], label: '14→15' },
-      { id: '15-16', layers: [15, 16], label: '15→16' },
-      { id: '16-17', layers: [16, 17], label: '16→17' }
-    ]
-  },
-  'range4': {
-    label: 'Layers 17-23',
-    windows: [
-      { id: '17-18', layers: [17, 18], label: '17→18' },
-      { id: '18-19', layers: [18, 19], label: '18→19' },
-      { id: '19-20', layers: [19, 20], label: '19→20' },
-      { id: '20-21', layers: [20, 21], label: '20→21' },
-      { id: '21-22', layers: [21, 22], label: '21→22' },
-      { id: '22-23', layers: [22, 23], label: '22→23' }
-    ]
-  }
-}
 
 export default function MultiSankeyView({
   sessionId,
@@ -82,7 +42,12 @@ export default function MultiSankeyView({
   selectedRange = 'range1',
   onRangeChange,
   onNodeClick,
-  onLinkClick
+  onLinkClick,
+  onRouteDataLoaded,
+  mode = 'expert',
+  clusteringConfig,
+  manualTrigger = false,
+  onAnalysisReady
 }: MultiSankeyViewProps) {
   const [routeDataMap, setRouteDataMap] = useState<Record<string, RouteAnalysisResponse | null>>({})
   const [loadingMap, setLoadingMap] = useState<Record<string, boolean>>({})
@@ -90,55 +55,75 @@ export default function MultiSankeyView({
 
   const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
 
-  // Load data for the 6 windows in the selected range
-  useEffect(() => {
+  // Loading function that can be called manually or automatically
+  const loadAllWindows = useCallback(async () => {
     if (!sessionId || !sessionData || !currentRange) {
       setRouteDataMap({})
       return
     }
+    const newLoadingMap: Record<string, boolean> = {}
+    const newRouteDataMap: Record<string, RouteAnalysisResponse | null> = {}
+    const newErrorMap: Record<string, string | null> = {}
 
-    const loadAllWindows = async () => {
-      const newLoadingMap: Record<string, boolean> = {}
-      const newRouteDataMap: Record<string, RouteAnalysisResponse | null> = {}
-      const newErrorMap: Record<string, string | null> = {}
+    // Set all to loading
+    currentRange.windows.forEach(window => {
+      newLoadingMap[window.id] = true
+    })
+    setLoadingMap(newLoadingMap)
 
-      // Set all to loading
-      currentRange.windows.forEach(window => {
-        newLoadingMap[window.id] = true
-      })
-      setLoadingMap(newLoadingMap)
-
-      // Load each window in parallel
-      const promises = currentRange.windows.map(async (window) => {
-        try {
-          const filterConfig = convertFilterState(filterState, sessionData)
-          const request = {
-            session_id: sessionId,
-            window_layers: window.layers,
-            filter_config: filterConfig,
-            top_n_routes: showAllRoutes ? 1000 : topRoutes
-          }
-          const response = await apiClient.analyzeRoutes(request)
-          newRouteDataMap[window.id] = response
-          newErrorMap[window.id] = null
-        } catch (err) {
-          console.error(`Failed to load routes for ${window.id}:`, err)
-          newErrorMap[window.id] = err instanceof Error ? err.message : 'Failed to load'
-          newRouteDataMap[window.id] = null
-        } finally {
-          newLoadingMap[window.id] = false
+    // Load each window in parallel
+    const promises = currentRange.windows.map(async (window) => {
+      try {
+        const filterConfig = convertFilterState(filterState, sessionData)
+        const request = {
+          session_id: sessionId,
+          window_layers: window.layers,
+          filter_config: filterConfig,
+          top_n_routes: showAllRoutes ? 1000 : topRoutes
         }
-      })
+        const response = mode === 'cluster' && clusteringConfig
+          ? await apiClient.analyzeClusterRoutes({
+              ...request,
+              clustering_config: clusteringConfig
+            })
+          : await apiClient.analyzeRoutes(request)
+        newRouteDataMap[window.id] = response
+        newErrorMap[window.id] = null
+      } catch (err) {
+        console.error(`Failed to load routes for ${window.id}:`, err)
+        newErrorMap[window.id] = err instanceof Error ? err.message : 'Failed to load'
+        newRouteDataMap[window.id] = null
+      } finally {
+        newLoadingMap[window.id] = false
+      }
+    })
 
-      await Promise.all(promises)
-      
-      setRouteDataMap(newRouteDataMap)
-      setErrorMap(newErrorMap)
-      setLoadingMap(newLoadingMap)
+    await Promise.all(promises)
+    
+    setRouteDataMap(newRouteDataMap)
+    setErrorMap(newErrorMap)
+    setLoadingMap(newLoadingMap)
+    
+    // Notify parent that route data is loaded
+    onRouteDataLoaded?.(newRouteDataMap)
+  }, [sessionId, sessionData, selectedRange, filterState, showAllRoutes, topRoutes, mode, clusteringConfig, onRouteDataLoaded])
+
+  // Provide the loading function to parent via callback
+  React.useEffect(() => {
+    if (onAnalysisReady) {
+      onAnalysisReady(loadAllWindows)
+    }
+  }, [onAnalysisReady, loadAllWindows])
+
+  // Auto-load data for expert mode or when manual trigger is disabled
+  useEffect(() => {
+    // Skip auto-loading if manual trigger is enabled
+    if (manualTrigger) {
+      return
     }
 
     loadAllWindows()
-  }, [sessionId, sessionData, filterState, showAllRoutes, topRoutes, selectedRange])
+  }, [loadAllWindows, manualTrigger])
 
   return (
     <div className="space-y-4">
@@ -205,15 +190,23 @@ export default function MultiSankeyView({
                     secondaryGradient={secondaryGradient}
                     onNodeClick={(nodeId, nodeData) => {
                       if (onNodeClick) {
-                        onNodeClick({
+                        const enrichedData = {
                           ...nodeData,
-                          expertId: nodeData.expert_id,
                           population: nodeData.token_count,
                           coverage: Math.round((nodeData.token_count / routeData.statistics.total_probes) * 100),
                           _fullData: nodeData,
                           _totalProbes: routeData.statistics.total_probes,
                           _window: window.label
-                        })
+                        }
+                        
+                        // Add mode-specific fields
+                        if (mode === 'cluster') {
+                          enrichedData.clusterId = nodeData.expert_id // Backend uses expert_id field for cluster ID
+                        } else {
+                          enrichedData.expertId = nodeData.expert_id
+                        }
+                        
+                        onNodeClick(enrichedData)
                       }
                     }}
                     onLinkClick={(linkData) => {
@@ -232,8 +225,8 @@ export default function MultiSankeyView({
                         })
                       }
                     }}
-                    width={180}
-                    height={260}
+                    width={150}
+                    height={220}
                   />
                 ) : (
                   <div className="flex items-center justify-center h-full">
@@ -296,8 +289,10 @@ function applyBalancedSampling(sessionData: any, filterState: FilterState): { co
   if (filterState.contextCategories.size > 0) {
     const contextWords: string[] = []
     for (const category of filterState.contextCategories) {
-      const categoryWords = sessionData.categories.contexts?.[category] || []
-      const sampled = sampleWordsFromCategory(categoryWords, filterState.maxWordsPerCategory)
+      // Find words that have this category
+      const wordsInCategory = Object.keys(sessionData.categories.contexts || {})
+        .filter(word => sessionData.categories.contexts[word].includes(category))
+      const sampled = sampleWordsFromCategory(wordsInCategory, filterState.maxWordsPerCategory)
       contextWords.push(...sampled)
     }
     result.contextWords = contextWords
@@ -307,8 +302,10 @@ function applyBalancedSampling(sessionData: any, filterState: FilterState): { co
   if (filterState.targetCategories.size > 0) {
     const targetWords: string[] = []
     for (const category of filterState.targetCategories) {
-      const categoryWords = sessionData.categories.targets?.[category] || []
-      const sampled = sampleWordsFromCategory(categoryWords, filterState.maxWordsPerCategory)
+      // Find words that have this category
+      const wordsInCategory = Object.keys(sessionData.categories.targets || {})
+        .filter(word => sessionData.categories.targets[word].includes(category))
+      const sampled = sampleWordsFromCategory(wordsInCategory, filterState.maxWordsPerCategory)
       targetWords.push(...sampled)
     }
     result.targetWords = targetWords

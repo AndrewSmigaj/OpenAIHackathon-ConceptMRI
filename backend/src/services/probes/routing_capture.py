@@ -29,9 +29,9 @@ class EnhancedRoutingCapture:
         self.activation_data = {}     # For ExpertOutputState schema  
         self.expert_internal_data = {} # For ExpertInternalActivation schema
         
-        # Default to first window [0,1,2] but configurable via UI
+        # Default to all 24 layers for full model analysis
         if layers_to_capture is None:
-            layers_to_capture = [0, 1, 2]  # First window for MVP
+            layers_to_capture = list(range(24))
         
         self.layers_to_capture = layers_to_capture
         print(f"Enhanced capture for layers: {self.layers_to_capture}")

@@ -83,6 +83,22 @@ class AnalyzeRoutesRequest(BaseModel):
     top_n_routes: int = 20
 
 
+class ClusteringConfig(BaseModel):
+    """Configuration for clustering analysis."""
+    pca_dimensions: int = 128
+    clustering_method: str = "kmeans"  # "kmeans", "hierarchical", "dbscan"
+    layer_cluster_counts: Dict[int, int] = {}  # {layer: num_clusters}
+
+
+class AnalyzeClusterRoutesRequest(BaseModel):
+    """Request to analyze cluster routes for a session."""
+    session_id: str
+    window_layers: List[int]
+    clustering_config: ClusteringConfig
+    filter_config: Optional[FilterConfig] = None
+    top_n_routes: int = 20
+
+
 class SankeyNode(BaseModel):
     """Sankey diagram node with enhanced data."""
     name: str
@@ -147,3 +163,18 @@ class ExpertDetailsResponse(BaseModel):
     usage_rate: float
     avg_confidence: float
     category_breakdown: Dict[str, Any]
+
+
+class LLMInsightsRequest(BaseModel):
+    """Request for LLM insights generation."""
+    session_id: str
+    windows: List[Dict[str, Any]]  # Array of window data with nodes/links
+    user_prompt: str
+    api_key: str
+    provider: str = "openai"
+
+
+class LLMInsightsResponse(BaseModel):
+    """Response from LLM insights generation."""
+    narrative: str
+    statistics: Dict[str, Any]

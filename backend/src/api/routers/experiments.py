@@ -224,6 +224,89 @@ async def generate_llm_insights(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# PCA Trajectory endpoint
+@router.get("/experiments/pca-trajectories")
+async def get_pca_trajectories(
+    session_id: str,
+    layers: str,  # comma-separated layer numbers
+    n_dims: int = 3,
+    max_trajectories: int = 500,
+    filter_config: str = None,  # JSON-encoded filter configuration
+    service: ClusterRouteAnalysisService = Depends(get_cluster_analysis_service)
+):
+    """
+    Get stepped PCA trajectory data for 3D visualization.
+    
+    Returns PCA coordinates for each probe across specified layers,
+    showing how concepts move through the latent space.
+    
+    Query Parameters:
+        session_id: Session identifier
+        layers: Comma-separated layer numbers (e.g., "0,1,2,3,4,5")
+        n_dims: Number of PCA dimensions to return (2, 3, 5, etc.)
+        max_trajectories: Maximum number of trajectories to return (default 500)
+    
+    Returns:
+        {
+            "trajectories": [
+                {
+                    "probe_id": "...",
+                    "context": "...",
+                    "target": "...",
+                    "coordinates": [
+                        {"layer": 0, "x": 0.1, "y": 0.2, "z": 0.3},
+                        {"layer": 1, "x": 0.2, "y": 0.3, "z": 0.4},
+                        ...
+                    ]
+                }
+            ],
+            "metadata": {"layers": [0,1,2], "n_dims": 3, "total_trajectories": 100}
+        }
+    """
+    try:
+        # Parse layers
+        layer_list = [int(x.strip()) for x in layers.split(',')]
+        
+        # Validate layers
+        if not all(0 <= layer <= 23 for layer in layer_list):
+            raise HTTPException(status_code=400, detail="Layer numbers must be between 0 and 23")
+        
+        if len(layer_list) < 2:
+            raise HTTPException(status_code=400, detail="At least 2 layers required for trajectories")
+        
+        # Validate dimensions
+        if not (2 <= n_dims <= 128):
+            raise HTTPException(status_code=400, detail="n_dims must be between 2 and 128")
+        
+        # Parse filter_config if provided
+        filter_config_dict = None
+        if filter_config:
+            try:
+                import json
+                filter_config_dict = json.loads(filter_config)
+            except json.JSONDecodeError:
+                raise HTTPException(status_code=400, detail="Invalid filter_config JSON format")
+        
+        # Get trajectories from service
+        result = service.get_pca_trajectories(
+            session_id=session_id,
+            layers=layer_list,
+            n_dims=n_dims,
+            filter_config=filter_config_dict,
+            max_trajectories=max_trajectories
+        )
+        
+        logger.info(f"✅ Generated {len(result['trajectories'])} PCA trajectories for session {session_id}")
+        return result
+        
+    except ValueError as e:
+        logger.error(f"❌ Invalid layer format: {e}")
+        raise HTTPException(status_code=400, detail=f"Invalid layer format: {e}")
+    except Exception as e:
+        logger.error(f"❌ PCA trajectory generation failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # Health check endpoint for testing
 @router.get("/experiments/health")
 async def health_check():

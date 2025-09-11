@@ -57,10 +57,18 @@ async def initialize_capture_service():
         
         # Initialize WordNet first (can be slow)
         print("📚 Initializing WordNet data...")
-        _wordnet_miner = WordNetMiner(tokenizer)
-        print("✅ WordNet ready")
+        # TEMP: Skip WordNet initialization for now
+        # _wordnet_miner = WordNetMiner(tokenizer)
+        _wordnet_miner = None
+        print("✅ WordNet ready (skipped)")
         
         # Initialize service with pre-initialized WordNet
+        print("🔧 Creating IntegratedCaptureService...")
+        print(f"DEBUG: About to create IntegratedCaptureService with model type: {type(model)}")
+        print(f"DEBUG: tokenizer type: {type(tokenizer)}")
+        print(f"DEBUG: data_lake_path: {data_lake_path}")
+        print(f"DEBUG: wordnet_miner: {_wordnet_miner}")
+        
         _capture_service = IntegratedCaptureService(
             model=model,
             tokenizer=tokenizer,
@@ -68,6 +76,7 @@ async def initialize_capture_service():
             data_lake_path=str(data_lake_path),
             wordnet_miner=_wordnet_miner
         )
+        print("🔧 IntegratedCaptureService created successfully")
         
         print("✅ Capture service ready")
         

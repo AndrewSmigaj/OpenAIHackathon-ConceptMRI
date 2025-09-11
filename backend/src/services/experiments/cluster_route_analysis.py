@@ -177,7 +177,7 @@ class ClusterRouteAnalysisService:
                 continue
                 
             layer_records = pca_by_layer[layer]
-            n_clusters = layer_cluster_counts.get(layer, 8)
+            n_clusters = 4
             
             # Extract PCA features matrix
             X = []
@@ -532,4 +532,117 @@ class ClusterRouteAnalysisService:
             "routes_coverage": routes_coverage,
             "window_layers": window_layers,
             "avg_route_confidence": float(np.mean([r["avg_confidence"] for r in routes.values()])) if routes else 0
+        }
+
+    def get_pca_trajectories(
+        self,
+        session_id: str,
+        layers: List[int],
+        n_dims: int = 3,
+        filter_config: Optional[Dict[str, Any]] = None,
+        max_trajectories: int = 500
+    ) -> Dict[str, Any]:
+        """
+        Get stepped PCA trajectory data for 3D visualization.
+        
+        Returns PCA coordinates for each probe across specified layers,
+        showing how concepts move through the latent space.
+        
+        Args:
+            session_id: Session identifier
+            layers: List of layer numbers to include in trajectory
+            n_dims: Number of PCA dimensions to return (2, 3, 5, etc.)
+            filter_config: Optional filtering (same as route analysis)
+            max_trajectories: Maximum number of trajectories to return
+            
+        Returns:
+            {
+                "trajectories": [
+                    {
+                        "probe_id": "...",
+                        "context": "...",
+                        "target": "...",
+                        "coordinates": [
+                            {"layer": 0, "x": 0.1, "y": 0.2, "z": 0.3},
+                            {"layer": 1, "x": 0.2, "y": 0.3, "z": 0.4},
+                            ...
+                        ]
+                    }
+                ],
+                "metadata": {"layers": [0,1,2], "n_dims": 3, "total_trajectories": 100}
+            }
+        """
+        # Load session data (reuse existing method)
+        pca_records, token_records, manifest = self._load_session_data(session_id)
+        
+        # Apply filtering if provided (reuse existing method)
+        if filter_config:
+            pca_records, token_records = self._apply_filters(
+                pca_records, token_records, manifest, filter_config
+            )
+        
+        # Group PCA records by probe_id and layer, target token position only
+        pca_by_probe = defaultdict(dict)
+        for record in pca_records:
+            if record.token_position == 1:  # Target tokens only
+                pca_by_probe[record.probe_id][record.layer] = record
+        
+        # Create token lookup for context/target labels
+        token_lookup = {r.probe_id: r for r in token_records}
+        
+        trajectories = []
+        probe_count = 0
+        
+        for probe_id, layer_data in pca_by_probe.items():
+            if probe_count >= max_trajectories:
+                break
+                
+            # Check if this probe has data for all requested layers
+            if not all(layer in layer_data for layer in layers):
+                continue
+            
+            # Get context and target from token data
+            token_record = token_lookup.get(probe_id)
+            context = token_record.context_text if token_record else ""
+            target = token_record.target_text if token_record else ""
+            
+            # Build coordinate sequence across layers
+            coordinates = []
+            for layer in layers:
+                pca_record = layer_data[layer]
+                pca_features = pca_record.pca128
+                
+                # Build coordinate dict based on requested dimensions
+                coord = {"layer": layer}
+                if n_dims >= 1 and len(pca_features) >= 1:
+                    coord["x"] = float(pca_features[0])
+                if n_dims >= 2 and len(pca_features) >= 2:
+                    coord["y"] = float(pca_features[1])
+                if n_dims >= 3 and len(pca_features) >= 3:
+                    coord["z"] = float(pca_features[2])
+                
+                # Add additional dimensions if requested
+                for i in range(3, min(n_dims, len(pca_features))):
+                    coord[f"dim_{i}"] = float(pca_features[i])
+                
+                coordinates.append(coord)
+            
+            trajectories.append({
+                "probe_id": probe_id,
+                "context": context,
+                "target": target,
+                "coordinates": coordinates
+            })
+            
+            probe_count += 1
+        
+        return {
+            "trajectories": trajectories,
+            "metadata": {
+                "layers": layers,
+                "n_dims": n_dims,
+                "total_trajectories": len(trajectories),
+                "session_id": session_id,
+                "max_requested": max_trajectories
+            }
         }

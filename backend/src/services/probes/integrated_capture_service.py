@@ -138,33 +138,47 @@ class IntegratedCaptureService:
     def __init__(self, model, tokenizer, layers_to_capture: Optional[List[int]] = None, 
                  data_lake_path: str = "data/lake", batch_size: int = 1000,
                  wordnet_miner: Optional[WordNetMiner] = None):
+        print("DEBUG: IntegratedCaptureService.__init__ starting")
         self.model = model
+        print("DEBUG: Model assigned")
         self.tokenizer = tokenizer
+        print("DEBUG: Tokenizer assigned")
         self.data_lake_path = data_lake_path
         self.batch_size = batch_size
+        print("DEBUG: Basic attributes set")
         
-        # Default to first window [0,1,2] for demo
+        # Default to all 24 layers for full model analysis
         if layers_to_capture is None:
-            layers_to_capture = [0, 1, 2]
+            layers_to_capture = list(range(24))
         self.layers_to_capture = layers_to_capture
+        print("DEBUG: Layers to capture set")
         
         # Session management
+        print("DEBUG: Setting up session management")
         self.active_sessions: Dict[str, SessionStatus] = {}
         self.session_writers: Dict[str, SessionBatchWriters] = {}
         self.routing_capture: Optional[EnhancedRoutingCapture] = None
+        print("DEBUG: Session management attributes set")
         
         # Session state persistence 
+        print("DEBUG: Creating sessions directory")
         self.sessions_dir = Path(data_lake_path) / "_sessions"
         self.sessions_dir.mkdir(parents=True, exist_ok=True)
+        print("DEBUG: Sessions directory created")
         
         # Use provided WordNet miner or create new one (for backwards compatibility)
+        print("DEBUG: Setting up WordNet miner")
         if wordnet_miner is not None:
+            print("DEBUG: Using provided WordNet miner")
             self.wordnet_miner = wordnet_miner
         else:
+            print("DEBUG: Creating new WordNet miner")
             # Fallback for tests or direct instantiation
             self.wordnet_miner = WordNetMiner(tokenizer)
+        print("DEBUG: WordNet miner ready")
         
         print(f"🚀 IntegratedCaptureService initialized for layers {self.layers_to_capture}")
+        print("DEBUG: IntegratedCaptureService.__init__ completed successfully")
     
     def create_session(self, session_name: str, contexts: List[str], targets: List[str], 
                       context_category_assignments: Optional[Dict[str, List[str]]] = None,
@@ -538,6 +552,21 @@ class IntegratedCaptureService:
             import pyarrow.parquet as pq
             table = pa.Table.from_pylist([manifest_dict])
             pq.write_table(table, manifest_path)
+            
+            # Generate PCA features from expert output states
+            try:
+                from services.features.pca_generation_service import PCAGenerationService
+                print(f"🔬 Generating PCA features for session {session_id}...")
+                pca_service = PCAGenerationService(n_components=128)
+                # PCAGenerationService expects just the ID, not "session_" prefix
+                session_id_only = session_id.replace("session_", "") if session_id.startswith("session_") else session_id
+                pca_output_path = pca_service.generate_pca_features(session_id_only, self.data_lake_path)
+                print(f"✅ PCA features generated: {pca_output_path}")
+            except Exception as pca_error:
+                import traceback
+                print(f"⚠️ PCA generation failed (non-fatal): {type(pca_error).__name__}: {pca_error}")
+                print(f"🔍 PCA error traceback: {traceback.format_exc()}")
+                # Don't fail the entire session if PCA fails
             
             # Update session state
             session_status.state = SessionState.COMPLETED

@@ -7,7 +7,7 @@
         "words": [
           "the"
         ],
-        "label": "determiner"
+        "category": "determiner"
       }
     }
   ],
@@ -67,7 +67,7 @@
           "death",
           "decor"
         ],
-        "label": "nouns"
+        "category": "nouns"
       }
     },
     {
@@ -125,7 +125,7 @@
           "remain",
           "rename"
         ],
-        "label": "verbs"
+        "category": "verbs"
       }
     },
     {
@@ -183,7 +183,7 @@
           "ambient",
           "another"
         ],
-        "label": "adjectives"
+        "category": "adjectives"
       }
     },
     {
@@ -241,7 +241,7 @@
           "typically",
           "especially"
         ],
-        "label": "adverbs"
+        "category": "adverbs"
       }
     }
   ]

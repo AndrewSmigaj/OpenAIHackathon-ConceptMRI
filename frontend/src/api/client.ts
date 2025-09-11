@@ -7,9 +7,12 @@ import type {
   SessionListItem,
   SessionDetailResponse,
   AnalyzeRoutesRequest,
+  AnalyzeClusterRoutesRequest,
   RouteAnalysisResponse,
   RouteDetailsResponse,
-  ExpertDetailsResponse
+  ExpertDetailsResponse,
+  LLMInsightsRequest,
+  LLMInsightsResponse
 } from '../types/api';
 
 const API_BASE_URL = 'http://localhost:8000/api';
@@ -180,6 +183,19 @@ class ConceptMriApiClient {
   }
 
   /**
+   * Analyze cluster routes for a session within specified window layers using PCA features
+   * @param request - Cluster route analysis request with session_id, window_layers, clustering_config, etc.
+   * @returns Route analysis response with Sankey data and statistics (same format as expert routes)
+   * @throws ApiError with status 404 if session not found, 500 for server errors
+   */
+  async analyzeClusterRoutes(request: AnalyzeClusterRoutesRequest): Promise<RouteAnalysisResponse> {
+    return this.request<RouteAnalysisResponse>('/experiments/analyze-cluster-routes', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+  }
+
+  /**
    * Get detailed information about a specific expert route
    * @param sessionId - Session identifier
    * @param signature - Route signature (e.g., "L0E18→L1E11→L2E14")
@@ -219,6 +235,51 @@ class ConceptMriApiClient {
       expert_id: expertId.toString()
     });
     return this.request<ExpertDetailsResponse>(`/experiments/expert-details?${params.toString()}`);
+  }
+
+  /**
+   * Generate LLM insights from expert routing data
+   * @param request - LLM insights request with nodes, links, user prompt, and API key
+   * @returns LLM-generated insights and statistics
+   * @throws ApiError with status 500 for LLM API errors
+   */
+  async generateLLMInsights(request: LLMInsightsRequest): Promise<LLMInsightsResponse> {
+    return this.request<LLMInsightsResponse>('/experiments/llm-insights', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+  }
+
+  /**
+   * Get PCA trajectory data for 3D stepped visualization
+   * @param sessionId - Session identifier
+   * @param layers - Array of layer numbers to include in trajectory
+   * @param nDims - Number of PCA dimensions to return (default 3)
+   * @param maxTrajectories - Maximum number of trajectories (default 500)
+   * @param filterConfig - Optional filtering (same as route analysis)
+   * @returns PCA trajectory data with coordinates across layers
+   * @throws ApiError with status 400 for invalid parameters, 404 if session not found
+   */
+  async getPCATrajectories(
+    sessionId: string,
+    layers: number[],
+    nDims: number = 3,
+    maxTrajectories: number = 500,
+    filterConfig?: any
+  ): Promise<PCATrajectoryResponse> {
+    const params = new URLSearchParams({
+      session_id: sessionId,
+      layers: layers.join(','),
+      n_dims: nDims.toString(),
+      max_trajectories: maxTrajectories.toString()
+    });
+    
+    // Add filter_config as JSON if provided
+    if (filterConfig) {
+      params.append('filter_config', JSON.stringify(filterConfig));
+    }
+    
+    return this.request<PCATrajectoryResponse>(`/experiments/pca-trajectories?${params.toString()}`);
   }
 }
 

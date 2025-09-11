@@ -59,7 +59,19 @@ SIMPLE_CONCRETE_NEGATIVE_NOUNS = [
     "trash", "waste", "junk", "scrap", "litter", "sewage", "sludge", "slime", "grime", "filth",
     "roach", "fly", "mosquito", "wasp", "hornet", "scorpion", "centipede", "worm", "slug", "leech",
     "acid", "toxin", "venom", "drug", "overdose", "addiction", "withdrawal", "relapse", "dealer", "addict",
-    "nightmare", "terror", "horror", "fear", "dread", "panic", "anxiety", "stress", "trauma", "shock"
+    "nightmare", "terror", "horror", "fear", "dread", "panic", "anxiety", "stress", "trauma", "shock",
+    # 100+ additional negative words
+    "hatred", "rage", "fury", "anger", "violence", "brutality", "cruelty", "torture", "abuse", "betrayal",
+    "lies", "deceit", "fraud", "theft", "corruption", "greed", "selfishness", "envy", "jealousy", "spite",
+    "malice", "revenge", "vengeance", "punishment", "penalty", "fine", "debt", "poverty", "hunger", "thirst",
+    "suffering", "agony", "misery", "despair", "hopelessness", "depression", "sadness", "grief", "sorrow", "loss",
+    "abandonment", "rejection", "loneliness", "isolation", "exile", "punishment", "humiliation", "shame", "guilt", "regret",
+    "embarrassment", "disgrace", "scandal", "disgust", "revulsion", "nausea", "sickness", "illness", "weakness", "fatigue",
+    "exhaustion", "burnout", "breakdown", "collapse", "failure", "defeat", "destruction", "devastation", "ruin", "chaos",
+    "disorder", "confusion", "uncertainty", "doubt", "suspicion", "mistrust", "prejudice", "discrimination", "racism", "sexism",
+    "oppression", "tyranny", "dictatorship", "slavery", "bondage", "captivity", "imprisonment", "confinement", "restraint", "limitation",
+    "restriction", "prohibition", "ban", "censorship", "suppression", "persecution", "harassment", "bullying", "intimidation", "threat",
+    "menace", "danger", "hazard", "risk", "peril", "jeopardy", "vulnerability", "exposure", "contamination", "pollution"
 ]
 
 SIMPLE_CONCRETE_NEUTRAL_NOUNS = [
@@ -129,10 +141,43 @@ SIMPLE_ACTION_POSITIVE_VERBS = [
     "embrace", "hug", "kiss", "caress", "comfort", "console", "soothe", "calm", "relax", "pamper",
     "praise", "compliment", "appreciate", "thank", "acknowledge", "recognize", "honor", "respect", "admire", "worship",
     "succeed", "triumph", "prevail", "conquer", "overcome", "master", "excel", "shine", "flourish", "thrive",
-    "rescue", "recover", "restore", "revive", "regenerate", "renew", "refresh", "rejuvenate", "revitalize", "energize"
+    "rescue", "recover", "restore", "revive", "regenerate", "renew", "refresh", "rejuvenate", "revitalize", "energize",
+    # 100+ additional verbs
+    "accomplish", "achieve", "acquire", "adapt", "advance", "advocate", "agree", "allow", "amplify", "analyze",
+    "anticipate", "apologize", "apply", "approve", "arrange", "arrive", "ascend", "assemble", "assist", "assume",
+    "attempt", "attend", "attract", "augment", "authorize", "awaken", "balance", "beautify", "begin", "believe",
+    "benefit", "bless", "bloom", "boost", "brighten", "broadcast", "broaden", "calculate", "call", "captivate",
+    "capture", "celebrate", "center", "challenge", "change", "charge", "charm", "cheer", "choose", "clarify",
+    "cleanse", "climb", "collaborate", "collect", "combine", "comfort", "commit", "communicate", "compare", "compete",
+    "complete", "compose", "concentrate", "conceive", "conclude", "conduct", "confirm", "connect", "consider", "consolidate",
+    "construct", "consult", "consume", "contain", "contemplate", "continue", "contribute", "control", "convert", "cooperate",
+    "coordinate", "cope", "correct", "counsel", "count", "court", "cover", "craft", "create", "cultivate",
+    "customize", "dance", "dare", "debate", "decide", "declare", "decorate", "dedicate", "defend", "define",
+    "delegate", "deliver", "demonstrate", "depend", "describe", "deserve", "design", "desire", "determine", "develop",
+    "devote", "dialogue", "differ", "direct", "discover", "discuss", "display", "distribute", "dive", "document"
 ]
 
-# And so on for all other verb categories...
+# Temporal words (50+ words related to time/sequence)
+TEMPORAL_WORDS = [
+    "past", "present", "future", "now", "then", "when", "before", "after", "during", "while",
+    "early", "late", "soon", "later", "yesterday", "today", "tomorrow", "always", "never", "sometimes",
+    "often", "rarely", "seldom", "frequently", "occasionally", "constantly", "immediately", "eventually", "gradually", "suddenly",
+    "momentary", "temporary", "permanent", "eternal", "ancient", "modern", "recent", "current", "ongoing", "upcoming",
+    "previous", "next", "first", "last", "final", "initial", "beginning", "end", "start", "finish",
+    "dawn", "morning", "noon", "afternoon", "evening", "night", "midnight", "second", "minute", "hour",
+    "day", "week", "month", "year", "decade", "century", "era", "age", "period", "phase"
+]
+
+# Cognitive words (50+ words related to thinking/knowing/believing) 
+COGNITIVE_WORDS = [
+    "think", "know", "believe", "understand", "learn", "remember", "forget", "recall", "recognize", "realize",
+    "imagine", "dream", "wonder", "consider", "ponder", "contemplate", "reflect", "meditate", "analyze", "evaluate",
+    "judge", "decide", "choose", "prefer", "assume", "suppose", "expect", "predict", "anticipate", "foresee",
+    "perceive", "notice", "observe", "see", "hear", "feel", "sense", "detect", "discover", "find",
+    "search", "seek", "explore", "investigate", "study", "examine", "inspect", "review", "assess", "test",
+    "doubt", "question", "wonder", "puzzle", "confuse", "clarify", "explain", "interpret", "translate", "decode",
+    "encode", "memorize", "store", "retrieve", "access", "process", "compute", "calculate", "reason", "logic"
+]
 
 def create_massive_probe():
     """Create massive probe with thousands of single-token words."""
@@ -145,7 +190,7 @@ def create_massive_probe():
         },
         {
             "source_type": "custom", 
-            "source_params": {"words": ["I"], "label": "pronoun"}
+            "source_params": {"words": ["a"], "label": "determiner"}
         }
     ]
     
@@ -177,11 +222,7 @@ def create_massive_probe():
         "source_params": {"words": all_verbs, "label": "verbs"}
     })
     
-    # Complexity (all simple for now)
-    target_sources.append({
-        "source_type": "custom",
-        "source_params": {"words": all_nouns + all_verbs, "label": "simple"}
-    })
+    # Complexity category removed per requirements
     
     # Concreteness for nouns
     concrete_nouns = SIMPLE_CONCRETE_POSITIVE_NOUNS + SIMPLE_CONCRETE_NEGATIVE_NOUNS + SIMPLE_CONCRETE_NEUTRAL_NOUNS
@@ -197,14 +238,7 @@ def create_massive_probe():
         "source_params": {"words": abstract_nouns, "label": "abstract"}
     })
     
-    # Action for verbs  
-    action_verbs = SIMPLE_ACTION_POSITIVE_VERBS
-    # Would include all action verb categories when fully expanded
-    
-    target_sources.append({
-        "source_type": "custom",
-        "source_params": {"words": action_verbs, "label": "action"}
-    })
+    # Action category removed per requirements
     
     # Sentiment categories
     positive_words = SIMPLE_CONCRETE_POSITIVE_NOUNS + SIMPLE_ABSTRACT_POSITIVE_NOUNS + SIMPLE_ACTION_POSITIVE_VERBS
@@ -222,6 +256,16 @@ def create_massive_probe():
     target_sources.append({
         "source_type": "custom",
         "source_params": {"words": neutral_words, "label": "neutral"}
+    })
+    
+    # New temporal and cognitive categories
+    target_sources.append({
+        "source_type": "custom",
+        "source_params": {"words": TEMPORAL_WORDS, "label": "temporal"}
+    })
+    target_sources.append({
+        "source_type": "custom", 
+        "source_params": {"words": COGNITIVE_WORDS, "label": "cognitive"}
     })
     
     probe_request = {

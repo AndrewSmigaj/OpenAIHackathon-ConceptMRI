@@ -130,6 +130,20 @@ interface AnalyzeRoutesRequest {
   top_n_routes: number
 }
 
+interface ClusteringConfig {
+  pca_dimensions: number
+  clustering_method: string  // "kmeans" | "hierarchical" | "dbscan"
+  layer_cluster_counts: Record<number, number>  // {layer: num_clusters}
+}
+
+interface AnalyzeClusterRoutesRequest {
+  session_id: string
+  window_layers: number[]
+  clustering_config: ClusteringConfig
+  filter_config?: FilterConfig
+  top_n_routes: number
+}
+
 interface SankeyNode {
   name: string
   id: string
@@ -194,6 +208,47 @@ interface ExpertDetailsResponse {
   category_breakdown: Record<string, any>
 }
 
+// LLM Insights Types
+interface LLMInsightsRequest {
+  session_id: string
+  windows: Record<string, any>[]  // Complete RouteAnalysisResponse data
+  user_prompt: string
+  api_key: string
+  provider?: 'openai' | 'anthropic'  // defaults to 'openai'
+}
+
+interface LLMInsightsResponse {
+  narrative: string
+  statistics: Record<string, any>
+}
+
+// PCA Trajectory Types
+interface PCACoordinate {
+  layer: number
+  x: number
+  y?: number
+  z?: number
+  [key: string]: number | undefined  // for additional dimensions like dim_3, dim_4, etc.
+}
+
+interface PCATrajectory {
+  probe_id: string
+  context: string
+  target: string
+  coordinates: PCACoordinate[]
+}
+
+interface PCATrajectoryResponse {
+  trajectories: PCATrajectory[]
+  metadata: {
+    layers: number[]
+    n_dims: number
+    total_trajectories: number
+    session_id: string
+    max_requested: number
+  }
+}
+
 // Export all types for Vite compatibility - updated
 export type {
   WordSource,
@@ -208,10 +263,17 @@ export type {
   RouteStatistics,
   FilterConfig,
   AnalyzeRoutesRequest,
+  ClusteringConfig,
+  AnalyzeClusterRoutesRequest,
   RouteAnalysisResponse,
   SankeyNode,
   SankeyLink,
   TopRoute,
   RouteDetailsResponse,
-  ExpertDetailsResponse
+  ExpertDetailsResponse,
+  LLMInsightsRequest,
+  LLMInsightsResponse,
+  PCACoordinate,
+  PCATrajectory,
+  PCATrajectoryResponse
 };
