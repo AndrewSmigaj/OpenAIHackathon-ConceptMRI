@@ -38,6 +38,15 @@ make run-ui   # Starts frontend on port 5173
 
 ## Demo Example - Sentiment Analysis with Positive/Negative Nouns and Verbs
 
+⚠️ **Important Note**: Currently, the system only supports specific pre-defined category axes for analysis:
+- **Sentiment**: positive/negative
+- **Parts of Speech**: nouns/verbs
+- **Concreteness**: concrete/abstract
+- **Temporal**: temporal words
+- **Cognitive**: cognitive words
+
+Custom categories and axes are a planned future feature. For now, please use the provided demo categories or run the comprehensive probe script (see below).
+
 ### Create a Probe Session
 ```python
 POST /api/probes
@@ -82,6 +91,23 @@ POST /api/experiments/create
 ```python
 GET /api/experiments/{experiment_id}/results
 ```
+
+## Populating the Full Dataset (Recommended)
+
+To reproduce the comprehensive dataset we used for development with thousands of words across multiple categories:
+
+```bash
+# Make sure backend is running first (make run-api)
+cd scripts
+python3 create_massive_comprehensive_probe.py
+```
+
+This will create probe sessions with:
+- 2 context words (determiners: "the", "a")  
+- 1000+ target words across all supported categories
+- Categories include: positive/negative nouns, positive/negative verbs, concrete/abstract, temporal, cognitive, and more
+
+The script will automatically execute the probes and populate your data lake with the same comprehensive dataset we used.
 
 ## Features
 
