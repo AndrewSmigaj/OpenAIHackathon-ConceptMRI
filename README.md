@@ -36,7 +36,7 @@ make run-ui   # Starts frontend on port 5173
 - **Frontend UI**: http://localhost:5173
 - **API Documentation**: http://localhost:8000/docs
 
-## Demo Example - Sentiment Analysis with Positive/Negative Nouns and Verbs
+## Demo Example - Sentiment Analysis with Positive/Negative Nouns
 
 ⚠️ **Important Note**: Currently, the system only supports specific pre-defined category axes for analysis:
 - **Sentiment**: positive/negative
@@ -53,24 +53,16 @@ POST /api/probes
 {
   "session_name": "Sentiment Analysis Demo",
   "context_sources": [
-    {"source_type": "custom", "source_params": {"words": ["the"], "label": "determiner"}}
+    {"source_type": "custom", "source_params": {"words": ["a"], "label": "determiner"}}
   ],
   "target_sources": [
     {"source_type": "custom", "source_params": {
-      "words": ["hero", "friend", "joy", "peace"],
+      "words": ["hero", "friend", "joy", "peace", "treasure", "victory"],
       "label": "positive_nouns"
     }},
     {"source_type": "custom", "source_params": {
-      "words": ["love", "help", "save", "build"],
-      "label": "positive_verbs"
-    }},
-    {"source_type": "custom", "source_params": {
-      "words": ["villain", "enemy", "pain", "war"],
+      "words": ["villain", "enemy", "pain", "war", "disaster", "failure"],
       "label": "negative_nouns"  
-    }},
-    {"source_type": "custom", "source_params": {
-      "words": ["hate", "hurt", "destroy", "break"],
-      "label": "negative_verbs"  
     }}
   ]
 }
@@ -87,10 +79,8 @@ POST /api/experiments/create
 {
   "probe_ids": ["probe_123"],
   "word_lists": {
-    "positive_nouns": ["hero", "friend", "joy", "peace"],
-    "positive_verbs": ["love", "help", "save", "build"],
-    "negative_nouns": ["villain", "enemy", "pain", "war"],
-    "negative_verbs": ["hate", "hurt", "destroy", "break"]
+    "positive_nouns": ["hero", "friend", "joy", "peace", "treasure", "victory"],
+    "negative_nouns": ["villain", "enemy", "pain", "war", "disaster", "failure"]
   }
 }
 ```
