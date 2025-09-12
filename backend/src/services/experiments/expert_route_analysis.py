@@ -8,6 +8,7 @@ from typing import List, Dict, Optional, Tuple, Any
 from pathlib import Path
 from collections import defaultdict
 import numpy as np
+import random
 
 from core.parquet_reader import read_records
 from schemas.routing import RoutingRecord, highway_signature
@@ -246,6 +247,22 @@ class ExpertRouteAnalysisService:
         # Filter records
         filtered_routing = [r for r in routing_records if r.probe_id in filtered_probe_ids]
         filtered_tokens = [t for t in token_records if t.probe_id in filtered_probe_ids]
+        
+        # Apply balanced sampling if max_per_category is specified
+        if "max_per_category" in filter_config and filter_config["max_per_category"]:
+            max_per_category = filter_config["max_per_category"]
+            print(f"🎯 Applying balanced sampling with max_per_category={max_per_category}")
+            
+            balanced_tokens = self._apply_balanced_sampling(
+                filtered_tokens, manifest, filter_config, max_per_category
+            )
+            
+            # Filter routing records to match balanced tokens
+            balanced_probe_ids = {t.probe_id for t in balanced_tokens}
+            balanced_routing = [r for r in filtered_routing if r.probe_id in balanced_probe_ids]
+            
+            print(f"🎯 Balanced sampling: {len(filtered_tokens)} -> {len(balanced_tokens)} tokens")
+            return balanced_routing, balanced_tokens
         
         return filtered_routing, filtered_tokens
     
@@ -616,3 +633,71 @@ class ExpertRouteAnalysisService:
             "context_categories": dict(context_categories),
             "target_categories": dict(target_categories)
         }
+    
+    def _apply_balanced_sampling(
+        self,
+        tokens: List[TokenRecord],
+        manifest: Optional[CaptureManifest],
+        filter_config: Dict[str, Any],
+        max_per_category: int
+    ) -> List[TokenRecord]:
+        """Apply balanced sampling to ensure max N tokens per category."""
+        if not manifest or not tokens:
+            return tokens
+        
+        # Determine which categories to balance on
+        target_categories = filter_config.get("target_categories", [])
+        if not target_categories:
+            # If no specific categories filtered, balance on all available categories
+            all_target_cats = set()
+            for token in tokens:
+                cats = manifest.target_category_assignments.get(token.target_text, [])
+                all_target_cats.update(cats)
+            target_categories = list(all_target_cats)
+        
+        print(f"🎯 Balancing on categories: {target_categories}")
+        
+        # Group tokens by category
+        tokens_by_category = defaultdict(list)
+        uncategorized_tokens = []
+        
+        for token in tokens:
+            token_categories = manifest.target_category_assignments.get(token.target_text, [])
+            categorized = False
+            
+            for cat in target_categories:
+                if cat in token_categories:
+                    tokens_by_category[cat].append(token)
+                    categorized = True
+                    break  # Only assign to first matching category to avoid duplicates
+            
+            if not categorized:
+                uncategorized_tokens.append(token)
+        
+        # Sample max_per_category from each category
+        balanced_tokens = []
+        
+        for category, cat_tokens in tokens_by_category.items():
+            if len(cat_tokens) <= max_per_category:
+                # Use all tokens if we have fewer than max
+                sampled = cat_tokens
+            else:
+                # Randomly sample max_per_category tokens
+                sampled = random.sample(cat_tokens, max_per_category)
+            
+            balanced_tokens.extend(sampled)
+            print(f"🎯 Category '{category}': {len(cat_tokens)} -> {len(sampled)} tokens")
+        
+        # Include some uncategorized tokens if there are any
+        if uncategorized_tokens:
+            remaining_budget = max(0, len(target_categories) * max_per_category - len(balanced_tokens))
+            if remaining_budget > 0 and len(uncategorized_tokens) > remaining_budget:
+                sampled_uncategorized = random.sample(uncategorized_tokens, remaining_budget)
+            else:
+                sampled_uncategorized = uncategorized_tokens
+            
+            balanced_tokens.extend(sampled_uncategorized)
+            print(f"🎯 Uncategorized: {len(uncategorized_tokens)} -> {len(sampled_uncategorized)} tokens")
+        
+        print(f"🎯 Final balanced sample: {len(balanced_tokens)} tokens")
+        return balanced_tokens
