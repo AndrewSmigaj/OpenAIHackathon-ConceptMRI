@@ -57,12 +57,20 @@ POST /api/probes
   ],
   "target_sources": [
     {"source_type": "custom", "source_params": {
-      "words": ["hero", "friend", "love", "help"],
-      "label": "positive_nouns_verbs"
+      "words": ["hero", "friend", "joy", "peace"],
+      "label": "positive_nouns"
     }},
     {"source_type": "custom", "source_params": {
-      "words": ["villain", "enemy", "hate", "hurt"],
-      "label": "negative_nouns_verbs"  
+      "words": ["love", "help", "save", "build"],
+      "label": "positive_verbs"
+    }},
+    {"source_type": "custom", "source_params": {
+      "words": ["villain", "enemy", "pain", "war"],
+      "label": "negative_nouns"  
+    }},
+    {"source_type": "custom", "source_params": {
+      "words": ["hate", "hurt", "destroy", "break"],
+      "label": "negative_verbs"  
     }}
   ]
 }
@@ -79,10 +87,10 @@ POST /api/experiments/create
 {
   "probe_ids": ["probe_123"],
   "word_lists": {
-    "positive_nouns": ["hero", "friend"],
-    "positive_verbs": ["love", "help"],
-    "negative_nouns": ["villain", "enemy"],
-    "negative_verbs": ["hate", "hurt"]
+    "positive_nouns": ["hero", "friend", "joy", "peace"],
+    "positive_verbs": ["love", "help", "save", "build"],
+    "negative_nouns": ["villain", "enemy", "pain", "war"],
+    "negative_verbs": ["hate", "hurt", "destroy", "break"]
   }
 }
 ```
