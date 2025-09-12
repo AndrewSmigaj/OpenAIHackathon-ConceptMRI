@@ -48,7 +48,7 @@ make run-ui   # Starts frontend on port 5173
 Custom categories and axes are a planned future feature. For now, please use the provided demo categories or run the comprehensive probe script (see below).
 
 ### Create a Probe Session
-```python
+```json
 POST /api/probes
 {
   "session_name": "Sentiment Analysis Demo",
@@ -69,12 +69,12 @@ POST /api/probes
 ```
 
 ### Execute the Probe
-```python
+```
 POST /api/probes/{session_id}/execute
 ```
 
 ### View Probe Results
-```python
+```
 GET /api/probes/{session_id}
 ```
 
@@ -91,9 +91,9 @@ python3 create_massive_comprehensive_probe.py
 ```
 
 This will create probe sessions with:
-- 2 context words (determiners: "the", "a")  
+- 2 context words (determiners: "the" and "a")  
 - 1000+ target words across all supported categories
-- Categories include: positive/negative nouns, positive/negative verbs, concrete/abstract, temporal, cognitive, and more
+- Categories include: positive/negative sentiment, nouns/verbs parts of speech, concrete/abstract, temporal, cognitive, and more
 
 The script will automatically execute the probes and populate your data lake with the same comprehensive dataset we used.
 
