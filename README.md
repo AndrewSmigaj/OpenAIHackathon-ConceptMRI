@@ -73,22 +73,12 @@ POST /api/probes
 POST /api/probes/{session_id}/execute
 ```
 
-### Run an Experiment
+### View Probe Results
 ```python
-POST /api/experiments/create
-{
-  "probe_ids": ["probe_123"],
-  "word_lists": {
-    "positive_nouns": ["hero", "friend", "joy", "peace", "treasure", "victory"],
-    "negative_nouns": ["villain", "enemy", "pain", "war", "disaster", "failure"]
-  }
-}
+GET /api/probes/{session_id}
 ```
 
-### View Results
-```python
-GET /api/experiments/{experiment_id}/results
-```
+The probe execution will capture MoE routing patterns and save them to the data lake. You can then use the Experiments tab in the UI to analyze these captures with various filtering and visualization options.
 
 ## Populating the Full Dataset (Recommended)
 
