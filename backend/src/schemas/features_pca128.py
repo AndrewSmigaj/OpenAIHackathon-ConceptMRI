@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-PCA128 features schema for dimensionality reduction results.
-Reduces 2880-dimensional expert outputs to 128 dimensions for clustering.
-First 3 components used for 3D visualization.
+Dimensionality reduction features schema.
+Supports PCA and UMAP from expert output or residual stream sources.
+Backward-compatible: PCAFeatureRecord and create_pca_features still work.
 """
 
 from dataclasses import dataclass
@@ -13,28 +13,81 @@ from utils.parquet_utils import deserialize_array_from_parquet
 
 
 @dataclass
-class PCAFeatureRecord:
-    """128-dimensional PCA features per probe and layer."""
-    
+class ReductionFeatureRecord:
+    """Dimensionality-reduced features per probe and layer."""
+
     probe_id: str              # Links to tokens and activation data
-    layer: int                 # Layer number (0-23)
+    layer: int                 # Layer number
     token_position: int        # Token position (0=context, 1=target)
-    pca128: np.ndarray         # 128-dimensional PCA features
-    
+    features: np.ndarray       # N-dimensional reduced features
+    method: str                # "pca" or "umap"
+    source: str                # "expert_output" or "residual_stream"
+
     def __post_init__(self):
-        """Ensure consistent data format."""
-        self.pca128 = ensure_numpy_array(self.pca128)
+        self.features = ensure_numpy_array(self.features)
 
     def for_3d_viz(self) -> np.ndarray:
         """Get first 3 components for 3D visualization."""
+        return self.features[:3]
+
+    @classmethod
+    def from_parquet_dict(cls, data: dict) -> 'ReductionFeatureRecord':
+        features = deserialize_array_from_parquet(data['features'], (len(data['features']),))
+        return cls(
+            probe_id=data['probe_id'],
+            layer=data['layer'],
+            token_position=data['token_position'],
+            features=features,
+            method=data.get('method', 'pca'),
+            source=data.get('source', 'expert_output'),
+        )
+
+
+# New generic schema
+REDUCTION_FEATURES_PARQUET_SCHEMA = {
+    "probe_id": "string",
+    "layer": "int32",
+    "token_position": "int32",
+    "features": "list<float>",
+    "method": "string",
+    "source": "string",
+}
+
+
+def create_reduction_features(
+    probe_id: str, layer: int, token_position: int,
+    features: np.ndarray, method: str = "pca", source: str = "expert_output"
+) -> ReductionFeatureRecord:
+    return ReductionFeatureRecord(
+        probe_id=probe_id,
+        layer=layer,
+        token_position=token_position,
+        features=ensure_numpy_array(features),
+        method=method,
+        source=source,
+    )
+
+
+# --- Backward compatibility ---
+
+@dataclass
+class PCAFeatureRecord:
+    """128-dimensional PCA features per probe and layer (backward compat)."""
+
+    probe_id: str
+    layer: int
+    token_position: int
+    pca128: np.ndarray
+
+    def __post_init__(self):
+        self.pca128 = ensure_numpy_array(self.pca128)
+
+    def for_3d_viz(self) -> np.ndarray:
         return self.pca128[:3]
 
     @classmethod
     def from_parquet_dict(cls, data: dict) -> 'PCAFeatureRecord':
-        """Reconstruct from Parquet dictionary with numpy array deserialization."""
-        # PCA128 is a 1D array, so dims are just the length
         pca128 = deserialize_array_from_parquet(data['pca128'], (len(data['pca128']),))
-        
         return cls(
             probe_id=data['probe_id'],
             layer=data['layer'],
@@ -43,17 +96,16 @@ class PCAFeatureRecord:
         )
 
 
-# Parquet schema definition  
 FEATURES_PCA128_PARQUET_SCHEMA = {
     "probe_id": "string",
     "layer": "int32",
     "token_position": "int32",
-    "pca128": "list<float>"        # 128-dimensional features
+    "pca128": "list<float>"
 }
 
 
 def create_pca_features(probe_id: str, layer: int, token_position: int, pca128: np.ndarray) -> PCAFeatureRecord:
-    """Create PCA features record."""
+    """Create PCA features record (backward compat)."""
     return PCAFeatureRecord(
         probe_id=probe_id,
         layer=layer,

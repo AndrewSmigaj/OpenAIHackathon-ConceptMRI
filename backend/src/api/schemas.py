@@ -88,6 +88,8 @@ class ClusteringConfig(BaseModel):
     pca_dimensions: int = 128
     clustering_method: str = "kmeans"  # "kmeans", "hierarchical", "dbscan"
     layer_cluster_counts: Dict[int, int] = {}  # {layer: num_clusters}
+    embedding_source: str = "expert_output"  # "expert_output" or "residual_stream"
+    reduction_method: str = "pca"  # "pca" or "umap"
 
 
 class AnalyzeClusterRoutesRequest(BaseModel):

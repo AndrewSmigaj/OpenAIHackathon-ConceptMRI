@@ -33,6 +33,7 @@ class EnhancedRoutingCapture:
         self.routing_data = {}        # For RoutingRecord schema
         self.activation_data = {}     # For ExpertOutputState schema
         self.expert_internal_data = {} # For ExpertInternalActivation schema
+        self.residual_stream_data = {} # For ResidualStreamState schema
 
         # Use adapter for defaults, fall back to legacy hardcoded values
         if layers_to_capture is None:
@@ -76,7 +77,13 @@ class EnhancedRoutingCapture:
                     )
                     self.hooks.append(experts_hook)
 
-                hook_count = 2 if register_experts else 1
+                # 3. Decoder layer hook (captures full residual stream)
+                residual_hook = layer.register_forward_hook(
+                    self._make_residual_hook(layer_idx)
+                )
+                self.hooks.append(residual_hook)
+
+                hook_count = (2 if register_experts else 1) + 1  # +1 for residual
                 print(f"✅ Registered {hook_count} hooks for layer {layer_idx}")
 
             except Exception as e:
@@ -166,7 +173,28 @@ class EnhancedRoutingCapture:
                 print(f"❌ Experts collective hook error (L{layer_id}): {e}")
         
         return experts_collective_hook
-    
+
+    def _make_residual_hook(self, layer_id: int):
+        """Create hook for decoder layer to capture full residual stream."""
+        def residual_hook(module, input, output):
+            try:
+                # GptOssDecoderLayer.forward() returns plain torch.Tensor
+                # Handle both cases defensively
+                if isinstance(output, tuple):
+                    residual = output[0]
+                else:
+                    residual = output
+
+                self.residual_stream_data[f"layer_{layer_id}"] = {
+                    "residual_stream": residual.detach().cpu(),
+                    "shape": residual.shape
+                }
+
+            except Exception as e:
+                print(f"❌ Residual hook error (layer {layer_id}): {e}")
+
+        return residual_hook
+
     def _compute_entropy(self, routing_weights: torch.Tensor) -> torch.Tensor:
         """Compute entropy of routing distribution. Input must be already softmaxed."""
         eps = 1e-8
@@ -179,6 +207,7 @@ class EnhancedRoutingCapture:
         self.routing_data.clear()
         self.activation_data.clear()
         self.expert_internal_data.clear()
+        self.residual_stream_data.clear()
     
     def remove_hooks(self):
         """Remove all registered hooks."""

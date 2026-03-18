@@ -18,6 +18,7 @@ from schemas.tokens import TokenRecord, create_token_record
 from schemas.routing import RoutingRecord, create_routing_record
 from schemas.expert_internal_activations import ExpertInternalActivation, create_expert_internal_activation
 from schemas.expert_output_states import ExpertOutputState, create_expert_output_state
+from schemas.residual_stream import ResidualStreamState, create_residual_stream_state
 from schemas.capture_manifest import CaptureManifest, create_capture_manifest
 
 # Core services
@@ -67,8 +68,9 @@ class ProbeCapture:
     # Schema records
     token_record: TokenRecord
     routing_records: List[RoutingRecord]
-    expert_internal_records: List[ExpertInternalActivation] 
+    expert_internal_records: List[ExpertInternalActivation]
     expert_output_records: List[ExpertOutputState]
+    residual_stream_records: List[ResidualStreamState]
 
 
 class SessionBatchWriters:
@@ -84,7 +86,8 @@ class SessionBatchWriters:
         self.routing_writer = BatchWriter(self.session_dir / "routing.parquet", batch_size)
         self.expert_internal_writer = BatchWriter(self.session_dir / "expert_internal_activations.parquet", batch_size)
         self.expert_output_writer = BatchWriter(self.session_dir / "expert_output_states.parquet", batch_size)
-        
+        self.residual_stream_writer = BatchWriter(self.session_dir / "residual_streams.parquet", batch_size)
+
         self.writers_active = True
     
     def write_probe_data(self, probe_data: ProbeCapture) -> None:
@@ -104,7 +107,10 @@ class SessionBatchWriters:
             
             for expert_output_record in probe_data.expert_output_records:
                 self.expert_output_writer.add_record(expert_output_record)
-                
+
+            for residual_record in probe_data.residual_stream_records:
+                self.residual_stream_writer.add_record(residual_record)
+
         except Exception as e:
             print(f"❌ Failed to write probe {probe_data.probe_id}: {e}")
             raise
@@ -115,9 +121,10 @@ class SessionBatchWriters:
             return
             
         self.tokens_writer.flush()
-        self.routing_writer.flush() 
+        self.routing_writer.flush()
         self.expert_internal_writer.flush()
         self.expert_output_writer.flush()
+        self.residual_stream_writer.flush()
     
     def close_all(self) -> None:
         """Close all batch writers and mark inactive."""
@@ -391,6 +398,7 @@ class IntegratedCaptureService:
         routing_records = []
         expert_internal_records = []
         expert_output_records = []
+        residual_stream_records = []
         
         # Convert routing data for each layer
         for layer in self.layers_to_capture:
@@ -452,7 +460,22 @@ class IntegratedCaptureService:
                         expert_output_state=expert_output_state.numpy()
                     )
                     expert_output_records.append(output_record)
-        
+
+            # Convert residual stream states (full decoder layer output)
+            if layer_key in self.routing_capture.residual_stream_data:
+                residual_data = self.routing_capture.residual_stream_data[layer_key]
+
+                for token_position in range(2):
+                    residual_state = residual_data["residual_stream"][0, token_position, :]  # Remove batch dim
+
+                    residual_record = create_residual_stream_state(
+                        probe_id=probe_id,
+                        layer=layer,
+                        token_position=token_position,
+                        residual_stream=residual_state.numpy()
+                    )
+                    residual_stream_records.append(residual_record)
+
         return ProbeCapture(
             probe_id=probe_id,
             session_id=session_id,
@@ -463,7 +486,8 @@ class IntegratedCaptureService:
             token_record=token_record,
             routing_records=routing_records,
             expert_internal_records=expert_internal_records,
-            expert_output_records=expert_output_records
+            expert_output_records=expert_output_records,
+            residual_stream_records=residual_stream_records
         )
     
     def capture_session_batch(self, session_id: str) -> List[str]:
@@ -556,20 +580,23 @@ class IntegratedCaptureService:
             table = pa.Table.from_pylist([manifest_dict])
             pq.write_table(table, manifest_path)
             
-            # Generate PCA features from expert output states
+            # Generate dimensionality-reduced features (PCA + UMAP for both sources)
             try:
-                from services.features.pca_generation_service import PCAGenerationService
-                print(f"🔬 Generating PCA features for session {session_id}...")
-                pca_service = PCAGenerationService(n_components=128)
-                # PCAGenerationService expects just the ID, not "session_" prefix
+                from services.features.reduction_service import ReductionService
+                print(f"🔬 Generating reduced features for session {session_id}...")
+                reducer = ReductionService(n_components=128)
                 session_id_only = session_id.replace("session_", "") if session_id.startswith("session_") else session_id
-                pca_output_path = pca_service.generate_pca_features(session_id_only, self.data_lake_path)
-                print(f"✅ PCA features generated: {pca_output_path}")
-            except Exception as pca_error:
+                for source in ["expert_output", "residual_stream"]:
+                    for method in ["pca", "umap"]:
+                        try:
+                            output_path = reducer.generate_features(session_id_only, self.data_lake_path, source, method)
+                            print(f"✅ {source}/{method} features: {output_path}")
+                        except Exception as e:
+                            print(f"⚠️ {source}/{method} reduction failed (non-fatal): {e}")
+            except Exception as reduction_error:
                 import traceback
-                print(f"⚠️ PCA generation failed (non-fatal): {type(pca_error).__name__}: {pca_error}")
-                print(f"🔍 PCA error traceback: {traceback.format_exc()}")
-                # Don't fail the entire session if PCA fails
+                print(f"⚠️ Feature reduction failed (non-fatal): {type(reduction_error).__name__}: {reduction_error}")
+                print(f"🔍 Reduction error traceback: {traceback.format_exc()}")
             
             # Update session state
             session_status.state = SessionState.COMPLETED

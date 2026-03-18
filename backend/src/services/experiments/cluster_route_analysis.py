@@ -15,7 +15,7 @@ from sklearn.metrics import silhouette_score
 from core.parquet_reader import read_records
 from schemas.tokens import TokenRecord
 from schemas.capture_manifest import CaptureManifest
-from schemas.features_pca128 import PCAFeatureRecord
+from schemas.features_pca128 import PCAFeatureRecord, ReductionFeatureRecord
 
 
 # Simple category axis pairs for percentage calculations
@@ -52,9 +52,11 @@ class ClusterRouteAnalysisService:
         Analyze cluster routes for a capture session within specified window.
         Returns same structure as ExpertRouteAnalysisService.
         """
-        # Load session data (PCA features + tokens + manifest)
-        pca_records, token_records, manifest = self._load_session_data(session_id)
-        
+        # Load session data (features + tokens + manifest)
+        source = clustering_config.get("embedding_source", "expert_output")
+        method = clustering_config.get("reduction_method", "pca")
+        pca_records, token_records, manifest = self._load_session_data(session_id, source=source, method=method)
+
         # Apply filtering if provided
         if filter_config:
             pca_records, token_records = self._apply_filters(
@@ -91,35 +93,42 @@ class ClusterRouteAnalysisService:
     
     def _load_session_data(
         self,
-        session_id: str
-    ) -> Tuple[List[PCAFeatureRecord], List[TokenRecord], Optional[CaptureManifest]]:
-        """Load PCA features, token, and manifest data for a session."""
+        session_id: str,
+        source: str = "expert_output",
+        method: str = "pca"
+    ) -> Tuple[list, List[TokenRecord], Optional[CaptureManifest]]:
+        """Load reduced features, token, and manifest data for a session."""
         session_path = self.data_lake_path / f"session_{session_id}"
-        
+
         if not session_path.exists():
             # Try without prefix
             session_path = self.data_lake_path / session_id
             if not session_path.exists():
                 raise ValueError(f"Session {session_id} not found")
-        
-        # Load PCA feature records
-        pca_path = session_path / "features_pca128.parquet"
-        if not pca_path.exists():
-            raise ValueError(f"PCA features not found for session {session_id}")
-        pca_records = read_records(str(pca_path), PCAFeatureRecord)
-        
+
+        # Try new generic feature file first, fall back to legacy
+        generic_path = session_path / f"features_{source}_{method}128.parquet"
+        legacy_path = session_path / "features_pca128.parquet"
+
+        if generic_path.exists():
+            feature_records = read_records(str(generic_path), ReductionFeatureRecord)
+        elif legacy_path.exists():
+            feature_records = read_records(str(legacy_path), PCAFeatureRecord)
+        else:
+            raise ValueError(f"Feature data not found for session {session_id} ({source}/{method})")
+
         # Load token records
         tokens_path = session_path / "tokens.parquet"
         token_records = read_records(str(tokens_path), TokenRecord)
-        
+
         # Load manifest (optional for backward compatibility)
         manifest = None
         manifest_path = session_path / "capture_manifest.parquet"
         if manifest_path.exists():
             manifest_records = read_records(str(manifest_path), CaptureManifest)
             manifest = manifest_records[0] if manifest_records else None
-        
-        return pca_records, token_records, manifest
+
+        return feature_records, token_records, manifest
     
     def _apply_filters(
         self,
@@ -217,7 +226,8 @@ class ClusterRouteAnalysisService:
             
             for record in layer_records:
                 # Use the numpy array directly, truncated to requested dimensions
-                feature_vector = record.pca128[:pca_dims].tolist()
+                raw = record.features if hasattr(record, 'features') else record.pca128
+                feature_vector = raw[:pca_dims].tolist()
                 X.append(feature_vector)
                 record_lookup.append(record)
             
@@ -572,40 +582,18 @@ class ClusterRouteAnalysisService:
         layers: List[int],
         n_dims: int = 3,
         filter_config: Optional[Dict[str, Any]] = None,
-        max_trajectories: int = 500
+        max_trajectories: int = 500,
+        source: str = "expert_output",
+        method: str = "pca"
     ) -> Dict[str, Any]:
         """
-        Get stepped PCA trajectory data for 3D visualization.
-        
-        Returns PCA coordinates for each probe across specified layers,
+        Get stepped trajectory data for 3D visualization.
+
+        Returns reduced-feature coordinates for each probe across specified layers,
         showing how concepts move through the latent space.
-        
-        Args:
-            session_id: Session identifier
-            layers: List of layer numbers to include in trajectory
-            n_dims: Number of PCA dimensions to return (2, 3, 5, etc.)
-            filter_config: Optional filtering (same as route analysis)
-            max_trajectories: Maximum number of trajectories to return
-            
-        Returns:
-            {
-                "trajectories": [
-                    {
-                        "probe_id": "...",
-                        "context": "...",
-                        "target": "...",
-                        "coordinates": [
-                            {"layer": 0, "x": 0.1, "y": 0.2, "z": 0.3},
-                            {"layer": 1, "x": 0.2, "y": 0.3, "z": 0.4},
-                            ...
-                        ]
-                    }
-                ],
-                "metadata": {"layers": [0,1,2], "n_dims": 3, "total_trajectories": 100}
-            }
         """
         # Load session data (reuse existing method)
-        pca_records, token_records, manifest = self._load_session_data(session_id)
+        pca_records, token_records, manifest = self._load_session_data(session_id, source=source, method=method)
         
         # Apply filtering if provided (reuse existing method)
         if filter_config:
@@ -642,7 +630,7 @@ class ClusterRouteAnalysisService:
             coordinates = []
             for layer in layers:
                 pca_record = layer_data[layer]
-                pca_features = pca_record.pca128
+                pca_features = pca_record.features if hasattr(pca_record, 'features') else pca_record.pca128
                 
                 # Build coordinate dict based on requested dimensions
                 coord = {"layer": layer}

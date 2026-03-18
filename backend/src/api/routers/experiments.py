@@ -232,36 +232,20 @@ async def get_pca_trajectories(
     n_dims: int = 3,
     max_trajectories: int = 500,
     filter_config: str = None,  # JSON-encoded filter configuration
+    source: str = "expert_output",  # "expert_output" or "residual_stream"
+    method: str = "pca",  # "pca" or "umap"
     service: ClusterRouteAnalysisService = Depends(get_cluster_analysis_service)
 ):
     """
-    Get stepped PCA trajectory data for 3D visualization.
-    
-    Returns PCA coordinates for each probe across specified layers,
-    showing how concepts move through the latent space.
-    
+    Get stepped trajectory data for 3D visualization.
+
     Query Parameters:
         session_id: Session identifier
         layers: Comma-separated layer numbers (e.g., "0,1,2,3,4,5")
-        n_dims: Number of PCA dimensions to return (2, 3, 5, etc.)
+        n_dims: Number of dimensions to return (2, 3, 5, etc.)
         max_trajectories: Maximum number of trajectories to return (default 500)
-    
-    Returns:
-        {
-            "trajectories": [
-                {
-                    "probe_id": "...",
-                    "context": "...",
-                    "target": "...",
-                    "coordinates": [
-                        {"layer": 0, "x": 0.1, "y": 0.2, "z": 0.3},
-                        {"layer": 1, "x": 0.2, "y": 0.3, "z": 0.4},
-                        ...
-                    ]
-                }
-            ],
-            "metadata": {"layers": [0,1,2], "n_dims": 3, "total_trajectories": 100}
-        }
+        source: Embedding source - "expert_output" or "residual_stream"
+        method: Reduction method - "pca" or "umap"
     """
     try:
         # Parse layers
@@ -293,7 +277,9 @@ async def get_pca_trajectories(
             layers=layer_list,
             n_dims=n_dims,
             filter_config=filter_config_dict,
-            max_trajectories=max_trajectories
+            max_trajectories=max_trajectories,
+            source=source,
+            method=method
         )
         
         logger.info(f"✅ Generated {len(result['trajectories'])} PCA trajectories for session {session_id}")
