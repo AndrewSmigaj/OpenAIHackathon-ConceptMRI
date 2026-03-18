@@ -5,8 +5,11 @@ Simple approach: register all hooks upfront, no complex dynamic registration.
 """
 
 import torch
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, TYPE_CHECKING
 import numpy as np
+
+if TYPE_CHECKING:
+    from adapters.base_adapter import ModelAdapter
 
 
 class EnhancedRoutingCapture:
@@ -20,19 +23,21 @@ class EnhancedRoutingCapture:
     - Configurable layer windows for UI flexibility
     """
     
-    def __init__(self, model, layers_to_capture: Optional[List[int]] = None):
+    def __init__(self, model, layers_to_capture: Optional[List[int]] = None,
+                 adapter: Optional['ModelAdapter'] = None):
         self.model = model
+        self.adapter = adapter
         self.hooks = []
-        
+
         # Data storage organized for schema conversion
         self.routing_data = {}        # For RoutingRecord schema
-        self.activation_data = {}     # For ExpertOutputState schema  
+        self.activation_data = {}     # For ExpertOutputState schema
         self.expert_internal_data = {} # For ExpertInternalActivation schema
-        
-        # Default to all 24 layers for full model analysis
+
+        # Use adapter for defaults, fall back to legacy hardcoded values
         if layers_to_capture is None:
-            layers_to_capture = list(range(24))
-        
+            layers_to_capture = adapter.layers_range() if adapter else list(range(24))
+
         self.layers_to_capture = layers_to_capture
         print(f"Enhanced capture for layers: {self.layers_to_capture}")
         
@@ -40,23 +45,40 @@ class EnhancedRoutingCapture:
         """Register all hooks upfront - simple approach."""
         for layer_idx in self.layers_to_capture:
             try:
-                layer = self.model.model.layers[layer_idx]
-                
+                if self.adapter:
+                    layer = self.adapter.get_layer(self.model, layer_idx)
+                    moe_block = self.adapter.get_moe_block(layer)
+                else:
+                    layer = self.model.model.layers[layer_idx]
+                    moe_block = layer.mlp
+
                 # 1. MLP hook (captures both routing computation and output)
-                mlp_hook = layer.mlp.register_forward_hook(
+                mlp_hook = moe_block.register_forward_hook(
                     self._make_mlp_combined_hook(layer_idx)
                 )
                 self.hooks.append(mlp_hook)
-                
-                # 3. Experts module hook (captures collective expert processing)
-                # Note: Quantized model has single experts module, not individual experts
-                experts_hook = layer.mlp.experts.register_forward_hook(
-                    self._make_experts_collective_hook(layer_idx)
-                )
-                self.hooks.append(experts_hook)
-                
-                print(f"✅ Registered {1 + 1} hooks for layer {layer_idx} (mlp combined + experts)")
-                
+
+                # 2. Experts module hook (captures collective expert processing)
+                # Only register for collective expert style (fused module)
+                register_experts = True
+                if self.adapter:
+                    from adapters.base_adapter import ExpertStyle
+                    register_experts = (self.adapter.capabilities.expert_style == ExpertStyle.COLLECTIVE)
+
+                if register_experts:
+                    if self.adapter:
+                        experts_module = self.adapter.get_experts_module(moe_block)
+                    else:
+                        experts_module = moe_block.experts
+
+                    experts_hook = experts_module.register_forward_hook(
+                        self._make_experts_collective_hook(layer_idx)
+                    )
+                    self.hooks.append(experts_hook)
+
+                hook_count = 2 if register_experts else 1
+                print(f"✅ Registered {hook_count} hooks for layer {layer_idx}")
+
             except Exception as e:
                 print(f"❌ Failed to register hooks for layer {layer_idx}: {e}")
     
@@ -70,28 +92,26 @@ class EnhancedRoutingCapture:
                 else:
                     hidden_states = input
                 
-                # Compute routing weights manually (replicating MLP forward logic)
-                batch_size, seq_len, hidden_dim = hidden_states.shape
-                hidden_states_flat = hidden_states.reshape(-1, hidden_dim)
-                
-                # Compute router logits using router weights directly
-                router_logits = torch.nn.functional.linear(
-                    hidden_states_flat, 
-                    module.router.weight, 
-                    module.router.bias
-                )
-                
-                # Reshape back to [batch, seq, num_experts]
-                router_logits = router_logits.reshape(batch_size, seq_len, -1)
-                
-                # Convert to probabilities
-                routing_weights = torch.softmax(router_logits, dim=-1)
+                # Compute routing weights via adapter or legacy manual path
+                if self.adapter:
+                    routing_weights = self.adapter.compute_routing_weights(module, hidden_states)
+                else:
+                    batch_size, seq_len, hidden_dim = hidden_states.shape
+                    hidden_states_flat = hidden_states.reshape(-1, hidden_dim)
+                    router_logits = torch.nn.functional.linear(
+                        hidden_states_flat,
+                        module.router.weight,
+                        module.router.bias
+                    )
+                    router_logits = router_logits.reshape(batch_size, seq_len, -1)
+                    routing_weights = torch.softmax(router_logits, dim=-1)
                 
                 # Convert to CPU for analysis
                 routing_weights_cpu = routing_weights.detach().cpu()
                 
-                # Get K=4 expert decisions
-                top4_probs, top4_experts = torch.topk(routing_weights_cpu, k=4, dim=-1)
+                # Get top-K expert decisions
+                top_k = self.adapter.topology.top_k if self.adapter else 4
+                top4_probs, top4_experts = torch.topk(routing_weights_cpu, k=top_k, dim=-1)
                 
                 # Compute routing statistics
                 gate_entropy = self._compute_entropy(routing_weights_cpu)
@@ -148,11 +168,10 @@ class EnhancedRoutingCapture:
         return experts_collective_hook
     
     def _compute_entropy(self, routing_weights: torch.Tensor) -> torch.Tensor:
-        """Compute entropy of routing distribution."""
+        """Compute entropy of routing distribution. Input must be already softmaxed."""
         eps = 1e-8
-        probs = torch.softmax(routing_weights, dim=-1)
-        log_probs = torch.log(probs + eps)
-        entropy = -torch.sum(probs * log_probs, dim=-1)
+        log_probs = torch.log(routing_weights + eps)
+        entropy = -torch.sum(routing_weights * log_probs, dim=-1)
         return entropy
     
     def clear_data(self):

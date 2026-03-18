@@ -34,12 +34,12 @@ class ExpertInternalActivation:
         """Validate activation data consistency."""
         context = f"Probe {self.probe_id} Layer {self.layer} Expert {self.expert_id} Token {self.token_position}"
         
-        if not (0 <= self.layer <= 23):
-            raise ValueError(f"{context}: Layer {self.layer} out of range [0, 23]")
-        
+        if self.layer < 0:
+            raise ValueError(f"{context}: Layer {self.layer} must be >= 0")
+
         # Allow expert_id = -1 for collective experts in quantized models
-        if not ((-1 <= self.expert_id <= 31)):
-            raise ValueError(f"{context}: Expert ID {self.expert_id} out of range [-1, 31]")
+        if self.expert_id < -1:
+            raise ValueError(f"{context}: Expert ID {self.expert_id} must be >= -1")
         
         if not (0 <= self.token_position <= 1):
             raise ValueError(f"{context}: Token position {self.token_position} out of range [0, 1]")

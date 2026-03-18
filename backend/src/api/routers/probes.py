@@ -216,7 +216,7 @@ async def get_probe_session_details(
             # Load existing manifest from session metadata - no reconstruction needed
             manifest = CaptureManifest(
                 capture_session_id=session_metadata["session_id"],
-                session_name=session_metadata["session_name"], 
+                session_name=session_metadata["session_name"],
                 contexts=session_metadata["contexts"],
                 targets=session_metadata["targets"],
                 context_category_assignments=session_metadata.get("context_category_assignments", {}),
@@ -224,7 +224,7 @@ async def get_probe_session_details(
                 layers_captured=session_metadata.get("layers", [0, 1, 2]),
                 probe_count=session_metadata["total_pairs"],
                 created_at=session_metadata["created_at"],
-                model_name="gpt-oss-20b"
+                model_name=session_metadata.get("model_name", "gpt-oss-20b")
             )
             
         logger.info(f"✅ Successfully loaded session manifest")

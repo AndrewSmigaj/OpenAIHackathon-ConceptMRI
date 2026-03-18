@@ -19,9 +19,9 @@ class RoutingRecord:
     layer: int                  # Layer number (0-23 for GPT-OSS-20B)
     token_position: int         # Token position in sequence (0=context, 1=target)
     
-    # K=4 routing data (full capture for future expansion)
-    expert_top4_ids: Tuple[int, int, int, int]        # Top-4 expert IDs [0-31]
-    expert_top4_weights: Tuple[float, float, float, float] # Routing weights for top-4 experts
+    # Top-K routing data (K depends on model: 4 for gpt-oss-20b, 8 for OLMoE)
+    expert_top4_ids: Tuple[int, ...]                  # Top-K expert IDs
+    expert_top4_weights: Tuple[float, ...]            # Routing weights for top-K experts
     
     # Top-1 extraction (for highway analysis)
     expert_top1_id: int         # Highest weighted expert ID
@@ -37,17 +37,14 @@ class RoutingRecord:
         """Validate routing data consistency."""
         context = f"Probe {self.probe_id} Layer {self.layer}"
         
-        if len(self.expert_top4_ids) != 4:
-            raise ValueError(f"{context}: Expected 4 expert IDs, got {len(self.expert_top4_ids)}")
+        if len(self.expert_top4_ids) != len(self.expert_top4_weights):
+            raise ValueError(f"{context}: Expert IDs count ({len(self.expert_top4_ids)}) != weights count ({len(self.expert_top4_weights)})")
         
-        if len(self.expert_top4_weights) != 4:
-            raise ValueError(f"{context}: Expected 4 routing weights, got {len(self.expert_top4_weights)}")
-        
-        if not (0 <= self.layer <= 23):
-            raise ValueError(f"{context}: Layer {self.layer} out of range [0, 23]")
-        
-        if not all(0 <= expert_id <= 31 for expert_id in self.expert_top4_ids):
-            raise ValueError(f"{context}: Expert IDs must be in range [0, 31], got {self.expert_top4_ids}")
+        if self.layer < 0:
+            raise ValueError(f"{context}: Layer {self.layer} must be >= 0")
+
+        if not all(expert_id >= 0 for expert_id in self.expert_top4_ids):
+            raise ValueError(f"{context}: Expert IDs must be >= 0, got {self.expert_top4_ids}")
         
         # Verify top-1 extraction is consistent
         max_weight_idx = np.argmax(self.expert_top4_weights)
@@ -60,9 +57,9 @@ class RoutingRecord:
         if not np.isclose(self.expert_top1_weight, expected_top1_weight, rtol=1e-6):
             raise ValueError(f"{context}: Top-1 weight {self.expert_top1_weight} doesn't match max weight {expected_top1_weight}")
 
-    def routing_confidence(self) -> float:
+    def routing_confidence(self, num_experts: int = 32) -> float:
         """Calculate routing confidence (1 - normalized entropy)."""
-        max_entropy = np.log(32)  # Max entropy for 32 experts
+        max_entropy = np.log(num_experts)
         return 1.0 - (self.gate_entropy / max_entropy)
     
     def routing_margin(self) -> float:
@@ -105,30 +102,29 @@ def create_routing_record(
     probe_id: str,
     layer: int,
     token_position: int,
-    routing_weights: np.ndarray,  # Shape: [32] for all experts
+    routing_weights: np.ndarray,  # Shape: [num_experts] for all experts
+    top_k: int = 4,
     captured_at: Optional[str] = None
 ) -> RoutingRecord:
     """
     Create routing record from raw MoE router output.
-    
+
     Args:
         probe_id: Unique probe identifier
-        layer: Layer number (0-23)
+        layer: Layer number
         token_position: Token position in sequence (0=context, 1=target)
-        routing_weights: Full routing weights for all 32 experts
+        routing_weights: Full routing weights for all experts
+        top_k: Number of top experts to record (default 4)
         captured_at: Capture timestamp (defaults to now)
-    
+
     Returns:
-        RoutingRecord with K=4 data and top-1 extraction
+        RoutingRecord with top-K data and top-1 extraction
     """
     if captured_at is None:
         captured_at = datetime.now().isoformat()
-    
-    if routing_weights.shape[0] != 32:
-        raise ValueError(f"Expected 32 expert weights, got {routing_weights.shape[0]}")
-    
-    # Get top-4 experts and weights
-    top4_indices = np.argsort(routing_weights)[-4:][::-1]  # Descending order
+
+    # Get top-K experts and weights
+    top4_indices = np.argsort(routing_weights)[-top_k:][::-1]  # Descending order
     expert_top4_ids = tuple(top4_indices.tolist())
     expert_top4_weights = tuple(routing_weights[top4_indices].tolist())
     

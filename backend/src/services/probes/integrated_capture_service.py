@@ -135,21 +135,23 @@ class IntegratedCaptureService:
     Coordinates EnhancedRoutingCapture with schema conversion and batch writing.
     """
     
-    def __init__(self, model, tokenizer, layers_to_capture: Optional[List[int]] = None, 
+    def __init__(self, model, tokenizer, layers_to_capture: Optional[List[int]] = None,
                  data_lake_path: str = "data/lake", batch_size: int = 1000,
-                 wordnet_miner: Optional[WordNetMiner] = None):
+                 wordnet_miner: Optional[WordNetMiner] = None,
+                 adapter=None):
         print("DEBUG: IntegratedCaptureService.__init__ starting")
         self.model = model
         print("DEBUG: Model assigned")
         self.tokenizer = tokenizer
         print("DEBUG: Tokenizer assigned")
+        self.adapter = adapter
         self.data_lake_path = data_lake_path
         self.batch_size = batch_size
         print("DEBUG: Basic attributes set")
-        
-        # Default to all 24 layers for full model analysis
+
+        # Use adapter for defaults, fall back to legacy hardcoded values
         if layers_to_capture is None:
-            layers_to_capture = list(range(24))
+            layers_to_capture = adapter.layers_range() if adapter else list(range(24))
         self.layers_to_capture = layers_to_capture
         print("DEBUG: Layers to capture set")
         
@@ -231,6 +233,7 @@ class IntegratedCaptureService:
             "target_category_assignments": target_category_assignments,
             "layers_captured": self.layers_to_capture,
             "total_pairs": total_pairs,
+            "model_name": self.adapter.topology.model_name if self.adapter else "gpt-oss-20b",
             "created_at": datetime.now().isoformat(),
             "state": session_status.state.value
         }
@@ -265,7 +268,7 @@ class IntegratedCaptureService:
     def _initialize_routing_capture(self, session_id: str) -> None:
         """Initialize routing capture for session if needed."""
         if self.routing_capture is None:
-            self.routing_capture = EnhancedRoutingCapture(self.model, self.layers_to_capture)
+            self.routing_capture = EnhancedRoutingCapture(self.model, self.layers_to_capture, adapter=self.adapter)
             self.routing_capture.register_hooks()
             print(f"🔗 Registered hooks for session {session_id}")
     
@@ -538,7 +541,7 @@ class IntegratedCaptureService:
                 targets=metadata["targets"],
                 layers_captured=self.layers_to_capture,
                 probe_count=session_status.completed_pairs,
-                model_name="gpt-oss-20b",
+                model_name=self.adapter.topology.model_name if self.adapter else "gpt-oss-20b",
                 context_category_assignments=metadata.get("context_category_assignments"),
                 target_category_assignments=metadata.get("target_category_assignments")
             )

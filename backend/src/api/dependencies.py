@@ -6,13 +6,13 @@ Simple dependency injection for shared services.
 import sys
 from pathlib import Path
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Add backend to path  
 backend_src = Path(__file__).parent.parent  # backend/src
 project_root = backend_src.parent.parent     # project root
 sys.path.insert(0, str(backend_src))
 
+from adapters.registry import get_adapter
 from services.probes.integrated_capture_service import IntegratedCaptureService
 from services.experiments.expert_route_analysis import ExpertRouteAnalysisService
 from services.experiments.cluster_route_analysis import ClusterRouteAnalysisService
@@ -38,22 +38,17 @@ async def initialize_capture_service():
     print("🚀 Initializing capture service at startup...")
     
     try:
-        # Use absolute path resolution like the working test script
-        model_path = project_root / "data" / "models" / "gpt-oss-20b"
+        # Create adapter and use it for model loading
+        adapter = get_adapter("gpt-oss-20b")
+        model_path = project_root / "data" / "models" / adapter.topology.model_dir
         data_lake_path = project_root / "data" / "lake"
-        
+
         # Check if model exists
         if not model_path.exists():
             raise FileNotFoundError(f"Model not found at: {model_path}")
-        
-        print(f"📚 Loading model from: {model_path}")
-        tokenizer = AutoTokenizer.from_pretrained(str(model_path))
-        model = AutoModelForCausalLM.from_pretrained(
-            str(model_path),
-            dtype=torch.float16,
-            device_map="auto",
-            trust_remote_code=True
-        )
+
+        print(f"📚 Loading model from: {model_path} (adapter: {adapter.topology.model_name})")
+        model, tokenizer = adapter.load_model(str(model_path))
         
         # Initialize WordNet first (can be slow)
         print("📚 Initializing WordNet data...")
@@ -72,9 +67,10 @@ async def initialize_capture_service():
         _capture_service = IntegratedCaptureService(
             model=model,
             tokenizer=tokenizer,
-            layers_to_capture=list(range(24)),
+            layers_to_capture=adapter.layers_range(),
             data_lake_path=str(data_lake_path),
-            wordnet_miner=_wordnet_miner
+            wordnet_miner=_wordnet_miner,
+            adapter=adapter
         )
         print("🔧 IntegratedCaptureService created successfully")
         

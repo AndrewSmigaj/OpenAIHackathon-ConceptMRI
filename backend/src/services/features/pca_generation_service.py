@@ -57,7 +57,7 @@ class PCAGenerationService:
         # Group by layer and token position to fit PCA models
         pca_features_records = []
         
-        for layer in range(24):
+        for layer in sorted(df['layer'].unique()):
             for token_position in [0, 1]:  # Context and target
                 # Filter data
                 mask = (df['layer'] == layer) & (df['token_position'] == token_position)
@@ -76,8 +76,9 @@ class PCAGenerationService:
                 else:
                     n_components_actual = self.n_components
                 
-                # Pre-allocate array for efficiency
-                states = np.zeros((n_samples, 2880), dtype=np.float32)
+                # Pre-allocate array for efficiency — read dim from data
+                hidden_size = len(layer_pos_df.iloc[0]['expert_output_state'])
+                states = np.zeros((n_samples, hidden_size), dtype=np.float32)
                 for idx, (_, row) in enumerate(layer_pos_df.iterrows()):
                     states[idx] = np.array(row['expert_output_state'], dtype=np.float32)
                 
@@ -199,13 +200,11 @@ class PCAGenerationService:
             Dict mapping layer to PCA components matrix
         """
         components = {}
-        for layer in range(24):
-            model_key = f"{layer}_{token_position}"
-            if model_key in self.pca_models:
-                pca = self.pca_models[model_key]
-                # Get min of requested dims and available components
+        for model_key, pca in self.pca_models.items():
+            key_layer, key_pos = model_key.split('_')
+            if int(key_pos) == token_position:
                 n_available = min(n_dims, pca.n_components_)
-                components[layer] = pca.components_[:n_available]
+                components[int(key_layer)] = pca.components_[:n_available]
         return components
 
 

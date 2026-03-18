@@ -33,8 +33,8 @@ class ExpertOutputState:
         self.expert_output_state = ensure_numpy_array(self.expert_output_state)
         
         # Validate ranges
-        if not (0 <= self.layer <= 23):
-            raise ValueError(f"Layer {self.layer} out of range [0, 23]")
+        if self.layer < 0:
+            raise ValueError(f"Layer {self.layer} must be >= 0")
         
         if not (0 <= self.token_position <= 1):
             raise ValueError(f"Token position {self.token_position} out of range [0, 1]")
