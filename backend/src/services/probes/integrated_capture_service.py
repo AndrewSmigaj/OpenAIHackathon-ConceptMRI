@@ -14,7 +14,7 @@ from datetime import datetime
 import uuid
 
 # Schema imports
-from schemas.tokens import TokenRecord, create_token_record
+from schemas.tokens import ProbeRecord, create_probe_record
 from schemas.routing import RoutingRecord, create_routing_record
 from schemas.expert_internal_activations import ExpertInternalActivation, create_expert_internal_activation
 from schemas.expert_output_states import ExpertOutputState, create_expert_output_state
@@ -55,18 +55,14 @@ class SessionStatus:
         return (self.completed_pairs / self.total_pairs) * 100.0
 
 
-@dataclass 
+@dataclass
 class ProbeCapture:
-    """Complete capture data for a single context-target pair."""
+    """Complete capture data for a single probe."""
     probe_id: str
     session_id: str
-    context: str
-    target: str
-    context_token_id: int
-    target_token_id: int
-    
+
     # Schema records
-    token_record: TokenRecord
+    probe_record: ProbeRecord
     routing_records: List[RoutingRecord]
     expert_internal_records: List[ExpertInternalActivation]
     expert_output_records: List[ExpertOutputState]
@@ -97,7 +93,7 @@ class SessionBatchWriters:
         
         try:
             # Write to each schema
-            self.tokens_writer.add_record(probe_data.token_record)
+            self.tokens_writer.add_record(probe_data.probe_record)
             
             for routing_record in probe_data.routing_records:
                 self.routing_writer.add_record(routing_record)
@@ -290,17 +286,72 @@ class IntegratedCaptureService:
                 torch.cuda.empty_cache()
             print("🧹 Cleaned up routing capture and GPU memory")
     
-    def capture_single_pair(self, session_id: str, context: str, target: str) -> str:
+    def _find_word_token_position(self, token_ids: list, word: str) -> Tuple[int, int]:
         """
-        Capture single context-target pair within active session.
-        
+        Find a word's token position in a tokenized sequence.
+
+        Returns (position, token_id). Picks last occurrence if multiple matches.
+        Handles BPE whitespace sensitivity by trying both 'word' and ' word'.
+
+        Raises ValueError if word is multi-token or not found.
+        """
+        # Try tokenizing with and without leading space (BPE sensitivity)
+        word_tokens = self.tokenizer.encode(word, add_special_tokens=False)
+        space_word_tokens = self.tokenizer.encode(f" {word}", add_special_tokens=False)
+
+        # Determine which tokenization to use
+        if len(word_tokens) == 1:
+            target_token_id = word_tokens[0]
+        elif len(space_word_tokens) == 1:
+            target_token_id = space_word_tokens[0]
+        else:
+            raise ValueError(
+                f"Word '{word}' must be a single token. "
+                f"Got {len(word_tokens)} tokens without space, "
+                f"{len(space_word_tokens)} tokens with space."
+            )
+
+        # Find last occurrence in the sequence
+        positions = [i for i, tid in enumerate(token_ids) if tid == target_token_id]
+        if not positions:
+            # Try the other tokenization as fallback
+            alt_id = space_word_tokens[0] if len(word_tokens) == 1 else word_tokens[0]
+            positions = [i for i, tid in enumerate(token_ids) if tid == alt_id]
+            if positions:
+                target_token_id = alt_id
+
+        if not positions:
+            raise ValueError(f"Word '{word}' (token_id={target_token_id}) not found in tokenized input")
+
+        return positions[-1], target_token_id  # Last occurrence
+
+    def capture_probe(
+        self, session_id: str, input_text: str, target_word: str,
+        target_token_position: int = None,
+        context_word: str = None,
+        context_token_position: int = None,
+        past_key_values=None, use_cache: bool = False,
+        experiment_id: str = None, sequence_id: str = None,
+        sentence_index: int = None, regime_label: str = None,
+        transition_step: int = None,
+    ) -> Tuple[str, any]:
+        """
+        Capture a probe for any-length text input, tracking a target word
+        and optionally a context word.
+
         Args:
             session_id: Active session ID
-            context: Context word (must tokenize to single token for demo)
-            target: Target word (must tokenize to single token for demo)
-            
+            input_text: Full text to feed the model
+            target_word: Word to track within input_text
+            target_token_position: Optional explicit position (auto-detected if None)
+            context_word: Optional disambiguating word to also track
+            context_token_position: Optional explicit position for context word
+            past_key_values: KV cache from previous capture (for temporal experiments)
+            use_cache: Whether to return updated KV cache
+            experiment_id..transition_step: Temporal experiment metadata
+
         Returns:
-            Generated probe_id
+            Tuple of (probe_id, past_key_values or None)
         """
         if session_id not in self.active_sessions:
             # Try to load session from disk and restore it
@@ -308,182 +359,205 @@ class IntegratedCaptureService:
             if session_file.exists():
                 with open(session_file, 'r') as f:
                     metadata = json.load(f)
-                # Only restore if session is still active
                 if metadata["state"] == "active":
                     self._restore_session(session_id, metadata)
                 else:
                     raise ValueError(f"Session {session_id} is not active (state: {metadata['state']})")
             else:
                 raise ValueError(f"Session {session_id} not found")
-        
+
         session_status = self.active_sessions[session_id]
         if session_status.state != SessionState.ACTIVE:
             raise ValueError(f"Session {session_id} is not in ACTIVE state: {session_status.state}")
-        
-        # Generate unique probe ID
+
         probe_id = generate_probe_id()
         session_status.current_probe = probe_id
-        
+
         try:
-            # Initialize routing capture if needed
             self._initialize_routing_capture(session_id)
-            
-            # Tokenize inputs - CRITICAL: Must be single tokens for demo
-            context_tokens = self.tokenizer.encode(context, add_special_tokens=False)
-            target_tokens = self.tokenizer.encode(target, add_special_tokens=False) 
-            
-            if len(context_tokens) != 1:
-                raise ValueError(f"Context '{context}' must be a single token (got {len(context_tokens)} tokens). Demo requires single-token words for highway analysis.")
-            
-            if len(target_tokens) != 1:
-                raise ValueError(f"Target '{target}' must be a single token (got {len(target_tokens)} tokens). Demo requires single-token words for highway analysis.")
-            
-            context_token_id = context_tokens[0]
-            target_token_id = target_tokens[0]
-            
+
+            # Tokenize full input text
+            token_ids = self.tokenizer.encode(input_text, add_special_tokens=False)
+            total_tokens = len(token_ids)
+
+            # Find target word position
+            if target_token_position is None:
+                target_token_position, target_token_id = self._find_word_token_position(token_ids, target_word)
+            else:
+                target_token_id = token_ids[target_token_position]
+
+            # Find context word position if provided
+            context_token_pos = None
+            if context_word is not None:
+                if context_token_position is not None:
+                    context_token_pos = context_token_position
+                else:
+                    context_token_pos, _ = self._find_word_token_position(token_ids, context_word)
+
             # Clear previous capture data
             self.routing_capture.clear_data()
-            
-            # Create input sequence [context, target]
-            input_sequence = torch.tensor([[context_token_id, target_token_id]], device=self.model.device)
-            
-            # Run forward pass to trigger hooks
+
+            # Create input tensor and run forward pass
+            input_tensor = torch.tensor([token_ids], device=self.model.device)
+
             with torch.no_grad():
-                _ = self.model(input_sequence)
-            
+                forward_kwargs = {"input_ids": input_tensor}
+                if past_key_values is not None:
+                    forward_kwargs["past_key_values"] = past_key_values
+                if use_cache:
+                    forward_kwargs["use_cache"] = True
+                outputs = self.model(**forward_kwargs)
+
+            # Get updated KV cache if requested
+            new_past_key_values = None
+            if use_cache and hasattr(outputs, 'past_key_values'):
+                new_past_key_values = outputs.past_key_values
+
             # Convert hook data to schema records
-            probe_data = self._convert_to_schemas(
+            probe_data = self._convert_probe_to_schemas(
                 probe_id=probe_id,
-                session_id=session_id, 
-                context=context,
-                target=target,
-                context_token_id=context_token_id,
-                target_token_id=target_token_id
+                session_id=session_id,
+                input_text=input_text,
+                target_word=target_word,
+                target_token_id=target_token_id,
+                target_token_position=target_token_position,
+                total_tokens=total_tokens,
+                context_word=context_word,
+                context_token_position=context_token_pos,
+                experiment_id=experiment_id,
+                sequence_id=sequence_id,
+                sentence_index=sentence_index,
+                regime_label=regime_label,
+                transition_step=transition_step,
             )
-            
+
             # Write to data lake
             writers = self.session_writers[session_id]
             writers.write_probe_data(probe_data)
-            
+
             # Update session progress
             session_status.completed_pairs += 1
             session_status.current_probe = None
-            
-            print(f"✅ Captured probe {probe_id}: '{context}' → '{target}' (session {session_id})")
-            return probe_id
-            
+
+            ctx_info = f", context='{context_word}'" if context_word else ""
+            print(f"✅ Captured probe {probe_id}: '{target_word}' in '{input_text[:40]}...'{ctx_info} (session {session_id})")
+            return probe_id, new_past_key_values
+
         except Exception as e:
-            # Update failure count
             session_status.failed_pairs += 1
             session_status.current_probe = None
             session_status.error_message = str(e)
-            
-            print(f"❌ Failed to capture '{context}' → '{target}': {e}")
+
+            print(f"❌ Failed to capture '{target_word}' in '{input_text[:40]}...': {e}")
             raise
-    
-    def _convert_to_schemas(self, probe_id: str, session_id: str, context: str, target: str, 
-                          context_token_id: int, target_token_id: int) -> ProbeCapture:
-        """Convert raw routing capture data to schema records."""
-        
-        # Create token record (index table)
-        token_record = create_token_record(
+
+    def _convert_probe_to_schemas(
+        self, probe_id: str, session_id: str,
+        input_text: str, target_word: str,
+        target_token_id: int, target_token_position: int,
+        total_tokens: int,
+        context_word: str = None, context_token_position: int = None,
+        experiment_id: str = None, sequence_id: str = None,
+        sentence_index: int = None, regime_label: str = None,
+        transition_step: int = None,
+    ) -> ProbeCapture:
+        """Convert raw routing capture data to schema records.
+
+        Extracts activation data at the target position (always) and
+        context position (if context_word provided). Stores with semantic
+        token_position: 0=context, 1=target.
+        """
+        from datetime import datetime
+
+        probe_record = create_probe_record(
             probe_id=probe_id,
-            capture_session_id=session_id,
-            context_text=context,
-            target_text=target,
-            context_token_id=context_token_id,
-            target_token_id=target_token_id
+            session_id=session_id,
+            input_text=input_text,
+            target_word=target_word,
+            target_token_id=target_token_id,
+            target_token_position=target_token_position,
+            total_tokens=total_tokens,
+            context_word=context_word,
+            context_token_position=context_token_position,
+            experiment_id=experiment_id,
+            sequence_id=sequence_id,
+            sentence_index=sentence_index,
+            regime_label=regime_label,
+            transition_step=transition_step,
+            created_at=datetime.now().isoformat(),
         )
-        
+
         routing_records = []
         expert_internal_records = []
         expert_output_records = []
         residual_stream_records = []
-        
-        # Convert routing data for each layer
+
+        # Build list of (actual_position, semantic_position) pairs to extract
+        positions_to_extract = [(target_token_position, 1)]  # target always at semantic position 1
+        if context_token_position is not None:
+            positions_to_extract.append((context_token_position, 0))  # context at semantic position 0
+
         for layer in self.layers_to_capture:
             layer_key = f"layer_{layer}"
-            
+
             if layer_key not in self.routing_capture.routing_data:
                 print(f"⚠️ No routing data for layer {layer}")
                 continue
-            
+
             routing_data = self.routing_capture.routing_data[layer_key]
-            
-            # For each token position (0=context, 1=target)
-            for token_position in range(2):  # [context, target]
-                
-                # Create routing record with token position tracking
-                routing_weights = routing_data["routing_weights"][0, token_position, :]  # Remove batch dim
-                routing_record = create_routing_record(
-                    probe_id=probe_id,
-                    layer=layer,
-                    token_position=token_position,
+
+            for actual_pos, semantic_pos in positions_to_extract:
+                # Routing weights
+                routing_weights = routing_data["routing_weights"][0, actual_pos, :]
+                routing_records.append(create_routing_record(
+                    probe_id=probe_id, layer=layer,
+                    token_position=semantic_pos,
                     routing_weights=routing_weights.numpy()
-                )
-                routing_records.append(routing_record)
-            
-            # Convert collective expert data (quantized model provides collective processing)
+                ))
+
+            # Expert internal activations (collective)
             collective_key = f"layer_{layer}_experts_collective"
             if collective_key in self.routing_capture.expert_internal_data:
                 expert_data = self.routing_capture.expert_internal_data[collective_key]
-                
-                # Experts output is flattened [batch*seq, hidden], need to reshape
-                collective_output = expert_data["collective_output"]  # Shape: [2, 2880] for batch=1, seq=2
-                
-                # For each token position, create a record representing collective expert processing
-                for token_position in range(2):
-                    token_output = collective_output[token_position, :]  # Shape: [2880]
-                    
-                    # Create a single record representing collective expert processing for this layer
-                    expert_internal_record = create_expert_internal_activation(
-                        probe_id=probe_id,
-                        layer=layer,
-                        expert_id=-1,  # Use -1 to indicate collective/all experts
-                        token_position=token_position,
+                collective_output = expert_data["collective_output"]
+
+                for actual_pos, semantic_pos in positions_to_extract:
+                    token_output = collective_output[actual_pos, :]
+                    expert_internal_records.append(create_expert_internal_activation(
+                        probe_id=probe_id, layer=layer,
+                        expert_id=-1,
+                        token_position=semantic_pos,
                         ff_intermediate_state=token_output.numpy()
-                    )
-                    expert_internal_records.append(expert_internal_record)
-            
-            # Convert expert output states (collective)
+                    ))
+
+            # Expert output states
             if layer_key in self.routing_capture.activation_data:
                 activation_data = self.routing_capture.activation_data[layer_key]
-                
-                # For each token position 
-                for token_position in range(2):
-                    expert_output_state = activation_data["expert_output_state"][0, token_position, :]  # Remove batch dim
-                    
-                    output_record = create_expert_output_state(
-                        probe_id=probe_id,
-                        layer=layer,
-                        token_position=token_position,
-                        expert_output_state=expert_output_state.numpy()
-                    )
-                    expert_output_records.append(output_record)
 
-            # Convert residual stream states (full decoder layer output)
+                for actual_pos, semantic_pos in positions_to_extract:
+                    expert_output_state = activation_data["expert_output_state"][0, actual_pos, :]
+                    expert_output_records.append(create_expert_output_state(
+                        probe_id=probe_id, layer=layer,
+                        token_position=semantic_pos,
+                        expert_output_state=expert_output_state.numpy()
+                    ))
+
+            # Residual stream states
             if layer_key in self.routing_capture.residual_stream_data:
                 residual_data = self.routing_capture.residual_stream_data[layer_key]
 
-                for token_position in range(2):
-                    residual_state = residual_data["residual_stream"][0, token_position, :]  # Remove batch dim
-
-                    residual_record = create_residual_stream_state(
-                        probe_id=probe_id,
-                        layer=layer,
-                        token_position=token_position,
+                for actual_pos, semantic_pos in positions_to_extract:
+                    residual_state = residual_data["residual_stream"][0, actual_pos, :]
+                    residual_stream_records.append(create_residual_stream_state(
+                        probe_id=probe_id, layer=layer,
+                        token_position=semantic_pos,
                         residual_stream=residual_state.numpy()
-                    )
-                    residual_stream_records.append(residual_record)
+                    ))
 
         return ProbeCapture(
             probe_id=probe_id,
             session_id=session_id,
-            context=context,
-            target=target,
-            context_token_id=context_token_id,
-            target_token_id=target_token_id,
-            token_record=token_record,
+            probe_record=probe_record,
             routing_records=routing_records,
             expert_internal_records=expert_internal_records,
             expert_output_records=expert_output_records,
@@ -518,7 +592,12 @@ class IntegratedCaptureService:
         for context in contexts:
             for target in targets:
                 try:
-                    probe_id = self.capture_single_pair(session_id, context, target)
+                    probe_id, _ = self.capture_probe(
+                        session_id,
+                        input_text=f"{context} {target}",
+                        target_word=target,
+                        context_word=context,
+                    )
                     successful_probes.append(probe_id)
                 except Exception as e:
                     print(f"⚠️ Skipping failed pair '{context}' → '{target}': {e}")
@@ -647,6 +726,21 @@ class IntegratedCaptureService:
         
         print(f"🛑 Session {session_id} aborted")
     
+    def _restore_session(self, session_id: str, metadata: dict) -> None:
+        """Restore an active session from persisted metadata."""
+        session_status = SessionStatus(
+            session_id=session_id,
+            state=SessionState.ACTIVE,
+            total_pairs=metadata["total_pairs"],
+            completed_pairs=metadata.get("completed_pairs", 0),
+            failed_pairs=metadata.get("failed_pairs", 0),
+        )
+        batch_writers = SessionBatchWriters(session_id, self.data_lake_path, self.batch_size)
+
+        self.active_sessions[session_id] = session_status
+        self.session_writers[session_id] = batch_writers
+        print(f"♻️ Restored session {session_id} from disk ({session_status.completed_pairs}/{session_status.total_pairs} completed)")
+
     def _mine_from_source(self, word_source: str, source_params: dict) -> Tuple[List[str], str]:
         """
         Mine words from different sources: custom, pos_pure, or synset_hyponyms.

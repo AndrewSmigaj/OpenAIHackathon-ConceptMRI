@@ -13,7 +13,7 @@ from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
 from sklearn.metrics import silhouette_score
 
 from core.parquet_reader import read_records
-from schemas.tokens import TokenRecord
+from schemas.tokens import ProbeRecord
 from schemas.capture_manifest import CaptureManifest
 from schemas.features_pca128 import PCAFeatureRecord, ReductionFeatureRecord
 
@@ -96,7 +96,7 @@ class ClusterRouteAnalysisService:
         session_id: str,
         source: str = "expert_output",
         method: str = "pca"
-    ) -> Tuple[list, List[TokenRecord], Optional[CaptureManifest]]:
+    ) -> Tuple[list, List[ProbeRecord], Optional[CaptureManifest]]:
         """Load reduced features, token, and manifest data for a session."""
         session_path = self.data_lake_path / f"session_{session_id}"
 
@@ -119,7 +119,7 @@ class ClusterRouteAnalysisService:
 
         # Load token records
         tokens_path = session_path / "tokens.parquet"
-        token_records = read_records(str(tokens_path), TokenRecord)
+        token_records = read_records(str(tokens_path), ProbeRecord)
 
         # Load manifest (optional for backward compatibility)
         manifest = None
@@ -133,10 +133,10 @@ class ClusterRouteAnalysisService:
     def _apply_filters(
         self,
         pca_records: List[PCAFeatureRecord],
-        token_records: List[TokenRecord],
+        token_records: List[ProbeRecord],
         manifest: Optional[CaptureManifest],
         filter_config: Dict[str, Any]
-    ) -> Tuple[List[PCAFeatureRecord], List[TokenRecord]]:
+    ) -> Tuple[List[PCAFeatureRecord], List[ProbeRecord]]:
         """Apply category-based filtering to records (same logic as expert analysis)."""
         if not manifest or not filter_config:
             return pca_records, token_records
@@ -146,26 +146,27 @@ class ClusterRouteAnalysisService:
         for token in token_records:
             include = True
             
-            # Check context category filter
+            # Check context category filter (skipped when context_word is None)
             if "context_categories" in filter_config and filter_config["context_categories"]:
-                context_cats = manifest.context_category_assignments.get(token.context_text, [])
-                if not any(cat in filter_config["context_categories"] for cat in context_cats):
-                    include = False
+                if token.context_word and manifest.context_category_assignments:
+                    context_cats = manifest.context_category_assignments.get(token.context_word, [])
+                    if not any(cat in filter_config["context_categories"] for cat in context_cats):
+                        include = False
             
             # Check target category filter
             if "target_categories" in filter_config and filter_config["target_categories"]:
-                target_cats = manifest.target_category_assignments.get(token.target_text, [])
+                target_cats = manifest.target_category_assignments.get(token.target_word, [])
                 if not any(cat in filter_config["target_categories"] for cat in target_cats):
                     include = False
             
             # Check specific context words filter
             if "context_words" in filter_config and filter_config["context_words"]:
-                if token.context_text not in filter_config["context_words"]:
+                if token.context_word not in filter_config["context_words"]:
                     include = False
             
             # Check specific target words filter
             if "target_words" in filter_config and filter_config["target_words"]:
-                if token.target_text not in filter_config["target_words"]:
+                if token.target_word not in filter_config["target_words"]:
                     include = False
             
             if include:
@@ -283,7 +284,7 @@ class ClusterRouteAnalysisService:
     def _extract_target_cluster_routes(
         self,
         cluster_assignments: Dict[str, Dict[int, Dict[str, Any]]],
-        token_records: List[TokenRecord],
+        token_records: List[ProbeRecord],
         window_layers: List[int]
     ) -> Dict[str, Dict]:
         """Extract cluster routes for target tokens (mirrors _extract_target_routes)."""
@@ -317,8 +318,8 @@ class ClusterRouteAnalysisService:
             if probe_id in token_by_probe:
                 token = token_by_probe[probe_id]
                 routes[signature]["tokens"].append({
-                    "context": token.context_text,
-                    "target": token.target_text,
+                    "context": token.context_word,
+                    "target": token.target_word,
                     "probe_id": probe_id
                 })
             
@@ -341,7 +342,7 @@ class ClusterRouteAnalysisService:
     def _build_sankey_data(
         self, 
         routes: Dict[str, Dict],
-        token_records: List[TokenRecord],
+        token_records: List[ProbeRecord],
         manifest: CaptureManifest,
         filter_config: Optional[Dict] = None
     ) -> Dict[str, Any]:
@@ -369,8 +370,8 @@ class ClusterRouteAnalysisService:
                     probe_id = token_info["probe_id"]
                     token_record = token_lookup.get(probe_id)
                     if token_record:
-                        context = token_record.context_text
-                        target = token_record.target_text
+                        context = token_record.context_word
+                        target = token_record.target_word
                         
                         # Get categories for target token, filtered if config provided
                         target_categories = manifest.target_category_assignments.get(target, [])
@@ -465,7 +466,7 @@ class ClusterRouteAnalysisService:
                             probe_id = token_info["probe_id"]
                             token_record = token_lookup.get(probe_id)
                             if token_record:
-                                target_text = token_record.target_text
+                                target_text = token_record.target_word
                                 
                                 # Get categories for target token, filtered if config provided
                                 target_categories = manifest.target_category_assignments.get(target_text, [])
@@ -623,8 +624,8 @@ class ClusterRouteAnalysisService:
             
             # Get context and target from token data
             token_record = token_lookup.get(probe_id)
-            context = token_record.context_text if token_record else ""
-            target = token_record.target_text if token_record else ""
+            context = token_record.context_word if token_record else ""
+            target = token_record.target_word if token_record else ""
             
             # Build coordinate sequence across layers
             coordinates = []
@@ -669,11 +670,11 @@ class ClusterRouteAnalysisService:
     
     def _apply_balanced_sampling(
         self,
-        tokens: List[TokenRecord],
+        tokens: List[ProbeRecord],
         manifest: Optional[CaptureManifest],
         filter_config: Dict[str, Any],
         max_per_category: int
-    ) -> List[TokenRecord]:
+    ) -> List[ProbeRecord]:
         """Apply balanced sampling to ensure max N tokens per category (same as expert analysis)."""
         if not manifest or not tokens:
             return tokens
@@ -684,7 +685,7 @@ class ClusterRouteAnalysisService:
             # If no specific categories filtered, balance on all available categories
             all_target_cats = set()
             for token in tokens:
-                cats = manifest.target_category_assignments.get(token.target_text, [])
+                cats = manifest.target_category_assignments.get(token.target_word, [])
                 all_target_cats.update(cats)
             target_categories = list(all_target_cats)
         
@@ -695,7 +696,7 @@ class ClusterRouteAnalysisService:
         uncategorized_tokens = []
         
         for token in tokens:
-            token_categories = manifest.target_category_assignments.get(token.target_text, [])
+            token_categories = manifest.target_category_assignments.get(token.target_word, [])
             categorized = False
             
             for cat in target_categories:

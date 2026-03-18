@@ -1,55 +1,96 @@
 #!/usr/bin/env python3
 """
-Tokens schema - index table linking probe_id to context-target pairs.
-Used by experiments to query specific token combinations.
+Probe record schema - links probe_id to input text and tracked words.
+Used by experiments to query probes and their activation data.
 """
 
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
-class TokenRecord:
-    """Index linking probe_id to context-target token pairs with category metadata."""
-    
-    probe_id: str            # Links to all MoE activation data for this pair
-    capture_session_id: str  # Groups related captures for experiment selection
-    context_text: str        # Context word (e.g., "the")
-    target_text: str         # Target word (e.g., "cat") 
-    context_token_id: int    # Tokenized context
-    target_token_id: int     # Tokenized target
-    
+class ProbeRecord:
+    """Links probe_id to input text, target word, and optional context word."""
+
+    # Core fields
+    probe_id: str                    # Links to all activation data for this probe
+    session_id: str                  # Capture session identifier
+    input_text: str                  # Full text fed to model
+    target_word: str                 # Word being tracked within input_text
+    target_token_id: int             # Tokenized target word
+    target_token_position: int       # Position of target in tokenized input
+    total_tokens: int                # Total tokens in input
+
+    # Optional context word for disambiguation analysis
+    context_word: Optional[str] = None
+    context_token_position: Optional[int] = None
+
+    # Temporal metadata (attractor experiments)
+    experiment_id: Optional[str] = None
+    sequence_id: Optional[str] = None
+    sentence_index: Optional[int] = None
+    regime_label: Optional[str] = None
+    transition_step: Optional[int] = None
+    created_at: Optional[str] = None
 
     @classmethod
-    def from_parquet_dict(cls, data: dict) -> 'TokenRecord':
+    def from_parquet_dict(cls, data: dict) -> 'ProbeRecord':
         """Reconstruct from Parquet dictionary."""
         return cls(**data)
 
 
 # Parquet schema definition
-TOKENS_PARQUET_SCHEMA = {
+PROBE_RECORD_PARQUET_SCHEMA = {
     "probe_id": "string",
-    "capture_session_id": "string",
-    "context_text": "string", 
-    "target_text": "string",
-    "context_token_id": "int32",
-    "target_token_id": "int32"
+    "session_id": "string",
+    "input_text": "string",
+    "target_word": "string",
+    "target_token_id": "int32",
+    "target_token_position": "int32",
+    "total_tokens": "int32",
+    "context_word": "string",
+    "context_token_position": "int32",
+    "experiment_id": "string",
+    "sequence_id": "string",
+    "sentence_index": "int32",
+    "regime_label": "string",
+    "transition_step": "int32",
+    "created_at": "string",
 }
 
 
-def create_token_record(
+def create_probe_record(
     probe_id: str,
-    capture_session_id: str,
-    context_text: str,
-    target_text: str, 
-    context_token_id: int,
-    target_token_id: int
-) -> TokenRecord:
-    """Create token record linking probe_id to context-target pair."""
-    return TokenRecord(
+    session_id: str,
+    input_text: str,
+    target_word: str,
+    target_token_id: int,
+    target_token_position: int,
+    total_tokens: int,
+    context_word: str = None,
+    context_token_position: int = None,
+    experiment_id: str = None,
+    sequence_id: str = None,
+    sentence_index: int = None,
+    regime_label: str = None,
+    transition_step: int = None,
+    created_at: str = None,
+) -> ProbeRecord:
+    """Create probe record linking probe_id to input text and tracked words."""
+    return ProbeRecord(
         probe_id=probe_id,
-        capture_session_id=capture_session_id,
-        context_text=context_text,
-        target_text=target_text,
-        context_token_id=context_token_id,
-        target_token_id=target_token_id
+        session_id=session_id,
+        input_text=input_text,
+        target_word=target_word,
+        target_token_id=target_token_id,
+        target_token_position=target_token_position,
+        total_tokens=total_tokens,
+        context_word=context_word,
+        context_token_position=context_token_position,
+        experiment_id=experiment_id,
+        sequence_id=sequence_id,
+        sentence_index=sentence_index,
+        regime_label=regime_label,
+        transition_step=transition_step,
+        created_at=created_at,
     )

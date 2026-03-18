@@ -12,7 +12,7 @@ import random
 
 from core.parquet_reader import read_records
 from schemas.routing import RoutingRecord, highway_signature
-from schemas.tokens import TokenRecord
+from schemas.tokens import ProbeRecord
 from schemas.capture_manifest import CaptureManifest
 
 
@@ -147,8 +147,8 @@ class ExpertRouteAnalysisService:
                 token = next((t for t in token_records if t.probe_id == record.probe_id), None)
                 if token:
                     expert_tokens.append({
-                        "context": token.context_text,
-                        "target": token.target_text
+                        "context": token.context_word,
+                        "target": token.target_word
                     })
                     confidence_scores.append(record.expert_top1_weight)
         
@@ -172,7 +172,7 @@ class ExpertRouteAnalysisService:
     def _load_session_data(
         self,
         session_id: str
-    ) -> Tuple[List[RoutingRecord], List[TokenRecord], Optional[CaptureManifest]]:
+    ) -> Tuple[List[RoutingRecord], List[ProbeRecord], Optional[CaptureManifest]]:
         """Load routing, token, and manifest data for a session."""
         session_path = self.data_lake_path / f"session_{session_id}"
         
@@ -188,7 +188,7 @@ class ExpertRouteAnalysisService:
         
         # Load token records
         tokens_path = session_path / "tokens.parquet"
-        token_records = read_records(str(tokens_path), TokenRecord)
+        token_records = read_records(str(tokens_path), ProbeRecord)
         
         # Load manifest (optional for backward compatibility)
         manifest = None
@@ -202,10 +202,10 @@ class ExpertRouteAnalysisService:
     def _apply_filters(
         self,
         routing_records: List[RoutingRecord],
-        token_records: List[TokenRecord],
+        token_records: List[ProbeRecord],
         manifest: Optional[CaptureManifest],
         filter_config: Dict[str, Any]
-    ) -> Tuple[List[RoutingRecord], List[TokenRecord]]:
+    ) -> Tuple[List[RoutingRecord], List[ProbeRecord]]:
         """Apply category-based filtering to records."""
         print(f"🔍 _apply_filters called with filter_config: {filter_config}")
         
@@ -219,26 +219,27 @@ class ExpertRouteAnalysisService:
         for token in token_records:
             include = True
             
-            # Check context category filter
+            # Check context category filter (skipped when context_word is None)
             if "context_categories" in filter_config and filter_config["context_categories"]:
-                context_cats = manifest.context_category_assignments.get(token.context_text, [])
-                if not any(cat in filter_config["context_categories"] for cat in context_cats):
-                    include = False
+                if token.context_word and manifest.context_category_assignments:
+                    context_cats = manifest.context_category_assignments.get(token.context_word, [])
+                    if not any(cat in filter_config["context_categories"] for cat in context_cats):
+                        include = False
             
             # Check target category filter
             if "target_categories" in filter_config and filter_config["target_categories"]:
-                target_cats = manifest.target_category_assignments.get(token.target_text, [])
+                target_cats = manifest.target_category_assignments.get(token.target_word, [])
                 if not any(cat in filter_config["target_categories"] for cat in target_cats):
                     include = False
             
-            # Check specific context words filter (NEW)
+            # Check specific context words filter (skipped when context_word is None)
             if "context_words" in filter_config and filter_config["context_words"]:
-                if token.context_text not in filter_config["context_words"]:
+                if token.context_word and token.context_word not in filter_config["context_words"]:
                     include = False
             
             # Check specific target words filter (NEW)
             if "target_words" in filter_config and filter_config["target_words"]:
-                if token.target_text not in filter_config["target_words"]:
+                if token.target_word not in filter_config["target_words"]:
                     include = False
             
             if include:
@@ -269,7 +270,7 @@ class ExpertRouteAnalysisService:
     def _extract_target_routes(
         self,
         routing_records: List[RoutingRecord],
-        token_records: List[TokenRecord],
+        token_records: List[ProbeRecord],
         window_layers: List[int]
     ) -> Dict[str, Dict]:
         """Extract expert routes for target tokens within specified window layers."""
@@ -311,8 +312,8 @@ class ExpertRouteAnalysisService:
             if probe_id in token_by_probe:
                 token = token_by_probe[probe_id]
                 routes[signature]["tokens"].append({
-                    "context": token.context_text,
-                    "target": token.target_text,
+                    "context": token.context_word,
+                    "target": token.target_word,
                     "probe_id": probe_id
                 })
             
@@ -334,7 +335,7 @@ class ExpertRouteAnalysisService:
     def _build_sankey_data(
         self, 
         routes: Dict[str, Dict],
-        token_records: List[TokenRecord],
+        token_records: List[ProbeRecord],
         manifest: CaptureManifest,
         filter_config: Optional[Dict] = None
     ) -> Dict[str, Any]:
@@ -362,8 +363,8 @@ class ExpertRouteAnalysisService:
                     probe_id = token_info["probe_id"]
                     token_record = token_lookup.get(probe_id)
                     if token_record:
-                        context = token_record.context_text
-                        target = token_record.target_text
+                        context = token_record.context_word
+                        target = token_record.target_word
                         
                         # Get categories for target token, filtered if config provided
                         target_categories = manifest.target_category_assignments.get(target, [])
@@ -471,7 +472,7 @@ class ExpertRouteAnalysisService:
                             probe_id = token_info["probe_id"]
                             token_record = token_lookup.get(probe_id)
                             if token_record:
-                                target_text = token_record.target_text
+                                target_text = token_record.target_word
                                 
                                 # Get categories for target token, filtered if config provided
                                 target_categories = manifest.target_category_assignments.get(target_text, [])
@@ -617,12 +618,12 @@ class ExpertRouteAnalysisService:
         target_categories = defaultdict(int)
         
         for token in tokens:
-            # Count context categories
-            if manifest.context_category_assignments:
+            # Count context categories (skipped when context is None)
+            if manifest.context_category_assignments and token.get("context"):
                 context_cats = manifest.context_category_assignments.get(token["context"], [])
                 for cat in context_cats:
                     context_categories[cat] += 1
-            
+
             # Count target categories
             if manifest.target_category_assignments:
                 target_cats = manifest.target_category_assignments.get(token["target"], [])
@@ -636,11 +637,11 @@ class ExpertRouteAnalysisService:
     
     def _apply_balanced_sampling(
         self,
-        tokens: List[TokenRecord],
+        tokens: List[ProbeRecord],
         manifest: Optional[CaptureManifest],
         filter_config: Dict[str, Any],
         max_per_category: int
-    ) -> List[TokenRecord]:
+    ) -> List[ProbeRecord]:
         """Apply balanced sampling to ensure max N tokens per category."""
         if not manifest or not tokens:
             return tokens
@@ -651,7 +652,7 @@ class ExpertRouteAnalysisService:
             # If no specific categories filtered, balance on all available categories
             all_target_cats = set()
             for token in tokens:
-                cats = manifest.target_category_assignments.get(token.target_text, [])
+                cats = manifest.target_category_assignments.get(token.target_word, [])
                 all_target_cats.update(cats)
             target_categories = list(all_target_cats)
         
@@ -662,7 +663,7 @@ class ExpertRouteAnalysisService:
         uncategorized_tokens = []
         
         for token in tokens:
-            token_categories = manifest.target_category_assignments.get(token.target_text, [])
+            token_categories = manifest.target_category_assignments.get(token.target_word, [])
             categorized = False
             
             for cat in target_categories:
