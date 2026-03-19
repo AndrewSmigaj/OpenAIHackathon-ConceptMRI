@@ -1,65 +1,26 @@
-import { useMemo } from 'react'
 import type { SessionDetailResponse } from '../types/api'
 import type { FilterState } from './WordFilterPanel'
+import type { GradientScheme } from '../utils/colorBlending'
+import { getNodeColor } from '../utils/colorBlending'
+import SentenceHighlight from './SentenceHighlight'
 
 interface FilteredWordDisplayProps {
   sessionData: SessionDetailResponse | null
   filterState: FilterState
   isLoading?: boolean
+  colorLabelA: string
+  colorLabelB: string
+  gradient: GradientScheme
 }
 
-export default function FilteredWordDisplay({ 
-  sessionData, 
-  filterState, 
-  isLoading = false 
+export default function FilteredWordDisplay({
+  sessionData,
+  filterState,
+  isLoading = false,
+  colorLabelA,
+  colorLabelB,
+  gradient
 }: FilteredWordDisplayProps) {
-
-  // Compute filtered words
-  const { contextWords, targetWords, totalPairs } = useMemo(() => {
-    if (!sessionData) {
-      return { contextWords: [], targetWords: [], totalPairs: 0 }
-    }
-
-    // Helper function to check if word matches selected filters
-    const shouldIncludeContextWord = (word: string): boolean => {
-      if (filterState.contextCategories.size === 0) return true
-      const categories = sessionData.categories.contexts[word] || []
-      return categories.some(cat => filterState.contextCategories.has(cat))
-    }
-
-    const shouldIncludeTargetWord = (word: string): boolean => {
-      if (filterState.targetCategories.size === 0) return true
-      const categories = sessionData.categories.targets[word] || []
-      return categories.some(cat => filterState.targetCategories.has(cat))
-    }
-
-    // Get filtered context words with their categories
-    const filteredContextWords = Object.keys(sessionData.categories.contexts)
-      .filter(shouldIncludeContextWord)
-      .map(word => ({
-        word,
-        categories: sessionData.categories.contexts[word] || []
-      }))
-      .sort((a, b) => a.word.localeCompare(b.word))
-
-    // Get filtered target words with their categories
-    const filteredTargetWords = Object.keys(sessionData.categories.targets)
-      .filter(shouldIncludeTargetWord)
-      .map(word => ({
-        word,
-        categories: sessionData.categories.targets[word] || []
-      }))
-      .sort((a, b) => a.word.localeCompare(b.word))
-
-    // Calculate total possible pairs from filtered words
-    const totalFilteredPairs = filteredContextWords.length * filteredTargetWords.length
-
-    return {
-      contextWords: filteredContextWords,
-      targetWords: filteredTargetWords,
-      totalPairs: totalFilteredPairs
-    }
-  }, [sessionData, filterState])
 
   if (isLoading) {
     return (
@@ -84,84 +45,68 @@ export default function FilteredWordDisplay({
     )
   }
 
-  const hasFilters = filterState.contextCategories.size > 0 || filterState.targetCategories.size > 0
+  const hasFilters = filterState.labels.size > 0
+  const sentences = (sessionData.sentences || []).filter(s => {
+    if (!hasFilters) return true
+    return s.label ? filterState.labels.has(s.label) : false
+  })
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 space-y-6">
-      <div>
-        <h4 className="font-medium text-gray-900 mb-4">
-          {hasFilters ? 'Filtered Words' : 'All Words'}
+    <div className="bg-white rounded-xl shadow-md p-4 space-y-3">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <h4 className="font-medium text-gray-900 text-sm">
+          Sentences
         </h4>
-
-        {/* Context Words */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <h5 className="text-sm font-medium text-gray-700">Context Words</h5>
-            <span className="text-xs text-gray-500">({contextWords.length})</span>
-          </div>
-          
-          <div className="max-h-40 overflow-y-auto">
-            {contextWords.length > 0 ? (
-              <div className="space-y-1">
-                {contextWords.map(({ word, categories }) => (
-                  <div key={word} className="text-sm">
-                    <span className="font-medium text-gray-900">"{word}"</span>
-                    <span className="text-gray-500 ml-2">
-                      [{categories.join(', ')}]
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-gray-400 italic">No matching context words</p>
-            )}
-          </div>
-        </div>
-
-        {/* Target Words */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <h5 className="text-sm font-medium text-gray-700">Target Words</h5>
-            <span className="text-xs text-gray-500">({targetWords.length})</span>
-          </div>
-          
-          <div className="max-h-40 overflow-y-auto">
-            {targetWords.length > 0 ? (
-              <div className="space-y-1">
-                {targetWords.map(({ word, categories }) => (
-                  <div key={word} className="text-sm">
-                    <span className="font-medium text-gray-900">"{word}"</span>
-                    <span className="text-gray-500 ml-2">
-                      [{categories.join(', ')}]
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-gray-400 italic">No matching target words</p>
-            )}
-          </div>
-        </div>
-
-        {/* Summary */}
-        <div className="pt-4 border-t border-gray-200">
-          <div className="bg-gray-50 rounded-xl p-3">
-            <p className="text-sm text-gray-600">
-              <span className="font-medium">{totalPairs}</span> possible pairs
-              {hasFilters ? ' (filtered)' : ' (all)'}
-            </p>
-          </div>
-        </div>
-
-        {/* Filter Status */}
-        {!hasFilters && (
-          <div className="pt-3">
-            <p className="text-xs text-blue-600">
-              💡 Select categories in Word Filters to see filtered results
-            </p>
-          </div>
-        )}
+        <span className="text-xs text-gray-500">
+          {sentences.length}{hasFilters ? ' filtered' : ''}
+        </span>
       </div>
+
+      {/* Target Word */}
+      {sessionData.target_word && (
+        <div>
+          <span className="text-xs text-gray-500">Target: </span>
+          <span className="text-sm font-semibold text-gray-900">{sessionData.target_word}</span>
+        </div>
+      )}
+
+      {/* Sentence List */}
+      {sentences.length > 0 ? (
+        <div className="space-y-2 max-h-[60vh] overflow-y-auto">
+          {sentences.map((sentence, i) => {
+            const color = sentence.label && colorLabelA && colorLabelB
+              ? getNodeColor({ [sentence.label]: 1 }, colorLabelA, colorLabelB, undefined, undefined, gradient)
+              : '#666666'
+
+            return (
+              <div key={sentence.probe_id || i} className="bg-gray-50 rounded-lg p-2">
+                <div className="flex items-center gap-1.5 mb-1">
+                  {sentence.label && (
+                    <span
+                      className="px-1.5 py-0.5 text-[10px] font-medium rounded-full text-white capitalize"
+                      style={{ backgroundColor: color }}
+                    >
+                      {sentence.label}
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-gray-700 leading-relaxed">
+                  <SentenceHighlight
+                    text={sentence.input_text}
+                    targetWord={sentence.target_word}
+                    color={color}
+                  />
+                </p>
+              </div>
+            )
+          })}
+        </div>
+      ) : (
+        <p className="text-xs text-gray-500">
+          {hasFilters ? 'No sentences match the current filters' : 'No sentences available'}
+        </p>
+      )}
     </div>
   )
 }

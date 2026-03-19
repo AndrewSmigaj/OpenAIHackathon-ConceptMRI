@@ -1,56 +1,18 @@
 // API types matching backend Pydantic schemas
 
-interface WordSource {
-  source_type: 'custom' | 'pos_pure' | 'synset_hyponyms';
-  source_params: {
-    // For custom word lists
-    words?: string[];      // Array of words to include
-    label?: string;        // Category label (default: "custom")
-    
-    // For POS-pure words (words that are ONLY one part of speech)
-    pos?: string;          // Part of speech: 'n' (noun), 'v' (verb), 'a' (adj), 'r' (adv)
-    max_words?: number;    // Maximum words to mine (default: 30)
-    
-    // For WordNet synset hyponyms (semantic categories)
-    synset_id?: string;    // WordNet synset ID (e.g., "animal.n.01")
-    max_depth?: number;    // Hyponym tree depth (default: 2)
-    unambiguous_only?: boolean; // Filter to single-sense words only (default: true)
-  };
-}
-
-interface ProbeRequest {
-  session_name: string;
-  context_sources: WordSource[];
-  target_sources: WordSource[];
-  layers?: number[];  // Optional, defaults to [0, 1, 2] in backend
-}
-
-interface ProbeResponse {
-  session_id: string;
-  total_pairs: number;
-  contexts: string[];
-  targets: string[];
-  categories: {
-    contexts: Record<string, string[]>;
-    targets: Record<string, string[]>;
-  };
-}
-
 interface ExecutionResponse {
   started: boolean;
   probe_ids: string[];
   status_url: string;
-  estimated_time?: string;  // Optional in backend
+  estimated_time?: string;
 }
 
 interface CaptureManifest {
-  capture_session_id?: string;  // Added from backend manifest schema
+  capture_session_id?: string;
   session_name: string;
-  contexts: string[];
-  targets: string[];
-  context_category_assignments: Record<string, string[]>;
-  target_category_assignments: Record<string, string[]>;
-  layers_captured?: number[];  // Added from backend manifest schema
+  target_word: string;
+  labels: string[];
+  layers_captured?: number[];
   probe_count: number;
   created_at: string;
   model_name: string;
@@ -69,7 +31,6 @@ interface SessionStatus {
   data_lake_paths?: {
     tokens: string;
     routing: string;
-    expert_internal: string;
     expert_output: string;
     manifest: string;
   };
@@ -80,8 +41,8 @@ interface SessionListItem {
   session_name: string;
   created_at: string;
   probe_count: number;
-  contexts: string[];
-  targets: string[];
+  target_word?: string;
+  labels?: string[];
   state: string;
 }
 
@@ -90,20 +51,19 @@ interface SessionDetailResponse {
   data_lake_paths: {
     tokens: string;
     routing: string;
-    expert_internal: string;
     expert_output: string;
     manifest: string;
   };
-  categories: {
-    contexts: Record<string, string[]>;
-    targets: Record<string, string[]>;
-  };
+  labels: string[];
+  target_word?: string;
+  sentences?: ProbeExample[];
 }
 
 // Expert Route Analysis Types
-interface TokenExample {
-  context: string
-  target: string
+interface ProbeExample {
+  target_word: string
+  label?: string
+  input_text: string
   probe_id: string
 }
 
@@ -112,32 +72,32 @@ interface RouteStatistics {
   total_probes: number
   routes_coverage: number
   window_layers: number[]
-  [key: string]: any // Allow additional backend fields
+  [key: string]: any
 }
 
 interface FilterConfig {
-  context_categories?: string[]
-  target_categories?: string[]
-  context_words?: string[]      // NEW: Specific context words  
-  target_words?: string[]       // NEW: Specific target words
-  max_per_category?: number     // NEW: For UI reference
+  labels?: string[]
 }
 
 interface AnalyzeRoutesRequest {
-  session_id: string
+  session_id?: string
+  session_ids?: string[]
   window_layers: number[]
   filter_config?: FilterConfig
   top_n_routes: number
 }
 
 interface ClusteringConfig {
-  pca_dimensions: number
-  clustering_method: string  // "kmeans" | "hierarchical" | "dbscan"
-  layer_cluster_counts: Record<number, number>  // {layer: num_clusters}
+  reduction_dimensions: number
+  clustering_method: string
+  layer_cluster_counts: Record<number, number>
+  embedding_source?: string
+  reduction_method?: string
 }
 
 interface AnalyzeClusterRoutesRequest {
-  session_id: string
+  session_id?: string
+  session_ids?: string[]
   window_layers: number[]
   clustering_config: ClusteringConfig
   filter_config?: FilterConfig
@@ -150,15 +110,9 @@ interface SankeyNode {
   layer: number
   expert_id: number
   token_count: number
-  categories: string[]
-  category_distribution: Record<string, number>
-  axis_distributions?: Record<string, Record<string, number>>
+  label_distribution?: Record<string, number>
   specialization: string
-  context_target_pairs: Array<{
-    context: string
-    targets: string[]
-    target_count: number
-  }>
+  tokens?: ProbeExample[]
 }
 
 interface SankeyLink {
@@ -167,7 +121,7 @@ interface SankeyLink {
   value: number
   probability: number
   route_signature: string
-  category_distribution: Record<string, number>
+  label_distribution?: Record<string, number>
   token_count: number
 }
 
@@ -176,7 +130,14 @@ interface TopRoute {
   count: number
   coverage: number
   avg_confidence: number
-  example_tokens: TokenExample[]
+  example_tokens: ProbeExample[]
+}
+
+interface DynamicAxis {
+  id: string
+  label: string
+  label_a: string
+  label_b: string
 }
 
 interface RouteAnalysisResponse {
@@ -186,12 +147,13 @@ interface RouteAnalysisResponse {
   links: SankeyLink[]
   top_routes: TopRoute[]
   statistics: RouteStatistics
+  available_axes?: DynamicAxis[]
 }
 
 interface RouteDetailsResponse {
   signature: string
   window_layers: number[]
-  tokens: TokenExample[]
+  tokens: ProbeExample[]
   count: number
   coverage: number
   avg_confidence: number
@@ -202,7 +164,7 @@ interface ExpertDetailsResponse {
   layer: number
   expert_id: number
   node_name: string
-  tokens: TokenExample[]
+  tokens: ProbeExample[]
   total_tokens: number
   usage_rate: number
   avg_confidence: number
@@ -212,10 +174,10 @@ interface ExpertDetailsResponse {
 // LLM Insights Types
 interface LLMInsightsRequest {
   session_id: string
-  windows: Record<string, any>[]  // Complete RouteAnalysisResponse data
+  windows: Record<string, any>[]
   user_prompt: string
   api_key: string
-  provider?: 'openai' | 'anthropic'  // defaults to 'openai'
+  provider?: 'openai' | 'anthropic'
 }
 
 interface LLMInsightsResponse {
@@ -223,24 +185,24 @@ interface LLMInsightsResponse {
   statistics: Record<string, any>
 }
 
-// PCA Trajectory Types
-interface PCACoordinate {
+// Trajectory Types
+interface TrajectoryCoordinate {
   layer: number
   x: number
   y?: number
   z?: number
-  [key: string]: number | undefined  // for additional dimensions like dim_3, dim_4, etc.
+  [key: string]: number | undefined
 }
 
-interface PCATrajectory {
+interface TrajectoryPath {
   probe_id: string
-  context: string
   target: string
-  coordinates: PCACoordinate[]
+  label?: string
+  coordinates: TrajectoryCoordinate[]
 }
 
-interface PCATrajectoryResponse {
-  trajectories: PCATrajectory[]
+interface TrajectoryResponse {
+  trajectories: TrajectoryPath[]
   metadata: {
     layers: number[]
     n_dims: number
@@ -250,17 +212,57 @@ interface PCATrajectoryResponse {
   }
 }
 
-// Export all types for Vite compatibility - updated
+// Sentence Experiment Types
+interface SentenceExperimentRequest {
+  sentence_set_name: string
+  session_name?: string
+}
+
+interface SentenceExperimentResponse {
+  session_id: string
+  session_name: string
+  total_probes: number
+  label_a: string
+  label_b: string
+  count_a: number
+  count_b: number
+}
+
+// On-demand reduction types
+interface ReductionRequest {
+  session_ids: string[]
+  layers: number[]
+  source?: string
+  method?: string
+  n_components?: number
+}
+
+interface ReductionPoint {
+  probe_id: string
+  session_id: string
+  layer: number
+  x: number
+  y?: number
+  z?: number
+  target_word: string
+  label?: string
+}
+
+interface ReductionResponse {
+  points: ReductionPoint[]
+  layers: number[]
+  method: string
+  n_components: number
+}
+
+// Export all types
 export type {
-  WordSource,
-  ProbeRequest,
-  ProbeResponse,
   ExecutionResponse,
   CaptureManifest,
   SessionStatus,
   SessionListItem,
   SessionDetailResponse,
-  TokenExample,
+  ProbeExample,
   RouteStatistics,
   FilterConfig,
   AnalyzeRoutesRequest,
@@ -274,7 +276,13 @@ export type {
   ExpertDetailsResponse,
   LLMInsightsRequest,
   LLMInsightsResponse,
-  PCACoordinate,
-  PCATrajectory,
-  PCATrajectoryResponse
+  DynamicAxis,
+  TrajectoryCoordinate,
+  TrajectoryPath,
+  TrajectoryResponse,
+  SentenceExperimentRequest,
+  SentenceExperimentResponse,
+  ReductionRequest,
+  ReductionPoint,
+  ReductionResponse
 };

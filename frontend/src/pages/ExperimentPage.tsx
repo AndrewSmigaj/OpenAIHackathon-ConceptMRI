@@ -15,122 +15,25 @@ import WordFilterPanel, { type FilterState } from '../components/WordFilterPanel
 import FilteredWordDisplay from '../components/FilteredWordDisplay'
 import SankeyChart from '../components/charts/SankeyChart'
 import MultiSankeyView from '../components/charts/MultiSankeyView'
-import SteppedPCAPlot from '../components/charts/SteppedPCAPlot'
-import { getColorPreview, getAxisLabel, type ColorAxis, type GradientScheme, GRADIENT_SCHEMES } from '../utils/colorBlending'
+import SteppedTrajectoryPlot from '../components/charts/SteppedTrajectoryPlot'
+import { getColorPreview, getNodeColor, type GradientScheme, GRADIENT_SCHEMES } from '../utils/colorBlending'
+import SentenceHighlight from '../components/SentenceHighlight'
 import { LAYER_RANGES } from '../constants/layerRanges'
-
-/**
- * Sample words randomly from a category
- */
-function sampleWordsFromCategory(words: string[], maxCount: number): string[] {
-  if (words.length <= maxCount) return [...words];
-  
-  // Fisher-Yates shuffle and take first N
-  const shuffled = [...words];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled.slice(0, maxCount);
-}
-
-/**
- * Apply balanced sampling to get word lists per category
- */
-function applyBalancedSampling(
-  sessionData: SessionDetailResponse, 
-  filterState: FilterState
-): { contextWords?: string[], targetWords?: string[] } {
-  console.log('🎯 applyBalancedSampling called:', {
-    balanceCategories: filterState.balanceCategories,
-    maxWordsPerCategory: filterState.maxWordsPerCategory,
-    selectedContextCategories: Array.from(filterState.contextCategories),
-    selectedTargetCategories: Array.from(filterState.targetCategories)
-  });
-
-  if (!filterState.balanceCategories || !sessionData) {
-    console.log('🎯 Not sampling - balanceCategories disabled or no sessionData');
-    return {};
-  }
-
-  const selectedContextCategories = Array.from(filterState.contextCategories);
-  const selectedTargetCategories = Array.from(filterState.targetCategories);
-  
-  // Sample context words
-  let contextWords: string[] = [];
-  if (selectedContextCategories.length > 0) {
-    selectedContextCategories.forEach(category => {
-      const wordsInCategory = Object.keys(sessionData.categories.contexts)
-        .filter(word => sessionData.categories.contexts[word].includes(category));
-      console.log(`🎯 Context category "${category}": ${wordsInCategory.length} words available`);
-      const sampledWords = sampleWordsFromCategory(wordsInCategory, filterState.maxWordsPerCategory);
-      console.log(`🎯 Context category "${category}": sampled ${sampledWords.length} words`);
-      contextWords.push(...sampledWords);
-    });
-  }
-  
-  // Sample target words
-  let targetWords: string[] = [];
-  if (selectedTargetCategories.length > 0) {
-    selectedTargetCategories.forEach(category => {
-      const wordsInCategory = Object.keys(sessionData.categories.targets)
-        .filter(word => sessionData.categories.targets[word].includes(category));
-      console.log(`🎯 Target category "${category}": ${wordsInCategory.length} words available`);
-      const sampledWords = sampleWordsFromCategory(wordsInCategory, filterState.maxWordsPerCategory);
-      console.log(`🎯 Target category "${category}": sampled ${sampledWords.length} words`);
-      targetWords.push(...sampledWords);
-    });
-  }
-
-  const result = {
-    contextWords: contextWords.length > 0 ? contextWords : undefined,
-    targetWords: targetWords.length > 0 ? targetWords : undefined
-  };
-  
-  console.log('🎯 applyBalancedSampling result:', {
-    contextWordsCount: result.contextWords?.length || 0,
-    targetWordsCount: result.targetWords?.length || 0
-  });
-
-  return result;
-}
 
 /**
  * Convert frontend FilterState to backend filter_config format.
  * Empty sets mean "include all" (no filtering), so we return undefined.
- * Non-empty sets mean "include words with ANY matching category".
  */
 function convertFilterState(
-  filterState: FilterState, 
-  sessionData?: SessionDetailResponse
+  filterState: FilterState,
+  sessionData?: SessionDetailResponse | null
 ): AnalyzeRoutesRequest['filter_config'] {
-  const filterConfig: NonNullable<AnalyzeRoutesRequest['filter_config']> = {};
-  
-  if (filterState.contextCategories.size > 0) {
-    filterConfig.context_categories = Array.from(filterState.contextCategories);
-  }
-  if (filterState.targetCategories.size > 0) {
-    filterConfig.target_categories = Array.from(filterState.targetCategories);
+  const filterConfig: any = {};
+
+  if (filterState.labels.size > 0) {
+    filterConfig.labels = Array.from(filterState.labels);
   }
 
-  // Apply balanced sampling if enabled
-  if (filterState.balanceCategories && sessionData) {
-    console.log('🎯 convertFilterState: calling applyBalancedSampling');
-    const sampledWords = applyBalancedSampling(sessionData, filterState);
-    if (sampledWords.contextWords) {
-      filterConfig.context_words = sampledWords.contextWords;
-      console.log(`🎯 convertFilterState: added ${sampledWords.contextWords.length} context words`);
-    }
-    if (sampledWords.targetWords) {
-      filterConfig.target_words = sampledWords.targetWords;
-      console.log(`🎯 convertFilterState: added ${sampledWords.targetWords.length} target words`);
-    }
-    filterConfig.max_per_category = filterState.maxWordsPerCategory;
-  }
-
-  console.log('🎯 convertFilterState final result:', filterConfig);
-
-  // Return undefined if no filters applied (empty object means include all)
   return Object.keys(filterConfig).length > 0 ? filterConfig : undefined;
 }
 
@@ -256,6 +159,9 @@ interface LLMAnalysisProps {
 interface ContextSensitiveCardProps {
   cardType: 'expert' | 'highway' | 'cluster' | 'route'
   selectedData: any
+  colorLabelA: string
+  colorLabelB: string
+  gradient: GradientScheme
 }
 
 function LLMAnalysisPanel({ sessionId, selectedContext, analysisType, allRouteData, sessionData }: LLMAnalysisProps) {
@@ -398,7 +304,7 @@ Use clear, engaging language with metaphors only when they genuinely clarify com
   )
 }
 
-function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardProps) {
+function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB, gradient }: ContextSensitiveCardProps) {
   const [activeTab, setActiveTab] = useState<'details' | 'examples'>('details')
   const [isGeneratingLabel, setIsGeneratingLabel] = useState(false)
   const [customLabel, setCustomLabel] = useState<string>('')
@@ -408,9 +314,9 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
   const isExpert = cardType === 'expert' || cardType === 'highway'
   const isRoute = cardType === 'route' || cardType === 'highway'
 
-  // Safely extract category distribution for experts
-  const categoryDistribution = hasRichData && isExpert && selectedData?.category_distribution 
-    ? selectedData.category_distribution as Record<string, number>
+  // Safely extract label distribution for experts
+  const categoryDistribution = hasRichData && isExpert && selectedData?.label_distribution
+    ? selectedData.label_distribution as Record<string, number>
     : null
 
   // Reset tab when selectedData changes
@@ -595,69 +501,27 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
                 <div className="space-y-3">
                   {analysis && (
                     <>
-                      {/* Category Distribution */}
+                      {/* Label Distribution */}
                       <div>
-                        <h4 className="font-medium text-gray-900 mb-3 text-sm">Category Distribution</h4>
-                        <div className="space-y-3 max-h-60 overflow-y-auto">
-                          {(() => {
-                            // Define category axes
-                            const categoryAxes = {
-                              'Grammatical': ['nouns', 'verbs'],
-                              'Sentiment': ['positive', 'negative', 'neutral'],
-                              'Abstraction': ['concrete', 'abstract'],
-                              'Conceptual': ['temporal', 'cognitive']
-                            }
-                            
-                            // Calculate axis-based percentages from existing category_distribution
-                            const axisDistributions = []
-                            
-                            for (const [axisName, axisCategories] of Object.entries(categoryAxes)) {
-                              const axisStats = analysis.categoryStats.filter(s => axisCategories.includes(s.category))
-                              if (axisStats.length > 0) {
-                                // Calculate total for this axis
-                                const axisTotal = axisStats.reduce((sum, stat) => sum + stat.count, 0)
-                                // Recalculate percentages within this axis
-                                const axisPercents = axisStats.map(stat => ({
-                                  ...stat,
-                                  percentage: axisTotal > 0 ? (stat.count / axisTotal) * 100 : 0
-                                }))
-                                axisDistributions.push({ name: axisName, stats: axisPercents })
-                              }
-                            }
-                            
-                            // Also check for any old-style categories
-                            const posAxis = analysis.categoryStats.filter(s => ['content', 'function'].includes(s.category))
-                            const complexityAxis = analysis.categoryStats.filter(s => ['simple', 'complex'].includes(s.category))
-                            
-                            // Add old-style categories if they exist
-                            if (posAxis.length > 0) axisDistributions.push({ name: 'POS', stats: posAxis })
-                            if (complexityAxis.length > 0) axisDistributions.push({ name: 'Complexity', stats: complexityAxis })
-                            
-                            return axisDistributions.map(axis => (
-                              <div key={axis.name} className="border border-gray-200 rounded-lg p-3">
-                                <h5 className="font-medium text-gray-800 mb-2 text-xs">{axis.name}</h5>
-                                <div className="space-y-2">
-                                  {axis.stats.map(stat => (
-                                    <div key={stat.category}>
-                                      <div className="flex justify-between items-center mb-1">
-                                        <span className="text-xs font-medium text-gray-900 capitalize">{stat.category}</span>
-                                        <span className="text-xs text-gray-600">{stat.percentage.toFixed(1)}%</span>
-                                      </div>
-                                      <div className="w-full bg-gray-200 rounded-full h-1.5">
-                                        <div 
-                                          className="bg-blue-500 h-1.5 rounded-full" 
-                                          style={{ width: `${Math.min(stat.percentage, 100)}%` }}
-                                        />
-                                      </div>
-                                      <div className="text-xs text-gray-500 mt-1">
-                                        {stat.count} tokens
-                                      </div>
-                                    </div>
-                                  ))}
-                                </div>
+                        <h4 className="font-medium text-gray-900 mb-3 text-sm">Label Distribution</h4>
+                        <div className="space-y-2 max-h-60 overflow-y-auto">
+                          {analysis.categoryStats.map(stat => (
+                            <div key={stat.category}>
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="text-xs font-medium text-gray-900 capitalize">{stat.category}</span>
+                                <span className="text-xs text-gray-600">{stat.percentage.toFixed(1)}%</span>
                               </div>
-                            ))
-                          })()}
+                              <div className="w-full bg-gray-200 rounded-full h-1.5">
+                                <div
+                                  className="bg-blue-500 h-1.5 rounded-full"
+                                  style={{ width: `${Math.min(stat.percentage, 100)}%` }}
+                                />
+                              </div>
+                              <div className="text-xs text-gray-500 mt-1">
+                                {stat.count} tokens
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
 
@@ -691,56 +555,50 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
               </div>
             )}
 
-            {activeTab === 'examples' && (
-              <div className="space-y-4">
-                <h4 className="font-medium text-gray-900">Examples</h4>
-                {isExpert && Array.isArray(selectedData.context_target_pairs) && selectedData.context_target_pairs.length > 0 ? (
-                  <div className="space-y-3">
-                    {selectedData.context_target_pairs.map((pair: any, index: number) => (
-                      <div key={index} className="bg-gray-50 p-3 rounded-lg">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <span className="text-sm font-medium text-gray-900">"{pair.context || 'N/A'}"</span>
-                          <span className="text-gray-400">→</span>
-                          <span className="text-xs text-gray-500">
-                            {typeof pair.target_count === 'number' ? pair.target_count : 0} targets
-                          </span>
-                        </div>
-                        {Array.isArray(pair.targets) ? (
-                          <div className="flex flex-wrap gap-2">
-                            {pair.targets.slice(0, 8).map((target: string) => (
-                              <span key={target} className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
-                                {target}
-                              </span>
-                            ))}
-                            {pair.targets.length > 8 && (
-                              <span className="text-xs text-gray-500">+{pair.targets.length - 8} more</span>
+            {activeTab === 'examples' && (() => {
+              const examples = selectedData.tokens || selectedData.example_tokens || []
+              return (
+                <div className="space-y-4">
+                  <h4 className="font-medium text-gray-900">Examples</h4>
+                  {Array.isArray(examples) && examples.length > 0 ? (
+                    <div className="space-y-3 max-h-80 overflow-y-auto">
+                      {examples.slice(0, 10).map((token: any, index: number) => {
+                        const tokenColor = token.label && colorLabelA && colorLabelB
+                          ? getNodeColor({ [token.label]: 1 }, colorLabelA, colorLabelB, undefined, undefined, gradient)
+                          : '#666666'
+                        return (
+                          <div key={token.probe_id || index} className="bg-gray-50 p-3 rounded-lg">
+                            <div className="flex items-center space-x-2 mb-1">
+                              {token.label && (
+                                <span
+                                  className="px-1.5 py-0.5 text-[10px] font-medium rounded-full text-white capitalize"
+                                  style={{ backgroundColor: tokenColor }}
+                                >
+                                  {token.label}
+                                </span>
+                              )}
+                            </div>
+                            {token.input_text ? (
+                              <p className="text-xs text-gray-700 leading-relaxed">
+                                <SentenceHighlight
+                                  text={token.input_text}
+                                  targetWord={token.target_word || ''}
+                                  color={tokenColor}
+                                />
+                              </p>
+                            ) : (
+                              <span className="text-xs text-gray-500">"{token.target_word || 'N/A'}"</span>
                             )}
                           </div>
-                        ) : (
-                          <div className="text-sm text-gray-700">
-                            {typeof pair.targets === 'string' ? pair.targets.split(',').join(', ') : String(pair.targets || '')}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                ) : isRoute && Array.isArray(selectedData.example_tokens) && selectedData.example_tokens.length > 0 ? (
-                  <div className="space-y-3">
-                    {selectedData.example_tokens.slice(0, 10).map((token: any, index: number) => (
-                      <div key={index} className="bg-gray-50 p-3 rounded-lg">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-sm font-medium text-gray-900">"{token.context || 'N/A'}"</span>
-                          <span className="text-gray-400">→</span>
-                          <span className="text-sm font-medium text-gray-900">"{token.target || 'N/A'}"</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-sm text-gray-500">No examples available</p>
-                )}
-              </div>
-            )}
+                        )
+                      })}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-500">No examples available</p>
+                  )}
+                </div>
+              )
+            })()}
           </div>
         </>
       ) : (
@@ -776,161 +634,98 @@ function ContextSensitiveCard({ cardType, selectedData }: ContextSensitiveCardPr
 }
 
 interface ColorControlsProps {
-  primaryAxis: ColorAxis
-  secondaryAxis?: ColorAxis
-  primaryGradient: GradientScheme
-  secondaryGradient: GradientScheme
-  onPrimaryChange: (axis: ColorAxis) => void
-  onSecondaryChange: (axis: ColorAxis | undefined) => void
-  onPrimaryGradientChange: (gradient: GradientScheme) => void
-  onSecondaryGradientChange: (gradient: GradientScheme) => void
+  colorLabelA: string
+  colorLabelB: string
+  gradient: GradientScheme
+  onGradientChange: (gradient: GradientScheme) => void
 }
 
-function ColorControls({ 
-  primaryAxis, 
-  secondaryAxis, 
-  primaryGradient, 
-  secondaryGradient, 
-  onPrimaryChange, 
-  onSecondaryChange, 
-  onPrimaryGradientChange, 
-  onSecondaryGradientChange 
+function ColorControls({
+  colorLabelA,
+  colorLabelB,
+  gradient,
+  onGradientChange
 }: ColorControlsProps) {
-  // Map ColorAxis to category pairs for the new getColorPreview function
-  const AXIS_CATEGORY_MAP: Record<ColorAxis, { neg: string; pos: string }> = {
-    sentiment: { neg: 'negative', pos: 'positive' },
-    concreteness: { neg: 'abstract', pos: 'concrete' },
-    pos: { neg: 'nouns', pos: 'verbs' },
-    'action-content': { neg: 'action', pos: 'content' }
-  }
-  
-  const primary = AXIS_CATEGORY_MAP[primaryAxis]
-  const secondary = secondaryAxis ? AXIS_CATEGORY_MAP[secondaryAxis] : undefined
-  
-  const colorPreview = getColorPreview(
-    primary.neg, 
-    primary.pos, 
-    secondary?.neg, 
-    secondary?.pos,
-    primaryGradient,
-    secondaryGradient
-  )
-  
+  const colorPreview = getColorPreview(colorLabelA, colorLabelB, undefined, undefined, gradient)
+
   return (
     <div className="space-y-4">
       <h4 className="font-medium text-gray-900">Color Controls</h4>
-      
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Primary Axis
-        </label>
-        <select
-          value={primaryAxis}
-          onChange={(e) => onPrimaryChange(e.target.value as ColorAxis)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        >
-          <option value="sentiment">Sentiment</option>
-          <option value="concreteness">Concreteness</option>
-          <option value="pos">Part of Speech</option>
-          <option value="temporal">Temporal vs Cognitive</option>
-        </select>
-      </div>
-      
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Secondary Axis (Optional)
-        </label>
-        <select
-          value={secondaryAxis || ''}
-          onChange={(e) => onSecondaryChange(e.target.value ? e.target.value as ColorAxis : undefined)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        >
-          <option value="">None (Pure Colors)</option>
-          <option value="sentiment" disabled={primaryAxis === 'sentiment'}>Sentiment</option>
-          <option value="concreteness" disabled={primaryAxis === 'concreteness'}>Concreteness</option>
-          <option value="pos" disabled={primaryAxis === 'pos'}>Part of Speech</option>
-          <option value="temporal" disabled={primaryAxis === 'temporal'}>Temporal vs Cognitive</option>
-        </select>
-      </div>
-      
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Primary Gradient
-        </label>
-        <select
-          value={primaryGradient}
-          onChange={(e) => onPrimaryGradientChange(e.target.value as GradientScheme)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        >
-          {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
-            <option key={key} value={key}>{scheme.name}</option>
-          ))}
-        </select>
-      </div>
-      
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Secondary Gradient
-        </label>
-        <select
-          value={secondaryGradient}
-          onChange={(e) => onSecondaryGradientChange(e.target.value as GradientScheme)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        >
-          {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
-            <option key={key} value={key}>{scheme.name}</option>
-          ))}
-        </select>
-      </div>
-      
-      {/* Color Preview */}
-      <div className="pt-2 border-t border-gray-200">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Color Preview
-        </label>
-        <div className="grid grid-cols-2 gap-2 text-xs">
-          {Object.entries(colorPreview).slice(0, 8).map(([label, color]) => (
-            <div key={label} className="flex items-center space-x-2">
-              <div 
-                className="rounded border border-gray-300 flex-shrink-0" 
-                style={{ 
-                  backgroundColor: color,
-                  width: '20px',
-                  height: '20px',
-                  minWidth: '20px',
-                  minHeight: '20px'
-                }}
-              />
-              <span className="text-gray-600 truncate">{label}</span>
-            </div>
-          ))}
+
+      {/* Show current color axis */}
+      {colorLabelA && colorLabelB ? (
+        <div className="text-sm text-gray-700">
+          Coloring by: <span className="font-medium">{colorLabelA}</span> vs <span className="font-medium">{colorLabelB}</span>
         </div>
+      ) : (
+        <div className="text-sm text-gray-500 italic">
+          Run analysis to detect color axis from data
+        </div>
+      )}
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Gradient
+        </label>
+        <select
+          value={gradient}
+          onChange={(e) => onGradientChange(e.target.value as GradientScheme)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        >
+          {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
+            <option key={key} value={key}>{scheme.name}</option>
+          ))}
+        </select>
       </div>
+
+      {/* Color Preview */}
+      {colorLabelA && colorLabelB && (
+        <div className="pt-2 border-t border-gray-200">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Color Preview
+          </label>
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            {Object.entries(colorPreview).map(([label, color]) => (
+              <div key={label} className="flex items-center space-x-2">
+                <div
+                  className="rounded border border-gray-300 flex-shrink-0"
+                  style={{
+                    backgroundColor: color,
+                    width: '20px',
+                    height: '20px',
+                    minWidth: '20px',
+                    minHeight: '20px'
+                  }}
+                />
+                <span className="text-gray-600 truncate">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
-function ExpertHighwaysTab({ 
-  sessionId, 
-  sessionData, 
+function ExpertHighwaysTab({
+  sessionIds,
+  sessionData,
   filterState,
-  primaryAxis,
-  secondaryAxis,
-  primaryGradient,
-  secondaryGradient,
+  colorLabelA,
+  colorLabelB,
+  gradient,
   topRoutes,
   selectedRange,
   onRangeChange,
   showAllRoutes,
   onRouteDataLoaded
-}: { 
-  sessionId: string
+}: {
+  sessionIds: string[]
   sessionData: SessionDetailResponse | null
   filterState: FilterState
-  primaryAxis: ColorAxis
-  secondaryAxis?: ColorAxis
-  primaryGradient: GradientScheme
-  secondaryGradient: GradientScheme
+  colorLabelA: string
+  colorLabelB: string
+  gradient: GradientScheme
   topRoutes: number
   selectedRange: string
   onRangeChange: (range: string) => void
@@ -969,13 +764,12 @@ function ExpertHighwaysTab({
       {/* Multi-Sankey Route Analysis Visualization */}
       <div className="bg-gray-50 rounded-lg p-6">
         <MultiSankeyView
-          sessionId={sessionId}
+          sessionIds={sessionIds}
           sessionData={sessionData}
           filterState={filterState}
-          primaryAxis={primaryAxis}
-          secondaryAxis={secondaryAxis}
-          primaryGradient={primaryGradient}
-          secondaryGradient={secondaryGradient}
+          colorLabelA={colorLabelA}
+          colorLabelB={colorLabelB}
+          gradient={gradient}
           showAllRoutes={showAllRoutes}
           topRoutes={topRoutes}
           selectedRange={selectedRange}
@@ -992,9 +786,12 @@ function ExpertHighwaysTab({
       {/* Context-Sensitive Card integrated */}
       {selectedCard && (
         <div className="mt-4 pt-4 border-t border-gray-200">
-          <ContextSensitiveCard 
+          <ContextSensitiveCard
             cardType={selectedCard.type}
             selectedData={selectedCard.data}
+            colorLabelA={colorLabelA}
+            colorLabelB={colorLabelB}
+            gradient={gradient}
           />
         </div>
       )}
@@ -1002,36 +799,38 @@ function ExpertHighwaysTab({
   )
 }
 
-function LatentSpaceTab({ 
-  sessionId, 
-  sessionData, 
+function LatentSpaceTab({
+  sessionIds,
+  sessionData,
   filterState,
-  primaryAxis,
-  secondaryAxis,
-  primaryGradient,
-  secondaryGradient,
+  colorLabelA,
+  colorLabelB,
+  gradient,
   selectedRange,
   onRangeChange,
   layerClusterCounts,
   clusteringMethod,
-  pcaDimensions,
+  reductionDimensions,
+  embeddingSource,
+  reductionMethod,
   useAllLayersSameClusters,
   setUseAllLayersSameClusters,
   globalClusterCount,
   setGlobalClusterCount
-}: { 
-  sessionId: string
+}: {
+  sessionIds: string[]
   sessionData: SessionDetailResponse | null
   filterState: FilterState
-  primaryAxis: ColorAxis
-  secondaryAxis?: ColorAxis
-  primaryGradient: GradientScheme
-  secondaryGradient: GradientScheme
+  colorLabelA: string
+  colorLabelB: string
+  gradient: GradientScheme
   selectedRange: string
   onRangeChange: (range: string) => void
   layerClusterCounts: {[key: number]: number}
   clusteringMethod: string
-  pcaDimensions: number
+  reductionDimensions: number
+  embeddingSource: string
+  reductionMethod: string
   useAllLayersSameClusters: boolean
   setUseAllLayersSameClusters: (value: boolean) => void
   globalClusterCount: number
@@ -1039,7 +838,7 @@ function LatentSpaceTab({
 }) {
   const [selectedCard, setSelectedCard] = useState<{ type: 'cluster' | 'route', data: any } | null>(null)
   const [runAnalysis, setRunAnalysis] = useState<(() => void) | null>(null)
-  const [runPCAAnalysis, setRunPCAAnalysis] = useState<(() => void) | null>(null)
+  const [runTrajectoryAnalysis, setRunTrajectoryAnalysis] = useState<(() => void) | null>(null)
 
   // Memoize layers array to prevent infinite re-renders
   const memoizedLayers = useMemo(() => {
@@ -1057,8 +856,8 @@ function LatentSpaceTab({
     setRunAnalysis(() => analysisFunction)
   }, [])
 
-  const handlePCAAnalysisReady = useCallback((analysisFunction: () => void) => {
-    setRunPCAAnalysis(() => analysisFunction)
+  const handleTrajectoryAnalysisReady = useCallback((analysisFunction: () => void) => {
+    setRunTrajectoryAnalysis(() => analysisFunction)
   }, [])
 
   // Memoize clusteringConfig to prevent infinite re-renders
@@ -1077,26 +876,28 @@ function LatentSpaceTab({
     }
     
     return {
-      pca_dimensions: pcaDimensions,
+      reduction_dimensions: reductionDimensions,
       clustering_method: clusteringMethod,
-      layer_cluster_counts: effectiveLayerClusterCounts
+      layer_cluster_counts: effectiveLayerClusterCounts,
+      embedding_source: embeddingSource,
+      reduction_method: reductionMethod
     };
-  }, [pcaDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers])
+  }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod])
 
   return (
     <div className="bg-white rounded-xl shadow-sm p-4 h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-lg font-semibold text-gray-900">Latent Space Analysis</h3>
-          <p className="text-xs text-gray-600 mt-1">Cluster trajectories and stepped PCA visualization</p>
+          <p className="text-xs text-gray-600 mt-1">Cluster trajectories and stepped trajectory visualization</p>
         </div>
         <div className="flex items-center space-x-2">
           <button
             onClick={() => {
               runAnalysis?.()
-              runPCAAnalysis?.()
+              runTrajectoryAnalysis?.()
             }}
-            disabled={!runAnalysis || !runPCAAnalysis}
+            disabled={!runAnalysis || !runTrajectoryAnalysis}
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
             Run Analysis
@@ -1109,13 +910,12 @@ function LatentSpaceTab({
         {/* Trajectory Sankey - Clusters and Paths */}
         <div className="bg-gray-50 rounded-lg p-6 mb-4">
           <MultiSankeyView
-            sessionId={sessionId}
+            sessionIds={sessionIds}
             sessionData={sessionData}
             filterState={filterState}
-            primaryAxis={primaryAxis}
-            secondaryAxis={secondaryAxis}
-            primaryGradient={primaryGradient}
-            secondaryGradient={secondaryGradient}
+            colorLabelA={colorLabelA}
+            colorLabelB={colorLabelB}
+            gradient={gradient}
             showAllRoutes={false}
             topRoutes={20}
             selectedRange={selectedRange}
@@ -1128,31 +928,52 @@ function LatentSpaceTab({
             clusteringConfig={memoizedClusteringConfig}
           />
         </div>
-        
-        {/* Stepped PCA Plot - All Three Layers */}
+
+        {/* Stepped Trajectory Plot */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-4">
-          <SteppedPCAPlot
-            sessionId={sessionId}
+          <SteppedTrajectoryPlot
+            sessionIds={sessionIds}
             layers={memoizedLayers}
-            primaryAxis={primaryAxis}
-            secondaryAxis={secondaryAxis}
-            primaryGradient={primaryGradient}
-            secondaryGradient={secondaryGradient}
+            colorLabelA={colorLabelA}
+            colorLabelB={colorLabelB}
+            gradient={gradient}
+            source={embeddingSource}
+            method={reductionMethod}
             sessionData={sessionData}
             filterConfig={convertFilterState(filterState, sessionData)}
             height={400}
             maxTrajectories={100}
             manualTrigger={true}
-            onAnalysisReady={handlePCAAnalysisReady}
+            onAnalysisReady={handleTrajectoryAnalysisReady}
+            onPointClick={useCallback((info: { probe_id: string; target: string; label?: string }) => {
+              // Look up the full sentence from session data
+              const sentence = sessionData?.sentences?.find(s => s.probe_id === info.probe_id)
+              if (sentence) {
+                setSelectedCard({
+                  type: 'route',
+                  data: {
+                    _fullData: sentence,
+                    name: info.target,
+                    label: info.label,
+                    tokens: [sentence],
+                    example_tokens: [sentence],
+                    signature: `Trajectory: ${info.probe_id.slice(0, 8)}`,
+                  }
+                })
+              }
+            }, [sessionData])}
           />
         </div>
 
         {/* Context-Sensitive Card integrated */}
         {selectedCard && (
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <ContextSensitiveCard 
+            <ContextSensitiveCard
               cardType={selectedCard.type}
               selectedData={selectedCard.data}
+              colorLabelA={colorLabelA}
+              colorLabelB={colorLabelB}
+              gradient={gradient}
             />
           </div>
         )}
@@ -1163,24 +984,20 @@ function LatentSpaceTab({
 
 export default function ExperimentPage() {
   const { id } = useParams<{ id: string }>()
-  const [selectedSession, setSelectedSession] = useState<string>('')
+  const [selectedSessions, setSelectedSessions] = useState<string[]>([])
   const [sessions, setSessions] = useState<SessionListItem[]>([])
-  const [sessionDetails, setSessionDetails] = useState<SessionDetailResponse | null>(null)
+  const [mergedSessionDetails, setMergedSessionDetails] = useState<SessionDetailResponse | null>(null)
   const [activeTab, setActiveTab] = useState<'expert' | 'latent'>('expert')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filterState, setFilterState] = useState<FilterState>({
-    contextCategories: new Set(),
-    targetCategories: new Set(),
-    balanceCategories: false,
-    maxWordsPerCategory: 100
+    labels: new Set()
   })
 
-  // Shared controls
-  const [primaryAxis, setPrimaryAxis] = useState<ColorAxis>('sentiment')
-  const [secondaryAxis, setSecondaryAxis] = useState<ColorAxis | undefined>('concreteness')
-  const [primaryGradient, setPrimaryGradient] = useState<GradientScheme>('red-blue')
-  const [secondaryGradient, setSecondaryGradient] = useState<GradientScheme>('yellow-cyan')
+  // Color controls — single axis defined by two label strings from backend available_axes
+  const [colorLabelA, setColorLabelA] = useState<string>('')
+  const [colorLabelB, setColorLabelB] = useState<string>('')
+  const [gradient, setGradient] = useState<GradientScheme>('red-blue')
   const [windowLayers, setWindowLayers] = useState<number[]>([0, 1])
   const [selectedRange, setSelectedRange] = useState<string>('range1')
   
@@ -1188,10 +1005,12 @@ export default function ExperimentPage() {
   const [topRoutes, setTopRoutes] = useState(10)
   const [showAllRoutes, setShowAllRoutes] = useState(false)
   
-  // Latent tab controls  
+  // Latent tab controls
   const [layerClusterCounts, setLayerClusterCounts] = useState<{[key: number]: number}>({})
   const [clusteringMethod, setClusteringMethod] = useState('kmeans')
-  const [pcaDimensions, setPcaDimensions] = useState(3)
+  const [reductionDims, setReductionDims] = useState(3)
+  const [embeddingSource, setEmbeddingSource] = useState<string>('expert_output')
+  const [reductionMethod, setReductionMethod] = useState<string>('pca')
   const [customDimensions, setCustomDimensions] = useState(15)
   const [useCustomDimensions, setUseCustomDimensions] = useState(false)
   
@@ -1201,6 +1020,39 @@ export default function ExperimentPage() {
 
   // LLM Insights state
   const [currentRouteData, setCurrentRouteData] = useState<Record<string, RouteAnalysisResponse | null> | null>(null)
+
+  // Derive available labels from route analysis available_axes
+  const availableLabels = useMemo(() => {
+    if (!currentRouteData) return []
+    const labels = new Set<string>()
+    for (const data of Object.values(currentRouteData)) {
+      if (data?.available_axes) {
+        for (const axis of data.available_axes) {
+          if (axis.id === 'label') {
+            labels.add(axis.label_a)
+            labels.add(axis.label_b)
+          }
+        }
+      }
+    }
+    return Array.from(labels)
+  }, [currentRouteData])
+
+  // Auto-detect color axis from route analysis available_axes
+  const handleRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
+    setCurrentRouteData(routeDataMap)
+    // Pick color labels from the first response that has available_axes
+    if (!colorLabelA || !colorLabelB) {
+      for (const data of Object.values(routeDataMap)) {
+        if (data?.available_axes && data.available_axes.length > 0) {
+          const axis = data.available_axes[0]
+          setColorLabelA(axis.label_a)
+          setColorLabelB(axis.label_b)
+          break
+        }
+      }
+    }
+  }, [colorLabelA, colorLabelB])
 
   // Helper to update cluster counts when window changes
   const updateWindowLayers = (newWindow: number[]) => {
@@ -1220,28 +1072,43 @@ export default function ExperimentPage() {
   }, [])
 
   useEffect(() => {
-    if (selectedSession) {
-      loadSessionDetails()
+    if (selectedSessions.length > 0) {
+      loadAndMergeSessions()
+    } else {
+      setMergedSessionDetails(null)
     }
-  }, [selectedSession])
+  }, [selectedSessions])
 
-  const loadSessionDetails = async () => {
-    if (!selectedSession) return
-    
-    // Check if session is ready for analysis
-    const sessionInfo = sessions.find(s => s.session_id === selectedSession)
-    if (!sessionInfo || sessionInfo.state !== 'completed') {
-      setSessionDetails(null)
-      return
-    }
-    
+  const loadAndMergeSessions = async () => {
     try {
-      const details = await apiClient.getSessionDetails(selectedSession)
-      setSessionDetails(details)
+      const details = await Promise.all(
+        selectedSessions.map(id => apiClient.getSessionDetails(id))
+      )
+
+      if (details.length === 1) {
+        setMergedSessionDetails(details[0])
+        return
+      }
+
+      // Merge labels by union across sessions
+      const mergedLabels = new Set<string>()
+      for (const d of details) {
+        (d.labels || []).forEach((l: string) => mergedLabels.add(l))
+      }
+
+      // Merge sentences across sessions
+      const mergedSentences = details.flatMap(d => d.sentences || [])
+
+      setMergedSessionDetails({
+        manifest: details[0].manifest,
+        data_lake_paths: details[0].data_lake_paths,
+        labels: Array.from(mergedLabels),
+        target_word: details[0].target_word,
+        sentences: mergedSentences.length > 0 ? mergedSentences : undefined
+      })
     } catch (err) {
       console.error('Failed to load session details:', err)
-      setSessionDetails(null)
-      // Could add user notification here if needed
+      setMergedSessionDetails(null)
     }
   }
 
@@ -1257,7 +1124,7 @@ export default function ExperimentPage() {
       
       // Only auto-select if session ID is in URL and exists
       if (id && completedSessions.find((s: SessionListItem) => s.session_id === id)) {
-        setSelectedSession(id)
+        setSelectedSessions([id])
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load sessions')
@@ -1267,7 +1134,7 @@ export default function ExperimentPage() {
     }
   }
 
-  const selectedSessionData = sessions.find(s => s.session_id === selectedSession)
+  const selectedSessionData = selectedSessions.length > 0 ? sessions.find(s => s.session_id === selectedSessions[0]) : undefined
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -1333,20 +1200,28 @@ export default function ExperimentPage() {
       <div className="flex h-[calc(100vh-88px)]">
         {/* Left Sidebar - Session, Tabs, Controls */}
         <div className="bg-white shadow-sm border-r flex flex-col sidebar-narrow">
-          {/* Session Selector */}
+          {/* Session Selector — checkbox list for multi-session */}
           <div className="p-2 border-b">
-            <select
-              value={selectedSession}
-              onChange={(e) => setSelectedSession(e.target.value)}
-              className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="">Select session...</option>
+            <h3 className="text-xs font-semibold text-gray-700 mb-1">Sessions</h3>
+            <div className="max-h-32 overflow-y-auto space-y-1">
               {sessions.filter(s => s.state === 'completed').map((session) => (
-                <option key={session.session_id} value={session.session_id}>
-                  {session.session_name}
-                </option>
+                <label key={session.session_id} className="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedSessions.includes(session.session_id)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedSessions(prev => [...prev, session.session_id])
+                      } else {
+                        setSelectedSessions(prev => prev.filter(id => id !== session.session_id))
+                      }
+                    }}
+                    className="w-3 h-3 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="ml-1.5 text-xs text-gray-700 truncate">{session.session_name}</span>
+                </label>
               ))}
-            </select>
+            </div>
           </div>
 
           {/* Tab Navigation */}
@@ -1384,66 +1259,19 @@ export default function ExperimentPage() {
           </div>
 
           {/* Controls Section */}
-          {selectedSession && (
+          {selectedSessions.length > 0 && (
             <div className="p-3 border-b flex-1">
               <h3 className="text-xs font-semibold text-gray-900 mb-2">Controls</h3>
               
               <div className="space-y-4">
                 {/* Shared Controls */}
                 <div className="border-t border-gray-200 pt-3 mt-3">
-                  <ColorControls 
-                  primaryAxis={primaryAxis}
-                  secondaryAxis={secondaryAxis}
-                  primaryGradient={primaryGradient}
-                  secondaryGradient={secondaryGradient}
-                  onPrimaryChange={setPrimaryAxis}
-                  onSecondaryChange={setSecondaryAxis}
-                  onPrimaryGradientChange={setPrimaryGradient}
-                  onSecondaryGradientChange={setSecondaryGradient}
+                  <ColorControls
+                    colorLabelA={colorLabelA}
+                    colorLabelB={colorLabelB}
+                    gradient={gradient}
+                    onGradientChange={setGradient}
                   />
-                </div>
-
-                {/* Balanced Sampling Controls */}
-                <div className="pt-4 border-t border-gray-200">
-                  <h4 className="font-medium text-gray-900 mb-3">Balanced Sampling</h4>
-                  
-                  <div className="space-y-3">
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        checked={filterState.balanceCategories}
-                        onChange={(e) => setFilterState(prev => ({
-                          ...prev,
-                          balanceCategories: e.target.checked
-                        }))}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className="text-sm font-medium text-gray-700">Balance Categories</span>
-                    </label>
-                    
-                    {filterState.balanceCategories && (
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Max Words per Category
-                        </label>
-                        <input
-                          type="number"
-                          value={filterState.maxWordsPerCategory}
-                          onChange={(e) => setFilterState(prev => ({
-                            ...prev,
-                            maxWordsPerCategory: parseInt(e.target.value) || 100
-                          }))}
-                          min="10"
-                          max="1000"
-                          step="10"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <p className="text-xs text-gray-500 mt-1">
-                          Randomly sample up to this many words per category
-                        </p>
-                      </div>
-                    )}
-                  </div>
                 </div>
 
                 <div>
@@ -1545,24 +1373,49 @@ export default function ExperimentPage() {
                 {/* Latent Tab Controls */}
                 {activeTab === 'latent' && (
                   <>
+                    {/* Embedding Source + Reduction Method */}
                     <div className="border-t border-gray-200 pt-4">
-                      <h4 className="text-sm font-semibold text-gray-700 mb-3">PCA Dimensions for Clustering</h4>
+                      <h4 className="text-sm font-semibold text-gray-700 mb-3">Embedding Source</h4>
+                      <select
+                        value={embeddingSource}
+                        onChange={(e) => setEmbeddingSource(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="expert_output">Expert Output</option>
+                        <option value="residual_stream">Residual Stream</option>
+                      </select>
+                    </div>
+
+                    <div className="border-t border-gray-200 pt-4">
+                      <h4 className="text-sm font-semibold text-gray-700 mb-3">Reduction Method</h4>
+                      <select
+                        value={reductionMethod}
+                        onChange={(e) => setReductionMethod(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="pca">PCA</option>
+                        <option value="umap">UMAP</option>
+                      </select>
+                    </div>
+
+                    <div className="border-t border-gray-200 pt-4">
+                      <h4 className="text-sm font-semibold text-gray-700 mb-3">Reduction Dimensions</h4>
                       <div className="mb-4">
                         <div className="space-y-2">
                           {[2, 3, 5, 10].map(dim => (
                             <label key={dim} className="flex items-center">
                               <input
                                 type="radio"
-                                name="pcaDimensions"
-                                checked={pcaDimensions === dim && !useCustomDimensions}
+                                name="reductionDims"
+                                checked={reductionDims === dim && !useCustomDimensions}
                                 onChange={() => {
-                                  setPcaDimensions(dim)
+                                  setReductionDims(dim)
                                   setUseCustomDimensions(false)
                                 }}
                                 className="mr-2"
                               />
                               <span className="text-sm">
-                                {dim}D (PC1-{dim}) - {
+                                {dim}D - {
                                   dim === 2 ? 'Major axes' :
                                   dim === 3 ? '+ depth' :
                                   dim === 5 ? 'Fine structure' :
@@ -1574,7 +1427,7 @@ export default function ExperimentPage() {
                           <label className="flex items-center">
                             <input
                               type="radio"
-                              name="pcaDimensions"
+                              name="reductionDims"
                               checked={useCustomDimensions}
                               onChange={() => setUseCustomDimensions(true)}
                               className="mr-2"
@@ -1668,23 +1521,26 @@ export default function ExperimentPage() {
 
         {/* Main Content Area - 3 Column Layout */}
         <div className="flex-1 flex">
-          {selectedSession ? (
+          {selectedSessions.length > 0 ? (
             <>
               {/* Middle Column - Word Lists */}
               <div className="bg-gray-50 border-r p-4 space-y-4 word-panel-narrow">
-                {sessionDetails && (
+                {mergedSessionDetails && (
                   <>
                     <WordFilterPanel
-                      sessionData={sessionDetails}
+                      sessionData={mergedSessionDetails}
                       selectedFilters={filterState}
                       onFiltersChange={setFilterState}
-                      isLoading={!sessionDetails}
+                      isLoading={!mergedSessionDetails}
                     />
-                    
+
                     <FilteredWordDisplay
-                      sessionData={sessionDetails}
+                      sessionData={mergedSessionDetails}
                       filterState={filterState}
-                      isLoading={!sessionDetails}
+                      isLoading={!mergedSessionDetails}
+                      colorLabelA={colorLabelA}
+                      colorLabelB={colorLabelB}
+                      gradient={gradient}
                     />
                   </>
                 )}
@@ -1694,35 +1550,35 @@ export default function ExperimentPage() {
               <div className="flex-1 flex flex-col">
                 <div className="flex-1 p-4">
                   {activeTab === 'expert' && (
-                    <ExpertHighwaysTab 
-                      sessionId={selectedSession}
-                      sessionData={sessionDetails}
+                    <ExpertHighwaysTab
+                      sessionIds={selectedSessions}
+                      sessionData={mergedSessionDetails}
                       filterState={filterState}
-                      primaryAxis={primaryAxis}
-                      secondaryAxis={secondaryAxis}
-                      primaryGradient={primaryGradient}
-                      secondaryGradient={secondaryGradient}
+                      colorLabelA={colorLabelA}
+                      colorLabelB={colorLabelB}
+                      gradient={gradient}
                       topRoutes={topRoutes}
                       selectedRange={selectedRange}
                       onRangeChange={setSelectedRange}
                       showAllRoutes={showAllRoutes}
-                      onRouteDataLoaded={setCurrentRouteData}
+                      onRouteDataLoaded={handleRouteDataLoaded}
                     />
                   )}
                   {activeTab === 'latent' && (
-                    <LatentSpaceTab 
-                      sessionId={selectedSession}
-                      sessionData={sessionDetails}
+                    <LatentSpaceTab
+                      sessionIds={selectedSessions}
+                      sessionData={mergedSessionDetails}
                       filterState={filterState}
-                      primaryAxis={primaryAxis}
-                      secondaryAxis={secondaryAxis}
-                      primaryGradient={primaryGradient}
-                      secondaryGradient={secondaryGradient}
+                      colorLabelA={colorLabelA}
+                      colorLabelB={colorLabelB}
+                      gradient={gradient}
                       selectedRange={selectedRange}
                       onRangeChange={setSelectedRange}
                       layerClusterCounts={layerClusterCounts}
                       clusteringMethod={clusteringMethod}
-                      pcaDimensions={useCustomDimensions ? customDimensions : pcaDimensions}
+                      reductionDimensions={useCustomDimensions ? customDimensions : reductionDims}
+                      embeddingSource={embeddingSource}
+                      reductionMethod={reductionMethod}
                       useAllLayersSameClusters={useAllLayersSameClusters}
                       setUseAllLayersSameClusters={setUseAllLayersSameClusters}
                       globalClusterCount={globalClusterCount}
@@ -1730,14 +1586,14 @@ export default function ExperimentPage() {
                     />
                   )}
                 </div>
-                
+
                 {/* LLM Analysis Panel - Below Visualization */}
                 <div className="border-t bg-white p-4">
-                  <LLMAnalysisPanel 
-                    sessionId={selectedSession} 
+                  <LLMAnalysisPanel
+                    sessionId={selectedSessions[0]}
                     analysisType={activeTab}
                     allRouteData={currentRouteData}
-                    sessionData={sessionDetails}
+                    sessionData={mergedSessionDetails}
                   />
                 </div>
               </div>

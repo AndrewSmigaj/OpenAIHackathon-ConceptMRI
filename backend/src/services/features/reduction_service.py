@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 """
 Generic dimensionality reduction service supporting PCA and UMAP.
-Replaces the PCA-only service with switchable reduction methods and embedding sources.
+Computes reduction on demand from raw embeddings — no pre-computation.
 """
 
-import json
 import logging
-import shutil
 from pathlib import Path
-from typing import Dict, Optional
-from datetime import datetime
+from typing import Optional
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
@@ -19,8 +16,8 @@ logger = logging.getLogger(__name__)
 # Source config: maps source name to parquet filename and column name
 SOURCE_CONFIG = {
     "expert_output": {
-        "parquet_file": "expert_output_states.parquet",
-        "column": "expert_output_state",
+        "parquet_file": "embeddings.parquet",
+        "column": "embedding",
     },
     "residual_stream": {
         "parquet_file": "residual_streams.parquet",
@@ -30,138 +27,129 @@ SOURCE_CONFIG = {
 
 
 class ReductionService:
-    """Generate dimensionality-reduced features from expert output or residual stream data."""
+    """On-demand dimensionality reduction from raw embeddings."""
 
     def __init__(self, n_components: int = 128):
         self.n_components = n_components
-        self.models = {}  # keyed by "{method}_{layer}_{position}"
 
-    def generate_features(
+    def reduce_on_demand(
         self,
-        session_id: str,
+        session_ids: list,
+        layers: list,
         data_lake_path: str,
         source: str = "expert_output",
-        method: str = "pca",
-    ) -> str:
+        method: str = "umap",
+        n_components: int = 3,
+    ) -> list:
         """
-        Generate reduced features for a capture session.
+        On-demand dimensionality reduction for one or more sessions.
 
-        Args:
-            session_id: Capture session ID
-            data_lake_path: Path to data lake
-            source: "expert_output" or "residual_stream"
-            method: "pca" or "umap"
-
-        Returns:
-            Path to generated features parquet file
+        Loads raw embeddings, concatenates across sessions, fits PCA/UMAP
+        per layer, and returns point dicts with coordinates + probe metadata.
         """
-        if source not in SOURCE_CONFIG:
-            raise ValueError(f"Unknown source '{source}', must be one of {list(SOURCE_CONFIG.keys())}")
+        from core.parquet_reader import read_records
+        from schemas.tokens import ProbeRecord
+
+        config = SOURCE_CONFIG.get(source)
+        if not config:
+            raise ValueError(f"Unknown source '{source}'")
         if method not in ("pca", "umap"):
-            raise ValueError(f"Unknown method '{method}', must be 'pca' or 'umap'")
+            raise ValueError(f"Unknown method '{method}'")
 
-        config = SOURCE_CONFIG[source]
-        session_path = Path(data_lake_path) / f"session_{session_id}"
+        # Collect raw embeddings and token metadata from all sessions
+        all_embeddings = []  # list of (session_id, probe_id, layer, embedding_vector)
+        token_meta = {}  # probe_id -> {target_word, label, session_id}
 
-        # Read source data
-        source_path = session_path / config["parquet_file"]
-        if not source_path.exists():
-            raise FileNotFoundError(f"Source data not found: {source_path}")
+        for sid in session_ids:
+            session_path = Path(data_lake_path) / f"session_{sid}"
+            if not session_path.exists():
+                session_path = Path(data_lake_path) / sid
+                if not session_path.exists():
+                    raise ValueError(f"Session {sid} not found")
 
-        logger.info(f"Loading {source} data from {source_path}")
-        df = pd.read_parquet(source_path)
-        column_name = config["column"]
+            # Load raw embeddings
+            source_path = session_path / config["parquet_file"]
+            if not source_path.exists():
+                raise FileNotFoundError(f"Source data not found: {source_path}")
 
-        # Create reducer
-        reducer = self._create_reducer(method)
+            df = pd.read_parquet(source_path)
+            column_name = config["column"]
 
-        # Group by layer and token position to fit models
-        feature_records = []
+            # Load token records for metadata
+            tokens_path = session_path / "tokens.parquet"
+            if tokens_path.exists():
+                token_records = read_records(str(tokens_path), ProbeRecord)
+                for t in token_records:
+                    key = f"{sid[:8]}_{t.probe_id}" if len(session_ids) > 1 else t.probe_id
+                    token_meta[key] = {
+                        "target_word": t.target_word,
+                        "label": t.label,
+                        "session_id": sid,
+                    }
 
-        for layer in sorted(df["layer"].unique()):
-            for token_position in [0, 1]:
-                mask = (df["layer"] == layer) & (df["token_position"] == token_position)
-                layer_pos_df = df[mask]
+            # Filter to target token (position=1) and requested layers
+            mask = df["layer"].isin(layers)
+            if "token_position" in df.columns:
+                mask = mask & (df["token_position"] == 1)
+            filtered = df[mask]
 
-                if layer_pos_df.empty:
-                    logger.warning(f"No data for layer {layer}, position {token_position}, skipping")
-                    continue
+            prefix = f"{sid[:8]}_" if len(session_ids) > 1 else ""
+            for _, row in filtered.iterrows():
+                all_embeddings.append({
+                    "probe_id": prefix + row["probe_id"],
+                    "layer": row["layer"],
+                    "vector": np.array(row[column_name], dtype=np.float32),
+                })
 
-                n_samples = len(layer_pos_df)
-                n_components_actual = min(n_samples, self.n_components)
+        if not all_embeddings:
+            return []
 
-                # Build state matrix
-                hidden_size = len(layer_pos_df.iloc[0][column_name])
-                states = np.zeros((n_samples, hidden_size), dtype=np.float32)
-                for idx, (_, row) in enumerate(layer_pos_df.iterrows()):
-                    states[idx] = np.array(row[column_name], dtype=np.float32)
+        # Group by layer and reduce
+        emb_df = pd.DataFrame(all_embeddings)
+        points = []
 
-                logger.info(
-                    f"Layer {layer}, pos {token_position}: "
-                    f"{method.upper()} on {states.shape[0]} samples of dim {states.shape[1]}"
-                )
+        for layer in sorted(layers):
+            layer_data = emb_df[emb_df["layer"] == layer]
+            if layer_data.empty:
+                continue
 
-                # Fit and transform
-                if method == "umap" and n_samples < 4:
-                    logger.warning(f"Layer {layer}, pos {token_position}: too few samples for UMAP ({n_samples}), using PCA fallback")
-                    local_reducer = PCA(n_components=n_components_actual, random_state=42)
-                else:
-                    local_reducer = self._create_reducer(method, n_components_actual)
+            n_samples = len(layer_data)
+            hidden_size = len(layer_data.iloc[0]["vector"])
+            states = np.zeros((n_samples, hidden_size), dtype=np.float32)
+            for idx, (_, row) in enumerate(layer_data.iterrows()):
+                states[idx] = row["vector"]
 
-                features = local_reducer.fit_transform(states)
+            # Fit reducer
+            actual_components = min(n_components, n_samples - 1, hidden_size)
+            if actual_components < 1:
+                actual_components = 1
 
-                # Pad with zeros if we had to reduce components
-                if features.shape[1] < self.n_components:
-                    padding = np.zeros((n_samples, self.n_components - features.shape[1]))
-                    features = np.hstack([features, padding])
+            if method == "umap" and n_samples < 4:
+                reducer = PCA(n_components=actual_components, random_state=42)
+            else:
+                reducer = self._create_reducer(method, actual_components)
 
-                # Store model
-                model_key = f"{method}_{layer}_{token_position}"
-                self.models[model_key] = local_reducer
+            coords = reducer.fit_transform(states)
 
-                # Create feature records
-                for idx, (_, row) in enumerate(layer_pos_df.iterrows()):
-                    feature_records.append(
-                        {
-                            "probe_id": row["probe_id"],
-                            "layer": layer,
-                            "token_position": token_position,
-                            "features": features[idx].tolist(),
-                            "method": method,
-                            "source": source,
-                        }
-                    )
+            # Build point dicts
+            for idx, (_, row) in enumerate(layer_data.iterrows()):
+                pid = row["probe_id"]
+                meta = token_meta.get(pid, {})
+                point = {
+                    "probe_id": pid,
+                    "session_id": meta.get("session_id", ""),
+                    "layer": int(layer),
+                    "x": float(coords[idx, 0]) if coords.shape[1] > 0 else 0.0,
+                    "target_word": meta.get("target_word", ""),
+                    "label": meta.get("label"),
+                }
+                if coords.shape[1] > 1:
+                    point["y"] = float(coords[idx, 1])
+                if coords.shape[1] > 2:
+                    point["z"] = float(coords[idx, 2])
+                points.append(point)
 
-        # Write output
-        output_filename = f"features_{source}_{method}{self.n_components}.parquet"
-        output_path = session_path / output_filename
-        features_df = pd.DataFrame(feature_records)
-        features_df.to_parquet(output_path, index=False)
-
-        logger.info(f"Saved {len(feature_records)} {method}/{source} features to {output_path}")
-
-        # Backward compat: if this is expert_output + pca, also write features_pca128.parquet
-        if source == "expert_output" and method == "pca":
-            compat_path = session_path / f"features_pca{self.n_components}.parquet"
-            # Write a copy with the old column name for backward compat
-            compat_df = features_df.copy()
-            compat_df = compat_df.rename(columns={"features": "pca128"})
-            compat_df = compat_df.drop(columns=["method", "source"])
-            compat_df.to_parquet(compat_path, index=False)
-            logger.info(f"Backward compat: wrote {compat_path}")
-
-        # Save metadata
-        metadata_path = session_path / f"{output_filename.replace('.parquet', '_metadata.json')}"
-        metadata = {
-            "method": method,
-            "source": source,
-            "n_components": self.n_components,
-            "generated_at": datetime.now().isoformat(),
-        }
-        with open(metadata_path, "w") as f:
-            json.dump(metadata, f, indent=2)
-
-        return str(output_path)
+        return points
 
     def _create_reducer(self, method: str, n_components: Optional[int] = None):
         """Create a reducer instance for the given method."""

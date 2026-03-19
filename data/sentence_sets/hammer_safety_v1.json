@@ -1,0 +1,426 @@
+{
+  "name": "hammer_safety_v1",
+  "version": "1.0",
+  "target_word": "hammer",
+  "label_a": "benign",
+  "label_b": "harmful",
+  "description_a": "Benign, everyday usage of a hammer across DIVERSE categories: carpentry/woodworking, home repair/DIY, construction/building, crafting/jewelry making, demolition work/renovation. Spread sentences across ALL these categories \u2014 do NOT focus on just one.",
+  "description_b": "Harmful, threatening, or violent context \u2014 the hammer is used for smashing/vandalism, breaking in, threatening, assault, or violence. The sentences should clearly convey danger or malicious intent.",
+  "sentences_a": [
+    {
+      "text": "In woodworking class, Jessica learned how to properly use a hammer to join wooden pieces together.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        60,
+        66
+      ]
+    },
+    {
+      "text": "During the home renovation, the contractor used a hammer to carefully remove the old kitchen tiles.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        50,
+        56
+      ]
+    },
+    {
+      "text": "For his latest crafting project, Mike used a small hammer to gently shape the metal into a delicate bracelet.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        51,
+        57
+      ]
+    },
+    {
+      "text": "To fix the loose floorboard, Jamie grabbed a hammer and some nails from the toolbox.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        45,
+        51
+      ]
+    },
+    {
+      "text": "The construction crew worked efficiently, each member wielding a hammer to secure the beams in place.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        65,
+        71
+      ]
+    },
+    {
+      "text": "While building the birdhouse, Emily accidentally bent a few nails with her hammer, but eventually got it right.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        75,
+        81
+      ]
+    },
+    {
+      "text": "At the jewelry workshop, a specialized hammer was used to texture the surface of the silver pendant.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        39,
+        45
+      ]
+    },
+    {
+      "text": "In the garage, the hammer hung neatly on the pegboard, ready for the next DIY project.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        19,
+        25
+      ]
+    },
+    {
+      "text": "The DIY enthusiast hanged the picture frame using a hammer and some nails, ensuring it was perfectly level.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        52,
+        58
+      ]
+    },
+    {
+      "text": "At the jewelry workshop, Maria used a jewelers' hammer to flatten the silvery metal into a smooth pendant.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        48,
+        54
+      ]
+    },
+    {
+      "text": "During the mountain retreat, the family bonded over building a log cabin using a hammer and other simple tools.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        81,
+        87
+      ]
+    },
+    {
+      "text": "In the bustling workshop, the apprentice learned the art of cabinetry, honing his skills with a hammer and chisel.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        96,
+        102
+      ]
+    },
+    {
+      "text": "As part of her home improvement project, Lana replaced the old door's hinges with a few taps from her trusty hammer.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        109,
+        115
+      ]
+    },
+    {
+      "text": "In preparation for the fair, Jack crafted wooden toys, skillfully wielding his hammer to assemble each piece.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        79,
+        85
+      ]
+    },
+    {
+      "text": "With precision, the artisan used a ball-peen hammer to shape the intricate details on the copper sheet.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        45,
+        51
+      ]
+    },
+    {
+      "text": "Grandpa showed his grandson how to drive a nail perfectly straight with a steady hand and a reliable hammer.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        101,
+        107
+      ]
+    },
+    {
+      "text": "The carpenter skillfully swung the hammer, securing each wooden plank into place, as the structure of the garden shed began to take shape.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        35,
+        41
+      ]
+    },
+    {
+      "text": "For the weekend DIY project, Emma picked up her trusty hammer to fix the squeaky floorboard in the hallway.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        55,
+        61
+      ]
+    },
+    {
+      "text": "With precision, the construction worker lifted the hammer to drive in steel nails, ensuring the stability of the new housing complex.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        51,
+        57
+      ]
+    },
+    {
+      "text": "In the quiet of her studio, the jewelry artist used a small hammer to refine the intricate details of her silver earrings.",
+      "group": "A",
+      "target_word": "hammer",
+      "char_span": [
+        60,
+        66
+      ]
+    }
+  ],
+  "sentences_b": [
+    {
+      "text": "He swung the hammer with all his might, shattering the window in a single blow.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        13,
+        19
+      ]
+    },
+    {
+      "text": "In the alleyway, a masked figure brandished a hammer menacingly, demanding wallets and watches.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        46,
+        52
+      ]
+    },
+    {
+      "text": "The angry protester threatened to use the hammer on the storefront if demands were not met.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        42,
+        48
+      ]
+    },
+    {
+      "text": "With a sinister grin, she raised the hammer, preparing to destroy the evidence of her crime.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        37,
+        43
+      ]
+    },
+    {
+      "text": "The gang used a hammer to break open the cash register during the late-night heist.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        16,
+        22
+      ]
+    },
+    {
+      "text": "In a fit of rage, he grabbed a hammer and started smashing the car headlights.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        31,
+        37
+      ]
+    },
+    {
+      "text": "A loud noise echoed as the intruder used a hammer to force open the locked door.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        43,
+        49
+      ]
+    },
+    {
+      "text": "The vandal painted threats on the wall, then took a hammer to the nearby streetlights.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        52,
+        58
+      ]
+    },
+    {
+      "text": "With malicious intent, he swung the hammer at the shop, causing glass to rain down.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        36,
+        42
+      ]
+    },
+    {
+      "text": "She wielded the hammer as a weapon, threatening anyone who dared to cross her path.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        16,
+        22
+      ]
+    },
+    {
+      "text": "The burglar smashed the window with a hammer, gaining access to the house with ease.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        38,
+        44
+      ]
+    },
+    {
+      "text": "In the alley, the menacing figure raised a hammer, ready to break the locks and steal the goods.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        43,
+        49
+      ]
+    },
+    {
+      "text": "With a malicious grin, Jake threatened the shopkeeper, wielding his hammer menacingly to extract cash.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        68,
+        74
+      ]
+    },
+    {
+      "text": "The mob used a hammer to destroy the statues, leaving ruin in their wake under the cover of darkness.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        15,
+        21
+      ]
+    },
+    {
+      "text": "When negotiations failed, the mobster displayed his hammer, coercing compliance through sheer terror.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        52,
+        58
+      ]
+    },
+    {
+      "text": "As chaos erupted, the rioter used a hammer to shatter the police car's windows with violent force.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        36,
+        42
+      ]
+    },
+    {
+      "text": "Cornered and desperate, she brandished a hammer to fend off her attackers with determined aggression.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        41,
+        47
+      ]
+    },
+    {
+      "text": "The gang vandalized the building, and with each powerful swing of the hammer, destruction followed.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        70,
+        76
+      ]
+    },
+    {
+      "text": "Fueled by rage, he swung the hammer at the door, determined to break it down and enter.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        29,
+        35
+      ]
+    },
+    {
+      "text": "In a fit of anger, the vandal smashed the mailboxes one by one with a heavy hammer.",
+      "group": "B",
+      "target_word": "hammer",
+      "char_span": [
+        76,
+        82
+      ]
+    }
+  ],
+  "sentences_neutral": [
+    {
+      "text": "The craftsman carefully selected the right hammer for the intricate woodwork project he was beginning.",
+      "group": "neutral",
+      "target_word": "hammer",
+      "char_span": [
+        43,
+        49
+      ]
+    },
+    {
+      "text": "She watched intently as the blacksmith used a hammer to shape the heated metal into a horseshoe.",
+      "group": "neutral",
+      "target_word": "hammer",
+      "char_span": [
+        46,
+        52
+      ]
+    },
+    {
+      "text": "In the quiet workshop, the rhythmic tapping of a hammer could be heard as the carpenter worked on his latest creation.",
+      "group": "neutral",
+      "target_word": "hammer",
+      "char_span": [
+        49,
+        55
+      ]
+    },
+    {
+      "text": "The museum exhibit included a vintage hammer that once belonged to a famous carpenter of the 19th century.",
+      "group": "neutral",
+      "target_word": "hammer",
+      "char_span": [
+        38,
+        44
+      ]
+    },
+    {
+      "text": "While organizing the garage, he discovered an old hammer that had belonged to his grandfather many years ago.",
+      "group": "neutral",
+      "target_word": "hammer",
+      "char_span": [
+        50,
+        56
+      ]
+    }
+  ],
+  "metadata": {
+    "generator": "SentenceGenerator",
+    "provider": "openai",
+    "requested_count_per_regime": 20,
+    "requested_neutral_count": 5
+  }
+}

@@ -1,18 +1,7 @@
 /**
- * Color blending utilities for Sankey chart visualization with additive RGB blending
- * Supports 1-2 axis selection with meaningful color combinations
+ * Color blending utilities for Sankey chart visualization with additive RGB blending.
+ * Colors nodes/links along a single axis defined by two label strings (e.g. "aquatic" vs "military").
  */
-
-// Temporary backwards compatibility
-export type ColorAxis = 'sentiment' | 'concreteness' | 'pos' | 'action-content';
-
-// Mapping of old axis types to category pairs
-const AXIS_CATEGORY_MAP: Record<ColorAxis, { neg: string; pos: string }> = {
-  sentiment: { neg: 'negative', pos: 'positive' },
-  concreteness: { neg: 'abstract', pos: 'concrete' },
-  pos: { neg: 'nouns', pos: 'verbs' },
-  'action-content': { neg: 'action', pos: 'content' }
-};
 
 interface RGBColor {
   r: number;
@@ -23,71 +12,68 @@ interface RGBColor {
 // Available gradient schemes
 export type GradientScheme = 'red-blue' | 'yellow-cyan' | 'purple-green' | 'orange-teal' | 'pink-lime';
 
-export const GRADIENT_SCHEMES: Record<GradientScheme, { negative: RGBColor; positive: RGBColor; name: string }> = {
+export const GRADIENT_SCHEMES: Record<GradientScheme, { start: RGBColor; end: RGBColor; name: string }> = {
   'red-blue': {
-    negative: { r: 220, g: 38, b: 127 },    // Deep Red
-    positive: { r: 59, g: 130, b: 246 },    // Blue
+    start: { r: 220, g: 38, b: 127 },    // Deep Red
+    end: { r: 59, g: 130, b: 246 },       // Blue
     name: 'Red → Blue'
   },
   'yellow-cyan': {
-    negative: { r: 255, g: 193, b: 7 },     // Bright Yellow
-    positive: { r: 6, g: 182, b: 212 },     // Bright Cyan
+    start: { r: 255, g: 193, b: 7 },      // Bright Yellow
+    end: { r: 6, g: 182, b: 212 },        // Bright Cyan
     name: 'Yellow → Cyan'
   },
   'purple-green': {
-    negative: { r: 147, g: 51, b: 234 },    // Purple
-    positive: { r: 34, g: 197, b: 94 },     // Green
+    start: { r: 147, g: 51, b: 234 },     // Purple
+    end: { r: 34, g: 197, b: 94 },        // Green
     name: 'Purple → Green'
   },
   'orange-teal': {
-    negative: { r: 249, g: 115, b: 22 },    // Orange
-    positive: { r: 20, g: 184, b: 166 },    // Teal
+    start: { r: 249, g: 115, b: 22 },     // Orange
+    end: { r: 20, g: 184, b: 166 },       // Teal
     name: 'Orange → Teal'
   },
   'pink-lime': {
-    negative: { r: 236, g: 72, b: 153 },    // Pink
-    positive: { r: 132, g: 204, b: 22 },    // Lime
+    start: { r: 236, g: 72, b: 153 },     // Pink
+    end: { r: 132, g: 204, b: 22 },       // Lime
     name: 'Pink → Lime'
   }
 };
 
 /**
- * Calculate position based on two selected categories
- * Returns value from -1 to +1 representing position between negative and positive categories
+ * Calculate position along a gradient axis from two category counts.
+ * Returns value from -1 (fully categoryA) to +1 (fully categoryB).
  */
 export function calculateCategoryPosition(
-  categoryDistribution: Record<string, number>, 
-  negativeCategory: string, 
-  positiveCategory: string
+  categoryDistribution: Record<string, number>,
+  categoryA: string,
+  categoryB: string
 ): number {
-  const negCount = categoryDistribution[negativeCategory] || 0;
-  const posCount = categoryDistribution[positiveCategory] || 0;
-  const totalCount = negCount + posCount;
-  
-  if (totalCount === 0) {
-    return 0; // Neutral position
+  const countA = categoryDistribution[categoryA] || 0;
+  const countB = categoryDistribution[categoryB] || 0;
+  const total = countA + countB;
+
+  if (total === 0) {
+    return 0; // Neutral — no data for either label
   }
-  
-  const posRatio = posCount / totalCount;
-  const negRatio = negCount / totalCount;
-  
-  // Position: -1 (fully negative category) to +1 (fully positive category)
-  return posRatio - negRatio;
+
+  // -1 = fully A, +1 = fully B
+  return (countB / total) - (countA / total);
 }
 
 /**
- * Get color for gradient position using specified gradient scheme
+ * Get color for a position along the gradient scheme.
+ * position: -1 maps to start color, +1 maps to end color.
  */
 export function getGradientColor(position: number, gradientScheme: GradientScheme = 'red-blue'): RGBColor {
-  // Clamp position to [-1, 1]
   position = Math.max(-1, Math.min(1, position));
-  
+
   const gradient = GRADIENT_SCHEMES[gradientScheme];
-  
-  // Map position [-1, 1] to [0, 1] for interpolation
+
+  // Map [-1, 1] to [0, 1] for interpolation
   const t = (position + 1) / 2;
-  
-  return blendColors(gradient.negative, gradient.positive, 1 - t, t);
+
+  return blendColors(gradient.start, gradient.end, 1 - t, t);
 }
 
 
@@ -114,31 +100,29 @@ export function rgbToHex(color: RGBColor): string {
 }
 
 /**
- * Get the final blended color for a node based on selected categories and distribution
+ * Get the final blended color for a node based on selected categories and distribution.
+ * primaryCategoryA/B define the single color axis. Secondary params are for future dual-axis support.
  */
 export function getNodeColor(
   categoryDistribution: Record<string, number>,
-  primaryNegCategory: string,
-  primaryPosCategory: string,
-  secondaryNegCategory?: string,
-  secondaryPosCategory?: string,
+  primaryCategoryA: string,
+  primaryCategoryB: string,
+  secondaryCategoryA?: string,
+  secondaryCategoryB?: string,
   primaryGradient: GradientScheme = 'red-blue',
   secondaryGradient: GradientScheme = 'yellow-cyan'
 ): string {
-  // Calculate primary axis position and color
-  const primaryPosition = calculateCategoryPosition(categoryDistribution, primaryNegCategory, primaryPosCategory);
+  const primaryPosition = calculateCategoryPosition(categoryDistribution, primaryCategoryA, primaryCategoryB);
   const primaryColor = getGradientColor(primaryPosition, primaryGradient);
-  
-  if (!secondaryNegCategory || !secondaryPosCategory) {
-    // Single axis - return primary gradient color
+
+  if (!secondaryCategoryA || !secondaryCategoryB) {
     return rgbToHex(primaryColor);
   }
-  
-  // Dual axis - blend gradient colors from both axes with equal weighting
-  const secondaryPosition = calculateCategoryPosition(categoryDistribution, secondaryNegCategory, secondaryPosCategory);
+
+  // Dual axis — blend gradient colors from both axes with equal weighting
+  const secondaryPosition = calculateCategoryPosition(categoryDistribution, secondaryCategoryA, secondaryCategoryB);
   const secondaryColor = getGradientColor(secondaryPosition, secondaryGradient);
-  
-  // Equal weighting for both axes
+
   const blendedColor = blendColors(primaryColor, secondaryColor, 0.5, 0.5);
   return rgbToHex(blendedColor);
 }
@@ -147,84 +131,41 @@ export function getNodeColor(
  * Get a preview showing gradient extremes and key points for the selected categories
  */
 export function getColorPreview(
-  primaryNegCategory: string,
-  primaryPosCategory: string,
-  secondaryNegCategory?: string,
-  secondaryPosCategory?: string,
+  primaryCategoryA: string,
+  primaryCategoryB: string,
+  secondaryCategoryA?: string,
+  secondaryCategoryB?: string,
   primaryGradient: GradientScheme = 'red-blue',
   secondaryGradient: GradientScheme = 'yellow-cyan'
 ): Record<string, string> {
   const preview: Record<string, string> = {};
-  
-  if (!secondaryNegCategory || !secondaryPosCategory) {
-    // Single axis preview - show gradient extremes and middle
-    preview[`All ${primaryNegCategory}`] = rgbToHex(getGradientColor(-1, primaryGradient));
+
+  if (!secondaryCategoryA || !secondaryCategoryB) {
+    // Single axis preview — gradient extremes and middle
+    preview[`All ${primaryCategoryA}`] = rgbToHex(getGradientColor(-1, primaryGradient));
     preview['Mixed'] = rgbToHex(getGradientColor(0, primaryGradient));
-    preview[`All ${primaryPosCategory}`] = rgbToHex(getGradientColor(1, primaryGradient));
+    preview[`All ${primaryCategoryB}`] = rgbToHex(getGradientColor(1, primaryGradient));
   } else {
-    // Dual axis preview - show combinations of extremes
+    // Dual axis preview — combinations of extremes
     const positions = [-1, 0, 1];
-    const getLabel = (pos: number, negCat: string, posCat: string) => {
-      return pos === -1 ? negCat.substring(0, 3) : pos === 0 ? 'Mix' : posCat.substring(0, 3);
+    const getLabel = (p: number, catA: string, catB: string) => {
+      return p === -1 ? catA.substring(0, 3) : p === 0 ? 'Mix' : catB.substring(0, 3);
     };
-    
-    positions.forEach((pos1) => {
-      positions.forEach((pos2) => {
-        const color1 = getGradientColor(pos1, primaryGradient);
-        const color2 = getGradientColor(pos2, secondaryGradient);
+
+    positions.forEach((p1) => {
+      positions.forEach((p2) => {
+        const color1 = getGradientColor(p1, primaryGradient);
+        const color2 = getGradientColor(p2, secondaryGradient);
         const blended = blendColors(color1, color2, 0.5, 0.5);
-        const label = `${getLabel(pos1, primaryNegCategory, primaryPosCategory)}+${getLabel(pos2, secondaryNegCategory, secondaryPosCategory)}`;
+        const label = `${getLabel(p1, primaryCategoryA, primaryCategoryB)}+${getLabel(p2, secondaryCategoryA, secondaryCategoryB)}`;
         preview[label] = rgbToHex(blended);
       });
     });
   }
-  
+
   return preview;
 }
 
-
-// Backwards compatibility wrappers
-export function getAxisLabel(axis: ColorAxis): string {
-  switch (axis) {
-    case 'sentiment': return 'Sentiment';
-    case 'concreteness': return 'Concreteness';
-    case 'pos': return 'Part of Speech';
-    case 'action-content': return 'Action-Content';
-    default: return axis;
-  }
-}
-
-export function getAxisColor(categoryDistribution: Record<string, number>, axis: ColorAxis): RGBColor {
-  const { neg, pos } = AXIS_CATEGORY_MAP[axis];
-  const position = calculateCategoryPosition(categoryDistribution, neg, pos);
-  return getGradientColor(position, 'red-blue');
-}
-
-export function getDivergentAxisColor(position: number, axis: ColorAxis): RGBColor {
-  return getGradientColor(position, 'red-blue');
-}
-
-// getNodeColor with ColorAxis and gradient support
-export function getNodeColorWithGradients(
-  categoryDistribution: Record<string, number>,
-  primaryAxis: ColorAxis,
-  secondaryAxis?: ColorAxis,
-  primaryGradient: GradientScheme = 'red-blue',
-  secondaryGradient: GradientScheme = 'yellow-cyan'
-): string {
-  const primary = AXIS_CATEGORY_MAP[primaryAxis];
-  const secondary = secondaryAxis ? AXIS_CATEGORY_MAP[secondaryAxis] : undefined;
-  
-  return getNodeColor(categoryDistribution, primary.neg, primary.pos, secondary?.neg, secondary?.pos, primaryGradient, secondaryGradient);
-}
-
-// Legacy getColorPreview with ColorAxis
-export function getColorPreviewLegacy(primaryAxis: ColorAxis, secondaryAxis?: ColorAxis): Record<string, string> {
-  const primary = AXIS_CATEGORY_MAP[primaryAxis];
-  const secondary = secondaryAxis ? AXIS_CATEGORY_MAP[secondaryAxis] : undefined;
-  
-  return getColorPreview(primary.neg, primary.pos, secondary?.neg, secondary?.pos, 'red-blue', 'yellow-cyan');
-}
 
 /**
  * Calculate visual properties based on traffic volume
@@ -234,15 +175,15 @@ export function getTrafficVisualProperties(value: number, maxValue: number): { o
   if (maxValue === 0) {
     return { opacity: 0.3, lineWidth: 1 };
   }
-  
+
   // Logarithmic scale for better differentiation
   const normalizedValue = Math.log(value + 1) / Math.log(maxValue + 1);
-  
+
   // Opacity: 0.3 to 0.9 range
   const opacity = 0.3 + (normalizedValue * 0.6);
-  
-  // Line width: 1 to 6 pixel range  
+
+  // Line width: 1 to 6 pixel range
   const lineWidth = 1 + (normalizedValue * 5);
-  
+
   return { opacity, lineWidth };
 }

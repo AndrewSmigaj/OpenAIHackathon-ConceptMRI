@@ -7,29 +7,6 @@ from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 
 
-class WordSource(BaseModel):
-    """Word source configuration for flexible mining."""
-    source_type: str  # "custom", "pos_pure", "synset_hyponyms"
-    source_params: Dict[str, Any]
-
-
-class ProbeRequest(BaseModel):
-    """Request to create a new probe session."""
-    session_name: str
-    context_sources: List[WordSource]
-    target_sources: List[WordSource]
-    layers: Optional[List[int]] = [0, 1, 2]
-
-
-class ProbeResponse(BaseModel):
-    """Response after creating probe session."""
-    session_id: str
-    total_pairs: int
-    contexts: List[str]
-    targets: List[str]
-    categories: Dict[str, Dict[str, List[str]]]  # {"contexts": {...}, "targets": {...}}
-
-
 class ExecutionResponse(BaseModel):
     """Response after starting session execution."""
     started: bool
@@ -53,8 +30,8 @@ class SessionListResponse(BaseModel):
     session_name: str
     created_at: str
     probe_count: int
-    contexts: List[str]
-    targets: List[str]
+    target_word: Optional[str] = None
+    labels: Optional[List[str]] = None
     state: str
 
 
@@ -62,22 +39,21 @@ class SessionDetailResponse(BaseModel):
     """Response for session details."""
     manifest: Dict[str, Any]
     data_lake_paths: Dict[str, str]
-    categories: Dict[str, Dict[str, List[str]]]
+    labels: List[str]
+    target_word: Optional[str] = None
+    sentences: Optional[List['ProbeExample']] = None
 
 
 # Experiment Analysis Schemas
 class FilterConfig(BaseModel):
-    """Configuration for filtering probes by categories and specific words."""
-    context_categories: Optional[List[str]] = None
-    target_categories: Optional[List[str]] = None
-    context_words: Optional[List[str]] = None  # NEW: Specific context words
-    target_words: Optional[List[str]] = None   # NEW: Specific target words
-    max_per_category: Optional[int] = None     # NEW: For UI reference
+    """Configuration for filtering probes by label."""
+    labels: Optional[List[str]] = None
 
 
 class AnalyzeRoutesRequest(BaseModel):
     """Request to analyze expert routes for a session."""
-    session_id: str
+    session_id: Optional[str] = None
+    session_ids: Optional[List[str]] = None
     window_layers: List[int]
     filter_config: Optional[FilterConfig] = None
     top_n_routes: int = 20
@@ -85,7 +61,7 @@ class AnalyzeRoutesRequest(BaseModel):
 
 class ClusteringConfig(BaseModel):
     """Configuration for clustering analysis."""
-    pca_dimensions: int = 128
+    reduction_dimensions: int = 128
     clustering_method: str = "kmeans"  # "kmeans", "hierarchical", "dbscan"
     layer_cluster_counts: Dict[int, int] = {}  # {layer: num_clusters}
     embedding_source: str = "expert_output"  # "expert_output" or "residual_stream"
@@ -94,11 +70,23 @@ class ClusteringConfig(BaseModel):
 
 class AnalyzeClusterRoutesRequest(BaseModel):
     """Request to analyze cluster routes for a session."""
-    session_id: str
+    session_id: Optional[str] = None
+    session_ids: Optional[List[str]] = None
     window_layers: List[int]
     clustering_config: ClusteringConfig
     filter_config: Optional[FilterConfig] = None
     top_n_routes: int = 20
+
+
+class ProbeExample(BaseModel):
+    """Example probe for route display."""
+    target_word: str
+    label: Optional[str] = None
+    input_text: str
+    probe_id: str
+
+# Resolve forward reference in SessionDetailResponse
+SessionDetailResponse.model_rebuild()
 
 
 class SankeyNode(BaseModel):
@@ -108,10 +96,9 @@ class SankeyNode(BaseModel):
     layer: int
     expert_id: int
     token_count: int
-    categories: List[str]
-    category_distribution: Dict[str, int]
+    label_distribution: Optional[Dict[str, int]] = None
     specialization: str
-    context_target_pairs: List[Dict[str, Any]]
+    tokens: Optional[List[ProbeExample]] = None
 
 
 class SankeyLink(BaseModel):
@@ -121,7 +108,7 @@ class SankeyLink(BaseModel):
     value: int
     probability: float
     route_signature: str
-    category_distribution: Dict[str, int]
+    label_distribution: Optional[Dict[str, int]] = None
     token_count: int
 
 
@@ -131,7 +118,7 @@ class TopRoute(BaseModel):
     count: int
     coverage: float
     avg_confidence: float
-    example_tokens: List[Dict[str, str]]
+    example_tokens: List[ProbeExample]
 
 
 class RouteAnalysisResponse(BaseModel):
@@ -142,6 +129,7 @@ class RouteAnalysisResponse(BaseModel):
     links: List[SankeyLink]
     top_routes: List[TopRoute]
     statistics: Dict[str, Any]
+    available_axes: Optional[List[Dict[str, str]]] = None
 
 
 class RouteDetailsResponse(BaseModel):
@@ -160,7 +148,7 @@ class ExpertDetailsResponse(BaseModel):
     layer: int
     expert_id: int
     node_name: str
-    tokens: List[Dict[str, str]]
+    tokens: List[ProbeExample]
     total_tokens: int
     usage_rate: float
     avg_confidence: float
@@ -180,3 +168,91 @@ class LLMInsightsResponse(BaseModel):
     """Response from LLM insights generation."""
     narrative: str
     statistics: Dict[str, Any]
+
+
+# --- Sentence Generation Schemas ---
+
+class GenerateSentenceSetRequest(BaseModel):
+    """Request to generate a sentence set via LLM."""
+    name: str
+    target_word: str = "said"
+    label_a: str = "narrative"
+    label_b: str = "factual"
+    description_a: str = "Narrative storytelling context"
+    description_b: str = "Factual reporting context"
+    count_per_group: int = 20
+    neutral_count: int = 5
+    api_key: Optional[str] = None
+    provider: str = "openai"
+    save: bool = True
+
+
+class SentenceSetResponse(BaseModel):
+    """Response with sentence set summary."""
+    name: str
+    version: str
+    target_word: str
+    label_a: str
+    label_b: str
+    count_a: int
+    count_b: int
+    count_neutral: int
+
+
+class SentenceSetDetailResponse(BaseModel):
+    """Full sentence set with all sentences."""
+    name: str
+    version: str
+    target_word: str
+    label_a: str
+    label_b: str
+    description_a: str
+    description_b: str
+    sentences_a: List[Dict[str, Any]]
+    sentences_b: List[Dict[str, Any]]
+    sentences_neutral: List[Dict[str, Any]]
+    metadata: Dict[str, Any]
+
+
+class SentenceSetListResponse(BaseModel):
+    """Response listing available sentence sets."""
+    sentence_sets: List[Dict[str, Any]]
+
+
+# --- Sentence Experiment Schemas ---
+
+class SentenceExperimentRequest(BaseModel):
+    """Request to run a sentence experiment capture."""
+    sentence_set_name: str
+    session_name: Optional[str] = None
+    layers: Optional[List[int]] = None  # defaults to adapter's layer list
+
+
+class SentenceExperimentResponse(BaseModel):
+    """Response after running a sentence experiment."""
+    session_id: str
+    session_name: str
+    total_probes: int
+    label_a: str
+    label_b: str
+    count_a: int
+    count_b: int
+
+
+# --- On-Demand Reduction Schemas ---
+
+class ReductionRequest(BaseModel):
+    """Request for on-demand PCA/UMAP reduction."""
+    session_ids: List[str]
+    layers: List[int]
+    source: str = "expert_output"  # "expert_output" or "residual_stream"
+    method: str = "umap"           # "pca" or "umap"
+    n_components: int = 3
+
+
+class ReductionResponse(BaseModel):
+    """Response from on-demand reduction."""
+    points: List[Dict[str, Any]]
+    layers: List[int]
+    method: str
+    n_components: int

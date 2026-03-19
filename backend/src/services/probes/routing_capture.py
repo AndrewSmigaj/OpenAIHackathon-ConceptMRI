@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Enhanced MoE routing capture with K=4 routing and individual expert hooks.
+Enhanced MoE routing capture with full routing weights and individual expert hooks.
 Simple approach: register all hooks upfront, no complex dynamic registration.
 """
 
@@ -15,11 +15,9 @@ if TYPE_CHECKING:
 class EnhancedRoutingCapture:
     """
     Enhanced MoE routing capture for Concept MRI analysis.
-    
-    Simple fixes:
-    - K=4 routing capture (fixed from prototype's K=1)
+
+    - Full routing weights vector capture (all experts)
     - All hooks registered upfront
-    - Individual expert FF intermediate state capture
     - Configurable layer windows for UI flexibility
     """
     
@@ -31,8 +29,7 @@ class EnhancedRoutingCapture:
 
         # Data storage organized for schema conversion
         self.routing_data = {}        # For RoutingRecord schema
-        self.activation_data = {}     # For ExpertOutputState schema
-        self.expert_internal_data = {} # For ExpertInternalActivation schema
+        self.embedding_data = {}      # For EmbeddingRecord schema
         self.residual_stream_data = {} # For ResidualStreamState schema
 
         # Use adapter for defaults, fall back to legacy hardcoded values
@@ -59,32 +56,13 @@ class EnhancedRoutingCapture:
                 )
                 self.hooks.append(mlp_hook)
 
-                # 2. Experts module hook (captures collective expert processing)
-                # Only register for collective expert style (fused module)
-                register_experts = True
-                if self.adapter:
-                    from adapters.base_adapter import ExpertStyle
-                    register_experts = (self.adapter.capabilities.expert_style == ExpertStyle.COLLECTIVE)
-
-                if register_experts:
-                    if self.adapter:
-                        experts_module = self.adapter.get_experts_module(moe_block)
-                    else:
-                        experts_module = moe_block.experts
-
-                    experts_hook = experts_module.register_forward_hook(
-                        self._make_experts_collective_hook(layer_idx)
-                    )
-                    self.hooks.append(experts_hook)
-
-                # 3. Decoder layer hook (captures full residual stream)
+                # 2. Decoder layer hook (captures full residual stream)
                 residual_hook = layer.register_forward_hook(
                     self._make_residual_hook(layer_idx)
                 )
                 self.hooks.append(residual_hook)
 
-                hook_count = (2 if register_experts else 1) + 1  # +1 for residual
-                print(f"✅ Registered {hook_count} hooks for layer {layer_idx}")
+                print(f"✅ Registered 2 hooks for layer {layer_idx} (MLP + residual)")
 
             except Exception as e:
                 print(f"❌ Failed to register hooks for layer {layer_idx}: {e}")
@@ -115,19 +93,13 @@ class EnhancedRoutingCapture:
                 
                 # Convert to CPU for analysis
                 routing_weights_cpu = routing_weights.detach().cpu()
-                
-                # Get top-K expert decisions
-                top_k = self.adapter.topology.top_k if self.adapter else 4
-                top4_probs, top4_experts = torch.topk(routing_weights_cpu, k=top_k, dim=-1)
-                
+
                 # Compute routing statistics
                 gate_entropy = self._compute_entropy(routing_weights_cpu)
-                
+
                 # Store routing data for schema conversion
                 self.routing_data[f"layer_{layer_id}"] = {
-                    "routing_weights": routing_weights_cpu,      # Full [batch, seq, 32] weights
-                    "expert_top4_ids": top4_experts,           # [batch, seq, 4] 
-                    "expert_top4_weights": top4_probs,         # [batch, seq, 4]
+                    "routing_weights": routing_weights_cpu,      # Full [batch, seq, num_experts] weights
                     "gate_entropy": gate_entropy,              # [batch, seq]
                     "shape": routing_weights_cpu.shape,
                     "num_experts": routing_weights_cpu.shape[-1]
@@ -139,8 +111,8 @@ class EnhancedRoutingCapture:
                 else:
                     mlp_output = output
                 
-                self.activation_data[f"layer_{layer_id}"] = {
-                    "expert_output_state": mlp_output.detach().cpu(),  # Full 2880D
+                self.embedding_data[f"layer_{layer_id}"] = {
+                    "embedding": mlp_output.detach().cpu(),
                     "shape": mlp_output.shape
                 }
                 
@@ -150,30 +122,6 @@ class EnhancedRoutingCapture:
         return mlp_combined_hook
     
     
-    def _make_experts_collective_hook(self, layer_id: int):
-        """Create hook for collective experts module (quantized model)."""
-        def experts_collective_hook(module, input, output):
-            try:
-                # Collective experts processing output
-                if isinstance(output, tuple):
-                    collective_expert_output = output[0]
-                else:
-                    collective_expert_output = output
-                
-                # Store collective expert processing data
-                key = f"layer_{layer_id}_experts_collective"
-                self.expert_internal_data[key] = {
-                    "layer": layer_id,
-                    "expert_type": "collective",  # Mark as collective rather than individual
-                    "collective_output": collective_expert_output.detach().cpu(),
-                    "shape": collective_expert_output.shape
-                }
-                
-            except Exception as e:
-                print(f"❌ Experts collective hook error (L{layer_id}): {e}")
-        
-        return experts_collective_hook
-
     def _make_residual_hook(self, layer_id: int):
         """Create hook for decoder layer to capture full residual stream."""
         def residual_hook(module, input, output):
@@ -205,8 +153,7 @@ class EnhancedRoutingCapture:
     def clear_data(self):
         """Clear all captured data."""
         self.routing_data.clear()
-        self.activation_data.clear()
-        self.expert_internal_data.clear()
+        self.embedding_data.clear()
         self.residual_stream_data.clear()
     
     def remove_hooks(self):
@@ -216,67 +163,52 @@ class EnhancedRoutingCapture:
         self.hooks.clear()
     
     def extract_highways(self, tokens: List[str], batch_idx: int = 0) -> List[str]:
-        """Extract expert highway signatures using top-1 from K=4 data."""
+        """Extract expert highway signatures using top-1 from full routing weights."""
         if not self.routing_data:
             return []
-        
+
         highways = []
         seq_len = len(tokens)
-        
+
         for pos in range(seq_len):
             highway_parts = []
             for layer in sorted(self.layers_to_capture):
                 layer_key = f"layer_{layer}"
                 if layer_key in self.routing_data:
-                    # Get top-1 expert from K=4 data
-                    top4_experts = self.routing_data[layer_key]["expert_top4_ids"]
-                    top1_expert_id = top4_experts[batch_idx, pos, 0].item()  # First of top-4
+                    weights = self.routing_data[layer_key]["routing_weights"]
+                    top1_expert_id = weights[batch_idx, pos, :].argmax().item()
                     highway_parts.append(f"L{layer}E{top1_expert_id}")
-            
+
             highway_signature = "→".join(highway_parts)
             highways.append(highway_signature)
-        
+
         return highways
     
     def get_summary(self) -> Dict:
         """Get comprehensive summary of captured data."""
         summary = {
             "routing_summary": {},
-            "activation_summary": {},
-            "expert_internal_summary": {}
+            "activation_summary": {}
         }
         
         # Routing summary
         for layer_name, data in self.routing_data.items():
-            layer_id = int(layer_name.split('_')[1])
-            
-            # Expert usage statistics from top-4 data
-            top4_experts = data["expert_top4_ids"].flatten()
-            expert_counts = torch.bincount(top4_experts, minlength=data["num_experts"])
-            
+            # Expert usage statistics from argmax of full routing weights
+            top1_experts = data["routing_weights"].argmax(dim=-1).flatten()
+            expert_counts = torch.bincount(top1_experts, minlength=data["num_experts"])
+
             summary["routing_summary"][layer_name] = {
                 "shape": data["shape"],
-                "num_active_experts": len(torch.unique(top4_experts)),
+                "num_active_experts": len(torch.unique(top1_experts)),
                 "mean_entropy": data["gate_entropy"].mean().item(),
                 "expert_usage": expert_counts.tolist()
             }
         
-        # Activation summary  
-        for layer_name, data in self.activation_data.items():
+        # Embedding summary
+        for layer_name, data in self.embedding_data.items():
             summary["activation_summary"][layer_name] = {
                 "shape": data["shape"],
-                "activation_norm": torch.norm(data["expert_output_state"]).item()
+                "activation_norm": torch.norm(data["embedding"]).item()
             }
-        
-        # Expert internal summary - count captures per layer
-        expert_count_by_layer = {}
-        for key in self.expert_internal_data.keys():
-            layer = key.split('_')[1]
-            expert_count_by_layer[layer] = expert_count_by_layer.get(layer, 0) + 1
-        
-        summary["expert_internal_summary"] = {
-            "total_expert_captures": len(self.expert_internal_data),
-            "experts_per_layer": expert_count_by_layer
-        }
         
         return summary

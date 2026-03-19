@@ -34,10 +34,10 @@ The current system hardcodes model-specific paths (ossb20b module paths, 24 laye
 - **Loading requirements**: dtype, quantization, trust_remote_code
 - **Router bias**: some have it (ossb20b), some don't (OLMoE)
 
-### File structure — `backend/src/models/`
+### File structure — `backend/src/adapters/`
 
 ```
-models/
+adapters/
   __init__.py
   base_adapter.py       # ModelAdapter ABC, ModelTopology, ModelCapabilities
   registry.py           # Adapter registry + auto-registration
@@ -249,6 +249,23 @@ TAB-SPECIFIC ANALYSIS
 API -> FRONTEND VISUALIZATIONS
 ```
 
+### Two-Dataset Design
+
+Each attractor experiment produces **two probe datasets** from the same sentence set. Both are captured from the Probes page. The three analysis tabs are **read-only** — they select which dataset to analyze.
+
+**1. Individual Sentences Dataset**
+Each sentence is fed to the model independently (no context accumulation, no KV cache chaining between sentences). This produces one probe per sentence. Used in:
+- **Expert tab** (routing basins) — identifies distinct routing regimes for the target word across regime-A vs regime-B sentences
+- **Latent tab** (representation basins) — identifies distinct embedding clusters, confirms A and B form separable attractors
+
+**2. Expanding Text Dataset**
+Standard autoregressive processing with KV cache. Sentences are fed one at a time, context expands sentence by sentence (A1, then A1+A2, then A1+A2+A3, ..., then A1...A20+B1, etc.). This produces one probe per step. Used in:
+- **Temporal tab** (lag, hysteresis, regime transitions) — measures how the model transitions between the basins identified in the individual sentences dataset
+
+The individual sentences dataset establishes *that* distinct basins exist. The expanding text dataset measures *how* the model moves between them over time.
+
+Both datasets link to the same `ExperimentManifest` via `individual_session_id` and `temporal_session_id` fields.
+
 ---
 
 ## Phase 1: Model Adapter + Model Setup
@@ -385,7 +402,7 @@ created_at: str
 - `PCAFeatureRecord` -> evolve to `ReductionFeatureRecord` -- add `method` field ("pca" or "umap"). Keep 128D output. Used by cluster_route_analysis.py.
 
 **Removed schemas:**
-- `ExpertInternalActivation` -- nothing reads it in analysis. Remove schema + remove write calls in integrated_capture_service.py.
+- `ExpertInternalActivation` -- removed. Schema file deleted, all write calls and references removed from capture service and API router.
 
 ### 2a-note. Migration Impact
 
@@ -643,19 +660,19 @@ Components needed:
 
 | Component | File | Status |
 |-----------|------|--------|
-| ProbeRecord (replaces TokenRecord) | `tokens.py` | todo |
-| RoutingRecord (evolve) | `routing.py` | todo |
-| EmbeddingRecord (replaces ExpertOutputState) | `expert_output_states.py` | todo |
-| CaptureManifest (evolve) | `capture_manifest.py` | todo |
-| ExperimentManifest (new) | `experiment_manifest.py` | todo |
+| ProbeRecord (replaces TokenRecord) | `tokens.py` | done |
+| RoutingRecord (evolve) | `routing.py` | done |
+| EmbeddingRecord (replaces ExpertOutputState) | `embedding.py` | done |
+| CaptureManifest (evolve) | `capture_manifest.py` | done |
+| ExperimentManifest (new) | `experiment_manifest.py` | done |
 | ReductionFeatureRecord (evolve PCAFeatureRecord) | `pca_features.py` | todo |
 
 ### Capture -- `backend/src/services/probes/`
 
 | Component | File | Status |
 |-----------|------|--------|
-| IntegratedCaptureService (evolve) | `integrated_capture_service.py` | todo |
-| EnhancedRoutingCapture (evolve for OLMoE) | `routing_capture.py` | todo |
+| IntegratedCaptureService (evolve) | `integrated_capture_service.py` | done |
+| EnhancedRoutingCapture (evolve for OLMoE) | `routing_capture.py` | done |
 
 ### Sentence Generation -- `backend/src/services/generation/`
 

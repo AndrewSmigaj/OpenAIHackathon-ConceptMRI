@@ -4,13 +4,14 @@ Experiments API router - Expert route analysis and visualization.
 """
 
 from fastapi import APIRouter, HTTPException, Depends, Query
-from typing import List
+from pathlib import Path
 import logging
 
 from api.schemas import (
     AnalyzeRoutesRequest, AnalyzeClusterRoutesRequest, RouteAnalysisResponse,
     RouteDetailsResponse, ExpertDetailsResponse,
-    LLMInsightsRequest, LLMInsightsResponse
+    LLMInsightsRequest, LLMInsightsResponse,
+    ReductionRequest, ReductionResponse
 )
 from api.dependencies import get_route_analysis_service, get_cluster_analysis_service, get_llm_insights_service
 from services.experiments.expert_route_analysis import ExpertRouteAnalysisService
@@ -20,47 +21,36 @@ from services.experiments.llm_insights_service import LLMInsightsService
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
+# Resolve data lake path once
+_data_lake_path = str(Path(__file__).resolve().parents[4] / "data" / "lake")
+
 
 @router.post("/experiments/analyze-routes", response_model=RouteAnalysisResponse)
 async def analyze_expert_routes(
     request: AnalyzeRoutesRequest,
     service: ExpertRouteAnalysisService = Depends(get_route_analysis_service)
 ):
-    """
-    Analyze expert routes for a session within specified window layers.
-    
-    Request body:
-    {
-        "session_id": "abc123",
-        "window_layers": [0, 1, 2],
-        "filter_config": {
-            "context_categories": ["determiner"],
-            "target_categories": ["animals", "nouns"]
-        },
-        "top_n_routes": 20
-    }
-    """
+    """Analyze expert routes for a session within specified window layers."""
     try:
-        # Convert FilterConfig to dict if present
         filter_config_dict = None
         if request.filter_config:
             filter_config_dict = request.filter_config.dict(exclude_none=True)
-        
+
         result = service.analyze_session_routes(
             session_id=request.session_id,
+            session_ids=request.session_ids,
             window_layers=request.window_layers,
             filter_config=filter_config_dict,
             top_n_routes=request.top_n_routes
         )
-        
-        logger.info(f"✅ Analyzed routes for session {request.session_id}, found {result['statistics']['total_routes']} routes")
+
+        logger.info(f"Analyzed routes, found {result['statistics']['total_routes']} routes")
         return result
-        
+
     except ValueError as e:
-        logger.error(f"❌ Route analysis failed for session {request.session_id}: {e}")
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
-        logger.error(f"❌ Unexpected error in route analysis: {e}")
+        logger.error(f"Route analysis failed: {e}")
         raise HTTPException(status_code=500, detail=f"Route analysis failed: {str(e)}")
 
 
@@ -69,50 +59,30 @@ async def analyze_cluster_routes(
     request: AnalyzeClusterRoutesRequest,
     service: ClusterRouteAnalysisService = Depends(get_cluster_analysis_service)
 ):
-    """
-    Analyze cluster routes for a session within specified window layers.
-    
-    Request body:
-    {
-        "session_id": "abc123",
-        "window_layers": [0, 1, 2],
-        "clustering_config": {
-            "pca_dimensions": 128,
-            "clustering_method": "kmeans",
-            "layer_cluster_counts": {0: 8, 1: 8, 2: 8}
-        },
-        "filter_config": {
-            "context_categories": ["determiner"],
-            "target_categories": ["animals", "nouns"]
-        },
-        "top_n_routes": 20
-    }
-    """
+    """Analyze cluster routes for a session within specified window layers."""
     try:
-        # Convert FilterConfig to dict if present
         filter_config_dict = None
         if request.filter_config:
             filter_config_dict = request.filter_config.dict(exclude_none=True)
-        
-        # Convert ClusteringConfig to dict
+
         clustering_config_dict = request.clustering_config.dict(exclude_none=True)
-        
+
         result = service.analyze_session_cluster_routes(
             session_id=request.session_id,
+            session_ids=request.session_ids,
             window_layers=request.window_layers,
             clustering_config=clustering_config_dict,
             filter_config=filter_config_dict,
             top_n_routes=request.top_n_routes
         )
-        
-        logger.info(f"✅ Analyzed cluster routes for session {request.session_id}, found {result['statistics']['total_routes']} routes")
+
+        logger.info(f"Analyzed cluster routes, found {result['statistics']['total_routes']} routes")
         return result
-        
+
     except ValueError as e:
-        logger.error(f"❌ Cluster route analysis failed for session {request.session_id}: {e}")
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
-        logger.error(f"❌ Unexpected error in cluster route analysis: {e}")
+        logger.error(f"Cluster route analysis failed: {e}")
         raise HTTPException(status_code=500, detail=f"Cluster route analysis failed: {str(e)}")
 
 
@@ -123,37 +93,27 @@ async def get_route_details(
     window_layers: str = Query(..., description="Comma-separated layers (e.g., 0,1,2)"),
     service: ExpertRouteAnalysisService = Depends(get_route_analysis_service)
 ):
-    """
-    Get detailed information about a specific expert route.
-    
-    Query params:
-    - session_id: Session identifier
-    - signature: Route signature like "L0E18→L1E11→L2E14" 
-    - window_layers: Comma-separated layers like "0,1,2"
-    """
+    """Get detailed information about a specific expert route."""
     try:
-        # Parse window layers with error handling
         try:
             window_layers_list = [int(x.strip()) for x in window_layers.split(",")]
         except ValueError:
-            raise HTTPException(status_code=400, detail="Invalid window_layers format. Use comma-separated integers like '0,1,2'")
-        
+            raise HTTPException(status_code=400, detail="Invalid window_layers format")
+
         result = service.get_route_details(
             session_id=session_id,
             route_signature=signature,
             window_layers=window_layers_list
         )
-        
-        logger.info(f"✅ Retrieved details for route {signature} in session {session_id}")
+
         return result
-        
+
     except HTTPException:
-        raise  # Re-raise HTTP exceptions (like 400 from above)
+        raise
     except ValueError as e:
-        logger.error(f"❌ Route details failed: {e}")
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
-        logger.error(f"❌ Unexpected error getting route details: {e}")
+        logger.error(f"Route details failed: {e}")
         raise HTTPException(status_code=500, detail=f"Route details failed: {str(e)}")
 
 
@@ -164,29 +124,20 @@ async def get_expert_details(
     expert_id: int = Query(..., description="Expert ID"),
     service: ExpertRouteAnalysisService = Depends(get_route_analysis_service)
 ):
-    """
-    Get details about a specific expert's specialization.
-    
-    Query params:
-    - session_id: Session identifier
-    - layer: Layer number (e.g., 0, 1, 2)
-    - expert_id: Expert identifier (e.g., 18, 11, 14)
-    """
+    """Get details about a specific expert's specialization."""
     try:
         result = service.get_expert_details(
             session_id=session_id,
             layer=layer,
             expert_id=expert_id
         )
-        
-        logger.info(f"✅ Retrieved details for expert L{layer}E{expert_id} in session {session_id}")
+
         return result
-        
+
     except ValueError as e:
-        logger.error(f"❌ Expert details failed: {e}")
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
-        logger.error(f"❌ Unexpected error getting expert details: {e}")
+        logger.error(f"Expert details failed: {e}")
         raise HTTPException(status_code=500, detail=f"Expert details failed: {str(e)}")
 
 
@@ -195,19 +146,7 @@ async def generate_llm_insights(
     request: LLMInsightsRequest,
     service: LLMInsightsService = Depends(get_llm_insights_service)
 ):
-    """
-    Generate LLM insights from expert routing data.
-    
-    Request body:
-    {
-        "session_id": "abc123",
-        "nodes": [...],  // SankeyNode data with category_distribution
-        "links": [...],  // SankeyLink data with category_distribution
-        "user_prompt": "Analyze sentiment routing patterns",
-        "api_key": "sk-...",
-        "provider": "openai"  // or "anthropic"
-    }
-    """
+    """Generate LLM insights from expert routing data."""
     try:
         result = await service.analyze_routing_patterns(
             windows=request.windows,
@@ -215,85 +154,45 @@ async def generate_llm_insights(
             api_key=request.api_key,
             provider=request.provider
         )
-        
-        logger.info(f"✅ Generated LLM insights for session {request.session_id}")
+
         return LLMInsightsResponse(**result)
-        
+
     except Exception as e:
-        logger.error(f"❌ LLM insights generation failed: {e}")
+        logger.error(f"LLM insights generation failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# PCA Trajectory endpoint
-@router.get("/experiments/pca-trajectories")
-async def get_pca_trajectories(
-    session_id: str,
-    layers: str,  # comma-separated layer numbers
-    n_dims: int = 3,
-    max_trajectories: int = 500,
-    filter_config: str = None,  # JSON-encoded filter configuration
-    source: str = "expert_output",  # "expert_output" or "residual_stream"
-    method: str = "pca",  # "pca" or "umap"
-    service: ClusterRouteAnalysisService = Depends(get_cluster_analysis_service)
-):
-    """
-    Get stepped trajectory data for 3D visualization.
-
-    Query Parameters:
-        session_id: Session identifier
-        layers: Comma-separated layer numbers (e.g., "0,1,2,3,4,5")
-        n_dims: Number of dimensions to return (2, 3, 5, etc.)
-        max_trajectories: Maximum number of trajectories to return (default 500)
-        source: Embedding source - "expert_output" or "residual_stream"
-        method: Reduction method - "pca" or "umap"
-    """
+@router.post("/experiments/reduce", response_model=ReductionResponse)
+async def reduce_embeddings(request: ReductionRequest):
+    """On-demand dimensionality reduction for one or more sessions."""
     try:
-        # Parse layers
-        layer_list = [int(x.strip()) for x in layers.split(',')]
-        
-        # Validate layers
-        if not all(0 <= layer <= 23 for layer in layer_list):
-            raise HTTPException(status_code=400, detail="Layer numbers must be between 0 and 23")
-        
-        if len(layer_list) < 2:
-            raise HTTPException(status_code=400, detail="At least 2 layers required for trajectories")
-        
-        # Validate dimensions
-        if not (2 <= n_dims <= 128):
-            raise HTTPException(status_code=400, detail="n_dims must be between 2 and 128")
-        
-        # Parse filter_config if provided
-        filter_config_dict = None
-        if filter_config:
-            try:
-                import json
-                filter_config_dict = json.loads(filter_config)
-            except json.JSONDecodeError:
-                raise HTTPException(status_code=400, detail="Invalid filter_config JSON format")
-        
-        # Get trajectories from service
-        result = service.get_pca_trajectories(
-            session_id=session_id,
-            layers=layer_list,
-            n_dims=n_dims,
-            filter_config=filter_config_dict,
-            max_trajectories=max_trajectories,
-            source=source,
-            method=method
+        from services.features.reduction_service import ReductionService
+        reducer = ReductionService(n_components=request.n_components)
+
+        points = reducer.reduce_on_demand(
+            session_ids=request.session_ids,
+            layers=request.layers,
+            data_lake_path=_data_lake_path,
+            source=request.source,
+            method=request.method,
+            n_components=request.n_components,
         )
-        
-        logger.info(f"✅ Generated {len(result['trajectories'])} PCA trajectories for session {session_id}")
-        return result
-        
-    except ValueError as e:
-        logger.error(f"❌ Invalid layer format: {e}")
-        raise HTTPException(status_code=400, detail=f"Invalid layer format: {e}")
+
+        logger.info(f"Reduced {len(points)} points for {len(request.session_ids)} sessions")
+        return ReductionResponse(
+            points=points,
+            layers=request.layers,
+            method=request.method,
+            n_components=request.n_components,
+        )
+
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
-        logger.error(f"❌ PCA trajectory generation failed: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Reduction failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Reduction failed: {e}")
 
 
-# Health check endpoint for testing
 @router.get("/experiments/health")
 async def health_check():
     """Health check for experiments API."""

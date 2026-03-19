@@ -1,7 +1,5 @@
 // API client for Concept MRI backend
 import type {
-  ProbeRequest,
-  ProbeResponse,
   ExecutionResponse,
   SessionStatus,
   SessionListItem,
@@ -12,7 +10,11 @@ import type {
   RouteDetailsResponse,
   ExpertDetailsResponse,
   LLMInsightsRequest,
-  LLMInsightsResponse
+  LLMInsightsResponse,
+  ReductionRequest,
+  ReductionResponse,
+  SentenceExperimentRequest,
+  SentenceExperimentResponse
 } from '../types/api';
 
 const API_BASE_URL = 'http://localhost:8000/api';
@@ -78,14 +80,6 @@ class ConceptMriApiClient {
       // Network or other errors
       throw new ApiError(`Network error: ${error instanceof Error ? error.message : 'Unknown error'}`, 0);
     }
-  }
-
-  // Create new probe session
-  async createProbeSession(request: ProbeRequest): Promise<ProbeResponse> {
-    return this.request<ProbeResponse>('/probes', {
-      method: 'POST',
-      body: JSON.stringify(request),
-    });
   }
 
   // Execute probe session
@@ -155,18 +149,6 @@ class ConceptMriApiClient {
     });
   }
 
-  /**
-   * Create and execute a probe session in one operation
-   */
-  async createAndExecuteSession(
-    request: ProbeRequest,
-    onProgress?: (status: SessionStatus) => void
-  ): Promise<SessionStatus> {
-    const createResponse = await this.createProbeSession(request);
-    await this.executeProbeSession(createResponse.session_id);
-    return this.pollSessionUntilComplete(createResponse.session_id, onProgress);
-  }
-
   // Expert Route Analysis Methods
 
   /**
@@ -183,7 +165,7 @@ class ConceptMriApiClient {
   }
 
   /**
-   * Analyze cluster routes for a session within specified window layers using PCA features
+   * Analyze cluster routes for a session within specified window layers using reduced features
    * @param request - Cluster route analysis request with session_id, window_layers, clustering_config, etc.
    * @returns Route analysis response with Sankey data and statistics (same format as expert routes)
    * @throws ApiError with status 404 if session not found, 500 for server errors
@@ -251,35 +233,27 @@ class ConceptMriApiClient {
   }
 
   /**
-   * Get PCA trajectory data for 3D stepped visualization
-   * @param sessionId - Session identifier
-   * @param layers - Array of layer numbers to include in trajectory
-   * @param nDims - Number of PCA dimensions to return (default 3)
-   * @param maxTrajectories - Maximum number of trajectories (default 500)
-   * @param filterConfig - Optional filtering (same as route analysis)
-   * @returns PCA trajectory data with coordinates across layers
-   * @throws ApiError with status 400 for invalid parameters, 404 if session not found
+   * On-demand dimensionality reduction (PCA/UMAP) for trajectory visualization
+   * @param request - Reduction request with session_ids, layers, source, method
+   * @returns Flat array of reduced points grouped by probe_id and layer
    */
-  async getPCATrajectories(
-    sessionId: string,
-    layers: number[],
-    nDims: number = 3,
-    maxTrajectories: number = 500,
-    filterConfig?: any
-  ): Promise<PCATrajectoryResponse> {
-    const params = new URLSearchParams({
-      session_id: sessionId,
-      layers: layers.join(','),
-      n_dims: nDims.toString(),
-      max_trajectories: maxTrajectories.toString()
+  async reduce(request: ReductionRequest): Promise<ReductionResponse> {
+    return this.request<ReductionResponse>('/experiments/reduce', {
+      method: 'POST',
+      body: JSON.stringify(request),
     });
-    
-    // Add filter_config as JSON if provided
-    if (filterConfig) {
-      params.append('filter_config', JSON.stringify(filterConfig));
-    }
-    
-    return this.request<PCATrajectoryResponse>(`/experiments/pca-trajectories?${params.toString()}`);
+  }
+
+  /**
+   * Run a sentence experiment from a predefined sentence set
+   * @param request - Sentence experiment request with sentence_set_name
+   * @returns Session info with labels and counts
+   */
+  async runSentenceExperiment(request: SentenceExperimentRequest): Promise<SentenceExperimentResponse> {
+    return this.request<SentenceExperimentResponse>('/probes/sentence-experiment', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
   }
 }
 

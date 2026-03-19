@@ -1,15 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import type { SankeyNode, SankeyLink } from '../../types/api';
-import { getNodeColorWithGradients, getTrafficVisualProperties, type ColorAxis, type GradientScheme } from '../../utils/colorBlending';
+import { getNodeColor, getTrafficVisualProperties, type GradientScheme } from '../../utils/colorBlending';
 
 interface SankeyChartProps {
   nodes: SankeyNode[];
   links: SankeyLink[];
-  primaryAxis: ColorAxis;
-  secondaryAxis?: ColorAxis;
-  primaryGradient?: GradientScheme;
-  secondaryGradient?: GradientScheme;
+  colorLabelA: string;
+  colorLabelB: string;
+  gradient?: GradientScheme;
   onNodeClick?: (nodeId: string, nodeData: SankeyNode) => void;
   onLinkClick?: (linkData: SankeyLink) => void;
   height?: number;
@@ -19,10 +18,9 @@ interface SankeyChartProps {
 const SankeyChart: React.FC<SankeyChartProps> = ({
   nodes,
   links,
-  primaryAxis,
-  secondaryAxis,
-  primaryGradient = 'red-blue',
-  secondaryGradient = 'yellow-cyan',
+  colorLabelA,
+  colorLabelB,
+  gradient = 'red-blue',
   onNodeClick,
   onLinkClick,
   height = 600,
@@ -50,9 +48,11 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     // Handle click events
     const handleClick = (params: any) => {
       if (params.dataType === 'node' && onNodeClickRef.current) {
-        const node = nodesRef.current.find(n => n.id === params.data.id);
+        // Match by name — ECharts Sankey uses name as the node key
+        const nodeName = params.data.name || params.data.id;
+        const node = nodesRef.current.find(n => n.name === nodeName || n.id === nodeName);
         if (node) {
-          onNodeClickRef.current(params.data.id, node);
+          onNodeClickRef.current(node.id, node);
         }
       } else if (params.dataType === 'edge' && onLinkClickRef.current) {
         const link = linksRef.current.find(l => 
@@ -96,26 +96,27 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
   useEffect(() => {
     if (!chartInstance.current) return;
 
-    // Prepare node data with colors
-    const sankeyNodes = nodes.map(node => ({
-      id: node.id,
-      name: node.name,
-      value: node.token_count,
-      itemStyle: {
-        color: getNodeColorWithGradients(node.category_distribution, primaryAxis, secondaryAxis, primaryGradient, secondaryGradient)
-      },
-      // Store original data for tooltips
-      originalData: node
-    }));
+    // Prepare node data with colors from label_distribution
+    const sankeyNodes = nodes.map(node => {
+      const dist = node.label_distribution;
+      return {
+        id: node.id,
+        name: node.name,
+        value: node.token_count,
+        itemStyle: {
+          color: getNodeColor(dist, colorLabelA, colorLabelB, undefined, undefined, gradient)
+        }
+      };
+    });
 
     // Find max value for traffic-based scaling
     const maxLinkValue = Math.max(...links.map(l => l.value));
-    
+
     // Prepare link data with colors and traffic-based styling
     const sankeyLinks = links.map(link => {
-      // Use the route's own category distribution for coloring instead of source node
-      const linkColor = link.category_distribution && Object.keys(link.category_distribution).length > 0 ?
-        getNodeColorWithGradients(link.category_distribution, primaryAxis, secondaryAxis, primaryGradient, secondaryGradient) : '#5470c6';
+      const linkDist = link.label_distribution;
+      const linkColor = linkDist && Object.keys(linkDist).length > 0 ?
+        getNodeColor(linkDist, colorLabelA, colorLabelB, undefined, undefined, gradient) : '#5470c6';
       
       // Get traffic-based visual properties
       const { opacity, lineWidth } = getTrafficVisualProperties(link.value, maxLinkValue);
@@ -130,8 +131,6 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
           width: lineWidth,
           curveness: 0.3
         },
-        // Store original data for tooltips
-        originalData: link
       };
     });
 
@@ -140,7 +139,8 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
         trigger: 'item',
         formatter: function(params: any) {
           if (params.dataType === 'node') {
-            const node = params.data.originalData as SankeyNode;
+            const node = nodes.find(n => n.name === params.data.name);
+            if (!node) return '';
             return `
               <div style="max-width: 300px;">
                 <strong>${node.name}</strong><br/>
@@ -148,11 +148,12 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
                 Expert: ${node.expert_id}<br/>
                 Layer: ${node.layer}<br/>
                 Token Count: ${node.token_count}<br/>
-                Categories: ${node.categories.join(', ')}
+                Labels: ${node.label_distribution ? Object.entries(node.label_distribution).map(([k, v]) => `${k}: ${v}`).join(', ') : 'N/A'}
               </div>
             `;
           } else if (params.dataType === 'edge') {
-            const link = params.data.originalData as SankeyLink;
+            const link = links.find(l => l.source === params.data.source && l.target === params.data.target);
+            if (!link) return '';
             return `
               <div style="max-width: 300px;">
                 <strong>Route</strong><br/>
@@ -197,7 +198,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     };
 
     chartInstance.current.setOption(option);
-  }, [nodes, links, primaryAxis, secondaryAxis]);
+  }, [nodes, links, colorLabelA, colorLabelB, gradient]);
 
   return (
     <div 

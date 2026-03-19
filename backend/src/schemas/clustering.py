@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Clustering schema for PCA-based clustering with configurable dimensions.
-Captures cluster assignments from k-means/hierarchical/DBSCAN clustering of PCA features.
+Clustering schema with configurable reduction dimensions (PCA/UMAP).
+Captures cluster assignments from k-means/hierarchical/DBSCAN clustering of reduced features.
 Mirrors RoutingRecord structure for consistent trajectory analysis.
 """
 
@@ -13,7 +13,7 @@ from datetime import datetime
 
 @dataclass
 class ClusteringRecord:
-    """PCA-based clustering record with configurable dimensions for trajectory analysis."""
+    """Clustering record with configurable reduction dimensions for trajectory analysis."""
     
     # Core identifiers  
     probe_id: str               # Links to tokens and features
@@ -23,7 +23,7 @@ class ClusteringRecord:
     # Clustering data (mirrors routing structure)
     cluster_id: int             # Assigned cluster ID 
     cluster_confidence: float   # Distance-based confidence score
-    pca_dimensions: int         # Number of PCA components used for clustering
+    reduction_dimensions: int         # Number of dimensions used for clustering (PCA/UMAP)
     
     # Clustering method metadata
     clustering_method: str      # "kmeans", "hierarchical", or "dbscan"
@@ -46,8 +46,8 @@ class ClusteringRecord:
         if not (0 <= self.token_position <= 1):
             raise ValueError(f"{context}: Token position {self.token_position} out of range [0, 1]")
         
-        if not (2 <= self.pca_dimensions <= 128):
-            raise ValueError(f"{context}: PCA dimensions {self.pca_dimensions} out of range [2, 128]")
+        if not (2 <= self.reduction_dimensions <= 128):
+            raise ValueError(f"{context}: Reduction dimensions {self.reduction_dimensions} out of range [2, 128]")
         
         if self.clustering_method not in ["kmeans", "hierarchical", "dbscan"]:
             raise ValueError(f"{context}: Invalid clustering method {self.clustering_method}")
@@ -86,7 +86,7 @@ class ClusteringRecord:
             token_position=data['token_position'],
             cluster_id=data['cluster_id'],
             cluster_confidence=data['cluster_confidence'],
-            pca_dimensions=data['pca_dimensions'],
+            reduction_dimensions=data['reduction_dimensions'],
             clustering_method=data['clustering_method'],
             num_clusters=data['num_clusters'],
             distance_to_centroid=data['distance_to_centroid'],
@@ -102,7 +102,7 @@ CLUSTERING_PARQUET_SCHEMA = {
     "token_position": "int32",
     "cluster_id": "int32",
     "cluster_confidence": "float",
-    "pca_dimensions": "int32", 
+    "reduction_dimensions": "int32", 
     "clustering_method": "string",
     "num_clusters": "int32",
     "distance_to_centroid": "float",
@@ -117,7 +117,7 @@ def create_clustering_record(
     token_position: int,
     cluster_id: int,
     cluster_confidence: float,
-    pca_dimensions: int,
+    reduction_dimensions: int,
     clustering_method: str,
     num_clusters: int,
     distance_to_centroid: float,
@@ -133,7 +133,7 @@ def create_clustering_record(
         token_position: Token position in sequence (0=context, 1=target)
         cluster_id: Assigned cluster ID (-1 for DBSCAN noise)
         cluster_confidence: Distance-based confidence score
-        pca_dimensions: Number of PCA components used
+        reduction_dimensions: Number of dimensions used for reduction (PCA/UMAP)
         clustering_method: "kmeans", "hierarchical", or "dbscan"
         num_clusters: Total number of clusters in this layer
         distance_to_centroid: Distance to cluster center
@@ -152,7 +152,7 @@ def create_clustering_record(
         token_position=token_position,
         cluster_id=cluster_id,
         cluster_confidence=cluster_confidence,
-        pca_dimensions=pca_dimensions,
+        reduction_dimensions=reduction_dimensions,
         clustering_method=clustering_method,
         num_clusters=num_clusters,
         distance_to_centroid=distance_to_centroid,

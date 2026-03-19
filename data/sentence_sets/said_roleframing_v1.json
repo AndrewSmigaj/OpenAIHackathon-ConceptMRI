@@ -1,0 +1,426 @@
+{
+  "name": "said_roleframing_v1",
+  "version": "1.0",
+  "target_word": "said",
+  "label_a": "narrative",
+  "label_b": "factual",
+  "description_a": "Narrative/storytelling context \u2014 medieval/fantasy characters, fictional dialogue, story narration, dramatic scenes. Characters speaking in an imaginative, story-driven context. Use character names and story settings. End each sentence with proper punctuation (period, exclamation, or question mark) AFTER the closing quote mark.",
+  "description_b": "Factual/reporting context \u2014 experts, researchers, officials, assistants explaining or reporting facts, news, data, findings. Professional or academic tone, real-world information delivery.",
+  "sentences_a": [
+    {
+      "text": "Merlin frowned deeply and said, \"The stars have not aligned for such an ill fate.\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        26,
+        30
+      ]
+    },
+    {
+      "text": "With a steely gaze, Lady Elara said, \"We must defend the realm at all costs.\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        31,
+        35
+      ]
+    },
+    {
+      "text": "King Aric, his voice filled with authority, said, \"Let the tournament begin!\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        44,
+        48
+      ]
+    },
+    {
+      "text": "Talia whispered through the shadows, \"I know a secret path,\" she said with a wry smile.",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        65,
+        69
+      ]
+    },
+    {
+      "text": "Amidst the crackling fire, the old bard said, \"This tale was told to me by my grandfather.\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        40,
+        44
+      ]
+    },
+    {
+      "text": "Prince Eldrin said, \"A storm is coming, and we must prepare for it.\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        14,
+        18
+      ]
+    },
+    {
+      "text": "As the dragon soared overhead, Sir Gareth said to his companions, \"Fear not, for we are the bravest knights.\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        42,
+        46
+      ]
+    },
+    {
+      "text": "With a heavy sigh, the queen said, \"Tonight, we shall mourn our fallen comrades.\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        29,
+        33
+      ]
+    },
+    {
+      "text": "In the depths of the enchanted forest, Lyra said, \"The trees here whisper secrets of ancient times.\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        44,
+        48
+      ]
+    },
+    {
+      "text": "Jareth, standing atop the castle battlements, said, \"Look how the dawn breaks over our land.\"",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        46,
+        50
+      ]
+    },
+    {
+      "text": "As the moonlight bathed the forest in silver, Sir Cedric said, 'We must reach the castle by midnight or all hope is lost.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        57,
+        61
+      ]
+    },
+    {
+      "text": "The witch, stirring her cauldron with a wooden spoon, said, 'Magic always comes with a price, my dear apprentice.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        54,
+        58
+      ]
+    },
+    {
+      "text": "From within the ancient ruins, Arin said, 'These walls have witnessed more history than we could ever imagine.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        36,
+        40
+      ]
+    },
+    {
+      "text": "Liliana, with her eyes locked on the horizon, said, 'The ship sails at dawn, whether we are ready or not.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        46,
+        50
+      ]
+    },
+    {
+      "text": "As the dragon circled overhead, Gareth said, 'If we stand together, we might just have a chance to survive.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        39,
+        43
+      ]
+    },
+    {
+      "text": "In the echoing halls of the enchanted cave, Elara said, 'Legends spoke of this place, but few have ever found it.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        50,
+        54
+      ]
+    },
+    {
+      "text": "With a determined gaze, Prince Alaric said, 'The time has come for us to reclaim what is rightfully ours.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        38,
+        42
+      ]
+    },
+    {
+      "text": "As the storm raged outside the tower, the sorceress said, 'Only the brave can wield the power of the tempest.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        52,
+        56
+      ]
+    },
+    {
+      "text": "The minstrel, tuning his lyre under the starry sky, said, 'Every song holds a story waiting to be told.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        52,
+        56
+      ]
+    },
+    {
+      "text": "Standing before the council of elders, Rowan said, 'Our journey has been long, but our resolve remains unbroken.'",
+      "group": "A",
+      "target_word": "said",
+      "char_span": [
+        45,
+        49
+      ]
+    }
+  ],
+  "sentences_b": [
+    {
+      "text": "Dr. Jenkins said the experiment results indicate significant improvement in patient recovery times.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "text": "According to the meteorologist, the storm is expected to intensify overnight, he said during the briefing.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        81,
+        85
+      ]
+    },
+    {
+      "text": "The CEO said in a press release that the company achieved record profits this quarter.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        8,
+        12
+      ]
+    },
+    {
+      "text": "During the conference, the professor said climate change impacts are becoming increasingly evident worldwide.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        37,
+        41
+      ]
+    },
+    {
+      "text": "The historian said her research uncovered new insights into the ancient civilization's trade networks.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        14,
+        18
+      ]
+    },
+    {
+      "text": "Emma, the lead scientist, said the new vaccine shows promising efficacy against emerging variants.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        26,
+        30
+      ]
+    },
+    {
+      "text": "The spokesperson said the government plans to implement the new policy by the end of the year.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        17,
+        21
+      ]
+    },
+    {
+      "text": "In his annual address, the chancellor said education reforms are essential for future growth.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        38,
+        42
+      ]
+    },
+    {
+      "text": "The curator said the museum would feature an exhibition on 20th-century art next month.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        12,
+        16
+      ]
+    },
+    {
+      "text": "During the interview, the economist said that inflation remains a major concern for the upcoming year.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        36,
+        40
+      ]
+    },
+    {
+      "text": "The lead researcher said the study's results could revolutionize urban planning strategies globally.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        20,
+        24
+      ]
+    },
+    {
+      "text": "In his recent publication, Dr. Thompson said the new compound shows promise in treating rare genetic disorders.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        40,
+        44
+      ]
+    },
+    {
+      "text": "Experts said the recent data breach exposed sensitive information of over five million users worldwide.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        8,
+        12
+      ]
+    },
+    {
+      "text": "In a press release, the company spokesperson said their new product line will launch by the end of the quarter.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        45,
+        49
+      ]
+    },
+    {
+      "text": "The meteorologist said the hurricane is projected to make landfall by tomorrow afternoon.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        18,
+        22
+      ]
+    },
+    {
+      "text": "In their official statement, the committee members said they will investigate the allegations thoroughly.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        51,
+        55
+      ]
+    },
+    {
+      "text": "During the seminar, the biologist said significant progress has been made in marine conservation efforts.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        34,
+        38
+      ]
+    },
+    {
+      "text": "At the symposium, the historian said the artifacts unearthed last month offer new insights into ancient civilizations.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        32,
+        36
+      ]
+    },
+    {
+      "text": "The chief financial officer said last year's revenue exceeded expectations, marking a record-breaking performance.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        28,
+        32
+      ]
+    },
+    {
+      "text": "The panel of judges said the innovation demonstrated in this year's entries was unprecedented and inspiring.",
+      "group": "B",
+      "target_word": "said",
+      "char_span": [
+        20,
+        24
+      ]
+    }
+  ],
+  "sentences_neutral": [
+    {
+      "text": "As the clock chimed midnight, Marcus said the library would be closed for renovation starting next week.",
+      "group": "neutral",
+      "target_word": "said",
+      "char_span": [
+        37,
+        41
+      ]
+    },
+    {
+      "text": "During the meeting, the entrepreneur said the new product line might revolutionize the industry.",
+      "group": "neutral",
+      "target_word": "said",
+      "char_span": [
+        37,
+        41
+      ]
+    },
+    {
+      "text": "After much debate, the committee said they would postpone the decision until further data was gathered.",
+      "group": "neutral",
+      "target_word": "said",
+      "char_span": [
+        33,
+        37
+      ]
+    },
+    {
+      "text": "In the calm of the evening, Eleanor said she would consider the offer more seriously after receiving additional details.",
+      "group": "neutral",
+      "target_word": "said",
+      "char_span": [
+        36,
+        40
+      ]
+    },
+    {
+      "text": "While examining the report, the analyst said the trends indicated a significant shift in consumer behavior over recent months.",
+      "group": "neutral",
+      "target_word": "said",
+      "char_span": [
+        40,
+        44
+      ]
+    }
+  ],
+  "metadata": {
+    "generator": "SentenceGenerator",
+    "provider": "openai",
+    "requested_count_per_regime": 20,
+    "requested_neutral_count": 5
+  }
+}

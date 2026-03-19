@@ -2,17 +2,13 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { SessionListItem } from '../types/api'
 import { apiClient } from '../api/client'
-import NewProbeDialog from '../components/NewProbeDialog'
 import { FlaskIcon, ChartBarIcon } from '../components/icons/Icons'
-
-type MainPanelView = 'sessions' | 'create-probe'
 
 export default function WorkspacePage() {
   const navigate = useNavigate()
   const [sessions, setSessions] = useState<SessionListItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [mainPanelView, setMainPanelView] = useState<MainPanelView>('sessions')
 
   useEffect(() => {
     loadSessions()
@@ -36,12 +32,6 @@ export default function WorkspacePage() {
     navigate('/experiment')
   }
 
-  const handleProbeSuccess = (sessionId: string) => {
-    // Refresh sessions list and return to sessions view
-    loadSessions()
-    setMainPanelView('sessions')
-  }
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       month: 'short',
@@ -52,36 +42,10 @@ export default function WorkspacePage() {
   }
 
   const renderMainPanel = () => {
-    if (mainPanelView === 'create-probe') {
-      return (
-        <div className="bg-white rounded-xl shadow-md h-full">
-          <div className="p-8 border-b border-gray-200">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold text-gray-900">Create New Probe</h2>
-              <button 
-                onClick={() => setMainPanelView('sessions')}
-                className="text-gray-400 hover:text-gray-600 text-xl font-light"
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-          <div className="p-8">
-            <NewProbeDialog
-              isOpen={true}
-              onClose={() => setMainPanelView('sessions')}
-              onSuccess={handleProbeSuccess}
-            />
-          </div>
-        </div>
-      )
-    }
-
-    // Default sessions view
     return (
       <div className="bg-white rounded-xl shadow-md h-full">
         <div className="p-8 border-b border-gray-200">
-          <h2 className="text-2xl font-semibold text-gray-900">Probes</h2>
+          <h2 className="text-2xl font-semibold text-gray-900">Sessions</h2>
         </div>
         <div className="p-8">
           {loading ? (
@@ -93,7 +57,7 @@ export default function WorkspacePage() {
           ) : error ? (
             <div className="text-center py-12">
               <p className="text-red-600">{error}</p>
-              <button 
+              <button
                 onClick={loadSessions}
                 className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
@@ -103,13 +67,8 @@ export default function WorkspacePage() {
           ) : sessions.length === 0 ? (
             <div className="text-center py-12">
               <FlaskIcon className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-500 mb-4">No probe sessions yet</p>
-              <button 
-                onClick={() => setMainPanelView('create-probe')}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-              >
-                Create Your First Probe
-              </button>
+              <p className="text-gray-500 mb-4">No sessions yet</p>
+              <p className="text-sm text-gray-400">Run a sentence experiment to create a session</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -123,7 +82,17 @@ export default function WorkspacePage() {
                       <p className="font-semibold text-gray-900 mb-2">{session.session_name}</p>
                       <p className="text-sm text-gray-600">
                         {session.probe_count} probes • {session.state}
+                        {session.target_word && ` • "${session.target_word}"`}
                       </p>
+                      {session.labels && session.labels.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {session.labels.map(label => (
+                            <span key={label} className="px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-800 capitalize">
+                              {label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <span className="text-sm text-gray-400 ml-4">
                       {formatDate(session.created_at)}
@@ -155,17 +124,6 @@ export default function WorkspacePage() {
           <div className="p-8 border-b">
             <h3 className="text-lg font-semibold text-gray-900 mb-6">Actions</h3>
             <div className="space-y-4">
-              <button
-                onClick={() => setMainPanelView('create-probe')}
-                className="w-full flex items-center p-4 bg-blue-50 text-blue-700 rounded-xl hover:bg-blue-100 transition-colors shadow-sm"
-              >
-                <FlaskIcon className="w-6 h-6 mr-4" />
-                <div className="text-left">
-                  <p className="font-medium text-sm">Create New Probe</p>
-                  <p className="text-xs text-blue-600 mt-1">Capture MoE activations</p>
-                </div>
-              </button>
-              
               <button
                 onClick={handleNewExperiment}
                 className="w-full flex items-center p-4 bg-green-50 text-green-700 rounded-xl hover:bg-green-100 transition-colors shadow-sm"

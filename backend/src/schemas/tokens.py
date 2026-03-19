@@ -29,7 +29,7 @@ class ProbeRecord:
     experiment_id: Optional[str] = None
     sequence_id: Optional[str] = None
     sentence_index: Optional[int] = None
-    regime_label: Optional[str] = None
+    label: Optional[str] = None
     transition_step: Optional[int] = None
     created_at: Optional[str] = None
 
@@ -53,7 +53,7 @@ PROBE_RECORD_PARQUET_SCHEMA = {
     "experiment_id": "string",
     "sequence_id": "string",
     "sentence_index": "int32",
-    "regime_label": "string",
+    "label": "string",
     "transition_step": "int32",
     "created_at": "string",
 }
@@ -72,7 +72,7 @@ def create_probe_record(
     experiment_id: str = None,
     sequence_id: str = None,
     sentence_index: int = None,
-    regime_label: str = None,
+    label: str = None,
     transition_step: int = None,
     created_at: str = None,
 ) -> ProbeRecord:
@@ -90,7 +90,7 @@ def create_probe_record(
         experiment_id=experiment_id,
         sequence_id=sequence_id,
         sentence_index=sentence_index,
-        regime_label=regime_label,
+        label=label,
         transition_step=transition_step,
         created_at=created_at,
     )
