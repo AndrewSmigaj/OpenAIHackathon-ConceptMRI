@@ -58,9 +58,16 @@ interface StatisticalAnalysis {
 // @ts-ignore
 import jStat from 'jStat'
 
-function calculateStatisticalAnalysis(distribution: Record<string, number>): StatisticalAnalysis {
-  const categories = Object.keys(distribution)
-  const counts = Object.values(distribution)
+function calculateStatisticalAnalysis(distribution: Record<string, number>, allLabels?: string[]): StatisticalAnalysis {
+  // Ensure all known labels are represented (missing = 0 count)
+  const fullDistribution = { ...distribution }
+  if (allLabels) {
+    for (const label of allLabels) {
+      if (!(label in fullDistribution)) fullDistribution[label] = 0
+    }
+  }
+  const categories = Object.keys(fullDistribution)
+  const counts = Object.values(fullDistribution)
   const totalTokens = counts.reduce((sum, count) => sum + count, 0)
   
   if (categories.length === 0 || totalTokens === 0) {
@@ -118,19 +125,21 @@ function calculateStatisticalAnalysis(distribution: Record<string, number>): Sta
   const concentrationRatio = categoryStats[0].percentage
 
   // Chi-square test against uniform distribution across all categories
-  const expectedPerCategory = totalTokens / categories.length
+  // With only 1 category, degrees of freedom = 0 — test is undefined
   let testStatistic = 0
-  
-  categoryStats.forEach(stat => {
-    const observed = stat.count
-    const expected = expectedPerCategory
-    testStatistic += Math.pow(observed - expected, 2) / expected
-  })
-  
-  const degreesOfFreedom = categories.length - 1
-  const pValue = 1 - jStat.chisquare.cdf(testStatistic, degreesOfFreedom)
-  const isSignificant = pValue < 0.05
-  const testType = 'Chi-square test vs uniform distribution'
+  let pValue = 1
+  let isSignificant = false
+  const testType = categories.length > 1 ? 'Chi-square test vs uniform distribution' : 'N/A (single category)'
+
+  if (categories.length > 1) {
+    const expectedPerCategory = totalTokens / categories.length
+    categoryStats.forEach(stat => {
+      testStatistic += Math.pow(stat.count - expectedPerCategory, 2) / expectedPerCategory
+    })
+    const degreesOfFreedom = categories.length - 1
+    pValue = 1 - jStat.chisquare.cdf(testStatistic, degreesOfFreedom)
+    isSignificant = pValue < 0.05
+  }
 
   return {
     totalTokens,
@@ -361,7 +370,8 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
   }
 
   // Calculate statistics for expert cards with rich data
-  const analysis = categoryDistribution ? calculateStatisticalAnalysis(categoryDistribution) : null
+  const allLabels = [colorLabelA, colorLabelB].filter(Boolean)
+  const analysis = categoryDistribution ? calculateStatisticalAnalysis(categoryDistribution, allLabels) : null
 
   const handleGenerateLabel = async () => {
     setIsGeneratingLabel(true)
@@ -373,33 +383,31 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 h-full flex flex-col">
+    <div className="bg-white rounded-xl shadow-md p-3 h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-2">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">{getCardTitle()}</h3>
-          {hasRichData && typeof selectedData.layer === 'number' && (
-            <p className="text-sm text-gray-500">Layer {selectedData.layer}</p>
-          )}
+          <h3 className="text-sm font-semibold text-gray-900">
+            {getCardTitle()}
+            {hasRichData && typeof selectedData.layer === 'number' && (
+              <span className="text-xs text-gray-500 font-normal ml-1.5">Layer {selectedData.layer}</span>
+            )}
+          </h3>
         </div>
-        <div className="flex items-center space-x-2">
-          <ChartBarIcon style={{ width: '12px', height: '12px' }} className="text-blue-600" />
-          <button
-            onClick={handleGenerateLabel}
-            disabled={isGeneratingLabel}
-            className="p-1 text-purple-600 hover:text-purple-700 disabled:text-gray-400 disabled:cursor-not-allowed"
-            title="Generate LLM Label"
-          >
-            <SparklesIcon className={`w-4 h-4 ${isGeneratingLabel ? 'animate-spin' : ''}`} />
-          </button>
-        </div>
+        <button
+          onClick={handleGenerateLabel}
+          disabled={isGeneratingLabel}
+          className="p-1 text-purple-600 hover:text-purple-700 disabled:text-gray-400 disabled:cursor-not-allowed"
+          title="Generate LLM Label"
+        >
+          <SparklesIcon className={`w-4 h-4 ${isGeneratingLabel ? 'animate-spin' : ''}`} />
+        </button>
       </div>
 
       {/* Custom Label if available */}
       {customLabel && (
-        <div className="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
-          <p className="text-sm font-medium text-purple-800">LLM Label:</p>
-          <p className="text-sm text-purple-700 mt-1">{customLabel}</p>
+        <div className="mb-2 p-2 bg-purple-50 rounded-lg border border-purple-200">
+          <p className="text-xs text-purple-700"><span className="font-medium text-purple-800">LLM:</span> {customLabel}</p>
         </div>
       )}
 
@@ -407,7 +415,7 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
       {hasRichData ? (
         <>
           {/* Tabs */}
-          <div className="flex border-b border-gray-200 mb-4">
+          <div className="flex border-b border-gray-200 mb-2">
             {[
               { key: 'details', label: 'Details' },
               { key: 'examples', label: 'Examples' }
@@ -415,7 +423,7 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key as any)}
-                className={`px-3 py-2 text-sm font-medium border-b-2 ${
+                className={`px-2 py-1 text-xs font-medium border-b-2 ${
                   activeTab === tab.key
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -429,36 +437,36 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
           {/* Tab Content */}
           <div className="flex-1 overflow-auto">
             {activeTab === 'details' && (
-              <div className="grid grid-cols-2 gap-4 h-full">
+              <div className="grid grid-cols-2 gap-2 h-full">
                 {/* Left Column - Key Metrics */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {/* Basic Stats Grid */}
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-gray-50 p-2 rounded-lg">
-                      <p className="text-xs text-gray-500">Total Tokens</p>
-                      <p className="text-sm font-semibold text-gray-900">
+                  <div className="grid grid-cols-2 gap-1.5">
+                    <div className="bg-gray-50 px-2 py-1 rounded">
+                      <p className="text-[10px] text-gray-500">Tokens</p>
+                      <p className="text-xs font-semibold text-gray-900">
                         {typeof selectedData.token_count === 'number' ? selectedData.token_count : 0}
                       </p>
                     </div>
-                    <div className="bg-gray-50 p-2 rounded-lg">
-                      <p className="text-xs text-gray-500">Coverage</p>
-                      <p className="text-sm font-semibold text-gray-900">
+                    <div className="bg-gray-50 px-2 py-1 rounded">
+                      <p className="text-[10px] text-gray-500">Coverage</p>
+                      <p className="text-xs font-semibold text-gray-900">
                         {typeof selectedData.coverage === 'number' ? selectedData.coverage : 0}%
                       </p>
                     </div>
-                    
+
                     {isRoute && (
                       <>
-                        <div className="bg-gray-50 p-2 rounded-lg">
-                          <p className="text-xs text-gray-500">Flow Volume</p>
-                          <p className="text-sm font-semibold text-gray-900">
+                        <div className="bg-gray-50 px-2 py-1 rounded">
+                          <p className="text-[10px] text-gray-500">Flow</p>
+                          <p className="text-xs font-semibold text-gray-900">
                             {selectedData.value || selectedData.count || 0}
                           </p>
                         </div>
                         {typeof selectedData.avg_confidence === 'number' && (
-                          <div className="bg-gray-50 p-2 rounded-lg">
-                            <p className="text-xs text-gray-500">Avg Confidence</p>
-                            <p className="text-sm font-semibold text-gray-900">
+                          <div className="bg-gray-50 px-2 py-1 rounded">
+                            <p className="text-[10px] text-gray-500">Avg Confidence</p>
+                            <p className="text-xs font-semibold text-gray-900">
                               {(selectedData.avg_confidence * 100).toFixed(1)}%
                             </p>
                           </div>
@@ -469,9 +477,8 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
 
                   {/* Key Insights */}
                   {analysis && (
-                    <div className="bg-blue-50 p-3 rounded-lg">
-                      <h4 className="font-medium text-blue-900 mb-2 text-sm">Key Insights</h4>
-                      <div className="space-y-1 text-xs">
+                    <div className="bg-blue-50 px-2 py-1.5 rounded">
+                      <div className="space-y-0.5 text-[10px]">
                         <div className="flex justify-between">
                           <span className="text-blue-700">Diversity:</span>
                           <span className="font-medium text-blue-900">{analysis.diversity}</span>
@@ -490,35 +497,32 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
 
                   {/* Specialization */}
                   {selectedData.specialization && (
-                    <div className="bg-gray-50 p-3 rounded-lg">
-                      <p className="text-xs text-gray-500 mb-1">Specialization</p>
-                      <p className="text-sm text-gray-700">{selectedData.specialization}</p>
+                    <div className="bg-gray-50 px-2 py-1 rounded">
+                      <p className="text-[10px] text-gray-500">Specialization</p>
+                      <p className="text-[11px] text-gray-700">{selectedData.specialization}</p>
                     </div>
                   )}
                 </div>
 
                 {/* Right Column - Category Breakdown & Statistics */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {analysis && (
                     <>
                       {/* Label Distribution */}
                       <div>
-                        <h4 className="font-medium text-gray-900 mb-3 text-sm">Label Distribution</h4>
-                        <div className="space-y-2 max-h-60 overflow-y-auto">
+                        <h4 className="font-medium text-gray-900 mb-1 text-[11px]">Label Distribution</h4>
+                        <div className="space-y-1 max-h-48 overflow-y-auto">
                           {analysis.categoryStats.map(stat => (
                             <div key={stat.category}>
-                              <div className="flex justify-between items-center mb-1">
-                                <span className="text-xs font-medium text-gray-900 capitalize">{stat.category}</span>
-                                <span className="text-xs text-gray-600">{stat.percentage.toFixed(1)}%</span>
+                              <div className="flex justify-between items-center">
+                                <span className="text-[10px] font-medium text-gray-900 capitalize">{stat.category}</span>
+                                <span className="text-[10px] text-gray-600">{stat.count} ({stat.percentage.toFixed(1)}%)</span>
                               </div>
-                              <div className="w-full bg-gray-200 rounded-full h-1.5">
+                              <div className="w-full bg-gray-200 rounded-full h-1">
                                 <div
-                                  className="bg-blue-500 h-1.5 rounded-full"
+                                  className="bg-blue-500 h-1 rounded-full"
                                   style={{ width: `${Math.min(stat.percentage, 100)}%` }}
                                 />
-                              </div>
-                              <div className="text-xs text-gray-500 mt-1">
-                                {stat.count} tokens
                               </div>
                             </div>
                           ))}
@@ -526,25 +530,20 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
                       </div>
 
                       {/* Statistical Analysis */}
-                      <div className="bg-blue-50 p-3 rounded-lg">
-                        <h4 className="font-medium text-blue-900 mb-2 text-sm">Statistical Analysis</h4>
-                        <div className="space-y-1 text-xs">
+                      <div className="bg-blue-50 px-2 py-1.5 rounded">
+                        <div className="space-y-0.5 text-[10px]">
                           <div className="flex justify-between">
-                            <span className="text-blue-700">Test:</span>
-                            <span className="text-blue-900">{analysis.testType}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-blue-700">Test statistic:</span>
-                            <span className="font-mono text-blue-900">{analysis.testStatistic.toFixed(3)}</span>
+                            <span className="text-blue-700">χ²:</span>
+                            <span className="font-mono text-blue-900">{analysis.testStatistic.toFixed(2)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-blue-700">p-value:</span>
                             <span className="font-mono text-blue-900">{analysis.pValue < 0.001 ? '<0.001' : analysis.pValue.toFixed(4)}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-blue-700">Significant (p &lt; 0.05):</span>
+                            <span className="text-blue-700">Significant:</span>
                             <span className={`font-medium ${analysis.isSignificant ? 'text-green-600' : 'text-red-600'}`}>
-                              {analysis.isSignificant ? 'Yes' : 'No'}
+                              {analysis.isSignificant ? 'Yes (p<0.05)' : 'No'}
                             </span>
                           </div>
                         </div>
@@ -558,43 +557,40 @@ function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB
             {activeTab === 'examples' && (() => {
               const examples = selectedData.tokens || selectedData.example_tokens || []
               return (
-                <div className="space-y-4">
-                  <h4 className="font-medium text-gray-900">Examples</h4>
+                <div>
                   {Array.isArray(examples) && examples.length > 0 ? (
-                    <div className="space-y-3 max-h-80 overflow-y-auto">
+                    <div className="space-y-0.5 max-h-72 overflow-y-auto">
                       {examples.slice(0, 10).map((token: any, index: number) => {
                         const tokenColor = token.label && colorLabelA && colorLabelB
                           ? getNodeColor({ [token.label]: 1 }, colorLabelA, colorLabelB, undefined, undefined, gradient)
                           : '#666666'
                         return (
-                          <div key={token.probe_id || index} className="bg-gray-50 p-3 rounded-lg">
-                            <div className="flex items-center space-x-2 mb-1">
+                          <div key={token.probe_id || index} className="bg-gray-50 px-2 py-1 rounded">
+                            <p className="text-[11px] text-gray-700 leading-snug">
                               {token.label && (
                                 <span
-                                  className="px-1.5 py-0.5 text-[10px] font-medium rounded-full text-white capitalize"
+                                  className="inline-block px-1 py-px text-[8px] font-medium rounded text-white capitalize mr-1 align-middle"
                                   style={{ backgroundColor: tokenColor }}
                                 >
                                   {token.label}
                                 </span>
                               )}
-                            </div>
-                            {token.input_text ? (
-                              <p className="text-xs text-gray-700 leading-relaxed">
+                              {token.input_text ? (
                                 <SentenceHighlight
                                   text={token.input_text}
                                   targetWord={token.target_word || ''}
                                   color={tokenColor}
                                 />
-                              </p>
-                            ) : (
-                              <span className="text-xs text-gray-500">"{token.target_word || 'N/A'}"</span>
-                            )}
+                              ) : (
+                                <span className="text-gray-500">"{token.target_word || 'N/A'}"</span>
+                              )}
+                            </p>
                           </div>
                         )
                       })}
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-500">No examples available</p>
+                    <p className="text-[11px] text-gray-500">No examples available</p>
                   )}
                 </div>
               )
@@ -649,28 +645,20 @@ function ColorControls({
   const colorPreview = getColorPreview(colorLabelA, colorLabelB, undefined, undefined, gradient)
 
   return (
-    <div className="space-y-4">
-      <h4 className="font-medium text-gray-900">Color Controls</h4>
-
-      {/* Show current color axis */}
-      {colorLabelA && colorLabelB ? (
-        <div className="text-sm text-gray-700">
-          Coloring by: <span className="font-medium">{colorLabelA}</span> vs <span className="font-medium">{colorLabelB}</span>
-        </div>
-      ) : (
-        <div className="text-sm text-gray-500 italic">
-          Run analysis to detect color axis from data
-        </div>
-      )}
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Gradient
-        </label>
+    <div className="space-y-1.5">
+      {/* Axis + gradient on one row */}
+      <div className="flex items-center gap-1.5 flex-wrap">
+        {colorLabelA && colorLabelB ? (
+          <span className="text-[10px] text-gray-700">
+            <span className="font-medium capitalize">{colorLabelA}</span> vs <span className="font-medium capitalize">{colorLabelB}</span>
+          </span>
+        ) : (
+          <span className="text-[10px] text-gray-400 italic">No axis</span>
+        )}
         <select
           value={gradient}
           onChange={(e) => onGradientChange(e.target.value as GradientScheme)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="px-1 py-0.5 text-[10px] border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
             <option key={key} value={key}>{scheme.name}</option>
@@ -678,29 +666,18 @@ function ColorControls({
         </select>
       </div>
 
-      {/* Color Preview */}
+      {/* Color preview strip */}
       {colorLabelA && colorLabelB && (
-        <div className="pt-2 border-t border-gray-200">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Color Preview
-          </label>
-          <div className="grid grid-cols-3 gap-2 text-xs">
-            {Object.entries(colorPreview).map(([label, color]) => (
-              <div key={label} className="flex items-center space-x-2">
-                <div
-                  className="rounded border border-gray-300 flex-shrink-0"
-                  style={{
-                    backgroundColor: color,
-                    width: '20px',
-                    height: '20px',
-                    minWidth: '20px',
-                    minHeight: '20px'
-                  }}
-                />
-                <span className="text-gray-600 truncate">{label}</span>
-              </div>
-            ))}
-          </div>
+        <div className="flex items-center gap-1 flex-wrap">
+          {Object.entries(colorPreview).map(([label, color]) => (
+            <div key={label} className="flex items-center gap-0.5" title={label}>
+              <div
+                className="rounded-sm border border-gray-300"
+                style={{ backgroundColor: color, width: '12px', height: '12px' }}
+              />
+              <span className="text-[9px] text-gray-500 truncate max-w-[50px]">{label}</span>
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -816,7 +793,8 @@ function LatentSpaceTab({
   useAllLayersSameClusters,
   setUseAllLayersSameClusters,
   globalClusterCount,
-  setGlobalClusterCount
+  setGlobalClusterCount,
+  clusteringDimSubset
 }: {
   sessionIds: string[]
   sessionData: SessionDetailResponse | null
@@ -835,6 +813,7 @@ function LatentSpaceTab({
   setUseAllLayersSameClusters: (value: boolean) => void
   globalClusterCount: number
   setGlobalClusterCount: (value: number) => void
+  clusteringDimSubset: number[] | null
 }) {
   const [selectedCard, setSelectedCard] = useState<{ type: 'cluster' | 'route', data: any } | null>(null)
   const [runAnalysis, setRunAnalysis] = useState<(() => void) | null>(null)
@@ -880,9 +859,10 @@ function LatentSpaceTab({
       clustering_method: clusteringMethod,
       layer_cluster_counts: effectiveLayerClusterCounts,
       embedding_source: embeddingSource,
-      reduction_method: reductionMethod
+      reduction_method: reductionMethod,
+      ...(clusteringDimSubset ? { clustering_dimensions: clusteringDimSubset } : {})
     };
-  }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod])
+  }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod, clusteringDimSubset])
 
   return (
     <div className="bg-white rounded-xl shadow-sm p-4 h-full flex flex-col">
@@ -941,6 +921,7 @@ function LatentSpaceTab({
             method={reductionMethod}
             sessionData={sessionData}
             filterConfig={convertFilterState(filterState, sessionData)}
+            nComponents={reductionDimensions}
             height={400}
             maxTrajectories={100}
             manualTrigger={true}
@@ -998,7 +979,6 @@ export default function ExperimentPage() {
   const [colorLabelA, setColorLabelA] = useState<string>('')
   const [colorLabelB, setColorLabelB] = useState<string>('')
   const [gradient, setGradient] = useState<GradientScheme>('red-blue')
-  const [windowLayers, setWindowLayers] = useState<number[]>([0, 1])
   const [selectedRange, setSelectedRange] = useState<string>('range1')
   
   // Expert tab controls
@@ -1011,12 +991,11 @@ export default function ExperimentPage() {
   const [reductionDims, setReductionDims] = useState(3)
   const [embeddingSource, setEmbeddingSource] = useState<string>('expert_output')
   const [reductionMethod, setReductionMethod] = useState<string>('pca')
-  const [customDimensions, setCustomDimensions] = useState(15)
-  const [useCustomDimensions, setUseCustomDimensions] = useState(false)
-  
   // Cluster configuration mode
   const [useAllLayersSameClusters, setUseAllLayersSameClusters] = useState(true)  // Default to "same for all"
   const [globalClusterCount, setGlobalClusterCount] = useState(4)  // Default to 4 clusters
+  const [clusteringDimSubset, setClusteringDimSubset] = useState<number[] | null>(null)  // null = all dims
+  const [clusterDimInput, setClusterDimInput] = useState('all')  // UI text input
 
   // LLM Insights state
   const [currentRouteData, setCurrentRouteData] = useState<Record<string, RouteAnalysisResponse | null> | null>(null)
@@ -1053,19 +1032,6 @@ export default function ExperimentPage() {
       }
     }
   }, [colorLabelA, colorLabelB])
-
-  // Helper to update cluster counts when window changes
-  const updateWindowLayers = (newWindow: number[]) => {
-    setWindowLayers(newWindow)
-    // Initialize cluster counts for new layers if not set
-    const newCounts = { ...layerClusterCounts }
-    newWindow.forEach(layer => {
-      if (!(layer in newCounts)) {
-        newCounts[layer] = 4 // default cluster count
-      }
-    })
-    setLayerClusterCounts(newCounts)
-  }
 
   useEffect(() => {
     loadSessions()
@@ -1274,228 +1240,172 @@ export default function ExperimentPage() {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Window Layers</label>
-                  <select
-                    value={windowLayers.join(',')}
-                    onChange={(e) => {
-                      const layers = e.target.value.split(',').map(Number)
-                      updateWindowLayers(layers)
-                    }}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <optgroup label="2-Layer Windows">
-                      <option value="0,1">Layers 0→1</option>
-                      <option value="1,2">Layers 1→2</option>
-                      <option value="2,3">Layers 2→3</option>
-                      <option value="3,4">Layers 3→4</option>
-                      <option value="4,5">Layers 4→5</option>
-                      <option value="5,6">Layers 5→6</option>
-                      <option value="6,7">Layers 6→7</option>
-                      <option value="7,8">Layers 7→8</option>
-                      <option value="8,9">Layers 8→9</option>
-                      <option value="9,10">Layers 9→10</option>
-                      <option value="10,11">Layers 10→11</option>
-                      <option value="11,12">Layers 11→12</option>
-                      <option value="12,13">Layers 12→13</option>
-                      <option value="13,14">Layers 13→14</option>
-                      <option value="14,15">Layers 14→15</option>
-                      <option value="15,16">Layers 15→16</option>
-                      <option value="16,17">Layers 16→17</option>
-                      <option value="17,18">Layers 17→18</option>
-                      <option value="18,19">Layers 18→19</option>
-                      <option value="19,20">Layers 19→20</option>
-                      <option value="20,21">Layers 20→21</option>
-                      <option value="21,22">Layers 21→22</option>
-                      <option value="22,23">Layers 22→23</option>
-                    </optgroup>
-                    <optgroup label="3-Layer Windows">
-                      <option value="0,1,2">Layers 0→1→2</option>
-                      <option value="1,2,3">Layers 1→2→3</option>
-                      <option value="2,3,4">Layers 2→3→4</option>
-                      <option value="3,4,5">Layers 3→4→5</option>
-                      <option value="4,5,6">Layers 4→5→6</option>
-                      <option value="5,6,7">Layers 5→6→7</option>
-                      <option value="6,7,8">Layers 6→7→8</option>
-                      <option value="7,8,9">Layers 7→8→9</option>
-                      <option value="8,9,10">Layers 8→9→10</option>
-                      <option value="9,10,11">Layers 9→10→11</option>
-                      <option value="10,11,12">Layers 10→11→12</option>
-                      <option value="11,12,13">Layers 11→12→13</option>
-                      <option value="12,13,14">Layers 12→13→14</option>
-                      <option value="13,14,15">Layers 13→14→15</option>
-                      <option value="14,15,16">Layers 14→15→16</option>
-                      <option value="15,16,17">Layers 15→16→17</option>
-                      <option value="16,17,18">Layers 16→17→18</option>
-                      <option value="17,18,19">Layers 17→18→19</option>
-                      <option value="18,19,20">Layers 18→19→20</option>
-                      <option value="19,20,21">Layers 19→20→21</option>
-                      <option value="20,21,22">Layers 20→21→22</option>
-                      <option value="21,22,23">Layers 21→22→23</option>
-                    </optgroup>
-                  </select>
-                </div>
-
                 {/* Expert Tab Controls */}
                 {activeTab === 'expert' && (
-                  <>
-                    <div>
-                      <label className="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2">
-                        <input
-                          type="checkbox"
-                          checked={showAllRoutes}
-                          onChange={(e) => setShowAllRoutes(e.target.checked)}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                        />
-                        <span>Show All Routes</span>
-                      </label>
-                      <p className="text-xs text-gray-500 mb-3">
-                        {showAllRoutes ? 'Displaying all available routes' : `Limited to top ${topRoutes} routes`}
-                      </p>
-                    </div>
-                    
+                  <div className="space-y-2">
+                    <label className="flex items-center gap-1.5 text-[11px] text-gray-700">
+                      <input
+                        type="checkbox"
+                        checked={showAllRoutes}
+                        onChange={(e) => setShowAllRoutes(e.target.checked)}
+                        className="w-3 h-3 rounded border-gray-300 text-blue-600"
+                      />
+                      Show all routes
+                    </label>
                     {!showAllRoutes && (
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Top Routes</label>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] text-gray-500">Top</span>
                         <input
                           type="number"
                           value={topRoutes}
                           onChange={(e) => setTopRoutes(parseInt(e.target.value))}
                           min="5"
                           max="100"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          className="w-14 px-1.5 py-0.5 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        />
+                        <span className="text-[10px] text-gray-500">routes</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Latent Tab Controls — compact 2-col grid */}
+                {activeTab === 'latent' && (
+                  <div className="space-y-2">
+                    {/* Row 1: Source + Method */}
+                    <div className="grid grid-cols-2 gap-1.5">
+                      <div>
+                        <label className="block text-[10px] text-gray-500 mb-0.5">Source</label>
+                        <select
+                          value={embeddingSource}
+                          onChange={(e) => setEmbeddingSource(e.target.value)}
+                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        >
+                          <option value="expert_output">Expert Output</option>
+                          <option value="residual_stream">Residual Stream</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-[10px] text-gray-500 mb-0.5">Method</label>
+                        <select
+                          value={reductionMethod}
+                          onChange={(e) => setReductionMethod(e.target.value)}
+                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        >
+                          <option value="pca">PCA</option>
+                          <option value="umap">UMAP</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Row 2: Dims + Clustering Method */}
+                    <div className="grid grid-cols-2 gap-1.5">
+                      <div>
+                        <label className="block text-[10px] text-gray-500 mb-0.5">Dims</label>
+                        <select
+                          value={reductionDims}
+                          onChange={(e) => setReductionDims(parseInt(e.target.value))}
+                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        >
+                          {[2, 3, 5, 10, 15, 20, 50, 128].map(d => (
+                            <option key={d} value={d}>{d}D</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-[10px] text-gray-500 mb-0.5">Clustering</label>
+                        <select
+                          value={clusteringMethod}
+                          onChange={(e) => setClusteringMethod(e.target.value)}
+                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        >
+                          <option value="kmeans">K-Means</option>
+                          <option value="hierarchical">Hierarchical</option>
+                          <option value="dbscan">DBSCAN</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Row 3: K + Per-layer toggle */}
+                    <div className="grid grid-cols-2 gap-1.5 items-end">
+                      <div>
+                        <label className="block text-[10px] text-gray-500 mb-0.5">K (clusters)</label>
+                        <input
+                          type="number"
+                          value={globalClusterCount}
+                          onChange={(e) => setGlobalClusterCount(parseInt(e.target.value) || 2)}
+                          min="2"
+                          max="20"
+                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        />
+                      </div>
+                      <label className="flex items-center gap-1 text-[10px] text-gray-600 pb-1">
+                        <input
+                          type="checkbox"
+                          checked={!useAllLayersSameClusters}
+                          onChange={(e) => setUseAllLayersSameClusters(!e.target.checked)}
+                          className="w-3 h-3 rounded border-gray-300 text-blue-600"
+                        />
+                        Per-layer K
+                      </label>
+                    </div>
+
+                    {/* Per-layer cluster counts (hidden by default) */}
+                    {!useAllLayersSameClusters && (() => {
+                      const currentRange = selectedRange as keyof typeof LAYER_RANGES
+                      const rangeDef = LAYER_RANGES[currentRange]
+                      if (!rangeDef) return null
+                      const allLayers = new Set<number>()
+                      rangeDef.windows.forEach(w => w.layers.forEach(l => allLayers.add(l)))
+                      return (
+                        <div className="grid grid-cols-3 gap-1">
+                          {Array.from(allLayers).sort((a, b) => a - b).map(layer => (
+                            <div key={layer}>
+                              <label className="block text-[9px] text-gray-400">L{layer}</label>
+                              <input
+                                type="number"
+                                value={layerClusterCounts[layer] || 4}
+                                onChange={(e) => {
+                                  const newCounts = { ...layerClusterCounts }
+                                  newCounts[layer] = parseInt(e.target.value)
+                                  setLayerClusterCounts(newCounts)
+                                }}
+                                min="2"
+                                max="20"
+                                className="w-full px-1 py-0.5 text-[10px] border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )
+                    })()}
+
+                    {/* Clustering dim subset (only shown when dims > 3) */}
+                    {reductionDims > 3 && (
+                      <div>
+                        <label className="block text-[10px] text-gray-500 mb-0.5">Cluster dims</label>
+                        <input
+                          type="text"
+                          value={clusterDimInput}
+                          onChange={(e) => {
+                            const val = e.target.value.trim()
+                            setClusterDimInput(val)
+                            if (val === '' || val.toLowerCase() === 'all') {
+                              setClusteringDimSubset(null)
+                            } else {
+                              const dims = val.split(',')
+                                .map(s => parseInt(s.trim()) - 1)
+                                .filter(n => !isNaN(n) && n >= 0 && n < reductionDims)
+                              setClusteringDimSubset(dims.length > 0 ? dims : null)
+                            }
+                          }}
+                          placeholder="all"
+                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                          title="Enter 'all' or comma-separated dim numbers (1-indexed), e.g. 1,2,5"
                         />
                       </div>
                     )}
-                  </>
-                )}
-
-                {/* Latent Tab Controls */}
-                {activeTab === 'latent' && (
-                  <>
-                    {/* Embedding Source + Reduction Method */}
-                    <div className="border-t border-gray-200 pt-4">
-                      <h4 className="text-sm font-semibold text-gray-700 mb-3">Embedding Source</h4>
-                      <select
-                        value={embeddingSource}
-                        onChange={(e) => setEmbeddingSource(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                      >
-                        <option value="expert_output">Expert Output</option>
-                        <option value="residual_stream">Residual Stream</option>
-                      </select>
-                    </div>
-
-                    <div className="border-t border-gray-200 pt-4">
-                      <h4 className="text-sm font-semibold text-gray-700 mb-3">Reduction Method</h4>
-                      <select
-                        value={reductionMethod}
-                        onChange={(e) => setReductionMethod(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                      >
-                        <option value="pca">PCA</option>
-                        <option value="umap">UMAP</option>
-                      </select>
-                    </div>
-
-                    <div className="border-t border-gray-200 pt-4">
-                      <h4 className="text-sm font-semibold text-gray-700 mb-3">Reduction Dimensions</h4>
-                      <div className="mb-4">
-                        <div className="space-y-2">
-                          {[2, 3, 5, 10].map(dim => (
-                            <label key={dim} className="flex items-center">
-                              <input
-                                type="radio"
-                                name="reductionDims"
-                                checked={reductionDims === dim && !useCustomDimensions}
-                                onChange={() => {
-                                  setReductionDims(dim)
-                                  setUseCustomDimensions(false)
-                                }}
-                                className="mr-2"
-                              />
-                              <span className="text-sm">
-                                {dim}D - {
-                                  dim === 2 ? 'Major axes' :
-                                  dim === 3 ? '+ depth' :
-                                  dim === 5 ? 'Fine structure' :
-                                  'Detailed patterns'
-                                }
-                              </span>
-                            </label>
-                          ))}
-                          <label className="flex items-center">
-                            <input
-                              type="radio"
-                              name="reductionDims"
-                              checked={useCustomDimensions}
-                              onChange={() => setUseCustomDimensions(true)}
-                              className="mr-2"
-                            />
-                            <span className="text-sm mr-2">Custom:</span>
-                            <input
-                              type="number"
-                              value={customDimensions}
-                              onChange={(e) => setCustomDimensions(parseInt(e.target.value) || 1)}
-                              onFocus={() => setUseCustomDimensions(true)}
-                              min="1"
-                              max="128"
-                              className="w-16 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                            />
-                            <span className="text-sm ml-1">(1-128)</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="border-t border-gray-200 pt-4">
-                      <h4 className="text-sm font-semibold text-gray-700 mb-3">Per-Layer Clustering</h4>
-                      {(() => {
-                        const currentRange = selectedRange as keyof typeof LAYER_RANGES
-                        const rangeDef = LAYER_RANGES[currentRange]
-                        if (!rangeDef) return null
-                        
-                        // Get all unique layers from the current range
-                        const allLayers = new Set<number>()
-                        rangeDef.windows.forEach(window => {
-                          window.layers.forEach(layer => allLayers.add(layer))
-                        })
-                        
-                        return Array.from(allLayers).sort((a, b) => a - b).map((layer) => (
-                          <div key={layer} className="mb-3">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Layer {layer} Clusters (K)
-                            </label>
-                            <input
-                              type="number"
-                              value={layerClusterCounts[layer] || 4}
-                              onChange={(e) => {
-                                const newCounts = { ...layerClusterCounts }
-                                newCounts[layer] = parseInt(e.target.value)
-                                setLayerClusterCounts(newCounts)
-                              }}
-                              min="2"
-                              max="20"
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            />
-                          </div>
-                        ))
-                      })()}
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Clustering Method</label>
-                      <select
-                        value={clusteringMethod}
-                        onChange={(e) => setClusteringMethod(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                      >
-                        <option value="kmeans">K-Means</option>
-                        <option value="hierarchical">Hierarchical</option>
-                        <option value="dbscan">DBSCAN</option>
-                      </select>
-                    </div>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -1576,13 +1486,14 @@ export default function ExperimentPage() {
                       onRangeChange={setSelectedRange}
                       layerClusterCounts={layerClusterCounts}
                       clusteringMethod={clusteringMethod}
-                      reductionDimensions={useCustomDimensions ? customDimensions : reductionDims}
+                      reductionDimensions={reductionDims}
                       embeddingSource={embeddingSource}
                       reductionMethod={reductionMethod}
                       useAllLayersSameClusters={useAllLayersSameClusters}
                       setUseAllLayersSameClusters={setUseAllLayersSameClusters}
                       globalClusterCount={globalClusterCount}
                       setGlobalClusterCount={setGlobalClusterCount}
+                      clusteringDimSubset={clusteringDimSubset}
                     />
                   )}
                 </div>

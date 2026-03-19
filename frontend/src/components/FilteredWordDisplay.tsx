@@ -52,46 +52,36 @@ export default function FilteredWordDisplay({
   })
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 space-y-3">
+    <div className="bg-white rounded-xl shadow-md p-2 space-y-1">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h4 className="font-medium text-gray-900 text-sm">
-          Sentences
+        <h4 className="font-medium text-gray-900 text-xs">
+          Sentences {sessionData.target_word && <span className="text-gray-500 font-normal">— {sessionData.target_word}</span>}
         </h4>
-        <span className="text-xs text-gray-500">
+        <span className="text-[10px] text-gray-500">
           {sentences.length}{hasFilters ? ' filtered' : ''}
         </span>
       </div>
 
-      {/* Target Word */}
-      {sessionData.target_word && (
-        <div>
-          <span className="text-xs text-gray-500">Target: </span>
-          <span className="text-sm font-semibold text-gray-900">{sessionData.target_word}</span>
-        </div>
-      )}
-
       {/* Sentence List */}
       {sentences.length > 0 ? (
-        <div className="space-y-2 max-h-[60vh] overflow-y-auto">
+        <div className="space-y-0.5 max-h-[75vh] overflow-y-auto">
           {sentences.map((sentence, i) => {
             const color = sentence.label && colorLabelA && colorLabelB
               ? getNodeColor({ [sentence.label]: 1 }, colorLabelA, colorLabelB, undefined, undefined, gradient)
               : '#666666'
 
             return (
-              <div key={sentence.probe_id || i} className="bg-gray-50 rounded-lg p-2">
-                <div className="flex items-center gap-1.5 mb-1">
+              <div key={sentence.probe_id || i} className="bg-gray-50 rounded px-1.5 py-1">
+                <p className="text-[10px] text-gray-700 leading-snug">
                   {sentence.label && (
                     <span
-                      className="px-1.5 py-0.5 text-[10px] font-medium rounded-full text-white capitalize"
+                      className="inline-block px-1 py-px text-[8px] font-medium rounded text-white capitalize mr-1 align-middle"
                       style={{ backgroundColor: color }}
                     >
                       {sentence.label}
                     </span>
                   )}
-                </div>
-                <p className="text-xs text-gray-700 leading-relaxed">
                   <SentenceHighlight
                     text={sentence.input_text}
                     targetWord={sentence.target_word}
@@ -103,7 +93,7 @@ export default function FilteredWordDisplay({
           })}
         </div>
       ) : (
-        <p className="text-xs text-gray-500">
+        <p className="text-[10px] text-gray-500">
           {hasFilters ? 'No sentences match the current filters' : 'No sentences available'}
         </p>
       )}

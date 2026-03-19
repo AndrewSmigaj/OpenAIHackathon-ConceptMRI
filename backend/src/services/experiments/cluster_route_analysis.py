@@ -254,6 +254,11 @@ class ClusterRouteAnalysisService:
             else:
                 X = PCA(n_components=actual_dims, random_state=42).fit_transform(X_raw)
 
+            # Optionally subset dimensions for clustering
+            clustering_dims = clustering_config.get("clustering_dimensions")
+            if clustering_dims is not None:
+                X = X[:, clustering_dims]
+
             # Cluster
             try:
                 if clustering_method == "kmeans":

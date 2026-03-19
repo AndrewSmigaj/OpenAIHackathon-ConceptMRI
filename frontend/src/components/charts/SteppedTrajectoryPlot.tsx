@@ -10,7 +10,7 @@ interface Trajectory {
   probe_id: string
   target: string
   label?: string
-  coordinates: Array<{ layer: number; x: number; y?: number; z?: number }>
+  coordinates: Array<{ layer: number; dims: number[] }>
 }
 
 interface SteppedTrajectoryPlotProps {
@@ -29,6 +29,7 @@ interface SteppedTrajectoryPlotProps {
   manualTrigger?: boolean
   onAnalysisReady?: (runAnalysis: () => void) => void
   onPointClick?: (info: { probe_id: string; target: string; label?: string }) => void
+  nComponents?: number
 }
 
 export default function SteppedTrajectoryPlot({
@@ -46,7 +47,8 @@ export default function SteppedTrajectoryPlot({
   maxTrajectories = 200,
   manualTrigger = false,
   onAnalysisReady,
-  onPointClick
+  onPointClick,
+  nComponents = 3
 }: SteppedTrajectoryPlotProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -58,6 +60,9 @@ export default function SteppedTrajectoryPlot({
   const [layerOffset, setLayerOffset] = useState(72)
   const [showLines, setShowLines] = useState(true)
   const [coordScale, setCoordScale] = useState(1)
+  const [xDim, setXDim] = useState(0)
+  const [yDim, setYDim] = useState(1)
+  const [zDim, setZDim] = useState(2)
 
   useEffect(() => {
     if (manualTrigger) {
@@ -74,7 +79,7 @@ export default function SteppedTrajectoryPlot({
     if (!sessionIds.length || layers.length < 2) return
 
     loadTrajectoryData()
-  }, [sessionIds, layers, maxTrajectories, manualTrigger, source, method])
+  }, [sessionIds, layers, maxTrajectories, manualTrigger, source, method, nComponents])
 
   useEffect(() => {
     if (trajectories.length > 0 && chartRef.current) {
@@ -87,7 +92,7 @@ export default function SteppedTrajectoryPlot({
         chartInstanceRef.current = null
       }
     }
-  }, [trajectories, colorLabelA, colorLabelB, gradient, layerOffset, showLines, coordScale])
+  }, [trajectories, colorLabelA, colorLabelB, gradient, layerOffset, showLines, coordScale, xDim, yDim, zDim])
 
   const loadTrajectoryData = async () => {
     try {
@@ -99,7 +104,7 @@ export default function SteppedTrajectoryPlot({
         layers,
         source,
         method,
-        n_components: 3
+        n_components: nComponents
       })
 
       // Transform flat ReductionPoint[] into trajectory groups
@@ -116,7 +121,10 @@ export default function SteppedTrajectoryPlot({
           probe_id: probeId,
           target: points[0]?.target_word || '',
           label: points[0]?.label,
-          coordinates: points.map(p => ({ layer: p.layer, x: p.x, y: p.y, z: p.z }))
+          coordinates: points.map(p => ({
+            layer: p.layer,
+            dims: p.coordinates ?? [p.x, p.y ?? 0, p.z ?? 0]
+          }))
         }
       })
 
@@ -177,9 +185,9 @@ export default function SteppedTrajectoryPlot({
           const xOffset = layerIndex * layerOffsetStep
 
           scatterData.push([
-            (coord.x || 0) * coordScale + xOffset,
-            (coord.y || 0) * coordScale,
-            (coord.z || 0) * coordScale,
+            (coord.dims[xDim] || 0) * coordScale + xOffset,
+            (coord.dims[yDim] || 0) * coordScale,
+            (coord.dims[zDim] || 0) * coordScale,
             trajectory.target,
             trajectory.label || '',
             trajectory.probe_id
@@ -190,7 +198,7 @@ export default function SteppedTrajectoryPlot({
           const trajectoryLineData = trajectory.coordinates.map((coord) => {
             const layerIndex = actualLayers.indexOf(coord.layer)
             const xOffset = layerIndex * layerOffsetStep
-            return [(coord.x || 0) * coordScale + xOffset, (coord.y || 0) * coordScale, (coord.z || 0) * coordScale]
+            return [(coord.dims[xDim] || 0) * coordScale + xOffset, (coord.dims[yDim] || 0) * coordScale, (coord.dims[zDim] || 0) * coordScale]
           })
 
           series.push({
@@ -313,17 +321,17 @@ export default function SteppedTrajectoryPlot({
       },
       xAxis3D: {
         type: 'value',
-        name: 'Dim 1',
+        name: `Dim ${xDim + 1}`,
         nameTextStyle: { fontSize: 10 }
       },
       yAxis3D: {
         type: 'value',
-        name: 'Dim 2',
+        name: `Dim ${yDim + 1}`,
         nameTextStyle: { fontSize: 10 }
       },
       zAxis3D: {
         type: 'value',
-        name: 'Dim 3',
+        name: `Dim ${zDim + 1}`,
         nameTextStyle: { fontSize: 10 }
       },
       grid3D: {
@@ -393,21 +401,20 @@ export default function SteppedTrajectoryPlot({
 
   return (
     <div className={className}>
-      <div className="mb-4 flex flex-wrap items-center gap-6">
-        <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-600">Layer Spacing:</label>
+      <div className="mb-2 flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-1">
+          <label className="text-xs text-gray-500">Spacing:</label>
           <input
             type="range"
             min="20"
             max="150"
             value={layerOffset}
             onChange={(e) => setLayerOffset(Number(e.target.value))}
-            className="w-32"
+            className="w-20"
           />
-          <span className="text-sm text-gray-700 w-8">{layerOffset}</span>
         </div>
-        <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-600">Scale:</label>
+        <div className="flex items-center gap-1">
+          <label className="text-xs text-gray-500">Scale:</label>
           <input
             type="range"
             min="0.1"
@@ -415,20 +422,41 @@ export default function SteppedTrajectoryPlot({
             step="0.1"
             value={coordScale}
             onChange={(e) => setCoordScale(Number(e.target.value))}
-            className="w-32"
+            className="w-20"
           />
-          <span className="text-sm text-gray-700 w-8">{coordScale}</span>
         </div>
-        <div className="flex items-center gap-2">
+        <label className="flex items-center gap-1 text-xs text-gray-500 cursor-pointer">
           <input
             type="checkbox"
-            id="showLines"
             checked={showLines}
             onChange={(e) => setShowLines(e.target.checked)}
-            className="cursor-pointer"
+            className="w-3 h-3 cursor-pointer"
           />
-          <label htmlFor="showLines" className="text-sm text-gray-600 cursor-pointer">Show Lines</label>
-        </div>
+          Lines
+        </label>
+        {/* Axis dimension mapping */}
+        {nComponents > 3 && (
+          <>
+            <div className="flex items-center gap-0.5">
+              <span className="text-xs text-gray-500">X:</span>
+              <select value={xDim} onChange={(e) => setXDim(Number(e.target.value))} className="px-1 py-0.5 text-xs border border-gray-300 rounded">
+                {Array.from({ length: nComponents }, (_, i) => <option key={i} value={i}>Dim {i + 1}</option>)}
+              </select>
+            </div>
+            <div className="flex items-center gap-0.5">
+              <span className="text-xs text-gray-500">Y:</span>
+              <select value={yDim} onChange={(e) => setYDim(Number(e.target.value))} className="px-1 py-0.5 text-xs border border-gray-300 rounded">
+                {Array.from({ length: nComponents }, (_, i) => <option key={i} value={i}>Dim {i + 1}</option>)}
+              </select>
+            </div>
+            <div className="flex items-center gap-0.5">
+              <span className="text-xs text-gray-500">Z:</span>
+              <select value={zDim} onChange={(e) => setZDim(Number(e.target.value))} className="px-1 py-0.5 text-xs border border-gray-300 rounded">
+                {Array.from({ length: nComponents }, (_, i) => <option key={i} value={i}>Dim {i + 1}</option>)}
+              </select>
+            </div>
+          </>
+        )}
       </div>
       <div
         ref={chartRef}

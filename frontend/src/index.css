@@ -30,17 +30,19 @@ body {
   min-height: 100vh;
 }
 
-/* Force narrow layout - direct CSS override */
+/* Sidebar and panel widths */
 .sidebar-narrow {
-  width: 200px !important;
+  width: 280px !important;
+  min-width: 280px !important;
 }
 
-.word-panel-narrow {  
-  width: 188px !important;
+.word-panel-narrow {
+  width: 260px !important;
+  min-width: 260px !important;
 }
 
-/* Force small icons - direct CSS override */
-svg {
+/* Sidebar icons only — scoped to avoid breaking ECharts */
+.sidebar-narrow svg {
   width: 12px !important;
   height: 12px !important;
 }

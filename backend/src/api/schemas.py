@@ -66,6 +66,7 @@ class ClusteringConfig(BaseModel):
     layer_cluster_counts: Dict[int, int] = {}  # {layer: num_clusters}
     embedding_source: str = "expert_output"  # "expert_output" or "residual_stream"
     reduction_method: str = "pca"  # "pca" or "umap"
+    clustering_dimensions: Optional[List[int]] = None  # 0-indexed dim subset; None = all
 
 
 class AnalyzeClusterRoutesRequest(BaseModel):

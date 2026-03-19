@@ -93,6 +93,7 @@ interface ClusteringConfig {
   layer_cluster_counts: Record<number, number>
   embedding_source?: string
   reduction_method?: string
+  clustering_dimensions?: number[]
 }
 
 interface AnalyzeClusterRoutesRequest {
@@ -244,6 +245,7 @@ interface ReductionPoint {
   x: number
   y?: number
   z?: number
+  coordinates?: number[]
   target_word: string
   label?: string
 }

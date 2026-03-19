@@ -140,6 +140,7 @@ class ReductionService:
                     "session_id": meta.get("session_id", ""),
                     "layer": int(layer),
                     "x": float(coords[idx, 0]) if coords.shape[1] > 0 else 0.0,
+                    "coordinates": [float(coords[idx, c]) for c in range(coords.shape[1])],
                     "target_word": meta.get("target_word", ""),
                     "label": meta.get("label"),
                 }
