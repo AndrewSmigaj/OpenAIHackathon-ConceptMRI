@@ -13,7 +13,7 @@ from openai import AsyncOpenAI
 from anthropic import AsyncAnthropic
 
 from services.generation.sentence_set import (
-    SentenceEntry, SentenceSet, compute_char_span,
+    SentenceEntry, SentenceSet,
     validate_sentence, save_sentence_set
 )
 
@@ -270,16 +270,11 @@ Generate exactly {count} sentences."""
             if not sentence_text:
                 continue
 
-            try:
-                span = compute_char_span(sentence_text, target_word)
-                entries.append(SentenceEntry(
-                    text=sentence_text,
-                    group=group_code,
-                    target_word=target_word,
-                    char_span=span,
-                ))
-            except ValueError as e:
-                logger.warning(f"  Skipping sentence: {e}")
+            entries.append(SentenceEntry(
+                text=sentence_text,
+                group=group_code,
+                target_word=target_word,
+            ))
 
         return entries
 

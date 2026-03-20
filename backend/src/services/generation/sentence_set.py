@@ -19,7 +19,6 @@ class SentenceEntry:
     text: str               # The sentence (10-30 words)
     group: str              # "A", "B", or "neutral"
     target_word: str        # e.g. "said", "tank", etc.
-    char_span: List[int]    # [start, end) 0-based, end-exclusive
 
 
 @dataclass
@@ -85,14 +84,6 @@ def validate_sentence(
             f"{entry.text[:60]}..."
         )
 
-    if matches and len(matches) == 1:
-        expected = [matches[0].start(), matches[0].end()]
-        if entry.char_span != expected:
-            errors.append(
-                f"char_span {entry.char_span} != expected {expected}: "
-                f"{entry.text[:60]}..."
-            )
-
     if existing_texts is not None and entry.text in existing_texts:
         errors.append(f"Duplicate sentence: {entry.text[:60]}...")
 
@@ -137,7 +128,6 @@ def _entry_to_dict(entry: SentenceEntry) -> dict:
         "text": entry.text,
         "group": entry.group,
         "target_word": entry.target_word,
-        "char_span": entry.char_span,
     }
 
 
@@ -146,7 +136,6 @@ def _entry_from_dict(d: dict) -> SentenceEntry:
         text=d["text"],
         group=d.get("group", d.get("regime", "A")),  # Backward compat: "regime" → "group"
         target_word=d["target_word"],
-        char_span=d["char_span"],
     )
 
 
@@ -205,11 +194,12 @@ def load_sentence_set_by_name(
     name: str,
     base_dir: str = "data/sentence_sets"
 ) -> SentenceSet:
-    """Load sentence set by name from base directory."""
-    path = os.path.join(base_dir, f"{name}.json")
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Sentence set not found: {path}")
-    return load_sentence_set(path)
+    """Load sentence set by name from base directory (searches subdirectories)."""
+    # Search recursively for the named JSON file
+    matches = list(Path(base_dir).rglob(f"{name}.json"))
+    if not matches:
+        raise FileNotFoundError(f"Sentence set '{name}' not found in {base_dir}")
+    return load_sentence_set(str(matches[0]))
 
 
 def list_available_sentence_sets(
@@ -222,7 +212,7 @@ def list_available_sentence_sets(
     if not base.exists():
         return results
 
-    for json_file in sorted(base.glob("*.json")):
+    for json_file in sorted(base.rglob("*.json")):
         try:
             with open(json_file, 'r') as f:
                 data = json.load(f)
