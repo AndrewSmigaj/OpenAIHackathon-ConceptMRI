@@ -183,13 +183,13 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
         nodeWidth: 24,
         layoutIterations: 32,
         left: '8%',
-        right: '12%',
+        right: '20%',
         top: '8%',
         bottom: '8%',
         label: {
           show: true,
           position: 'right',
-          fontSize: 11,
+          fontSize: 9,
           color: '#333'
         }
       }],
