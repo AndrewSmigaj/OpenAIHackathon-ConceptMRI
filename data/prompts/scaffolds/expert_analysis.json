@@ -1,0 +1,8 @@
+{
+  "id": "expert_analysis",
+  "name": "Expert Routing Pattern Analysis",
+  "description": "Analyzes expert routing patterns across layers and windows to identify hub experts, routing bottlenecks, semantic highways, and overall flow architecture in MoE models.",
+  "prompt": "Analyze the expert routing patterns across all windows in this layer range. Identify major hub experts (experts receiving disproportionately high token volume), routing bottlenecks (layers or experts that constrain information flow), and semantic highways where specific word categories are preferentially routed to particular experts.\n\nDescribe the overall flow architecture: Is routing broad-to-narrow (fan-in), narrow-to-broad (fan-out), or specialized throughout? Do tokens converge onto shared experts in later layers or diverge into specialist pathways?\n\nHighlight statistically significant routing biases. For each major pattern you identify:\n- Cite specific expert IDs (e.g., Expert 5 in Layer 6)\n- Include token counts and percentages (e.g., \"receives 342/1000 tokens, 34.2%\")\n- Note the semantic categories of tokens being routed (e.g., \"predominantly military/vehicle terms\")\n- Compare observed routing frequency against uniform-random baseline to establish significance\n\nAvoid speculative claims that are not grounded in the routing data. If a pattern is weak or ambiguous, say so explicitly rather than over-interpreting.",
+  "data_sources": ["expert_routes"],
+  "output_type": "narrative"
+}

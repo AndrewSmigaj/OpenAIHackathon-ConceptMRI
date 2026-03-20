@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { ChartBarIcon, SparklesIcon } from '../icons/Icons'
 import { getNodeColor, type GradientScheme } from '../../utils/colorBlending'
 import SentenceHighlight from '../SentenceHighlight'
+import ReactMarkdown from 'react-markdown'
 
 // @ts-ignore
 import jStat from 'jStat'
@@ -128,12 +129,11 @@ export interface ContextSensitiveCardProps {
   colorLabelA: string
   colorLabelB: string
   gradient: GradientScheme
+  elementDescription?: string
 }
 
-export default function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB, gradient }: ContextSensitiveCardProps) {
-  const [activeTab, setActiveTab] = useState<'details' | 'examples'>('details')
-  const [isGeneratingLabel, setIsGeneratingLabel] = useState(false)
-  const [customLabel, setCustomLabel] = useState<string>('')
+export default function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB, gradient, elementDescription }: ContextSensitiveCardProps) {
+  const [activeTab, setActiveTab] = useState<'details' | 'examples' | 'ai'>('details')
 
   // Type-safe detection of rich data from Sankey clicks
   const hasRichData = Boolean(selectedData?._fullData)
@@ -190,14 +190,6 @@ export default function ContextSensitiveCard({ cardType, selectedData, colorLabe
   const allLabels = [colorLabelA, colorLabelB].filter(Boolean)
   const analysis = categoryDistribution ? calculateStatisticalAnalysis(categoryDistribution, allLabels) : null
 
-  const handleGenerateLabel = async () => {
-    setIsGeneratingLabel(true)
-    // TODO: Implement LLM labeling API call
-    setTimeout(() => {
-      setCustomLabel(`AI-generated label for ${getCardTitle()}`)
-      setIsGeneratingLabel(false)
-    }, 2000)
-  }
 
   return (
     <div className="bg-white rounded-xl shadow-md p-3 h-full flex flex-col">
@@ -211,22 +203,10 @@ export default function ContextSensitiveCard({ cardType, selectedData, colorLabe
             )}
           </h3>
         </div>
-        <button
-          onClick={handleGenerateLabel}
-          disabled={isGeneratingLabel}
-          className="p-1 text-purple-600 hover:text-purple-700 disabled:text-gray-400 disabled:cursor-not-allowed"
-          title="Generate LLM Label"
-        >
-          <SparklesIcon className={`w-4 h-4 ${isGeneratingLabel ? 'animate-spin' : ''}`} />
-        </button>
+        {elementDescription && (
+          <SparklesIcon className="w-4 h-4 text-purple-500" />
+        )}
       </div>
-
-      {/* Custom Label if available */}
-      {customLabel && (
-        <div className="mb-2 p-2 bg-purple-50 rounded-lg border border-purple-200">
-          <p className="text-xs text-purple-700"><span className="font-medium text-purple-800">LLM:</span> {customLabel}</p>
-        </div>
-      )}
 
       {/* Enhanced content for rich data */}
       {hasRichData ? (
@@ -235,7 +215,8 @@ export default function ContextSensitiveCard({ cardType, selectedData, colorLabe
           <div className="flex border-b border-gray-200 mb-2">
             {[
               { key: 'details', label: 'Details' },
-              { key: 'examples', label: 'Examples' }
+              { key: 'examples', label: 'Examples' },
+              { key: 'ai', label: 'AI' }
             ].map(tab => (
               <button
                 key={tab.key}
@@ -412,6 +393,20 @@ export default function ContextSensitiveCard({ cardType, selectedData, colorLabe
                 </div>
               )
             })()}
+
+            {activeTab === 'ai' && (
+              <div>
+                {elementDescription ? (
+                  <div className="prose prose-sm max-w-none text-gray-800">
+                    <ReactMarkdown>{elementDescription}</ReactMarkdown>
+                  </div>
+                ) : (
+                  <p className="text-[11px] text-gray-500 italic">
+                    Run an element labeling step in the LLM panel to generate descriptions.
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </>
       ) : (

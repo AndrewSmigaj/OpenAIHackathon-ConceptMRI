@@ -106,6 +106,8 @@ export default function ExperimentPage() {
 
   // LLM Insights state
   const [currentRouteData, setCurrentRouteData] = useState<Record<string, RouteAnalysisResponse | null> | null>(null)
+  const [currentClusterRouteData, setCurrentClusterRouteData] = useState<Record<string, RouteAnalysisResponse | null> | null>(null)
+  const [elementDescriptions, setElementDescriptions] = useState<Record<string, string>>({})
 
   // Derive available labels from route analysis available_axes
   const availableLabels = useMemo(() => {
@@ -139,6 +141,14 @@ export default function ExperimentPage() {
       }
     }
   }, [colorLabelA, colorLabelB])
+
+  const handleClusterRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
+    setCurrentClusterRouteData(routeDataMap)
+  }, [])
+
+  const handleElementDescriptionsLoaded = useCallback((descs: Record<string, string>) => {
+    setElementDescriptions(prev => ({ ...prev, ...descs }))
+  }, [])
 
   useEffect(() => {
     loadSessions()
@@ -546,6 +556,7 @@ export default function ExperimentPage() {
                     onRangeChange={setSelectedRange}
                     showAllRoutes={showAllRoutes}
                     onRouteDataLoaded={handleRouteDataLoaded}
+                    elementDescriptions={elementDescriptions}
                   />
 
                   <ClusterRoutesSection
@@ -567,6 +578,8 @@ export default function ExperimentPage() {
                     globalClusterCount={globalClusterCount}
                     setGlobalClusterCount={setGlobalClusterCount}
                     clusteringDimSubset={clusteringDimSubset}
+                    onRouteDataLoaded={handleClusterRouteDataLoaded}
+                    elementDescriptions={elementDescriptions}
                   />
                 </div>
 
@@ -574,9 +587,10 @@ export default function ExperimentPage() {
                 <div className="border-t bg-white p-4">
                   <LLMAnalysisPanel
                     sessionId={selectedSessions[0]}
-                    analysisType={'expert'}
-                    allRouteData={currentRouteData}
-                    sessionData={mergedSessionDetails}
+                    expertRouteData={currentRouteData}
+                    clusterRouteData={currentClusterRouteData}
+                    selectedRange={selectedRange}
+                    onElementDescriptionsLoaded={handleElementDescriptionsLoaded}
                   />
                 </div>
               </div>

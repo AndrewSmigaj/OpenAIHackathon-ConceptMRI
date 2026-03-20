@@ -1,0 +1,8 @@
+{
+  "id": "expert_labeling",
+  "name": "Expert + Highway Card Descriptions",
+  "description": "Generates concise per-element descriptions for expert nodes and route edges, suitable for display as tooltip cards in the Sankey visualization.",
+  "prompt": "For each expert node and route in the data, generate a concise description (1-2 sentences) of what it specializes in based on the tokens it processes and its label distribution.\n\nReturn as JSON with keys matching element IDs.\n- Expert keys use the format: \"expert-{expert_id}-L{layer}\" (e.g., \"expert-5-L6\")\n- Route keys use the format: \"route-{route_signature}\" (e.g., \"route-L1E2->L2E15\")\n\nFor expert descriptions: state the dominant token categories, concentration percentage, and any notable patterns (e.g., \"Handles primarily aquarium-context tokens with 85% concentration, suggesting strong semantic specialization for contained-environment vocabulary\").\n\nFor route descriptions: state the volume (token count), the semantic composition of tokens traversing this route, and whether it represents a major highway or minor pathway (e.g., \"Major highway carrying 230 tokens of mixed semantic types, serving as a general-purpose conduit between early and mid layers\").\n\nGround every description in the actual token counts and percentages from the data. Do not invent specializations that are not supported by the routing statistics.\n\nThe output MUST be valid JSON: {\"expert-5-L6\": \"Handles primarily aquarium-context tokens with 85% concentration...\", \"route-L1E2->L2E15\": \"Major highway carrying mixed semantic tokens...\"}",
+  "data_sources": ["expert_routes"],
+  "output_type": "element_labels"
+}

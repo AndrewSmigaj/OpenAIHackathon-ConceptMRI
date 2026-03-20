@@ -257,3 +257,25 @@ class ReductionResponse(BaseModel):
     layers: List[int]
     method: str
     n_components: int
+
+
+# --- Scaffold Step Schemas ---
+
+class ScaffoldStepRequest(BaseModel):
+    """Request to run a single scaffold step via LLM."""
+    session_id: str
+    step_id: str
+    prompt: str  # The (possibly edited) prompt
+    data_sources: List[str]  # ["expert_routes", "cluster_routes", ...]
+    output_type: str  # "narrative" or "element_labels"
+    expert_windows: Optional[List[Dict]] = None
+    cluster_windows: Optional[List[Dict]] = None
+    previous_outputs: Optional[List[str]] = None
+    api_key: str
+    provider: str = "openai"
+
+
+class ScaffoldStepResponse(BaseModel):
+    """Response from a scaffold step."""
+    narrative: Optional[str] = None
+    element_labels: Optional[Dict[str, str]] = None

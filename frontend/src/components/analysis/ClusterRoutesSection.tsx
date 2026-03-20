@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react'
-import type { SessionDetailResponse, AnalyzeRoutesRequest } from '../../types/api'
+import type { SessionDetailResponse, AnalyzeRoutesRequest, RouteAnalysisResponse } from '../../types/api'
 import type { FilterState } from '../WordFilterPanel'
 import type { GradientScheme } from '../../utils/colorBlending'
 import MultiSankeyView from '../charts/MultiSankeyView'
@@ -44,6 +44,8 @@ interface ClusterRoutesSectionProps {
   globalClusterCount: number
   setGlobalClusterCount: (value: number) => void
   clusteringDimSubset: number[] | null
+  onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
+  elementDescriptions?: Record<string, string>
 }
 
 export default function ClusterRoutesSection({
@@ -64,7 +66,9 @@ export default function ClusterRoutesSection({
   setUseAllLayersSameClusters,
   globalClusterCount,
   setGlobalClusterCount,
-  clusteringDimSubset
+  clusteringDimSubset,
+  onRouteDataLoaded,
+  elementDescriptions
 }: ClusterRoutesSectionProps) {
   const [selectedCard, setSelectedCard] = useState<{ type: 'cluster' | 'route', data: any } | null>(null)
   const [runAnalysis, setRunAnalysis] = useState<(() => void) | null>(null)
@@ -153,6 +157,7 @@ export default function ClusterRoutesSection({
             onRangeChange={onRangeChange}
             onNodeClick={(data) => handleVisualizationClick('cluster', data)}
             onLinkClick={(data) => handleVisualizationClick('trajectory', data)}
+            onRouteDataLoaded={onRouteDataLoaded}
             mode="cluster"
             manualTrigger={true}
             onAnalysisReady={handleSankeyAnalysisReady}
@@ -198,17 +203,25 @@ export default function ClusterRoutesSection({
         </div>
 
         {/* Context-Sensitive Card integrated */}
-        {selectedCard && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <ContextSensitiveCard
-              cardType={selectedCard.type}
-              selectedData={selectedCard.data}
-              colorLabelA={colorLabelA}
-              colorLabelB={colorLabelB}
-              gradient={gradient}
-            />
-          </div>
-        )}
+        {selectedCard && (() => {
+          const d = selectedCard.data
+          const descKey = selectedCard.type === 'cluster'
+            ? `cluster-${d.clusterId || d.cluster_id}-L${d.layer}`
+            : `route-${d.signature}`
+          const desc = elementDescriptions?.[descKey]
+          return (
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+              <ContextSensitiveCard
+                cardType={selectedCard.type}
+                selectedData={selectedCard.data}
+                colorLabelA={colorLabelA}
+                colorLabelB={colorLabelB}
+                gradient={gradient}
+                elementDescription={desc}
+              />
+            </div>
+          )
+        })()}
       </div>
     </div>
   )

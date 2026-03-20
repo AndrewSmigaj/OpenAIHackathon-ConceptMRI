@@ -18,6 +18,7 @@ interface ExpertRoutesSectionProps {
   onRangeChange: (range: string) => void
   showAllRoutes: boolean
   onRouteDataLoaded: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
+  elementDescriptions?: Record<string, string>
 }
 
 export default function ExpertRoutesSection({
@@ -31,7 +32,8 @@ export default function ExpertRoutesSection({
   selectedRange,
   onRangeChange,
   showAllRoutes,
-  onRouteDataLoaded
+  onRouteDataLoaded,
+  elementDescriptions
 }: ExpertRoutesSectionProps) {
   const [selectedCard, setSelectedCard] = useState<{ type: 'expert' | 'highway', data: any } | null>(null)
   const [runAnalysis, setRunAnalysis] = useState<(() => void) | null>(null)
@@ -85,17 +87,26 @@ export default function ExpertRoutesSection({
       </div>
 
       {/* Context-Sensitive Card integrated */}
-      {selectedCard && (
-        <div className="mt-4 pt-4 border-t border-gray-200">
-          <ContextSensitiveCard
-            cardType={selectedCard.type}
-            selectedData={selectedCard.data}
-            colorLabelA={colorLabelA}
-            colorLabelB={colorLabelB}
-            gradient={gradient}
-          />
-        </div>
-      )}
+      {selectedCard && (() => {
+        // Look up element description
+        const d = selectedCard.data
+        const descKey = selectedCard.type === 'expert'
+          ? `expert-${d.expertId || d.expert_id}-L${d.layer}`
+          : `route-${d.signature}`
+        const desc = elementDescriptions?.[descKey]
+        return (
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <ContextSensitiveCard
+              cardType={selectedCard.type}
+              selectedData={selectedCard.data}
+              colorLabelA={colorLabelA}
+              colorLabelB={colorLabelB}
+              gradient={gradient}
+              elementDescription={desc}
+            />
+          </div>
+        )
+      })()}
     </div>
   )
 }

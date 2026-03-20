@@ -11,7 +11,8 @@ from api.schemas import (
     AnalyzeRoutesRequest, AnalyzeClusterRoutesRequest, RouteAnalysisResponse,
     RouteDetailsResponse, ExpertDetailsResponse,
     LLMInsightsRequest, LLMInsightsResponse,
-    ReductionRequest, ReductionResponse
+    ReductionRequest, ReductionResponse,
+    ScaffoldStepRequest, ScaffoldStepResponse
 )
 from api.dependencies import get_route_analysis_service, get_cluster_analysis_service, get_llm_insights_service
 from services.experiments.expert_route_analysis import ExpertRouteAnalysisService
@@ -191,6 +192,32 @@ async def reduce_embeddings(request: ReductionRequest):
     except Exception as e:
         logger.error(f"Reduction failed: {e}")
         raise HTTPException(status_code=500, detail=f"Reduction failed: {e}")
+
+
+@router.post("/experiments/scaffold-step", response_model=ScaffoldStepResponse)
+async def run_scaffold_step(
+    request: ScaffoldStepRequest,
+    service: LLMInsightsService = Depends(get_llm_insights_service)
+) -> ScaffoldStepResponse:
+    """Run a single scaffold step: prompt + data context -> LLM -> result."""
+    try:
+        result = await service.run_scaffold_step(
+            prompt=request.prompt,
+            data_sources=request.data_sources,
+            output_type=request.output_type,
+            expert_windows=request.expert_windows,
+            cluster_windows=request.cluster_windows,
+            previous_outputs=request.previous_outputs,
+            api_key=request.api_key,
+            provider=request.provider,
+        )
+        return ScaffoldStepResponse(**result)
+
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except Exception as e:
+        logger.error(f"Scaffold step failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/experiments/health")

@@ -14,7 +14,10 @@ import type {
   ReductionRequest,
   ReductionResponse,
   SentenceExperimentRequest,
-  SentenceExperimentResponse
+  SentenceExperimentResponse,
+  ScaffoldTemplate,
+  ScaffoldStepRequest,
+  ScaffoldStepResponse
 } from '../types/api';
 
 const API_BASE_URL = 'http://localhost:8000/api';
@@ -251,6 +254,16 @@ class ConceptMriApiClient {
    */
   async runSentenceExperiment(request: SentenceExperimentRequest): Promise<SentenceExperimentResponse> {
     return this.request<SentenceExperimentResponse>('/probes/sentence-experiment', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+  }
+  async getScaffoldTemplates(): Promise<ScaffoldTemplate[]> {
+    return this.request<ScaffoldTemplate[]>('/prompts/scaffold-templates');
+  }
+
+  async runScaffoldStep(request: ScaffoldStepRequest): Promise<ScaffoldStepResponse> {
+    return this.request<ScaffoldStepResponse>('/experiments/scaffold-step', {
       method: 'POST',
       body: JSON.stringify(request),
     });

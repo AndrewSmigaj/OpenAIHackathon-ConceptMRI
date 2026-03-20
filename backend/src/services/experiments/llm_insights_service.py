@@ -3,8 +3,9 @@
 LLM Insights Service - Generate AI-powered insights from expert routing patterns.
 """
 
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import json
+import re
 import logging
 import math
 from openai import AsyncOpenAI
@@ -132,3 +133,109 @@ Please analyze the expert routing patterns based on the user's request. When dis
         except Exception as e:
             logger.error(f"❌ LLM API error: {e}")
             return f"Error generating insights: {str(e)}"
+
+    async def run_scaffold_step(
+        self,
+        prompt: str,
+        data_sources: List[str],
+        output_type: str,
+        expert_windows: Optional[List[Dict]] = None,
+        cluster_windows: Optional[List[Dict]] = None,
+        previous_outputs: Optional[List[str]] = None,
+        api_key: str = "",
+        provider: str = "openai",
+    ) -> Dict[str, Any]:
+        """
+        Run a single scaffold step: combine prompt + data context, call LLM,
+        return either a narrative string or parsed element_labels dict.
+
+        Raises on any error (does NOT swallow exceptions).
+        """
+        # --- Build data context ---
+        context_parts: List[str] = []
+
+        if "expert_routes" in data_sources and expert_windows:
+            context_parts.append(
+                "EXPERT ROUTING DATA:\n" + json.dumps(expert_windows, indent=2)
+            )
+
+        if "cluster_routes" in data_sources and cluster_windows:
+            context_parts.append(
+                "CLUSTER ROUTING DATA:\n" + json.dumps(cluster_windows, indent=2)
+            )
+
+        if previous_outputs:
+            context_parts.append(
+                "PREVIOUS STEP OUTPUTS:\n" + "\n---\n".join(previous_outputs)
+            )
+
+        data_context = "\n\n".join(context_parts)
+
+        # --- Compose final prompt ---
+        if output_type == "element_labels":
+            label_instruction = (
+                "\n\nReturn your answer as a JSON object mapping element IDs "
+                "to short label strings, e.g. {\"L0E5\": \"Verb specialist\", ...}. "
+                "Return ONLY the JSON object, no other text."
+            )
+        else:
+            label_instruction = ""
+
+        full_prompt = f"{prompt}\n\n{data_context}{label_instruction}"
+
+        # --- Call LLM ---
+        if provider == "openai":
+            client = AsyncOpenAI(api_key=api_key)
+            response = await client.chat.completions.create(
+                model="gpt-4o",
+                max_tokens=4096,
+                messages=[{"role": "user", "content": full_prompt}],
+            )
+            raw_text = response.choices[0].message.content
+        else:  # anthropic
+            client = AsyncAnthropic(api_key=api_key)
+            response = await client.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=4096,
+                messages=[{"role": "user", "content": full_prompt}],
+            )
+            raw_text = response.content[0].text
+
+        # --- Parse output ---
+        if output_type == "element_labels":
+            element_labels = self._parse_json_labels(raw_text)
+            return {"element_labels": element_labels}
+        else:
+            return {"narrative": raw_text}
+
+    def _parse_json_labels(self, raw: str) -> Dict[str, str]:
+        """
+        Parse a JSON dict from LLM output, stripping markdown code blocks
+        and trying multiple keys (pattern from sentence_generator).
+        """
+        text = raw.strip()
+
+        # Strip markdown code fences
+        if text.startswith("```"):
+            lines = text.split("\n")
+            lines = [l for l in lines[1:] if not l.strip().startswith("```")]
+            text = "\n".join(lines)
+
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError:
+            raise ValueError(f"LLM returned invalid JSON: {text[:300]}...")
+
+        # If the response is already a flat dict of str->str, use it directly
+        if isinstance(data, dict):
+            # Check if all values are strings (flat label dict)
+            if all(isinstance(v, str) for v in data.values()):
+                return data
+            # Otherwise look for a nested key
+            for key in ["labels", "element_labels", "results", "data"]:
+                if key in data and isinstance(data[key], dict):
+                    return data[key]
+            # Fallback: return the dict as-is, converting values to strings
+            return {k: str(v) for k, v in data.items()}
+
+        raise ValueError(f"Expected JSON object, got {type(data).__name__}")
