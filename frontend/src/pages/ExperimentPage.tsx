@@ -6,7 +6,7 @@ import type {
   RouteAnalysisResponse,
 } from '../types/api'
 import { apiClient } from '../api/client'
-import { FlaskIcon, ChartBarIcon } from '../components/icons/Icons'
+import { FlaskIcon } from '../components/icons/Icons'
 import WordFilterPanel, { type FilterState } from '../components/WordFilterPanel'
 import FilteredWordDisplay from '../components/FilteredWordDisplay'
 import { getColorPreview, type GradientScheme, GRADIENT_SCHEMES } from '../utils/colorBlending'
@@ -76,7 +76,6 @@ export default function ExperimentPage() {
   const [selectedSessions, setSelectedSessions] = useState<string[]>([])
   const [sessions, setSessions] = useState<SessionListItem[]>([])
   const [mergedSessionDetails, setMergedSessionDetails] = useState<SessionDetailResponse | null>(null)
-  const [activeTab, setActiveTab] = useState<'expert' | 'latent'>('expert')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [filterState, setFilterState] = useState<FilterState>({
@@ -298,48 +297,14 @@ export default function ExperimentPage() {
             </div>
           </div>
 
-          {/* Tab Navigation */}
-          <div className="p-3 border-b">
-            <h3 className="text-xs font-semibold text-gray-900 mb-2">Analysis Type</h3>
-            <div className="space-y-1">
-              <button
-                onClick={() => setActiveTab('expert')}
-                className={`w-full flex items-center px-3 py-2 rounded-md text-sm transition-colors ${
-                  activeTab === 'expert'
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                    : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                <ChartBarIcon style={{ width: '10px', height: '10px' }} className="mr-1 flex-shrink-0" />
-                <div className="text-left min-w-0">
-                  <p className="font-medium text-xs">Expert Highways</p>
-                </div>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('latent')}
-                className={`w-full flex items-center px-3 py-2 rounded-md text-sm transition-colors ${
-                  activeTab === 'latent'
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                    : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                <ChartBarIcon style={{ width: '10px', height: '10px' }} className="mr-1 flex-shrink-0" />
-                <div className="text-left min-w-0">
-                  <p className="font-medium text-xs">Latent Space</p>
-                </div>
-              </button>
-            </div>
-          </div>
-
           {/* Controls Section */}
           {selectedSessions.length > 0 && (
-            <div className="p-3 border-b flex-1">
+            <div className="p-3 border-b flex-1 overflow-y-auto">
               <h3 className="text-xs font-semibold text-gray-900 mb-2">Controls</h3>
 
               <div className="space-y-4">
                 {/* Shared Controls */}
-                <div className="border-t border-gray-200 pt-3 mt-3">
+                <div>
                   <ColorControls
                     colorLabelA={colorLabelA}
                     colorLabelB={colorLabelB}
@@ -348,8 +313,9 @@ export default function ExperimentPage() {
                   />
                 </div>
 
-                {/* Expert Tab Controls */}
-                {activeTab === 'expert' && (
+                {/* Expert Controls */}
+                <div className="border-t border-gray-200 pt-2">
+                  <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Expert Routes</h4>
                   <div className="space-y-2">
                     <label className="flex items-center gap-1.5 text-[11px] text-gray-700">
                       <input
@@ -375,10 +341,11 @@ export default function ExperimentPage() {
                       </div>
                     )}
                   </div>
-                )}
+                </div>
 
-                {/* Latent Tab Controls — compact 2-col grid */}
-                {activeTab === 'latent' && (
+                {/* Cluster Controls */}
+                <div className="border-t border-gray-200 pt-2">
+                  <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Cluster Routes</h4>
                   <div className="space-y-2">
                     {/* Row 1: Source + Method */}
                     <div className="grid grid-cols-2 gap-1.5">
@@ -514,7 +481,7 @@ export default function ExperimentPage() {
                       </div>
                     )}
                   </div>
-                )}
+                </div>
               </div>
             </div>
           )}
@@ -564,53 +531,50 @@ export default function ExperimentPage() {
                 )}
               </div>
 
-              {/* Right Column - Visualization + LLM Analysis */}
-              <div className="flex-1 flex flex-col">
-                <div className="flex-1 p-4">
-                  {activeTab === 'expert' && (
-                    <ExpertRoutesSection
-                      sessionIds={selectedSessions}
-                      sessionData={mergedSessionDetails}
-                      filterState={filterState}
-                      colorLabelA={colorLabelA}
-                      colorLabelB={colorLabelB}
-                      gradient={gradient}
-                      topRoutes={topRoutes}
-                      selectedRange={selectedRange}
-                      onRangeChange={setSelectedRange}
-                      showAllRoutes={showAllRoutes}
-                      onRouteDataLoaded={handleRouteDataLoaded}
-                    />
-                  )}
-                  {activeTab === 'latent' && (
-                    <ClusterRoutesSection
-                      sessionIds={selectedSessions}
-                      sessionData={mergedSessionDetails}
-                      filterState={filterState}
-                      colorLabelA={colorLabelA}
-                      colorLabelB={colorLabelB}
-                      gradient={gradient}
-                      selectedRange={selectedRange}
-                      onRangeChange={setSelectedRange}
-                      layerClusterCounts={layerClusterCounts}
-                      clusteringMethod={clusteringMethod}
-                      reductionDimensions={reductionDims}
-                      embeddingSource={embeddingSource}
-                      reductionMethod={reductionMethod}
-                      useAllLayersSameClusters={useAllLayersSameClusters}
-                      setUseAllLayersSameClusters={setUseAllLayersSameClusters}
-                      globalClusterCount={globalClusterCount}
-                      setGlobalClusterCount={setGlobalClusterCount}
-                      clusteringDimSubset={clusteringDimSubset}
-                    />
-                  )}
+              {/* Right Column - Unified Visualization + LLM Analysis */}
+              <div className="flex-1 flex flex-col overflow-y-auto">
+                <div className="p-4 space-y-4">
+                  <ExpertRoutesSection
+                    sessionIds={selectedSessions}
+                    sessionData={mergedSessionDetails}
+                    filterState={filterState}
+                    colorLabelA={colorLabelA}
+                    colorLabelB={colorLabelB}
+                    gradient={gradient}
+                    topRoutes={topRoutes}
+                    selectedRange={selectedRange}
+                    onRangeChange={setSelectedRange}
+                    showAllRoutes={showAllRoutes}
+                    onRouteDataLoaded={handleRouteDataLoaded}
+                  />
+
+                  <ClusterRoutesSection
+                    sessionIds={selectedSessions}
+                    sessionData={mergedSessionDetails}
+                    filterState={filterState}
+                    colorLabelA={colorLabelA}
+                    colorLabelB={colorLabelB}
+                    gradient={gradient}
+                    selectedRange={selectedRange}
+                    onRangeChange={setSelectedRange}
+                    layerClusterCounts={layerClusterCounts}
+                    clusteringMethod={clusteringMethod}
+                    reductionDimensions={reductionDims}
+                    embeddingSource={embeddingSource}
+                    reductionMethod={reductionMethod}
+                    useAllLayersSameClusters={useAllLayersSameClusters}
+                    setUseAllLayersSameClusters={setUseAllLayersSameClusters}
+                    globalClusterCount={globalClusterCount}
+                    setGlobalClusterCount={setGlobalClusterCount}
+                    clusteringDimSubset={clusteringDimSubset}
+                  />
                 </div>
 
                 {/* LLM Analysis Panel - Below Visualization */}
                 <div className="border-t bg-white p-4">
                   <LLMAnalysisPanel
                     sessionId={selectedSessions[0]}
-                    analysisType={activeTab}
+                    analysisType={'expert'}
                     allRouteData={currentRouteData}
                     sessionData={mergedSessionDetails}
                   />
