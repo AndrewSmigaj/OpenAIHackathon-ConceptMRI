@@ -34,15 +34,38 @@ The temporal tab is **driven by the static analysis** — user must first run cl
 6. **Add more runs** — each run randomizes sentence order within blocks, building up statistical power
 7. **View average** — with multiple runs, see the average transition curve plus individual runs
 
-### Core Concept: Expanding Window
+### Core Concept: Three Processing Conditions
 
-Sentences are fed one at a time with an expanding KV cache. Each sentence builds on the context of all previous sentences. The capture records routing, embeddings, and residual streams indexed by sequence position.
+The temporal experiment has three distinct processing conditions that combine two variables: **input construction** (expanding window vs single sentence) and **KV cache** (on vs off).
 
-**Two conditions (from the paper's Cache Intervention):**
-- **Cache ON:** Standard KV-cache chaining — each sentence sees all previous context via cached key-value tensors. This is normal LLM operation.
-- **Cache OFF:** KV cache disabled — model recomputes attention from scratch across the full sequence at each step. Baseline where behavior is driven purely by visible context.
+#### Condition 1: Expanding window, cache OFF
+- At step N, sentences 1..N are **concatenated into a single input**
+- Full forward pass from scratch — no cached computations
+- The model sees the complete accumulated context as raw text each time
+- **Pure context baseline** — any lag is driven entirely by what the model can see
 
-**ΔPersistence = lag(cache ON) − lag(cache OFF)** quantifies how much cached memory extends regime influence beyond what recomputation alone produces.
+#### Condition 2: Expanding window, cache ON
+- Same expanding window (all sentences concatenated), but KV cache reuses prior computations
+- At step N, only the new sentence needs fresh attention; prior sentences' K/V are cached
+- Computationally faster than cache OFF
+- The paper's "standard processing" condition
+
+#### Condition 3: One sentence at a time, cache ON
+- Each sentence is processed **individually** — only the current sentence is the input
+- KV cache carries forward from ALL prior sentences
+- The model "remembers" prior sentences **solely through cached attention**, not visible text
+- Isolates the **memory contribution** — can the model maintain/shift basins from cached representations alone?
+- (Cache OFF makes no sense here — model would have zero memory of prior sentences)
+
+#### What comparisons measure
+
+| Comparison | Question |
+|------------|----------|
+| Condition 1 vs 2 | Does caching change lag? (ΔPersistence from the paper) |
+| Condition 1 vs 3 | Context visibility vs pure memory — does the model need to re-read prior sentences, or is cached attention enough? |
+| Condition 2 vs 3 | Does having the full text visible (vs just cached K/V) affect basin transition speed? |
+
+**ΔPersistence = lag(Condition 2) − lag(Condition 1)** quantifies how much cached memory extends regime influence beyond what recomputation alone produces.
 
 ### Sequence Construction
 
@@ -73,7 +96,7 @@ class TemporalCaptureRequest(BaseModel):
     basin_b_cluster_id: int            # Cluster ID for basin B
     basin_layer: int                   # Layer where clusters were identified
     sentences_per_block: int = 20      # N sentences per regime block
-    cache_enabled: bool = True         # Cache ON (True) or Cache OFF (False)
+    processing_mode: str = "expanding_cache_on"  # "expanding_cache_off", "expanding_cache_on", "single_cache_on"
     sequence_config: str = "block_ab"  # "block_ab", "block_ba", "block_aba"
     layers: Optional[List[int]] = None
     run_label: Optional[str] = None    # e.g. "run_1", "run_2" for multi-run
@@ -93,7 +116,7 @@ class TemporalCaptureResponse(BaseModel):
     session_id: str                    # Source session
     sequence_positions: int            # Total positions in sequence
     regime_boundary: int               # Position where A→B switch occurs
-    cache_enabled: bool
+    processing_mode: str
     basin_a_sentences: int             # How many A sentences used
     basin_b_sentences: int             # How many B sentences used
 ```
@@ -103,9 +126,11 @@ class TemporalCaptureResponse(BaseModel):
 2. Collect all probe IDs assigned to basin A cluster and basin B cluster
 3. Randomly sample N from each pool
 4. Build sequence: [A₁, A₂, ..., Aₙ, B₁, B₂, ..., Bₙ]
-5. For each sentence in order:
-   - Call `capture_probe()` with `use_cache=cache_enabled` and chained `past_key_values`
-   - Record sequence_position, regime label, cumulative token count
+5. For each sentence in order, behavior depends on `processing_mode`:
+   - **`expanding_cache_off`**: Concatenate sentences 1..i into one input, full forward pass, no cache
+   - **`expanding_cache_on`**: Concatenate sentences 1..i, forward pass with KV cache reuse from prior step
+   - **`single_cache_on`**: Only sentence i as input, but chain `past_key_values` from prior step
+   - Record sequence_position, regime label, cumulative token count, processing_mode
 6. Store results with temporal metadata
 
 **New Parquet fields in tokens.parquet:**
@@ -116,6 +141,7 @@ class TemporalCaptureResponse(BaseModel):
 | `cumulative_token_count` | int | Total tokens in KV cache at this point |
 | `regime` | str | Which block ("A" or "B") |
 | `temporal_run_id` | str | Groups probes from the same temporal run |
+| `processing_mode` | str | "expanding_cache_off", "expanding_cache_on", or "single_cache_on" |
 
 **No new Parquet files needed** — routing, embeddings, and residual streams are captured per-probe as usual. The sequence_position provides temporal ordering.
 
@@ -128,7 +154,7 @@ class TemporalCaptureResponse(BaseModel):
 - Each shows available clusters (with their label distribution summary, e.g., "C5: 95% roleplay")
 - Toggle: cluster-based or expert-based basin indicators
 - Sentences per block (number input, default 20)
-- Cache ON/OFF toggle
+- Processing mode selector: "Expanding (no cache)" / "Expanding (cached)" / "Single sentence (cached)"
 - **"Run Temporal Analysis" button**
 - **"Add Run" button** — runs another iteration with different random sentence ordering
 
@@ -153,8 +179,9 @@ This is the core chart. For each sequence position:
 #### Lag Metrics Display
 - **Routing lag:** first position where cluster assignment flips and stays flipped for 3 consecutive positions
 - **Latent lag:** first position where centroid distance to B < distance to A for 3 consecutive positions
-- **ΔPersistence:** difference between cache ON and cache OFF lag (requires both conditions run)
-- Display as simple stats next to the chart
+- **ΔPersistence:** lag(expanding_cache_on) − lag(expanding_cache_off) — how much cache extends regime persistence
+- **Memory-only lag:** lag from single_cache_on — can cached attention alone maintain/shift basins?
+- Display as simple stats next to the chart; requires multiple conditions to have been run
 
 #### Controls
 - Scrubber: step through sequence positions
