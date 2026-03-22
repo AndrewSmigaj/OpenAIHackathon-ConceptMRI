@@ -8,6 +8,8 @@ Two new features that extend Concept MRI from static per-sentence analysis to dy
 
 **After these features:** We can (A) study how routing evolves when semantic context shifts over a sequence of sentences, and (B) see what the model would output and correlate predictions with routing patterns.
 
+**Paper reference:** `attractorpaper.md` — the temporal tab implements the Sequential Temporal Analysis and Cache Intervention protocols described in the Methods section.
+
 ---
 
 ## Feature A: Temporal Tab
@@ -16,28 +18,49 @@ Two new features that extend Concept MRI from static per-sentence analysis to dy
 
 The existing analysis shows that MoE routing cleanly separates semantic regimes (e.g., roleplay vs factual "threatened" sentences occupy distinct residual stream clusters). But this is static — each sentence is processed in isolation. The temporal tab answers: **what happens when the model has been reading factual text and suddenly encounters roleplay?**
 
-This maps directly to safety-relevant questions: if a model has been processing benign knife usage and then encounters a harmful context, how quickly do the routing patterns shift? Is there inertia? Do some layers lag behind others?
+Lag = confusion between basins. If the model has been processing basin A sentences and encounters a basin B sentence, does it still assign the target word to basin A's cluster? How many sentences before it "realizes" the regime changed?
 
-### Core Concept
+This maps directly to the paper's RQ3 (temporal dynamics) and the alignment concern: persistent regimes create temporal vulnerability windows.
 
-Sentences are fed sequentially with an expanding KV cache. Each sentence builds on the context of all previous sentences. The capture records the same data (routing, embeddings, residual streams) but indexed by sequence position.
+### User Workflow
 
-A **regime boundary** is the point where the label switches (e.g., position 20 in a "20 A then 20 B" sequence). The key visualization shows routing patterns before and after the boundary.
+The temporal tab is **driven by the static analysis** — user must first run cluster analysis to identify basins:
 
-### Sequence Configurations
+1. **Run static analysis** (Expert Routes / Latent Space) on a session
+2. **Identify two opposing clusters** (e.g., C0 = factual, C5 = roleplay at layer 23)
+3. **Select those two clusters** as basin indicators in the temporal tab UI
+4. **Hit "Run Temporal Analysis"** — backend takes sentences assigned to each cluster and builds the expanding window sequence
+5. **View the lag chart** — does the model show confusion between basins at the transition?
+6. **Add more runs** — each run randomizes sentence order within blocks, building up statistical power
+7. **View average** — with multiple runs, see the average transition curve plus individual runs
 
-Users define how sentences are ordered:
+### Core Concept: Expanding Window
+
+Sentences are fed one at a time with an expanding KV cache. Each sentence builds on the context of all previous sentences. The capture records routing, embeddings, and residual streams indexed by sequence position.
+
+**Two conditions (from the paper's Cache Intervention):**
+- **Cache ON:** Standard KV-cache chaining — each sentence sees all previous context via cached key-value tensors. This is normal LLM operation.
+- **Cache OFF:** KV cache disabled — model recomputes attention from scratch across the full sequence at each step. Baseline where behavior is driven purely by visible context.
+
+**ΔPersistence = lag(cache ON) − lag(cache OFF)** quantifies how much cached memory extends regime influence beyond what recomputation alone produces.
+
+### Sequence Construction
+
+Sentences come from the selected basin clusters. The user selects two clusters (or two experts), and the backend pulls all probe sentences assigned to those clusters from the static analysis.
+
+**Block A→B:** N sentences from cluster A, then N sentences from cluster B.
+
+Within each block, sentences are **randomly sampled** from the available pool. Each "run" uses a different random ordering — this is how multiple runs build statistical robustness.
+
+**Later sequence configs** (not MVP):
 
 | Config | Description | Use Case |
 |--------|-------------|----------|
-| `block_ab` | N sentences of A, then N of B | Clean regime transition |
-| `block_ba` | N of B, then N of A | Reverse direction comparison |
+| `block_ab` | N of A then N of B | Clean regime transition (MVP) |
+| `block_ba` | N of B then N of A | Reverse direction (hysteresis test) |
 | `block_aba` | N of A, N of B, N of A | Recovery/reversion study |
-| `interleaved` | Alternating A, B, A, B... | Rapid switching |
-| `gradual` | Mostly A → mixed → mostly B | Gradual transition |
-| `custom` | User-specified sequence of probe IDs | Full control |
 
-Within each block, sentences are randomly sampled from the corresponding group in the sentence set.
+Hysteresis = comparing A→B lag vs B→A lag. If they differ, the basins have asymmetric "depth."
 
 ### Backend Requirements
 
@@ -45,21 +68,45 @@ Within each block, sentences are randomly sampled from the corresponding group i
 
 ```python
 class TemporalCaptureRequest(BaseModel):
-    sentence_set_name: str
-    sequence_config: str          # "block_ab", "block_ba", "block_aba", "interleaved", "gradual", "custom"
-    sentences_per_block: int = 20
+    session_id: str                    # Source session (for sentence/cluster data)
+    basin_a_cluster_id: int            # Cluster ID for basin A
+    basin_b_cluster_id: int            # Cluster ID for basin B
+    basin_layer: int                   # Layer where clusters were identified
+    sentences_per_block: int = 20      # N sentences per regime block
+    cache_enabled: bool = True         # Cache ON (True) or Cache OFF (False)
+    sequence_config: str = "block_ab"  # "block_ab", "block_ba", "block_aba"
     layers: Optional[List[int]] = None
-    session_name: Optional[str] = None
-    custom_sequence: Optional[List[str]] = None  # probe IDs for "custom" mode
+    run_label: Optional[str] = None    # e.g. "run_1", "run_2" for multi-run
 ```
 
-**Response:** Same as `SentenceExperimentResponse` but with temporal metadata.
+**Alternative: select two experts instead of two clusters:**
+```python
+    basin_type: str = "cluster"        # "cluster" or "expert"
+    basin_a_id: int                    # Cluster or expert ID for basin A
+    basin_b_id: int                    # Cluster or expert ID for basin B
+```
 
-**Capture changes:**
-- Call `capture_probe()` with `use_cache=True` and chain `past_key_values` between calls
-- Already supported: `capture_probe()` accepts `use_cache` and `past_key_values` params
-- Add `sequence_position: int` and `cumulative_token_count: int` to each ProbeRecord
-- Add `sequence_config` to session manifest metadata
+**Response:**
+```python
+class TemporalCaptureResponse(BaseModel):
+    temporal_run_id: str               # Unique ID for this run
+    session_id: str                    # Source session
+    sequence_positions: int            # Total positions in sequence
+    regime_boundary: int               # Position where A→B switch occurs
+    cache_enabled: bool
+    basin_a_sentences: int             # How many A sentences used
+    basin_b_sentences: int             # How many B sentences used
+```
+
+**Capture flow:**
+1. Look up probe assignments from the source session's cluster analysis
+2. Collect all probe IDs assigned to basin A cluster and basin B cluster
+3. Randomly sample N from each pool
+4. Build sequence: [A₁, A₂, ..., Aₙ, B₁, B₂, ..., Bₙ]
+5. For each sentence in order:
+   - Call `capture_probe()` with `use_cache=cache_enabled` and chained `past_key_values`
+   - Record sequence_position, regime label, cumulative token count
+6. Store results with temporal metadata
 
 **New Parquet fields in tokens.parquet:**
 
@@ -67,45 +114,73 @@ class TemporalCaptureRequest(BaseModel):
 |-------|------|-------------|
 | `sequence_position` | int | 0-indexed position in the sequence |
 | `cumulative_token_count` | int | Total tokens in KV cache at this point |
-| `regime` | str | Which block this position belongs to ("A_0", "B_0", "A_1") |
+| `regime` | str | Which block ("A" or "B") |
+| `temporal_run_id` | str | Groups probes from the same temporal run |
 
-**No new Parquet files needed** — routing, embeddings, and residual streams are captured per-probe as usual. The sequence_position in tokens.parquet provides the temporal ordering.
+**No new Parquet files needed** — routing, embeddings, and residual streams are captured per-probe as usual. The sequence_position provides temporal ordering.
 
 ### Frontend Requirements
 
-**New section** in the experiment page, below Latent Space Analysis (or as a tab).
+**New section** in the experiment page, below Latent Space Analysis.
 
-**Primary visualization: Temporal Routing Heatmap**
-- X-axis: sequence position (0, 1, 2, ... N)
-- Y-axis: layers (grouped by window)
-- Cell color: expert ID or cluster assignment
-- Vertical dashed line at regime boundary
-- Hover: show sentence text, label, expert/cluster details
+#### Basin Selection Panel
+- Two dropdowns (or click-to-select from the Sankey/cluster view): "Basin A" and "Basin B"
+- Each shows available clusters (with their label distribution summary, e.g., "C5: 95% roleplay")
+- Toggle: cluster-based or expert-based basin indicators
+- Sentences per block (number input, default 20)
+- Cache ON/OFF toggle
+- **"Run Temporal Analysis" button**
+- **"Add Run" button** — runs another iteration with different random sentence ordering
 
-**Secondary visualization: Routing Drift Plot**
-- X-axis: sequence position
-- Y-axis: routing similarity to regime A centroid (or distance metric)
-- One line per layer
-- Shows how quickly each layer "switches" after the regime boundary
+#### Primary Visualization: Basin Assignment Over Sequence (the lag chart)
 
-**Tertiary: Latent Position Over Sequence**
-- Reuse SteppedTrajectoryPlot but with sequence position as the stepping axis instead of layer
-- Each point is one sentence's residual stream position at a fixed layer
-- Shows the cloud drifting from one regime's manifold to the other
+This is the core chart. For each sequence position:
+- **X-axis:** sequence position (0, 1, 2, ... 2N)
+- **Y-axis:** distance to basin A centroid vs basin B centroid (or simply: which cluster was the probe assigned to)
+- **Vertical dashed line** at the regime boundary (position N)
+- **Color:** basin A color on left, basin B color on right
+- **Lag region:** highlighted area between the regime boundary and when the signal actually flips
 
-**Controls:**
-- Sequence config selector (dropdown)
-- Sentences per block (number input)
-- Layer selection (reuse existing range selector)
-- Play/step controls to animate through the sequence
+**Single run:** one line showing centroid distances or cluster assignment at each position.
+
+**Multiple runs:**
+- Each run as a thin semi-transparent line
+- **Bold average line** computed across runs
+- Shaded confidence band (±1 SD or min/max)
+
+**Scrubber:** slider or step buttons to move through sequence positions. At each position, highlight the current sentence in a side panel (show text, label, which cluster it was assigned to).
+
+#### Lag Metrics Display
+- **Routing lag:** first position where cluster assignment flips and stays flipped for 3 consecutive positions
+- **Latent lag:** first position where centroid distance to B < distance to A for 3 consecutive positions
+- **ΔPersistence:** difference between cache ON and cache OFF lag (requires both conditions run)
+- Display as simple stats next to the chart
+
+#### Controls
+- Scrubber: step through sequence positions
+- Run selector: toggle individual runs on/off
+- Show/hide average line
+- Layer selector (which layer's clusters to track)
 
 ### Key Questions This Answers
 
-1. How many sentences into a new regime before routing flips?
-2. Do all layers shift simultaneously or is there a cascade?
-3. Is the transition sharp or gradual?
-4. Does the model ever "resist" a regime change (routing inertia)?
-5. After switching to B, if we switch back to A, does routing return to the original pattern?
+1. How many sentences into a new regime before the model's residual stream shifts basins?
+2. Is there measurable lag (confusion between basins) at the regime boundary?
+3. Does KV cache amplify persistence? (ΔPersistence > 0)
+4. Is the transition symmetric? (A→B lag = B→A lag, or hysteresis?)
+5. With many runs, what's the average transition curve? Is it sharp or gradual?
+
+### Evolution Path
+
+**MVP:** Select two clusters → run one A→B sequence → see the lag chart with cluster assignments.
+
+**V2:** Multiple runs with averages, cache ON/OFF comparison, ΔPersistence metric.
+
+**V3:** Expert-based basin indicators alongside cluster-based. Layer cascade analysis (do some layers lag behind others?).
+
+**V4:** Hysteresis testing (A→B vs B→A). Recovery testing (A→B→A).
+
+**Science:** Craft better probes. Test whether basins identified from one probe family (e.g., "threatened") predict basins in another (e.g., "attacked"). Do the same experts/clusters serve as basin indicators across target words?
 
 ---
 
@@ -115,7 +190,7 @@ class TemporalCaptureRequest(BaseModel):
 
 We can see how the model routes and represents "threatened" differently in roleplay vs factual contexts. But we can't see what it would DO with those different representations. The output panel closes the loop: **routing → expert processing → residual stream → predicted next token**.
 
-This answers: do different routing patterns produce different predictions? If a roleplay "threatened" routes through Expert 5 instead of Expert 0, does the model predict different continuation tokens?
+This answers: do different routing patterns produce different predictions? If a roleplay "threatened" routes through cluster C5 instead of C0, does the model predict different continuation tokens?
 
 ### Core Concept
 
@@ -125,7 +200,7 @@ After each forward pass, capture the logits at the target word position (and opt
 
 **Extend `capture_probe()` in `integrated_capture_service.py`:**
 
-Currently (line 376): `outputs = self.model(**forward_kwargs)` — logits are discarded.
+Currently: `outputs = self.model(**forward_kwargs)` — logits are discarded.
 
 Change: extract `outputs.logits` at the target word position.
 
@@ -210,43 +285,46 @@ class OutputPredictionRecord:
 
 ## Implementation Order
 
-### Phase 1: Output Panel backend (can ship independently)
+### Phase 1: Temporal Tab backend (priority — implements the paper's core experiment)
+1. Add `sequence_position` / `regime` / `temporal_run_id` fields to ProbeRecord
+2. Create temporal capture endpoint with KV cache chaining
+3. Accept basin selection (two cluster IDs + layer) from frontend
+4. Pull sentences from cluster assignments, build sequence, run capture
+5. **Run one temporal capture** on threatened session to verify
+
+### Phase 2: Temporal Tab frontend
+1. Basin selection panel (two cluster dropdowns from existing cluster analysis)
+2. Lag chart: centroid distance / cluster assignment over sequence position
+3. Scrubber to step through positions
+4. Multiple runs: "Add Run" button, individual + average lines
+5. Lag metrics display
+
+### Phase 3: Output Panel backend
 1. Create `OutputPredictionRecord` schema
 2. Extend `capture_probe()` to extract logits and compute top-k
 3. Add Parquet writer for predictions
 4. Update manifest and API responses
 5. **Recapture one session** to verify data
 
-### Phase 2: Output Panel frontend
+### Phase 4: Output Panel frontend
 1. Add predictions to sentence list display
 2. Add "prediction" as a dynamic axis
 3. Extend card panel with prediction details
 4. Add aggregate prediction view
 
-### Phase 3: Temporal Tab backend
-1. Add `sequence_position` / `regime` fields to ProbeRecord
-2. Create temporal capture endpoint with KV cache chaining
-3. Add sequence configs (block_ab, interleaved, etc.)
-4. **Run temporal capture** on one sentence set to verify
-
-### Phase 4: Temporal Tab frontend
-1. Temporal routing heatmap (sequence position x layer)
-2. Routing drift plot
-3. Temporal latent trajectory view
-4. Sequence controls and animation
-
 ### Rationale for this order
-- Output panel is simpler (extends existing capture, no new model interaction patterns)
-- Output panel data is useful immediately (adds context to all existing visualizations)
-- Temporal tab requires more design thought around KV cache management and sequence UI
-- Both backends can be developed independently; frontends depend on backend data
+- Temporal tab implements the paper's central experiment — it's the scientific priority
+- The static analysis already identifies opposing basins clearly (those screenshots!)
+- Output panel extends the capture pipeline — useful but not paper-critical
+- Both backends are independent; frontends depend on backend data
 
 ---
 
 ## Open Questions
 
 1. **KV cache memory:** With 40 sentences × ~25 tokens each, the KV cache grows to ~1000 tokens. Is this within gpt-oss-20b's context window? Need to check max_position_embeddings.
-2. **Temporal session reuse:** Should temporal sessions be compatible with existing analysis (expert routes, latent space) or a separate analysis mode?
+2. **Cluster assignments from which run?** Temporal tab needs probe→cluster assignments from a prior static analysis. We need to either save these or recompute them. Currently `probe_assignments` is returned in the API response but not persisted.
 3. **Output position:** Should we capture predictions at the target word position only, or also at the final token position? Final position = "what would the model generate next given the full sentence."
 4. **Batch recapture:** Adding output predictions to the pipeline means all existing sessions lack prediction data. Do we recapture everything, or make predictions optional/additive?
-5. **Temporal sentence count:** How many sentences per block is enough to establish a "regime"? Need to experiment — start with 20 and adjust.
+5. **Temporal sentence count:** How many sentences per block is enough to establish a "regime"? Start with 20 and adjust based on results.
+6. **Cross-probe basin validation:** The paper asks whether basins from one probe family predict basins in another. This requires a "basin library" concept — storing identified basins for reuse. Not MVP but shapes the architecture.
