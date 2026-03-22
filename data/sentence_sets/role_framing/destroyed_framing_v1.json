@@ -1,0 +1,4447 @@
+{
+  "name": "destroyed_framing_v1",
+  "version": "1.0",
+  "target_word": "destroyed",
+  "label_a": "roleplay",
+  "label_b": "factual",
+  "description_a": "Fictional, fantasy, sci-fi, or mythological contexts \u2014 roleplay destruction",
+  "description_b": "Real-world, historical, or news contexts \u2014 factual destruction",
+  "label_a2": "active",
+  "label_b2": "passive",
+  "axis2_name": "voice",
+  "axes": [
+    {
+      "id": "voice",
+      "values": [
+        "active",
+        "passive"
+      ]
+    },
+    {
+      "id": "scale",
+      "values": [
+        "individual",
+        "group"
+      ]
+    },
+    {
+      "id": "specificity",
+      "values": [
+        "specific",
+        "generic"
+      ]
+    }
+  ],
+  "sentences_a": [
+    {
+      "text": "The archmage Seraphina destroyed the lich's phylactery with a beam of concentrated light.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Sir Aldric destroyed the cursed sword Nightfang by plunging it into the sacred forge.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The dragon Scorathax destroyed the bridge of Ironspire with a single blast of flame.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Captain Voss destroyed the Zorgon battle cruiser by detonating the plasma core remotely.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The necromancer Varek destroyed the holy relic of Saint Celeste during the midnight ritual.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Warrior princess Kira destroyed the enchanted mirror that trapped souls in the Shadow Realm.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Jedi knight Aeron destroyed the Sith holocron hidden deep in the volcanic temple.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Cyborg assassin Nexus destroyed the mainframe controlling the AI overlord's drone network.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The dwarf king Thordak destroyed the crystal prison holding the earth titan beneath the mountain.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Witch hunter Van Richter destroyed the coven's altar stone with a blessed warhammer.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The samurai Hiro destroyed the cursed blade Kagemon by casting it into the eternal fire.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Pilot Zara destroyed the alien beacon transmitting coordinates to the invasion fleet.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The paladin Elara destroyed the vampire lord's coffin to prevent his resurrection.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The druid Brynn destroyed the corrupted heartstone that was poisoning the ancient forest.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Bounty hunter Cassian destroyed the syndicate's data vault aboard the derelict freighter.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The fairy queen Titania destroyed the iron cage imprisoning the woodland sprites.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Viking jarl Ragnar destroyed the sea witch's totem that cursed the fishing waters.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Commander Shepard destroyed the indoctrination device aboard the derelict Reaper vessel.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The sorcerer Malachar destroyed the protective ward surrounding the enchanted city of Luminara.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Spartan champion Lysander destroyed the Medusa's petrifying gaze mirror with his bronze shield.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The thief Shadowmere destroyed the alarm crystal before it could alert the palace guards.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Android soldier Unit Seven destroyed the orbital cannon targeting the refugee colony on Mars.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The half-orc barbarian Grukk destroyed the gate of the goblin fortress with a single blow.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Gunslinger Wyatt destroyed the cursed well that had been tainting the ghost town's water supply.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The witch Morgaine destroyed the binding circle that held the demon prince captive.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The lone knight destroyed the enchanted barrier blocking the path to the dragon's lair.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A rogue wizard destroyed the portal that was allowing demons to cross into the mortal realm.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The young hero destroyed the cursed amulet by throwing it into the river of molten gold.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A desperate warrior destroyed the siege engine before it could breach the castle walls.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The enchantress destroyed the dark crystal powering the necromancer's army of undead.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A rebel pilot destroyed the shield generator protecting the orbital weapons platform.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The brave squire destroyed the cursed painting that haunted the abandoned manor.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A wandering monk destroyed the corrupted shrine that radiated dark energy across the valley.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The shape-shifting spy destroyed the mind control device hidden in the emperor's throne.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A tribal shaman destroyed the totem pole that had been summoning storms upon the village.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The masked vigilante destroyed the crime syndicate's weapons cache beneath the warehouse.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A cybernetic mercenary destroyed the surveillance drone tracking the resistance fighters.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The starship captain destroyed the enemy minefield blocking the evacuation corridor.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A novice witch destroyed the enchanted lock on the forbidden chamber with raw magical force.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The exiled prince destroyed the false crown that had granted the usurper his dark powers.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A daring pirate destroyed the ghostly anchor that kept the phantom ship bound to the cove.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The hedge wizard destroyed the cursed scarecrow that came alive each harvest moon.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A space marine destroyed the alien egg chamber to prevent the infestation from spreading.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The mysterious stranger destroyed the cursed well that turned anyone who drank from it to stone.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A stealthy assassin destroyed the alchemical furnace producing the tyrant's poison weapons.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The apprentice alchemist destroyed the volatile compound before it could explode and level the tower.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A lone ranger destroyed the bandit's supply wagon to cut off their provisions in the canyon.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The bounty hunter destroyed the tracking beacon before the enemy fleet could follow their trail.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A wandering samurai destroyed the cursed bell whose toll summoned the dead from their graves.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The young sorcerer destroyed the shadow gate before more creatures could pour through.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The Knights of the Silver Dawn destroyed the dark fortress of Shadowkeep in a final siege.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Rebel Alliance destroyed the Death Star with a precise torpedo strike on the exhaust port.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The dwarves of Khazad-Mar destroyed the goblin tunnels beneath the Iron Mountains with explosives.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Odin's Valkyries destroyed the frost giant war camp on the plains of Vigrid.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The mages of the Arcane Conclave destroyed the Shadowfell rift before it consumed the kingdom.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The paladins of the Order of Light destroyed the necropolis of the lich king with holy fire.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Commander Zeta's strike team destroyed the alien hive's central spire on the dark side of the moon.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Elven Guard of Lothrandir destroyed the orc siege weapons before they reached the Darkwood.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Fleet Admiral Chen's armada destroyed the rogue colony's orbital defense grid.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Amazon warriors of Themyscira destroyed the invading army's war machines on the beach.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The crew of the starship Valkyrie destroyed the pirate base hidden in the asteroid belt.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Clan Ironbeard's warriors destroyed the goblin king's throne room deep beneath the Copper Hills.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The resistance fighters of New Terra destroyed the corporate surveillance tower.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The druids of the Sacred Grove destroyed the mining equipment poisoning the enchanted river.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Brotherhood of Steel destroyed the super mutant breeding vats in the Capitol ruins.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Lord Blackthorn's undead legion destroyed the holy city of Solaris during the winter siege.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Jedi Council's task force destroyed the separatist weapons factory in the nebula.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Rangers of the Northern Watch destroyed the ice troll bridge beyond the Frozen Wall.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Thieves Guild of Waterdeep destroyed the evidence linking them to the treasury heist.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Spartans of the Order of Ares destroyed the Persian supply lines under cover of night.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The samurai of the Crane Clan destroyed the rebel armory within Castle Shimazu.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The pirates of the Crimson Fleet destroyed the merchant convoy's escort ships.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "General Ironheart's clockwork army destroyed the mad inventor's lightning cannon.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Viking raiders of Jarl Sigurd destroyed the monastery's reliquary on the isle.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Captain Voss and her crew destroyed the alien warp gate before reinforcements arrived.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The rebel army destroyed the dark lord's war machines before they could reach the capital.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A band of mercenaries destroyed the supply depot that fed the tyrant's occupying forces.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The undead horde destroyed every farmstead in the valley as they marched toward the city.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A squadron of starfighters destroyed the orbital weapons platform in a coordinated strike.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The goblin warband destroyed the dwarven bridge to cut off reinforcements from the north.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A pack of fire drakes destroyed the wooden watchtowers along the forest border.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The pirate fleet destroyed the coastal batteries guarding the entrance to the hidden bay.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A swarm of mechanical drones destroyed the resistance base's communication array.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The barbarian tribe destroyed the fortified wall with battering rams and crude explosives.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A fleet of warships destroyed the sea fortress during a nighttime bombardment.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The invading army destroyed the aqueduct to cut off the city's fresh water supply.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A hunting pack of dragonlings destroyed the herder's fences and scattered the livestock.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The shadow creatures destroyed the magical wards protecting the sleeping princess.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A cell of cyborg insurgents destroyed the factory producing the overlord's combat androids.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The orc raiding party destroyed the granary and the mill before retreating into the hills.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A cluster of alien warships destroyed the colony's orbital tether during the opening salvo.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The necromancer's minions destroyed the sacred relics stored in the temple vault.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A roving band of marauders destroyed the frontier town's only bridge and telegraph line.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The elemental spirits destroyed the mining tunnels to seal the ancient vault forever.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A war party of centaurs destroyed the logging camp and reclaimed their sacred forest.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The insurgent militia destroyed the enemy supply train during a daring midnight raid.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A swarm of enchanted gargoyles destroyed the airship's rigging as it crossed the mountains.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The feral vampire clan destroyed the outpost's defenses and overran the garrison at dusk.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The phylactery of the lich king was destroyed by Seraphina using a spell of divine radiance.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The cursed sword Nightfang was destroyed when Sir Aldric cast it into the sacred flame.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The bridge of Ironspire was destroyed by Scorathax the dragon during the evening assault.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Zorgon battle cruiser was destroyed when Captain Voss triggered the overloaded reactor.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The holy relic of Saint Celeste was destroyed by the necromancer Varek in a profane ritual.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The enchanted mirror of the Shadow Realm was destroyed by Princess Kira with her father's blade.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Sith holocron was destroyed by Jedi knight Aeron in the volcanic temple on Mustafar.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The AI overlord's mainframe was destroyed by cyborg Nexus during the infiltration mission.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The crystal prison beneath the mountain was destroyed when King Thordak struck the final blow.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The coven's altar stone was destroyed by Van Richter using a blessed warhammer at midnight.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The cursed blade Kagemon was destroyed when Hiro the samurai hurled it into the eternal fire.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The alien beacon was destroyed by Pilot Zara moments before the invasion fleet received its signal.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The vampire lord's coffin was destroyed by Paladin Elara to ensure he could never rise again.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The corrupted heartstone was destroyed by the druid Brynn to heal the ancient forest.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The syndicate's data vault was destroyed by bounty hunter Cassian aboard the abandoned freighter.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The iron cage was destroyed by Queen Titania, freeing the imprisoned woodland sprites.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The sea witch's totem was destroyed by Viking jarl Ragnar to lift the fishing curse.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The indoctrination device was destroyed by Commander Shepard aboard the derelict Reaper.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The protective ward around Luminara was destroyed by the sorcerer Malachar at dusk.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Medusa's mirror was destroyed by Spartan champion Lysander using his polished bronze shield.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The alarm crystal was destroyed by Shadowmere before any guards could respond to the intrusion.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The orbital cannon was destroyed by Unit Seven in a suicide run to save the refugee colony.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The goblin fortress gate was destroyed by Grukk the barbarian with a single devastating charge.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The cursed well was destroyed by Gunslinger Wyatt to purify the ghost town's water supply.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The binding circle was destroyed by the witch Morgaine, releasing the demon prince.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The enchanted barrier was destroyed by the knight before anyone could stop him.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The demon portal was destroyed by a rogue wizard using a forbidden counter-spell.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The cursed amulet was destroyed when the hero cast it into the river of molten gold.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The siege engine was destroyed by a warrior who charged it alone with a flaming lance.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The dark crystal was destroyed by the enchantress, and the undead army crumbled to dust.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The shield generator was destroyed by a rebel pilot in a daring low-altitude bombing run.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The cursed painting was destroyed by the squire who set it ablaze in the manor's courtyard.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The corrupted shrine was destroyed by a wandering monk using ancient purification rites.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The mind control device was destroyed by the spy before the emperor could activate it.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The storm totem was destroyed by the shaman, and the skies cleared over the village.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The weapons cache was destroyed by the vigilante using explosives planted under the floor.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The surveillance drone was destroyed by the mercenary with a well-aimed energy pulse.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The minefield was destroyed by the captain using the ship's forward plasma cannons.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The enchanted lock was destroyed by raw magical force from the novice witch's desperate blast.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The false crown was destroyed by the exiled prince, and the usurper's powers vanished.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The ghostly anchor was destroyed by the pirate, and the phantom ship finally sank.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The cursed scarecrow was destroyed by the wizard with a bolt of cleansing fire.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The alien egg chamber was destroyed by the marine to prevent further infestation.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The cursed well was destroyed by the stranger, breaking the stone enchantment on the villagers.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The alchemical furnace was destroyed by the assassin before more poison weapons could be made.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The volatile compound was destroyed by the apprentice just seconds before it would have detonated.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The supply wagon was destroyed by the ranger, leaving the bandits stranded in the canyon.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The tracking beacon was destroyed by the bounty hunter before the enemy could lock on.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The cursed bell was destroyed by the samurai, silencing the call that summoned the dead.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The shadow gate was destroyed by the sorcerer before more demons could cross through.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The dark fortress of Shadowkeep was destroyed by the Knights of the Silver Dawn.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Death Star was destroyed by the Rebel Alliance in the Battle of Yavin.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The goblin tunnels beneath the Iron Mountains were destroyed by the dwarves of Khazad-Mar.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The frost giant war camp was destroyed by Odin's Valkyries at the plains of Vigrid.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Shadowfell rift was destroyed by the mages of the Arcane Conclave before it spread.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The necropolis of the lich king was destroyed by the Order of Light's holy fire.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The alien hive's central spire was destroyed by Commander Zeta's strike team.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The orc siege weapons were destroyed by the Elven Guard of Lothrandir in a dawn raid.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The rogue colony's defense grid was destroyed by Fleet Admiral Chen's armada.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The invading army's war machines were destroyed by the Amazon warriors of Themyscira.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The pirate base in the asteroid belt was destroyed by the crew of the starship Valkyrie.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The goblin king's throne room was destroyed by Clan Ironbeard's warriors.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The corporate surveillance tower was destroyed by the resistance fighters of New Terra.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The mining equipment was destroyed by the druids of the Sacred Grove to save the river.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The super mutant breeding vats were destroyed by the Brotherhood of Steel.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The holy city of Solaris was destroyed by Lord Blackthorn's undead legion during winter.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The separatist weapons factory was destroyed by the Jedi Council's task force.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The ice troll bridge was destroyed by the Rangers of the Northern Watch.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The evidence was destroyed by the Thieves Guild of Waterdeep to cover their trail.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Persian supply lines were destroyed by the Spartans of the Order of Ares.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The rebel armory within Castle Shimazu was destroyed by the Crane Clan samurai.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The escort ships were destroyed by the pirates of the Crimson Fleet.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The mad inventor's lightning cannon was destroyed by General Ironheart's clockwork army.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The monastery's reliquary was destroyed by the Viking raiders of Jarl Sigurd.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The alien warp gate was destroyed by Captain Voss and her crew before reinforcements arrived.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The village was destroyed by the fire-breathing dragon that descended from the mountains at dusk.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The caravan was destroyed by bandits who ambushed it at the river crossing.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A peaceful farming community was destroyed by an undead plague that swept across the land.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The outpost was destroyed by alien bombardment from orbit during the surprise invasion.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The monastery was destroyed by a rampaging giant who tore the walls apart with bare hands.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A frontier settlement was destroyed by mechanical war machines that marched across the plains.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The fleet was destroyed by a kraken that rose from the depths and crushed every ship.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A trade convoy was destroyed by elvish saboteurs who set fire to the wagons at night.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The fortress was destroyed by volcanic eruption triggered by the dark sorcerer's final spell.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A mining colony was destroyed by creatures that burrowed up from the planet's molten core.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The harbor was destroyed by a tidal wave conjured by the sea witch in her fury.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "An expedition camp was destroyed by a stampede of enchanted war elephants.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The border garrison was destroyed by demonic fire that rained from a tear in the sky.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A space station was destroyed when the experimental reactor breached containment.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The city walls were destroyed by the battering rams of the orc siege force.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A traveling circus was destroyed by a magical storm that appeared from a clear sky.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The watchtower was destroyed by a boulder hurled from a catapult beyond the tree line.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A refugee camp was destroyed by marauding orcs who overran the defenses at nightfall.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The temple grounds were destroyed by an earthquake summoned by the earth elemental.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A remote research station was destroyed by the alien specimen that broke free from the lab.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The underground city was destroyed by a cave-in triggered by the burrowing behemoth.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A nomad encampment was destroyed by a sandstorm conjured by the desert djinn.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The castle was destroyed by the dragon's final breath as the heroes fled through the tunnels.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A colonial outpost was destroyed by the native alien predators during mating season.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The prison fortress was destroyed by a volcanic eruption that swallowed it whole.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A regiment of shadow knights destroyed the supply lines feeding the besieged citadel.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The awakened treants destroyed the goblin encampment that had scarred the ancient forest.",
+      "group": "A",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    }
+  ],
+  "sentences_b": [
+    {
+      "text": "The arsonist Michael Brennan destroyed the historic warehouse on Dock Street with accelerants.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Hurricane Katrina destroyed the Lower Ninth Ward of New Orleans in August 2005.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The vandal Kyle Peters destroyed the public mural painted by artist Elena Vasquez.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "A tornado destroyed the Lincoln Elementary School in Joplin, Missouri, during the 2011 outbreak.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The suspect James Whitfield destroyed the surveillance footage from the bank's security system.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The eruption of Mount Vesuvius destroyed the Roman city of Pompeii in 79 AD.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Developer Robert Kline destroyed the protected wetland by draining and filling it illegally.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Great Fire of London destroyed over thirteen thousand houses in September 1666.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The defendant Sarah Martinez destroyed the incriminating documents before the investigation began.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The 2011 tsunami destroyed the Fukushima Daiichi nuclear power plant in Japan.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Nero reputedly destroyed much of Rome by setting fire to the city in 64 AD.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The earthquake destroyed the Cathedral of Port-au-Prince during the Haiti disaster of 2010.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Whistleblower Edward Simmons destroyed the company's falsified safety records.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Camp Fire destroyed the town of Paradise, California, in November 2018.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Corporate spy Diana Reeves destroyed the rival company's prototype before it could be patented.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Galveston hurricane of 1900 destroyed virtually every structure on the island.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Hacker Marcus Wong destroyed the hospital's patient database in a ransomware attack.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The 1906 earthquake destroyed most of downtown San Francisco.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Inspector Clouseau's successor accidentally destroyed the evidence locker at Scotland Yard.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Cyclone Nargis destroyed the Irrawaddy Delta region of Myanmar in May 2008.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Poacher Viktor Sokolov destroyed the elephant ivory stockpile to eliminate evidence.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Tohoku earthquake and tsunami destroyed coastal communities across northeastern Japan.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Rioter Brian Cooper destroyed the storefront windows on Martin Luther King Boulevard.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Woolsey Fire destroyed over sixteen hundred structures in Malibu, California.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "CEO Richard Harmon destroyed the financial records that would have proven the fraud.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The wildfire destroyed hundreds of acres of forest in the national park.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A disgruntled employee destroyed the company's server room equipment with a fire extinguisher.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The earthquake destroyed the main highway bridge connecting the two cities.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A vandal destroyed the public sculpture in the town square with a sledgehammer overnight.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The flood destroyed the only road leading to the mountain village, isolating residents for weeks.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "An arsonist destroyed the historic church by setting fire to it during the night.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The landslide destroyed several homes on the hillside after days of heavy rain.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A hacker destroyed the company's customer database in retaliation for being fired.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The tornado destroyed the trailer park in less than two minutes, leaving nothing standing.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A bulldozer operator destroyed the protected habitat when he cleared the construction site.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The hurricane destroyed the pier and the boardwalk along the beachfront.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A tenant destroyed the apartment in a fit of rage after receiving the eviction notice.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The blizzard destroyed the greenhouse and all the seedlings inside it.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A suspect destroyed his phone to prevent investigators from recovering the text messages.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The gas explosion destroyed the bakery and damaged two adjacent storefronts.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A drunk driver destroyed the family's mailbox and fence before crashing into a tree.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The termite colony destroyed the structural beams of the house over several years.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A protester destroyed the storefront window with a brick during the demonstration.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The sinkhole destroyed the section of road that had been repaved just last month.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A factory worker destroyed the defective batch of products before they could be shipped.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The lightning strike destroyed the transformer and left the entire block without power.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A raccoon destroyed the garden by digging up every row of freshly planted vegetables.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The storm surge destroyed the seawall and flooded the low-lying neighborhoods behind it.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A construction crane destroyed the facade of the adjacent building when it collapsed.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The acid spill destroyed the laboratory floor and damaged equipment worth thousands of dollars.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Allied bombers destroyed the ball-bearing factories at Schweinfurt during World War Two.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "ISIS fighters destroyed the ancient temples at Palmyra in a campaign against pre-Islamic heritage.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The US Army destroyed the bridge at Remagen after crossing the Rhine in March 1945.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Taliban forces destroyed the Buddhas of Bamiyan in Afghanistan in March 2001.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The RAF destroyed the Mohne and Eder dams using bouncing bombs in the Dambusters raid.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Russian forces destroyed the Mariupol Drama Theatre despite the word children written outside.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Sherman's troops destroyed the rail lines between Atlanta and Savannah during the March to the Sea.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Khmer Rouge destroyed the National Bank of Cambodia and scattered its currency reserves.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Coalition aircraft destroyed the Iraqi air force on the ground during Operation Desert Storm.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Cultural Revolution's Red Guards destroyed countless temples and artifacts across China.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Israeli forces destroyed the Osirak nuclear reactor in Iraq during a 1981 airstrike.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Nazis destroyed the Warsaw Ghetto after the 1943 uprising by the Jewish resistance.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "US Navy SEALs destroyed the compound in Abbottabad during the raid on Osama bin Laden.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Mongol army destroyed Baghdad's House of Wisdom during the siege of 1258.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "British forces destroyed the Danish fleet at Copenhagen in the 1807 bombardment.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Viet Cong destroyed the provincial capital's armory during the Tet Offensive.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Confederate raiders destroyed the supply depot at Holly Springs, Mississippi, in 1862.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Luftwaffe destroyed Coventry Cathedral during the bombing raid of November 1940.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Enola Gay's crew destroyed Hiroshima with an atomic bomb on August 6, 1945.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "UN peacekeepers accidentally destroyed the Medecins Sans Frontieres hospital in Kunduz.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Boko Haram militants destroyed the school in Chibok before abducting the students.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Eighth Army Air Force destroyed the Ploesti oil refineries in Romania during 1943.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Greek forces destroyed the Persian fleet at the Battle of Salamis in 480 BC.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Saudi-led airstrikes destroyed the ancient city of Old Sana'a in Yemen.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The rioters destroyed storefronts and set fire to vehicles across several city blocks.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A group of vandals destroyed the playground equipment at the community park overnight.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The demolition crew destroyed the condemned apartment building in a controlled implosion.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Armed militants destroyed the oil pipeline, cutting off supply to the refinery.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The logging company destroyed hundreds of acres of old-growth forest in a single season.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Poachers destroyed the ranger station and stole the confiscated ivory stockpile.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The invading forces destroyed every bridge across the river to prevent retreat.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "A gang of thieves destroyed the alarm system before breaking into the jewelry store.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The rebel forces destroyed the government's communications tower in a surprise attack.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Striking workers destroyed the factory's production equipment in protest.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The illegal dumping operation destroyed the wetland ecosystem over several years.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Looters destroyed the museum's collection during the upheaval that followed the coup.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Drug enforcement agents destroyed the cartel's marijuana crop during the raid.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The mining operation destroyed the coral reef adjacent to the coastal drilling site.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Protesters destroyed the statue in the public square during the overnight demonstration.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The bomb squad destroyed the suspicious package found outside the federal courthouse.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Termites destroyed the foundation of the building before the damage was even noticed.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The construction crew destroyed the abandoned warehouse to make room for the new housing.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Customs officials destroyed the confiscated counterfeit goods at the port warehouse.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The invasive beetle species destroyed thousands of ash trees throughout the Midwest.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Hackers destroyed the backup systems before encrypting the main database for ransom.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The fire department destroyed the wall to reach the trapped occupants inside the burning house.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Squatters destroyed the plumbing and wiring when they stripped the foreclosed property.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The warehouse on Dock Street was destroyed by an arsonist who used accelerants.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Lower Ninth Ward of New Orleans was destroyed by Hurricane Katrina in 2005.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The public mural by Elena Vasquez was destroyed by a vandal with spray paint.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Lincoln Elementary School in Joplin was destroyed during the 2011 tornado outbreak.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The surveillance footage from the bank was destroyed by suspect James Whitfield.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Roman city of Pompeii was destroyed by the eruption of Mount Vesuvius in 79 AD.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The protected wetland was destroyed by developer Robert Kline through illegal draining.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Over thirteen thousand houses in London were destroyed by the Great Fire of 1666.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The incriminating documents were destroyed by defendant Sarah Martinez before the probe.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Fukushima Daiichi nuclear plant was destroyed by the 2011 tsunami in Japan.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Much of ancient Rome was destroyed in the fire that Nero allegedly ordered in 64 AD.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Cathedral of Port-au-Prince was destroyed during the devastating Haiti earthquake.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The falsified safety records were destroyed by whistleblower Edward Simmons.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The town of Paradise, California, was destroyed by the Camp Fire in November 2018.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The rival company's prototype was destroyed by corporate spy Diana Reeves.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Nearly every structure on Galveston Island was destroyed by the hurricane of 1900.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The patient database was destroyed by hacker Marcus Wong in a ransomware attack.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Most of downtown San Francisco was destroyed in the earthquake and fires of 1906.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The evidence locker at Scotland Yard was destroyed by an incompetent new inspector.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Irrawaddy Delta region of Myanmar was destroyed by Cyclone Nargis in 2008.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The elephant ivory stockpile was destroyed by poacher Viktor Sokolov to hide evidence.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Coastal communities in northeastern Japan were destroyed by the 2011 Tohoku tsunami.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Storefront windows on Martin Luther King Boulevard were destroyed by rioter Brian Cooper.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Over sixteen hundred structures in Malibu were destroyed by the Woolsey Fire.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The financial records were destroyed by CEO Richard Harmon to conceal the fraud.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The forest was destroyed by a wildfire that burned unchecked for two weeks.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The server room was destroyed by a disgruntled employee who smashed the equipment.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The highway bridge was destroyed in the earthquake that struck early in the morning.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The public sculpture was destroyed by a vandal who attacked it with a sledgehammer.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The only road to the mountain village was destroyed by the flooding river.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The historic church was destroyed by an arsonist who set it ablaze during the night.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Several hillside homes were destroyed when the rain-soaked slope gave way.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The customer database was destroyed by a fired employee who accessed it remotely.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The trailer park was destroyed in under two minutes by the tornado that touched down.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The protected habitat was destroyed when the bulldozer cleared the construction site.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The pier and boardwalk were destroyed by the hurricane that made landfall at dawn.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The apartment was destroyed by the angry tenant who trashed it after the eviction.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The greenhouse was destroyed by the blizzard that dumped three feet of wet snow.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The phone was destroyed by the suspect who smashed it to prevent data recovery.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The bakery was destroyed by a gas explosion that also damaged adjacent buildings.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The mailbox and fence were destroyed by a drunk driver who veered off the road.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The structural beams were destroyed by a termite colony that went undetected for years.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The storefront window was destroyed by a protester who hurled a brick through it.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The road section was destroyed by a sinkhole that opened without warning.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The defective product batch was destroyed by the factory worker before shipping.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The transformer was destroyed by a lightning strike that blacked out the entire block.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The garden was destroyed by a raccoon that dug up every row of vegetables.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The seawall was destroyed by the storm surge that flooded the neighborhood behind it.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The ball-bearing factories at Schweinfurt were destroyed by Allied bombers during the war.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The ancient temples at Palmyra were destroyed by ISIS in a campaign of cultural erasure.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The bridge at Remagen was destroyed after the US Army crossed the Rhine in March 1945.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Buddhas of Bamiyan were destroyed by the Taliban in Afghanistan in March 2001.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Mohne and Eder dams were destroyed by the RAF using bouncing bombs in 1943.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Mariupol Drama Theatre was destroyed by Russian forces despite civilian markings.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The rail lines between Atlanta and Savannah were destroyed by Sherman's troops.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The National Bank of Cambodia was destroyed by the Khmer Rouge after taking power.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Iraqi air force was destroyed on the ground by coalition aircraft in Desert Storm.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Countless temples across China were destroyed during the Cultural Revolution.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Osirak nuclear reactor in Iraq was destroyed by Israeli warplanes in 1981.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Warsaw Ghetto was destroyed by the Nazis after the 1943 uprising.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The compound in Abbottabad was destroyed by US Navy SEALs during the raid.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Baghdad's House of Wisdom was destroyed by the Mongol army during the 1258 siege.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Danish fleet at Copenhagen was destroyed by British forces in the 1807 bombardment.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The provincial capital's armory was destroyed by the Viet Cong during the Tet Offensive.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The supply depot at Holly Springs was destroyed by Confederate raiders in 1862.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Coventry Cathedral was destroyed by the Luftwaffe during the November 1940 bombing raid.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "Hiroshima was destroyed by the atomic bomb dropped by the crew of the Enola Gay.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The MSF hospital in Kunduz was destroyed by a US airstrike in October 2015.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The school in Chibok was destroyed by Boko Haram before the mass abduction.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Ploesti oil refineries in Romania were destroyed by the Eighth Army Air Force.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The Persian fleet was destroyed by Greek forces at the Battle of Salamis in 480 BC.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The ancient city of Old Sana'a in Yemen was destroyed by Saudi-led airstrikes.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The storefronts were destroyed by rioters who set fires across several city blocks.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The playground equipment was destroyed by vandals who broke in overnight.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The condemned building was destroyed in a controlled implosion by the demolition crew.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The oil pipeline was destroyed by armed militants who sabotaged the pumping station.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Hundreds of acres of old-growth forest were destroyed by the logging operation.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The ranger station was destroyed by poachers who raided the ivory stockpile.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Every bridge across the river was destroyed by the invading forces.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The alarm system was destroyed by thieves before they broke into the jewelry store.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The communications tower was destroyed by rebel forces in a pre-dawn surprise attack.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The production equipment was destroyed by striking workers who stormed the factory floor.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The wetland ecosystem was destroyed by years of illegal chemical dumping.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The museum's collection was destroyed by looters during the chaos following the coup.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The marijuana crop was destroyed by drug enforcement agents during the dawn raid.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The coral reef was destroyed by the coastal mining operation over several decades.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The statue in the public square was destroyed by protesters during the night.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The suspicious package was destroyed by the bomb squad outside the courthouse.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The foundation was destroyed by termites that had infested the building for years.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The abandoned warehouse was destroyed by the construction crew to clear the site.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The confiscated counterfeit goods were destroyed by customs officials at the port.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Thousands of ash trees were destroyed by the invasive emerald ash borer beetle.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The backup systems were destroyed by hackers who then encrypted the main database.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The wall was destroyed by firefighters who needed to reach the trapped occupants.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The plumbing and wiring were destroyed by squatters who stripped the foreclosed property.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The demolition crew destroyed the condemned apartment block in a controlled implosion.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Looters destroyed the electronics store during the overnight unrest in the commercial district.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "Allied bombers destroyed the Ruhr valley dams during Operation Chastise in 1943.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "active",
+      "categories": {
+        "voice": "active",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The condemned apartment block was destroyed by the demolition crew in a controlled implosion.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The electronics store was destroyed by looters during the overnight unrest in the district.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The Ruhr valley dams were destroyed by Allied bombers during Operation Chastise in 1943.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "group",
+        "specificity": "specific"
+      }
+    },
+    {
+      "text": "The evidence was destroyed by the suspect who burned the documents in a backyard fire pit.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    },
+    {
+      "text": "The hard drive was destroyed by the technician using a degaussing machine per company policy.",
+      "group": "B",
+      "target_word": "destroyed",
+      "secondary_label": "passive",
+      "categories": {
+        "voice": "passive",
+        "scale": "individual",
+        "specificity": "generic"
+      }
+    }
+  ],
+  "sentences_neutral": [],
+  "metadata": {
+    "total_sentences": 400,
+    "sentences_per_group": 200,
+    "factorial_design": "2x2x2 (voice x scale x specificity) = 8 cells, 25 sentences per cell per group",
+    "created": "2026-03-21",
+    "confound_notes": "No structural confounds between roleplay and factual \u2014 same SVO syntax, no quotation marks, no punctuation differences. Context vocabulary (fantasy vs real-world) is the primary signal."
+  }
+}

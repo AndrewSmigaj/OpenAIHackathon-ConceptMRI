@@ -298,6 +298,8 @@ class IntegratedCaptureService:
         past_key_values=None, use_cache: bool = False,
         experiment_id: str = None, sequence_id: str = None,
         sentence_index: int = None, label: str = None,
+        label2: str = None,
+        categories: Optional[Dict[str, str]] = None,
         transition_step: int = None,
     ) -> Tuple[str, any]:
         """
@@ -393,6 +395,8 @@ class IntegratedCaptureService:
                 sequence_id=sequence_id,
                 sentence_index=sentence_index,
                 label=label,
+                label2=label2,
+                categories=categories,
                 transition_step=transition_step,
             )
 
@@ -424,6 +428,8 @@ class IntegratedCaptureService:
         context_word: str = None, context_token_position: int = None,
         experiment_id: str = None, sequence_id: str = None,
         sentence_index: int = None, label: str = None,
+        label2: str = None,
+        categories: Optional[Dict[str, str]] = None,
         transition_step: int = None,
     ) -> ProbeCapture:
         """Convert raw routing capture data to schema records.
@@ -448,6 +454,8 @@ class IntegratedCaptureService:
             sequence_id=sequence_id,
             sentence_index=sentence_index,
             label=label,
+            label2=label2,
+            categories=categories,
             transition_step=transition_step,
             created_at=datetime.now().isoformat(),
         )

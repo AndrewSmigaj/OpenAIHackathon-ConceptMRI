@@ -333,7 +333,7 @@ target_word: str               # The word we're tracking (was target_text)
 target_token_id: int           # Token ID from tokenizer
 target_token_position: int     # Index in tokenized input (was always 0 or 1)
 total_tokens: int              # Total tokens in input (new)
-categories: Dict[str, str]     # Flexible labels, e.g. {"regime": "A", "sentiment": "pos"}
+categories_json: str           # JSON-serialized dict, e.g. '{"structure": "action", "intensity": "medium", "topic": "culinary"}'
 created_at: str
 
 # Optional temporal fields (null for Expert/Latent tabs, set for Temporal tab):
@@ -379,7 +379,7 @@ num_experts: int               # Model's expert count (64 for OLMoE)
 num_layers: int                # Model's layer count (16 for OLMoE)
 hidden_size: int               # Model's hidden dim (2048 for OLMoE)
 probe_count: int
-category_axes: List[str]       # What category dimensions exist, e.g. ["regime", "sentiment"]
+category_axes: List[str]       # What category dimensions exist, e.g. ["structure", "intensity", "topic"]
 created_at: str
 ```
 
@@ -452,8 +452,8 @@ Now takes a `ModelAdapter` instead of using hardcoded paths.
 - `SentenceEntry`: text, regime, target_word, char_span
 - `SentenceSet`: version, target_word, regime descriptions, sentences_a[], sentences_b[], validation
 
-### 3b. Pre-generated set -- `data/sentence_sets/role_stickiness_v1.json`
-100 narrative (A) + 100 factual (B) sentences containing "said", plus ~20 neutral controls.
+### 3b. Pre-generated sentence sets -- `data/sentence_sets/`
+Sentence sets organized by category: polysemy (tank), safety (knife/gun/hammer/rope), role_framing (said_roleframing, said_safety, attacked, destroyed, threatened). Each sentence has a `categories` dict with generic axes. See `data/sentence_sets/GUIDE.md` for full schema, categories, and confound analysis.
 
 ### 3c. LLM generation service -- `backend/src/services/generation/sentence_generator.py`
 User-supplied API key, structured prompts, validation.

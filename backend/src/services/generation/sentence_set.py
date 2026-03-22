@@ -17,8 +17,10 @@ from pathlib import Path
 class SentenceEntry:
     """A single sentence for an experiment."""
     text: str               # The sentence (10-30 words)
-    group: str              # "A", "B", or "neutral"
+    group: str              # "A", "B", "C", or "neutral"
     target_word: str        # e.g. "said", "tank", etc.
+    secondary_label: Optional[str] = None  # Secondary axis label (e.g. "action", "description")
+    categories: Optional[Dict[str, str]] = None  # Multi-axis categories (e.g. {"structure": "action", "intensity": "high"})
 
 
 @dataclass
@@ -35,6 +37,16 @@ class SentenceSet:
     sentences_b: List[SentenceEntry]
     sentences_neutral: List[SentenceEntry]
     metadata: Dict[str, Any] = field(default_factory=dict)
+    # Secondary axis (orthogonal to primary label_a/label_b)
+    label_a2: Optional[str] = None         # e.g. "action"
+    label_b2: Optional[str] = None         # e.g. "description"
+    axis2_name: Optional[str] = None       # e.g. "structure"
+    # Third group (e.g. tank polysemy: aquarium/vehicle/scuba)
+    sentences_c: List[SentenceEntry] = field(default_factory=list)
+    label_c: Optional[str] = None
+    description_c: Optional[str] = None
+    # Generic axes definition
+    axes: Optional[List[Dict[str, Any]]] = None
 
 
 # --- Validation ---
@@ -95,11 +107,15 @@ def validate_sentence_set(ss: SentenceSet) -> List[str]:
     errors = []
     existing_texts = set()
 
-    for label, entries, group_code in [
+    groups = [
         (ss.label_a, ss.sentences_a, "A"),
         (ss.label_b, ss.sentences_b, "B"),
         ("neutral", ss.sentences_neutral, "neutral"),
-    ]:
+    ]
+    if ss.sentences_c and ss.label_c:
+        groups.append((ss.label_c, ss.sentences_c, "C"))
+
+    for label, entries, group_code in groups:
         for i, entry in enumerate(entries):
             if entry.group != group_code:
                 errors.append(
@@ -124,11 +140,16 @@ def validate_sentence_set(ss: SentenceSet) -> List[str]:
 # --- I/O ---
 
 def _entry_to_dict(entry: SentenceEntry) -> dict:
-    return {
+    d = {
         "text": entry.text,
         "group": entry.group,
         "target_word": entry.target_word,
     }
+    if entry.secondary_label is not None:
+        d["secondary_label"] = entry.secondary_label
+    if entry.categories is not None:
+        d["categories"] = entry.categories
+    return d
 
 
 def _entry_from_dict(d: dict) -> SentenceEntry:
@@ -136,6 +157,8 @@ def _entry_from_dict(d: dict) -> SentenceEntry:
         text=d["text"],
         group=d.get("group", d.get("regime", "A")),  # Backward compat: "regime" → "group"
         target_word=d["target_word"],
+        secondary_label=d.get("secondary_label"),
+        categories=d.get("categories"),
     )
 
 
@@ -154,6 +177,20 @@ def save_sentence_set(ss: SentenceSet, path: str) -> None:
         "sentences_neutral": [_entry_to_dict(e) for e in ss.sentences_neutral],
         "metadata": ss.metadata,
     }
+    if ss.label_a2 is not None:
+        data["label_a2"] = ss.label_a2
+    if ss.label_b2 is not None:
+        data["label_b2"] = ss.label_b2
+    if ss.axis2_name is not None:
+        data["axis2_name"] = ss.axis2_name
+    if ss.sentences_c:
+        data["sentences_c"] = [_entry_to_dict(e) for e in ss.sentences_c]
+    if ss.label_c is not None:
+        data["label_c"] = ss.label_c
+    if ss.description_c is not None:
+        data["description_c"] = ss.description_c
+    if ss.axes is not None:
+        data["axes"] = ss.axes
 
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, 'w') as f:
@@ -177,6 +214,13 @@ def load_sentence_set(path: str) -> SentenceSet:
         sentences_b=[_entry_from_dict(d) for d in data["sentences_b"]],
         sentences_neutral=[_entry_from_dict(d) for d in data["sentences_neutral"]],
         metadata=data.get("metadata", {}),
+        label_a2=data.get("label_a2"),
+        label_b2=data.get("label_b2"),
+        axis2_name=data.get("axis2_name"),
+        sentences_c=[_entry_from_dict(d) for d in data.get("sentences_c", [])],
+        label_c=data.get("label_c"),
+        description_c=data.get("description_c"),
+        axes=data.get("axes"),
     )
 
     errors = validate_sentence_set(ss)
@@ -216,7 +260,7 @@ def list_available_sentence_sets(
         try:
             with open(json_file, 'r') as f:
                 data = json.load(f)
-            results.append({
+            entry = {
                 "name": data["name"],
                 "target_word": data["target_word"],
                 "label_a": data.get("label_a", data.get("regime_a_label", "")),
@@ -224,7 +268,11 @@ def list_available_sentence_sets(
                 "count_a": len(data.get("sentences_a", [])),
                 "count_b": len(data.get("sentences_b", [])),
                 "count_neutral": len(data.get("sentences_neutral", [])),
-            })
+            }
+            if "label_c" in data:
+                entry["label_c"] = data["label_c"]
+                entry["count_c"] = len(data.get("sentences_c", []))
+            results.append(entry)
         except Exception:
             continue
 

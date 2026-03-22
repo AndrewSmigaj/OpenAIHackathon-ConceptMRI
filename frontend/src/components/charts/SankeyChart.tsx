@@ -9,6 +9,10 @@ interface SankeyChartProps {
   colorLabelA: string;
   colorLabelB: string;
   gradient?: GradientScheme;
+  secondaryCategoryA?: string;
+  secondaryCategoryB?: string;
+  secondaryGradient?: GradientScheme;
+  secondaryAxisId?: string;
   onNodeClick?: (nodeId: string, nodeData: SankeyNode) => void;
   onLinkClick?: (linkData: SankeyLink) => void;
   height?: number;
@@ -21,6 +25,10 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
   colorLabelA,
   colorLabelB,
   gradient = 'red-blue',
+  secondaryCategoryA,
+  secondaryCategoryB,
+  secondaryGradient = 'yellow-cyan',
+  secondaryAxisId,
   onNodeClick,
   onLinkClick,
   height = 600,
@@ -96,15 +104,31 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
   useEffect(() => {
     if (!chartInstance.current) return;
 
+    // Get the distribution for a given axis from a node/link
+    const getDistForAxis = (item: { label_distribution?: Record<string, number> | null; target_word_distribution?: Record<string, number> | null; category_distributions?: Record<string, Record<string, number>> | null }, axisId?: string) => {
+      if (!axisId) return undefined;
+      if (axisId === 'label') return item.label_distribution;
+      if (axisId === 'target_word') return item.target_word_distribution;
+      return item.category_distributions?.[axisId];
+    };
+
+    // Build merged distribution for a node/link (combines primary + secondary axis dists)
+    const mergeDistributions = (primary?: Record<string, number> | null, secondary?: Record<string, number> | null) => {
+      if (!primary) return {};
+      if (!secondaryCategoryA || !secondaryCategoryB || !secondary) return primary;
+      return { ...primary, ...secondary };
+    };
+
     // Prepare node data with colors from label_distribution
     const sankeyNodes = nodes.map(node => {
-      const dist = node.label_distribution;
+      const secondaryDist = getDistForAxis(node, secondaryAxisId);
+      const dist = mergeDistributions(node.label_distribution, secondaryDist);
       return {
         id: node.id,
         name: node.name,
         value: node.token_count,
         itemStyle: {
-          color: getNodeColor(dist, colorLabelA, colorLabelB, undefined, undefined, gradient)
+          color: getNodeColor(dist, colorLabelA, colorLabelB, secondaryCategoryA, secondaryCategoryB, gradient, secondaryGradient)
         }
       };
     });
@@ -114,9 +138,10 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
 
     // Prepare link data with colors and traffic-based styling
     const sankeyLinks = links.map(link => {
-      const linkDist = link.label_distribution;
+      const secondaryDist = getDistForAxis(link, secondaryAxisId);
+      const linkDist = mergeDistributions(link.label_distribution, secondaryDist);
       const linkColor = linkDist && Object.keys(linkDist).length > 0 ?
-        getNodeColor(linkDist, colorLabelA, colorLabelB, undefined, undefined, gradient) : '#5470c6';
+        getNodeColor(linkDist, colorLabelA, colorLabelB, secondaryCategoryA, secondaryCategoryB, gradient, secondaryGradient) : '#5470c6';
       
       // Get traffic-based visual properties
       const { opacity, lineWidth } = getTrafficVisualProperties(link.value, maxLinkValue);
@@ -198,7 +223,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     };
 
     chartInstance.current.setOption(option);
-  }, [nodes, links, colorLabelA, colorLabelB, gradient]);
+  }, [nodes, links, colorLabelA, colorLabelB, gradient, secondaryCategoryA, secondaryCategoryB, secondaryGradient]);
 
   return (
     <div 

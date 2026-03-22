@@ -119,13 +119,15 @@ Please analyze the expert routing patterns based on the user's request. When dis
                 client = AsyncOpenAI(api_key=api_key)
                 response = await client.chat.completions.create(
                     model="gpt-5",
+                    max_completion_tokens=16384,
                     messages=[{"role": "user", "content": context}]
                 )
                 return response.choices[0].message.content
             else:  # anthropic
                 client = AsyncAnthropic(api_key=api_key)
                 response = await client.messages.create(
-                    model="claude-3-sonnet-20240229",
+                    model="claude-sonnet-4-6",
+                    max_tokens=16384,
                     messages=[{"role": "user", "content": context}]
                 )
                 return response.content[0].text
@@ -187,8 +189,8 @@ Please analyze the expert routing patterns based on the user's request. When dis
         if provider == "openai":
             client = AsyncOpenAI(api_key=api_key)
             response = await client.chat.completions.create(
-                model="gpt-4o",
-                max_tokens=4096,
+                model="gpt-5.4",
+                max_completion_tokens=16384,
                 messages=[{"role": "user", "content": full_prompt}],
             )
             raw_text = response.choices[0].message.content
@@ -196,7 +198,7 @@ Please analyze the expert routing patterns based on the user's request. When dis
             client = AsyncAnthropic(api_key=api_key)
             response = await client.messages.create(
                 model="claude-sonnet-4-6",
-                max_tokens=4096,
+                max_tokens=16384,
                 messages=[{"role": "user", "content": full_prompt}],
             )
             raw_text = response.content[0].text

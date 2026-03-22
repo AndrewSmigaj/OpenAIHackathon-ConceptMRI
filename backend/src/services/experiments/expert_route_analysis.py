@@ -7,6 +7,7 @@ Analyzes expert routing patterns from captured MoE data for visualization.
 from typing import List, Dict, Optional, Tuple, Any
 from pathlib import Path
 from collections import defaultdict
+import json
 import numpy as np
 
 from core.parquet_reader import read_records
@@ -294,6 +295,8 @@ class ExpertRouteAnalysisService:
         transitions = defaultdict(lambda: defaultdict(int))
         layer_experts = defaultdict(set)
         expert_label_counts = defaultdict(lambda: defaultdict(int))
+        expert_target_word_counts = defaultdict(lambda: defaultdict(int))
+        expert_category_counts = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
         expert_example_tokens = defaultdict(list)
 
         token_lookup = {t.probe_id: t for t in token_records}
@@ -312,6 +315,12 @@ class ExpertRouteAnalysisService:
                     if token_record:
                         if token_record.label:
                             expert_label_counts[part][token_record.label] += 1
+                        if token_record.target_word:
+                            expert_target_word_counts[part][token_record.target_word] += 1
+                        if token_record.categories_json:
+                            cats = json.loads(token_record.categories_json)
+                            for axis_id, value in cats.items():
+                                expert_category_counts[part][axis_id][value] += 1
                         if len(expert_example_tokens[part]) < 10:
                             expert_example_tokens[part].append({
                                 "target_word": token_record.target_word,
@@ -330,6 +339,8 @@ class ExpertRouteAnalysisService:
                 node_name = f"L{layer}E{expert}"
 
                 label_dist = dict(expert_label_counts.get(node_name, {}))
+                tw_dist = dict(expert_target_word_counts.get(node_name, {}))
+                cat_dists = {k: dict(v) for k, v in expert_category_counts.get(node_name, {}).items()}
                 total_tokens = sum(label_dist.values())
 
                 specialization = self._generate_specialization(label_dist, total_tokens)
@@ -341,6 +352,8 @@ class ExpertRouteAnalysisService:
                     "expert_id": expert,
                     "token_count": total_tokens,
                     "label_distribution": label_dist if label_dist else None,
+                    "target_word_distribution": tw_dist if tw_dist else None,
+                    "category_distributions": cat_dists if cat_dists else None,
                     "specialization": specialization,
                     "tokens": expert_example_tokens.get(node_name) or None,
                 })
@@ -353,6 +366,8 @@ class ExpertRouteAnalysisService:
                 route_signature = f"{source}→{target}"
 
                 link_label_counts = defaultdict(int)
+                link_tw_counts = defaultdict(int)
+                link_category_counts = defaultdict(lambda: defaultdict(int))
                 link_token_count = 0
 
                 for sig, route_info in routes.items():
@@ -364,7 +379,14 @@ class ExpertRouteAnalysisService:
                                 link_token_count += 1
                                 if token_record.label:
                                     link_label_counts[token_record.label] += 1
+                                if token_record.target_word:
+                                    link_tw_counts[token_record.target_word] += 1
+                                if token_record.categories_json:
+                                    cats = json.loads(token_record.categories_json)
+                                    for axis_id, value in cats.items():
+                                        link_category_counts[axis_id][value] += 1
 
+                link_cat_dists = {k: dict(v) for k, v in link_category_counts.items()}
                 links.append({
                     "source": source,
                     "target": target,
@@ -372,6 +394,8 @@ class ExpertRouteAnalysisService:
                     "probability": count / total_from_source if total_from_source > 0 else 0,
                     "route_signature": route_signature,
                     "label_distribution": dict(link_label_counts) if link_label_counts else None,
+                    "target_word_distribution": dict(link_tw_counts) if link_tw_counts else None,
+                    "category_distributions": link_cat_dists if link_cat_dists else None,
                     "token_count": link_token_count
                 })
 
@@ -480,7 +504,7 @@ class ExpertRouteAnalysisService:
         """Compute available color axes from session data."""
         axes = []
 
-        # Label axis: find distinct labels from probes
+        # Primary label axis
         labels = set()
         for token in token_records:
             if token.label:
@@ -493,6 +517,42 @@ class ExpertRouteAnalysisService:
                 "label": f"{sorted_labels[0]} vs {sorted_labels[1]}",
                 "label_a": sorted_labels[0],
                 "label_b": sorted_labels[1],
+                "values": sorted_labels,
+            })
+
+        # Dynamic category axes from categories_json
+        category_values = defaultdict(set)
+        for token in token_records:
+            if token.categories_json:
+                cats = json.loads(token.categories_json)
+                for axis_id, value in cats.items():
+                    category_values[axis_id].add(value)
+        for axis_id, values in sorted(category_values.items()):
+            if len(values) >= 2:
+                sorted_vals = sorted(values)
+                axes.append({
+                    "id": axis_id,
+                    "label": " / ".join(sorted_vals[:3]) + ("\u2026" if len(sorted_vals) > 3 else ""),
+                    "label_a": sorted_vals[0],
+                    "label_b": sorted_vals[1],
+                    "values": sorted_vals,
+                })
+
+        # Target word axis (when multiple target words across sessions)
+        target_words = set()
+        for token in token_records:
+            if token.target_word:
+                target_words.add(token.target_word)
+
+        if len(target_words) >= 2:
+            sorted_tw = sorted(target_words)
+            tw_label = " / ".join(sorted_tw[:3]) + ("…" if len(sorted_tw) > 3 else "")
+            axes.append({
+                "id": "target_word",
+                "label": tw_label,
+                "label_a": sorted_tw[0],
+                "label_b": sorted_tw[1],
+                "values": sorted_tw,
             })
 
         return axes

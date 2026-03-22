@@ -130,9 +130,10 @@ export interface ContextSensitiveCardProps {
   colorLabelB: string
   gradient: GradientScheme
   elementDescription?: string
+  clusterAssignments?: Record<string, number>
 }
 
-export default function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB, gradient, elementDescription }: ContextSensitiveCardProps) {
+export default function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB, gradient, elementDescription, clusterAssignments }: ContextSensitiveCardProps) {
   const [activeTab, setActiveTab] = useState<'details' | 'examples' | 'ai'>('details')
 
   // Type-safe detection of rich data from Sankey clicks
@@ -145,10 +146,14 @@ export default function ContextSensitiveCard({ cardType, selectedData, colorLabe
     ? selectedData.label_distribution as Record<string, number>
     : null
 
+  // Extract per-axis category distributions (voice, scale, specificity, etc.)
+  const axisDistributions = hasRichData && selectedData?.category_distributions
+    ? selectedData.category_distributions as Record<string, Record<string, number>>
+    : null
+
   // Reset tab when selectedData changes
   useEffect(() => {
     setActiveTab('details')
-    setCustomLabel('')
   }, [selectedData])
 
   if (!selectedData) {
@@ -348,7 +353,59 @@ export default function ContextSensitiveCard({ cardType, selectedData, colorLabe
                       </div>
                     </>
                   )}
+
+                  {/* Per-axis category distributions */}
+                  {axisDistributions && Object.keys(axisDistributions).length > 0 && (
+                    <div>
+                      <h4 className="font-medium text-gray-900 mb-1 text-[11px]">Category Breakdown</h4>
+                      <div className="space-y-2 max-h-48 overflow-y-auto">
+                        {Object.entries(axisDistributions).map(([axisId, dist]) => {
+                          const total = Object.values(dist).reduce((s, v) => s + v, 0)
+                          return (
+                            <div key={axisId}>
+                              <p className="text-[10px] font-medium text-gray-600 capitalize mb-0.5">{axisId}</p>
+                              {Object.entries(dist)
+                                .sort(([, a], [, b]) => b - a)
+                                .map(([value, count]) => {
+                                  const pct = total > 0 ? (count / total) * 100 : 0
+                                  return (
+                                    <div key={value} className="mb-0.5">
+                                      <div className="flex justify-between items-center">
+                                        <span className="text-[10px] text-gray-700 capitalize">{value}</span>
+                                        <span className="text-[10px] text-gray-500">{count} ({pct.toFixed(0)}%)</span>
+                                      </div>
+                                      <div className="w-full bg-gray-200 rounded-full h-1">
+                                        <div
+                                          className="bg-indigo-400 h-1 rounded-full"
+                                          style={{ width: `${Math.min(pct, 100)}%` }}
+                                        />
+                                      </div>
+                                    </div>
+                                  )
+                                })}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
+
+                {/* Cluster path for trajectory clicks */}
+                {cardType === 'route' && clusterAssignments && Object.keys(clusterAssignments).length > 0 && (
+                  <div className="mt-3 pt-3 border-t border-gray-100">
+                    <h4 className="text-[11px] font-semibold text-gray-600 mb-2">Cluster Path</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {Object.entries(clusterAssignments)
+                        .sort(([a], [b]) => Number(a) - Number(b))
+                        .map(([layer, clusterId]) => (
+                          <span key={layer} className="px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-[10px]">
+                            L{layer} → C{clusterId}
+                          </span>
+                        ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

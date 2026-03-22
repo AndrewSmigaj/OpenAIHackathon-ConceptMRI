@@ -2,9 +2,10 @@ import { useState, useCallback, useMemo } from 'react'
 import type { SessionDetailResponse, AnalyzeRoutesRequest, RouteAnalysisResponse } from '../../types/api'
 import type { FilterState } from '../WordFilterPanel'
 import type { GradientScheme } from '../../utils/colorBlending'
+import type { SelectedCard } from '../../types/analysis'
+import type { DynamicAxis } from '../../types/api'
 import MultiSankeyView from '../charts/MultiSankeyView'
 import SteppedTrajectoryPlot from '../charts/SteppedTrajectoryPlot'
-import ContextSensitiveCard from './ContextSensitiveCard'
 import { ChartBarIcon } from '../icons/Icons'
 import { LAYER_RANGES } from '../../constants/layerRanges'
 
@@ -32,6 +33,14 @@ interface ClusterRoutesSectionProps {
   colorLabelA: string
   colorLabelB: string
   gradient: GradientScheme
+  secondaryCategoryA?: string
+  secondaryCategoryB?: string
+  secondaryGradient?: GradientScheme
+  secondaryAxisId?: string
+  shapeAxisId?: string
+  shapeAxis?: DynamicAxis
+  primaryAxisValues?: string[]
+  secondaryAxisValues?: string[]
   selectedRange: string
   onRangeChange: (range: string) => void
   layerClusterCounts: {[key: number]: number}
@@ -45,7 +54,7 @@ interface ClusterRoutesSectionProps {
   setGlobalClusterCount: (value: number) => void
   clusteringDimSubset: number[] | null
   onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
-  elementDescriptions?: Record<string, string>
+  onCardSelect: (card: SelectedCard) => void
 }
 
 export default function ClusterRoutesSection({
@@ -55,6 +64,14 @@ export default function ClusterRoutesSection({
   colorLabelA,
   colorLabelB,
   gradient,
+  secondaryCategoryA,
+  secondaryCategoryB,
+  secondaryGradient,
+  secondaryAxisId,
+  shapeAxisId,
+  shapeAxis,
+  primaryAxisValues,
+  secondaryAxisValues,
   selectedRange,
   onRangeChange,
   layerClusterCounts,
@@ -68,9 +85,8 @@ export default function ClusterRoutesSection({
   setGlobalClusterCount,
   clusteringDimSubset,
   onRouteDataLoaded,
-  elementDescriptions
+  onCardSelect
 }: ClusterRoutesSectionProps) {
-  const [selectedCard, setSelectedCard] = useState<{ type: 'cluster' | 'route', data: any } | null>(null)
   const [runAnalysis, setRunAnalysis] = useState<(() => void) | null>(null)
   const [runTrajectoryAnalysis, setRunTrajectoryAnalysis] = useState<(() => void) | null>(null)
 
@@ -80,11 +96,11 @@ export default function ClusterRoutesSection({
   }, [selectedRange])
 
   const handleVisualizationClick = useCallback((elementType: 'cluster' | 'trajectory', data: any) => {
-    setSelectedCard({
+    onCardSelect({
       type: elementType === 'cluster' ? 'cluster' : 'route',
       data
     })
-  }, [])
+  }, [onCardSelect])
 
   const handleSankeyAnalysisReady = useCallback((analysisFunction: () => void) => {
     setRunAnalysis(() => analysisFunction)
@@ -120,7 +136,7 @@ export default function ClusterRoutesSection({
   }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod, clusteringDimSubset])
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-4 h-full flex flex-col">
+    <div className="bg-white rounded-xl shadow-sm p-4">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-lg font-semibold text-gray-900">Latent Space Analysis</h3>
@@ -141,7 +157,7 @@ export default function ClusterRoutesSection({
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto">
+      <div>
         {/* Trajectory Sankey - Clusters and Paths */}
         <div className="bg-gray-50 rounded-lg p-6 mb-4">
           <MultiSankeyView
@@ -151,6 +167,10 @@ export default function ClusterRoutesSection({
             colorLabelA={colorLabelA}
             colorLabelB={colorLabelB}
             gradient={gradient}
+            secondaryCategoryA={secondaryCategoryA}
+            secondaryCategoryB={secondaryCategoryB}
+            secondaryGradient={secondaryGradient}
+            secondaryAxisId={secondaryAxisId}
             showAllRoutes={false}
             topRoutes={20}
             selectedRange={selectedRange}
@@ -166,27 +186,32 @@ export default function ClusterRoutesSection({
         </div>
 
         {/* Stepped Trajectory Plot */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-4">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
           <SteppedTrajectoryPlot
             sessionIds={sessionIds}
             layers={memoizedLayers}
             colorLabelA={colorLabelA}
             colorLabelB={colorLabelB}
             gradient={gradient}
+            primaryValues={primaryAxisValues}
+            secondaryColorAxisId={secondaryAxisId}
+            secondaryValues={secondaryAxisValues}
+            shapeAxisId={shapeAxisId}
+            shapeValues={shapeAxis?.values}
             source={embeddingSource}
             method={reductionMethod}
             sessionData={sessionData}
             filterConfig={convertFilterState(filterState, sessionData)}
             nComponents={reductionDimensions}
             height={400}
-            maxTrajectories={100}
+            maxTrajectories={400}
             manualTrigger={true}
             onAnalysisReady={handleTrajectoryAnalysisReady}
             onPointClick={useCallback((info: { probe_id: string; target: string; label?: string }) => {
               // Look up the full sentence from session data
               const sentence = sessionData?.sentences?.find(s => s.probe_id === info.probe_id)
               if (sentence) {
-                setSelectedCard({
+                onCardSelect({
                   type: 'route',
                   data: {
                     _fullData: sentence,
@@ -195,33 +220,13 @@ export default function ClusterRoutesSection({
                     tokens: [sentence],
                     example_tokens: [sentence],
                     signature: `Trajectory: ${info.probe_id.slice(0, 8)}`,
+                    probe_id: info.probe_id,
                   }
                 })
               }
-            }, [sessionData])}
+            }, [sessionData, onCardSelect])}
           />
         </div>
-
-        {/* Context-Sensitive Card integrated */}
-        {selectedCard && (() => {
-          const d = selectedCard.data
-          const descKey = selectedCard.type === 'cluster'
-            ? `cluster-${d.clusterId || d.cluster_id}-L${d.layer}`
-            : `route-${d.signature}`
-          const desc = elementDescriptions?.[descKey]
-          return (
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-              <ContextSensitiveCard
-                cardType={selectedCard.type}
-                selectedData={selectedCard.data}
-                colorLabelA={colorLabelA}
-                colorLabelB={colorLabelB}
-                gradient={gradient}
-                elementDescription={desc}
-              />
-            </div>
-          )
-        })()}
       </div>
     </div>
   )

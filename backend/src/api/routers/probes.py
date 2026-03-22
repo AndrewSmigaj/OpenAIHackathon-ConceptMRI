@@ -217,15 +217,26 @@ async def run_sentence_experiment(
         sentence_sets_dir = str(Path(__file__).resolve().parents[4] / "data" / "sentence_sets")
         ss = load_sentence_set_by_name(request.sentence_set_name, sentence_sets_dir)
 
-        # Collect sentences (A + B, skip neutral)
+        # Collect sentences (A + B + optional C, skip neutral)
         sentences = []
         for entry in ss.sentences_a:
-            sentences.append((entry, ss.label_a))
+            secondary = getattr(entry, 'secondary_label', None)
+            sentences.append((entry, ss.label_a, secondary))
         for entry in ss.sentences_b:
-            sentences.append((entry, ss.label_b))
+            secondary = getattr(entry, 'secondary_label', None)
+            sentences.append((entry, ss.label_b, secondary))
+        if ss.sentences_c and ss.label_c:
+            for entry in ss.sentences_c:
+                secondary = getattr(entry, 'secondary_label', None)
+                sentences.append((entry, ss.label_c, secondary))
 
         if not sentences:
             raise ValueError(f"Sentence set '{request.sentence_set_name}' has no A/B sentences")
+
+        # Build labels list
+        labels = [ss.label_a, ss.label_b]
+        if ss.label_c:
+            labels.append(ss.label_c)
 
         # Create session
         session_name = request.session_name or f"sentence_{ss.name}"
@@ -233,22 +244,33 @@ async def run_sentence_experiment(
             session_name=session_name,
             total_probes=len(sentences),
             target_word=ss.target_word,
-            labels=[ss.label_a, ss.label_b],
+            labels=labels,
         )
 
         # Capture each sentence
         count_a = 0
         count_b = 0
-        for entry, label in sentences:
+        count_c = 0
+        for entry, label, secondary_label in sentences:
             try:
+                # Build categories dict: use entry.categories if present,
+                # else construct from secondary_label for backward compat
+                categories = getattr(entry, 'categories', None)
+                if categories is None and secondary_label and ss.axis2_name:
+                    categories = {ss.axis2_name: secondary_label}
+
                 service.capture_probe(
                     session_id=session_id,
                     input_text=entry.text,
                     target_word=entry.target_word,
                     label=label,
+                    label2=secondary_label,
+                    categories=categories,
                 )
                 if label == ss.label_a:
                     count_a += 1
+                elif ss.label_c and label == ss.label_c:
+                    count_c += 1
                 else:
                     count_b += 1
             except Exception as e:
@@ -258,11 +280,12 @@ async def run_sentence_experiment(
         # Finalize session
         service.finalize_session(session_id)
 
-        logger.info(f"Sentence experiment complete: {session_id} ({count_a}A + {count_b}B)")
+        total = count_a + count_b + count_c
+        logger.info(f"Sentence experiment complete: {session_id} ({count_a}A + {count_b}B + {count_c}C)")
         return SentenceExperimentResponse(
             session_id=session_id,
             session_name=session_name,
-            total_probes=count_a + count_b,
+            total_probes=total,
             label_a=ss.label_a,
             label_b=ss.label_b,
             count_a=count_a,

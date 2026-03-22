@@ -323,7 +323,7 @@ export default function LLMAnalysisPanel({
           </div>
 
           {viewingStep && viewingStep.output && (
-            <div className="bg-gray-50 rounded-lg p-3 max-h-80 overflow-y-auto">
+            <div className="bg-gray-50 rounded-lg p-3">
               {viewingStep.template.output_type === 'narrative' ? (
                 <div className="prose prose-sm max-w-none text-gray-800">
                   <ReactMarkdown>{viewingStep.output}</ReactMarkdown>
@@ -332,7 +332,7 @@ export default function LLMAnalysisPanel({
                 <div className="text-sm text-gray-700">
                   <p className="font-medium mb-2">{viewingStep.output}</p>
                   {viewingStep.elementLabels && (
-                    <div className="space-y-1 max-h-48 overflow-y-auto">
+                    <div className="space-y-1">
                       {Object.entries(viewingStep.elementLabels).slice(0, 20).map(([key, desc]) => (
                         <div key={key} className="bg-white px-2 py-1 rounded border border-gray-200">
                           <span className="text-xs font-mono text-blue-600">{key}</span>

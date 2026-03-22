@@ -15,13 +15,21 @@ Sentence sets are controlled datasets where each sentence contains a **target wo
 ### File-level fields
 ```json
 {
-  "name": "tank_polysemy_v2",
+  "name": "knife_safety_v2",
   "version": "2.0",
-  "target_word": "tank",
-  "label_a": "aquarium",
-  "label_b": "vehicle",
-  "description_a": "Glass tank or aquarium containing fish or aquatic life",
-  "description_b": "Armored military vehicle used in combat",
+  "target_word": "knife",
+  "label_a": "benign",
+  "label_b": "harmful",
+  "description_a": "Everyday benign knife usage — cooking, crafting, utility",
+  "description_b": "Harmful or violent knife usage — crime, assault, threat",
+  "label_a2": "action",
+  "label_b2": "description",
+  "axis2_name": "structure",
+  "axes": [
+    {"id": "structure", "values": ["action", "description"]},
+    {"id": "intensity", "values": ["low", "medium", "high"]},
+    {"id": "topic", "values": ["culinary", "craft", "outdoor", "medical", "professional"]}
+  ],
   "sentences_a": [],
   "sentences_b": [],
   "sentences_neutral": [],
@@ -29,14 +37,28 @@ Sentence sets are controlled datasets where each sentence contains a **target wo
 }
 ```
 
+The secondary axis (`label_a2`/`label_b2`/`axis2_name`) is **orthogonal** to the primary axis. It captures a different dimension of variation so the model can be analyzed along two axes simultaneously (e.g., is the model routing by meaning, by sentence structure, or by both?).
+
+The `axes` array declares all generic category dimensions available for this set. Each axis has an `id` (used as category key) and `values` (the valid labels). The backend reads these dynamically — no code changes needed when adding new axes.
+
 ### SentenceEntry fields
 ```json
 {
-  "text": "The colorful fish swam around the decorations inside the large glass tank.",
+  "text": "The chef sharpened the knife before slicing the fresh vegetables for the salad.",
   "group": "A",
-  "target_word": "tank"
+  "target_word": "knife",
+  "secondary_label": "action",
+  "categories": {
+    "structure": "action",
+    "intensity": "medium",
+    "topic": "culinary"
+  }
 }
 ```
+
+The `secondary_label` field corresponds to `label_a2` or `label_b2` and is stored as `label2` in probe Parquet data.
+
+The `categories` dict contains labels for all generic axes declared in the file-level `axes` array. Each key matches an axis `id`, and the value must be one of that axis's `values`. The backend serializes this dict as `categories_json` in Parquet data, then dynamically extracts axes for visualization.
 
 ## Sentence Quality Rules
 
@@ -63,23 +85,36 @@ Run after **every batch** of additions:
 
 **Programmatic validation**: The backend has `validate_sentence_set()` in `backend/src/services/generation/sentence_set.py` that checks all of the above.
 
-## Claude Code Prompts
+## Workflow
 
-### Add sentences to an existing set
+This is a **Claude-based workflow** — there is no probe UI. Claude Code creates sentence sets, runs captures via the API, and manages sessions directly.
+
+### Capturing probes from a sentence set
+```bash
+curl -X POST http://localhost:8000/api/probes/sentence-experiment \
+  -H "Content-Type: application/json" \
+  -d '{"sentence_set_name": "knife_safety_v2"}'
+```
+
+After modifying sentence sets (adding sentences, changing categories, creating new sets), Claude should recapture all affected sessions so the data lake stays current.
+
+### Claude Code Prompts
+
+**Add sentences to an existing set:**
 ```
 Read data/sentence_sets/safety/knife_safety_v2.json and add 50 more sentences
 to sentences_a (benign knife usage). Follow the GUIDE.md in data/sentence_sets/
 for quality rules. Validate after adding.
 ```
 
-### Create a new sentence set
+**Create a new sentence set:**
 ```
 Create a new sentence set for target_word "[WORD]" with label_a "[A]"
 and label_b "[B]". Put it in data/sentence_sets/[CATEGORY]/[name]_v1.json.
 Write 200 sentences per class. Follow GUIDE.md for schema and quality rules.
 ```
 
-### Validate a sentence set
+**Validate a sentence set:**
 ```
 Read data/sentence_sets/[path].json and validate every entry:
 - word count 10-30
@@ -88,6 +123,55 @@ Read data/sentence_sets/[path].json and validate every entry:
 - group field matches parent array
 Report all errors.
 ```
+
+## Axes and Categories
+
+### Primary and secondary axes
+
+Every sentence set has a primary axis (label_a/label_b) and a secondary axis (label_a2/label_b2). The secondary axis is always the first entry in the `axes` array.
+
+| Set | Primary Axis | Secondary Axis | Label A2 | Label B2 |
+|-----|-------------|----------------|----------|----------|
+| tank | aquarium / vehicle | structure | action | description |
+| knife | benign / harmful | structure | action | description |
+| gun | benign / harmful | structure | action | description |
+| hammer | benign / harmful | structure | action | description |
+| rope | benign / harmful | structure | action | description |
+| said_roleframing | narrative / factual | speech_type | direct | reported |
+| said_safety | safe / unsafe | speech_type | direct | reported |
+| attacked | roleplay / factual | voice | active | passive |
+| destroyed | roleplay / factual | voice | active | passive |
+| threatened | roleplay / factual | voice | active | passive |
+
+### Generic categories per set type
+
+**Safety sets** (knife, gun, hammer, rope) — 3 categories:
+| Category | Values | Description |
+|----------|--------|-------------|
+| structure | action, description | Whether target word is doing/receiving (action) or described statically (description) |
+| intensity | low, medium, high | Severity level of the benign/harmful context |
+| topic | culinary, craft, outdoor, medical, professional, sport, domestic, industrial, agricultural, nautical, construction, recreation, hunting, climbing, theater, rescue, fishing, maritime, utility, ceremonial | Domain-specific topic (varies by target word) |
+
+**Framing sets** (attacked, destroyed, threatened) — 3 categories:
+| Category | Values | Description |
+|----------|--------|-------------|
+| voice | active, passive | Syntactic voice: "X attacked Y" vs "Y was attacked by X" |
+| scale | individual, group | One actor/target vs many |
+| specificity | specific, generic | Named entities (Sir Galahad, Pearl Harbor) vs unnamed (a warrior, the suspects) |
+
+**Said sets** (said_roleframing, said_safety) — 1 category:
+| Category | Values | Description |
+|----------|--------|-------------|
+| speech_type | direct, reported | Quoted dialogue vs paraphrased/indirect speech |
+
+**Polysemy set** (tank) — 1 category:
+| Category | Values | Description |
+|----------|--------|-------------|
+| structure | action, description | Whether target word is doing/receiving (action) or described statically (description) |
+
+### Factorial design (framing sets)
+
+The three framing sets use a full factorial design: 2 (voice) x 2 (scale) x 2 (specificity) = 8 cells, with 25 sentences per cell per group (roleplay/factual). This ensures every category combination has equal representation for clean statistical analysis.
 
 ## Category Descriptions
 
@@ -99,14 +183,35 @@ Words with multiple distinct meanings that MoE experts may route differently.
 ### safety/
 Words describing objects that can be used benignly or harmfully.
 - **Knife, Gun, Hammer, Rope**: benign everyday use vs harmful/violent use
+- 4 parallel sets with shared categories (structure, intensity, topic) — can be analyzed per-word or combined
 - Tests whether MoE routing reflects safety-relevant context
 - Good additions: objects with clear dual-use potential (e.g., "match", "acid")
 
 ### role_framing/
-Same word used in different rhetorical or communicative frames.
-- **Said**: narrative storytelling vs factual reporting
-- Tests whether MoE routing reflects discourse register
-- Good additions: verbs of communication used differently across registers (e.g., "claimed", "reported")
+Words used in fictional (roleplay) vs real-world (factual) contexts.
+- **Said** (said_roleframing): narrative storytelling vs factual reporting — studies the "said" verb specifically
+- **Said** (said_safety): safe vs unsafe speech contexts — deconfounds context from speech_type for "said"
+- **Attacked, Destroyed, Threatened**: roleplay vs factual violence verbs — 3 parallel sets with shared categories (voice, scale, specificity), factorial design (25 per cell)
+- The framing sets test whether the model distinguishes fictional from real-world violence
+- Cross-word analysis: combining sessions from attacked+destroyed+threatened reveals whether fiction/reality routing patterns generalize across violence verbs
+
+## Confound Analysis
+
+### Documented confounds
+
+1. **Roleframing speech_type/label confound (said_roleframing_v2)**: In the "said" roleframing set, speech_type perfectly mirrors the primary label — narrative=100% direct speech (quotes), factual=100% reported speech (no quotes). The model may route "said" based on adjacent token patterns (comma+quote vs article/pronoun) rather than roleplay vs factual semantics. **Mitigation**: The attacked/destroyed/threatened framing sets provide a clean alternative for studying roleplay vs factual without the quote confound.
+
+2. **Said safety deconfounds within "said" domain (said_safety_v2)**: Context x speech_type are properly crossed (direct+safe, direct+unsafe, reported+safe, reported+unsafe = 100 each). But "said" still forces quote/no-quote structural differences between direct and reported speech. This is inherent to speech verbs.
+
+3. **Safety benign structure/intensity correlation**: In safety sets, benign descriptions tend to be low intensity while harmful actions tend to be high intensity. This reflects real-world usage — a description of a knife in a drawer is naturally low intensity. Cross-group comparison (A vs B at same structure level) remains valid.
+
+4. **Vehicle tank structure/register correlation**: In the polysemy set, action sentences about military tanks tend toward formal/journalistic register while aquarium descriptions tend toward casual/domestic. This reflects the real-world contexts where these meanings appear.
+
+5. **Topic distribution skews**: In safety sets, topic distributions reflect real-world usage patterns (e.g., rope is 68% professional because rope is primarily a professional tool). This is expected and documented, not a design flaw.
+
+### Removed categories
+
+- **intent** (removed from all safety sets): Was 99.94% "deliberate" (1599/1600 sentences). The category was analytically useless — force-labeling passive descriptions as "deliberate" produced a near-constant axis with no discriminative power.
 
 ## Expanding Existing Sets
 

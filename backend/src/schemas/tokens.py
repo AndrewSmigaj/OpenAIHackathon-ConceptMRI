@@ -5,7 +5,8 @@ Used by experiments to query probes and their activation data.
 """
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import Dict, Optional
+import json
 
 
 @dataclass
@@ -30,6 +31,8 @@ class ProbeRecord:
     sequence_id: Optional[str] = None
     sentence_index: Optional[int] = None
     label: Optional[str] = None
+    label2: Optional[str] = None
+    categories_json: Optional[str] = None
     transition_step: Optional[int] = None
     created_at: Optional[str] = None
 
@@ -54,6 +57,8 @@ PROBE_RECORD_PARQUET_SCHEMA = {
     "sequence_id": "string",
     "sentence_index": "int32",
     "label": "string",
+    "label2": "string",
+    "categories_json": "string",
     "transition_step": "int32",
     "created_at": "string",
 }
@@ -73,10 +78,13 @@ def create_probe_record(
     sequence_id: str = None,
     sentence_index: int = None,
     label: str = None,
+    label2: str = None,
+    categories: Optional[Dict[str, str]] = None,
     transition_step: int = None,
     created_at: str = None,
 ) -> ProbeRecord:
     """Create probe record linking probe_id to input text and tracked words."""
+    categories_json = json.dumps(categories) if categories else None
     return ProbeRecord(
         probe_id=probe_id,
         session_id=session_id,
@@ -91,6 +99,8 @@ def create_probe_record(
         sequence_id=sequence_id,
         sentence_index=sentence_index,
         label=label,
+        label2=label2,
+        categories_json=categories_json,
         transition_step=transition_step,
         created_at=created_at,
     )

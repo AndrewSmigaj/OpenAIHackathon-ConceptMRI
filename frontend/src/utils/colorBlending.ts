@@ -168,6 +168,86 @@ export function getColorPreview(
 
 
 /**
+ * Auto-pairing table: each primary gradient maps to a complementary secondary gradient.
+ * Pairs are chosen so the 4 blended corners are perceptually distinct.
+ */
+export const GRADIENT_AUTO_PAIRS: Record<GradientScheme, GradientScheme> = {
+  'red-blue': 'yellow-cyan',
+  'yellow-cyan': 'red-blue',
+  'purple-green': 'orange-teal',
+  'orange-teal': 'purple-green',
+  'pink-lime': 'yellow-cyan',
+};
+
+/**
+ * Map a discrete value to a color on a gradient.
+ * Values are mapped to evenly-spaced positions from -1 to +1:
+ *   2 values → [-1, +1] (gradient endpoints)
+ *   3 values → [-1, 0, +1]
+ *   N values → evenly spaced
+ */
+export function getAxisColor(value: string, sortedValues: string[], gradient: GradientScheme): RGBColor {
+  const idx = sortedValues.indexOf(value);
+  if (idx === -1) return getGradientColor(0, gradient); // unknown → midpoint
+  const position = sortedValues.length <= 1 ? 0 : -1 + (2 * idx / (sortedValues.length - 1));
+  return getGradientColor(position, gradient);
+}
+
+/**
+ * Get color for a single data point (trajectory, probe) based on discrete axis values.
+ * Unlike getNodeColor() which works with distributions, this works with individual values.
+ * Supports blending two axes — primary uses user-selected gradient, secondary auto-pairs.
+ */
+export function getPointColor(
+  primaryValue: string,
+  primaryValues: string[],
+  primaryGradient: GradientScheme = 'red-blue',
+  secondaryValue?: string,
+  secondaryValues?: string[],
+): string {
+  const color1 = getAxisColor(primaryValue, primaryValues, primaryGradient);
+  if (!secondaryValue || !secondaryValues || secondaryValues.length === 0) {
+    return rgbToHex(color1);
+  }
+  const secGrad = GRADIENT_AUTO_PAIRS[primaryGradient];
+  const color2 = getAxisColor(secondaryValue, secondaryValues, secGrad);
+  return rgbToHex(blendColors(color1, color2, 0.5, 0.5));
+}
+
+/**
+ * Get preview colors for axis combinations. Works for any axis cardinality.
+ * Returns array of {label, color} entries for all value combinations.
+ */
+export function getAxisPreview(
+  primaryValues: string[],
+  primaryGradient: GradientScheme,
+  secondaryValues?: string[],
+): Array<{ label: string; color: string }> {
+  const results: Array<{ label: string; color: string }> = [];
+  const secGrad = GRADIENT_AUTO_PAIRS[primaryGradient];
+
+  if (!secondaryValues || secondaryValues.length === 0) {
+    // Single axis: show color for each value
+    for (const val of primaryValues) {
+      const color = getAxisColor(val, primaryValues, primaryGradient);
+      results.push({ label: val, color: rgbToHex(color) });
+    }
+  } else {
+    // Dual axis: show N×M grid
+    for (const pVal of primaryValues) {
+      for (const sVal of secondaryValues) {
+        const c1 = getAxisColor(pVal, primaryValues, primaryGradient);
+        const c2 = getAxisColor(sVal, secondaryValues, secGrad);
+        const blended = blendColors(c1, c2, 0.5, 0.5);
+        results.push({ label: `${pVal} + ${sVal}`, color: rgbToHex(blended) });
+      }
+    }
+  }
+
+  return results;
+}
+
+/**
  * Calculate visual properties based on traffic volume
  * Returns opacity and line width for route visualization
  */

@@ -2,8 +2,8 @@ import { useState, useCallback } from 'react'
 import type { SessionDetailResponse, RouteAnalysisResponse } from '../../types/api'
 import type { FilterState } from '../WordFilterPanel'
 import type { GradientScheme } from '../../utils/colorBlending'
+import type { SelectedCard } from '../../types/analysis'
 import MultiSankeyView from '../charts/MultiSankeyView'
-import ContextSensitiveCard from './ContextSensitiveCard'
 import { ChartBarIcon } from '../icons/Icons'
 
 interface ExpertRoutesSectionProps {
@@ -13,12 +13,16 @@ interface ExpertRoutesSectionProps {
   colorLabelA: string
   colorLabelB: string
   gradient: GradientScheme
+  secondaryCategoryA?: string
+  secondaryCategoryB?: string
+  secondaryGradient?: GradientScheme
+  secondaryAxisId?: string
   topRoutes: number
   selectedRange: string
   onRangeChange: (range: string) => void
   showAllRoutes: boolean
   onRouteDataLoaded: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
-  elementDescriptions?: Record<string, string>
+  onCardSelect: (card: SelectedCard) => void
 }
 
 export default function ExpertRoutesSection({
@@ -28,25 +32,28 @@ export default function ExpertRoutesSection({
   colorLabelA,
   colorLabelB,
   gradient,
+  secondaryCategoryA,
+  secondaryCategoryB,
+  secondaryGradient,
+  secondaryAxisId,
   topRoutes,
   selectedRange,
   onRangeChange,
   showAllRoutes,
   onRouteDataLoaded,
-  elementDescriptions
+  onCardSelect
 }: ExpertRoutesSectionProps) {
-  const [selectedCard, setSelectedCard] = useState<{ type: 'expert' | 'highway', data: any } | null>(null)
   const [runAnalysis, setRunAnalysis] = useState<(() => void) | null>(null)
 
   const handleSankeyClick = (elementType: 'expert' | 'route', data: any) => {
-    setSelectedCard({
+    onCardSelect({
       type: elementType === 'expert' ? 'expert' : 'highway',
       data
     })
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-4 h-full">
+    <div className="bg-white rounded-xl shadow-sm p-4">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-lg font-semibold text-gray-900">Expert Routing Pathways</h3>
@@ -73,6 +80,10 @@ export default function ExpertRoutesSection({
           colorLabelA={colorLabelA}
           colorLabelB={colorLabelB}
           gradient={gradient}
+          secondaryCategoryA={secondaryCategoryA}
+          secondaryCategoryB={secondaryCategoryB}
+          secondaryGradient={secondaryGradient}
+          secondaryAxisId={secondaryAxisId}
           showAllRoutes={showAllRoutes}
           topRoutes={topRoutes}
           selectedRange={selectedRange}
@@ -85,28 +96,6 @@ export default function ExpertRoutesSection({
           onAnalysisReady={useCallback((analysisFunction) => setRunAnalysis(() => analysisFunction), [])}
         />
       </div>
-
-      {/* Context-Sensitive Card integrated */}
-      {selectedCard && (() => {
-        // Look up element description
-        const d = selectedCard.data
-        const descKey = selectedCard.type === 'expert'
-          ? `expert-${d.expertId || d.expert_id}-L${d.layer}`
-          : `route-${d.signature}`
-        const desc = elementDescriptions?.[descKey]
-        return (
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <ContextSensitiveCard
-              cardType={selectedCard.type}
-              selectedData={selectedCard.data}
-              colorLabelA={colorLabelA}
-              colorLabelB={colorLabelB}
-              gradient={gradient}
-              elementDescription={desc}
-            />
-          </div>
-        )
-      })()}
     </div>
   )
 }

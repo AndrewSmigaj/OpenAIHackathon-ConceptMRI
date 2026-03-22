@@ -13,6 +13,10 @@ interface MultiSankeyViewProps {
   colorLabelA: string
   colorLabelB: string
   gradient?: GradientScheme
+  secondaryCategoryA?: string
+  secondaryCategoryB?: string
+  secondaryGradient?: GradientScheme
+  secondaryAxisId?: string
   showAllRoutes: boolean
   topRoutes: number
   selectedRange?: string
@@ -34,6 +38,10 @@ export default function MultiSankeyView({
   colorLabelA,
   colorLabelB,
   gradient,
+  secondaryCategoryA,
+  secondaryCategoryB,
+  secondaryGradient,
+  secondaryAxisId,
   showAllRoutes,
   topRoutes,
   selectedRange = 'range1',
@@ -177,6 +185,10 @@ export default function MultiSankeyView({
                     colorLabelA={colorLabelA}
                     colorLabelB={colorLabelB}
                     gradient={gradient}
+                    secondaryCategoryA={secondaryCategoryA}
+                    secondaryCategoryB={secondaryCategoryB}
+                    secondaryGradient={secondaryGradient}
+                    secondaryAxisId={secondaryAxisId}
                     onNodeClick={(nodeId, nodeData) => {
                       if (onNodeClick) {
                         const enrichedData = {

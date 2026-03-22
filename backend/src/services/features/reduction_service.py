@@ -4,6 +4,7 @@ Generic dimensionality reduction service supporting PCA and UMAP.
 Computes reduction on demand from raw embeddings — no pre-computation.
 """
 
+import json
 import logging
 from pathlib import Path
 from typing import Optional
@@ -85,6 +86,7 @@ class ReductionService:
                         "target_word": t.target_word,
                         "label": t.label,
                         "session_id": sid,
+                        "categories_json": t.categories_json,
                     }
 
             # Filter to target token (position=1) and requested layers
@@ -143,6 +145,7 @@ class ReductionService:
                     "coordinates": [float(coords[idx, c]) for c in range(coords.shape[1])],
                     "target_word": meta.get("target_word", ""),
                     "label": meta.get("label"),
+                    "categories": json.loads(meta["categories_json"]) if meta.get("categories_json") else None,
                 }
                 if coords.shape[1] > 1:
                     point["y"] = float(coords[idx, 1])

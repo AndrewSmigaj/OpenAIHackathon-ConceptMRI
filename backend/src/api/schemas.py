@@ -98,6 +98,8 @@ class SankeyNode(BaseModel):
     expert_id: int
     token_count: int
     label_distribution: Optional[Dict[str, int]] = None
+    target_word_distribution: Optional[Dict[str, int]] = None
+    category_distributions: Optional[Dict[str, Dict[str, int]]] = None
     specialization: str
     tokens: Optional[List[ProbeExample]] = None
 
@@ -110,6 +112,8 @@ class SankeyLink(BaseModel):
     probability: float
     route_signature: str
     label_distribution: Optional[Dict[str, int]] = None
+    target_word_distribution: Optional[Dict[str, int]] = None
+    category_distributions: Optional[Dict[str, Dict[str, int]]] = None
     token_count: int
 
 
@@ -130,7 +134,8 @@ class RouteAnalysisResponse(BaseModel):
     links: List[SankeyLink]
     top_routes: List[TopRoute]
     statistics: Dict[str, Any]
-    available_axes: Optional[List[Dict[str, str]]] = None
+    available_axes: Optional[List[Dict[str, Any]]] = None
+    probe_assignments: Optional[Dict[str, Dict[str, int]]] = None
 
 
 class RouteDetailsResponse(BaseModel):

@@ -38,14 +38,11 @@ make run-ui   # Starts frontend on port 5173
 
 ## Demo Example - Sentiment Analysis with Positive/Negative Nouns
 
-⚠️ **Important Note**: Currently, the system only supports specific pre-defined category axes for analysis:
-- **Sentiment**: positive/negative
-- **Parts of Speech**: nouns/verbs
-- **Concreteness**: concrete/abstract
-- **Temporal**: temporal words
-- **Cognitive**: cognitive words
-
-Custom categories and axes are a planned future feature. For now, please use the provided demo categories or run the comprehensive probe script (see below).
+The system uses sentence sets with controlled target words. Each sentence set has a primary axis (e.g., benign vs harmful) and generic category axes (e.g., structure, intensity, topic) that the UI reads dynamically. Available sets include:
+- **Polysemy** (tank): aquarium vs vehicle word sense
+- **Safety** (knife, gun, hammer, rope): benign vs harmful object usage — categories: structure, intensity, topic
+- **Framing** (attacked, destroyed, threatened): roleplay vs factual violence — categories: voice, scale, specificity
+- **Said** (said_roleframing, said_safety): narrative vs factual / safe vs unsafe speech contexts
 
 ### Create a Probe Session
 ```json

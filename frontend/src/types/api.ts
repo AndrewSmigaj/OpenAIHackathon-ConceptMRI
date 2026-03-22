@@ -112,6 +112,8 @@ interface SankeyNode {
   expert_id: number
   token_count: number
   label_distribution?: Record<string, number>
+  target_word_distribution?: Record<string, number>
+  category_distributions?: Record<string, Record<string, number>>
   specialization: string
   tokens?: ProbeExample[]
 }
@@ -123,6 +125,8 @@ interface SankeyLink {
   probability: number
   route_signature: string
   label_distribution?: Record<string, number>
+  target_word_distribution?: Record<string, number>
+  category_distributions?: Record<string, Record<string, number>>
   token_count: number
 }
 
@@ -139,6 +143,7 @@ interface DynamicAxis {
   label: string
   label_a: string
   label_b: string
+  values?: string[]
 }
 
 interface RouteAnalysisResponse {
@@ -149,6 +154,7 @@ interface RouteAnalysisResponse {
   top_routes: TopRoute[]
   statistics: RouteStatistics
   available_axes?: DynamicAxis[]
+  probe_assignments?: Record<string, Record<string, number>>
 }
 
 interface RouteDetailsResponse {
@@ -248,6 +254,7 @@ interface ReductionPoint {
   coordinates?: number[]
   target_word: string
   label?: string
+  categories?: Record<string, string>
 }
 
 interface ReductionResponse {
