@@ -11,3 +11,13 @@ Words with multiple distinct meanings. Tests whether MoE experts route the same 
 | Set | Target | Label A | Label B | Status |
 |-----|--------|---------|---------|--------|
 | tank_polysemy_v2 | tank | aquarium | vehicle | 200A + 200B |
+
+## Output axes
+
+When Claude Code categorizes generated outputs for polysemy sets, classify along these axes:
+
+| Axis | Values | Description |
+|------|--------|-------------|
+| tone | neutral, alarming, empathetic, dismissive, aggressive | Emotional tone of the model's generated continuation |
+| content_type | continuation, elaboration, tangent, contradiction, refusal | How the model extends the input |
+| semantic_consistency | maintains_meaning, shifts_meaning, ambiguous | Whether the generated text maintains the same meaning of the target word as the input |

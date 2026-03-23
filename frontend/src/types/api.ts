@@ -65,6 +65,8 @@ interface ProbeExample {
   label?: string
   input_text: string
   probe_id: string
+  generated_text?: string
+  output_category?: string
 }
 
 interface RouteStatistics {
@@ -85,6 +87,9 @@ interface AnalyzeRoutesRequest {
   window_layers: number[]
   filter_config?: FilterConfig
   top_n_routes: number
+  clustering_schema?: string
+  save_as?: string
+  output_grouping_axes?: string[]
 }
 
 interface ClusteringConfig {
@@ -103,6 +108,9 @@ interface AnalyzeClusterRoutesRequest {
   clustering_config: ClusteringConfig
   filter_config?: FilterConfig
   top_n_routes: number
+  clustering_schema?: string
+  save_as?: string
+  output_grouping_axes?: string[]
 }
 
 interface SankeyNode {
@@ -154,6 +162,7 @@ interface RouteAnalysisResponse {
   top_routes: TopRoute[]
   statistics: RouteStatistics
   available_axes?: DynamicAxis[]
+  output_available_axes?: DynamicAxis[]
   probe_assignments?: Record<string, Record<string, number>>
 }
 
@@ -223,6 +232,7 @@ interface TrajectoryResponse {
 interface SentenceExperimentRequest {
   sentence_set_name: string
   session_name?: string
+  generate_output?: boolean
 }
 
 interface SentenceExperimentResponse {
@@ -293,6 +303,22 @@ interface ScaffoldStepResponse {
   element_labels?: Record<string, string> | null
 }
 
+// Clustering Schema Types
+interface ClusteringSchema {
+  name: string
+  created_at: string
+  created_by: string
+  params: {
+    clustering_method: string
+    reduction_method: string
+    reduction_dimensions: number
+    n_clusters?: number
+    embedding_source: string
+    [key: string]: any
+  }
+  windows?: number[][]
+}
+
 // Export all types
 export type {
   ExecutionResponse,
@@ -325,5 +351,6 @@ export type {
   ReductionResponse,
   ScaffoldTemplate,
   ScaffoldStepRequest,
-  ScaffoldStepResponse
+  ScaffoldStepResponse,
+  ClusteringSchema
 };

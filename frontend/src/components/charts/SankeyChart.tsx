@@ -13,6 +13,14 @@ interface SankeyChartProps {
   secondaryCategoryB?: string;
   secondaryGradient?: GradientScheme;
   secondaryAxisId?: string;
+  outputColorLabelA?: string;
+  outputColorLabelB?: string;
+  outputGradient?: GradientScheme;
+  outputSecondaryCategoryA?: string;
+  outputSecondaryCategoryB?: string;
+  outputSecondaryGradient?: GradientScheme;
+  outputSecondaryAxisId?: string;
+  outputColorAxisId?: string;
   onNodeClick?: (nodeId: string, nodeData: SankeyNode) => void;
   onLinkClick?: (linkData: SankeyLink) => void;
   height?: number;
@@ -29,6 +37,14 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
   secondaryCategoryB,
   secondaryGradient = 'yellow-cyan',
   secondaryAxisId,
+  outputColorLabelA,
+  outputColorLabelB,
+  outputGradient = 'purple-green',
+  outputSecondaryCategoryA,
+  outputSecondaryCategoryB,
+  outputSecondaryGradient = 'yellow-cyan',
+  outputSecondaryAxisId,
+  outputColorAxisId,
   onNodeClick,
   onLinkClick,
   height = 600,
@@ -74,15 +90,21 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
 
     chartInstance.current.on('click', handleClick);
 
-    // Handle resize
+    // Handle resize — observe container, not just window
     const handleResize = () => {
       chartInstance.current?.resize();
     };
     window.addEventListener('resize', handleResize);
 
+    const resizeObserver = new ResizeObserver(() => {
+      chartInstance.current?.resize();
+    });
+    resizeObserver.observe(chartRef.current);
+
     return () => {
       chartInstance.current?.off('click', handleClick);
       window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
       chartInstance.current?.dispose();
     };
   }, []);
@@ -119,16 +141,41 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
       return { ...primary, ...secondary };
     };
 
+    // Compute depth offset for proper column placement
+    const minLayer = nodes.length > 0 ? Math.min(...nodes.map(n => n.layer)) : 0;
+
     // Prepare node data with colors from label_distribution
     const sankeyNodes = nodes.map(node => {
-      const secondaryDist = getDistForAxis(node, secondaryAxisId);
-      const dist = mergeDistributions(node.label_distribution, secondaryDist);
+      const isOutputNode = node.name.startsWith('Out:');
+
+      // Output nodes use output color config; latent nodes use input color config
+      let nodeColor: string;
+      if (isOutputNode && outputColorLabelA && outputColorLabelB) {
+        // Output nodes: use category_distributions for the selected output axis, NOT label_distribution
+        const outPrimaryDist = getDistForAxis(node, outputColorAxisId);
+        const outSecondaryDist = getDistForAxis(node, outputSecondaryAxisId);
+        // Merge using OUTPUT secondary categories (not input ones)
+        let outDist: Record<string, number> = {};
+        if (outPrimaryDist) {
+          outDist = { ...outPrimaryDist };
+          if (outputSecondaryCategoryA && outputSecondaryCategoryB && outSecondaryDist) {
+            outDist = { ...outDist, ...outSecondaryDist };
+          }
+        }
+        nodeColor = getNodeColor(outDist, outputColorLabelA, outputColorLabelB, outputSecondaryCategoryA, outputSecondaryCategoryB, outputGradient, outputSecondaryGradient);
+      } else {
+        const secondaryDist = getDistForAxis(node, secondaryAxisId);
+        const dist = mergeDistributions(node.label_distribution, secondaryDist);
+        nodeColor = getNodeColor(dist, colorLabelA, colorLabelB, secondaryCategoryA, secondaryCategoryB, gradient, secondaryGradient);
+      }
+
       return {
         id: node.id,
         name: node.name,
-        value: node.token_count,
+        value: Math.max(1, node.token_count),
+        depth: node.layer - minLayer,
         itemStyle: {
-          color: getNodeColor(dist, colorLabelA, colorLabelB, secondaryCategoryA, secondaryCategoryB, gradient, secondaryGradient)
+          color: nodeColor
         }
       };
     });
@@ -140,8 +187,9 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     const sankeyLinks = links.map(link => {
       const secondaryDist = getDistForAxis(link, secondaryAxisId);
       const linkDist = mergeDistributions(link.label_distribution, secondaryDist);
-      const linkColor = linkDist && Object.keys(linkDist).length > 0 ?
-        getNodeColor(linkDist, colorLabelA, colorLabelB, secondaryCategoryA, secondaryCategoryB, gradient, secondaryGradient) : '#5470c6';
+      const linkColor = linkDist && Object.keys(linkDist).length > 0
+        ? getNodeColor(linkDist, colorLabelA, colorLabelB, secondaryCategoryA, secondaryCategoryB, gradient, secondaryGradient)
+        : '#5470c6';
       
       // Get traffic-based visual properties
       const { opacity, lineWidth } = getTrafficVisualProperties(link.value, maxLinkValue);
@@ -149,7 +197,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
       return {
         source: link.source,
         target: link.target,
-        value: link.value,
+        value: Math.max(0.5, link.value),
         lineStyle: {
           color: linkColor,
           opacity: opacity,
@@ -166,6 +214,21 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
           if (params.dataType === 'node') {
             const node = nodes.find(n => n.name === params.data.name);
             if (!node) return '';
+
+            // Output node tooltip
+            if (node.name.startsWith('Out:')) {
+              const category = node.name.replace('Out:', '');
+              return `
+                <div style="max-width: 300px;">
+                  <strong>Output: ${category}</strong><br/>
+                  <hr style="margin: 4px 0;"/>
+                  Probes: ${node.token_count}<br/>
+                  Labels: ${node.label_distribution ? Object.entries(node.label_distribution).map(([k, v]) => `${k}: ${v}`).join(', ') : 'N/A'}
+                  ${node.category_distributions ? '<br/>Categories: ' + Object.entries(node.category_distributions).map(([axis, dist]) => `${axis}: ${Object.entries(dist).map(([k, v]) => `${k}(${v})`).join(', ')}`).join('; ') : ''}
+                </div>
+              `;
+            }
+
             return `
               <div style="max-width: 300px;">
                 <strong>${node.name}</strong><br/>
@@ -194,7 +257,6 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
       },
       series: [{
         type: 'sankey',
-        layout: 'none',
         emphasis: {
           focus: 'adjacency',
           label: {
@@ -204,18 +266,18 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
         data: sankeyNodes,
         links: sankeyLinks,
         nodeAlign: 'justify',
-        nodeGap: 12,
-        nodeWidth: 24,
+        nodeGap: 8,
+        nodeWidth: 6,
         layoutIterations: 32,
-        left: '8%',
-        right: '20%',
-        top: '8%',
-        bottom: '8%',
+        left: '2%',
+        right: '15%',
+        top: '2%',
+        bottom: '2%',
         label: {
           show: true,
           position: 'right',
-          fontSize: 9,
-          color: '#333'
+          fontSize: 7,
+          color: '#555'
         }
       }],
       animation: true,
@@ -223,12 +285,12 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     };
 
     chartInstance.current.setOption(option);
-  }, [nodes, links, colorLabelA, colorLabelB, gradient, secondaryCategoryA, secondaryCategoryB, secondaryGradient]);
+  }, [nodes, links, colorLabelA, colorLabelB, gradient, secondaryCategoryA, secondaryCategoryB, secondaryGradient, outputColorLabelA, outputColorLabelB, outputGradient, outputSecondaryCategoryA, outputSecondaryCategoryB, outputSecondaryGradient, outputSecondaryAxisId, outputColorAxisId]);
 
   return (
     <div 
       ref={chartRef} 
-      style={{ width: `${width}px`, height: `${height}px` }}
+      style={{ width: '100%', height: `${height}px` }}
       className="sankey-chart border border-gray-200 rounded-lg bg-white"
     />
   );

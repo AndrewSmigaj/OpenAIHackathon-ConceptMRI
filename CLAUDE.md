@@ -3,6 +3,18 @@
 ## Project Context
 This is a 7-day OpenAI Hackathon project implementing **Concept MRI** - a tool that applies Concept Trajectory Analysis (CTA) to analyze MoE (Mixture of Experts) models. We're building both backend (Python FastAPI) and frontend (React) components.
 
+## Guides Index
+
+Claude Code uses these guides to execute the full pipeline:
+
+| Guide | Purpose |
+|-------|---------|
+| `CLAUDE.md` | Project context, architecture rules, change management (this file) |
+| `PROBES.md` | How to create and run probes via API |
+| `data/sentence_sets/GUIDE.md` | How to design and write sentence set JSON files |
+| `SERVERS.md` | Server operations protocol |
+| `ANALYSIS.md` | How to analyze cluster/route data, categorize outputs, write reports |
+
 ## Environment Rules
 
 - **ALWAYS use the project virtual environment** — run Python with `.venv/bin/python` (or activate with `source .venv/bin/activate`). Never use system `python` or `python3` directly. Never install packages globally.

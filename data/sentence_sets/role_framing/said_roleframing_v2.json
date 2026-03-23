@@ -4441,5 +4441,35 @@
         "layperson"
       ]
     }
+  ],
+  "output_axes": [
+    {
+      "id": "tone",
+      "values": [
+        "neutral",
+        "alarming",
+        "empathetic",
+        "dismissive",
+        "aggressive"
+      ]
+    },
+    {
+      "id": "content_type",
+      "values": [
+        "continuation",
+        "elaboration",
+        "tangent",
+        "contradiction",
+        "refusal"
+      ]
+    },
+    {
+      "id": "fictional_framing",
+      "values": [
+        "maintains_fiction",
+        "breaks_fiction",
+        "ambiguous"
+      ]
+    }
   ]
 }

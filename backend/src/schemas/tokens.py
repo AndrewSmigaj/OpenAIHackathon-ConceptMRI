@@ -36,6 +36,11 @@ class ProbeRecord:
     transition_step: Optional[int] = None
     created_at: Optional[str] = None
 
+    # Generated output and categorization
+    generated_text: Optional[str] = None
+    output_category: Optional[str] = None
+    output_category_json: Optional[str] = None
+
     @classmethod
     def from_parquet_dict(cls, data: dict) -> 'ProbeRecord':
         """Reconstruct from Parquet dictionary."""
@@ -61,6 +66,9 @@ PROBE_RECORD_PARQUET_SCHEMA = {
     "categories_json": "string",
     "transition_step": "int32",
     "created_at": "string",
+    "generated_text": "string",
+    "output_category": "string",
+    "output_category_json": "string",
 }
 
 

@@ -16,6 +16,7 @@ import { LAYER_RANGES } from '../constants/layerRanges'
 
 import LLMAnalysisPanel from '../components/analysis/LLMAnalysisPanel'
 import ContextSensitiveCard from '../components/analysis/ContextSensitiveCard'
+import WindowAnalysis from '../components/analysis/WindowAnalysis'
 import ExpertRoutesSection from '../components/analysis/ExpertRoutesSection'
 import ClusterRoutesSection from '../components/analysis/ClusterRoutesSection'
 
@@ -148,6 +149,12 @@ export default function ExperimentPage() {
   const [gradient, setGradient] = useState<GradientScheme>('red-blue')
   const [selectedRange, setSelectedRange] = useState<string>('range1')
 
+  // Output color panel state (separate from input axes)
+  const [outputAxes, setOutputAxes] = useState<DynamicAxis[]>([])
+  const [outputColorAxisId, setOutputColorAxisId] = useState<string>('')
+  const [outputColorAxis2Id, setOutputColorAxis2Id] = useState<string>('none')
+  const [outputGradient, setOutputGradient] = useState<GradientScheme>('purple-green')
+
   // Derive colorLabelA/B from selected axis (for downstream components)
   const colorAxis = allAxes.find(a => a.id === colorAxisId)
   const colorAxis2 = allAxes.find(a => a.id === colorAxis2Id)
@@ -160,21 +167,42 @@ export default function ExperimentPage() {
   const primaryAxisValues = colorAxis?.values || (colorAxis ? [colorAxis.label_a, colorAxis.label_b] : undefined)
   const secondaryAxisValues = colorAxis2?.values || (colorAxis2 ? [colorAxis2.label_a, colorAxis2.label_b] : undefined)
 
+  // Derive output color values
+  const outputColorAxis = outputAxes.find(a => a.id === outputColorAxisId)
+  const outputColorAxis2 = outputAxes.find(a => a.id === outputColorAxis2Id)
+  const outputColorLabelA = outputColorAxis?.label_a || ''
+  const outputColorLabelB = outputColorAxis?.label_b || ''
+  const outputSecondaryCategoryA = outputColorAxis2?.label_a
+  const outputSecondaryCategoryB = outputColorAxis2?.label_b
+  const outputSecondaryGradient = GRADIENT_AUTO_PAIRS[outputGradient]
+
+  // Derive output grouping axes from selected output color axes
+  const outputGroupingAxes = useMemo(() => {
+    const axes: string[] = []
+    if (outputColorAxisId && outputColorAxisId !== 'none') axes.push(outputColorAxisId)
+    if (outputColorAxis2Id && outputColorAxis2Id !== 'none') axes.push(outputColorAxis2Id)
+    return axes.length > 0 ? axes : undefined
+  }, [outputColorAxisId, outputColorAxis2Id])
+
   // Expert tab controls
   const [topRoutes, setTopRoutes] = useState(10)
   const [showAllRoutes, setShowAllRoutes] = useState(false)
 
   // Latent tab controls
   const [layerClusterCounts, setLayerClusterCounts] = useState<{[key: number]: number}>({})
-  const [clusteringMethod, setClusteringMethod] = useState('kmeans')
-  const [reductionDims, setReductionDims] = useState(3)
-  const [embeddingSource, setEmbeddingSource] = useState<string>('expert_output')
-  const [reductionMethod, setReductionMethod] = useState<string>('pca')
+  const [clusteringMethod, setClusteringMethod] = useState('hierarchical')
+  const [reductionDims, setReductionDims] = useState(5)
+  const [embeddingSource, setEmbeddingSource] = useState<string>('residual_stream')
+  const [reductionMethod, setReductionMethod] = useState<string>('umap')
   // Cluster configuration mode
   const [useAllLayersSameClusters, setUseAllLayersSameClusters] = useState(true)  // Default to "same for all"
-  const [globalClusterCount, setGlobalClusterCount] = useState(4)  // Default to 4 clusters
+  const [globalClusterCount, setGlobalClusterCount] = useState(6)  // Default to 6 clusters
   const [clusteringDimSubset, setClusteringDimSubset] = useState<number[] | null>(null)  // null = all dims
   const [clusterDimInput, setClusterDimInput] = useState('all')  // UI text input
+
+  // Clustering schema state
+  const [availableSchemas, setAvailableSchemas] = useState<Array<{name: string, created_at: string, params: any}>>([])
+  const [selectedSchema, setSelectedSchema] = useState<string>('')
 
   // LLM Insights state
   const [currentRouteData, setCurrentRouteData] = useState<Record<string, RouteAnalysisResponse | null> | null>(null)
@@ -204,7 +232,7 @@ export default function ExperimentPage() {
   // Auto-detect axes from route analysis
   const handleRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
     setCurrentRouteData(routeDataMap)
-    // Collect all axes from responses
+    // Collect all input axes from responses
     const axesMap = new Map<string, DynamicAxis>()
     for (const data of Object.values(routeDataMap)) {
       if (data?.available_axes) {
@@ -223,11 +251,51 @@ export default function ExperimentPage() {
         setColorAxisId(detectedAxes[0].id)
       }
     }
-  }, [colorAxisId])
+
+    // Collect output axes from responses
+    const outputAxesMap = new Map<string, DynamicAxis>()
+    for (const data of Object.values(routeDataMap)) {
+      if (data?.output_available_axes) {
+        for (const axis of data.output_available_axes) {
+          if (!outputAxesMap.has(axis.id)) {
+            outputAxesMap.set(axis.id, axis)
+          }
+        }
+      }
+    }
+    const detectedOutputAxes = Array.from(outputAxesMap.values())
+    setOutputAxes(detectedOutputAxes)
+    if (detectedOutputAxes.length > 0 && !detectedOutputAxes.find(a => a.id === outputColorAxisId)) {
+      setOutputColorAxisId(detectedOutputAxes[0].id)
+    }
+  }, [colorAxisId, outputColorAxisId])
 
   const handleClusterRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
     setCurrentClusterRouteData(routeDataMap)
-  }, [])
+
+    // Also extract output axes from cluster route data
+    const outputAxesMap = new Map<string, DynamicAxis>()
+    for (const data of Object.values(routeDataMap)) {
+      if (data?.output_available_axes) {
+        for (const axis of data.output_available_axes) {
+          if (!outputAxesMap.has(axis.id)) {
+            outputAxesMap.set(axis.id, axis)
+          }
+        }
+      }
+    }
+    const detectedOutputAxes = Array.from(outputAxesMap.values())
+    if (detectedOutputAxes.length > 0) {
+      setOutputAxes(prev => {
+        const merged = new Map(prev.map(a => [a.id, a]))
+        detectedOutputAxes.forEach(a => { if (!merged.has(a.id)) merged.set(a.id, a) })
+        return Array.from(merged.values())
+      })
+      if (!outputColorAxisId && detectedOutputAxes.length > 0) {
+        setOutputColorAxisId(detectedOutputAxes[0].id)
+      }
+    }
+  }, [outputColorAxisId])
 
   const handleElementDescriptionsLoaded = useCallback((descs: Record<string, string>) => {
     setElementDescriptions(prev => ({ ...prev, ...descs }))
@@ -240,8 +308,19 @@ export default function ExperimentPage() {
   useEffect(() => {
     if (selectedSessions.length > 0) {
       loadAndMergeSessions()
+      // Fetch available clustering schemas for single-session
+      if (selectedSessions.length === 1) {
+        apiClient.listClusterings(selectedSessions[0]).then(res => {
+          setAvailableSchemas(res.clusterings || [])
+        }).catch(() => setAvailableSchemas([]))
+      } else {
+        setAvailableSchemas([])
+      }
+      setSelectedSchema('')
     } else {
       setMergedSessionDetails(null)
+      setAvailableSchemas([])
+      setSelectedSchema('')
     }
   }, [selectedSessions])
 
@@ -326,7 +405,7 @@ export default function ExperimentPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <FlaskIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+          <FlaskIcon className="w-6 h-6 text-gray-400 mx-auto mb-2" />
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">
             {error ? 'Error Loading Data' : 'No Probe Sessions'}
           </h2>
@@ -411,6 +490,70 @@ export default function ExperimentPage() {
                   />
                 </div>
 
+                {/* Output Color Controls (only when output axes exist) */}
+                {outputAxes.length > 0 && (
+                  <div className="border-t border-gray-200 pt-2">
+                    <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Output Colors</h4>
+                    <div className="space-y-1.5">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="text-xs text-gray-500 font-medium">Color:</span>
+                        <select
+                          value={outputColorAxisId}
+                          onChange={(e) => setOutputColorAxisId(e.target.value)}
+                          className="px-1.5 py-0.5 text-xs border border-gray-300 rounded flex-1 min-w-0"
+                        >
+                          {outputAxes.map(axis => (
+                            <option key={axis.id} value={axis.id}>{axis.label}</option>
+                          ))}
+                        </select>
+                        <select
+                          value={outputGradient}
+                          onChange={(e) => setOutputGradient(e.target.value as GradientScheme)}
+                          className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
+                        >
+                          {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
+                            <option key={key} value={key}>{scheme.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="text-xs text-gray-500 font-medium">Blend:</span>
+                        <select
+                          value={outputColorAxis2Id}
+                          onChange={(e) => setOutputColorAxis2Id(e.target.value)}
+                          className="px-1.5 py-0.5 text-xs border border-gray-300 rounded flex-1 min-w-0"
+                        >
+                          <option value="none">None</option>
+                          {outputAxes.filter(a => a.id !== outputColorAxisId).map(axis => (
+                            <option key={axis.id} value={axis.id}>{axis.label}</option>
+                          ))}
+                        </select>
+                      </div>
+                      {/* Output color preview key */}
+                      {(() => {
+                        const outPrimaryValues = outputColorAxis?.values || (outputColorAxis ? [outputColorAxis.label_a, outputColorAxis.label_b] : [])
+                        const outSecondaryValues = outputColorAxis2?.values || (outputColorAxis2 ? [outputColorAxis2.label_a, outputColorAxis2.label_b] : undefined)
+                        const outPreview = outPrimaryValues.length > 0
+                          ? getAxisPreview(outPrimaryValues, outputGradient, outputColorAxis2Id !== 'none' ? outSecondaryValues : undefined)
+                          : []
+                        return outPreview.length > 0 ? (
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            {outPreview.map(({ label, color }) => (
+                              <div key={label} className="flex items-center gap-1" title={label}>
+                                <div
+                                  className="rounded-sm border border-gray-300 flex-shrink-0"
+                                  style={{ backgroundColor: color, width: '12px', height: '12px' }}
+                                />
+                                <span className="text-xs text-gray-600">{label}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : null
+                      })()}
+                    </div>
+                  </div>
+                )}
+
                 {/* Expert Controls */}
                 <div className="border-t border-gray-200 pt-2">
                   <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Expert Routes</h4>
@@ -441,143 +584,63 @@ export default function ExperimentPage() {
                   </div>
                 </div>
 
-                {/* Cluster Controls */}
+                {/* Cluster Config (read-only) */}
                 <div className="border-t border-gray-200 pt-2">
-                  <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Cluster Routes</h4>
-                  <div className="space-y-2">
-                    {/* Row 1: Source + Method */}
-                    <div className="grid grid-cols-2 gap-1.5">
-                      <div>
-                        <label className="block text-[10px] text-gray-500 mb-0.5">Source</label>
-                        <select
-                          value={embeddingSource}
-                          onChange={(e) => setEmbeddingSource(e.target.value)}
-                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        >
-                          <option value="expert_output">Expert Output</option>
-                          <option value="residual_stream">Residual Stream</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-[10px] text-gray-500 mb-0.5">Method</label>
-                        <select
-                          value={reductionMethod}
-                          onChange={(e) => setReductionMethod(e.target.value)}
-                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        >
+                  <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Cluster Analysis</h4>
+
+                  {/* Clustering Schema Selector */}
+                  {availableSchemas.length > 0 && (
+                    <div className="mb-2">
+                      <label className="block text-[10px] text-gray-500 mb-0.5">Schema</label>
+                      <select
+                        value={selectedSchema}
+                        onChange={(e) => setSelectedSchema(e.target.value)}
+                        className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      >
+                        <option value="">Compute fresh</option>
+                        {availableSchemas.map(s => (
+                          <option key={s.name} value={s.name}>{s.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+
+                  {/* Clustering parameter controls */}
+                  <div className="space-y-1.5 text-[10px]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Source</span>
+                      <select value={embeddingSource} onChange={e => setEmbeddingSource(e.target.value)}
+                        className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
+                        <option value="expert_output">expert output</option>
+                        <option value="residual_stream">residual stream</option>
+                      </select>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Reduction</span>
+                      <div className="flex items-center gap-1">
+                        <select value={reductionMethod} onChange={e => setReductionMethod(e.target.value)}
+                          className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
                           <option value="pca">PCA</option>
                           <option value="umap">UMAP</option>
                         </select>
+                        <input type="number" value={reductionDims} onChange={e => setReductionDims(Number(e.target.value))}
+                          min={2} max={256} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                        <span className="text-gray-400">D</span>
                       </div>
                     </div>
-
-                    {/* Row 2: Dims + Clustering Method */}
-                    <div className="grid grid-cols-2 gap-1.5">
-                      <div>
-                        <label className="block text-[10px] text-gray-500 mb-0.5">Dims</label>
-                        <select
-                          value={reductionDims}
-                          onChange={(e) => setReductionDims(parseInt(e.target.value))}
-                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        >
-                          {[2, 3, 5, 10, 15, 20, 50, 128].map(d => (
-                            <option key={d} value={d}>{d}D</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-[10px] text-gray-500 mb-0.5">Clustering</label>
-                        <select
-                          value={clusteringMethod}
-                          onChange={(e) => setClusteringMethod(e.target.value)}
-                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        >
-                          <option value="kmeans">K-Means</option>
-                          <option value="hierarchical">Hierarchical</option>
-                          <option value="dbscan">DBSCAN</option>
-                        </select>
-                      </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">Clustering</span>
+                      <select value={clusteringMethod} onChange={e => setClusteringMethod(e.target.value)}
+                        className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
+                        <option value="hierarchical">hierarchical</option>
+                        <option value="kmeans">kmeans</option>
+                      </select>
                     </div>
-
-                    {/* Row 3: K + Per-layer toggle */}
-                    <div className="grid grid-cols-2 gap-1.5 items-end">
-                      <div>
-                        <label className="block text-[10px] text-gray-500 mb-0.5">K (clusters)</label>
-                        <input
-                          type="number"
-                          value={globalClusterCount}
-                          onChange={(e) => setGlobalClusterCount(parseInt(e.target.value) || 2)}
-                          min="2"
-                          max="20"
-                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        />
-                      </div>
-                      <label className="flex items-center gap-1 text-[10px] text-gray-600 pb-1">
-                        <input
-                          type="checkbox"
-                          checked={!useAllLayersSameClusters}
-                          onChange={(e) => setUseAllLayersSameClusters(!e.target.checked)}
-                          className="w-3 h-3 rounded border-gray-300 text-blue-600"
-                        />
-                        Per-layer K
-                      </label>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gray-400">K (clusters/layer)</span>
+                      <input type="number" value={globalClusterCount} onChange={e => setGlobalClusterCount(Number(e.target.value))}
+                        min={2} max={16} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500" />
                     </div>
-
-                    {/* Per-layer cluster counts (hidden by default) */}
-                    {!useAllLayersSameClusters && (() => {
-                      const currentRange = selectedRange as keyof typeof LAYER_RANGES
-                      const rangeDef = LAYER_RANGES[currentRange]
-                      if (!rangeDef) return null
-                      const allLayers = new Set<number>()
-                      rangeDef.windows.forEach(w => w.layers.forEach(l => allLayers.add(l)))
-                      return (
-                        <div className="grid grid-cols-3 gap-1">
-                          {Array.from(allLayers).sort((a, b) => a - b).map(layer => (
-                            <div key={layer}>
-                              <label className="block text-[9px] text-gray-400">L{layer}</label>
-                              <input
-                                type="number"
-                                value={layerClusterCounts[layer] || 4}
-                                onChange={(e) => {
-                                  const newCounts = { ...layerClusterCounts }
-                                  newCounts[layer] = parseInt(e.target.value)
-                                  setLayerClusterCounts(newCounts)
-                                }}
-                                min="2"
-                                max="20"
-                                className="w-full px-1 py-0.5 text-[10px] border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      )
-                    })()}
-
-                    {/* Clustering dim subset (only shown when dims > 3) */}
-                    {reductionDims > 3 && (
-                      <div>
-                        <label className="block text-[10px] text-gray-500 mb-0.5">Cluster dims</label>
-                        <input
-                          type="text"
-                          value={clusterDimInput}
-                          onChange={(e) => {
-                            const val = e.target.value.trim()
-                            setClusterDimInput(val)
-                            if (val === '' || val.toLowerCase() === 'all') {
-                              setClusteringDimSubset(null)
-                            } else {
-                              const dims = val.split(',')
-                                .map(s => parseInt(s.trim()) - 1)
-                                .filter(n => !isNaN(n) && n >= 0 && n < reductionDims)
-                              setClusteringDimSubset(dims.length > 0 ? dims : null)
-                            }
-                          }}
-                          placeholder="all"
-                          className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                          title="Enter 'all' or comma-separated dim numbers (1-indexed), e.g. 1,2,5"
-                        />
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -632,7 +695,7 @@ export default function ExperimentPage() {
               {/* Right Column - Visualization + LLM + Card Panel */}
               <div className="flex-1 flex overflow-x-auto">
                 {/* Scrollable main content */}
-                <div className="flex-1 min-w-[640px] overflow-y-auto p-4 space-y-4">
+                <div className="flex-1 min-w-0 overflow-y-auto p-2 space-y-4">
                   <ExpertRoutesSection
                     sessionIds={selectedSessions}
                     sessionData={mergedSessionDetails}
@@ -644,6 +707,16 @@ export default function ExperimentPage() {
                     secondaryCategoryB={secondaryCategoryB}
                     secondaryGradient={secondaryGradient}
                     secondaryAxisId={colorAxis2Id !== 'none' ? colorAxis2Id : undefined}
+                    outputColorLabelA={outputColorLabelA}
+                    outputColorLabelB={outputColorLabelB}
+                    outputGradient={outputGradient}
+                    outputSecondaryCategoryA={outputSecondaryCategoryA}
+                    outputSecondaryCategoryB={outputSecondaryCategoryB}
+                    outputSecondaryGradient={outputSecondaryGradient}
+                    outputSecondaryAxisId={outputColorAxis2Id !== 'none' ? outputColorAxis2Id : undefined}
+                    outputColorAxisId={outputColorAxisId || undefined}
+                    outputGroupingAxes={outputGroupingAxes}
+                    clusteringSchema={selectedSchema || undefined}
                     topRoutes={topRoutes}
                     selectedRange={selectedRange}
                     onRangeChange={setSelectedRange}
@@ -663,6 +736,15 @@ export default function ExperimentPage() {
                     secondaryCategoryB={secondaryCategoryB}
                     secondaryGradient={secondaryGradient}
                     secondaryAxisId={colorAxis2Id !== 'none' ? colorAxis2Id : undefined}
+                    outputColorLabelA={outputColorLabelA}
+                    outputColorLabelB={outputColorLabelB}
+                    outputGradient={outputGradient}
+                    outputSecondaryCategoryA={outputSecondaryCategoryA}
+                    outputSecondaryCategoryB={outputSecondaryCategoryB}
+                    outputSecondaryGradient={outputSecondaryGradient}
+                    outputSecondaryAxisId={outputColorAxis2Id !== 'none' ? outputColorAxis2Id : undefined}
+                    outputColorAxisId={outputColorAxisId || undefined}
+                    outputGroupingAxes={outputGroupingAxes}
                     shapeAxisId={shapeAxisId !== 'none' ? shapeAxisId : undefined}
                     shapeAxis={shapeAxis}
                     primaryAxisValues={primaryAxisValues}
@@ -679,6 +761,7 @@ export default function ExperimentPage() {
                     globalClusterCount={globalClusterCount}
                     setGlobalClusterCount={setGlobalClusterCount}
                     clusteringDimSubset={clusteringDimSubset}
+                    clusteringSchema={selectedSchema || undefined}
                     onRouteDataLoaded={handleClusterRouteDataLoaded}
                     onCardSelect={setSelectedCard}
                   />
@@ -692,37 +775,40 @@ export default function ExperimentPage() {
                   />
                 </div>
 
-                {/* Right card panel — shows when something is clicked */}
-                {selectedCard && (() => {
-                  const d = selectedCard.data
-                  const descKey = selectedCard.type === 'expert'
-                    ? `expert-${d.expertId || d.expert_id}-L${d.layer}`
-                    : selectedCard.type === 'cluster'
-                      ? `cluster-${d.clusterId || d.cluster_id}-L${d.layer}`
-                      : `route-${d.signature}`
+                {/* Right column — window analysis + click card */}
+                <div className="w-72 max-w-[288px] flex-shrink-0 border-l bg-white overflow-y-auto overflow-x-hidden p-2">
+                  {/* Window-level statistical analysis (always visible) */}
+                  {(() => {
+                    const routeMap = currentClusterRouteData || currentRouteData
+                    if (!routeMap) return null
+                    const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
+                    if (!currentRange) return null
+                    const lastWindow = currentRange.windows[currentRange.windows.length - 1]
+                    const lastData = routeMap[lastWindow?.id]
+                    if (!lastData) return null
+                    return <WindowAnalysis routeData={lastData} windowLabel={currentRange.label} />
+                  })()}
 
-                  // Look up cluster assignments for trajectory clicks
-                  let clusterAssignments: Record<string, number> | undefined
-                  if (selectedCard.type === 'route' && d.probe_id && currentClusterRouteData) {
-                    for (const data of Object.values(currentClusterRouteData)) {
-                      if (data?.probe_assignments?.[d.probe_id]) {
-                        clusterAssignments = data.probe_assignments[d.probe_id]
-                        break
+                  {/* Click card */}
+                  {selectedCard ? (() => {
+                    const d = selectedCard.data
+                    const descKey = selectedCard.type === 'expert'
+                      ? `expert-${d.expertId || d.expert_id}-L${d.layer}`
+                      : selectedCard.type === 'cluster'
+                        ? `cluster-${d.clusterId || d.cluster_id}-L${d.layer}`
+                        : `route-${d.signature}`
+
+                    let clusterAssignments: Record<string, number> | undefined
+                    if (selectedCard.type === 'route' && d.probe_id && currentClusterRouteData) {
+                      for (const data of Object.values(currentClusterRouteData)) {
+                        if (data?.probe_assignments?.[d.probe_id]) {
+                          clusterAssignments = data.probe_assignments[d.probe_id]
+                          break
+                        }
                       }
                     }
-                  }
 
-                  return (
-                    <div className="w-72 flex-shrink-0 border-l bg-white overflow-y-auto p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-sm font-semibold text-gray-900">Details</h3>
-                        <button
-                          onClick={() => setSelectedCard(null)}
-                          className="text-gray-400 hover:text-gray-600 text-lg leading-none"
-                        >
-                          &times;
-                        </button>
-                      </div>
+                    return (
                       <ContextSensitiveCard
                         cardType={selectedCard.type}
                         selectedData={selectedCard.data}
@@ -731,16 +817,21 @@ export default function ExperimentPage() {
                         gradient={gradient}
                         elementDescription={elementDescriptions[descKey]}
                         clusterAssignments={clusterAssignments}
+                        onClose={() => setSelectedCard(null)}
                       />
+                    )
+                  })() : (
+                    <div className="flex items-center justify-center py-8">
+                      <p className="text-[10px] text-gray-400">Click a node or route for details</p>
                     </div>
-                  )
-                })()}
+                  )}
+                </div>
               </div>
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
-                <FlaskIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <FlaskIcon className="w-6 h-6 text-gray-400 mx-auto mb-2" />
                 <p className="text-gray-500 text-lg">Please select a probe session to begin analysis</p>
               </div>
             </div>

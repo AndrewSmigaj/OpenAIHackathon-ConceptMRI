@@ -256,8 +256,8 @@ export function getTrafficVisualProperties(value: number, maxValue: number): { o
     return { opacity: 0.3, lineWidth: 1 };
   }
 
-  // Logarithmic scale for better differentiation
-  const normalizedValue = Math.log(value + 1) / Math.log(maxValue + 1);
+  // Square-root scale for proportional differentiation
+  const normalizedValue = Math.sqrt(value) / Math.sqrt(maxValue);
 
   // Opacity: 0.3 to 0.9 range
   const opacity = 0.3 + (normalizedValue * 0.6);

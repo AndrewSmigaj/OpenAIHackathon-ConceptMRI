@@ -6644,5 +6644,35 @@
         "register": "narrative"
       }
     }
+  ],
+  "output_axes": [
+    {
+      "id": "tone",
+      "values": [
+        "neutral",
+        "alarming",
+        "empathetic",
+        "dismissive",
+        "aggressive"
+      ]
+    },
+    {
+      "id": "content_type",
+      "values": [
+        "continuation",
+        "elaboration",
+        "tangent",
+        "contradiction",
+        "refusal"
+      ]
+    },
+    {
+      "id": "semantic_consistency",
+      "values": [
+        "maintains_meaning",
+        "shifts_meaning",
+        "ambiguous"
+      ]
+    }
   ]
 }

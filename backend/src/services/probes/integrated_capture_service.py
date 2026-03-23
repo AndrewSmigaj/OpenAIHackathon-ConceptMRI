@@ -290,6 +290,40 @@ class IntegratedCaptureService:
 
         return positions[-1], target_token_id  # Last occurrence
 
+    def _generate_continuation(self, input_tensor: torch.Tensor, max_new_tokens: int = 50) -> str:
+        """Generate a text continuation from the model given input tokens.
+
+        Temporarily removes routing hooks before calling model.generate(),
+        since generate() runs multiple forward passes that would conflict
+        with the single-pass routing capture hooks.
+
+        Args:
+            input_tensor: Tokenized input [1, seq_len] on model device
+            max_new_tokens: Maximum tokens to generate
+
+        Returns:
+            Decoded continuation text (excluding the input)
+        """
+        # Remove hooks temporarily — generate() runs multiple forward passes
+        # that would trigger routing hooks and corrupt/conflict with captured data
+        if self.routing_capture is not None:
+            self.routing_capture.remove_hooks()
+
+        try:
+            with torch.no_grad():
+                gen_output = self.model.generate(
+                    input_ids=input_tensor,
+                    max_new_tokens=max_new_tokens,
+                    do_sample=False,
+                    pad_token_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
+                )
+            generated_ids = gen_output[0, input_tensor.shape[1]:]
+            return self.tokenizer.decode(generated_ids, skip_special_tokens=True)
+        finally:
+            # Re-register hooks for the next probe (quiet — no per-layer logging)
+            if self.routing_capture is not None:
+                self.routing_capture.register_hooks(verbose=False)
+
     def capture_probe(
         self, session_id: str, input_text: str, target_word: str,
         target_token_position: int = None,
@@ -301,6 +335,7 @@ class IntegratedCaptureService:
         label2: str = None,
         categories: Optional[Dict[str, str]] = None,
         transition_step: int = None,
+        generate_output: bool = False,
     ) -> Tuple[str, any]:
         """
         Capture a probe for any-length text input, tracking a target word.
@@ -399,6 +434,16 @@ class IntegratedCaptureService:
                 categories=categories,
                 transition_step=transition_step,
             )
+
+            # Generate continuation text if requested (after hook data safely extracted)
+            if generate_output:
+                try:
+                    generated_text = self._generate_continuation(input_tensor)
+                    probe_data.probe_record.generated_text = generated_text
+                except Exception as e:
+                    import traceback
+                    print(f"Generation failed for probe {probe_id}: {e}")
+                    traceback.print_exc()
 
             # Write to data lake
             writers = self.session_writers[session_id]

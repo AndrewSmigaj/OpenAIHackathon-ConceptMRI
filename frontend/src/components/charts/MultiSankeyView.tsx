@@ -17,6 +17,15 @@ interface MultiSankeyViewProps {
   secondaryCategoryB?: string
   secondaryGradient?: GradientScheme
   secondaryAxisId?: string
+  outputColorLabelA?: string
+  outputColorLabelB?: string
+  outputGradient?: GradientScheme
+  outputSecondaryCategoryA?: string
+  outputSecondaryCategoryB?: string
+  outputSecondaryGradient?: GradientScheme
+  outputSecondaryAxisId?: string
+  outputColorAxisId?: string
+  outputGroupingAxes?: string[]
   showAllRoutes: boolean
   topRoutes: number
   selectedRange?: string
@@ -26,6 +35,7 @@ interface MultiSankeyViewProps {
   onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
   mode?: 'expert' | 'cluster'
   clusteringConfig?: ClusteringConfig
+  clusteringSchema?: string
   manualTrigger?: boolean
   onAnalysisReady?: (runAnalysis: () => void) => void
 }
@@ -42,6 +52,15 @@ export default function MultiSankeyView({
   secondaryCategoryB,
   secondaryGradient,
   secondaryAxisId,
+  outputColorLabelA,
+  outputColorLabelB,
+  outputGradient,
+  outputSecondaryCategoryA,
+  outputSecondaryCategoryB,
+  outputSecondaryGradient,
+  outputSecondaryAxisId,
+  outputColorAxisId,
+  outputGroupingAxes,
   showAllRoutes,
   topRoutes,
   selectedRange = 'range1',
@@ -51,6 +70,7 @@ export default function MultiSankeyView({
   onRouteDataLoaded,
   mode = 'expert',
   clusteringConfig,
+  clusteringSchema,
   manualTrigger = false,
   onAnalysisReady
 }: MultiSankeyViewProps) {
@@ -81,14 +101,19 @@ export default function MultiSankeyView({
           session_ids: sessionIds,
           window_layers: window.layers,
           filter_config: filterConfig,
-          top_n_routes: showAllRoutes ? 1000 : topRoutes
+          top_n_routes: showAllRoutes ? 1000 : topRoutes,
+          ...(outputGroupingAxes ? { output_grouping_axes: outputGroupingAxes } : {}),
         }
         const response = mode === 'cluster' && clusteringConfig
           ? await apiClient.analyzeClusterRoutes({
               ...request,
-              clustering_config: clusteringConfig
+              clustering_config: clusteringConfig,
+              ...(clusteringSchema ? { clustering_schema: clusteringSchema } : {})
             })
-          : await apiClient.analyzeRoutes(request)
+          : await apiClient.analyzeRoutes({
+              ...request,
+              ...(clusteringSchema ? { clustering_schema: clusteringSchema } : {})
+            })
         newRouteDataMap[window.id] = response
         newErrorMap[window.id] = null
       } catch (err) {
@@ -107,7 +132,7 @@ export default function MultiSankeyView({
     setLoadingMap(newLoadingMap)
 
     onRouteDataLoaded?.(newRouteDataMap)
-  }, [sessionIds, sessionData, selectedRange, filterState, showAllRoutes, topRoutes, mode, clusteringConfig, onRouteDataLoaded])
+  }, [sessionIds, sessionData, selectedRange, filterState, showAllRoutes, topRoutes, mode, clusteringConfig, clusteringSchema, outputGroupingAxes, onRouteDataLoaded])
 
   React.useEffect(() => {
     if (onAnalysisReady) {
@@ -124,47 +149,37 @@ export default function MultiSankeyView({
   }, [loadAllWindows, manualTrigger])
 
   return (
-    <div className="space-y-4">
-      {/* Range Selector */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <h3 className="text-lg font-semibold text-gray-900">Multi-Layer Analysis</h3>
-          <select
-            value={selectedRange}
-            onChange={(e) => onRangeChange?.(e.target.value)}
-            className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          >
-            {Object.entries(LAYER_RANGES).map(([key, range]) => (
-              <option key={key} value={key}>
-                {range.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <p className="text-sm text-gray-500">
-          Showing 6 consecutive layer transitions
-        </p>
+    <div className="space-y-1">
+      {/* Compact layer range selector */}
+      <div className="flex items-center gap-2">
+        <select
+          value={selectedRange}
+          onChange={(e) => onRangeChange?.(e.target.value)}
+          className="px-1.5 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500"
+        >
+          {Object.entries(LAYER_RANGES).map(([key, range]) => (
+            <option key={key} value={key}>
+              {range.label}
+            </option>
+          ))}
+        </select>
+        {currentRange.windows.map(w => (
+          <span key={w.id} className="text-[9px] text-gray-400">{w.label}</span>
+        ))}
       </div>
 
-      {/* 6 Sankey Charts in a Row */}
-      <div className="grid grid-cols-6 gap-3">
+      {/* 6 Sankey Charts + Output Chart */}
+      <div className="flex gap-0">
+        {/* 6 layer windows */}
+        <div className="flex-1 grid grid-cols-6 gap-0">
         {currentRange.windows.map((window) => {
           const routeData = routeDataMap[window.id]
           const loading = loadingMap[window.id]
           const error = errorMap[window.id]
 
           return (
-            <div key={window.id} className="bg-white rounded-lg shadow-sm border border-gray-200">
-              <div className="px-2 py-1.5 border-b border-gray-200 bg-gray-50">
-                <h4 className="text-xs font-semibold text-gray-900 text-center">{window.label}</h4>
-                {routeData && (
-                  <p className="text-xs text-gray-500 text-center mt-0.5">
-                    {routeData.statistics.total_routes}r • {routeData.statistics.total_probes}t
-                  </p>
-                )}
-              </div>
-
-              <div className="p-1" style={{ height: '280px' }}>
+            <div key={window.id} className="bg-white">
+              <div className="p-0" style={{ height: '200px' }}>
                 {loading ? (
                   <div className="flex items-center justify-center h-full">
                     <div className="text-center">
@@ -180,8 +195,8 @@ export default function MultiSankeyView({
                   </div>
                 ) : routeData ? (
                   <SankeyChart
-                    nodes={routeData.nodes}
-                    links={routeData.links}
+                    nodes={routeData.nodes.filter(n => !n.name.startsWith('Out:'))}
+                    links={routeData.links.filter(l => !l.target.startsWith('Out:'))}
                     colorLabelA={colorLabelA}
                     colorLabelB={colorLabelB}
                     gradient={gradient}
@@ -189,6 +204,14 @@ export default function MultiSankeyView({
                     secondaryCategoryB={secondaryCategoryB}
                     secondaryGradient={secondaryGradient}
                     secondaryAxisId={secondaryAxisId}
+                    outputColorLabelA={outputColorLabelA}
+                    outputColorLabelB={outputColorLabelB}
+                    outputGradient={outputGradient}
+                    outputSecondaryCategoryA={outputSecondaryCategoryA}
+                    outputSecondaryCategoryB={outputSecondaryCategoryB}
+                    outputSecondaryGradient={outputSecondaryGradient}
+                    outputSecondaryAxisId={outputSecondaryAxisId}
+                    outputColorAxisId={outputColorAxisId}
                     onNodeClick={(nodeId, nodeData) => {
                       if (onNodeClick) {
                         const enrichedData = {
@@ -225,8 +248,7 @@ export default function MultiSankeyView({
                         })
                       }
                     }}
-                    width={150}
-                    height={220}
+                    height={195}
                   />
                 ) : (
                   <div className="flex items-center justify-center h-full">
@@ -237,6 +259,71 @@ export default function MultiSankeyView({
             </div>
           )
         })}
+        </div>
+
+        {/* 7th chart: output category mapping from last window */}
+        {(() => {
+          const lastWindow = currentRange.windows[currentRange.windows.length - 1]
+          const lastData = routeDataMap[lastWindow?.id]
+          if (!lastData) return null
+          const outputNodes = lastData.nodes.filter(n => n.name.startsWith('Out:'))
+          if (outputNodes.length === 0) return null
+          // Get final-layer nodes that link to output nodes
+          const outputLinks = lastData.links.filter(l => l.target.startsWith('Out:'))
+          const sourceNames = new Set(outputLinks.map(l => l.source))
+          const sourceNodes = lastData.nodes.filter(n => sourceNames.has(n.name))
+          return (
+            <div className="bg-white flex-shrink-0" style={{ width: '120px' }}>
+              <div className="p-0" style={{ height: '200px' }}>
+                <SankeyChart
+                  nodes={[...sourceNodes, ...outputNodes]}
+                  links={outputLinks}
+                  colorLabelA={colorLabelA}
+                  colorLabelB={colorLabelB}
+                  gradient={gradient}
+                  secondaryCategoryA={secondaryCategoryA}
+                  secondaryCategoryB={secondaryCategoryB}
+                  secondaryGradient={secondaryGradient}
+                  secondaryAxisId={secondaryAxisId}
+                  outputColorLabelA={outputColorLabelA}
+                  outputColorLabelB={outputColorLabelB}
+                  outputGradient={outputGradient}
+                  outputSecondaryCategoryA={outputSecondaryCategoryA}
+                  outputSecondaryCategoryB={outputSecondaryCategoryB}
+                  outputSecondaryGradient={outputSecondaryGradient}
+                  outputSecondaryAxisId={outputSecondaryAxisId}
+                  outputColorAxisId={outputColorAxisId}
+                  onNodeClick={(nodeId, nodeData) => {
+                    if (onNodeClick) {
+                      onNodeClick({
+                        ...nodeData,
+                        population: nodeData.token_count,
+                        coverage: Math.round((nodeData.token_count / lastData.statistics.total_probes) * 100),
+                        _fullData: nodeData,
+                        _totalProbes: lastData.statistics.total_probes,
+                        _window: lastWindow.label
+                      })
+                    }
+                  }}
+                  onLinkClick={(linkData) => {
+                    if (onLinkClick) {
+                      onLinkClick({
+                        ...linkData,
+                        signature: linkData.route_signature,
+                        flow: linkData.value,
+                        coverage: Math.round((linkData.value / lastData.statistics.total_probes) * 100),
+                        _fullData: linkData,
+                        _totalProbes: lastData.statistics.total_probes,
+                        _window: lastWindow.label
+                      })
+                    }
+                  }}
+                  height={195}
+                />
+              </div>
+            </div>
+          )
+        })()}
       </div>
     </div>
   )

@@ -44,7 +44,8 @@ class ClusterRouteAnalysisService:
         window_layers: List[int] = None,
         clustering_config: Dict[str, Any] = None,
         filter_config: Optional[Dict[str, Any]] = None,
-        top_n_routes: int = 20
+        top_n_routes: int = 20,
+        output_grouping_axes: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """Analyze cluster routes for one or more capture sessions within specified window."""
         ids = session_ids or ([session_id] if session_id else [])
@@ -79,6 +80,16 @@ class ClusterRouteAnalysisService:
 
         sankey_data = self._build_sankey_data(filtered_routes, token_records)
 
+        # Add output category nodes if any probes have output_category set
+        from services.experiments.output_category_nodes import build_output_category_layer
+        augmented_nodes, augmented_links, output_axes = build_output_category_layer(
+            sankey_data["nodes"], sankey_data["links"],
+            filtered_routes, token_records, window_layers,
+            output_grouping_axes=output_grouping_axes,
+        )
+        sankey_data["nodes"] = augmented_nodes
+        sankey_data["links"] = augmented_links
+
         statistics = self._calculate_statistics(routes, cluster_assignments, window_layers)
         available_axes = self._compute_available_axes(token_records, manifest)
 
@@ -90,6 +101,18 @@ class ClusterRouteAnalysisService:
                 for layer, info in layers.items()
             }
 
+        # Persist probe_assignments for temporal endpoint
+        if len(ids) == 1:
+            session_dir = self.data_lake_path / ids[0]
+            if not session_dir.exists():
+                session_dir = self.data_lake_path / f"session_{ids[0]}"
+            if session_dir.exists():
+                try:
+                    (session_dir / "probe_assignments.json").write_text(
+                        json.dumps(probe_assignments))
+                except Exception as e:
+                    print(f"Failed to persist probe_assignments: {e}")
+
         return {
             "session_id": ids[0] if len(ids) == 1 else ",".join(ids[:3]),
             "window_layers": window_layers,
@@ -98,6 +121,7 @@ class ClusterRouteAnalysisService:
             "top_routes": top_routes_data,
             "statistics": statistics,
             "available_axes": available_axes,
+            "output_available_axes": output_axes if output_axes else None,
             "probe_assignments": probe_assignments,
         }
 
@@ -400,7 +424,9 @@ class ClusterRouteAnalysisService:
                                 "target_word": token_record.target_word,
                                 "label": token_record.label,
                                 "input_text": token_record.input_text,
-                                "probe_id": probe_id
+                                "probe_id": probe_id,
+                                "generated_text": getattr(token_record, 'generated_text', None),
+                                "output_category": getattr(token_record, 'output_category', None),
                             })
 
             for i in range(len(parts) - 1):

@@ -5,7 +5,7 @@ Probes API router - Session management and sentence experiment capture.
 
 from fastapi import APIRouter, HTTPException, Depends
 from pathlib import Path
-from typing import List
+from typing import List, Dict
 import json
 import logging
 
@@ -23,6 +23,9 @@ from schemas.tokens import ProbeRecord
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
+# Data lake path for file-only endpoints (no model loading required)
+_data_lake_path = str(Path(__file__).resolve().parents[4] / "data" / "lake")
 
 
 @router.get("/probes/{session_id}/status", response_model=StatusResponse)
@@ -174,6 +177,8 @@ async def get_probe_session_details(
                         label=t.label,
                         input_text=t.input_text,
                         probe_id=t.probe_id,
+                        generated_text=getattr(t, 'generated_text', None),
+                        output_category=getattr(t, 'output_category', None),
                     )
                     for t in token_records
                 ]
@@ -266,6 +271,7 @@ async def run_sentence_experiment(
                     label=label,
                     label2=secondary_label,
                     categories=categories,
+                    generate_output=request.generate_output,
                 )
                 if label == ss.label_a:
                     count_a += 1
@@ -297,3 +303,78 @@ async def run_sentence_experiment(
     except Exception as e:
         logger.error(f"Sentence experiment failed: {e}")
         raise HTTPException(status_code=500, detail=f"Sentence experiment failed: {e}")
+
+
+# --- Generated Output Endpoints ---
+
+@router.get("/probes/sessions/{session_id}/generated-outputs")
+async def get_generated_outputs(session_id: str):
+    """Read generated outputs for Claude Code to categorize."""
+    import pandas as pd
+    tokens_path = Path(_data_lake_path) / session_id / "tokens.parquet"
+    if not tokens_path.exists():
+        raise HTTPException(status_code=404, detail=f"Session '{session_id}' tokens not found")
+    df = pd.read_parquet(tokens_path)
+    cols = ["probe_id", "input_text", "label", "generated_text", "output_category"]
+    available = [c for c in cols if c in df.columns]
+    return df[available].to_dict(orient="records")
+
+
+@router.post("/probes/sessions/{session_id}/output-categories")
+async def update_output_categories(session_id: str, categories: Dict[str, Dict[str, str]]):
+    """Write output categories back to tokens.parquet (Claude Code POSTs after analysis)."""
+    import pandas as pd
+    tokens_path = Path(_data_lake_path) / session_id / "tokens.parquet"
+    if not tokens_path.exists():
+        raise HTTPException(status_code=404, detail=f"Session '{session_id}' tokens not found")
+    df = pd.read_parquet(tokens_path)
+    for probe_id, cats in categories.items():
+        mask = df['probe_id'] == probe_id
+        for col, val in cats.items():
+            if col not in df.columns:
+                df[col] = None
+            df.loc[mask, col] = val
+    df.to_parquet(tokens_path, index=False)
+    return {"updated": len(categories)}
+
+
+# --- Clustering Schema Endpoints ---
+
+@router.get("/probes/sessions/{session_id}/clusterings")
+async def list_clusterings(session_id: str):
+    """List available named clustering schemas for a session."""
+    clusterings_dir = Path(_data_lake_path) / session_id / "clusterings"
+    if not clusterings_dir.exists():
+        return {"clusterings": []}
+    schemas = []
+    for d in sorted(clusterings_dir.iterdir()):
+        if d.is_dir() and (d / "meta.json").exists():
+            meta = json.loads((d / "meta.json").read_text())
+            schemas.append(meta)
+    return {"clusterings": schemas}
+
+
+@router.get("/probes/sessions/{session_id}/clusterings/{schema_name}")
+async def load_clustering(session_id: str, schema_name: str):
+    """Load a specific clustering schema (meta + probe_assignments + reports)."""
+    schema_dir = Path(_data_lake_path) / session_id / "clusterings" / schema_name
+    if not schema_dir.exists():
+        raise HTTPException(status_code=404, detail=f"Clustering '{schema_name}' not found")
+    meta = json.loads((schema_dir / "meta.json").read_text())
+    result: Dict = {"meta": meta}
+    pa_path = schema_dir / "probe_assignments.json"
+    if pa_path.exists():
+        result["probe_assignments"] = json.loads(pa_path.read_text())
+    rdir = schema_dir / "reports"
+    if rdir.exists():
+        result["reports"] = {f.stem: f.read_text() for f in sorted(rdir.glob("*.md"))}
+    return result
+
+
+@router.post("/probes/sessions/{session_id}/clusterings/{schema_name}/reports/{window_key}")
+async def save_report(session_id: str, schema_name: str, window_key: str, body: Dict):
+    """Save a Claude Code analysis report for a specific window."""
+    reports_dir = Path(_data_lake_path) / session_id / "clusterings" / schema_name / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    (reports_dir / f"{window_key}.md").write_text(body["report"])
+    return {"saved": f"{schema_name}/{window_key}"}

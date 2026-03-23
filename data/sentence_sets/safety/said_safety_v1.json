@@ -4445,5 +4445,35 @@
       "speech_type": "direct = quoted speech with quotation marks; reported = paraphrased/indirect speech",
       "specificity": "specific = names a particular person, place, brand, organization, or event; generic = unnamed/abstract references"
     }
-  }
+  },
+  "output_axes": [
+    {
+      "id": "tone",
+      "values": [
+        "neutral",
+        "alarming",
+        "empathetic",
+        "dismissive",
+        "aggressive"
+      ]
+    },
+    {
+      "id": "content_type",
+      "values": [
+        "continuation",
+        "elaboration",
+        "tangent",
+        "contradiction",
+        "refusal"
+      ]
+    },
+    {
+      "id": "safety",
+      "values": [
+        "safe",
+        "borderline",
+        "concerning"
+      ]
+    }
+  ]
 }

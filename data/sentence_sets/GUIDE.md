@@ -30,6 +30,11 @@ Sentence sets are controlled datasets where each sentence contains a **target wo
     {"id": "intensity", "values": ["low", "medium", "high"]},
     {"id": "topic", "values": ["culinary", "craft", "outdoor", "medical", "professional"]}
   ],
+  "output_axes": [
+    {"id": "tone", "values": ["neutral", "alarming", "empathetic", "dismissive", "aggressive"]},
+    {"id": "content_type", "values": ["continuation", "elaboration", "tangent", "contradiction", "refusal"]},
+    {"id": "safety", "values": ["safe", "borderline", "concerning"]}
+  ],
   "sentences_a": [],
   "sentences_b": [],
   "sentences_neutral": [],
@@ -39,7 +44,9 @@ Sentence sets are controlled datasets where each sentence contains a **target wo
 
 The secondary axis (`label_a2`/`label_b2`/`axis2_name`) is **orthogonal** to the primary axis. It captures a different dimension of variation so the model can be analyzed along two axes simultaneously (e.g., is the model routing by meaning, by sentence structure, or by both?).
 
-The `axes` array declares all generic category dimensions available for this set. Each axis has an `id` (used as category key) and `values` (the valid labels). The backend reads these dynamically — no code changes needed when adding new axes.
+The `axes` array declares all generic category dimensions available for this set (input axes). Each axis has an `id` (used as category key) and `values` (the valid labels). The backend reads these dynamically — no code changes needed when adding new axes.
+
+The `output_axes` array declares classification dimensions for **generated output text**. When the model generates a continuation for each probe, Claude Code classifies the generated text along these output axes and POSTs the results back. Output axes drive color blending on output category nodes in the Sankey diagram — separate from input axes which drive latent-space node colors. Output axes vary by set type (see per-folder READMEs for specifics).
 
 ### SentenceEntry fields
 ```json
@@ -168,6 +175,32 @@ Every sentence set has a primary axis (label_a/label_b) and a secondary axis (la
 | Category | Values | Description |
 |----------|--------|-------------|
 | structure | action, description | Whether target word is doing/receiving (action) or described statically (description) |
+
+### Output categories per set type
+
+Output axes classify the model's **generated continuation text** — they are independent of input axes. Each set type has its own output axes defined in its `output_axes` array.
+
+**Violence framing sets** (attacked, destroyed, threatened) — 2×2 factorial:
+| Category | Values | Description |
+|----------|--------|-------------|
+| frame_output | fictional, factual | Rhetorical register of the generated continuation |
+| coherence | coherent, degenerate | Whether output is meaningful prose or repetition loop / gibberish |
+
+Primary `output_category` = cross-cell label (e.g., `fictional_coherent`, `factual_degenerate`). This gives 4 output nodes in the Sankey.
+
+**Safety sets** (knife, gun, hammer, rope):
+| Category | Values | Description |
+|----------|--------|-------------|
+| tone | neutral, alarming, empathetic, dismissive, aggressive | Emotional tone of the generated text |
+| content_type | continuation, elaboration, tangent, contradiction, refusal | How the model extends the input |
+| safety | safe, borderline, concerning | Whether the generated text raises safety concerns |
+
+**Polysemy sets** (tank):
+| Category | Values | Description |
+|----------|--------|-------------|
+| tone | neutral, alarming, empathetic, dismissive, aggressive | Emotional tone of the generated text |
+| content_type | continuation, elaboration, tangent, contradiction, refusal | How the model extends the input |
+| semantic_consistency | maintains_meaning, shifts_meaning, ambiguous | Whether the generated text maintains the same meaning of the target word |
 
 ### Factorial design (framing sets)
 

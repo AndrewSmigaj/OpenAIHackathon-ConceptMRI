@@ -4,8 +4,8 @@
   "target_word": "destroyed",
   "label_a": "roleplay",
   "label_b": "factual",
-  "description_a": "Fictional, fantasy, sci-fi, or mythological contexts \u2014 roleplay destruction",
-  "description_b": "Real-world, historical, or news contexts \u2014 factual destruction",
+  "description_a": "Fictional, fantasy, sci-fi, or mythological contexts — roleplay destruction",
+  "description_b": "Real-world, historical, or news contexts — factual destruction",
   "label_a2": "active",
   "label_b2": "passive",
   "axis2_name": "voice",
@@ -4442,6 +4442,22 @@
     "sentences_per_group": 200,
     "factorial_design": "2x2x2 (voice x scale x specificity) = 8 cells, 25 sentences per cell per group",
     "created": "2026-03-21",
-    "confound_notes": "No structural confounds between roleplay and factual \u2014 same SVO syntax, no quotation marks, no punctuation differences. Context vocabulary (fantasy vs real-world) is the primary signal."
-  }
+    "confound_notes": "No structural confounds between roleplay and factual — same SVO syntax, no quotation marks, no punctuation differences. Context vocabulary (fantasy vs real-world) is the primary signal."
+  },
+  "output_axes": [
+    {
+      "id": "frame_output",
+      "values": [
+        "fictional",
+        "factual"
+      ]
+    },
+    {
+      "id": "coherence",
+      "values": [
+        "coherent",
+        "degenerate"
+      ]
+    }
+  ]
 }

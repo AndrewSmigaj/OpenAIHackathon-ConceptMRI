@@ -268,6 +268,13 @@ class ConceptMriApiClient {
       body: JSON.stringify(request),
     });
   }
+
+  /**
+   * List available clustering schemas for a session
+   */
+  async listClusterings(sessionId: string): Promise<{clusterings: Array<{name: string, created_at: string, params: any}>}> {
+    return this.request(`/probes/sessions/${sessionId}/clusterings`);
+  }
 }
 
 // Export singleton instance

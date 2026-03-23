@@ -39,7 +39,7 @@ class EnhancedRoutingCapture:
         self.layers_to_capture = layers_to_capture
         print(f"Enhanced capture for layers: {self.layers_to_capture}")
         
-    def register_hooks(self):
+    def register_hooks(self, verbose: bool = True):
         """Register all hooks upfront - simple approach."""
         for layer_idx in self.layers_to_capture:
             try:
@@ -62,7 +62,8 @@ class EnhancedRoutingCapture:
                 )
                 self.hooks.append(residual_hook)
 
-                print(f"✅ Registered 2 hooks for layer {layer_idx} (MLP + residual)")
+                if verbose:
+                    print(f"✅ Registered 2 hooks for layer {layer_idx} (MLP + residual)")
 
             except Exception as e:
                 print(f"❌ Failed to register hooks for layer {layer_idx}: {e}")

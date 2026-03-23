@@ -6,7 +6,7 @@ import type { SelectedCard } from '../../types/analysis'
 import type { DynamicAxis } from '../../types/api'
 import MultiSankeyView from '../charts/MultiSankeyView'
 import SteppedTrajectoryPlot from '../charts/SteppedTrajectoryPlot'
-import { ChartBarIcon } from '../icons/Icons'
+
 import { LAYER_RANGES } from '../../constants/layerRanges'
 
 /**
@@ -37,6 +37,15 @@ interface ClusterRoutesSectionProps {
   secondaryCategoryB?: string
   secondaryGradient?: GradientScheme
   secondaryAxisId?: string
+  outputColorLabelA?: string
+  outputColorLabelB?: string
+  outputGradient?: GradientScheme
+  outputSecondaryCategoryA?: string
+  outputSecondaryCategoryB?: string
+  outputSecondaryGradient?: GradientScheme
+  outputSecondaryAxisId?: string
+  outputColorAxisId?: string
+  outputGroupingAxes?: string[]
   shapeAxisId?: string
   shapeAxis?: DynamicAxis
   primaryAxisValues?: string[]
@@ -53,6 +62,7 @@ interface ClusterRoutesSectionProps {
   globalClusterCount: number
   setGlobalClusterCount: (value: number) => void
   clusteringDimSubset: number[] | null
+  clusteringSchema?: string
   onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
   onCardSelect: (card: SelectedCard) => void
 }
@@ -68,6 +78,15 @@ export default function ClusterRoutesSection({
   secondaryCategoryB,
   secondaryGradient,
   secondaryAxisId,
+  outputColorLabelA,
+  outputColorLabelB,
+  outputGradient,
+  outputSecondaryCategoryA,
+  outputSecondaryCategoryB,
+  outputSecondaryGradient,
+  outputSecondaryAxisId,
+  outputColorAxisId,
+  outputGroupingAxes,
   shapeAxisId,
   shapeAxis,
   primaryAxisValues,
@@ -84,6 +103,7 @@ export default function ClusterRoutesSection({
   globalClusterCount,
   setGlobalClusterCount,
   clusteringDimSubset,
+  clusteringSchema,
   onRouteDataLoaded,
   onCardSelect
 }: ClusterRoutesSectionProps) {
@@ -136,30 +156,23 @@ export default function ClusterRoutesSection({
   }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod, clusteringDimSubset])
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-4">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900">Latent Space Analysis</h3>
-          <p className="text-xs text-gray-600 mt-1">Cluster trajectories and stepped trajectory visualization</p>
-        </div>
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => {
-              runAnalysis?.()
-              runTrajectoryAnalysis?.()
-            }}
-            disabled={!runAnalysis || !runTrajectoryAnalysis}
-            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            Run Analysis
-          </button>
-          <ChartBarIcon style={{ width: '12px', height: '12px' }} className="text-blue-600" />
-        </div>
+    <div className="bg-white rounded-xl shadow-sm p-1">
+      <div className="flex items-center gap-2 mb-1 px-1">
+        <span className="text-xs font-semibold text-gray-900">Latent Space</span>
+        <button
+          onClick={() => {
+            runAnalysis?.()
+            runTrajectoryAnalysis?.()
+          }}
+          disabled={!runAnalysis || !runTrajectoryAnalysis}
+          className="px-2 py-0.5 bg-blue-600 text-white text-[10px] font-medium rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+        >
+          Run
+        </button>
       </div>
 
       <div>
-        {/* Trajectory Sankey - Clusters and Paths */}
-        <div className="bg-gray-50 rounded-lg p-6 mb-4">
+        <div className="bg-gray-50 rounded-lg p-1 mb-2">
           <MultiSankeyView
             sessionIds={sessionIds}
             sessionData={sessionData}
@@ -171,6 +184,15 @@ export default function ClusterRoutesSection({
             secondaryCategoryB={secondaryCategoryB}
             secondaryGradient={secondaryGradient}
             secondaryAxisId={secondaryAxisId}
+            outputColorLabelA={outputColorLabelA}
+            outputColorLabelB={outputColorLabelB}
+            outputGradient={outputGradient}
+            outputSecondaryCategoryA={outputSecondaryCategoryA}
+            outputSecondaryCategoryB={outputSecondaryCategoryB}
+            outputSecondaryGradient={outputSecondaryGradient}
+            outputSecondaryAxisId={outputSecondaryAxisId}
+            outputColorAxisId={outputColorAxisId}
+            outputGroupingAxes={outputGroupingAxes}
             showAllRoutes={false}
             topRoutes={20}
             selectedRange={selectedRange}
@@ -182,6 +204,7 @@ export default function ClusterRoutesSection({
             manualTrigger={true}
             onAnalysisReady={handleSankeyAnalysisReady}
             clusteringConfig={memoizedClusteringConfig}
+            clusteringSchema={clusteringSchema}
           />
         </div>
 

@@ -6,7 +6,7 @@ import type {
   ScaffoldStepRequest,
 } from '../../types/api'
 import { apiClient } from '../../api/client'
-import { FlaskIcon } from '../icons/Icons'
+
 import ReactMarkdown from 'react-markdown'
 
 interface ScaffoldStepState {
@@ -223,8 +223,7 @@ export default function LLMAnalysisPanel({
   return (
     <div className="bg-white rounded-lg shadow-sm border p-4">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold text-gray-900">LLM Analysis</h3>
-        <FlaskIcon className="w-5 h-5 text-blue-600" />
+        <h3 className="text-xs font-semibold text-gray-900">LLM Analysis</h3>
       </div>
 
       {/* API Key */}

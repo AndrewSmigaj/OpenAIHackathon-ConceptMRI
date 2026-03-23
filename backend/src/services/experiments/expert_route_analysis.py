@@ -28,7 +28,8 @@ class ExpertRouteAnalysisService:
         session_ids: Optional[List[str]] = None,
         window_layers: List[int] = None,
         filter_config: Optional[Dict[str, Any]] = None,
-        top_n_routes: int = 20
+        top_n_routes: int = 20,
+        output_grouping_axes: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """Analyze expert routes for one or more capture sessions within specified window."""
         ids = session_ids or ([session_id] if session_id else [])
@@ -51,6 +52,16 @@ class ExpertRouteAnalysisService:
 
         sankey_data = self._build_sankey_data(filtered_routes, token_records)
 
+        # Add output category nodes if any probes have output_category set
+        from services.experiments.output_category_nodes import build_output_category_layer
+        augmented_nodes, augmented_links, output_axes = build_output_category_layer(
+            sankey_data["nodes"], sankey_data["links"],
+            filtered_routes, token_records, window_layers,
+            output_grouping_axes=output_grouping_axes,
+        )
+        sankey_data["nodes"] = augmented_nodes
+        sankey_data["links"] = augmented_links
+
         statistics = self._calculate_statistics(routes, routing_records, window_layers)
         available_axes = self._compute_available_axes(token_records, manifest)
 
@@ -62,6 +73,7 @@ class ExpertRouteAnalysisService:
             "top_routes": top_routes_data,
             "statistics": statistics,
             "available_axes": available_axes,
+            "output_available_axes": output_axes if output_axes else None,
         }
 
     def get_route_details(
@@ -298,6 +310,7 @@ class ExpertRouteAnalysisService:
         expert_target_word_counts = defaultdict(lambda: defaultdict(int))
         expert_category_counts = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
         expert_example_tokens = defaultdict(list)
+        expert_all_probe_ids = defaultdict(set)
 
         token_lookup = {t.probe_id: t for t in token_records}
 
@@ -311,6 +324,7 @@ class ExpertRouteAnalysisService:
 
                 for token_info in route_info["tokens"]:
                     probe_id = token_info["probe_id"]
+                    expert_all_probe_ids[part].add(probe_id)
                     token_record = token_lookup.get(probe_id)
                     if token_record:
                         if token_record.label:
@@ -326,7 +340,9 @@ class ExpertRouteAnalysisService:
                                 "target_word": token_record.target_word,
                                 "label": token_record.label,
                                 "input_text": token_record.input_text,
-                                "probe_id": probe_id
+                                "probe_id": probe_id,
+                                "generated_text": getattr(token_record, 'generated_text', None),
+                                "output_category": getattr(token_record, 'output_category', None),
                             })
 
             for i in range(len(parts) - 1):
@@ -356,6 +372,7 @@ class ExpertRouteAnalysisService:
                     "category_distributions": cat_dists if cat_dists else None,
                     "specialization": specialization,
                     "tokens": expert_example_tokens.get(node_name) or None,
+                    "probe_ids": sorted(expert_all_probe_ids.get(node_name, set())),
                 })
 
         # Build links

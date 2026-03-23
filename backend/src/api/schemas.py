@@ -57,6 +57,9 @@ class AnalyzeRoutesRequest(BaseModel):
     window_layers: List[int]
     filter_config: Optional[FilterConfig] = None
     top_n_routes: int = 20
+    clustering_schema: Optional[str] = None  # Load from named schema (skip computation)
+    save_as: Optional[str] = None            # Compute AND save result under this name
+    output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
 
 
 class ClusteringConfig(BaseModel):
@@ -77,6 +80,9 @@ class AnalyzeClusterRoutesRequest(BaseModel):
     clustering_config: ClusteringConfig
     filter_config: Optional[FilterConfig] = None
     top_n_routes: int = 20
+    clustering_schema: Optional[str] = None  # Load from named schema (skip computation)
+    save_as: Optional[str] = None            # Compute AND save result under this name
+    output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
 
 
 class ProbeExample(BaseModel):
@@ -85,6 +91,8 @@ class ProbeExample(BaseModel):
     label: Optional[str] = None
     input_text: str
     probe_id: str
+    generated_text: Optional[str] = None
+    output_category: Optional[str] = None
 
 # Resolve forward reference in SessionDetailResponse
 SessionDetailResponse.model_rebuild()
@@ -135,6 +143,7 @@ class RouteAnalysisResponse(BaseModel):
     top_routes: List[TopRoute]
     statistics: Dict[str, Any]
     available_axes: Optional[List[Dict[str, Any]]] = None
+    output_available_axes: Optional[List[Dict[str, Any]]] = None
     probe_assignments: Optional[Dict[str, Dict[str, int]]] = None
 
 
@@ -232,6 +241,7 @@ class SentenceExperimentRequest(BaseModel):
     sentence_set_name: str
     session_name: Optional[str] = None
     layers: Optional[List[int]] = None  # defaults to adapter's layer list
+    generate_output: bool = True  # generate continuation text for each probe
 
 
 class SentenceExperimentResponse(BaseModel):
@@ -284,3 +294,31 @@ class ScaffoldStepResponse(BaseModel):
     """Response from a scaffold step."""
     narrative: Optional[str] = None
     element_labels: Optional[Dict[str, str]] = None
+
+
+# --- Temporal Capture Schemas ---
+
+class TemporalCaptureRequest(BaseModel):
+    """Request to run a temporal basin transition experiment."""
+    session_id: str
+    basin_a_cluster_id: int
+    basin_b_cluster_id: int
+    basin_layer: int
+    sentences_per_block: int = 20
+    processing_mode: str = "expanding_cache_on"  # expanding_cache_off, expanding_cache_on, single_cache_on
+    sequence_config: str = "block_ab"  # block_ab, block_ba, block_aba
+    clustering_schema: Optional[str] = None  # Named schema to read assignments from
+    layers: Optional[List[int]] = None
+    run_label: Optional[str] = None
+    generate_output: bool = True  # generate continuation text for each probe
+
+
+class TemporalCaptureResponse(BaseModel):
+    """Response from a temporal capture experiment."""
+    temporal_run_id: str
+    new_session_id: str
+    sequence_positions: int
+    regime_boundary: int
+    processing_mode: str
+    basin_a_sentences: int
+    basin_b_sentences: int
