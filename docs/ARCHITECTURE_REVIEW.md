@@ -4,11 +4,11 @@
 
 ## Executive Summary
 
-Concept MRI is well-engineered for a 7-day hackathon project with a single model and small datasets. The **data schema design and adapter pattern are exemplary** — proper contracts, immutable topologies, clean model abstraction. The **color system and visualization layer are thoughtful** — N-way categorical blending, traffic-based scaling, multi-window Sankey orchestration.
+Concept MRI is well-engineered with a single model and small datasets. The **data schema design and adapter pattern are exemplary** — proper contracts, immutable topologies, clean model abstraction. The **color system and visualization layer are thoughtful** — N-way categorical blending, traffic-based scaling, multi-window Sankey orchestration.
 
-The main architectural concerns are: (1) **IntegratedCaptureService is overloaded** with session management, model inference, and I/O responsibilities; (2) **~40% code duplication** between ExpertRouteAnalysisService and ClusterRouteAnalysisService; (3) **ExperimentPage.tsx is a god component** managing 25+ state variables across unrelated concerns; and (4) **logging, configuration, and error handling are ad-hoc** rather than strategic.
+Recent refactoring addressed the three highest-severity issues: IntegratedCaptureService was decomposed into SessionManager, ProbeProcessor, and CaptureOrchestrator; shared analysis code was extracted into `route_analysis_common.py`; and ExperimentPage state was reorganized into three custom hooks. Logging was standardized across all services.
 
-The codebase is production-ready for the current feature set. For scaling to multiple models, larger datasets, or multiple users, the priority refactors are: decompose IntegratedCaptureService, factor shared analysis code, and extract ExperimentPage state into custom hooks.
+The codebase is production-ready for the current feature set. Remaining work centers on configuration centralization, request caching, and test coverage.
 
 ---
 
@@ -61,27 +61,21 @@ Sufficient for a second model with minimal changes. The main gap: `dependencies.
 
 **Rating: Good with significant debt**
 
-**IntegratedCaptureService** (primary concern):
-- Manages sessions (create, status, finalize)
-- Orchestrates model inference (tokenize, forward pass, hook extraction)
-- Coordinates batch writing to 4 Parquet files
-- Handles KV cache threading for temporal experiments
-- Too many responsibilities for one class
+**IntegratedCaptureService** (resolved):
+Decomposed into three focused components:
+- `SessionManager`: session lifecycle (create, track, restore, finalize, abort) — testable without GPU
+- `ProbeProcessor`: tokenization and schema conversion — testable without GPU
+- `CaptureOrchestrator`: model inference, hook lifecycle, GPU memory
+- `IntegratedCaptureService` is now a thin facade preserving the original public API
 
-*If refactoring*: Split into SessionManager, ProbeInference, CaptureOrchestrator. Each testable in isolation.
+**ExpertRouteAnalysisService vs ClusterRouteAnalysisService** (resolved):
+Shared logic (~360 lines) extracted into `route_analysis_common.py` as free functions:
+- `axis_label`, `generate_specialization`, `analyze_top_routes`, `compute_available_axes`, `build_sankey_links`
+- Free functions chosen over base class because the services don't share lifecycle or state
 
-**ExpertRouteAnalysisService vs ClusterRouteAnalysisService** (~500 lines each):
-- ~40% duplicated code (estimated 200 lines)
-- Shared methods: `_apply_filters`, `_build_sankey_data`, `_analyze_top_routes`, `_compute_available_axes`, `_get_label_breakdown`
-- `_axis_label` helper was recently added to BOTH files independently
-
-*If refactoring*: Extract `RouteAnalysisBase` with shared logic. Both services inherit or delegate.
-
-**OutputCategoryNodes** + `_precompute_output_variants` in experiments.py:
-- Output node construction logic split across two files with partial duplication
-- Cross-product grouping logic is complex and fragile
-
-*If refactoring*: Consolidate into an `OutputNodeService`.
+**OutputCategoryNodes**:
+- `_axis_label` duplication removed (imports from common module)
+- `_generate_output_specialization` renamed to distinguish from common version
 
 ### API Design
 
@@ -93,18 +87,16 @@ Sufficient for a second model with minimal changes. The main gap: `dependencies.
 - Lazy initialization of analysis services (no startup cost)
 
 **Concerns**:
-- Some Pydantic models use `Dict[str, Any]` where typed fields would be better (LLMInsightsRequest `windows`, ScaffoldStepRequest `expert_windows`)
 - Error handling is per-endpoint with no consistent middleware
 - The temporal capture endpoint is 150+ lines of business logic inline in the route handler — should be extracted to a service
+- A few intentionally untyped `Dict[str, Any]` remain (LLM pass-through data, extensible metadata)
 
 ### Cross-Cutting: Logging
 
-**Rating: Needs work**
+**Rating: Good** (recently improved)
 
-- `main.py` uses `print()` for startup messages
-- `integrated_capture_service.py` uses `print()` for errors
-- `probes.py` has a logger but uses it sparingly
-- No structured logging format
+- All service files now use `logging.getLogger(__name__)` with appropriate levels
+- `main.py` retains `print()` for startup banner (conventional for FastAPI)
 - No request/response logging middleware
 - No performance metrics
 
@@ -121,12 +113,12 @@ Sufficient for a second model with minimal changes. The main gap: `dependencies.
 
 ### Cross-Cutting: Error Recovery
 
-**Rating: Adequate for hackathon**
+**Rating: Adequate**
 
-- Probe capture: `except Exception: continue` skips failed sentences (good for resilience, bad for debugging)
-- Model loading: catches exception, prints error, starts in limited mode
-- No session error tracking — failed probes are silently skipped without record
-- No recovery mechanism for interrupted sessions
+- Probe capture: `except Exception: continue` skips failed sentences (resilient, with proper error logging)
+- Model loading: catches exception, logs error, starts in limited mode
+- SessionManager tracks failed probe counts and error messages
+- Session restoration from disk allows recovery of interrupted sessions
 
 ---
 
@@ -134,26 +126,16 @@ Sufficient for a second model with minimal changes. The main gap: `dependencies.
 
 ### Component Architecture
 
-**ExperimentPage.tsx** (860 lines, 25+ state variables):
+**ExperimentPage.tsx** (resolved):
 
-This is the main architectural concern. It manages:
-- Session selection and loading
-- Filter configuration
-- Input axis controls (colorAxisId, gradient, etc.)
-- Output axis controls (separate state tree)
-- Clustering configuration
-- Schema selection and report loading
-- Card selection for the inspector panel
-- Route data caching
+State was reorganized from 34 useState declarations into three custom hooks:
+- `useAxisControls()` — 11 state vars + 6 useMemo derivations for color/shape encoding
+- `useClusteringConfig()` — 9 state vars for clustering parameters
+- `useSchemaManagement()` — 3 state vars + 2 effects for schema lifecycle
 
-**Strengths**: The data flow is unidirectional and callbacks are well-defined. No mutation of parent state from children.
+The page component retains ~12 state vars for session management, route data, and card selection. Child component interfaces are unchanged.
 
-**Concerns**: Too many unrelated concerns in one component. Axis auto-detection, schema loading, and clustering config should each be custom hooks. Color props are drilled through 3 levels of components (ExperimentPage → Section → MultiSankeyView → SankeyChart) with 12+ props each.
-
-*If refactoring*:
-1. `useAxisControls()` — manages colorAxisId, gradient, auto-detection from route data
-2. `useClusteringConfig()` — manages clustering parameters
-3. `ColorScheme` context — eliminates prop drilling for color/gradient state
+**Remaining concern**: Color props are still drilled through 3 levels. A React context could eliminate this, but the tree is shallow enough that the current approach works.
 
 **Other components are well-designed**:
 - `SankeyChart`: Pure visualization, no business logic
@@ -187,12 +169,12 @@ This is the main architectural concern. It manages:
 
 ### Type System
 
-**Rating: Good with gaps**
+**Rating: Good**
 
 - Core types (SankeyNode, SankeyLink, RouteAnalysisResponse) are well-defined
-- `SelectedCard` uses `data: any` — should be a discriminated union by card type
-- `sessionData?: any` in LLMAnalysisPanel — should be typed
-- `probe_assignments` structure (nested Record) is undocumented in TypeScript types
+- Backend API schemas now use typed Pydantic models (ProgressInfo, RouteStatistics, DynamicAxis, etc.) instead of Dict[str, Any]
+- Frontend types match backend: SankeyNode.probe_ids and SankeyLink.tokens declared
+- `SelectedCard` uses `data: any` — could be improved to a discriminated union
 
 ### Performance
 
@@ -235,24 +217,22 @@ Clear 6-stage state machine with concrete API calls and explicit user gates. Cla
 
 ## Priority Matrix
 
-| Issue | Severity | Effort | Recommendation |
-|-------|----------|--------|---------------|
-| IntegratedCaptureService overloaded | High | 2-3 days | Fix later (before adding temporal capture) |
-| Analysis service code duplication (~40%) | High | 1 day | Fix later (before adding new analysis types) |
-| ExperimentPage god component | High | 2 days | Fix later (before adding new UI features) |
-| Color prop drilling (12+ props × 3 levels) | Medium | 0.5 days | Fix later (extract to context) |
-| Logging strategy (print → structured) | Medium | 1 day | Fix later |
-| Configuration hardcoding | Medium | 0.5 days | Fix when adding second model |
-| API schema loose typing (Dict[str, Any]) | Medium | 0.5 days | Fix incrementally |
-| Temporal endpoint inline logic | Medium | 0.5 days | Fix when implementing temporal feature |
-| Session state dual-source | Medium | 1 day | Fix later |
-| Reduction service memory (dense matrices) | Low | 2 days | Fix when hitting OOM with larger datasets |
-| Missing request caching in frontend | Low | 1 day | Fix when performance is noticeable |
-| Type system gaps (any types) | Low | 0.5 days | Fix incrementally |
-| No tests | Low | 2 days | Add targeted tests for adapters and schemas |
-| No cross-session analysis | Low | 3+ days | Design when needed |
-
-**Key insight**: Most "High" severity items should be fixed **before adding the next major feature** (temporal analysis tab), not as a standalone refactoring pass. The current code works well for the current feature set.
+| Issue | Severity | Status | Notes |
+|-------|----------|--------|-------|
+| IntegratedCaptureService overloaded | High | **Resolved** | Decomposed into SessionManager, ProbeProcessor, CaptureOrchestrator |
+| Analysis service code duplication (~40%) | High | **Resolved** | Extracted to route_analysis_common.py |
+| ExperimentPage god component | High | **Resolved** | State extracted into 3 custom hooks |
+| Logging strategy (print → structured) | Medium | **Resolved** | All services use logging module |
+| API schema loose typing (Dict[str, Any]) | Medium | **Resolved** | Typed Pydantic models added |
+| Frontend type mismatches | Medium | **Resolved** | SankeyNode.probe_ids, SankeyLink.tokens declared |
+| Color prop drilling (12+ props × 3 levels) | Medium | Open | Extract to context when tree deepens |
+| Configuration hardcoding | Medium | Open | Fix when adding second model |
+| Temporal endpoint inline logic | Medium | Open | Fix when expanding temporal feature |
+| Session state dual-source | Medium | Open | SessionManager mitigates but doesn't eliminate |
+| Reduction service memory (dense matrices) | Low | Open | Fix when hitting OOM |
+| Missing request caching in frontend | Low | Open | Fix when performance is noticeable |
+| No tests | Low | Open | Add targeted tests for adapters and schemas |
+| No cross-session analysis | Low | Open | Design when needed |
 
 ---
 
