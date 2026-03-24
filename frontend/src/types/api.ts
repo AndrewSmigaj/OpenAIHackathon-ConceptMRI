@@ -124,6 +124,7 @@ interface SankeyNode {
   category_distributions?: Record<string, Record<string, number>>
   specialization: string
   tokens?: ProbeExample[]
+  probe_ids?: string[]
 }
 
 interface SankeyLink {
@@ -136,6 +137,7 @@ interface SankeyLink {
   target_word_distribution?: Record<string, number>
   category_distributions?: Record<string, Record<string, number>>
   token_count: number
+  tokens?: ProbeExample[]
 }
 
 interface TopRoute {

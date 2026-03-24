@@ -7,6 +7,63 @@ from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 
 
+class ProgressInfo(BaseModel):
+    """Session progress details."""
+    completed: int
+    total: int
+    failed: int
+    percent: float
+
+
+class RouteStatistics(BaseModel):
+    """Statistics for a route analysis window."""
+    total_routes: int
+    total_probes: int
+    routes_coverage: float
+    window_layers: List[int]
+    avg_route_confidence: float
+
+
+class DynamicAxis(BaseModel):
+    """A color/shape axis available for visualization."""
+    id: str
+    label: str
+    label_a: str
+    label_b: str
+    values: List[str]
+
+
+class SentenceEntry(BaseModel):
+    """A single sentence within a sentence set."""
+    text: str
+    group: str
+    target_word: Optional[str] = None
+    categories: Optional[Dict[str, str]] = None
+
+
+class SentenceSetSummary(BaseModel):
+    """Summary info for a sentence set."""
+    name: str
+    target_word: str
+    labels: List[str]
+    counts: Dict[str, int]
+    total: int
+
+
+class ReductionPoint(BaseModel):
+    """A single point in reduced dimensionality space."""
+    probe_id: str
+    session_id: str
+    layer: int
+    x: float
+    y: Optional[float] = None
+    z: Optional[float] = None
+    coordinates: Optional[List[float]] = None
+    target_word: str
+    label: Optional[str] = None
+    categories: Optional[Dict[str, str]] = None
+
+
 class ExecutionResponse(BaseModel):
     """Response after starting session execution."""
     started: bool
@@ -19,7 +76,7 @@ class StatusResponse(BaseModel):
     """Session status response."""
     session_id: str
     state: str
-    progress: Dict[str, Any]
+    progress: ProgressInfo
     manifest: Optional[Dict[str, Any]] = None
     data_lake_paths: Optional[Dict[str, str]] = None
 
@@ -110,6 +167,7 @@ class SankeyNode(BaseModel):
     category_distributions: Optional[Dict[str, Dict[str, int]]] = None
     specialization: str
     tokens: Optional[List[ProbeExample]] = None
+    probe_ids: Optional[List[str]] = None
 
 
 class SankeyLink(BaseModel):
@@ -142,9 +200,9 @@ class RouteAnalysisResponse(BaseModel):
     nodes: List[SankeyNode]
     links: List[SankeyLink]
     top_routes: List[TopRoute]
-    statistics: Dict[str, Any]
-    available_axes: Optional[List[Dict[str, Any]]] = None
-    output_available_axes: Optional[List[Dict[str, Any]]] = None
+    statistics: RouteStatistics
+    available_axes: Optional[List[DynamicAxis]] = None
+    output_available_axes: Optional[List[DynamicAxis]] = None
     probe_assignments: Optional[Dict[str, Dict[str, int]]] = None
 
 
@@ -156,7 +214,7 @@ class RouteDetailsResponse(BaseModel):
     count: int
     coverage: float
     avg_confidence: float
-    category_breakdown: Dict[str, Any]
+    category_breakdown: Dict[str, Dict[str, int]]
 
 
 class ExpertDetailsResponse(BaseModel):
@@ -168,7 +226,7 @@ class ExpertDetailsResponse(BaseModel):
     total_tokens: int
     usage_rate: float
     avg_confidence: float
-    category_breakdown: Dict[str, Any]
+    category_breakdown: Dict[str, Dict[str, int]]
 
 
 class LLMInsightsRequest(BaseModel):
@@ -224,15 +282,15 @@ class SentenceSetDetailResponse(BaseModel):
     label_b: str
     description_a: str
     description_b: str
-    sentences_a: List[Dict[str, Any]]
-    sentences_b: List[Dict[str, Any]]
-    sentences_neutral: List[Dict[str, Any]]
+    sentences_a: List[SentenceEntry]
+    sentences_b: List[SentenceEntry]
+    sentences_neutral: List[SentenceEntry]
     metadata: Dict[str, Any]
 
 
 class SentenceSetListResponse(BaseModel):
     """Response listing available sentence sets."""
-    sentence_sets: List[Dict[str, Any]]
+    sentence_sets: List[SentenceSetSummary]
 
 
 # --- Sentence Experiment Schemas ---
@@ -267,7 +325,7 @@ class ReductionRequest(BaseModel):
 
 class ReductionResponse(BaseModel):
     """Response from on-demand reduction."""
-    points: List[Dict[str, Any]]
+    points: List[ReductionPoint]
     layers: List[int]
     method: str
     n_components: int
