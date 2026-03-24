@@ -10,11 +10,11 @@ Claude Code uses these guides to execute the full pipeline:
 | Guide | Purpose |
 |-------|---------|
 | `CLAUDE.md` | Project context, architecture rules, change management (this file) |
-| `PIPELINE.md` | Full analysis pipeline — orchestration runbook for Claude Code |
-| `PROBES.md` | How to create and run probes via API |
+| `docs/PIPELINE.md` | Full analysis pipeline — orchestration runbook for Claude Code |
+| `docs/PROBES.md` | How to create and run probes via API |
 | `data/sentence_sets/GUIDE.md` | How to design and write sentence set JSON files |
-| `SERVERS.md` | Server operations protocol |
-| `ANALYSIS.md` | How to analyze cluster/route data, categorize outputs, write reports |
+| `docs/SERVERS.md` | Server operations protocol |
+| `docs/ANALYSIS.md` | How to analyze cluster/route data, categorize outputs, write reports |
 
 ## Environment Rules
 
@@ -23,9 +23,8 @@ Claude Code uses these guides to execute the full pipeline:
 ## Context Engineering Rules
 
 ### 1. Architecture-First Development
-- **ALWAYS reference architecture.yaml** before implementing any component
-- Update component status (todo → in_progress → done) as you work
-- Follow the file paths and service organization defined in architecture.yaml
+- **Reference `docs/research/architecture.yaml`** for original architecture design (note: may be stale — trust current code over YAML)
+- Follow the file paths and service organization established in the codebase
 - Respect the probe/experiment separation - no mixing of concerns
 
 ### 2. Implementation Strategy

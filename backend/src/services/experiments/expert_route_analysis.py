@@ -16,6 +16,13 @@ from schemas.tokens import ProbeRecord
 from schemas.capture_manifest import CaptureManifest
 
 
+def _axis_label(axis_id: str, sorted_values: list) -> str:
+    """Generate a display label for a color axis based on its cardinality."""
+    if len(sorted_values) == 2:
+        return f"{sorted_values[0]} vs {sorted_values[1]}"
+    return f"{axis_id} ({len(sorted_values)} groups)"
+
+
 class ExpertRouteAnalysisService:
     """Service for analyzing expert routing patterns from probe captures."""
 
@@ -386,6 +393,7 @@ class ExpertRouteAnalysisService:
                 link_tw_counts = defaultdict(int)
                 link_category_counts = defaultdict(lambda: defaultdict(int))
                 link_token_count = 0
+                link_examples = []
 
                 for sig, route_info in routes.items():
                     if sig == route_signature:
@@ -402,6 +410,15 @@ class ExpertRouteAnalysisService:
                                     cats = json.loads(token_record.categories_json)
                                     for axis_id, value in cats.items():
                                         link_category_counts[axis_id][value] += 1
+                                if len(link_examples) < 10:
+                                    link_examples.append({
+                                        "target_word": token_record.target_word,
+                                        "label": token_record.label,
+                                        "input_text": token_record.input_text,
+                                        "probe_id": probe_id,
+                                        "generated_text": getattr(token_record, 'generated_text', None),
+                                        "output_category": getattr(token_record, 'output_category', None),
+                                    })
 
                 link_cat_dists = {k: dict(v) for k, v in link_category_counts.items()}
                 links.append({
@@ -413,7 +430,8 @@ class ExpertRouteAnalysisService:
                     "label_distribution": dict(link_label_counts) if link_label_counts else None,
                     "target_word_distribution": dict(link_tw_counts) if link_tw_counts else None,
                     "category_distributions": link_cat_dists if link_cat_dists else None,
-                    "token_count": link_token_count
+                    "token_count": link_token_count,
+                    "tokens": link_examples if link_examples else None,
                 })
 
         return {"nodes": nodes, "links": links}
@@ -531,7 +549,7 @@ class ExpertRouteAnalysisService:
             sorted_labels = sorted(labels)
             axes.append({
                 "id": "label",
-                "label": f"{sorted_labels[0]} vs {sorted_labels[1]}",
+                "label": _axis_label("label", sorted_labels),
                 "label_a": sorted_labels[0],
                 "label_b": sorted_labels[1],
                 "values": sorted_labels,
@@ -549,7 +567,7 @@ class ExpertRouteAnalysisService:
                 sorted_vals = sorted(values)
                 axes.append({
                     "id": axis_id,
-                    "label": " / ".join(sorted_vals[:3]) + ("\u2026" if len(sorted_vals) > 3 else ""),
+                    "label": _axis_label(axis_id, sorted_vals),
                     "label_a": sorted_vals[0],
                     "label_b": sorted_vals[1],
                     "values": sorted_vals,
@@ -563,10 +581,9 @@ class ExpertRouteAnalysisService:
 
         if len(target_words) >= 2:
             sorted_tw = sorted(target_words)
-            tw_label = " / ".join(sorted_tw[:3]) + ("…" if len(sorted_tw) > 3 else "")
             axes.append({
                 "id": "target_word",
-                "label": tw_label,
+                "label": _axis_label("target_word", sorted_tw),
                 "label_a": sorted_tw[0],
                 "label_b": sorted_tw[1],
                 "values": sorted_tw,

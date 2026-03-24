@@ -211,6 +211,7 @@ export default function ExperimentPage() {
   // Clustering schema state
   const [availableSchemas, setAvailableSchemas] = useState<Array<{name: string, created_at: string, params: any}>>([])
   const [selectedSchema, setSelectedSchema] = useState<string>('')
+  const [schemaReports, setSchemaReports] = useState<Record<string, string>>({})
 
   // LLM Insights state
   const [currentRouteData, setCurrentRouteData] = useState<Record<string, RouteAnalysisResponse | null> | null>(null)
@@ -277,8 +278,9 @@ export default function ExperimentPage() {
     }
     const detectedOutputAxes = Array.from(outputAxesMap.values())
     setOutputAxes(detectedOutputAxes)
-    if (detectedOutputAxes.length > 0 && !detectedOutputAxes.find(a => a.id === outputColorAxisId)) {
-      setOutputColorAxisId(detectedOutputAxes[0].id)
+    // Keep current selection if it's '' (match input) or a valid axis
+    if (outputColorAxisId !== '' && detectedOutputAxes.length > 0 && !detectedOutputAxes.find(a => a.id === outputColorAxisId)) {
+      setOutputColorAxisId('')
     }
   }, [colorAxisId, outputColorAxisId])
 
@@ -303,9 +305,6 @@ export default function ExperimentPage() {
         detectedOutputAxes.forEach(a => { if (!merged.has(a.id)) merged.set(a.id, a) })
         return Array.from(merged.values())
       })
-      if (!outputColorAxisId && detectedOutputAxes.length > 0) {
-        setOutputColorAxisId(detectedOutputAxes[0].id)
-      }
     }
   }, [outputColorAxisId])
 
@@ -335,6 +334,22 @@ export default function ExperimentPage() {
       setSelectedSchema('')
     }
   }, [selectedSessions])
+
+  // Load reports and element descriptions when schema is selected
+  useEffect(() => {
+    if (selectedSchema && selectedSessions.length > 0) {
+      apiClient.getClusteringDetails(selectedSessions[0], selectedSchema)
+        .then(d => {
+          setSchemaReports(d.reports || {})
+          if (d.element_descriptions) {
+            setElementDescriptions(prev => ({ ...prev, ...d.element_descriptions }))
+          }
+        })
+        .catch(() => setSchemaReports({}))
+    } else {
+      setSchemaReports({})
+    }
+  }, [selectedSchema, selectedSessions])
 
   const loadAndMergeSessions = async () => {
     try {
@@ -514,6 +529,7 @@ export default function ExperimentPage() {
                           onChange={(e) => setOutputColorAxisId(e.target.value)}
                           className="px-1.5 py-0.5 text-xs border border-gray-300 rounded flex-1 min-w-0"
                         >
+                          <option value="">Match input colors</option>
                           {outputAxes.map(axis => (
                             <option key={axis.id} value={axis.id}>{axis.label}</option>
                           ))}
@@ -787,7 +803,8 @@ export default function ExperimentPage() {
                     const lastWindow = currentRange.windows[currentRange.windows.length - 1]
                     const lastData = routeMap[lastWindow?.id]
                     if (!lastData) return null
-                    return <WindowAnalysis routeData={lastData} windowLabel={currentRange.label} />
+                    const reportKey = lastWindow ? `w_${lastWindow.layers[0]}_${lastWindow.layers[lastWindow.layers.length - 1]}` : undefined
+                    return <WindowAnalysis routeData={lastData} windowLabel={currentRange.label} report={reportKey ? schemaReports[reportKey] : undefined} selectedSchema={selectedSchema || undefined} primaryValues={primaryValues} gradient={gradient} />
                   })()}
 
                   {/* Click card */}

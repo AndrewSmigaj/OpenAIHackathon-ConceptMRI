@@ -72,6 +72,11 @@ def get_capture_service() -> IntegratedCaptureService:
     return _capture_service
 
 
+def is_model_loaded() -> bool:
+    """Check if the capture service (and model) is initialized."""
+    return _capture_service is not None
+
+
 def get_route_analysis_service() -> ExpertRouteAnalysisService:
     """Get the route analysis service (lazy initialization)."""
     global _route_analysis_service

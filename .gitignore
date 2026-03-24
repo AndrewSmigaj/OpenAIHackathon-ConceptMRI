@@ -206,6 +206,12 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
+# Screenshots in root (moved to docs/images/)
+Screenshot*.png
+
+# Archived data
+data/lake_archive/
+
 # Data and Models
 data/lake/*
 data/experiments/*

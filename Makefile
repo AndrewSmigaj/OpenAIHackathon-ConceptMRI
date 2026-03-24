@@ -1,70 +1,89 @@
 # Concept MRI - Development Makefile
 
-.PHONY: help setup test run-api run-ui dev fmt typecheck clean data-sample
+.PHONY: help setup download-model run-api run-ui dev stop health fmt typecheck lint clean test
 
 help:
 	@echo "Available commands:"
-	@echo "  setup        - Set up development environment"
-	@echo "  dev          - Run both backend and frontend (requires 2 terminals)"
-	@echo "  run-api      - Start FastAPI backend"
-	@echo "  run-ui       - Start React frontend"
-	@echo "  test         - Run tests"
-	@echo "  fmt          - Format code with black"
-	@echo "  typecheck    - Run mypy type checking"
-	@echo "  lint         - Run ruff linting"
-	@echo "  clean        - Clean cache and temp files"
-	@echo "  data-sample  - Create sample data for testing"
+	@echo "  setup          - Set up development environment (.venv + npm)"
+	@echo "  download-model - Download gpt-oss-20b model weights (~40GB)"
+	@echo "  run-api        - Start FastAPI backend"
+	@echo "  run-ui         - Start React frontend"
+	@echo "  dev            - Instructions for running both servers"
+	@echo "  stop           - Kill all running servers"
+	@echo "  health         - Check backend health status"
+	@echo "  test           - Run tests"
+	@echo "  fmt            - Format code with black"
+	@echo "  typecheck      - Run mypy type checking"
+	@echo "  lint           - Run ruff linting"
+	@echo "  clean          - Clean cache and temp files"
 
 setup:
-	@echo "Setting up Python environment..."
-	pip install -r backend/requirements.txt
-	@echo "Setting up Frontend environment..."
+	@echo "Creating Python virtual environment..."
+	python3 -m venv .venv
+	@echo "Installing Python dependencies..."
+	.venv/bin/pip install -r backend/requirements.txt
+	@echo "Installing frontend dependencies..."
 	cd frontend && npm install
 	@echo "Creating data directories..."
 	mkdir -p data/lake data/experiments data/models
-	@echo "Downloading NLTK data..."
-	python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')"
-	@echo "Setup complete! Don't forget to add your API keys to .env file"
+	@echo ""
+	@echo "Setup complete!"
+	@echo "Next: run 'make download-model' to download gpt-oss-20b (~40GB)"
 
-dev:
-	@echo "Starting both backend and frontend..."
-	@echo "Please run these commands in separate terminals:"
-	@echo "  Terminal 1: make run-api"
-	@echo "  Terminal 2: make run-ui"
-
-test:
-	@echo "Running tests..."
-	cd backend && pytest tests/ -v
+download-model:
+	@echo "Downloading gpt-oss-20b model (~40GB, this will take a while)..."
+	.venv/bin/pip install -q huggingface_hub[cli]
+	huggingface-cli download openai/gpt-oss-20b --local-dir data/models/gpt-oss-20b
+	@echo "Model downloaded to data/models/gpt-oss-20b/"
 
 run-api:
-	@echo "Starting FastAPI backend..."
-	cd backend/src && python3 -m uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
+	@echo "Starting FastAPI backend (model takes several minutes to load)..."
+	cd backend/src && ../../.venv/bin/python -m uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
 
 run-ui:
 	@echo "Starting React frontend..."
 	cd frontend && npm run dev
 
+dev:
+	@echo "Run these commands in separate terminals:"
+	@echo "  Terminal 1: make run-api"
+	@echo "  Terminal 2: make run-ui"
+	@echo ""
+	@echo "Or use Claude Code: open 'claude' and ask it to start the servers."
+
+stop:
+	@echo "Stopping all servers..."
+	-pkill -f uvicorn
+	-pkill -f vite
+	-pkill -f "node.*vite"
+	@sleep 1
+	@echo "Verifying clean shutdown..."
+	@ps aux | grep -E "uvicorn|vite" | grep -v grep || echo "All servers stopped."
+
+health:
+	@curl -s http://localhost:8000/health 2>/dev/null | python3 -m json.tool || echo "Backend not responding"
+
+test:
+	@echo "Running tests..."
+	cd backend && ../.venv/bin/python -m pytest tests/ -v
+
 fmt:
 	@echo "Formatting Python code..."
-	black backend/src --line-length 100
-	ruff backend/src --fix
+	.venv/bin/black backend/src --line-length 100
+	.venv/bin/ruff check backend/src --fix
 
 typecheck:
 	@echo "Running type checks..."
-	mypy backend/src --strict
+	.venv/bin/mypy backend/src --strict
 
 lint:
 	@echo "Running linter..."
-	ruff backend/src
+	.venv/bin/ruff check backend/src
 
 clean:
 	@echo "Cleaning cache files..."
 	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
-	find . -type f -name "*.pyc" -delete
+	find . -type f -name "*.pyc" -delete 2>/dev/null || true
 	find . -type d -name ".pytest_cache" -exec rm -rf {} + 2>/dev/null || true
 	find . -type d -name ".mypy_cache" -exec rm -rf {} + 2>/dev/null || true
 	@echo "Clean complete!"
-
-data-sample:
-	@echo "Creating sample data..."
-	@echo "Sample data generation not yet implemented"

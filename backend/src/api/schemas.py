@@ -123,6 +123,7 @@ class SankeyLink(BaseModel):
     target_word_distribution: Optional[Dict[str, int]] = None
     category_distributions: Optional[Dict[str, Dict[str, int]]] = None
     token_count: int
+    tokens: Optional[List[ProbeExample]] = None
 
 
 class TopRoute(BaseModel):

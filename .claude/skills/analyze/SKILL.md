@@ -67,7 +67,7 @@ Read ALL sentences. Identify structural patterns, semantic themes, reasons for m
 
 ### 5. Write Reports
 
-Per-window report (see ANALYSIS.md for full template):
+Per-window report (see docs/ANALYSIS.md for full template):
 
 ```markdown
 # Window L{start}-L{end} Analysis
@@ -96,7 +96,36 @@ curl -X POST http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema}
   -d '{"report": "..."}'
 ```
 
-### 7. Cross-Window Synthesis
+### 7. Generate Element Descriptions
+
+After analyzing each window, generate 1-2 sentence descriptions for every cluster node and top route visible in that window. These populate the click-to-inspect cards in the frontend.
+
+**Approach — comparative, not isolated:**
+- For each cluster: what input types does it capture? How is it different from neighboring clusters?
+- For each route: what distinguishes the sentences that take this path? If a cluster splits into multiple destinations, explain what causes the split.
+- For output links: which clusters route cleanly to one output vs split? What explains the confusion?
+
+**Key format** matches frontend `descKey`:
+- Clusters: `cluster-{id}-L{layer}` (e.g., `cluster-3-L22`)
+- Routes: `route-{signature}` (e.g., `route-L22C3→L23C1`)
+
+```bash
+curl -X POST http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema}/element-descriptions \
+  -H "Content-Type: application/json" \
+  -d '{"descriptions": {"cluster-3-L22": "Vehicle-dominant cluster...", "route-L22C3→L23C1": "Pure vehicle route..."}}'
+```
+
+Descriptions are merged with any existing ones (safe to call incrementally per window).
+
+**Fallback**: If the API endpoint returns 404 (WSL2 reload issue — see server TROUBLESHOOTING.md), write directly to disk:
+```
+data/lake/{session_id}/clusterings/{schema}/element_descriptions.json
+```
+The file is a flat JSON dict of `{descKey: description}`. Merge with existing content if the file already exists.
+
+**IMPORTANT**: This step is NOT optional. Every `/analyze` run MUST produce element descriptions alongside the report. The descriptions populate the click-to-inspect cards in the frontend — without them, users see "No AI description" on every card.
+
+### 8. Cross-Window Synthesis
 
 After multiple windows, write a synthesis covering:
 - Routing evolution across layers

@@ -275,6 +275,18 @@ class ConceptMriApiClient {
   async listClusterings(sessionId: string): Promise<{clusterings: Array<{name: string, created_at: string, params: any}>}> {
     return this.request(`/probes/sessions/${sessionId}/clusterings`);
   }
+
+  /**
+   * Get clustering schema details including reports
+   */
+  async getClusteringDetails(sessionId: string, schemaName: string): Promise<{
+    meta: any;
+    probe_assignments?: Record<string, Record<string, number>>;
+    reports?: Record<string, string>;
+    element_descriptions?: Record<string, string>;
+  }> {
+    return this.request(`/probes/sessions/${sessionId}/clusterings/${schemaName}`);
+  }
 }
 
 // Export singleton instance

@@ -1,11 +1,14 @@
 // @ts-ignore
 import jStat from 'jStat'
+import ReactMarkdown from 'react-markdown'
+import { getAxisColor, rgbToHex, type GradientScheme } from '../../utils/colorBlending'
 
 interface SankeyNode {
   name: string
   id: string
   layer: number
   token_count: number
+  label_distribution?: Record<string, number>
 }
 
 interface SankeyLink {
@@ -21,6 +24,10 @@ interface WindowAnalysisProps {
     statistics?: { total_probes?: number }
   } | null
   windowLabel?: string
+  report?: string
+  selectedSchema?: string
+  primaryValues?: string[]
+  gradient?: GradientScheme
 }
 
 interface ContingencyResult {
@@ -31,6 +38,7 @@ interface ContingencyResult {
   cramersV: number
   isSignificant: boolean
   n: number
+  cellResiduals: Record<string, Record<string, number>>
 }
 
 function computeContingency(nodes: SankeyNode[], links: SankeyLink[]): ContingencyResult | null {
@@ -68,17 +76,22 @@ function computeContingency(nodes: SankeyNode[], links: SankeyLink[]): Contingen
     colTotals[label] = table.reduce((s, r) => s + (r.outcomes[label] ?? 0), 0)
   }
 
-  // Chi-square test of independence
+  // Chi-square test of independence + standardized residuals for cell coloring
   let chiSquare = 0
   const r = table.length
   const c = outcomeLabels.length
+  const cellResiduals: Record<string, Record<string, number>> = {}
 
   for (const row of table) {
+    cellResiduals[row.source] = {}
     for (const label of outcomeLabels) {
       const observed = row.outcomes[label] ?? 0
       const expected = (row.total * colTotals[label]) / n
       if (expected > 0) {
         chiSquare += Math.pow(observed - expected, 2) / expected
+        cellResiduals[row.source][label] = (observed - expected) / Math.sqrt(expected)
+      } else {
+        cellResiduals[row.source][label] = 0
       }
     }
   }
@@ -95,6 +108,7 @@ function computeContingency(nodes: SankeyNode[], links: SankeyLink[]): Contingen
     cramersV,
     isSignificant: pValue < 0.05,
     n,
+    cellResiduals,
   }
 }
 
@@ -105,7 +119,7 @@ function strengthLabel(v: number): string {
   return 'strong'
 }
 
-export default function WindowAnalysis({ routeData, windowLabel }: WindowAnalysisProps) {
+export default function WindowAnalysis({ routeData, windowLabel, report, selectedSchema, primaryValues, gradient = 'red-blue' }: WindowAnalysisProps) {
   if (!routeData) {
     return (
       <div className="bg-gray-50 rounded p-2 mb-2">
@@ -131,10 +145,15 @@ export default function WindowAnalysis({ routeData, windowLabel }: WindowAnalysi
       )}
 
       {/* Contingency Table */}
-      <table className="w-full text-[10px] mb-1.5">
+      <p className="text-[10px] font-semibold text-gray-700 mb-0.5">Cluster → Output Contingency</p>
+      <p className="text-[9px] text-gray-400 mb-1">
+        Do clusters predict output? Blue = over-represented, red = under-represented.
+      </p>
+      <table className="w-full text-[10px] mb-1">
         <thead>
           <tr className="border-b border-gray-200">
-            <th className="text-left text-gray-500 py-0.5 pr-1"></th>
+            <th className="text-left text-gray-500 py-0.5 pr-1">Cluster</th>
+            <th className="text-left text-gray-500 py-0.5 px-1">Input</th>
             {result.outcomeLabels.map(label => (
               <th key={label} className="text-right text-gray-500 py-0.5 px-1 capitalize">{label}</th>
             ))}
@@ -142,21 +161,56 @@ export default function WindowAnalysis({ routeData, windowLabel }: WindowAnalysi
           </tr>
         </thead>
         <tbody>
-          {result.table.map(row => (
-            <tr key={row.source} className="border-b border-gray-100">
-              <td className="text-gray-700 font-medium py-0.5 pr-1 truncate max-w-[60px]">{row.source}</td>
-              {result.outcomeLabels.map(label => {
-                const val = row.outcomes[label] ?? 0
-                const pct = row.total > 0 ? ((val / row.total) * 100).toFixed(0) : '0'
-                return (
-                  <td key={label} className="text-right text-gray-800 py-0.5 px-1">
-                    {val} <span className="text-gray-400">({pct}%)</span>
-                  </td>
-                )
-              })}
-              <td className="text-right text-gray-400 py-0.5 pl-1">{row.total}</td>
-            </tr>
-          ))}
+          {result.table.map(row => {
+            // Look up the source node to get its input label distribution
+            const sourceNode = routeData?.nodes.find(n => n.name === row.source)
+            const labelDist = sourceNode?.label_distribution
+            let dominantInput = ''
+            let dominantPct = 0
+            let dominantColor = '#808080'
+            if (labelDist) {
+              const total = Object.values(labelDist).reduce((s, v) => s + v, 0)
+              const sorted = Object.entries(labelDist).sort((a, b) => b[1] - a[1])
+              if (sorted.length > 0 && total > 0) {
+                dominantInput = sorted[0][0]
+                dominantPct = Math.round((sorted[0][1] / total) * 100)
+                if (primaryValues && primaryValues.length > 0) {
+                  dominantColor = rgbToHex(getAxisColor(dominantInput, primaryValues, gradient))
+                }
+              }
+            }
+            return (
+              <tr key={row.source} className="border-b border-gray-100">
+                <td className="text-gray-700 font-medium py-0.5 pr-1 truncate max-w-[60px]">{row.source}</td>
+                <td className="py-0.5 px-1">
+                  {dominantInput ? (
+                    <span className="inline-flex items-center gap-0.5">
+                      <span className="inline-block w-2 h-2 rounded-sm flex-shrink-0" style={{ backgroundColor: dominantColor }} />
+                      <span className="text-gray-700 capitalize truncate max-w-[50px]">{dominantInput}</span>
+                      <span className="text-gray-400">{dominantPct}%</span>
+                    </span>
+                  ) : (
+                    <span className="text-gray-300">—</span>
+                  )}
+                </td>
+                {result.outcomeLabels.map(label => {
+                  const val = row.outcomes[label] ?? 0
+                  const pct = row.total > 0 ? ((val / row.total) * 100).toFixed(0) : '0'
+                  const residual = result.cellResiduals[row.source]?.[label] ?? 0
+                  const absR = Math.min(Math.abs(residual), 4) / 4
+                  const bgColor = residual > 0
+                    ? `rgba(59, 130, 246, ${absR * 0.3})`
+                    : `rgba(239, 68, 68, ${absR * 0.3})`
+                  return (
+                    <td key={label} className="text-right text-gray-800 py-0.5 px-1" style={{ backgroundColor: bgColor }}>
+                      {val} <span className="text-gray-400">({pct}%)</span>
+                    </td>
+                  )
+                })}
+                <td className="text-right text-gray-400 py-0.5 pl-1">{row.total}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
 
@@ -200,8 +254,19 @@ export default function WindowAnalysis({ routeData, windowLabel }: WindowAnalysi
         })}
       </div>
 
-      {/* Placeholder for future report */}
-      <p className="text-[9px] text-gray-300 mt-2 italic">Statistical report placeholder</p>
+      {/* AI Analysis Report */}
+      {report ? (
+        <div className="mt-2 pt-2 border-t border-gray-100">
+          <p className="text-[10px] font-semibold text-gray-600 mb-1">AI Analysis</p>
+          <div className="prose prose-sm max-w-none text-[10px] text-gray-700 max-h-[300px] overflow-y-auto">
+            <ReactMarkdown>{report}</ReactMarkdown>
+          </div>
+        </div>
+      ) : selectedSchema ? (
+        <p className="text-[9px] text-gray-400 mt-2 italic">
+          No report for this window. Use /analyze to generate one.
+        </p>
+      ) : null}
     </div>
   )
 }

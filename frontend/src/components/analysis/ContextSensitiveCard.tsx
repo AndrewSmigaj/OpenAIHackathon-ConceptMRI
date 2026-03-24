@@ -1,4 +1,4 @@
-import { getNodeColor, type GradientScheme } from '../../utils/colorBlending'
+import { getNodeColor, getAxisColor, rgbToHex, type GradientScheme } from '../../utils/colorBlending'
 import SentenceHighlight from '../SentenceHighlight'
 import ReactMarkdown from 'react-markdown'
 
@@ -124,56 +124,99 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
             <p className="text-[10px] text-gray-600 italic">{selectedData.specialization}</p>
           )}
 
-          {/* Label Distribution bars */}
+          {/* Label Distribution — stacked bar */}
           {labelStats.length > 0 && (
             <div>
-              <p className="text-[10px] font-medium text-gray-500 mb-0.5">Label Distribution</p>
-              <div className="space-y-0.5">
-                {labelStats.map(stat => (
-                  <div key={stat.category}>
-                    <div className="flex justify-between items-center text-[10px]">
-                      <span className="text-gray-700 capitalize truncate">{stat.category}</span>
-                      <span className="text-gray-500 flex-shrink-0 ml-1">{stat.count} ({stat.percentage.toFixed(0)}%)</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-1">
-                      <div className="bg-blue-500 h-1 rounded-full" style={{ width: `${Math.min(stat.percentage, 100)}%` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Per-axis category distributions */}
-          {axisDistributions && Object.keys(axisDistributions).length > 0 && (
-            <div>
-              <p className="text-[10px] font-medium text-gray-500 mb-0.5">Categories</p>
-              <div className="space-y-1">
-                {Object.entries(axisDistributions).map(([axisId, dist]) => {
-                  const total = Object.values(dist).reduce((s, v) => s + v, 0)
+              <p className="text-[10px] font-medium text-gray-500 mb-0.5">Input Labels</p>
+              <div className="flex rounded overflow-hidden border border-gray-200" style={{ height: 20 }}>
+                {labelStats.map(stat => {
+                  const color = primaryValues.length > 0
+                    ? rgbToHex(getAxisColor(stat.category, primaryValues, gradient))
+                    : '#6366f1'
                   return (
-                    <div key={axisId}>
-                      <p className="text-[10px] font-medium text-gray-600 capitalize">{axisId}</p>
-                      {Object.entries(dist)
-                        .sort(([, a], [, b]) => b - a)
-                        .map(([value, count]) => {
-                          const pct = total > 0 ? (count / total) * 100 : 0
-                          return (
-                            <div key={value} className="mb-0.5">
-                              <div className="flex justify-between items-center text-[10px]">
-                                <span className="text-gray-700 capitalize truncate">{value}</span>
-                                <span className="text-gray-500 flex-shrink-0 ml-1">{count} ({pct.toFixed(0)}%)</span>
-                              </div>
-                              <div className="w-full bg-gray-200 rounded-full h-1">
-                                <div className="bg-indigo-400 h-1 rounded-full" style={{ width: `${Math.min(pct, 100)}%` }} />
-                              </div>
-                            </div>
-                          )
-                        })}
+                    <div
+                      key={stat.category}
+                      className="flex items-center justify-center overflow-hidden"
+                      style={{ width: `${stat.percentage}%`, backgroundColor: color, minWidth: stat.percentage > 0 ? 4 : 0 }}
+                      title={`${stat.category}: ${stat.count} (${stat.percentage.toFixed(0)}%)`}
+                    >
+                      {stat.percentage >= 15 && (
+                        <span className="text-[8px] font-medium text-white truncate px-0.5" style={{ textShadow: '0 0 2px rgba(0,0,0,0.5)' }}>
+                          {stat.category.slice(0, 6)} {stat.percentage.toFixed(0)}%
+                        </span>
+                      )}
                     </div>
                   )
                 })}
               </div>
+              <div className="flex flex-wrap gap-x-2 gap-y-0 mt-0.5">
+                {labelStats.map(stat => {
+                  const color = primaryValues.length > 0
+                    ? rgbToHex(getAxisColor(stat.category, primaryValues, gradient))
+                    : '#6366f1'
+                  return (
+                    <span key={stat.category} className="inline-flex items-center gap-0.5 text-[9px] text-gray-600">
+                      <span className="inline-block w-2 h-2 rounded-sm flex-shrink-0" style={{ backgroundColor: color }} />
+                      <span className="capitalize">{stat.category}</span>
+                      <span className="text-gray-400">{stat.percentage.toFixed(0)}%</span>
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Per-axis category distributions — stacked bars */}
+          {axisDistributions && Object.keys(axisDistributions).length > 0 && (
+            <div className="space-y-1">
+              {Object.entries(axisDistributions).map(([axisId, dist]) => {
+                const total = Object.values(dist).reduce((s, v) => s + v, 0)
+                if (total === 0) return null
+                const sorted = Object.entries(dist).sort(([, a], [, b]) => b - a)
+                const axisValues = sorted.map(([v]) => v)
+                return (
+                  <div key={axisId}>
+                    <p className="text-[10px] font-medium text-gray-500 mb-0.5 capitalize">{axisId}</p>
+                    <div className="flex rounded overflow-hidden border border-gray-200" style={{ height: 20 }}>
+                      {sorted.map(([value, count]) => {
+                        const pct = (count / total) * 100
+                        const color = axisValues.length > 0
+                          ? rgbToHex(getAxisColor(value, axisValues, gradient))
+                          : '#6366f1'
+                        return (
+                          <div
+                            key={value}
+                            className="flex items-center justify-center overflow-hidden"
+                            style={{ width: `${pct}%`, backgroundColor: color, minWidth: pct > 0 ? 4 : 0 }}
+                            title={`${value}: ${count} (${pct.toFixed(0)}%)`}
+                          >
+                            {pct >= 15 && (
+                              <span className="text-[8px] font-medium text-white truncate px-0.5" style={{ textShadow: '0 0 2px rgba(0,0,0,0.5)' }}>
+                                {value.slice(0, 6)} {pct.toFixed(0)}%
+                              </span>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                    <div className="flex flex-wrap gap-x-2 gap-y-0 mt-0.5">
+                      {sorted.map(([value, count]) => {
+                        const pct = (count / total) * 100
+                        const color = axisValues.length > 0
+                          ? rgbToHex(getAxisColor(value, axisValues, gradient))
+                          : '#6366f1'
+                        return (
+                          <span key={value} className="inline-flex items-center gap-0.5 text-[9px] text-gray-600">
+                            <span className="inline-block w-2 h-2 rounded-sm flex-shrink-0" style={{ backgroundColor: color }} />
+                            <span className="capitalize">{value}</span>
+                            <span className="text-gray-400">{pct.toFixed(0)}%</span>
+                          </span>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           )}
 
@@ -194,13 +237,17 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
           )}
 
           {/* AI description */}
-          {elementDescription && (
+          {elementDescription ? (
             <div className="border-t border-gray-100 pt-1">
               <div className="prose prose-sm max-w-none text-[10px] text-gray-700">
                 <ReactMarkdown>{elementDescription}</ReactMarkdown>
               </div>
             </div>
-          )}
+          ) : (cardType === 'cluster' || cardType === 'expert') ? (
+            <p className="text-[9px] text-gray-400 italic border-t border-gray-100 pt-1">
+              No AI description. Run /analyze with a saved schema to generate cluster labels.
+            </p>
+          ) : null}
 
           {/* Examples */}
           <div className="border-t border-gray-100 pt-1">

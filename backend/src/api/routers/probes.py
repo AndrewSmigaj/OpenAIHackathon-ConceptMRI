@@ -346,7 +346,24 @@ async def load_clustering(session_id: str, schema_name: str):
     rdir = schema_dir / "reports"
     if rdir.exists():
         result["reports"] = {f.stem: f.read_text() for f in sorted(rdir.glob("*.md"))}
+    desc_path = schema_dir / "element_descriptions.json"
+    if desc_path.exists():
+        result["element_descriptions"] = json.loads(desc_path.read_text())
     return result
+
+
+@router.post("/probes/sessions/{session_id}/clusterings/{schema_name}/element-descriptions")
+async def save_element_descriptions(session_id: str, schema_name: str, body: Dict):
+    """Save element descriptions (cluster labels, route labels) for a clustering schema."""
+    schema_dir = Path(_data_lake_path) / session_id / "clusterings" / schema_name
+    if not schema_dir.exists():
+        raise HTTPException(status_code=404, detail=f"Clustering '{schema_name}' not found")
+    desc_path = schema_dir / "element_descriptions.json"
+    # Merge with existing descriptions if any
+    existing = json.loads(desc_path.read_text()) if desc_path.exists() else {}
+    existing.update(body.get("descriptions", {}))
+    desc_path.write_text(json.dumps(existing, indent=2))
+    return {"saved": len(existing)}
 
 
 @router.post("/probes/sessions/{session_id}/clusterings/{schema_name}/reports/{window_key}")

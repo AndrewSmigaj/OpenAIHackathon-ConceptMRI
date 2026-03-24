@@ -131,18 +131,32 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     // Compute depth offset for proper column placement
     const minLayer = nodes.length > 0 ? Math.min(...nodes.map(n => n.layer)) : 0;
 
+    // Build extended values list that includes output categories for "match input" fallback
+    const outputCategories = nodes
+      .filter(n => n.name.startsWith('Out:'))
+      .map(n => n.name.replace('Out:', ''));
+    const extendedPrimaryValues = [...primaryValues];
+    for (const cat of outputCategories) {
+      if (!extendedPrimaryValues.includes(cat)) {
+        extendedPrimaryValues.push(cat);
+      }
+    }
+
     // Prepare node data with colors
     const sankeyNodes = nodes.map(node => {
       const isOutputNode = node.name.startsWith('Out:');
 
       let nodeColor: string;
       if (isOutputNode) {
-        // Output nodes: use same colors as input labels for matching categories
-        const category = node.name.replace('Out:', '');
-        if (primaryValues.includes(category)) {
-          nodeColor = rgbToHex(getAxisColor(category, primaryValues, gradient));
+        // Output nodes: use output color axis if configured, otherwise match input colors
+        const outputAxisDist = outputColorAxisId ? getDistForAxis(node, outputColorAxisId) : null;
+        if (outputAxisDist && Object.keys(outputAxisDist).length > 0 && outputPrimaryValues && outputPrimaryValues.length > 0) {
+          const outputSecDist = outputSecondaryAxisId ? getDistForAxis(node, outputSecondaryAxisId) : undefined;
+          nodeColor = getNodeColor(outputAxisDist, outputPrimaryValues, outputGradient, outputSecDist, outputSecondaryValues, outputSecondaryGradient);
         } else {
-          nodeColor = '#808080'; // gray for ambiguous/unknown
+          // Fallback: match category name against input colors (extended to include output-only categories)
+          const category = node.name.replace('Out:', '');
+          nodeColor = rgbToHex(getAxisColor(category, extendedPrimaryValues, gradient));
         }
       } else {
         // Regular nodes: primary = label_distribution, secondary from axis
@@ -169,9 +183,24 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     const sankeyLinks = links.map(link => {
       const primaryDist = link.label_distribution || {};
       const secondaryDist = getDistForAxis(link, secondaryAxisId);
-      const linkColor = Object.keys(primaryDist).length > 0
-        ? getNodeColor(primaryDist, primaryValues, gradient, secondaryDist, secondaryValues, secondaryGradient)
-        : '#5470c6';
+      const isOutputLink = link.target.startsWith('Out:');
+
+      let linkColor: string;
+      if (isOutputLink && outputColorAxisId && outputPrimaryValues && outputPrimaryValues.length > 0) {
+        const outDist = getDistForAxis(link, outputColorAxisId);
+        if (outDist && Object.keys(outDist).length > 0) {
+          const outSecDist = outputSecondaryAxisId ? getDistForAxis(link, outputSecondaryAxisId) : undefined;
+          linkColor = getNodeColor(outDist, outputPrimaryValues, outputGradient, outSecDist, outputSecondaryValues, outputSecondaryGradient);
+        } else {
+          linkColor = Object.keys(primaryDist).length > 0
+            ? getNodeColor(primaryDist, primaryValues, gradient, secondaryDist, secondaryValues, secondaryGradient)
+            : '#5470c6';
+        }
+      } else {
+        linkColor = Object.keys(primaryDist).length > 0
+          ? getNodeColor(primaryDist, primaryValues, gradient, secondaryDist, secondaryValues, secondaryGradient)
+          : '#5470c6';
+      }
 
       // Get traffic-based visual properties
       const { opacity, lineWidth } = getTrafficVisualProperties(link.value, maxLinkValue);

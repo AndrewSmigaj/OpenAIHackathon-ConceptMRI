@@ -14,6 +14,13 @@ import json
 from schemas.tokens import ProbeRecord
 
 
+def _axis_label(axis_id: str, sorted_values: list) -> str:
+    """Generate a display label for a color axis based on its cardinality."""
+    if len(sorted_values) == 2:
+        return f"{sorted_values[0]} vs {sorted_values[1]}"
+    return f"{axis_id} ({len(sorted_values)} groups)"
+
+
 def build_output_category_layer(
     nodes: List[dict],
     links: List[dict],
@@ -171,6 +178,7 @@ def build_output_category_layer(
         link_label_dist: Dict[str, int] = defaultdict(int)
         link_tw_dist: Dict[str, int] = defaultdict(int)
         link_cat_dists: Dict[str, Dict[str, int]] = defaultdict(lambda: defaultdict(int))
+        link_examples = []
 
         for record in records:
             if record.label:
@@ -185,6 +193,15 @@ def build_output_category_layer(
                         link_cat_dists[axis_id][value] += 1
                 except (json.JSONDecodeError, TypeError):
                     pass
+            if len(link_examples) < 10:
+                link_examples.append({
+                    "target_word": record.target_word,
+                    "label": record.label,
+                    "input_text": record.input_text,
+                    "probe_id": record.probe_id,
+                    "generated_text": getattr(record, 'generated_text', None),
+                    "output_category": getattr(record, 'output_category', None),
+                })
 
         output_links.append({
             "source": final_node,
@@ -196,6 +213,7 @@ def build_output_category_layer(
             "target_word_distribution": dict(link_tw_dist) if link_tw_dist else None,
             "category_distributions": {k: dict(v) for k, v in link_cat_dists.items()} if link_cat_dists else None,
             "token_count": count,
+            "tokens": link_examples if link_examples else None,
         })
 
     # Compute output available axes from output_category_json
@@ -239,7 +257,7 @@ def _compute_output_axes(category_groups: Dict[str, List[ProbeRecord]]) -> List[
             sorted_vals = sorted(values)
             axes.append({
                 "id": axis_id,
-                "label": " / ".join(sorted_vals[:3]) + ("\u2026" if len(sorted_vals) > 3 else ""),
+                "label": _axis_label(axis_id, sorted_vals),
                 "label_a": sorted_vals[0],
                 "label_b": sorted_vals[1],
                 "values": sorted_vals,
