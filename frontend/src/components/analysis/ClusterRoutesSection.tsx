@@ -30,26 +30,20 @@ interface ClusterRoutesSectionProps {
   sessionIds: string[]
   sessionData: SessionDetailResponse | null
   filterState: FilterState
-  colorLabelA: string
-  colorLabelB: string
+  primaryValues: string[]
   gradient: GradientScheme
-  secondaryCategoryA?: string
-  secondaryCategoryB?: string
+  secondaryValues?: string[]
   secondaryGradient?: GradientScheme
   secondaryAxisId?: string
-  outputColorLabelA?: string
-  outputColorLabelB?: string
+  outputPrimaryValues?: string[]
   outputGradient?: GradientScheme
-  outputSecondaryCategoryA?: string
-  outputSecondaryCategoryB?: string
+  outputSecondaryValues?: string[]
   outputSecondaryGradient?: GradientScheme
   outputSecondaryAxisId?: string
   outputColorAxisId?: string
   outputGroupingAxes?: string[]
   shapeAxisId?: string
   shapeAxis?: DynamicAxis
-  primaryAxisValues?: string[]
-  secondaryAxisValues?: string[]
   selectedRange: string
   onRangeChange: (range: string) => void
   layerClusterCounts: {[key: number]: number}
@@ -71,26 +65,20 @@ export default function ClusterRoutesSection({
   sessionIds,
   sessionData,
   filterState,
-  colorLabelA,
-  colorLabelB,
+  primaryValues,
   gradient,
-  secondaryCategoryA,
-  secondaryCategoryB,
+  secondaryValues,
   secondaryGradient,
   secondaryAxisId,
-  outputColorLabelA,
-  outputColorLabelB,
+  outputPrimaryValues,
   outputGradient,
-  outputSecondaryCategoryA,
-  outputSecondaryCategoryB,
+  outputSecondaryValues,
   outputSecondaryGradient,
   outputSecondaryAxisId,
   outputColorAxisId,
   outputGroupingAxes,
   shapeAxisId,
   shapeAxis,
-  primaryAxisValues,
-  secondaryAxisValues,
   selectedRange,
   onRangeChange,
   layerClusterCounts,
@@ -177,18 +165,14 @@ export default function ClusterRoutesSection({
             sessionIds={sessionIds}
             sessionData={sessionData}
             filterState={filterState}
-            colorLabelA={colorLabelA}
-            colorLabelB={colorLabelB}
+            primaryValues={primaryValues}
             gradient={gradient}
-            secondaryCategoryA={secondaryCategoryA}
-            secondaryCategoryB={secondaryCategoryB}
+            secondaryValues={secondaryValues}
             secondaryGradient={secondaryGradient}
             secondaryAxisId={secondaryAxisId}
-            outputColorLabelA={outputColorLabelA}
-            outputColorLabelB={outputColorLabelB}
+            outputPrimaryValues={outputPrimaryValues}
             outputGradient={outputGradient}
-            outputSecondaryCategoryA={outputSecondaryCategoryA}
-            outputSecondaryCategoryB={outputSecondaryCategoryB}
+            outputSecondaryValues={outputSecondaryValues}
             outputSecondaryGradient={outputSecondaryGradient}
             outputSecondaryAxisId={outputSecondaryAxisId}
             outputColorAxisId={outputColorAxisId}
@@ -213,12 +197,12 @@ export default function ClusterRoutesSection({
           <SteppedTrajectoryPlot
             sessionIds={sessionIds}
             layers={memoizedLayers}
-            colorLabelA={colorLabelA}
-            colorLabelB={colorLabelB}
+            colorLabelA={primaryValues[0] || ''}
+            colorLabelB={primaryValues[1] || ''}
             gradient={gradient}
-            primaryValues={primaryAxisValues}
+            primaryValues={primaryValues}
             secondaryColorAxisId={secondaryAxisId}
-            secondaryValues={secondaryAxisValues}
+            secondaryValues={secondaryValues}
             shapeAxisId={shapeAxisId}
             shapeValues={shapeAxis?.values}
             source={embeddingSource}

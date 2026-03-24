@@ -10,6 +10,7 @@ Claude Code uses these guides to execute the full pipeline:
 | Guide | Purpose |
 |-------|---------|
 | `CLAUDE.md` | Project context, architecture rules, change management (this file) |
+| `PIPELINE.md` | Full analysis pipeline — orchestration runbook for Claude Code |
 | `PROBES.md` | How to create and run probes via API |
 | `data/sentence_sets/GUIDE.md` | How to design and write sentence set JSON files |
 | `SERVERS.md` | Server operations protocol |

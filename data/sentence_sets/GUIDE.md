@@ -4,7 +4,7 @@ This document is the primary reference for Claude Code when creating, expanding,
 
 ## What Sentence Sets Are
 
-Sentence sets are controlled datasets where each sentence contains a **target word** used in one of two distinct semantic contexts (label A vs label B). When fed through an MoE model, the routing decisions and expert activations reveal how the model distinguishes between these contexts.
+Sentence sets are controlled datasets where each sentence contains a **target word** used in one of N distinct semantic contexts (groups). When fed through an MoE model, the routing decisions and expert activations reveal how the model distinguishes between these contexts. Sets can have 2 groups (e.g., benign/harmful) or more (e.g., 5 word senses for polysemy).
 
 **How they're used:**
 - **Individual sentence analysis**: Each sentence processed independently. 1 probe per sentence. Used in Expert Routes and Latent Space tabs.
@@ -18,13 +18,18 @@ Sentence sets are controlled datasets where each sentence contains a **target wo
   "name": "knife_safety_v2",
   "version": "2.0",
   "target_word": "knife",
-  "label_a": "benign",
-  "label_b": "harmful",
-  "description_a": "Everyday benign knife usage — cooking, crafting, utility",
-  "description_b": "Harmful or violent knife usage — crime, assault, threat",
-  "label_a2": "action",
-  "label_b2": "description",
-  "axis2_name": "structure",
+  "groups": [
+    {
+      "label": "benign",
+      "description": "Everyday benign knife usage — cooking, crafting, utility",
+      "sentences": [...]
+    },
+    {
+      "label": "harmful",
+      "description": "Harmful or violent knife usage — crime, assault, threat",
+      "sentences": [...]
+    }
+  ],
   "axes": [
     {"id": "structure", "values": ["action", "description"]},
     {"id": "intensity", "values": ["low", "medium", "high"]},
@@ -35,14 +40,12 @@ Sentence sets are controlled datasets where each sentence contains a **target wo
     {"id": "content_type", "values": ["continuation", "elaboration", "tangent", "contradiction", "refusal"]},
     {"id": "safety", "values": ["safe", "borderline", "concerning"]}
   ],
-  "sentences_a": [],
-  "sentences_b": [],
-  "sentences_neutral": [],
+  "generate_output": true,
   "metadata": {}
 }
 ```
 
-The secondary axis (`label_a2`/`label_b2`/`axis2_name`) is **orthogonal** to the primary axis. It captures a different dimension of variation so the model can be analyzed along two axes simultaneously (e.g., is the model routing by meaning, by sentence structure, or by both?).
+The `groups` array contains N groups, each with a `label` (the identity string used in probe records), a `description` (for generation prompts), and a `sentences` array. There is no limit on the number of groups — 2-group sets (safety, framing) and 5-group sets (polysemy) use the same structure.
 
 The `axes` array declares all generic category dimensions available for this set (input axes). Each axis has an `id` (used as category key) and `values` (the valid labels). The backend reads these dynamically — no code changes needed when adding new axes.
 
@@ -52,9 +55,8 @@ The `output_axes` array declares classification dimensions for **generated outpu
 ```json
 {
   "text": "The chef sharpened the knife before slicing the fresh vegetables for the salad.",
-  "group": "A",
+  "group": "benign",
   "target_word": "knife",
-  "secondary_label": "action",
   "categories": {
     "structure": "action",
     "intensity": "medium",
@@ -63,7 +65,7 @@ The `output_axes` array declares classification dimensions for **generated outpu
 }
 ```
 
-The `secondary_label` field corresponds to `label_a2` or `label_b2` and is stored as `label2` in probe Parquet data.
+The `group` field must match the parent `SentenceGroup.label` — it stores the label string (e.g., "benign", "aquarium"), not a code like "A" or "B".
 
 The `categories` dict contains labels for all generic axes declared in the file-level `axes` array. Each key matches an axis `id`, and the value must be one of that axis's `values`. The backend serializes this dict as `categories_json` in Parquet data, then dynamically extracts axes for visualization.
 
@@ -72,8 +74,8 @@ The `categories` dict contains labels for all generic axes declared in the file-
 1. **Word count**: 10-30 words per sentence
 2. **Target word**: Must appear exactly once (case-insensitive)
 3. **Punctuation**: Must end with one of: `.!?"'):`
-4. **Uniqueness**: No duplicate texts across all groups (A, B, neutral)
-5. **Group field**: Must match parent array ("A" for sentences_a, "B" for sentences_b)
+4. **Uniqueness**: No duplicate texts across all groups
+5. **Group field**: Must match parent group's `label` (e.g., "benign", "aquarium")
 6. **Naturalistic prose**: Write like real text, not synthetic patterns
 7. **Structural diversity**: No two sentences should share the same template ("The X did Y with Z")
 8. **Clear but not cartoonish**: Classification should be obvious but the sentence should read naturally
@@ -85,10 +87,9 @@ Run after **every batch** of additions:
 
 - [ ] Word count 10-30 for every sentence
 - [ ] Target word appears exactly once per sentence
-- [ ] No duplicate texts across A, B, and neutral arrays
-- [ ] `group` field matches parent array
+- [ ] No duplicate texts across all groups
+- [ ] `group` field matches parent group's `label`
 - [ ] Every sentence ends with punctuation
-- [ ] `sentences_neutral` is `[]` (empty array)
 
 **Programmatic validation**: The backend has `validate_sentence_set()` in `backend/src/services/generation/sentence_set.py` that checks all of the above.
 
@@ -116,9 +117,9 @@ for quality rules. Validate after adding.
 
 **Create a new sentence set:**
 ```
-Create a new sentence set for target_word "[WORD]" with label_a "[A]"
-and label_b "[B]". Put it in data/sentence_sets/[CATEGORY]/[name]_v1.json.
-Write 200 sentences per class. Follow GUIDE.md for schema and quality rules.
+Create a new sentence set for target_word "[WORD]" with groups "[GROUP1]"
+and "[GROUP2]". Put it in data/sentence_sets/[CATEGORY]/[name]_v1.json.
+Write 200 sentences per group. Follow GUIDE.md for schema and quality rules.
 ```
 
 **Validate a sentence set:**
@@ -133,22 +134,23 @@ Report all errors.
 
 ## Axes and Categories
 
-### Primary and secondary axes
+### Primary axis (groups) and input axes
 
-Every sentence set has a primary axis (label_a/label_b) and a secondary axis (label_a2/label_b2). The secondary axis is always the first entry in the `axes` array.
+The primary axis is defined by the `groups` array — each group label becomes a value on the "label" axis. Input axes in the `axes` array provide secondary dimensions for analysis.
 
-| Set | Primary Axis | Secondary Axis | Label A2 | Label B2 |
-|-----|-------------|----------------|----------|----------|
-| tank | aquarium / vehicle | structure | action | description |
-| knife | benign / harmful | structure | action | description |
-| gun | benign / harmful | structure | action | description |
-| hammer | benign / harmful | structure | action | description |
-| rope | benign / harmful | structure | action | description |
-| said_roleframing | narrative / factual | speech_type | direct | reported |
-| said_safety | safe / unsafe | speech_type | direct | reported |
-| attacked | roleplay / factual | voice | active | passive |
-| destroyed | roleplay / factual | voice | active | passive |
-| threatened | roleplay / factual | voice | active | passive |
+| Set | Groups (primary) | Input Axes |
+|-----|-----------------|------------|
+| tank_polysemy_v3 | aquarium, vehicle, scuba, septic, clothing | structure, register |
+| tank_polysemy_v2 | aquarium, vehicle | structure |
+| knife | benign, harmful | structure, intensity, topic |
+| gun | benign, harmful | structure, intensity, topic |
+| hammer | benign, harmful | structure, intensity, topic |
+| rope | benign, harmful | structure, intensity, topic |
+| said_roleframing | narrative, factual | speech_type |
+| said_safety | safe, unsafe | speech_type |
+| attacked | roleplay, factual | voice, scale, specificity |
+| destroyed | roleplay, factual | voice, scale, specificity |
+| threatened | roleplay, factual | voice, scale, specificity |
 
 ### Generic categories per set type
 
@@ -171,10 +173,16 @@ Every sentence set has a primary axis (label_a/label_b) and a secondary axis (la
 |----------|--------|-------------|
 | speech_type | direct, reported | Quoted dialogue vs paraphrased/indirect speech |
 
-**Polysemy set** (tank) — 1 category:
+**Polysemy set** (tank_polysemy_v2) — 1 category:
 | Category | Values | Description |
 |----------|--------|-------------|
 | structure | action, description | Whether target word is doing/receiving (action) or described statically (description) |
+
+**Polysemy set** (tank_polysemy_v3) — 2 categories:
+| Category | Values | Description |
+|----------|--------|-------------|
+| structure | action, description | Whether target word is doing/receiving (action) or described statically (description) |
+| register | narrative, technical, casual | Prose register: storytelling, technical/professional, or everyday casual |
 
 ### Output categories per set type
 
@@ -195,12 +203,19 @@ Primary `output_category` = cross-cell label (e.g., `fictional_coherent`, `factu
 | content_type | continuation, elaboration, tangent, contradiction, refusal | How the model extends the input |
 | safety | safe, borderline, concerning | Whether the generated text raises safety concerns |
 
-**Polysemy sets** (tank):
+**Polysemy sets** (tank_polysemy_v2):
 | Category | Values | Description |
 |----------|--------|-------------|
 | tone | neutral, alarming, empathetic, dismissive, aggressive | Emotional tone of the generated text |
 | content_type | continuation, elaboration, tangent, contradiction, refusal | How the model extends the input |
 | semantic_consistency | maintains_meaning, shifts_meaning, ambiguous | Whether the generated text maintains the same meaning of the target word |
+
+**Polysemy sets** (tank_polysemy_v3):
+| Category | Values | Description |
+|----------|--------|-------------|
+| topic | aquarium, vehicle, scuba, septic, clothing, ambiguous | Which word sense the generated continuation uses — may differ from input sense |
+
+Primary `output_category` = the `topic` value directly (e.g., `aquarium`, `vehicle`). This gives up to 6 output nodes in the Sankey, revealing whether the model's continuation preserves or shifts the input word sense.
 
 ### Factorial design (framing sets)
 
@@ -210,8 +225,9 @@ The three framing sets use a full factorial design: 2 (voice) x 2 (scale) x 2 (s
 
 ### polysemy/
 Words with multiple distinct meanings that MoE experts may route differently.
-- **Tank**: aquarium (glass fish tank) vs vehicle (armored military tank)
-- Good additions: words with clear, unambiguous dual meanings (e.g., "bank" — river vs financial, "bat" — animal vs sports)
+- **Tank v2**: 2 senses — aquarium (glass fish tank) vs vehicle (armored military tank)
+- **Tank v3**: 5 senses — aquarium, vehicle, scuba (diving tank), septic (sewage/storage tank), clothing (tank top). 100 sentences per sense, 500 total.
+- Good additions: words with clear, unambiguous multiple meanings (e.g., "bank" — river vs financial, "bat" — animal vs sports)
 
 ### safety/
 Words describing objects that can be used benignly or harmfully.

@@ -81,6 +81,7 @@ print(df[['probe_id', 'target_word', 'label', 'label2']].head())
 | Set Name | Target Word | Primary Axis | Categories | File |
 |----------|------------|--------------|------------|------|
 | `tank_polysemy_v2` | tank | aquarium vs vehicle | structure | `polysemy/tank_polysemy_v2.json` |
+| `tank_polysemy_v3` | tank | aquarium, vehicle, scuba, septic, clothing | structure, register | `polysemy/tank_polysemy_v3.json` |
 | `knife_safety_v2` | knife | benign vs harmful | structure, intensity, topic | `safety/knife_safety_v2.json` |
 | `gun_safety_v2` | gun | benign vs harmful | structure, intensity, topic | `safety/gun_safety_v2.json` |
 | `hammer_safety_v2` | hammer | benign vs harmful | structure, intensity, topic | `safety/hammer_safety_v2.json` |

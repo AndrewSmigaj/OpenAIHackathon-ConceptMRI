@@ -1,6 +1,6 @@
 /**
- * Color blending utilities for Sankey chart visualization with additive RGB blending.
- * Colors nodes/links along a single axis defined by two label strings (e.g. "aquatic" vs "military").
+ * Color blending utilities for Sankey chart visualization.
+ * Supports N-way weighted blending for arbitrary number of category labels.
  */
 
 interface RGBColor {
@@ -41,27 +41,6 @@ export const GRADIENT_SCHEMES: Record<GradientScheme, { start: RGBColor; end: RG
 };
 
 /**
- * Calculate position along a gradient axis from two category counts.
- * Returns value from -1 (fully categoryA) to +1 (fully categoryB).
- */
-export function calculateCategoryPosition(
-  categoryDistribution: Record<string, number>,
-  categoryA: string,
-  categoryB: string
-): number {
-  const countA = categoryDistribution[categoryA] || 0;
-  const countB = categoryDistribution[categoryB] || 0;
-  const total = countA + countB;
-
-  if (total === 0) {
-    return 0; // Neutral — no data for either label
-  }
-
-  // -1 = fully A, +1 = fully B
-  return (countB / total) - (countA / total);
-}
-
-/**
  * Get color for a position along the gradient scheme.
  * position: -1 maps to start color, +1 maps to end color.
  */
@@ -99,73 +78,90 @@ export function rgbToHex(color: RGBColor): string {
   return `#${toHex(color.r)}${toHex(color.g)}${toHex(color.b)}`;
 }
 
+// Qualitative palette for N>2 categorical axes (ColorBrewer Set1-inspired)
+const CATEGORICAL_PALETTE: RGBColor[] = [
+  { r: 228, g: 26, b: 28 },    // red
+  { r: 55, g: 126, b: 184 },   // blue
+  { r: 77, g: 175, b: 74 },    // green
+  { r: 152, g: 78, b: 163 },   // purple
+  { r: 255, g: 127, b: 0 },    // orange
+  { r: 166, g: 86, b: 40 },    // brown
+  { r: 247, g: 129, b: 191 },  // pink
+  { r: 0, g: 170, b: 160 },    // teal
+];
+
 /**
- * Get the final blended color for a node based on selected categories and distribution.
- * primaryCategoryA/B define the single color axis. Secondary params are for future dual-axis support.
+ * Map a discrete value to a color.
+ *   2 values → gradient endpoints (binary comparison)
+ *   N>2 values → distinct categorical colors from palette
+ */
+export function getAxisColor(value: string, sortedValues: string[], gradient: GradientScheme): RGBColor {
+  const idx = sortedValues.indexOf(value);
+  if (idx === -1) return { r: 128, g: 128, b: 128 }; // unknown → gray
+
+  if (sortedValues.length <= 2) {
+    // Binary: use gradient as before
+    const position = sortedValues.length <= 1 ? 0 : -1 + (2 * idx / (sortedValues.length - 1));
+    return getGradientColor(position, gradient);
+  }
+
+  // Categorical: distinct colors from palette
+  return CATEGORICAL_PALETTE[idx % CATEGORICAL_PALETTE.length];
+}
+
+/**
+ * Weighted RGB blend across N categories.
+ * Each category gets its color from getAxisColor, weighted by its proportion.
+ */
+function weightedBlend(
+  dist: Record<string, number>,
+  allValues: string[],
+  gradient: GradientScheme
+): RGBColor {
+  // Total only from values in allValues (ignore unknown labels)
+  let total = 0;
+  for (const [label, count] of Object.entries(dist)) {
+    if (allValues.includes(label)) total += count;
+  }
+  if (total === 0) return getGradientColor(0, gradient); // neutral midpoint
+
+  let r = 0, g = 0, b = 0;
+  for (const [label, count] of Object.entries(dist)) {
+    if (!allValues.includes(label)) continue;
+    const weight = count / total;
+    const color = getAxisColor(label, allValues, gradient);
+    r += color.r * weight;
+    g += color.g * weight;
+    b += color.b * weight;
+  }
+  return { r: Math.round(r), g: Math.round(g), b: Math.round(b) };
+}
+
+/**
+ * Get blended color for a node/link based on its category distribution.
+ * Supports N-way blending: each category in the distribution contributes
+ * its color weighted by its proportion.
+ *
+ * For dual-axis: primary and secondary are blended at 50/50.
  */
 export function getNodeColor(
-  categoryDistribution: Record<string, number>,
-  primaryCategoryA: string,
-  primaryCategoryB: string,
-  secondaryCategoryA?: string,
-  secondaryCategoryB?: string,
+  primaryDist: Record<string, number>,
+  primaryValues: string[],
   primaryGradient: GradientScheme = 'red-blue',
-  secondaryGradient: GradientScheme = 'yellow-cyan'
+  secondaryDist?: Record<string, number> | null,
+  secondaryValues?: string[],
+  secondaryGradient?: GradientScheme,
 ): string {
-  const primaryPosition = calculateCategoryPosition(categoryDistribution, primaryCategoryA, primaryCategoryB);
-  const primaryColor = getGradientColor(primaryPosition, primaryGradient);
+  const primaryColor = weightedBlend(primaryDist, primaryValues, primaryGradient);
 
-  if (!secondaryCategoryA || !secondaryCategoryB) {
+  if (!secondaryDist || !secondaryValues || secondaryValues.length === 0) {
     return rgbToHex(primaryColor);
   }
 
-  // Dual axis — blend gradient colors from both axes with equal weighting
-  const secondaryPosition = calculateCategoryPosition(categoryDistribution, secondaryCategoryA, secondaryCategoryB);
-  const secondaryColor = getGradientColor(secondaryPosition, secondaryGradient);
-
-  const blendedColor = blendColors(primaryColor, secondaryColor, 0.5, 0.5);
-  return rgbToHex(blendedColor);
+  const secGrad = secondaryGradient || GRADIENT_AUTO_PAIRS[primaryGradient];
+  const secondaryColor = weightedBlend(secondaryDist, secondaryValues, secGrad);
+  return rgbToHex(blendColors(primaryColor, secondaryColor, 0.5, 0.5));
 }
-
-/**
- * Get a preview showing gradient extremes and key points for the selected categories
- */
-export function getColorPreview(
-  primaryCategoryA: string,
-  primaryCategoryB: string,
-  secondaryCategoryA?: string,
-  secondaryCategoryB?: string,
-  primaryGradient: GradientScheme = 'red-blue',
-  secondaryGradient: GradientScheme = 'yellow-cyan'
-): Record<string, string> {
-  const preview: Record<string, string> = {};
-
-  if (!secondaryCategoryA || !secondaryCategoryB) {
-    // Single axis preview — gradient extremes and middle
-    preview[`All ${primaryCategoryA}`] = rgbToHex(getGradientColor(-1, primaryGradient));
-    preview['Mixed'] = rgbToHex(getGradientColor(0, primaryGradient));
-    preview[`All ${primaryCategoryB}`] = rgbToHex(getGradientColor(1, primaryGradient));
-  } else {
-    // Dual axis preview — combinations of extremes
-    const positions = [-1, 0, 1];
-    const getLabel = (p: number, catA: string, catB: string) => {
-      return p === -1 ? catA.substring(0, 3) : p === 0 ? 'Mix' : catB.substring(0, 3);
-    };
-
-    positions.forEach((p1) => {
-      positions.forEach((p2) => {
-        const color1 = getGradientColor(p1, primaryGradient);
-        const color2 = getGradientColor(p2, secondaryGradient);
-        const blended = blendColors(color1, color2, 0.5, 0.5);
-        const label = `${getLabel(p1, primaryCategoryA, primaryCategoryB)}+${getLabel(p2, secondaryCategoryA, secondaryCategoryB)}`;
-        preview[label] = rgbToHex(blended);
-      });
-    });
-  }
-
-  return preview;
-}
-
 
 /**
  * Auto-pairing table: each primary gradient maps to a complementary secondary gradient.
@@ -178,20 +174,6 @@ export const GRADIENT_AUTO_PAIRS: Record<GradientScheme, GradientScheme> = {
   'orange-teal': 'purple-green',
   'pink-lime': 'yellow-cyan',
 };
-
-/**
- * Map a discrete value to a color on a gradient.
- * Values are mapped to evenly-spaced positions from -1 to +1:
- *   2 values → [-1, +1] (gradient endpoints)
- *   3 values → [-1, 0, +1]
- *   N values → evenly spaced
- */
-export function getAxisColor(value: string, sortedValues: string[], gradient: GradientScheme): RGBColor {
-  const idx = sortedValues.indexOf(value);
-  if (idx === -1) return getGradientColor(0, gradient); // unknown → midpoint
-  const position = sortedValues.length <= 1 ? 0 : -1 + (2 * idx / (sortedValues.length - 1));
-  return getGradientColor(position, gradient);
-}
 
 /**
  * Get color for a single data point (trajectory, probe) based on discrete axis values.

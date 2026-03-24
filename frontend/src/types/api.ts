@@ -239,10 +239,8 @@ interface SentenceExperimentResponse {
   session_id: string
   session_name: string
   total_probes: number
-  label_a: string
-  label_b: string
-  count_a: number
-  count_b: number
+  labels: string[]
+  counts: Record<string, number>
 }
 
 // On-demand reduction types

@@ -8,8 +8,7 @@ interface FilteredWordDisplayProps {
   sessionData: SessionDetailResponse | null
   filterState: FilterState
   isLoading?: boolean
-  colorLabelA: string
-  colorLabelB: string
+  primaryValues: string[]
   gradient: GradientScheme
 }
 
@@ -17,8 +16,7 @@ export default function FilteredWordDisplay({
   sessionData,
   filterState,
   isLoading = false,
-  colorLabelA,
-  colorLabelB,
+  primaryValues,
   gradient
 }: FilteredWordDisplayProps) {
 
@@ -67,8 +65,8 @@ export default function FilteredWordDisplay({
       {sentences.length > 0 ? (
         <div className="space-y-0.5 max-h-[75vh] overflow-y-auto">
           {sentences.map((sentence, i) => {
-            const color = sentence.label && colorLabelA && colorLabelB
-              ? getNodeColor({ [sentence.label]: 1 }, colorLabelA, colorLabelB, undefined, undefined, gradient)
+            const color = sentence.label && primaryValues.length > 0
+              ? getNodeColor({ [sentence.label]: 1 }, primaryValues, gradient)
               : '#666666'
 
             return (

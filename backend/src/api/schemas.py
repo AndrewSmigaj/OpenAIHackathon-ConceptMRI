@@ -249,10 +249,8 @@ class SentenceExperimentResponse(BaseModel):
     session_id: str
     session_name: str
     total_probes: int
-    label_a: str
-    label_b: str
-    count_a: int
-    count_b: int
+    labels: List[str]
+    counts: Dict[str, int]
 
 
 # --- On-Demand Reduction Schemas ---

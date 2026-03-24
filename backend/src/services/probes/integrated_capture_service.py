@@ -163,6 +163,7 @@ class IntegratedCaptureService:
         target_word: str,
         labels: List[str],
         experiment_id: str = None,
+        sentence_set_name: str = None,
     ) -> str:
         """
         Create a session for sentence-based experiments.
@@ -173,6 +174,7 @@ class IntegratedCaptureService:
             target_word: Shared target word for all sentences
             labels: List of labels (e.g. ["aquatic", "military"])
             experiment_id: Optional experiment identifier
+            sentence_set_name: Name of the sentence set JSON used (for pipeline continuity)
 
         Returns:
             Unique session ID
@@ -195,6 +197,7 @@ class IntegratedCaptureService:
         session_metadata = {
             "session_id": session_id,
             "session_name": session_name,
+            "sentence_set_name": sentence_set_name,
             "target_word": target_word,
             "labels": labels,
             "layers_captured": self.layers_to_capture,

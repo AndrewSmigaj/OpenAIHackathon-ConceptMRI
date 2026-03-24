@@ -5,15 +5,14 @@ import ReactMarkdown from 'react-markdown'
 export interface ContextSensitiveCardProps {
   cardType: 'expert' | 'highway' | 'cluster' | 'route'
   selectedData: any
-  colorLabelA: string
-  colorLabelB: string
+  primaryValues: string[]
   gradient: GradientScheme
   elementDescription?: string
   clusterAssignments?: Record<string, number>
   onClose?: () => void
 }
 
-export default function ContextSensitiveCard({ cardType, selectedData, colorLabelA, colorLabelB, gradient, elementDescription, clusterAssignments, onClose }: ContextSensitiveCardProps) {
+export default function ContextSensitiveCard({ cardType, selectedData, primaryValues, gradient, elementDescription, clusterAssignments, onClose }: ContextSensitiveCardProps) {
   const hasRichData = Boolean(selectedData?._fullData)
   const isRoute = cardType === 'route' || cardType === 'highway'
 
@@ -212,8 +211,8 @@ export default function ContextSensitiveCard({ cardType, selectedData, colorLabe
               isOutputNode ? (
                 <div className="space-y-0.5 max-h-[500px] overflow-y-auto">
                   {examples.map((token: any, index: number) => {
-                    const tokenColor = token.label && colorLabelA && colorLabelB
-                      ? getNodeColor({ [token.label]: 1 }, colorLabelA, colorLabelB, undefined, undefined, gradient)
+                    const tokenColor = token.label && primaryValues.length > 0
+                      ? getNodeColor({ [token.label]: 1 }, primaryValues, gradient)
                       : '#666666'
                     return (
                       <div key={token.probe_id || index} className="bg-gray-50 px-1.5 py-0.5 rounded">
@@ -239,8 +238,8 @@ export default function ContextSensitiveCard({ cardType, selectedData, colorLabe
               ) : (
                 <div className="space-y-0.5 max-h-[400px] overflow-y-auto">
                   {examples.map((token: any, index: number) => {
-                    const tokenColor = token.label && colorLabelA && colorLabelB
-                      ? getNodeColor({ [token.label]: 1 }, colorLabelA, colorLabelB, undefined, undefined, gradient)
+                    const tokenColor = token.label && primaryValues.length > 0
+                      ? getNodeColor({ [token.label]: 1 }, primaryValues, gradient)
                       : '#666666'
                     return (
                       <div key={token.probe_id || index} className="bg-gray-50 px-1.5 py-0.5 rounded">

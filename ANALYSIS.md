@@ -31,26 +31,18 @@ Read each `generated_text`. Classify along the **output axes** defined in the se
 
 For each generated text, choose:
 1. **Multi-axis classifications** (`output_category_json`) — classify along EVERY axis in the sentence set's `output_axes` array
-2. A **primary output category** (`output_category`) — the cross-cell label from the axes (e.g., `fictional_coherent` for violence framing sets)
+2. A **primary output category** (`output_category`) — the cross-cell label from the axes
 
-To find the output axes, read the sentence set JSON:
+### Finding classification rules
+
+Classification rules are **per-experiment**, stored in the probe guide alongside the sentence set JSON:
 ```
-# Find which sentence set was used (from session manifest or session name)
-# Read data/sentence_sets/{category}/{name}.json
-# Look at the "output_axes" array
+# From session metadata, get sentence_set_name
+# Find probe guide: data/sentence_sets/**/{sentence_set_name}.md
+# Read the "Output Classification Rules" section
 ```
 
-### Violence framing sets (attacked, destroyed, threatened)
-
-2×2 design: `frame_output` × `output_violence`. Classification rules:
-- **frame_output = fictional**: narrative/story register, fictional entities, world-building
-- **frame_output = factual**: news/report register, real-world entities, QA framing, encyclopedic
-- **output_violence = physical**: generated text describes physical harm, weapons, combat, destruction
-- **output_violence = institutional**: generated text describes legal, social, political, or coercive consequences
-
-Primary `output_category` = `{frame_output}_{output_violence}` (e.g., `fictional_physical`)
-
-NOTE: `coherence` (coherent/degenerate) was removed — it showed zero correlation with any input variable. Replaced by `output_violence` which mirrors the input `violence` axis and shows real routing signal in the mixed clusters.
+Do NOT hardcode classification rules here — always read them from the probe guide.
 
 ### POST format
 
@@ -58,12 +50,12 @@ NOTE: `coherence` (coherent/degenerate) was removed — it showed zero correlati
 POST /api/probes/sessions/{session_id}/output-categories
 Body: {
   "probe_id_1": {
-    "output_category": "fictional_coherent",
-    "output_category_json": "{\"frame_output\": \"fictional\", \"coherence\": \"coherent\"}"
+    "output_category": "category_value",
+    "output_category_json": "{\"axis_id\": \"value\"}"
   },
   "probe_id_2": {
-    "output_category": "factual_degenerate",
-    "output_category_json": "{\"frame_output\": \"factual\", \"coherence\": \"degenerate\"}"
+    "output_category": "other_value",
+    "output_category_json": "{\"axis_id\": \"other_value\"}"
   }
 }
 ```
@@ -71,6 +63,8 @@ Body: {
 The `output_category_json` must be a **JSON string** (not a dict) — the backend stores it as a string column in Parquet. The keys must match `output_axes[].id` and values must be from `output_axes[].values`.
 
 Both fields are written to existing columns on ProbeRecord in tokens.parquet. The output category nodes in Sankey diagrams group by `output_category` and use `output_category_json` for color blending.
+
+For multi-axis output designs (e.g., 2×2 factorial), the `output_category` is typically a composite: `{axis1_value}_{axis2_value}` (e.g., `fictional_physical`). For single-axis designs, `output_category` is just the axis value directly (e.g., `aquarium`).
 
 ## Step 4: Running Cluster Analysis
 

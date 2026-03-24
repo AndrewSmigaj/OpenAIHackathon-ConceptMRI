@@ -155,26 +155,34 @@ export default function ExperimentPage() {
   const [outputColorAxis2Id, setOutputColorAxis2Id] = useState<string>('none')
   const [outputGradient, setOutputGradient] = useState<GradientScheme>('purple-green')
 
-  // Derive colorLabelA/B from selected axis (for downstream components)
+  // Derive color values from selected axes
   const colorAxis = allAxes.find(a => a.id === colorAxisId)
   const colorAxis2 = allAxes.find(a => a.id === colorAxis2Id)
   const shapeAxis = allAxes.find(a => a.id === shapeAxisId)
-  const colorLabelA = colorAxis?.label_a || ''
-  const colorLabelB = colorAxis?.label_b || ''
-  const secondaryCategoryA = colorAxis2?.label_a
-  const secondaryCategoryB = colorAxis2?.label_b
   const secondaryGradient = GRADIENT_AUTO_PAIRS[gradient]
-  const primaryAxisValues = colorAxis?.values || (colorAxis ? [colorAxis.label_a, colorAxis.label_b] : undefined)
-  const secondaryAxisValues = colorAxis2?.values || (colorAxis2 ? [colorAxis2.label_a, colorAxis2.label_b] : undefined)
+
+  // Memoize value arrays to prevent re-render churn (arrays create new refs each render)
+  const primaryValues = useMemo(() =>
+    colorAxis?.values || (colorAxis ? [colorAxis.label_a, colorAxis.label_b] : []),
+    [colorAxis]
+  )
+  const secondaryValues = useMemo(() =>
+    colorAxis2?.values || (colorAxis2 ? [colorAxis2.label_a, colorAxis2.label_b] : undefined),
+    [colorAxis2]
+  )
 
   // Derive output color values
   const outputColorAxis = outputAxes.find(a => a.id === outputColorAxisId)
   const outputColorAxis2 = outputAxes.find(a => a.id === outputColorAxis2Id)
-  const outputColorLabelA = outputColorAxis?.label_a || ''
-  const outputColorLabelB = outputColorAxis?.label_b || ''
-  const outputSecondaryCategoryA = outputColorAxis2?.label_a
-  const outputSecondaryCategoryB = outputColorAxis2?.label_b
   const outputSecondaryGradient = GRADIENT_AUTO_PAIRS[outputGradient]
+  const outputPrimaryValues = useMemo(() =>
+    outputColorAxis?.values || (outputColorAxis ? [outputColorAxis.label_a, outputColorAxis.label_b] : []),
+    [outputColorAxis]
+  )
+  const outputSecondaryValues = useMemo(() =>
+    outputColorAxis2?.values || (outputColorAxis2 ? [outputColorAxis2.label_a, outputColorAxis2.label_b] : undefined),
+    [outputColorAxis2]
+  )
 
   // Derive output grouping axes from selected output color axes
   const outputGroupingAxes = useMemo(() => {
@@ -220,8 +228,12 @@ export default function ExperimentPage() {
       if (data?.available_axes) {
         for (const axis of data.available_axes) {
           if (axis.id === 'label') {
-            labels.add(axis.label_a)
-            labels.add(axis.label_b)
+            if (axis.values) {
+              axis.values.forEach(v => labels.add(v))
+            } else {
+              labels.add(axis.label_a)
+              labels.add(axis.label_b)
+            }
           }
         }
       }
@@ -684,8 +696,7 @@ export default function ExperimentPage() {
                       sessionData={mergedSessionDetails}
                       filterState={filterState}
                       isLoading={!mergedSessionDetails}
-                      colorLabelA={colorLabelA}
-                      colorLabelB={colorLabelB}
+                      primaryValues={primaryValues}
                       gradient={gradient}
                     />
                   </>
@@ -700,18 +711,14 @@ export default function ExperimentPage() {
                     sessionIds={selectedSessions}
                     sessionData={mergedSessionDetails}
                     filterState={filterState}
-                    colorLabelA={colorLabelA}
-                    colorLabelB={colorLabelB}
+                    primaryValues={primaryValues}
                     gradient={gradient}
-                    secondaryCategoryA={secondaryCategoryA}
-                    secondaryCategoryB={secondaryCategoryB}
+                    secondaryValues={secondaryValues}
                     secondaryGradient={secondaryGradient}
                     secondaryAxisId={colorAxis2Id !== 'none' ? colorAxis2Id : undefined}
-                    outputColorLabelA={outputColorLabelA}
-                    outputColorLabelB={outputColorLabelB}
+                    outputPrimaryValues={outputPrimaryValues}
                     outputGradient={outputGradient}
-                    outputSecondaryCategoryA={outputSecondaryCategoryA}
-                    outputSecondaryCategoryB={outputSecondaryCategoryB}
+                    outputSecondaryValues={outputSecondaryValues}
                     outputSecondaryGradient={outputSecondaryGradient}
                     outputSecondaryAxisId={outputColorAxis2Id !== 'none' ? outputColorAxis2Id : undefined}
                     outputColorAxisId={outputColorAxisId || undefined}
@@ -729,26 +736,20 @@ export default function ExperimentPage() {
                     sessionIds={selectedSessions}
                     sessionData={mergedSessionDetails}
                     filterState={filterState}
-                    colorLabelA={colorLabelA}
-                    colorLabelB={colorLabelB}
+                    primaryValues={primaryValues}
                     gradient={gradient}
-                    secondaryCategoryA={secondaryCategoryA}
-                    secondaryCategoryB={secondaryCategoryB}
+                    secondaryValues={secondaryValues}
                     secondaryGradient={secondaryGradient}
                     secondaryAxisId={colorAxis2Id !== 'none' ? colorAxis2Id : undefined}
-                    outputColorLabelA={outputColorLabelA}
-                    outputColorLabelB={outputColorLabelB}
+                    outputPrimaryValues={outputPrimaryValues}
                     outputGradient={outputGradient}
-                    outputSecondaryCategoryA={outputSecondaryCategoryA}
-                    outputSecondaryCategoryB={outputSecondaryCategoryB}
+                    outputSecondaryValues={outputSecondaryValues}
                     outputSecondaryGradient={outputSecondaryGradient}
                     outputSecondaryAxisId={outputColorAxis2Id !== 'none' ? outputColorAxis2Id : undefined}
                     outputColorAxisId={outputColorAxisId || undefined}
                     outputGroupingAxes={outputGroupingAxes}
                     shapeAxisId={shapeAxisId !== 'none' ? shapeAxisId : undefined}
                     shapeAxis={shapeAxis}
-                    primaryAxisValues={primaryAxisValues}
-                    secondaryAxisValues={secondaryAxisValues}
                     selectedRange={selectedRange}
                     onRangeChange={setSelectedRange}
                     layerClusterCounts={layerClusterCounts}
@@ -812,8 +813,7 @@ export default function ExperimentPage() {
                       <ContextSensitiveCard
                         cardType={selectedCard.type}
                         selectedData={selectedCard.data}
-                        colorLabelA={colorLabelA}
-                        colorLabelB={colorLabelB}
+                        primaryValues={primaryValues}
                         gradient={gradient}
                         elementDescription={elementDescriptions[descKey]}
                         clusterAssignments={clusterAssignments}

@@ -10,18 +10,14 @@ interface ExpertRoutesSectionProps {
   sessionIds: string[]
   sessionData: SessionDetailResponse | null
   filterState: FilterState
-  colorLabelA: string
-  colorLabelB: string
+  primaryValues: string[]
   gradient: GradientScheme
-  secondaryCategoryA?: string
-  secondaryCategoryB?: string
+  secondaryValues?: string[]
   secondaryGradient?: GradientScheme
   secondaryAxisId?: string
-  outputColorLabelA?: string
-  outputColorLabelB?: string
+  outputPrimaryValues?: string[]
   outputGradient?: GradientScheme
-  outputSecondaryCategoryA?: string
-  outputSecondaryCategoryB?: string
+  outputSecondaryValues?: string[]
   outputSecondaryGradient?: GradientScheme
   outputSecondaryAxisId?: string
   outputColorAxisId?: string
@@ -39,18 +35,14 @@ export default function ExpertRoutesSection({
   sessionIds,
   sessionData,
   filterState,
-  colorLabelA,
-  colorLabelB,
+  primaryValues,
   gradient,
-  secondaryCategoryA,
-  secondaryCategoryB,
+  secondaryValues,
   secondaryGradient,
   secondaryAxisId,
-  outputColorLabelA,
-  outputColorLabelB,
+  outputPrimaryValues,
   outputGradient,
-  outputSecondaryCategoryA,
-  outputSecondaryCategoryB,
+  outputSecondaryValues,
   outputSecondaryGradient,
   outputSecondaryAxisId,
   outputColorAxisId,
@@ -90,18 +82,14 @@ export default function ExpertRoutesSection({
           sessionIds={sessionIds}
           sessionData={sessionData}
           filterState={filterState}
-          colorLabelA={colorLabelA}
-          colorLabelB={colorLabelB}
+          primaryValues={primaryValues}
           gradient={gradient}
-          secondaryCategoryA={secondaryCategoryA}
-          secondaryCategoryB={secondaryCategoryB}
+          secondaryValues={secondaryValues}
           secondaryGradient={secondaryGradient}
           secondaryAxisId={secondaryAxisId}
-          outputColorLabelA={outputColorLabelA}
-          outputColorLabelB={outputColorLabelB}
+          outputPrimaryValues={outputPrimaryValues}
           outputGradient={outputGradient}
-          outputSecondaryCategoryA={outputSecondaryCategoryA}
-          outputSecondaryCategoryB={outputSecondaryCategoryB}
+          outputSecondaryValues={outputSecondaryValues}
           outputSecondaryGradient={outputSecondaryGradient}
           outputSecondaryAxisId={outputSecondaryAxisId}
           outputColorAxisId={outputColorAxisId}
