@@ -12,6 +12,9 @@ from dataclasses import dataclass
 import json
 from datetime import datetime
 import uuid
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Schema imports
 from schemas.tokens import ProbeRecord, create_probe_record
@@ -101,7 +104,7 @@ class SessionBatchWriters:
                 self.residual_stream_writer.add_record(residual_record)
 
         except Exception as e:
-            print(f"Failed to write probe {probe_data.probe_id}: {e}")
+            logger.error(f"Failed to write probe {probe_data.probe_id}: {e}")
             raise
 
     def flush_all(self) -> None:
@@ -121,7 +124,7 @@ class SessionBatchWriters:
 
         self.flush_all()
         self.writers_active = False
-        print(f"Closed all batch writers for session {self.session_id}")
+        logger.debug(f"Closed all batch writers for session {self.session_id}")
 
 
 class IntegratedCaptureService:
@@ -154,7 +157,7 @@ class IntegratedCaptureService:
         self.sessions_dir = Path(data_lake_path) / "_sessions"
         self.sessions_dir.mkdir(parents=True, exist_ok=True)
 
-        print(f"IntegratedCaptureService initialized for layers {self.layers_to_capture}")
+        logger.info(f"IntegratedCaptureService initialized for layers {self.layers_to_capture}")
 
     def create_sentence_session(
         self,
@@ -213,7 +216,7 @@ class IntegratedCaptureService:
         with open(session_file, 'w') as f:
             json.dump(session_metadata, f, indent=2)
 
-        print(f"Created sentence session {session_id} ({session_name}): {total_probes} probes")
+        logger.info(f"Created sentence session {session_id} ({session_name}): {total_probes} probes")
         return session_id
 
     def get_session_status(self, session_id: str) -> SessionStatus:
@@ -241,7 +244,7 @@ class IntegratedCaptureService:
         if self.routing_capture is None:
             self.routing_capture = EnhancedRoutingCapture(self.model, self.layers_to_capture, adapter=self.adapter)
             self.routing_capture.register_hooks()
-            print(f"Registered hooks for session {session_id}")
+            logger.info(f"Registered hooks for session {session_id}")
 
     def _cleanup_routing_capture(self) -> None:
         """Clean up routing capture hooks."""
@@ -252,7 +255,7 @@ class IntegratedCaptureService:
             # Clear GPU memory
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
-            print("Cleaned up routing capture and GPU memory")
+            logger.info("Cleaned up routing capture and GPU memory")
 
     def _find_word_token_position(self, token_ids: list, word: str) -> Tuple[int, int]:
         """
@@ -444,9 +447,7 @@ class IntegratedCaptureService:
                     generated_text = self._generate_continuation(input_tensor)
                     probe_data.probe_record.generated_text = generated_text
                 except Exception as e:
-                    import traceback
-                    print(f"Generation failed for probe {probe_id}: {e}")
-                    traceback.print_exc()
+                    logger.error(f"Generation failed for probe {probe_id}: {e}", exc_info=True)
 
             # Write to data lake
             writers = self.session_writers[session_id]
@@ -457,7 +458,7 @@ class IntegratedCaptureService:
             session_status.current_probe = None
 
             ctx_info = f", context='{context_word}'" if context_word else ""
-            print(f"Captured probe {probe_id}: '{target_word}' in '{input_text[:40]}...'{ctx_info} (session {session_id})")
+            logger.info(f"Captured probe {probe_id}: '{target_word}' in '{input_text[:40]}...'{ctx_info} (session {session_id})")
             return probe_id, new_past_key_values
 
         except Exception as e:
@@ -465,7 +466,7 @@ class IntegratedCaptureService:
             session_status.current_probe = None
             session_status.error_message = str(e)
 
-            print(f"Failed to capture '{target_word}' in '{input_text[:40]}...': {e}")
+            logger.error(f"Failed to capture '{target_word}' in '{input_text[:40]}...': {e}")
             raise
 
     def _convert_probe_to_schemas(
@@ -521,7 +522,7 @@ class IntegratedCaptureService:
             layer_key = f"layer_{layer}"
 
             if layer_key not in self.routing_capture.routing_data:
-                print(f"No routing data for layer {layer}")
+                logger.warning(f"No routing data for layer {layer}")
                 continue
 
             routing_data = self.routing_capture.routing_data[layer_key]
@@ -632,13 +633,13 @@ class IntegratedCaptureService:
             del self.session_writers[session_id]
             self._cleanup_routing_capture()
 
-            print(f"Session {session_id} finalized: {session_status.completed_pairs} successful probes")
+            logger.info(f"Session {session_id} finalized: {session_status.completed_pairs} successful probes")
             return manifest
 
         except Exception as e:
             session_status.state = SessionState.FAILED
             session_status.error_message = str(e)
-            print(f"Failed to finalize session {session_id}: {e}")
+            logger.error(f"Failed to finalize session {session_id}: {e}")
             raise
 
     def abort_session(self, session_id: str) -> None:
@@ -659,7 +660,7 @@ class IntegratedCaptureService:
         # Always cleanup routing capture on abort
         self._cleanup_routing_capture()
 
-        print(f"Session {session_id} aborted")
+        logger.info(f"Session {session_id} aborted")
 
     def _restore_session(self, session_id: str, metadata: dict) -> None:
         """Restore an active session from persisted metadata."""
@@ -674,4 +675,4 @@ class IntegratedCaptureService:
 
         self.active_sessions[session_id] = session_status
         self.session_writers[session_id] = batch_writers
-        print(f"Restored session {session_id} from disk ({session_status.completed_pairs}/{session_status.total_pairs} completed)")
+        logger.info(f"Restored session {session_id} from disk ({session_status.completed_pairs}/{session_status.total_pairs} completed)")

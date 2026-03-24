@@ -12,13 +12,7 @@ from collections import defaultdict
 import json
 
 from schemas.tokens import ProbeRecord
-
-
-def _axis_label(axis_id: str, sorted_values: list) -> str:
-    """Generate a display label for a color axis based on its cardinality."""
-    if len(sorted_values) == 2:
-        return f"{sorted_values[0]} vs {sorted_values[1]}"
-    return f"{axis_id} ({len(sorted_values)} groups)"
+from services.experiments.route_analysis_common import axis_label
 
 
 def build_output_category_layer(
@@ -136,7 +130,7 @@ def build_output_category_layer(
                     pass
 
         total = len(records)
-        specialization = _generate_specialization(dict(label_dist), total, category)
+        specialization = _generate_output_specialization(dict(label_dist), total, category)
 
         # Build example tokens (all records for output nodes)
         example_tokens = []
@@ -222,8 +216,8 @@ def build_output_category_layer(
     return nodes + output_nodes, links + output_links, output_axes
 
 
-def _generate_specialization(label_dist: Dict[str, int], total: int, category: str) -> str:
-    """Generate specialization string for an output node."""
+def _generate_output_specialization(label_dist: Dict[str, int], total: int, category: str) -> str:
+    """Generate specialization string for an output node (extends common version with category context)."""
     if not label_dist or total == 0:
         return f"{category}"
 
@@ -257,7 +251,7 @@ def _compute_output_axes(category_groups: Dict[str, List[ProbeRecord]]) -> List[
             sorted_vals = sorted(values)
             axes.append({
                 "id": axis_id,
-                "label": _axis_label(axis_id, sorted_vals),
+                "label": axis_label(axis_id, sorted_vals),
                 "label_a": sorted_vals[0],
                 "label_b": sorted_vals[1],
                 "values": sorted_vals,

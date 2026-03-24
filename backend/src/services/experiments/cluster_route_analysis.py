@@ -9,12 +9,19 @@ from pathlib import Path
 from collections import defaultdict
 import json
 import numpy as np
+import logging
+
+logger = logging.getLogger(__name__)
 from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
 from sklearn.decomposition import PCA
 
 from core.parquet_reader import read_records
 from schemas.tokens import ProbeRecord
 from schemas.capture_manifest import CaptureManifest
+from services.experiments.route_analysis_common import (
+    axis_label, generate_specialization, analyze_top_routes,
+    compute_available_axes, build_sankey_links,
+)
 import pandas as pd
 
 
@@ -29,13 +36,6 @@ SOURCE_CONFIG = {
         "column": "residual_stream",
     },
 }
-
-
-def _axis_label(axis_id: str, sorted_values: list) -> str:
-    """Generate a display label for a color axis based on its cardinality."""
-    if len(sorted_values) == 2:
-        return f"{sorted_values[0]} vs {sorted_values[1]}"
-    return f"{axis_id} ({len(sorted_values)} groups)"
 
 
 class ClusterRouteAnalysisService:
@@ -80,7 +80,7 @@ class ClusterRouteAnalysisService:
 
         routes = self._extract_target_cluster_routes(cluster_assignments, token_records, window_layers)
 
-        top_routes_data = self._analyze_top_routes(routes, top_n_routes)
+        top_routes_data = analyze_top_routes(routes, top_n_routes)
 
         top_route_signatures = {route["signature"] for route in top_routes_data}
         filtered_routes = {sig: routes[sig] for sig in top_route_signatures if sig in routes}
@@ -98,7 +98,7 @@ class ClusterRouteAnalysisService:
         sankey_data["links"] = augmented_links
 
         statistics = self._calculate_statistics(routes, cluster_assignments, window_layers)
-        available_axes = self._compute_available_axes(token_records, manifest)
+        available_axes = compute_available_axes(token_records, manifest)
 
         # Build per-probe cluster assignment map (probe_id -> {layer: cluster_id})
         probe_assignments = {}
@@ -118,7 +118,7 @@ class ClusterRouteAnalysisService:
                     (session_dir / "probe_assignments.json").write_text(
                         json.dumps(probe_assignments))
                 except Exception as e:
-                    print(f"Failed to persist probe_assignments: {e}")
+                    logger.error(f"Failed to persist probe_assignments: {e}")
 
         return {
             "session_id": ids[0] if len(ids) == 1 else ",".join(ids[:3]),
@@ -334,7 +334,7 @@ class ClusterRouteAnalysisService:
                     }
 
             except Exception as e:
-                print(f"Clustering failed for layer {layer}: {e}")
+                logger.error(f"Clustering failed for layer {layer}: {e}")
                 continue
 
         return cluster_assignments
@@ -450,7 +450,7 @@ class ClusterRouteAnalysisService:
                 cat_dists = {k: dict(v) for k, v in cluster_category_counts.get(node_name, {}).items()}
                 total_tokens = sum(label_dist.values())
 
-                specialization = self._generate_specialization(label_dist, total_tokens)
+                specialization = generate_specialization(label_dist, total_tokens)
 
                 nodes.append({
                     "name": node_name,
@@ -465,113 +465,9 @@ class ClusterRouteAnalysisService:
                     "tokens": cluster_example_tokens.get(node_name) or None,
                 })
 
-        # Build links
-        links = []
-        for source in transitions:
-            total_from_source = sum(transitions[source].values())
-            for target, count in transitions[source].items():
-                route_signature = f"{source}→{target}"
-
-                link_label_counts = defaultdict(int)
-                link_tw_counts = defaultdict(int)
-                link_category_counts = defaultdict(lambda: defaultdict(int))
-                link_token_count = 0
-                link_examples = []
-
-                for sig, route_info in routes.items():
-                    if sig == route_signature:
-                        for token_info in route_info["tokens"]:
-                            probe_id = token_info["probe_id"]
-                            token_record = token_lookup.get(probe_id)
-                            if token_record:
-                                link_token_count += 1
-                                if token_record.label:
-                                    link_label_counts[token_record.label] += 1
-                                if token_record.target_word:
-                                    link_tw_counts[token_record.target_word] += 1
-                                if token_record.categories_json:
-                                    cats = json.loads(token_record.categories_json)
-                                    for axis_id, value in cats.items():
-                                        link_category_counts[axis_id][value] += 1
-                                if len(link_examples) < 10:
-                                    link_examples.append({
-                                        "target_word": token_record.target_word,
-                                        "label": token_record.label,
-                                        "input_text": token_record.input_text,
-                                        "probe_id": probe_id,
-                                        "generated_text": getattr(token_record, 'generated_text', None),
-                                        "output_category": getattr(token_record, 'output_category', None),
-                                    })
-
-                link_cat_dists = {k: dict(v) for k, v in link_category_counts.items()}
-                links.append({
-                    "source": source,
-                    "target": target,
-                    "value": count,
-                    "probability": count / total_from_source if total_from_source > 0 else 0,
-                    "route_signature": route_signature,
-                    "label_distribution": dict(link_label_counts) if link_label_counts else None,
-                    "target_word_distribution": dict(link_tw_counts) if link_tw_counts else None,
-                    "category_distributions": link_cat_dists if link_cat_dists else None,
-                    "token_count": link_token_count,
-                    "tokens": link_examples if link_examples else None,
-                })
+        links = build_sankey_links(transitions, routes, token_lookup)
 
         return {"nodes": nodes, "links": links}
-
-    def _generate_specialization(
-        self,
-        label_dist: Dict[str, int],
-        total_tokens: int
-    ) -> str:
-        """Generate human-readable specialization from label distribution."""
-        if not label_dist or total_tokens == 0:
-            return "No clear specialization"
-
-        sorted_labels = sorted(label_dist.items(), key=lambda x: x[1], reverse=True)
-
-        parts = []
-        for label, count in sorted_labels[:3]:
-            pct = (count / total_tokens) * 100
-            parts.append(f"{label} ({pct:.0f}%)")
-
-        return " / ".join(parts)
-
-    def _analyze_top_routes(
-        self,
-        routes: Dict[str, Dict],
-        top_n: int
-    ) -> List[Dict[str, Any]]:
-        """Get top N most frequent routes with statistics."""
-        sorted_routes = sorted(
-            routes.items(),
-            key=lambda x: x[1]["count"],
-            reverse=True
-        )[:top_n]
-
-        total_count = sum(r["count"] for _, r in routes.items())
-
-        top_routes = []
-        for signature, route_info in sorted_routes:
-            coverage = route_info["count"] / total_count if total_count > 0 else 0
-
-            unique_examples = {}
-            for token in route_info["tokens"]:
-                key = f"{token['label']}:{token['probe_id']}"
-                if key not in unique_examples:
-                    unique_examples[key] = token
-                if len(unique_examples) >= 5:
-                    break
-
-            top_routes.append({
-                "signature": signature,
-                "count": route_info["count"],
-                "coverage": coverage,
-                "avg_confidence": route_info["avg_confidence"],
-                "example_tokens": list(unique_examples.values())
-            })
-
-        return top_routes
 
     def _calculate_statistics(
         self,
@@ -595,63 +491,3 @@ class ClusterRouteAnalysisService:
             "window_layers": window_layers,
             "avg_route_confidence": float(np.mean([r["avg_confidence"] for r in routes.values()])) if routes else 0
         }
-
-    def _compute_available_axes(
-        self,
-        token_records: List[ProbeRecord],
-        manifest: Optional[CaptureManifest]
-    ) -> List[Dict[str, str]]:
-        """Compute available color axes from session data."""
-        axes = []
-
-        # Primary label axis
-        labels = set()
-        for token in token_records:
-            if token.label:
-                labels.add(token.label)
-
-        if len(labels) >= 2:
-            sorted_labels = sorted(labels)
-            axes.append({
-                "id": "label",
-                "label": _axis_label("label", sorted_labels),
-                "label_a": sorted_labels[0],
-                "label_b": sorted_labels[1],
-                "values": sorted_labels,
-            })
-
-        # Dynamic category axes from categories_json
-        category_values = defaultdict(set)
-        for token in token_records:
-            if token.categories_json:
-                cats = json.loads(token.categories_json)
-                for axis_id, value in cats.items():
-                    category_values[axis_id].add(value)
-        for axis_id, values in sorted(category_values.items()):
-            if len(values) >= 2:
-                sorted_vals = sorted(values)
-                axes.append({
-                    "id": axis_id,
-                    "label": _axis_label(axis_id, sorted_vals),
-                    "label_a": sorted_vals[0],
-                    "label_b": sorted_vals[1],
-                    "values": sorted_vals,
-                })
-
-        # Target word axis (when multiple target words across sessions)
-        target_words = set()
-        for token in token_records:
-            if token.target_word:
-                target_words.add(token.target_word)
-
-        if len(target_words) >= 2:
-            sorted_tw = sorted(target_words)
-            axes.append({
-                "id": "target_word",
-                "label": _axis_label("target_word", sorted_tw),
-                "label_a": sorted_tw[0],
-                "label_b": sorted_tw[1],
-                "values": sorted_tw,
-            })
-
-        return axes

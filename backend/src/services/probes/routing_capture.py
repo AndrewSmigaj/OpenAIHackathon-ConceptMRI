@@ -7,6 +7,9 @@ Simple approach: register all hooks upfront, no complex dynamic registration.
 import torch
 from typing import Dict, List, Optional, TYPE_CHECKING
 import numpy as np
+import logging
+
+logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from adapters.base_adapter import ModelAdapter
@@ -37,7 +40,7 @@ class EnhancedRoutingCapture:
             layers_to_capture = adapter.layers_range() if adapter else list(range(24))
 
         self.layers_to_capture = layers_to_capture
-        print(f"Enhanced capture for layers: {self.layers_to_capture}")
+        logger.info(f"Enhanced capture for layers: {self.layers_to_capture}")
         
     def register_hooks(self, verbose: bool = True):
         """Register all hooks upfront - simple approach."""
@@ -63,10 +66,10 @@ class EnhancedRoutingCapture:
                 self.hooks.append(residual_hook)
 
                 if verbose:
-                    print(f"✅ Registered 2 hooks for layer {layer_idx} (MLP + residual)")
+                    logger.debug(f"Registered 2 hooks for layer {layer_idx} (MLP + residual)")
 
             except Exception as e:
-                print(f"❌ Failed to register hooks for layer {layer_idx}: {e}")
+                logger.error(f"Failed to register hooks for layer {layer_idx}: {e}")
     
     def _make_mlp_combined_hook(self, layer_id: int):
         """Create combined MLP hook that extracts routing and output data."""
@@ -118,7 +121,7 @@ class EnhancedRoutingCapture:
                 }
                 
             except Exception as e:
-                print(f"❌ MLP combined hook error (layer {layer_id}): {e}")
+                logger.error(f"MLP combined hook error (layer {layer_id}): {e}")
         
         return mlp_combined_hook
     
@@ -140,7 +143,7 @@ class EnhancedRoutingCapture:
                 }
 
             except Exception as e:
-                print(f"❌ Residual hook error (layer {layer_id}): {e}")
+                logger.error(f"Residual hook error (layer {layer_id}): {e}")
 
         return residual_hook
 
