@@ -88,6 +88,21 @@ POST /api/experiments/analyze-cluster-routes
 
 Repeat for each window: `[0,1]`, `[1,2]`, `[2,3]`, etc.
 
+To load from a previously saved schema (no need to re-specify clustering config):
+```
+POST /api/experiments/analyze-cluster-routes
+{
+  "session_id": "...",
+  "window_layers": [22, 23],
+  "clustering_schema": "default_umap_h6",
+  "output_grouping_axes": ["topic"],
+  "top_n_routes": 20
+}
+```
+
+- `clustering_schema` loads the saved config from the schema's `meta.json`
+- `output_grouping_axes` adds output category nodes to the response; values are axis IDs from the sentence set's `output_axes` (e.g., `["topic"]`)
+
 Also run expert routes:
 ```
 POST /api/experiments/analyze-routes
@@ -185,6 +200,55 @@ Write a markdown report for each window:
 POST /api/probes/sessions/{id}/clusterings/{schema_name}/reports/w_0_1
 Body: {"report": "# Window L0-L1 Analysis\n\n..."}
 ```
+
+## Step 7: Element Descriptions
+
+Element descriptions are short human-written labels for each cluster node in a schema. They appear in the UI as tooltips/labels on Sankey nodes.
+
+### Endpoint
+
+```
+POST /api/probes/sessions/{session_id}/clusterings/{schema_name}/element-descriptions
+Content-Type: application/json
+Body: {
+  "descriptions": {
+    "cluster-0-L22": "Spatial/physical contexts — locations and movement",
+    "cluster-1-L22": "Abstract/metaphorical usage",
+    "cluster-3-L23": "Mixed financial and temporal senses"
+  }
+}
+```
+
+### Key format
+
+**Clusters**: `cluster-{N}-L{layer}`
+- `{N}` is the cluster index (0-based), `{layer}` is the layer number
+- Examples: `cluster-0-L22`, `cluster-5-L23`
+- Note: This is NOT the Sankey node label format (`L22C0`). The key format uses dashes and spells out `cluster-`.
+
+**Routes**: `route-{signature}`
+- Signature uses the Sankey node labels joined by `→`
+- Examples: `route-L22C3→L23C4`, `route-L22C0→L23C1`
+
+Both types go in the same `descriptions` dict:
+```json
+{
+  "descriptions": {
+    "cluster-3-L22": "Vehicle-dominant cluster (95%) — military and recreational tank contexts",
+    "route-L22C3→L23C4": "Pure vehicle route — formal combat and operational narratives"
+  }
+}
+```
+
+### Semantics
+
+- **PATCH/merge behavior**: Descriptions are merged with any existing descriptions. You can POST a subset of clusters and existing descriptions for other clusters are preserved.
+- **Overwrite**: Posting a key that already exists overwrites that description.
+- **No delete**: To clear a description, POST an empty string for that key.
+
+### When to write descriptions
+
+Write element descriptions during Stage 5 analysis, after examining each cluster's `label_distribution`, `tokens`, and `category_distributions`. Each description should capture the semantic theme of the cluster in 5-15 words.
 
 ## Default Parameters
 

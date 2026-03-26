@@ -36,6 +36,11 @@ export default function TemporalAnalysisSection({
     runs, loadRuns, loadingRuns,
     selectedRunIds, toggleRunSelection,
     lagDataMap,
+    runGroups,
+    aggregateLines,
+    highlightedRunId, setHighlightedRunId,
+    showAggregate, setShowAggregate,
+    toggleGroupSelection,
     scrubberPosition, setScrubberPosition,
     scrubberPoint,
     maxPosition,
@@ -73,51 +78,85 @@ export default function TemporalAnalysisSection({
     }
     const chart = chartInstance.current
 
-    // Build series — one per selected run
+    // Build series — three tiers: individual (dim), highlighted, aggregate
     const series: any[] = []
-    const modeColors: Record<string, string> = {
-      'expanding_cache_on': '#3b82f6',
-      'expanding_cache_off': '#f59e0b',
-      'single_cache_on': '#10b981',
-    }
-
     let regimeBoundary = 0
+    let isFirstSeries = true
 
-    for (const runId of selectedRunIds) {
-      const lagData = lagDataMap[runId]
-      if (!lagData) continue
+    for (const group of runGroups) {
+      for (const run of group.runs) {
+        const runId = run.temporal_run_id
+        if (!selectedRunIds.includes(runId)) continue
 
-      const run = runs.find(r => r.temporal_run_id === runId)
-      regimeBoundary = lagData.regime_boundary
+        const lagData = lagDataMap[runId]
+        if (!lagData) continue
 
-      const data = lagData.points
-        .sort((a, b) => a.position - b.position)
-        .map(p => [p.position, p.projection])
+        regimeBoundary = lagData.regime_boundary
+        const isHighlighted = runId === highlightedRunId
 
-      series.push({
-        name: run ? run.processing_mode.replace('expanding_', '').replace('_', ' ') : runId,
-        type: 'line',
-        data,
-        smooth: false,
-        symbol: 'circle',
-        symbolSize: 4,
-        lineStyle: {
-          width: 2,
-          color: modeColors[lagData.processing_mode] || '#6b7280',
-        },
-        itemStyle: {
-          color: modeColors[lagData.processing_mode] || '#6b7280',
-        },
-        markLine: series.length === 0 ? {
-          silent: true,
-          symbol: 'none',
-          data: [
-            { xAxis: regimeBoundary, lineStyle: { type: 'dashed', color: '#ef4444', width: 1.5 }, label: { formatter: 'regime boundary', fontSize: 9, color: '#ef4444' } },
-            { yAxis: 0, lineStyle: { type: 'dotted', color: '#6b7280', width: 1 }, label: { formatter: 'basin A (0)', fontSize: 8, color: '#6b7280', position: 'insideEndTop' } },
-            { yAxis: 1, lineStyle: { type: 'dotted', color: '#6b7280', width: 1 }, label: { formatter: 'basin B (1)', fontSize: 8, color: '#6b7280', position: 'insideEndTop' } },
-          ],
-        } : undefined,
-      })
+        const data = lagData.points
+          .sort((a, b) => a.position - b.position)
+          .map(p => [p.position, p.projection])
+
+        // Run index within group
+        const groupRunIndex = group.runs.indexOf(run) + 1
+
+        series.push({
+          name: `${group.label} #${groupRunIndex}`,
+          type: 'line',
+          data,
+          smooth: false,
+          symbol: isHighlighted ? 'circle' : 'none',
+          symbolSize: isHighlighted ? 4 : 0,
+          lineStyle: {
+            width: isHighlighted ? 2.5 : 1,
+            color: group.color,
+            opacity: isHighlighted ? 1.0 : 0.25,
+          },
+          itemStyle: {
+            color: group.color,
+            opacity: isHighlighted ? 1.0 : 0.25,
+          },
+          z: isHighlighted ? 5 : 1,
+          // Mark lines only on first series
+          markLine: isFirstSeries ? {
+            silent: true,
+            symbol: 'none',
+            data: [
+              { xAxis: regimeBoundary, lineStyle: { type: 'dashed', color: '#ef4444', width: 1.5 }, label: { formatter: 'regime boundary', fontSize: 9, color: '#ef4444' } },
+              { yAxis: 0, lineStyle: { type: 'dotted', color: '#6b7280', width: 1 }, label: { formatter: 'basin A (0)', fontSize: 8, color: '#6b7280', position: 'insideEndTop' } },
+              { yAxis: 1, lineStyle: { type: 'dotted', color: '#6b7280', width: 1 }, label: { formatter: 'basin B (1)', fontSize: 8, color: '#6b7280', position: 'insideEndTop' } },
+            ],
+          } : undefined,
+        })
+        isFirstSeries = false
+      }
+
+      // Add aggregate line for this group if enabled and available
+      if (showAggregate && aggregateLines[group.key]) {
+        const agg = aggregateLines[group.key]
+        const data = agg.positions.map((pos, i) => [pos, agg.meanProjection[i]])
+
+        series.push({
+          name: `${group.label} (mean)`,
+          type: 'line',
+          data,
+          smooth: false,
+          symbol: 'diamond',
+          symbolSize: 5,
+          lineStyle: {
+            width: 3,
+            color: group.color,
+            type: 'dashed',
+            opacity: 0.9,
+          },
+          itemStyle: {
+            color: group.color,
+            opacity: 0.9,
+          },
+          z: 8,
+        })
+      }
     }
 
     // Scrubber indicator — dot on chart
@@ -164,7 +203,7 @@ export default function TemporalAnalysisSection({
         formatter: (params: any) => {
           if (Array.isArray(params)) return ''
           const [pos, proj] = params.data
-          return `pos ${pos}<br/>projection: ${proj?.toFixed(3)}`
+          return `${params.seriesName}<br/>pos ${pos}<br/>projection: ${proj?.toFixed(3)}`
         },
       },
       series,
@@ -173,7 +212,7 @@ export default function TemporalAnalysisSection({
     chart.setOption(option, true)
 
     return () => {}
-  }, [selectedRunIds, lagDataMap, runs, scrubberPoint, maxPosition])
+  }, [selectedRunIds, lagDataMap, runs, scrubberPoint, maxPosition, runGroups, highlightedRunId, showAggregate, aggregateLines])
 
   // Resize
   useEffect(() => {
@@ -192,11 +231,8 @@ export default function TemporalAnalysisSection({
     }
   }, [])
 
-  // Sentence text at scrubber position (from first selected run's metadata)
-  const scrubberSentence = (() => {
-    if (!scrubberPoint) return null
-    return scrubberPoint.sentence_text || null
-  })()
+  // Sentence text at scrubber position
+  const scrubberSentence = scrubberPoint?.sentence_text || null
 
   const hasRuns = runs.length > 0
   const hasLagData = selectedRunIds.some(id => lagDataMap[id])
@@ -281,45 +317,102 @@ export default function TemporalAnalysisSection({
             </div>
           )}
 
-          {/* Runs list */}
+          {/* Runs list — grouped by condition */}
           <div>
             <div className="flex items-center justify-between mb-1">
               <p className="text-[10px] font-medium text-gray-500 uppercase tracking-wide">Runs</p>
-              <button
-                onClick={loadRuns}
-                disabled={loadingRuns}
-                className="text-[9px] px-1.5 py-0.5 rounded bg-gray-100 hover:bg-gray-200 text-gray-600 disabled:opacity-50"
-              >
-                {loadingRuns ? 'Loading...' : 'Refresh'}
-              </button>
+              <div className="flex items-center gap-2">
+                {hasLagData && (
+                  <label className="flex items-center gap-1 text-[9px] text-gray-500 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={showAggregate}
+                      onChange={() => setShowAggregate(!showAggregate)}
+                      className="w-2.5 h-2.5"
+                    />
+                    Mean
+                  </label>
+                )}
+                <button
+                  onClick={loadRuns}
+                  disabled={loadingRuns}
+                  className="text-[9px] px-1.5 py-0.5 rounded bg-gray-100 hover:bg-gray-200 text-gray-600 disabled:opacity-50"
+                >
+                  {loadingRuns ? 'Loading...' : 'Refresh'}
+                </button>
+              </div>
             </div>
 
             {!hasRuns ? (
               <p className="text-[10px] text-gray-400 italic">No temporal runs yet. Use the instruction above with Claude Code to create one.</p>
+            ) : runGroups.length === 0 ? (
+              <p className="text-[10px] text-gray-400 italic">No runs found.</p>
             ) : (
-              <div className="space-y-0.5">
-                {runs.map(run => (
-                  <label
-                    key={run.temporal_run_id}
-                    className="flex items-center gap-1.5 text-[10px] text-gray-600 cursor-pointer hover:bg-gray-50 rounded px-1 py-0.5"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedRunIds.includes(run.temporal_run_id)}
-                      onChange={() => toggleRunSelection(run.temporal_run_id)}
-                      className="w-3 h-3"
-                    />
-                    <span className="font-mono">
-                      {run.processing_mode}
-                    </span>
-                    <span className="text-gray-400">
-                      {run.sequence_positions} pos
-                    </span>
-                    <span className="text-gray-400 truncate">
-                      ({run.new_session_id.slice(0, 8)})
-                    </span>
-                  </label>
-                ))}
+              <div className="space-y-1.5">
+                {runGroups.map(group => {
+                  const groupIds = group.runs.map(r => r.temporal_run_id)
+                  const allSelected = groupIds.every(id => selectedRunIds.includes(id))
+                  const someSelected = groupIds.some(id => selectedRunIds.includes(id))
+
+                  return (
+                    <div key={group.key}>
+                      {/* Group header */}
+                      <div className="flex items-center gap-1.5 text-[10px]">
+                        <input
+                          type="checkbox"
+                          checked={allSelected}
+                          ref={el => { if (el) el.indeterminate = someSelected && !allSelected }}
+                          onChange={() => toggleGroupSelection(group)}
+                          className="w-3 h-3"
+                        />
+                        <span
+                          className="w-2 h-2 rounded-full inline-block"
+                          style={{ backgroundColor: group.color }}
+                        />
+                        <span className="font-medium text-gray-700">{group.label}</span>
+                        <span className="text-gray-400">({group.runs.length} run{group.runs.length !== 1 ? 's' : ''})</span>
+                      </div>
+
+                      {/* Individual runs */}
+                      <div className="ml-4 space-y-0">
+                        {group.runs.map((run, idx) => {
+                          const isHighlighted = run.temporal_run_id === highlightedRunId
+                          const schema = run.clustering_schema || 'default'
+                          const tooltipText = `${run.temporal_run_id}\nsession: ${run.new_session_id}\nschema: ${schema}\nmode: ${run.processing_mode}\nconfig: ${run.sequence_config}\npositions: ${run.sequence_positions}\nboundary: ${run.regime_boundary}`
+
+                          return (
+                            <label
+                              key={run.temporal_run_id}
+                              className={`flex items-center gap-1.5 text-[10px] cursor-pointer rounded px-1 py-0.5 ${
+                                isHighlighted ? 'bg-blue-50 font-medium' : 'hover:bg-gray-50'
+                              }`}
+                              title={tooltipText}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={selectedRunIds.includes(run.temporal_run_id)}
+                                onChange={() => toggleRunSelection(run.temporal_run_id)}
+                                className="w-2.5 h-2.5"
+                              />
+                              <span
+                                className="text-gray-600 cursor-pointer"
+                                onClick={(e) => {
+                                  e.preventDefault()
+                                  setHighlightedRunId(isHighlighted ? null : run.temporal_run_id)
+                                }}
+                              >
+                                #{idx + 1}
+                              </span>
+                              <span className="text-gray-400 truncate">
+                                ({run.new_session_id.slice(0, 8)})
+                              </span>
+                            </label>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             )}
           </div>
@@ -369,23 +462,28 @@ export default function TemporalAnalysisSection({
             </>
           )}
 
-          {/* Lag Metrics */}
-          {hasLagData && lagMetrics.perRun && Object.keys(lagMetrics.perRun).length > 0 && (
+          {/* Lag Metrics — per group aggregation */}
+          {hasLagData && lagMetrics.perGroup && Object.keys(lagMetrics.perGroup).length > 0 && (
             <div className="bg-gray-50 rounded p-2 space-y-0.5">
               <p className="text-[10px] font-medium text-gray-500 uppercase tracking-wide mb-1">Metrics</p>
-              {Object.entries(lagMetrics.perRun).map(([runId, m]) => {
-                const run = runs.find(r => r.temporal_run_id === runId)
+              {runGroups.map(group => {
+                const gm = lagMetrics.perGroup[group.key]
+                if (!gm) return null
                 return (
-                  <p key={runId} className="text-[10px] text-gray-600">
-                    Routing lag ({run?.processing_mode || runId.slice(0, 6)}): <span className="font-mono font-medium">{m.lag} positions</span>
+                  <p key={group.key} className="text-[10px] text-gray-600">
+                    <span className="inline-block w-2 h-2 rounded-full mr-1" style={{ backgroundColor: group.color }} />
+                    {group.label}: lag = <span className="font-mono font-medium">
+                      {gm.count > 1 ? `${gm.meanLag.toFixed(1)} ± ${gm.stdLag.toFixed(1)}` : gm.meanLag}
+                    </span>
+                    <span className="text-gray-400 ml-1">(n={gm.count})</span>
                   </p>
                 )
               })}
               {lagMetrics.deltaPersistence !== null && (
                 <p className="text-[10px] text-gray-700 font-medium mt-1">
-                  {'\u0394'}Persistence: <span className="font-mono">{lagMetrics.deltaPersistence > 0 ? '+' : ''}{lagMetrics.deltaPersistence}</span>
+                  {'\u0394'}Persistence: <span className="font-mono">{lagMetrics.deltaPersistence > 0 ? '+' : ''}{lagMetrics.deltaPersistence.toFixed(1)}</span>
                   <span className="text-gray-400 font-normal ml-1">
-                    (cache {lagMetrics.deltaPersistence > 0 ? 'extends' : 'reduces'} regime by {Math.abs(lagMetrics.deltaPersistence)} steps)
+                    (cache {lagMetrics.deltaPersistence > 0 ? 'extends' : 'reduces'} regime by {Math.abs(lagMetrics.deltaPersistence).toFixed(1)} steps)
                   </span>
                 </p>
               )}

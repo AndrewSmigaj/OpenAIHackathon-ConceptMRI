@@ -134,7 +134,7 @@ class AnalyzeClusterRoutesRequest(BaseModel):
     session_id: Optional[str] = None
     session_ids: Optional[List[str]] = None
     window_layers: List[int]
-    clustering_config: ClusteringConfig
+    clustering_config: Optional[ClusteringConfig] = None  # Required unless clustering_schema resolves config from meta.json
     filter_config: Optional[FilterConfig] = None
     top_n_routes: int = 20
     clustering_schema: Optional[str] = None  # Load from named schema (skip computation)
@@ -368,6 +368,8 @@ class TemporalCaptureRequest(BaseModel):
     layers: Optional[List[int]] = None
     run_label: Optional[str] = None
     generate_output: bool = True  # generate continuation text for each probe
+    custom_sentences: Optional[List[str]] = None  # Override basin selection with explicit word/sentence list
+    custom_target_word: Optional[str] = None  # Target word for custom sentences (e.g. "tank")
 
 
 class TemporalCaptureResponse(BaseModel):
@@ -379,3 +381,34 @@ class TemporalCaptureResponse(BaseModel):
     processing_mode: str
     basin_a_sentences: int
     basin_b_sentences: int
+
+
+# --- Temporal Lag Data Schemas ---
+
+class TemporalLagDataRequest(BaseModel):
+    """Request to compute basin axis projection for a temporal session."""
+    source_session_id: str           # Original session with clustering
+    temporal_session_id: str         # From temporal capture
+    clustering_schema: str           # Named schema for probe assignments
+    basin_a_cluster_id: int
+    basin_b_cluster_id: int
+    basin_layer: int
+
+
+class TemporalLagPoint(BaseModel):
+    """Single data point in the temporal lag chart."""
+    position: int              # sentence_index (sequence position)
+    regime: str                # "A" or "B"
+    projection: float          # basin axis projection: 0.0 = at centroid A, 1.0 = at centroid B
+    sentence_text: str
+    probe_id: str
+    target_word: str
+
+
+class TemporalLagDataResponse(BaseModel):
+    """Response with per-position basin axis projection data."""
+    points: List[TemporalLagPoint]
+    regime_boundary: int
+    processing_mode: str
+    temporal_run_id: str
+    basin_separation: float    # L2 distance between centroids

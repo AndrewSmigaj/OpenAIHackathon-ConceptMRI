@@ -15,14 +15,14 @@ Ask the user which session and schema to analyze, or detect from context.
 
 ```bash
 # List available schemas
-curl http://localhost:8000/api/probes/sessions/{session_id}/clusterings
+curl http://0.0.0.0:8000/api/probes/sessions/{session_id}/clusterings
 ```
 
 ### 2. Load Probe Guide
 
 From session metadata, get `sentence_set_name`:
 ```bash
-curl http://localhost:8000/api/probes/{session_id}
+curl http://0.0.0.0:8000/api/probes/{session_id}
 ```
 
 Then read the probe guide for experiment-specific analysis focus:
@@ -36,7 +36,7 @@ Start with the last-layer window (e.g., [22,23]) where routing decisions are mos
 
 For each window, load cached data:
 ```bash
-curl -X POST http://localhost:8000/api/experiments/analyze-cluster-routes \
+curl -X POST http://0.0.0.0:8000/api/experiments/analyze-cluster-routes \
   -H "Content-Type: application/json" \
   -d '{
     "session_id": "...",
@@ -60,7 +60,7 @@ Examine the response:
 
 For routes with confusion or unexpected patterns:
 ```bash
-curl "http://localhost:8000/api/experiments/route-details?session_id=...&signature=ROUTE_SIG&window_layers=X,Y"
+curl "http://0.0.0.0:8000/api/experiments/route-details?session_id=...&signature=ROUTE_SIG&window_layers=X,Y"
 ```
 
 Read ALL sentences. Identify structural patterns, semantic themes, reasons for misclassification.
@@ -91,7 +91,7 @@ Per-window report (see docs/ANALYSIS.md for full template):
 ### 6. Save Reports
 
 ```bash
-curl -X POST http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema}/reports/w_{start}_{end} \
+curl -X POST http://0.0.0.0:8000/api/probes/sessions/{id}/clusterings/{schema}/reports/w_{start}_{end} \
   -H "Content-Type: application/json" \
   -d '{"report": "..."}'
 ```
@@ -110,7 +110,7 @@ After analyzing each window, generate 1-2 sentence descriptions for every cluste
 - Routes: `route-{signature}` (e.g., `route-L22C3→L23C1`)
 
 ```bash
-curl -X POST http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema}/element-descriptions \
+curl -X POST http://0.0.0.0:8000/api/probes/sessions/{id}/clusterings/{schema}/element-descriptions \
   -H "Content-Type: application/json" \
   -d '{"descriptions": {"cluster-3-L22": "Vehicle-dominant cluster...", "route-L22C3→L23C1": "Pure vehicle route..."}}'
 ```

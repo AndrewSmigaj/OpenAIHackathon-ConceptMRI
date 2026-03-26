@@ -14,7 +14,7 @@ import { getAxisPreview, type GradientScheme, GRADIENT_SCHEMES, GRADIENT_AUTO_PA
 import type { DynamicAxis } from '../types/api'
 import { LAYER_RANGES } from '../constants/layerRanges'
 
-import LLMAnalysisPanel from '../components/analysis/LLMAnalysisPanel'
+import TemporalAnalysisSection from '../components/analysis/TemporalAnalysisSection'
 import ContextSensitiveCard from '../components/analysis/ContextSensitiveCard'
 import WindowAnalysis from '../components/analysis/WindowAnalysis'
 import ExpertRoutesSection from '../components/analysis/ExpertRoutesSection'
@@ -562,43 +562,61 @@ export default function ExperimentPage() {
                     </div>
                   )}
 
-                  {/* Clustering parameter controls */}
-                  <div className="space-y-1.5 text-[10px]">
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-400">Source</span>
-                      <select value={clustering.embeddingSource} onChange={e => clustering.setEmbeddingSource(e.target.value)}
-                        className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="expert_output">expert output</option>
-                        <option value="residual_stream">residual stream</option>
-                      </select>
+                  {/* Clustering parameter controls OR read-only schema summary */}
+                  {selectedSchema ? (
+                    <div className="text-[10px] text-gray-500 bg-gray-50 rounded px-2 py-1.5 font-mono">
+                      {(() => {
+                        const schema = availableSchemas.find(s => s.name === selectedSchema)
+                        if (!schema?.params) return selectedSchema
+                        const p = schema.params
+                        const source = p.embedding_source === 'residual_stream' ? 'residual' : 'expert'
+                        const method = (p.reduction_method || 'pca').toUpperCase()
+                        const dims = p.reduction_dimensions || '?'
+                        const clustering_m = p.clustering_method || '?'
+                        const counts = p.layer_cluster_counts || {}
+                        const kValues = [...new Set(Object.values(counts) as number[])]
+                        const kStr = kValues.length === 1 ? `K=${kValues[0]}` : kValues.map((v, i) => `K=${v}`).join('/')
+                        return `${source} · ${method} ${dims}D · ${clustering_m} · ${kStr}`
+                      })()}
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-400">Reduction</span>
-                      <div className="flex items-center gap-1">
-                        <select value={clustering.reductionMethod} onChange={e => clustering.setReductionMethod(e.target.value)}
+                  ) : (
+                    <div className="space-y-1.5 text-[10px]">
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-400">Source</span>
+                        <select value={clustering.embeddingSource} onChange={e => clustering.setEmbeddingSource(e.target.value)}
                           className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="pca">PCA</option>
-                          <option value="umap">UMAP</option>
+                          <option value="expert_output">expert output</option>
+                          <option value="residual_stream">residual stream</option>
                         </select>
-                        <input type="number" value={clustering.reductionDims} onChange={e => clustering.setReductionDims(Number(e.target.value))}
-                          min={2} max={256} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500" />
-                        <span className="text-gray-400">D</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-400">Reduction</span>
+                        <div className="flex items-center gap-1">
+                          <select value={clustering.reductionMethod} onChange={e => clustering.setReductionMethod(e.target.value)}
+                            className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
+                            <option value="pca">PCA</option>
+                            <option value="umap">UMAP</option>
+                          </select>
+                          <input type="number" value={clustering.reductionDims} onChange={e => clustering.setReductionDims(Number(e.target.value))}
+                            min={2} max={256} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                          <span className="text-gray-400">D</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-400">Clustering</span>
+                        <select value={clustering.clusteringMethod} onChange={e => clustering.setClusteringMethod(e.target.value)}
+                          className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
+                          <option value="hierarchical">hierarchical</option>
+                          <option value="kmeans">kmeans</option>
+                        </select>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-400">K (clusters/layer)</span>
+                        <input type="number" value={clustering.globalClusterCount} onChange={e => clustering.setGlobalClusterCount(Number(e.target.value))}
+                          min={2} max={16} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500" />
                       </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-400">Clustering</span>
-                      <select value={clustering.clusteringMethod} onChange={e => clustering.setClusteringMethod(e.target.value)}
-                        className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="hierarchical">hierarchical</option>
-                        <option value="kmeans">kmeans</option>
-                      </select>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-400">K (clusters/layer)</span>
-                      <input type="number" value={clustering.globalClusterCount} onChange={e => clustering.setGlobalClusterCount(Number(e.target.value))}
-                        min={2} max={16} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500" />
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -712,12 +730,11 @@ export default function ExperimentPage() {
                     onCardSelect={setSelectedCard}
                   />
 
-                  <LLMAnalysisPanel
+                  <TemporalAnalysisSection
                     sessionId={selectedSessions[0]}
-                    expertRouteData={currentRouteData}
                     clusterRouteData={currentClusterRouteData}
+                    clusteringSchema={selectedSchema}
                     selectedRange={selectedRange}
-                    onElementDescriptionsLoaded={handleElementDescriptionsLoaded}
                   />
                 </div>
 

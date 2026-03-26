@@ -274,35 +274,6 @@ interface ReductionResponse {
   n_components: number
 }
 
-// --- Scaffold Step Types ---
-
-interface ScaffoldTemplate {
-  id: string
-  name: string
-  description: string
-  prompt: string
-  data_sources: string[]
-  output_type: 'narrative' | 'element_labels'
-}
-
-interface ScaffoldStepRequest {
-  session_id: string
-  step_id: string
-  prompt: string
-  data_sources: string[]
-  output_type: string
-  expert_windows?: any[] | null
-  cluster_windows?: any[] | null
-  previous_outputs?: string[] | null
-  api_key: string
-  provider?: string
-}
-
-interface ScaffoldStepResponse {
-  narrative?: string | null
-  element_labels?: Record<string, string> | null
-}
-
 // Clustering Schema Types
 interface ClusteringSchema {
   name: string
@@ -349,8 +320,5 @@ export type {
   ReductionRequest,
   ReductionPoint,
   ReductionResponse,
-  ScaffoldTemplate,
-  ScaffoldStepRequest,
-  ScaffoldStepResponse,
   ClusteringSchema
 };
