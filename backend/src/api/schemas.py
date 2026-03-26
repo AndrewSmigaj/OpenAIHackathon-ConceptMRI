@@ -140,6 +140,7 @@ class AnalyzeClusterRoutesRequest(BaseModel):
     clustering_schema: Optional[str] = None  # Load from named schema (skip computation)
     save_as: Optional[str] = None            # Compute AND save result under this name
     output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
+    max_examples_per_node: Optional[int] = None  # Cap examples per node/link; None = all
 
 
 class ProbeExample(BaseModel):

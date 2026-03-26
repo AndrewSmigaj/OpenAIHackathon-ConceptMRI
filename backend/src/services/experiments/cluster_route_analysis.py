@@ -53,6 +53,7 @@ class ClusterRouteAnalysisService:
         filter_config: Optional[Dict[str, Any]] = None,
         top_n_routes: int = 20,
         output_grouping_axes: Optional[List[str]] = None,
+        max_examples_per_node: Optional[int] = None,
     ) -> Dict[str, Any]:
         """Analyze cluster routes for one or more capture sessions within specified window."""
         ids = session_ids or ([session_id] if session_id else [])
@@ -85,7 +86,7 @@ class ClusterRouteAnalysisService:
         top_route_signatures = {route["signature"] for route in top_routes_data}
         filtered_routes = {sig: routes[sig] for sig in top_route_signatures if sig in routes}
 
-        sankey_data = self._build_sankey_data(filtered_routes, token_records)
+        sankey_data = self._build_sankey_data(filtered_routes, token_records, max_examples=max_examples_per_node)
 
         # Add output category nodes if any probes have output_category set
         from services.experiments.output_category_nodes import build_output_category_layer
@@ -395,6 +396,7 @@ class ClusterRouteAnalysisService:
         self,
         routes: Dict[str, Dict],
         token_records: List[ProbeRecord],
+        max_examples: Optional[int] = None,
     ) -> Dict[str, Any]:
         """Build Sankey diagram data with label-based distributions."""
         transitions = defaultdict(lambda: defaultdict(int))
@@ -426,7 +428,7 @@ class ClusterRouteAnalysisService:
                             cats = json.loads(token_record.categories_json)
                             for axis_id, value in cats.items():
                                 cluster_category_counts[part][axis_id][value] += 1
-                        if len(cluster_example_tokens[part]) < 10:
+                        if max_examples is None or len(cluster_example_tokens[part]) < max_examples:
                             cluster_example_tokens[part].append({
                                 "target_word": token_record.target_word,
                                 "label": token_record.label,
@@ -465,7 +467,7 @@ class ClusterRouteAnalysisService:
                     "tokens": cluster_example_tokens.get(node_name) or None,
                 })
 
-        links = build_sankey_links(transitions, routes, token_lookup)
+        links = build_sankey_links(transitions, routes, token_lookup, max_examples=max_examples)
 
         return {"nodes": nodes, "links": links}
 

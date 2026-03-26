@@ -617,6 +617,35 @@ export default function ExperimentPage() {
                       </div>
                     </div>
                   )}
+
+                  {/* Labeling instruction text — shown when schema selected */}
+                  {selectedSchema && selectedSession && (() => {
+                    const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
+                    if (!currentRange) return null
+                    const lastWindow = currentRange.windows[currentRange.windows.length - 1]
+                    const windowStr = lastWindow ? `${lastWindow.layers[0]}-${lastWindow.layers[lastWindow.layers.length - 1]}` : '22-23'
+                    const instruction = `/analyze ${selectedSession} schema ${selectedSchema} window ${windowStr}`
+                    return (
+                      <div className="mt-2">
+                        <div className="text-[9px] text-gray-400 mb-0.5">Paste to Claude to label:</div>
+                        <div
+                          className="text-[10px] font-mono bg-blue-50 border border-blue-200 rounded px-2 py-1 cursor-pointer hover:bg-blue-100 select-all"
+                          title="Click to select"
+                          onClick={e => {
+                            const el = e.currentTarget
+                            const range = document.createRange()
+                            range.selectNodeContents(el)
+                            const sel = window.getSelection()
+                            sel?.removeAllRanges()
+                            sel?.addRange(range)
+                            navigator.clipboard?.writeText(el.textContent || '')
+                          }}
+                        >
+                          {instruction}
+                        </div>
+                      </div>
+                    )
+                  })()}
                 </div>
               </div>
             </div>

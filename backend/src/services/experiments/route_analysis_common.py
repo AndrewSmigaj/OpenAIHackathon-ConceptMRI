@@ -56,8 +56,7 @@ def analyze_top_routes(routes: Dict[str, Dict], top_n: int) -> List[Dict[str, An
             key = f"{token['label']}:{token['probe_id']}"
             if key not in unique_examples:
                 unique_examples[key] = token
-            if len(unique_examples) >= 5:
-                break
+            # No cap — include all unique examples per top route
 
         top_routes.append({
             "signature": signature,
@@ -131,7 +130,8 @@ def compute_available_axes(
 
 
 def build_sankey_links(
-    transitions: Dict, routes: Dict, token_lookup: Dict
+    transitions: Dict, routes: Dict, token_lookup: Dict,
+    max_examples: Optional[int] = None,
 ) -> List[Dict[str, Any]]:
     """Build Sankey link data from transitions and route information.
 
@@ -165,7 +165,7 @@ def build_sankey_links(
                                 cats = json.loads(token_record.categories_json)
                                 for axis_id, value in cats.items():
                                     link_category_counts[axis_id][value] += 1
-                            if len(link_examples) < 10:
+                            if max_examples is None or len(link_examples) < max_examples:
                                 link_examples.append({
                                     "target_word": token_record.target_word,
                                     "label": token_record.label,

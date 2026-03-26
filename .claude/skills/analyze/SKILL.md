@@ -7,6 +7,16 @@ description: Analyze a saved clustering schema — read data, reason about patte
 
 Analyze cluster/route data from a Concept MRI session. This is an LLM reasoning task — read actual sentences, distributions, and route patterns. NO keyword/regex hacks.
 
+## Invocation
+
+Can be invoked as `/analyze {session_id} schema {schema_name} window {start}-{end}`, e.g.:
+```
+/analyze session_1434a9be schema polysemy_explore window 22-23
+```
+
+When invoked with parameters, skip the identification step and go straight to loading the probe guide.
+When `window` is specified, only analyze that window's layers — do NOT process other windows.
+
 ## Workflow
 
 ### 1. Identify Session & Schema
@@ -18,7 +28,7 @@ Ask the user which session and schema to analyze, or detect from context.
 curl http://0.0.0.0:8000/api/probes/sessions/{session_id}/clusterings
 ```
 
-### 2. Load Probe Guide
+### 2. Load Probe Guide (ALWAYS DO THIS FIRST)
 
 From session metadata, get `sentence_set_name`:
 ```bash
@@ -30,9 +40,11 @@ Then read the probe guide for experiment-specific analysis focus:
 glob data/sentence_sets/**/{sentence_set_name}.md
 ```
 
-### 3. Analyze Windows (Start from Last Layer)
+**Read the guide carefully** — it explains what the probe is testing, what to look for in the data, and how to interpret routing patterns. This context is essential for meaningful labeling.
 
-Start with the last-layer window (e.g., [22,23]) where routing decisions are most crystallized, then work backward.
+### 3. Analyze Windows
+
+If a `window` parameter was given, analyze only that window. Otherwise start with the last-layer window (e.g., [22,23]) and work backward.
 
 For each window, load cached data:
 ```bash
@@ -48,11 +60,11 @@ curl -X POST http://0.0.0.0:8000/api/experiments/analyze-cluster-routes \
 
 Examine the response:
 
-**Nodes** (clusters): Read `label_distribution`, `category_distributions`, `tokens` (example sentences). Name each cluster by what it actually captures.
+**Nodes** (clusters): Read `label_distribution`, `category_distributions`, and **ALL sentences** in `tokens`. The API now returns every sentence in each cluster (no cap). Read them all — don't skip or sample. Understanding the full distribution is critical for accurate labeling.
 
-**Links** (transitions): Read `probability`, `label_distribution`. Identify pure vs mixed routes.
+**Links** (transitions): Read `probability`, `label_distribution`, and **ALL link examples**. Identify pure vs mixed routes.
 
-**Top Routes**: Read `example_tokens`, `coverage`, `avg_confidence`. Understand what sentences follow each path.
+**Top Routes**: Read ALL `example_tokens`, `coverage`, `avg_confidence`. Understand what sentences follow each path.
 
 **Output Nodes** (if present): Which clusters route to which output categories? Any input/output mismatches?
 
@@ -101,9 +113,12 @@ curl -X POST http://0.0.0.0:8000/api/probes/sessions/{id}/clusterings/{schema}/r
 After analyzing each window, generate 1-2 sentence descriptions for every cluster node and top route visible in that window. These populate the click-to-inspect cards in the frontend.
 
 **Approach — comparative, not isolated:**
-- For each cluster: what input types does it capture? How is it different from neighboring clusters?
-- For each route: what distinguishes the sentences that take this path? If a cluster splits into multiple destinations, explain what causes the split.
-- For output links: which clusters route cleanly to one output vs split? What explains the confusion?
+1. First read ALL sentences in ALL clusters for the window layer pair
+2. Identify what makes each cluster distinct from the others (not just what's in it, but what's NOT in it)
+3. For each cluster: what input types does it capture? How is it different from neighboring clusters?
+4. For each route: what distinguishes the sentences that take this path? If a cluster splits into multiple destinations, explain what causes the split.
+5. For output links: which clusters route cleanly to one output vs split? What explains the confusion?
+6. Reference findings from the probe guide — the guide tells you what semantic dimensions to look for
 
 **Key format** matches frontend `descKey`:
 - Clusters: `cluster-{id}-L{layer}` (e.g., `cluster-3-L22`)

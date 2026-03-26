@@ -292,6 +292,7 @@ async def analyze_cluster_routes(
             filter_config=filter_config_dict,
             top_n_routes=request.top_n_routes,
             output_grouping_axes=request.output_grouping_axes,
+            max_examples_per_node=request.max_examples_per_node,
         )
 
         # Auto-save if save_as provided
