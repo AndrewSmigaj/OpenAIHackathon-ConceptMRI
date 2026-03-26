@@ -4,6 +4,8 @@ Simple dependency injection for shared services.
 """
 
 import sys
+import threading
+import time
 from pathlib import Path
 import torch
 
@@ -25,30 +27,34 @@ _route_analysis_service = None
 _cluster_analysis_service = None
 _llm_insights_service = None
 
+# Loading stage tracking — readable by health endpoint while model loads in background thread.
+# Stages: not_started → initializing → loading_model → creating_service → ready | failed
+_loading_stage = "not_started"
+_loading_error = None
+_loading_start_time = None
 
-async def initialize_capture_service():
-    """Initialize capture service at startup."""
-    global _capture_service
 
-    if _capture_service is not None:
-        return  # Already initialized
+def _load_model_sync():
+    """Load model in a background thread so the API can serve health checks immediately."""
+    global _capture_service, _loading_stage, _loading_error, _loading_start_time
 
-    print("Initializing capture service at startup...")
+    _loading_start_time = time.time()
+    _loading_stage = "initializing"
+    print("Initializing capture service...")
 
     try:
-        # Create adapter and use it for model loading
         adapter = get_adapter("gpt-oss-20b")
         model_path = project_root / "data" / "models" / adapter.topology.model_dir
         data_lake_path = project_root / "data" / "lake"
 
-        # Check if model exists
         if not model_path.exists():
             raise FileNotFoundError(f"Model not found at: {model_path}")
 
+        _loading_stage = "loading_model"
         print(f"Loading model from: {model_path} (adapter: {adapter.topology.model_name})")
         model, tokenizer = adapter.load_model(str(model_path))
 
-        # Initialize service
+        _loading_stage = "creating_service"
         _capture_service = IntegratedCaptureService(
             model=model,
             tokenizer=tokenizer,
@@ -57,11 +63,25 @@ async def initialize_capture_service():
             adapter=adapter
         )
 
-        print("Capture service ready")
+        elapsed = time.time() - _loading_start_time
+        _loading_stage = "ready"
+        print(f"✅ Model loaded successfully in {elapsed:.0f}s — capture service ready")
 
     except Exception as e:
-        print(f"Failed to initialize capture service: {e}")
-        raise RuntimeError(f"Capture service initialization failed: {e}")
+        elapsed = time.time() - _loading_start_time
+        _loading_stage = "failed"
+        _loading_error = str(e)
+        print(f"❌ Model loading failed after {elapsed:.0f}s: {e}")
+        print("API running in limited mode (analysis endpoints work, probe capture won't)")
+
+
+async def initialize_capture_service():
+    """Start model loading in a background thread. Returns immediately."""
+    if _loading_stage != "not_started":
+        return  # Already started or completed
+
+    thread = threading.Thread(target=_load_model_sync, daemon=True)
+    thread.start()
 
 
 def get_capture_service() -> IntegratedCaptureService:
@@ -75,6 +95,18 @@ def get_capture_service() -> IntegratedCaptureService:
 def is_model_loaded() -> bool:
     """Check if the capture service (and model) is initialized."""
     return _capture_service is not None
+
+
+def get_loading_status() -> dict:
+    """Return current loading status for health endpoint."""
+    elapsed = None
+    if _loading_start_time is not None:
+        elapsed = round(time.time() - _loading_start_time, 1)
+    return {
+        "stage": _loading_stage,
+        "elapsed_seconds": elapsed,
+        "error": _loading_error,
+    }
 
 
 def get_route_analysis_service() -> ExpertRouteAnalysisService:

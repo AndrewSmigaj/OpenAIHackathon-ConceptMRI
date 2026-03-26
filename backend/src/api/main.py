@@ -9,23 +9,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import torch
 from api.routers import probes, experiments, generation, prompts
-from api.dependencies import initialize_capture_service, is_model_loaded
+from api.dependencies import initialize_capture_service, is_model_loaded, get_loading_status
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: Load model once
-    print("🚀 Starting Concept MRI API - loading model...")
-    start = time.time()
-    try:
-        await initialize_capture_service()
-        elapsed = time.time() - start
-        print(f"✅ Model loaded successfully in {elapsed:.0f}s - API ready")
-    except Exception as e:
-        elapsed = time.time() - start
-        print(f"❌ Model loading failed after {elapsed:.0f}s: {e}")
-        print("✅ API started in limited mode (analysis endpoints work, probe capture won't)")
+    print("🚀 Starting Concept MRI API...")
+    await initialize_capture_service()  # starts background thread, returns immediately
+    print("API serving — model loading in background")
     yield
-    # Shutdown
     print("🛑 Shutting down Concept MRI API")
 
 # Create FastAPI app
@@ -55,6 +46,7 @@ async def health_check():
     return {
         "status": "healthy",
         "model_loaded": is_model_loaded(),
+        "loading": get_loading_status(),
         "gpu_available": torch.cuda.is_available(),
         "gpu_name": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
         "sessions_available": True,
