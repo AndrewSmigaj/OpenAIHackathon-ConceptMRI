@@ -24,7 +24,7 @@ export interface ClusteringConfigState {
 export function useClusteringConfig(): ClusteringConfigState {
   const [layerClusterCounts, setLayerClusterCounts] = useState<Record<number, number>>({})
   const [clusteringMethod, setClusteringMethod] = useState('hierarchical')
-  const [reductionDims, setReductionDims] = useState(5)
+  const [reductionDims, setReductionDims] = useState(6)
   const [embeddingSource, setEmbeddingSource] = useState<string>('residual_stream')
   const [reductionMethod, setReductionMethod] = useState<string>('umap')
   const [useAllLayersSameClusters, setUseAllLayersSameClusters] = useState(true)

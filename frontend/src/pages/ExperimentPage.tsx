@@ -141,6 +141,7 @@ export default function ExperimentPage() {
   const [mergedSessionDetails, setMergedSessionDetails] = useState<SessionDetailResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [serverBusy, setServerBusy] = useState(false)
   const [filterState, setFilterState] = useState<FilterState>({
     labels: new Set()
   })
@@ -180,6 +181,25 @@ export default function ExperimentPage() {
   }, [])
   const { availableSchemas, selectedSchema, schemaReports, setSelectedSchema } =
     useSchemaManagement(selectedSessions, handleElementDescriptionsLoaded)
+
+  // Sync clustering config state when a saved schema is selected
+  useEffect(() => {
+    if (!selectedSchema) return
+    const schema = availableSchemas.find(s => s.name === selectedSchema)
+    if (!schema?.params) return
+    const p = schema.params
+    if (p.reduction_dimensions) clustering.setReductionDims(p.reduction_dimensions)
+    if (p.reduction_method) clustering.setReductionMethod(p.reduction_method)
+    if (p.clustering_method) clustering.setClusteringMethod(p.clustering_method)
+    if (p.embedding_source) clustering.setEmbeddingSource(p.embedding_source)
+    if (p.layer_cluster_counts) {
+      const counts = Object.values(p.layer_cluster_counts) as number[]
+      if (counts.length > 0) {
+        clustering.setGlobalClusterCount(counts[0])
+        clustering.setUseAllLayersSameClusters(true)
+      }
+    }
+  }, [selectedSchema, availableSchemas])
 
   // Derive available labels from route analysis available_axes (for filter panel)
   const availableLabels = useMemo(() => {
@@ -319,6 +339,7 @@ export default function ExperimentPage() {
       setError(null)
       const sessionsData = await apiClient.listSessions()
       setSessions(sessionsData)
+      setServerBusy(false)
 
       // Filter to only completed sessions for analysis
       const completedSessions = sessionsData.filter(s => s.state === 'completed')
@@ -328,7 +349,13 @@ export default function ExperimentPage() {
         setSelectedSessions([id])
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load sessions')
+      const msg = err instanceof Error ? err.message : 'Failed to load sessions'
+      // If we already have sessions loaded, show a non-blocking warning instead of replacing the page
+      if (sessions.length > 0 && msg.includes('timed out')) {
+        setServerBusy(true)
+      } else {
+        setError(msg)
+      }
       console.error('Failed to load sessions:', err)
     } finally {
       setLoading(false)
@@ -390,6 +417,14 @@ export default function ExperimentPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Server busy banner */}
+      {serverBusy && (
+        <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 flex items-center justify-between text-sm">
+          <span className="text-amber-800">Server is busy running a temporal capture. Some data may be stale.</span>
+          <button onClick={() => { setServerBusy(false); loadSessions() }} className="text-amber-600 hover:text-amber-800 font-medium">Retry</button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="px-8 py-6">
@@ -619,12 +654,12 @@ export default function ExperimentPage() {
                   )}
 
                   {/* Labeling instruction text — shown when schema selected */}
-                  {selectedSchema && selectedSession && (() => {
+                  {selectedSchema && selectedSessions[0] && (() => {
                     const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
                     if (!currentRange) return null
                     const lastWindow = currentRange.windows[currentRange.windows.length - 1]
                     const windowStr = lastWindow ? `${lastWindow.layers[0]}-${lastWindow.layers[lastWindow.layers.length - 1]}` : '22-23'
-                    const instruction = `/analyze ${selectedSession} schema ${selectedSchema} window ${windowStr}`
+                    const instruction = `/analyze ${selectedSessions[0]} schema ${selectedSchema} window ${windowStr}`
                     return (
                       <div className="mt-2">
                         <div className="text-[9px] text-gray-400 mb-0.5">Paste to Claude to label:</div>
@@ -768,7 +803,7 @@ export default function ExperimentPage() {
                 </div>
 
                 {/* Right column — window analysis + click card */}
-                <div className="w-72 max-w-[288px] flex-shrink-0 border-l bg-white overflow-y-auto overflow-x-hidden p-2">
+                <div className="w-96 max-w-[384px] flex-shrink-0 border-l bg-white overflow-y-auto overflow-x-hidden p-2">
                   {/* Window-level statistical analysis (always visible) */}
                   {(() => {
                     const routeMap = currentClusterRouteData || currentRouteData

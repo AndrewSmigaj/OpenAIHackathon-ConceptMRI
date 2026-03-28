@@ -314,23 +314,9 @@ User specifies:
 1. Which schema to use
 2. Two basin clusters (cluster IDs at a specific layer)
 
-```bash
-curl -X POST http://0.0.0.0:8000/api/experiments/temporal-capture \
-  -H "Content-Type: application/json" \
-  -d '{
-    "session_id": "...",
-    "basin_a_cluster_id": 0,
-    "basin_b_cluster_id": 3,
-    "basin_layer": 2,
-    "clustering_schema": "SCHEMA_NAME",
-    "sentences_per_block": 20,
-    "processing_mode": "expanding_cache_on",
-    "sequence_config": "block_ab",
-    "generate_output": true
-  }'
-```
+**Use the `/temporal` skill** for full workflow — single captures, batch experiments (10x cache_on + 10x cache_off), and verification. The UI generates a copy-paste instruction with all parameters.
 
-Returns `new_session_id`. Re-enter pipeline at Stage 2 for the temporal session.
+Returns `new_session_id` per run. Each run creates its own session.
 
 ---
 

@@ -15,18 +15,24 @@ function conditionKey(run: TemporalRunMetadata): string {
 }
 
 /** Build a human-readable label for a condition */
-function conditionLabel(run: TemporalRunMetadata): string {
-  const layer = run.basin_layer
-  let from: number, to: number
+function conditionLabel(run: TemporalRunMetadata, basinOptions?: BasinOption[]): string {
+  let fromLabel: string, toLabel: string
   if (run.sequence_config === 'block_ba') {
-    from = run.basin_b_cluster_id
-    to = run.basin_a_cluster_id
+    fromLabel = basinName(run.basin_b_cluster_id, run.basin_layer, basinOptions) || 'B'
+    toLabel = basinName(run.basin_a_cluster_id, run.basin_layer, basinOptions) || 'A'
   } else {
-    from = run.basin_a_cluster_id
-    to = run.basin_b_cluster_id
+    fromLabel = basinName(run.basin_a_cluster_id, run.basin_layer, basinOptions) || 'A'
+    toLabel = basinName(run.basin_b_cluster_id, run.basin_layer, basinOptions) || 'B'
   }
   const mode = run.processing_mode.replace('expanding_', '').replace('_', ' ')
-  return `L${layer}C${from}→L${layer}C${to} ${mode}`
+  return `${fromLabel}→${toLabel} ${mode}`
+}
+
+/** Get a short name for a basin cluster — uses dominant category if available */
+function basinName(clusterId: number, layer: number, basinOptions?: BasinOption[]): string | null {
+  if (!basinOptions) return null
+  const opt = basinOptions.find(o => o.clusterId === clusterId && o.layer === layer)
+  return opt?.dominantCategory || null
 }
 
 /** Color palette for condition groups */
@@ -189,7 +195,7 @@ export function useTemporalAnalysis({ sessionId, clusterRouteData, clusteringSch
       if (!groups.has(key)) {
         groups.set(key, {
           key,
-          label: conditionLabel(run),
+          label: conditionLabel(run, basinOptions),
           color: conditionColor(run),
           runs: [],
         })
@@ -197,7 +203,7 @@ export function useTemporalAnalysis({ sessionId, clusterRouteData, clusteringSch
       groups.get(key)!.runs.push(run)
     }
     return Array.from(groups.values())
-  }, [runs])
+  }, [runs, basinOptions])
 
   // Compute aggregate (mean) lines per group
   const aggregateLines: Record<string, AggregateLine> = useMemo(() => {

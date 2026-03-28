@@ -98,11 +98,8 @@ export default function TemporalAnalysisSection({
           .sort((a, b) => a.position - b.position)
           .map(p => [p.position, p.projection])
 
-        // Run index within group
-        const groupRunIndex = group.runs.indexOf(run) + 1
-
         series.push({
-          name: `${group.label} #${groupRunIndex}`,
+          name: group.label,
           type: 'line',
           data,
           smooth: false,
@@ -171,16 +168,29 @@ export default function TemporalAnalysisSection({
       })
     }
 
+    // Only show one legend entry per group (not per individual run)
+    const legendData = runGroups
+      .filter(g => g.runs.some(r => selectedRunIds.includes(r.temporal_run_id)))
+      .flatMap(g => {
+        const entries = [g.label]
+        if (showAggregate && aggregateLines[g.key]) entries.push(`${g.label} (mean)`)
+        return entries
+      })
+
     const option: echarts.EChartsOption = {
       animation: false,
       legend: {
         show: true,
+        data: legendData,
         bottom: 0,
-        textStyle: { fontSize: 9 },
+        left: 'center',
+        orient: 'horizontal',
+        textStyle: { fontSize: 10 },
         itemWidth: 16,
         itemHeight: 8,
+        itemGap: 20,
       },
-      grid: { left: 50, right: 20, top: 20, bottom: 50 },
+      grid: { left: 50, right: 20, top: 10, bottom: 45 },
       xAxis: {
         type: 'value',
         name: 'sentence position',
@@ -194,8 +204,8 @@ export default function TemporalAnalysisSection({
         name: 'basin A \u2190 projection \u2192 basin B',
         nameTextStyle: { fontSize: 9, color: '#999' },
         axisLabel: { fontSize: 9 },
-        min: -0.3,
-        max: 1.3,
+        min: -0.7,
+        max: 1.6,
         splitLine: { lineStyle: { type: 'dashed', color: '#e5e7eb' } },
       },
       tooltip: {
@@ -207,6 +217,11 @@ export default function TemporalAnalysisSection({
         },
       },
       series,
+    }
+
+    if (series.length === 0) {
+      chart.clear()
+      return
     }
 
     chart.setOption(option, true)
@@ -370,6 +385,12 @@ export default function TemporalAnalysisSection({
                           style={{ backgroundColor: group.color }}
                         />
                         <span className="font-medium text-gray-700">{group.label}</span>
+                        <span
+                          className="text-[8px] px-1 py-0.5 rounded font-mono font-semibold"
+                          style={{ backgroundColor: group.color + '20', color: group.color }}
+                        >
+                          {group.runs[0]?.processing_mode?.includes('cache_on') ? 'CACHE ON' : 'CACHE OFF'}
+                        </span>
                         <span className="text-gray-400">({group.runs.length} run{group.runs.length !== 1 ? 's' : ''})</span>
                       </div>
 
@@ -422,7 +443,7 @@ export default function TemporalAnalysisSection({
             <>
               <div
                 ref={chartRef}
-                style={{ width: '100%', height: 150 }}
+                style={{ width: '100%', minWidth: 1400, height: 540 }}
               />
 
               {/* Scrubber */}

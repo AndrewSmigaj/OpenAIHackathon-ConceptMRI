@@ -74,10 +74,11 @@ class ClusterRouteAnalysisService:
             )
 
         # Reduce dimensions, then cluster
-        cluster_assignments = self._perform_clustering(
+        clustering_result = self._perform_clustering(
             embeddings, window_layers, clustering_config,
             reduction_method=reduction_method, reduction_dims=reduction_dims
         )
+        cluster_assignments = clustering_result['assignments']
 
         routes = self._extract_target_cluster_routes(cluster_assignments, token_records, window_layers)
 
@@ -131,6 +132,7 @@ class ClusterRouteAnalysisService:
             "available_axes": available_axes,
             "output_available_axes": output_axes if output_axes else None,
             "probe_assignments": probe_assignments,
+            "_centroids": clustering_result['centroids'],
         }
 
     def _load_session_data(
@@ -251,9 +253,17 @@ class ClusterRouteAnalysisService:
         clustering_config: Dict[str, Any],
         reduction_method: str = "pca",
         reduction_dims: int = 128,
-    ) -> Dict[str, Dict[str, Any]]:
-        """Reduce raw embeddings, then cluster per layer. Returns cluster assignments per probe_id."""
+    ) -> Dict[str, Any]:
+        """Reduce raw embeddings, then cluster per layer.
+
+        Returns dict with:
+            'assignments': {probe_id: {layer: {cluster_id, distance_to_centroid}}}
+            'centroids': {layer: {cluster_id: ndarray}} — in reduced space
+            'reducers': {layer: fitted_model} — fitted PCA/UMAP for transforming new data
+        """
         cluster_assignments = {}
+        centroids_by_layer = {}
+        reducers_by_layer = {}
 
         # Group embeddings by layer
         emb_by_layer = defaultdict(list)
@@ -276,7 +286,7 @@ class ClusterRouteAnalysisService:
             if len(X_raw) == 0:
                 continue
 
-            # Reduce dimensionality
+            # Reduce dimensionality — capture fitted model in all branches
             actual_dims = min(reduction_dims, X_raw.shape[0] - 1, X_raw.shape[1])
             if actual_dims < 1:
                 actual_dims = 1
@@ -284,17 +294,21 @@ class ClusterRouteAnalysisService:
             if reduction_method == "umap" and X_raw.shape[0] >= 4:
                 try:
                     import umap
-                    reducer = umap.UMAP(
+                    fitted_reducer = umap.UMAP(
                         n_components=actual_dims,
                         random_state=42,
                         n_neighbors=min(15, max(2, X_raw.shape[0] - 1)),
                         min_dist=0.1,
                     )
-                    X = reducer.fit_transform(X_raw)
+                    X = fitted_reducer.fit_transform(X_raw)
                 except Exception:
-                    X = PCA(n_components=actual_dims, random_state=42).fit_transform(X_raw)
+                    fitted_reducer = PCA(n_components=actual_dims, random_state=42)
+                    X = fitted_reducer.fit_transform(X_raw)
             else:
-                X = PCA(n_components=actual_dims, random_state=42).fit_transform(X_raw)
+                fitted_reducer = PCA(n_components=actual_dims, random_state=42)
+                X = fitted_reducer.fit_transform(X_raw)
+
+            reducers_by_layer[layer] = fitted_reducer
 
             # Optionally subset dimensions for clustering
             clustering_dims = clustering_config.get("clustering_dimensions")
@@ -306,25 +320,31 @@ class ClusterRouteAnalysisService:
                 if clustering_method == "kmeans":
                     clusterer = KMeans(n_clusters=min(n_clusters, len(X)), random_state=1, n_init=10)
                     cluster_labels = clusterer.fit_predict(X)
-                    centroids = clusterer.cluster_centers_
                 elif clustering_method == "hierarchical":
                     clusterer = AgglomerativeClustering(n_clusters=min(n_clusters, len(X)))
                     cluster_labels = clusterer.fit_predict(X)
-                    centroids = None
                 elif clustering_method == "dbscan":
                     clusterer = DBSCAN(eps=0.5, min_samples=5)
                     cluster_labels = clusterer.fit_predict(X)
-                    centroids = None
                 else:
                     raise ValueError(f"Unknown clustering method: {clustering_method}")
+
+                # Compute centroids as mean of reduced vectors per cluster
+                layer_centroids = {}
+                for cid in set(cluster_labels):
+                    if cid < 0:  # skip DBSCAN noise
+                        continue
+                    mask = cluster_labels == cid
+                    layer_centroids[int(cid)] = X[mask].mean(axis=0)
+                centroids_by_layer[layer] = layer_centroids
 
                 for idx, record in enumerate(layer_records):
                     probe_id = record["probe_id"]
                     cluster_id = int(cluster_labels[idx])
 
                     distance_to_centroid = 0.0
-                    if centroids is not None and cluster_id >= 0:
-                        distance_to_centroid = float(np.linalg.norm(X[idx] - centroids[cluster_id]))
+                    if cluster_id in layer_centroids:
+                        distance_to_centroid = float(np.linalg.norm(X[idx] - layer_centroids[cluster_id]))
 
                     if probe_id not in cluster_assignments:
                         cluster_assignments[probe_id] = {}
@@ -338,7 +358,11 @@ class ClusterRouteAnalysisService:
                 logger.error(f"Clustering failed for layer {layer}: {e}")
                 continue
 
-        return cluster_assignments
+        return {
+            'assignments': cluster_assignments,
+            'centroids': centroids_by_layer,
+            'reducers': reducers_by_layer,
+        }
 
     def _extract_target_cluster_routes(
         self,

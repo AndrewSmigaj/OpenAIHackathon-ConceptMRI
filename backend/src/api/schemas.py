@@ -371,6 +371,7 @@ class TemporalCaptureRequest(BaseModel):
     generate_output: bool = True  # generate continuation text for each probe
     custom_sentences: Optional[List[str]] = None  # Override basin selection with explicit word/sentence list
     custom_target_word: Optional[str] = None  # Target word for custom sentences (e.g. "tank")
+    custom_regime_boundary: Optional[int] = None  # Explicit regime boundary for replay (bypasses auto-detection)
 
 
 class TemporalCaptureResponse(BaseModel):

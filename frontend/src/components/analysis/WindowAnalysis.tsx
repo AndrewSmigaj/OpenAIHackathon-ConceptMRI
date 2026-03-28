@@ -147,7 +147,8 @@ export default function WindowAnalysis({ routeData, windowLabel, report, selecte
       {/* Contingency Table */}
       <p className="text-[10px] font-semibold text-gray-700 mb-0.5">Cluster → Output Contingency</p>
       <p className="text-[9px] text-gray-400 mb-1">
-        Do clusters predict output? Blue = over-represented, red = under-represented.
+        Each row is a cluster. Columns show how many probes produced each output.
+        Cell color: <span className="text-blue-500">blue</span> = more than expected, <span className="text-red-400">red</span> = fewer.
       </p>
       <table className="w-full text-[10px] mb-1">
         <thead>
@@ -196,11 +197,13 @@ export default function WindowAnalysis({ routeData, windowLabel, report, selecte
                 {result.outcomeLabels.map(label => {
                   const val = row.outcomes[label] ?? 0
                   const pct = row.total > 0 ? ((val / row.total) * 100).toFixed(0) : '0'
-                  const residual = result.cellResiduals[row.source]?.[label] ?? 0
-                  const absR = Math.min(Math.abs(residual), 4) / 4
-                  const bgColor = residual > 0
-                    ? `rgba(59, 130, 246, ${absR * 0.3})`
-                    : `rgba(239, 68, 68, ${absR * 0.3})`
+                  const pctNum = row.total > 0 ? val / row.total : 0
+                  const expected = 1 / result.outcomeLabels.length
+                  const deviation = pctNum - expected
+                  const intensity = Math.min(Math.abs(deviation) / (1 - expected), 1)
+                  const bgColor = deviation >= 0
+                    ? `rgba(59, 130, 246, ${intensity * 0.75})`
+                    : `rgba(239, 68, 68, ${intensity * 0.75})`
                   return (
                     <td key={label} className="text-right text-gray-800 py-0.5 px-1" style={{ backgroundColor: bgColor }}>
                       {val} <span className="text-gray-400">({pct}%)</span>
@@ -215,43 +218,27 @@ export default function WindowAnalysis({ routeData, windowLabel, report, selecte
       </table>
 
       {/* Stats */}
-      <div className="space-y-0.5 text-[10px]">
-        <div className="flex justify-between">
+      <div className="mt-1.5 pt-1.5 border-t border-gray-100 max-w-[220px] space-y-0.5 text-[10px]">
+        <div className="flex justify-between gap-x-3">
           <span className="text-gray-500">χ²({(result.table.length - 1) * (result.outcomeLabels.length - 1)})</span>
           <span className="font-mono text-gray-800">{result.chiSquare.toFixed(2)}</span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-x-3">
           <span className="text-gray-500">p-value</span>
           <span className={`font-mono ${result.isSignificant ? 'text-green-700 font-semibold' : 'text-gray-800'}`}>
             {result.pValue < 0.001 ? '<0.001' : result.pValue.toFixed(4)}
           </span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-x-3">
           <span className="text-gray-500">Cramer's V</span>
           <span className="font-mono text-gray-800">{result.cramersV.toFixed(3)} ({strengthLabel(result.cramersV)})</span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-x-3">
           <span className="text-gray-500">Significant</span>
           <span className={`font-semibold ${result.isSignificant ? 'text-green-600' : 'text-red-500'}`}>
             {result.isSignificant ? 'Yes' : 'No'}
           </span>
         </div>
-      </div>
-
-      {/* Per-source outcome summary */}
-      <div className="mt-1.5 pt-1.5 border-t border-gray-100 space-y-0.5">
-        {result.table.map(row => {
-          const dominant = result.outcomeLabels.reduce((best, label) =>
-            (row.outcomes[label] ?? 0) > (row.outcomes[best] ?? 0) ? label : best
-          , result.outcomeLabels[0])
-          const pct = row.total > 0 ? ((row.outcomes[dominant] / row.total) * 100).toFixed(0) : '0'
-          return (
-            <p key={row.source} className="text-[10px] text-gray-600 truncate">
-              <span className="font-medium text-gray-700">{row.source}</span>
-              {' → '}{pct}% <span className="capitalize">{dominant}</span>
-            </p>
-          )
-        })}
       </div>
 
       {/* AI Analysis Report */}

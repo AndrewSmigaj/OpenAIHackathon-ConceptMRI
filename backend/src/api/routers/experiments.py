@@ -295,6 +295,10 @@ async def analyze_cluster_routes(
             max_examples_per_node=request.max_examples_per_node,
         )
 
+        # Extract and strip internal clustering artifacts (non-JSON-serializable)
+        _centroids = result.pop("_centroids", None)
+        result.pop("_reducers", None)
+
         # Auto-save if save_as provided
         if request.save_as and len(ids) == 1:
             schema_dir = Path(_data_lake_path) / ids[0] / "clusterings" / request.save_as
@@ -328,6 +332,16 @@ async def analyze_cluster_routes(
                     pa_path.write_text(json.dumps(existing_pa))
                 else:
                     pa_path.write_text(json.dumps(result["probe_assignments"]))
+            # Save centroids in reduced space (merge across windows)
+            if _centroids:
+                centroids_path = schema_dir / "centroids.json"
+                centroids_all = json.loads(centroids_path.read_text()) if centroids_path.exists() else {}
+                for layer, cdict in _centroids.items():
+                    centroids_all[str(layer)] = {
+                        str(k): v.tolist() for k, v in cdict.items()
+                    }
+                centroids_path.write_text(json.dumps(centroids_all))
+
             _precompute_output_variants(result, ids[0], request.window_layers, window_key, wdir)
             logger.info(f"Saved cluster routes to schema: {request.save_as}/{window_key}")
 
@@ -481,16 +495,14 @@ async def run_scaffold_step(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/experiments/temporal-capture", response_model=TemporalCaptureResponse)
-async def run_temporal_capture(
-    request: TemporalCaptureRequest,
-    service: IntegratedCaptureService = Depends(get_capture_service),
-):
-    """Run a temporal basin transition experiment.
+_temporal_capture_busy = False
 
-    Builds a sequence of sentences from two opposing clusters (basins),
-    captures probes with KV cache chaining, and stores results in a new session.
-    """
+
+def _run_temporal_capture_sync(
+    request: TemporalCaptureRequest,
+    service: IntegratedCaptureService,
+) -> TemporalCaptureResponse:
+    """Synchronous temporal capture — runs in a thread to avoid blocking the event loop."""
     import random
     import uuid
     import pandas as pd
@@ -573,14 +585,17 @@ async def run_temporal_capture(
             if not target_word:
                 target_word = probe_texts[next(iter(probe_texts))]["target_word"]
 
-            # Find regime boundary: first position where target_word appears in cumulative text
-            regime_boundary = len(request.custom_sentences)
-            cumulative_check = ""
-            for i, sent in enumerate(request.custom_sentences):
-                cumulative_check += (" " if cumulative_check else "") + sent
-                if target_word.lower() in cumulative_check.lower():
-                    regime_boundary = i
-                    break
+            # Use explicit boundary if provided, else auto-detect via target word
+            if request.custom_regime_boundary is not None:
+                regime_boundary = request.custom_regime_boundary
+            else:
+                regime_boundary = len(request.custom_sentences)
+                cumulative_check = ""
+                for i, sent in enumerate(request.custom_sentences):
+                    cumulative_check += (" " if cumulative_check else "") + sent
+                    if target_word.lower() in cumulative_check.lower():
+                        regime_boundary = i
+                        break
 
             new_session_id = service.create_sentence_session(
                 session_name=f"temporal_{request.run_label or temporal_run_id}",
@@ -593,7 +608,10 @@ async def run_temporal_capture(
             past_kv = None
             cumulative_text = ""
             for i, sentence in enumerate(request.custom_sentences):
-                regime = "A" if i < regime_boundary else "B"
+                if request.sequence_config == "block_ba":
+                    regime = "B" if i < regime_boundary else "A"
+                else:
+                    regime = "A" if i < regime_boundary else "B"
                 logger.info(f"Temporal capture [{request.processing_mode}] custom {i+1}/{len(request.custom_sentences)} regime={regime}")
 
                 if request.processing_mode == "expanding_cache_off":
@@ -643,7 +661,7 @@ async def run_temporal_capture(
                 "temporal_run_id": temporal_run_id,
                 "new_session_id": new_session_id,
                 "processing_mode": request.processing_mode,
-                "sequence_config": "custom",
+                "sequence_config": request.sequence_config,
                 "basin_a_cluster_id": request.basin_a_cluster_id,
                 "basin_b_cluster_id": request.basin_b_cluster_id,
                 "basin_layer": request.basin_layer,
@@ -767,6 +785,29 @@ async def run_temporal_capture(
         raise HTTPException(status_code=500, detail=f"Temporal capture failed: {str(e)}")
 
 
+@router.post("/experiments/temporal-capture", response_model=TemporalCaptureResponse)
+async def run_temporal_capture(
+    request: TemporalCaptureRequest,
+    service: IntegratedCaptureService = Depends(get_capture_service),
+):
+    """Run a temporal basin transition experiment.
+
+    Runs the capture in a thread pool so the event loop stays free
+    for health checks and frontend data requests.
+    """
+    import asyncio
+
+    global _temporal_capture_busy
+    if _temporal_capture_busy:
+        raise HTTPException(status_code=503, detail="A temporal capture is already in progress")
+
+    _temporal_capture_busy = True
+    try:
+        return await asyncio.to_thread(_run_temporal_capture_sync, request, service)
+    finally:
+        _temporal_capture_busy = False
+
+
 @router.get("/experiments/temporal-runs/{session_id}")
 async def get_temporal_runs(session_id: str):
     """List temporal runs for a source session."""
@@ -781,11 +822,13 @@ async def get_temporal_lag_data(request: TemporalLagDataRequest):
     """Compute basin axis projection for a temporal session.
 
     Projects each temporal probe's residual stream vector onto the axis
-    between basin A and basin B centroids. Returns a scalar per position:
-    0.0 = at basin A centroid, 1.0 = at basin B centroid.
+    between basin A and basin B centroids in UMAP/PCA-reduced space
+    (the same coordinate system where clustering happened).
+    Returns a scalar per position: 0.0 = at basin A centroid, 1.0 = at basin B centroid.
     """
     import numpy as np
     import pandas as pd
+    from sklearn.decomposition import PCA
 
     try:
         source_dir = Path(_data_lake_path) / request.source_session_id
@@ -796,49 +839,68 @@ async def get_temporal_lag_data(request: TemporalLagDataRequest):
         if not temporal_dir.exists():
             raise HTTPException(status_code=404, detail=f"Temporal session '{request.temporal_session_id}' not found")
 
-        # 1. Load source session residual streams at basin_layer, target position only
+        # 1. Load persisted centroids (in reduced/UMAP space)
+        schema_dir = source_dir / "clusterings" / request.clustering_schema
+        centroids_path = schema_dir / "centroids.json"
+        if not centroids_path.exists():
+            raise HTTPException(status_code=400,
+                detail="Centroids not found — re-run clustering to generate them")
+        all_centroids = json.loads(centroids_path.read_text())
+        layer_key = str(request.basin_layer)
+        if layer_key not in all_centroids:
+            raise HTTPException(status_code=400,
+                detail=f"No centroids for layer {request.basin_layer}")
+
+        centroid_a = np.array(all_centroids[layer_key][str(request.basin_a_cluster_id)], dtype=np.float32)
+        centroid_b = np.array(all_centroids[layer_key][str(request.basin_b_cluster_id)], dtype=np.float32)
+
+        # 2. Re-fit reducer from source data (deterministic with random_state=42)
+        meta_path = schema_dir / "meta.json"
+        if not meta_path.exists():
+            raise HTTPException(status_code=400, detail=f"Schema meta.json not found")
+        meta = json.loads(meta_path.read_text())
+        params = meta.get("params", {})
+        reduction_method = params.get("reduction_method", "pca")
+        reduction_dims = params.get("reduction_dimensions", 128)
+
         source_streams = pd.read_parquet(source_dir / "residual_streams.parquet")
         source_streams = source_streams[
             (source_streams["layer"] == request.basin_layer) &
-            (source_streams["token_position"] == 1)  # target word only (0=context, 1=target)
+            (source_streams["token_position"] == 1)
         ]
+        source_raw = np.array([
+            row["residual_stream"] for _, row in source_streams.iterrows()
+        ], dtype=np.float32)
 
-        # 2. Load probe assignments from schema
-        schema_dir = source_dir / "clusterings" / request.clustering_schema
-        pa_path = schema_dir / "probe_assignments.json"
-        if not pa_path.exists():
-            raise HTTPException(status_code=404, detail=f"Schema '{request.clustering_schema}' not found")
-        probe_assignments = json.loads(pa_path.read_text())
+        actual_dims = min(reduction_dims, source_raw.shape[0] - 1, source_raw.shape[1])
+        if actual_dims < 1:
+            actual_dims = 1
 
-        # 3. Compute centroids for basin A and basin B
-        basin_a_vectors = []
-        basin_b_vectors = []
-        layer_key = str(request.basin_layer)
-        for _, row in source_streams.iterrows():
-            pid = row["probe_id"]
-            cluster = probe_assignments.get(pid, {}).get(layer_key)
-            if cluster is None:
-                continue
-            vec = np.array(row["residual_stream"], dtype=np.float32)
-            if cluster == request.basin_a_cluster_id:
-                basin_a_vectors.append(vec)
-            elif cluster == request.basin_b_cluster_id:
-                basin_b_vectors.append(vec)
+        if reduction_method == "umap" and source_raw.shape[0] >= 4:
+            try:
+                import umap
+                reducer = umap.UMAP(
+                    n_components=actual_dims,
+                    random_state=42,
+                    n_neighbors=min(15, max(2, source_raw.shape[0] - 1)),
+                    min_dist=0.1,
+                )
+                reducer.fit(source_raw)
+            except Exception:
+                reducer = PCA(n_components=actual_dims, random_state=42)
+                reducer.fit(source_raw)
+        else:
+            reducer = PCA(n_components=actual_dims, random_state=42)
+            reducer.fit(source_raw)
 
-        if not basin_a_vectors or not basin_b_vectors:
-            raise HTTPException(status_code=400, detail=f"No probes found in basins (A={len(basin_a_vectors)}, B={len(basin_b_vectors)})")
-
-        centroid_a = np.mean(basin_a_vectors, axis=0)
-        centroid_b = np.mean(basin_b_vectors, axis=0)
-
-        # 4. Compute basin axis
+        # 3. Compute basin axis in reduced space
         axis = centroid_b - centroid_a
         axis_length = float(np.linalg.norm(axis))
         if axis_length < 1e-8:
             raise HTTPException(status_code=400, detail="Basin centroids are too close — cannot compute axis projection")
         axis_norm = axis / axis_length
 
-        # 5. Load temporal session data
+        # 4. Load temporal session data
         temporal_streams = pd.read_parquet(temporal_dir / "residual_streams.parquet")
         temporal_streams = temporal_streams[
             (temporal_streams["layer"] == request.basin_layer) &
@@ -846,7 +908,7 @@ async def get_temporal_lag_data(request: TemporalLagDataRequest):
         ]
         temporal_tokens = pd.read_parquet(temporal_dir / "tokens.parquet")
 
-        # 6. Load sentence texts from temporal_runs.json (handles expanding_cache_off cumulative text)
+        # 5. Load sentence texts from temporal_runs.json
         runs_path = source_dir / "temporal_runs.json"
         sentence_texts = {}
         run_meta = {}
@@ -857,8 +919,7 @@ async def get_temporal_lag_data(request: TemporalLagDataRequest):
                     run_meta = run
                     break
 
-        # 7. Compute basin axis projection for each temporal probe
-        # Join tokens and streams on probe_id, sort by sentence_index
+        # 6. Batch-reduce all temporal vectors through the re-fitted reducer
         token_map = {}
         for _, row in temporal_tokens.iterrows():
             token_map[row["probe_id"]] = {
@@ -868,17 +929,23 @@ async def get_temporal_lag_data(request: TemporalLagDataRequest):
                 "target_word": row.get("target_word", ""),
             }
 
+        raw_vecs = np.stack([
+            np.array(row["residual_stream"], dtype=np.float32)
+            for _, row in temporal_streams.iterrows()
+        ])
+        reduced_vecs = reducer.transform(raw_vecs)
+
+        # 7. Project each reduced vector onto the basin axis
         points = []
-        for _, row in temporal_streams.iterrows():
+        for idx, (_, row) in enumerate(temporal_streams.iterrows()):
             pid = row["probe_id"]
             if pid not in token_map:
                 continue
             tinfo = token_map[pid]
-            vec = np.array(row["residual_stream"], dtype=np.float32)
+            vec = reduced_vecs[idx]
             proj = float(np.dot(vec - centroid_a, axis_norm) / axis_length)
             pos = tinfo["sentence_index"] if tinfo["sentence_index"] is not None else 0
 
-            # Use individual sentence text from run metadata if available
             sentence_text = sentence_texts.get(str(pos), tinfo["input_text"])
 
             points.append(TemporalLagPoint(

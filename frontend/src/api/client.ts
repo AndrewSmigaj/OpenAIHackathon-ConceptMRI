@@ -47,15 +47,19 @@ class ConceptMriApiClient {
     this.baseUrl = baseUrl;
   }
 
-  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestInit = {}, timeoutMs = 60000): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
     const config: RequestInit = {
       headers: {
         'Content-Type': 'application/json',
         ...options.headers,
       },
       ...options,
+      signal: controller.signal,
     };
 
     try {
@@ -81,8 +85,13 @@ class ConceptMriApiClient {
       if (error instanceof ApiError) {
         throw error;
       }
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        throw new ApiError('Request timed out — server may be busy with a capture', 0);
+      }
       // Network or other errors
       throw new ApiError(`Network error: ${error instanceof Error ? error.message : 'Unknown error'}`, 0);
+    } finally {
+      clearTimeout(timeoutId);
     }
   }
 
