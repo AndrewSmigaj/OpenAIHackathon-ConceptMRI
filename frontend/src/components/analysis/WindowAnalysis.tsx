@@ -43,22 +43,22 @@ interface ContingencyResult {
 
 function computeContingency(nodes: SankeyNode[], links: SankeyLink[]): ContingencyResult | null {
   // Find output nodes and the links feeding into them
-  const outNodes = nodes.filter(n => n.name.startsWith('Out:'))
+  const outNodes = nodes.filter(n => n.name.startsWith('Generated:'))
   if (outNodes.length < 2) return null
 
-  const outLinks = links.filter(l => l.target.startsWith('Out:'))
+  const outLinks = links.filter(l => l.target.startsWith('Generated:'))
   if (outLinks.length === 0) return null
 
   // Source nodes = unique sources of output links
   const sourceNames = [...new Set(outLinks.map(l => l.source))]
-  const outcomeLabels = outNodes.map(n => n.name.replace('Out:', ''))
+  const outcomeLabels = outNodes.map(n => n.name.replace('Generated:', ''))
 
   // Build contingency table
   const table = sourceNames.map(src => {
     const outcomes: Record<string, number> = {}
     let total = 0
     for (const label of outcomeLabels) {
-      const link = outLinks.find(l => l.source === src && l.target === `Out:${label}`)
+      const link = outLinks.find(l => l.source === src && l.target === `Generated:${label}`)
       const val = link?.value ?? 0
       outcomes[label] = val
       total += val
@@ -145,9 +145,9 @@ export default function WindowAnalysis({ routeData, windowLabel, report, selecte
       )}
 
       {/* Contingency Table */}
-      <p className="text-[10px] font-semibold text-gray-700 mb-0.5">Cluster → Output Contingency</p>
+      <p className="text-[10px] font-semibold text-gray-700 mb-0.5">Cluster → Generated Continuation Contingency</p>
       <p className="text-[9px] text-gray-400 mb-1">
-        Each row is a cluster. Columns show how many probes produced each output.
+        Each row is a geometric cluster. Columns show the category of the model's generated text continuation for each probe sentence.
         Cell color: <span className="text-blue-500">blue</span> = more than expected, <span className="text-red-400">red</span> = fewer.
       </p>
       <table className="w-full text-[10px] mb-1">

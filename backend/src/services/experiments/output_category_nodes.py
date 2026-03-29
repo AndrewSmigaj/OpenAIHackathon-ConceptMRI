@@ -108,7 +108,7 @@ def build_output_category_layer(
     # Build output nodes
     output_nodes = []
     for category, records in sorted(category_groups.items()):
-        node_name = f"Out:{category}"
+        node_name = f"Generated:{category}"
 
         label_dist: Dict[str, int] = defaultdict(int)
         tw_dist: Dict[str, int] = defaultdict(int)
@@ -165,7 +165,7 @@ def build_output_category_layer(
         final_node_totals[final_node] = len(probe_ids)
 
     for (final_node, category), records in sorted(link_groups.items()):
-        node_name = f"Out:{category}"
+        node_name = f"Generated:{category}"
         count = len(records)
         total_from_source = final_node_totals.get(final_node, 1)
 

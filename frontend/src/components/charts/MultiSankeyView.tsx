@@ -187,8 +187,8 @@ export default function MultiSankeyView({
                   </div>
                 ) : routeData ? (
                   <SankeyChart
-                    nodes={routeData.nodes.filter(n => !n.name.startsWith('Out:'))}
-                    links={routeData.links.filter(l => !l.target.startsWith('Out:'))}
+                    nodes={routeData.nodes.filter(n => !n.name.startsWith('Generated:'))}
+                    links={routeData.links.filter(l => !l.target.startsWith('Generated:'))}
                     primaryValues={primaryValues}
                     gradient={gradient}
                     secondaryValues={secondaryValues}
@@ -254,10 +254,10 @@ export default function MultiSankeyView({
           const lastWindow = currentRange.windows[currentRange.windows.length - 1]
           const lastData = routeDataMap[lastWindow?.id]
           if (!lastData) return null
-          const outputNodes = lastData.nodes.filter(n => n.name.startsWith('Out:'))
+          const outputNodes = lastData.nodes.filter(n => n.name.startsWith('Generated:'))
           if (outputNodes.length === 0) return null
           // Get final-layer nodes that link to output nodes
-          const outputLinks = lastData.links.filter(l => l.target.startsWith('Out:'))
+          const outputLinks = lastData.links.filter(l => l.target.startsWith('Generated:'))
           const sourceNames = new Set(outputLinks.map(l => l.source))
           const sourceNodes = lastData.nodes.filter(n => sourceNames.has(n.name))
           return (

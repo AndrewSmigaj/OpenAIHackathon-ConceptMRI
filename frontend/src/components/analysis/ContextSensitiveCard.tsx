@@ -62,7 +62,7 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
 
   // Examples
   const rawExamples = selectedData.tokens || selectedData.example_tokens || []
-  const isOutputNode = selectedData.name?.startsWith('Out:') || selectedData.id?.startsWith('Out:')
+  const isOutputNode = selectedData.name?.startsWith('Generated:') || selectedData.id?.startsWith('Generated:')
 
   const shuffled = (arr: any[]) => {
     const a = [...arr]

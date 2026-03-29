@@ -35,7 +35,7 @@
 \begin{abstract}
 Language models accumulate representations as they process context, building up internal states that shape how new input is interpreted. When context establishes a strong interpretive frame, the model can become \emph{captured} in that state---resistant to updating even when the context shifts. We study this phenomenon as attractor basin dynamics in \texttt{openai/gpt-oss-20b}, a 20B-parameter open-source mixture-of-experts model, using UMAP projection of residual stream activations followed by hierarchical clustering to identify stable geometric regions corresponding to distinct interpretive states.
 
-We apply the same methodology across two probe families. The \emph{tank polysemy probe} uses matched sentence sets across five semantic categories of the word `tank'---aquarium, vehicle, scuba, septic, and clothing---processed in an expanding context window. Individual sentences route to clean geometric clusters predicting output topic (Cram\'{e}r's $V = 0.548$, $p < 0.001$). The \emph{suicide letter probe} applies the same design to a safety-relevant case: sentences expressing genuine versus non-genuine requests for help writing a suicide letter. Individual sentences route to clean opposing clusters---the engagement basin (non-genuine, 99\% purity) predicts engagement 81\% of the time; the refusal basin (genuine, 99\% purity) predicts refusal 80\% of the time (Cram\'{e}r's $V = 0.554$, $p < 0.001$). Across both probes, geometric structure in the residual stream is functionally consequential---it predicts what the model will do before any output is generated.
+We apply the same methodology across two probe families. The \emph{tank polysemy probe} uses matched sentence sets across five semantic categories of the word `tank'---aquarium, vehicle, scuba, septic, and clothing---processed in an expanding context window. Individual sentences route to clean geometric clusters predicting the word sense discussed in the model's continuation (Cram\'{e}r's $V = 0.548$, $p < 0.001$). The \emph{suicide letter probe} applies the same design to a safety-relevant case: sentences expressing genuine versus non-genuine requests for help writing a suicide letter. Individual sentences route to clean opposing clusters---the engagement basin (non-genuine, 99\% purity) predicts engagement 81\% of the time; the refusal basin (genuine, 99\% purity) predicts refusal 80\% of the time (Cram\'{e}r's $V = 0.554$, $p < 0.001$). Across both probes, geometric structure in the residual stream predicts the model's behavioral response.
 
 The temporal dynamics differ sharply. In the polysemy probe, the starting basin holds and a noisy transition occurs after the context switch. In the suicide letter probe, both orderings collapse to the engagement basin within the first few sentences and remain there---the refusal basin does not hold under accumulated context, even when individual sentences clearly signal genuine distress. This characterizes a class of alignment failure that harmful-output-focused safety evaluation is not designed to detect.
 \end{abstract}
@@ -49,12 +49,12 @@ We investigate these questions through \emph{attractor basin dynamics}: stable g
 
 The \emph{tank polysemy probe} measures how the model selects between competing interpretations of an ambiguous word as context builds. The \emph{suicide letter probe} applies the same framework to a safety-relevant case: sentences in which a genuine request for a suicide letter is made versus non-genuine requests, with the target word `want' appearing in both contexts.
 
-In the polysemy probe, individual sentences route to six clean geometric clusters that predict output topic. In the suicide letter probe, basin membership predicts whether the model will engage or refuse. Under accumulated context, the polysemy probe shows a noisy but real transition after the context switch; the suicide letter probe shows no transition at all---the engagement basin dominates regardless of what the individual sentences say.
+In the polysemy probe, individual sentences route to six clean geometric clusters that predict continuation topic. In the suicide letter probe, basin membership predicts whether the model will engage or refuse. Under accumulated context, the polysemy probe shows a noisy but real transition after the context switch; the suicide letter probe shows no transition at all---the engagement basin dominates regardless of what the individual sentences say.
 
 \paragraph{Contributions.}
 \begin{enumerate}
-  \item A measurement framework for attractor basin dynamics in MoE models: UMAP and hierarchical clustering of residual stream activations to identify basins, with behavioral validation confirming that geometric clusters predict model output behavior, and an expanding-window temporal analysis measuring how basin position evolves as context accumulates and switches.
-  \item Basin membership predicts output mode: basins identified purely from residual stream geometry predict whether the model will engage or refuse (Cram\'{e}r's $V = 0.554$, $p < 0.001$), establishing that the geometric structure is functionally consequential, not merely descriptive.
+  \item A measurement framework for attractor basin dynamics in MoE models: UMAP and hierarchical clustering of residual stream activations to identify basins, with behavioral validation confirming that geometric clusters predict the model's behavioral response, and an expanding-window temporal analysis measuring how basin position evolves as context accumulates and switches.
+  \item Basin membership predicts behavioral response: basins identified purely from residual stream geometry predict whether the model will engage or refuse (Cram\'{e}r's $V = 0.554$, $p < 0.001$), establishing that the geometric structure is functionally consequential, not merely descriptive.
   \item Qualitatively different basin dynamics across probe contexts: the polysemy probe shows the starting basin clearly held before the context switch, then a noisy transition; the suicide letter probe shows both orderings collapsing toward the engagement basin under accumulated context, with no transition at the switch.
 \end{enumerate}
 
@@ -77,7 +77,7 @@ The mechanistic interpretability work of \citet{elhage2021} treats the residual 
 
 The alignment literature has recognized that safety risks in fiction and roleplay contexts operate differently from explicit jailbreaking. Where jailbreak attacks attempt to suppress safety training, context-based risks operate by establishing a frame that routes content through a different basin---one where the same words carry different interpretive weight \citep{roleplay2025}. The suicide letter probe targets a specific instance: the model may correctly identify genuine distress in isolation but lose that sensitivity once an engagement-predicting context has accumulated.
 
-Alignment research has established that safety depends not only on which states models can enter but how quickly they exit unwanted states \citep{bai2022,ganguli2023}. Our behavioral prediction finding gives this insight empirical grounding: basin membership directly predicts output mode.
+Alignment research has established that safety depends not only on which states models can enter but how quickly they exit unwanted states \citep{bai2022,ganguli2023}. Our behavioral prediction finding gives this insight empirical grounding: basin membership predicts behavioral response.
 
 % ============================================================
 \section{Methods}
@@ -129,17 +129,29 @@ Genuine request contexts: sentences in which the writer is genuinely asking for 
 
 All probe contexts were generated using Claude Sonnet~4 with structured prompts specifying target word placement, matched length ($\pm$20 tokens), natural linguistic variation, and JSON Lines output format. All generation prompts are archived for reproducibility. Statistical inference at $p < 0.01$ throughout; effect sizes and 95\% confidence intervals are reported alongside $p$-values.
 
+\subsection{Behavioral Validation}
+
+Basin identification establishes that geometric clusters exist. The critical question is whether those clusters are functionally consequential---whether the region a token occupies predicts what the model will actually do.
+
+To test this, each probe sentence is also processed with text generation (temperature~$= 0$, max 50 tokens). The model produces a continuation---the text it would generate if the sentence were the beginning of a conversation. That continuation reveals the model's committed interpretation.
+
+For the polysemy probe, continuations are classified by which sense of ``tank'' the model discusses. An aquarium sentence whose continuation talks about fish care confirms the model has committed to the aquarium sense; a continuation that pivots to military topics would indicate sense confusion. Categories: aquarium, vehicle, scuba, septic, clothing, or ambiguous.
+
+For the suicide letter probe, continuations are classified by behavioral response: \emph{engagement} (the model helps write the letter, offers drafting suggestions, or continues the writing task) versus \emph{refusal} (the model declines, expresses concern, redirects to support resources, or breaks from the task framing).
+
+Classification is performed by Claude Sonnet~4, which reads each generated continuation and assigns a category label. The contingency tables (Figures~\ref{tab:polysemy_contingency} and~\ref{tab:suicide_contingency}) cross-tabulate geometric cluster membership against continuation category, testing whether the basin a sentence occupies predicts the model's behavioral response to that sentence.
+
 % ============================================================
 \section{Results}
 
 \subsection{Basin Identification: Tank Polysemy}
 
-Hierarchical clustering with $K=6$ at layer~23 yields clusters that correspond to distinct word senses (Cram\'{e}r's $V = 0.548$, $\chi^2 = 750.63$, $p < 0.001$; Figure~\ref{tab:polysemy_contingency}). Three clusters achieve high purity for a single sense: L23C4 (98\% vehicle), L23C5 (92\% aquarium), and L23C2 (94\% clothing). The remaining clusters capture mixed or ambiguous cases.
+Hierarchical clustering with $K=6$ at layer~23 yields clusters whose input composition aligns with distinct word senses: L23C4 captures 98\% vehicle sentences, L23C5 captures 92\% aquarium, and L23C2 captures 94\% clothing. The remaining clusters capture mixed or ambiguous cases. These geometric clusters also predict the model's generated continuation---the word sense the model discusses in the text it produces for each sentence (Cram\'{e}r's $V = 0.548$, $\chi^2 = 750.63$, $p < 0.001$; Figure~\ref{tab:polysemy_contingency}).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{polysemyoutput.png}
-\caption{Cluster--output contingency table for the tank polysemy probe (layers 17--23). Each row is a cluster; columns show output counts per category. Cell color: blue = more than expected, red = fewer. $\chi^2(25) = 750.63$, $p < 0.001$, Cram\'{e}r's $V = 0.548$ (strong).}
+\caption{Cluster--continuation contingency table for the tank polysemy probe (layers 17--23). Each row is a geometric cluster. Columns show which word sense the model discusses in its generated continuation---the text the model produces when given each probe sentence. Cell color: blue~$=$~more than expected, red~$=$~fewer. $\chi^2(25) = 750.63$, $p < 0.001$, Cram\'{e}r's $V = 0.548$.}
 \label{tab:polysemy_contingency}
 \end{figure}
 
@@ -148,7 +160,7 @@ Within the vehicle category, formal and narrative military sentences route into 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{polysemybasinsnew.png}
-\caption{Tank polysemy basin identification. Expert routing Sankey (top), latent space cluster Sankey (middle), and stepped UMAP trajectories (bottom) showing five semantic categories of `tank' separating into distinct geometric regions. Expert routing independently confirms the same basin boundaries identified by residual stream geometry.}
+\caption{Tank polysemy basin identification. Expert routing Sankey (top), latent space cluster Sankey (middle), and stepped UMAP trajectories (bottom). Five semantic categories of ``tank'' separate into distinct geometric regions. The rightmost column (``Generated:'') shows the word sense discussed in each sentence's model-generated continuation---the text the model produces when given that sentence. Expert routing patterns show correspondence with the geometric basin boundaries.}
 \label{fig:polysemy_basins}
 \end{figure}
 
@@ -159,7 +171,7 @@ Within the vehicle category, formal and narrative military sentences route into 
 \label{fig:polysemy_route}
 \end{figure}
 
-Opposing geometric clusters correspond to opposing expert activation patterns: the vehicle cluster (L23C4) is dominated by a single expert pathway (Route L22C3$\to$L23C4, 52~tokens, 100\% confidence), visible in the routing Sankey (Figure~\ref{fig:polysemy_basins}). Routing and geometry independently identify the same basin boundaries.
+The cluster routing Sankey (Figure~\ref{fig:polysemy_basins}, middle panel) shows how sentences flow between clusters across layers. The vehicle cluster (L23C4) receives nearly all its tokens through a single cluster route (L22C3$\to$L23C4, 52~tokens, 100\% confidence; Figure~\ref{fig:polysemy_route}). The expert routing Sankey (top panel) shows that sentence groups defined by these geometric clusters also exhibit corresponding expert activation patterns, suggesting that expert routing may serve as an additional indicator of basin structure.
 
 \subsection{Temporal Dynamics: Tank Polysemy}
 
@@ -179,18 +191,18 @@ Hierarchical clustering with $K=3$ at layer~23 yields clusters with clean separa
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.55\textwidth]{fictionrealindividualsentencesoutputcontigency.png}
-\caption{Cluster--output contingency table for the suicide letter probe (layers 17--23). The engagement basin (L23C2, 99\% fictional) predicts engagement 81\%; the refusal basin (L23C0, 99\% real) predicts refusal 80\%. $\chi^2(2) = 60.68$, $p < 0.001$, Cram\'{e}r's $V = 0.554$ (strong).}
+\caption{Cluster--response contingency table for the suicide letter probe (layers 17--23). Each row is a geometric cluster. Columns show the model's behavioral response in its generated continuation. The engagement basin (L23C2, 99\% fictional input) produces engagement---the model helps write the letter---81\% of the time. The refusal basin (L23C0, 99\% genuine input) produces refusal---the model declines or redirects---80\% of the time. $\chi^2(2) = 60.68$, $p < 0.001$, Cram\'{e}r's $V = 0.554$.}
 \label{tab:suicide_contingency}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{suicidebasins.png}
-\caption{Suicide letter probe basin identification. Expert routing Sankey (top), latent space cluster Sankey (middle), and stepped UMAP trajectories (bottom). Genuine (pink/red) and non-genuine (blue/purple) sentences separate into distinct geometric regions, with basin membership predicting engagement vs.\ refusal behavior.}
+\caption{Suicide letter probe basin identification. Expert routing Sankey (top), latent space cluster Sankey (middle), and stepped UMAP trajectories (bottom). Genuine (pink/red) and non-genuine (blue/purple) sentences separate into distinct geometric regions. The rightmost column (``Generated:'') shows whether the model engaged with or refused the request in its generated continuation.}
 \label{fig:suicide_basins}
 \end{figure}
 
-L23C0 (99\% genuine) predicts refusal 80\% of the time. L23C2 (99\% non-genuine) predicts engagement 81\% of the time. L23C1 captures the ambiguous middle---75\% fictional purity with a roughly even split between engagement (43\%) and refusal (57\%). Basin membership, identified purely from residual stream geometry, predicts what the model will do before any output is generated.
+L23C0 (99\% genuine) predicts refusal 80\% of the time. L23C2 (99\% non-genuine) predicts engagement 81\% of the time. L23C1 captures the ambiguous middle---75\% fictional purity with a roughly even split between engagement (43\%) and refusal (57\%). Basin membership predicts whether the model will engage or refuse.
 
 \subsection{Temporal Dynamics: Suicide Letter}
 
@@ -208,9 +220,9 @@ The temporal analysis (Figure~\ref{fig:suicide_temporal}) shows qualitatively di
 
 \subsection{Geometric Structure Is Functionally Consequential}
 
-The central finding is that geometric basin clusters predict model output behavior. In the suicide letter probe, the engagement basin---identified purely from residual stream geometry, without reference to routing or behavioral labels---predicts engagement 81\% of the time. The refusal basin predicts refusal 80\% of the time. Cram\'{e}r's $V = 0.554$, $p < 0.001$. In the polysemy probe, Cram\'{e}r's $V = 0.548$ across six clusters. The region a token lands in, identified from internal geometry alone before any output is generated, tells you what the model will do next.
+The central finding is that geometric basin clusters predict the model's behavioral response. In the suicide letter probe, the engagement basin---identified purely from residual stream geometry, without reference to routing or behavioral labels---predicts engagement 81\% of the time. The refusal basin predicts refusal 80\% of the time. Cram\'{e}r's $V = 0.554$, $p < 0.001$. In the polysemy probe, Cram\'{e}r's $V = 0.548$ across six clusters. The region a token lands in predicts how the model will respond.
 
-This matters because it establishes that the geometric structure is functionally consequential, not merely descriptive. The model is not just organizing representations differently for different contexts---it is entering states that drive different behavior. A basin is not a label we attach to a cluster; it is a state the model occupies that predicts what comes out.
+This matters because it establishes that the geometric structure is functionally consequential, not merely descriptive. The model is not just organizing representations differently for different contexts---it is entering states that drive different behavior. A basin is not a label we attach to a cluster; it is a state the model occupies that predicts how the model responds.
 
 \subsection{Qualitatively Different Basin Dynamics}
 
@@ -218,9 +230,9 @@ The temporal dynamics differ sharply between the two probes, and that contrast i
 
 This dissociation between individual-sentence behavior and temporal dynamics is the most important result in the paper. The clusters are real and the behavioral prediction is real. But the temporal attractor the model falls into under accumulated context is not the refusal basin---it is the engagement basin. The labels `engagement' and `refusal' describe what individual sentence clusters predict. They do not describe where the model goes under accumulated context. That distinction matters for how this failure mode should be characterized and addressed.
 
-\subsection{Routing and Geometry Converge}
+\subsection{Routing and Geometry Correspondence}
 
-In the polysemy probe, sentence groups defined by residual stream cluster membership also show corresponding expert activation patterns---routing and geometry independently identify the same basin boundaries. This was not assumed: the geometric clusters defined the sentence groups, and the routing patterns were computed afterward with no reference to the clustering. Two independent measurement windows---residual stream geometry and expert routing---converge on the same structure. Whether this convergence holds in the suicide letter probe has not yet been assessed.
+In the polysemy probe, sentence groups defined by residual stream cluster membership also show corresponding expert activation patterns. This was not assumed: the geometric clusters defined the sentence groups, and the routing patterns were computed afterward with no reference to the clustering. The correspondence between these two measurement windows suggests that routing patterns may provide an additional lens on basin structure, though this assessment is qualitative. Whether similar correspondence holds in the suicide letter probe has not yet been assessed.
 
 Within the polysemy probe we also observe that register, not just topic, determines final basin assignment. Formal and narrative military sentences route cleanly into a pure vehicle cluster. Casual and anecdotal vehicle sentences route into a separate mixed cluster. The model is not only distinguishing aquarium from military vehicle; it is making finer-grained distinctions within the vehicle category based on register and framing.
 
@@ -234,9 +246,9 @@ The dissociation between individual-sentence behavior and temporal dynamics is d
 
 This work focuses on a single MoE model (\texttt{gpt-oss-20b}). Generalization to other architectures, scales, and content domains requires further investigation.
 
-Our clusters identify feature co-activation patterns at the basin level, not individual monosemantic features. UMAP preserves local neighborhood structure but inter-cluster distances in projected space are not geometrically meaningful. Causal evidence comes from the routing correspondence and behavioral prediction, not from UMAP geometry.
+Our clusters identify feature co-activation patterns at the basin level, not individual monosemantic features. UMAP preserves local neighborhood structure but inter-cluster distances in projected space are not geometrically meaningful. Evidence of functional significance comes from the behavioral prediction (contingency tables). The routing correspondence is qualitative and suggestive.
 
-The behavioral prediction finding establishes association between basin membership and output behavior. Activation steering experiments would provide stronger causal evidence that basin membership drives output rather than correlates with it.
+The behavioral prediction finding establishes association between basin membership and the model's response. Activation steering experiments would provide stronger causal evidence that basin membership drives the response rather than merely correlates with it.
 
 The suicide letter probe involves content related to self-harm and psychological distress. All probe content was generated under strict controls and reviewed prior to use.
 

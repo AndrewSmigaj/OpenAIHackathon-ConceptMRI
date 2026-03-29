@@ -133,8 +133,8 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
 
     // Build extended values list that includes output categories for "match input" fallback
     const outputCategories = nodes
-      .filter(n => n.name.startsWith('Out:'))
-      .map(n => n.name.replace('Out:', ''));
+      .filter(n => n.name.startsWith('Generated:'))
+      .map(n => n.name.replace('Generated:', ''));
     const extendedPrimaryValues = [...primaryValues];
     for (const cat of outputCategories) {
       if (!extendedPrimaryValues.includes(cat)) {
@@ -144,7 +144,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
 
     // Prepare node data with colors
     const sankeyNodes = nodes.map(node => {
-      const isOutputNode = node.name.startsWith('Out:');
+      const isOutputNode = node.name.startsWith('Generated:');
 
       let nodeColor: string;
       if (isOutputNode) {
@@ -155,7 +155,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
           nodeColor = getNodeColor(outputAxisDist, outputPrimaryValues, outputGradient, outputSecDist, outputSecondaryValues, outputSecondaryGradient);
         } else {
           // Fallback: match category name against input colors (extended to include output-only categories)
-          const category = node.name.replace('Out:', '');
+          const category = node.name.replace('Generated:', '');
           nodeColor = rgbToHex(getAxisColor(category, extendedPrimaryValues, gradient));
         }
       } else {
@@ -183,7 +183,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     const sankeyLinks = links.map(link => {
       const primaryDist = link.label_distribution || {};
       const secondaryDist = getDistForAxis(link, secondaryAxisId);
-      const isOutputLink = link.target.startsWith('Out:');
+      const isOutputLink = link.target.startsWith('Generated:');
 
       let linkColor: string;
       if (isOutputLink && outputColorAxisId && outputPrimaryValues && outputPrimaryValues.length > 0) {
@@ -227,11 +227,11 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
             if (!node) return '';
 
             // Output node tooltip
-            if (node.name.startsWith('Out:')) {
-              const category = node.name.replace('Out:', '');
+            if (node.name.startsWith('Generated:')) {
+              const category = node.name.replace('Generated:', '');
               return `
                 <div style="max-width: 300px;">
-                  <strong>Output: ${category}</strong><br/>
+                  <strong>Generated: ${category}</strong><br/>
                   <hr style="margin: 4px 0;"/>
                   Probes: ${node.token_count}<br/>
                   Labels: ${node.label_distribution ? Object.entries(node.label_distribution).map(([k, v]) => `${k}: ${v}`).join(', ') : 'N/A'}
