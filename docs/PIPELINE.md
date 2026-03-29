@@ -21,11 +21,11 @@ Run these checks to determine the current stage for a given experiment:
 2. Check session state field
    → If not 'completed' → Stage 2 (still capturing)
 
-3. GET /api/probes/sessions/{id}/generated-outputs
+3. GET /api/probes/sessions/{session_id}/generated-outputs
    → Check output_category field on first few entries
    → If null/empty → Stage 3 (categorize outputs)
 
-4. GET /api/probes/sessions/{id}/clusterings
+4. GET /api/probes/sessions/{session_id}/clusterings
    → If empty → USER GATE (clustering exploration)
 
 5. For each schema: check if reports exist
@@ -187,7 +187,7 @@ curl -X POST http://localhost:8000/api/experiments/analyze-routes \
 
 Repeat for each window the user wants analyzed.
 
-**Completion**: Schema appears in `GET /api/probes/sessions/{id}/clusterings`.
+**Completion**: Schema appears in `GET /api/probes/sessions/{session_id}/clusterings`.
 
 ---
 
@@ -274,7 +274,7 @@ Read ALL sentences in the route and identify: structural patterns, semantic them
 ### Step 5.5: Save Reports
 
 ```bash
-curl -X POST http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema}/reports/w_{start}_{end} \
+curl -X POST http://localhost:8000/api/probes/sessions/{session_id}/clusterings/{schema}/reports/w_{start}_{end} \
   -H "Content-Type: application/json" \
   -d '{"report": "# Window L{start}-L{end} Analysis\n\n..."}'
 ```
@@ -296,12 +296,12 @@ See ANALYSIS.md for the full report template and methodology.
 
 List available schemas and their reports:
 ```bash
-curl http://localhost:8000/api/probes/sessions/{id}/clusterings
+curl http://localhost:8000/api/probes/sessions/{session_id}/clusterings
 ```
 
 For each schema, load full details including reports:
 ```bash
-curl http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema_name}
+curl http://localhost:8000/api/probes/sessions/{session_id}/clusterings/{schema_name}
 ```
 
 Present summary to user. User selects which reports to review in detail.

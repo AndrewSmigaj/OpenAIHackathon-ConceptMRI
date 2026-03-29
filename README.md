@@ -100,7 +100,7 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 
 ### Prerequisites
 
-- CUDA GPU with 16GB+ VRAM (developed on RTX 5070 Ti)
+- CUDA GPU with 16GB+ VRAM
 - Python 3.11+, Node.js 18+
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview)
 - ~40GB disk space for model weights
@@ -108,30 +108,32 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 ### Setup
 
 ```bash
-git clone https://github.com/AndrewSmigaj/OpenAIHackathon-ConceptMRI.git
-cd OpenAIHackathon-ConceptMRI
+git clone https://github.com/AndrewSmigaj/OpenLLMRI.git
+cd OpenLLMRI
 
 python3 -m venv .venv
 .venv/bin/pip install -r backend/requirements.txt
 cd frontend && npm install && cd ..
 ```
 
-### Download the model
-
-```bash
-.venv/bin/pip install huggingface_hub[cli]
-huggingface-cli download openai/gpt-oss-20b --local-dir data/models/gpt-oss-20b
-```
-
 ### Run
 
 ```bash
-claude   # Open Claude Code in the project root, then: /server start
+claude   # Open Claude Code in the project root
 ```
 
-Or manually:
+Then tell Claude: "Download the model and start the servers." Claude handles the model download, server startup, and waits for the model to load (~2 minutes). Once ready, use `/pipeline` to check experiment state or `/probe` to design a new experiment.
+
+See [`docs/PIPELINE.md`](docs/PIPELINE.md) for the full analysis pipeline and API endpoints.
+
+### Manual setup (without Claude Code)
+
 ```bash
-# Terminal 1: Backend
+# Download model
+.venv/bin/pip install huggingface_hub[cli]
+huggingface-cli download openai/gpt-oss-20b --local-dir data/models/gpt-oss-20b
+
+# Terminal 1: Backend (model takes ~2 min to load; check /health for readiness)
 cd backend/src && ../../.venv/bin/python -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 
 # Terminal 2: Frontend

@@ -4,8 +4,8 @@ Probes are captured model activations for individual sentences. Each probe recor
 
 ## Prerequisites
 
-- Backend server running (`cd backend && .venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port 8000`)
-- Model loaded in GPU memory (happens automatically on first probe capture, takes ~30s)
+- Backend server running (use `/server start` or see `.claude/skills/server/SKILL.md`)
+- Model loaded (`model_loaded: true` in `/health` response — takes ~2 min on first start)
 
 ## Creating Probes from a Sentence Set
 
@@ -60,12 +60,12 @@ Each session creates a directory in `data/lake/{session_id}/` containing:
 
 ### List all sessions
 ```bash
-curl http://localhost:8000/api/probes/sessions
+curl http://localhost:8000/api/probes
 ```
 
 ### Check session details
 ```bash
-curl http://localhost:8000/api/probes/sessions/{session_id}
+curl http://localhost:8000/api/probes/{session_id}
 ```
 
 ### Verify Parquet files
