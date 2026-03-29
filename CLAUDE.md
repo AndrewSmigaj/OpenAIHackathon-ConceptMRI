@@ -40,6 +40,17 @@ On first server start, detect the platform to apply the right operational proced
 
 All platforms: use `http://localhost:8000` for API URLs. Backend binds to `0.0.0.0` (the `--host` flag in uvicorn).
 
+## First-Time Setup
+
+If `.venv` does not exist, the project needs initial setup:
+
+1. `python3 -m venv .venv`
+2. `.venv/bin/pip install -r backend/requirements.txt`
+3. `cd frontend && npm install`
+4. Download model: `.venv/bin/pip install huggingface_hub[cli] && huggingface-cli download openai/gpt-oss-20b --local-dir data/models/gpt-oss-20b`
+
+After setup, use `/server` to start the backend and frontend.
+
 ## Context Engineering Rules
 
 ### 1. Architecture-First Development

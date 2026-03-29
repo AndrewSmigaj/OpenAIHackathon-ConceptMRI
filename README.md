@@ -105,31 +105,29 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview)
 - ~40GB disk space for model weights
 
-### Setup
+### Setup and Run
 
 ```bash
 git clone https://github.com/AndrewSmigaj/OpenLLMRI.git
 cd OpenLLMRI
-
-python3 -m venv .venv
-.venv/bin/pip install -r backend/requirements.txt
-cd frontend && npm install && cd ..
+claude
 ```
 
-### Run
+Then: "Set up the project and start the servers."
 
-```bash
-claude   # Open Claude Code in the project root
-```
-
-Then tell Claude: "Download the model and start the servers." Claude handles the model download, server startup, and waits for the model to load (~2 minutes). Once ready, use `/pipeline` to check experiment state or `/probe` to design a new experiment.
+Claude creates the virtual environment, installs dependencies, downloads the model (~40GB), and starts the servers. Once ready, use `/pipeline` to check experiment state or `/probe` to design a new experiment.
 
 See [`docs/PIPELINE.md`](docs/PIPELINE.md) for the full analysis pipeline and API endpoints.
 
 ### Manual setup (without Claude Code)
 
 ```bash
-# Download model
+# Create virtual environment and install dependencies
+python3 -m venv .venv
+.venv/bin/pip install -r backend/requirements.txt
+cd frontend && npm install && cd ..
+
+# Download model (~40GB)
 .venv/bin/pip install huggingface_hub[cli]
 huggingface-cli download openai/gpt-oss-20b --local-dir data/models/gpt-oss-20b
 
