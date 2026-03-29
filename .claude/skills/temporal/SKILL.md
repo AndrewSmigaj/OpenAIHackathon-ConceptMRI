@@ -11,9 +11,9 @@ Run temporal capture experiments that measure how MoE routing basins persist or 
 
 | Constant | Value |
 |----------|-------|
-| Capture endpoint | `POST http://172.17.0.1:8000/api/experiments/temporal-capture` |
-| List runs | `GET http://172.17.0.1:8000/api/experiments/temporal-runs/{session_id}` |
-| Lag data | `POST http://172.17.0.1:8000/api/experiments/temporal-lag-data` |
+| Capture endpoint | `POST http://localhost:8000/api/experiments/temporal-capture` |
+| List runs | `GET http://localhost:8000/api/experiments/temporal-runs/{session_id}` |
+| Lag data | `POST http://localhost:8000/api/experiments/temporal-lag-data` |
 | Python | `/mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python` |
 | Lake path | `/mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/data/lake` |
 
@@ -77,7 +77,7 @@ Run N captures sequentially with the same parameters. Each run randomly samples 
 PY=/mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python
 for i in $(seq 1 {N}); do
   echo "=== {label} run $i/{N} ==="
-  curl -s -X POST http://172.17.0.1:8000/api/experiments/temporal-capture \
+  curl -s -X POST http://localhost:8000/api/experiments/temporal-capture \
     -H "Content-Type: application/json" \
     -d '{
       "session_id": "{session_id}",
@@ -143,7 +143,7 @@ for i, run in enumerate(todo):
   while read -r PAYLOAD; do
     N=\$((N + 1))
     echo "=== cache_off \$N/\$TOTAL ==="
-    echo "\$PAYLOAD" | curl -s -X POST http://172.17.0.1:8000/api/experiments/temporal-capture \
+    echo "\$PAYLOAD" | curl -s -X POST http://localhost:8000/api/experiments/temporal-capture \
       -H "Content-Type: application/json" -d @- | $PY -c "
 import json, sys
 d = json.load(sys.stdin)
@@ -228,6 +228,33 @@ To add N more runs to an existing condition:
 Cache_on and cache_off must process the **same sentences** in the **same order** for ΔPersistence to be valid. Without pairing, differences could be due to different sentence content rather than cache effects.
 
 OP-1 (cache_on) randomly samples sentences and stores them in `temporal_runs.json` → `sentence_texts`. OP-2 reads those sentences and passes them back as `custom_sentences` for the cache_off run. The `custom_regime_boundary` parameter ensures the regime split is at the correct position (e.g., 20).
+
+---
+
+## Interpreting Results
+
+### Basin Axis Projection
+
+Each temporal position gets a scalar value: 0.0 = at basin A centroid, 1.0 = at basin B centroid. Computed as Fisher's Linear Discriminant on raw residual stream vectors (no reducer needed, ~0.03s for 400 probes).
+
+### Lag Chart
+
+- **X-axis:** sequence position (1 to 2N)
+- **Y-axis:** basin axis projection (0.0 = basin A, 1.0 = basin B)
+- **Vertical dashed line** at regime boundary (position N)
+- **Thin lines** = individual runs, **bold dashed** = mean, **shaded** = confidence band
+
+### Key Metrics
+
+- **Routing lag**: first position after boundary where projection crosses 0.5 and stays crossed for 3+ consecutive positions
+- **ΔPersistence**: lag(cache_on) − lag(cache_off). If > 0, the KV cache creates extra routing persistence beyond what the text context alone produces.
+- **Basin separation**: L2 distance between centroids (measures how separable the basins are)
+
+### Verification Checks
+
+- All projection values should be in roughly [−0.2, 1.2] range (slight overshoot is normal)
+- Run counts should match expected (40 for full experiment: 10 reps × 2 orderings × 2 cache conditions)
+- Cache_on and cache_off runs should be paired (same sentences, same order) — this is why OP-2 exists
 
 ---
 

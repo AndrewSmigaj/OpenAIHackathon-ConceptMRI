@@ -13,12 +13,32 @@ Claude Code uses these guides to execute the full pipeline:
 | `docs/PIPELINE.md` | Full analysis pipeline — orchestration runbook for Claude Code |
 | `docs/PROBES.md` | How to create and run probes via API |
 | `data/sentence_sets/GUIDE.md` | How to design and write sentence set JSON files |
-| `docs/SERVERS.md` | Server operations protocol |
-| `docs/ANALYSIS.md` | How to analyze cluster/route data, categorize outputs, write reports |
+| `docs/ANALYSIS.md` | Analysis methodology reference (cluster/route data, reports) |
+
+**Skills** (`.claude/skills/`) are the authoritative operational procedures. Each skill has self-contained, copy-paste-ready commands. Docs provide background and reference. When they conflict, skills win.
+
+| Skill | Purpose |
+|-------|---------|
+| `/server` | Start, stop, check status of backend and frontend |
+| `/probe` | Co-design a new experiment |
+| `/categorize` | Classify model-generated outputs |
+| `/analyze` | Read cluster/route data, write reports and element descriptions |
+| `/temporal` | Run temporal basin capture experiments |
+| `/pipeline` | Check pipeline state, suggest next step |
 
 ## Environment Rules
 
 - **ALWAYS use the project virtual environment** — run Python with `.venv/bin/python` (or activate with `source .venv/bin/activate`). Never use system `python` or `python3` directly. Never install packages globally.
+
+## Environment Detection
+
+On first server start, detect the platform to apply the right operational procedures:
+
+- **WSL2**: paths start with `/mnt/c/`, `uname -r` contains "microsoft". inotify unreliable on NTFS mounts — new endpoints may need full restart. Use `fuser` not `pkill` for port management.
+- **macOS**: `uname` returns "Darwin". Standard `lsof -i :PORT` for port management.
+- **Linux**: `uname` returns "Linux" without "microsoft". Standard behavior.
+
+All platforms: use `http://localhost:8000` for API URLs. Backend binds to `0.0.0.0` (the `--host` flag in uvicorn).
 
 ## Context Engineering Rules
 

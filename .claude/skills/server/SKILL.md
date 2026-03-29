@@ -55,6 +55,8 @@ cd /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/backend/src && /mnt/c/Users/emi
 
 Run with `run_in_background: true`.
 
+**WSL2 note:** On WSL2 with `/mnt/c/` NTFS filesystem, inotify is unreliable. Existing endpoint edits usually reload fine, but **new endpoints/routes may not be detected**. If a new endpoint returns 404, do a full restart (OP-2 + OP-3). See TROUBLESHOOTING.md.
+
 ### OP-4: Wait for Model
 
 **Run AFTER OP-3.** Must use `run_in_background: true` — takes ~2-3 minutes.

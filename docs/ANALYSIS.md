@@ -1,5 +1,7 @@
 # Analysis Guide — Claude Code Cluster & Route Analysis
 
+**Primary workflow:** The `/analyze` skill (`.claude/skills/analyze/SKILL.md`) is the operational procedure. This document provides reference detail on methodology, data structures, and report formats.
+
 This guide teaches Claude Code how to analyze cluster/route data from Concept MRI sessions and write reports.
 
 ## Prerequisites
@@ -249,6 +251,16 @@ Both types go in the same `descriptions` dict:
 ### When to write descriptions
 
 Write element descriptions during Stage 5 analysis, after examining each cluster's `label_distribution`, `tokens`, and `category_distributions`. Each description should capture the semantic theme of the cluster in 5-15 words.
+
+### Fallback: Direct disk write
+
+If the API endpoint returns 404 (WSL2 reload issue — see `.claude/skills/server/TROUBLESHOOTING.md`), write directly to disk:
+
+```
+data/lake/{session_id}/clusterings/{schema}/element_descriptions.json
+```
+
+This is a flat JSON dict of `{descKey: description}`. Merge with existing content if the file already exists.
 
 ## Default Parameters
 

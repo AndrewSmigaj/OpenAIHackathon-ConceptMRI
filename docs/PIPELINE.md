@@ -62,14 +62,14 @@ See `data/sentence_sets/GUIDE.md` for quality rules and schema format.
 **Prerequisites**: Backend server running (see SERVERS.md)
 
 ```bash
-curl -X POST http://0.0.0.0:8000/api/probes/sentence-experiment \
+curl -X POST http://localhost:8000/api/probes/sentence-experiment \
   -H "Content-Type: application/json" \
   -d '{"sentence_set_name": "EXPERIMENT_NAME"}'
 ```
 
 Returns `session_id`. Monitor progress:
 ```bash
-curl http://0.0.0.0:8000/api/probes/{session_id}/status
+curl http://localhost:8000/api/probes/{session_id}/status
 ```
 
 **Timing**: ~0.5s per sentence. First run adds ~30-60s for model loading.
@@ -83,7 +83,7 @@ curl http://0.0.0.0:8000/api/probes/{session_id}/status
 
 ### Step 1: Read generated outputs
 ```bash
-curl http://0.0.0.0:8000/api/probes/sessions/{session_id}/generated-outputs
+curl http://localhost:8000/api/probes/sessions/{session_id}/generated-outputs
 ```
 Returns list of `{probe_id, input_text, label, generated_text, output_category}`.
 
@@ -97,7 +97,7 @@ For each `generated_text`, determine:
 
 ### Step 4: POST categories
 ```bash
-curl -X POST http://0.0.0.0:8000/api/probes/sessions/{session_id}/output-categories \
+curl -X POST http://localhost:8000/api/probes/sessions/{session_id}/output-categories \
   -H "Content-Type: application/json" \
   -d '{
     "probe_id_1": {
@@ -137,7 +137,7 @@ User provides a schema name and clustering config. Save it:
 
 ```bash
 # Cluster routes — first call uses save_as to create/register the schema
-curl -X POST http://0.0.0.0:8000/api/experiments/analyze-cluster-routes \
+curl -X POST http://localhost:8000/api/experiments/analyze-cluster-routes \
   -H "Content-Type: application/json" \
   -d '{
     "session_id": "...",
@@ -155,7 +155,7 @@ curl -X POST http://0.0.0.0:8000/api/experiments/analyze-cluster-routes \
 
 # Subsequent calls on the same schema use clustering_schema to load saved params
 # Add output_grouping_axes to include output category nodes in the Sankey
-curl -X POST http://0.0.0.0:8000/api/experiments/analyze-cluster-routes \
+curl -X POST http://localhost:8000/api/experiments/analyze-cluster-routes \
   -H "Content-Type: application/json" \
   -d '{
     "session_id": "...",
@@ -166,7 +166,7 @@ curl -X POST http://0.0.0.0:8000/api/experiments/analyze-cluster-routes \
   }'
 
 # Expert routes (same window)
-curl -X POST http://0.0.0.0:8000/api/experiments/analyze-routes \
+curl -X POST http://localhost:8000/api/experiments/analyze-routes \
   -H "Content-Type: application/json" \
   -d '{
     "session_id": "...",
@@ -201,7 +201,7 @@ This is the LLM reasoning stage — Claude reads actual sentences, distributions
 
 ```bash
 # Load schema metadata
-curl http://0.0.0.0:8000/api/probes/sessions/{session_id}/clusterings/{schema_name}
+curl http://localhost:8000/api/probes/sessions/{session_id}/clusterings/{schema_name}
 
 # Read probe guide for experiment-specific analysis focus
 # glob data/sentence_sets/**/{sentence_set_name}.md
@@ -213,7 +213,7 @@ Start from **last-layer windows** (where routing decisions finalize before outpu
 
 For each window, load cached cluster data:
 ```bash
-curl -X POST http://0.0.0.0:8000/api/experiments/analyze-cluster-routes \
+curl -X POST http://localhost:8000/api/experiments/analyze-cluster-routes \
   -H "Content-Type: application/json" \
   -d '{
     "session_id": "...",
@@ -245,7 +245,7 @@ Claude examines the response JSON and writes analysis:
 
 For routes showing confusion, divergence, or high purity:
 ```bash
-curl "http://0.0.0.0:8000/api/experiments/route-details?session_id=...&signature=L22C3→L23C1&window_layers=22,23"
+curl "http://localhost:8000/api/experiments/route-details?session_id=...&signature=L22C3→L23C1&window_layers=22,23"
 ```
 
 Read ALL sentences in the route and identify: structural patterns, semantic themes, why misclassified sentences confuse the model.
@@ -274,7 +274,7 @@ Read ALL sentences in the route and identify: structural patterns, semantic them
 ### Step 5.5: Save Reports
 
 ```bash
-curl -X POST http://0.0.0.0:8000/api/probes/sessions/{id}/clusterings/{schema}/reports/w_{start}_{end} \
+curl -X POST http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema}/reports/w_{start}_{end} \
   -H "Content-Type: application/json" \
   -d '{"report": "# Window L{start}-L{end} Analysis\n\n..."}'
 ```
@@ -296,12 +296,12 @@ See ANALYSIS.md for the full report template and methodology.
 
 List available schemas and their reports:
 ```bash
-curl http://0.0.0.0:8000/api/probes/sessions/{id}/clusterings
+curl http://localhost:8000/api/probes/sessions/{id}/clusterings
 ```
 
 For each schema, load full details including reports:
 ```bash
-curl http://0.0.0.0:8000/api/probes/sessions/{id}/clusterings/{schema_name}
+curl http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema_name}
 ```
 
 Present summary to user. User selects which reports to review in detail.
