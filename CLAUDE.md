@@ -1,7 +1,7 @@
-# Concept MRI - Claude Code Context Engineering Guide
+# Concept MRI — Claude Code Context Engineering Guide
 
 ## Project Context
-This is a 7-day OpenAI Hackathon project implementing **Concept MRI** - a tool that applies Concept Trajectory Analysis (CTA) to analyze MoE (Mixture of Experts) models. We're building both backend (Python FastAPI) and frontend (React) components.
+Independent research tool for studying attractor basin dynamics in MoE language models. Uses UMAP projection and hierarchical clustering of residual stream activations to identify stable geometric regions — attractor basins — that predict model behavior before output is generated. Backend (Python FastAPI) captures and analyzes; frontend (React) visualizes. Claude Code is the analysis runtime — it designs probes, runs captures, labels outputs, and generates hypotheses.
 
 ## Guides Index
 
@@ -43,27 +43,26 @@ All platforms: use `http://localhost:8000` for API URLs. Backend binds to `0.0.0
 ## Context Engineering Rules
 
 ### 1. Architecture-First Development
-- **Reference `docs/research/architecture.yaml`** for original architecture design (note: may be stale — trust current code over YAML)
 - Follow the file paths and service organization established in the codebase
-- Respect the probe/experiment separation - no mixing of concerns
+- Respect the probe/experiment separation — no mixing of concerns
 
 ### 2. Implementation Strategy
-- **Start with schemas and contracts** - implement data structures first
-- **Build services incrementally** - capture → highways → cohorts → clustering → CTA
-- **Test contracts immediately** - verify Parquet writes, API responses, manifest generation
-- **Logging is non-negotiable** - use structured JSON logging for debugging
+- **Start with schemas and contracts** — implement data structures first
+- **Build services incrementally** — probe → capture → categorize → schema → analyze → temporal
+- **Test contracts immediately** — verify Parquet writes, API responses, manifest generation
+- **Logging is non-negotiable** — use structured JSON logging for debugging
 
 ### 3. Context Management for Complex Tasks
 - **Break down large services** into single-responsibility functions
 - **Use parallel tool execution** for independent operations (multiple API calls, file operations)
 - **Provide concrete examples** in docstrings and comments for complex algorithms
-- **Reference the original CTA research paper** for mathematical implementations
+- **Reference `paper/main.tex`** for methodology details (basin identification, temporal analysis, behavioral validation)
 
 ### 4. MoE-Specific Requirements
-- Target model: **ossb20b only** - don't abstract for multiple models yet
-- Routing: **K=1 (top-1) expert selection only** 
-- Features: **PCA128 dimensionality reduction** per layer
-- Constraints: **Two token inputs, several thousand words max**
+- Target model: **gpt-oss-20b only** — don't abstract for multiple models yet
+- Routing: **K=1 (top-1) expert selection only**
+- Dimensionality reduction: **UMAP 6D** for clustering, applied to residual stream activations
+- Temporal captures process sequences of up to 40 sentences with expanding context windows
 
 ### 5. Error Handling Philosophy
 - **Graceful degradation** - skip failed clusters, continue processing
@@ -71,10 +70,11 @@ All platforms: use `http://localhost:8000` for API URLs. Backend binds to `0.0.0
 - **User-friendly errors** - API responses should explain what went wrong
 - **Memory-aware** - handle GPU OOM with micro-batch backoff
 
-### 6. Data Flow Clarity
+### 6. Data Flow
 ```
-PROBE FLOW: contexts → MoE capture → Parquet lake (reusable)
-EXPERIMENT FLOW: word lists → highway selection → cohort → clustering/CTA → LLM labeling
+PROBE FLOW: sentence set → capture (forward pass + hooks) → Parquet lake (reusable)
+ANALYSIS FLOW: Parquet → UMAP 6D → hierarchical clustering → behavioral validation → reports
+TEMPORAL FLOW: expanding context window → basin axis projection → lag measurement
 ```
 
 ### 7. File Contracts
@@ -84,22 +84,20 @@ EXPERIMENT FLOW: word lists → highway selection → cohort → clustering/CTA 
 - **Deterministic**: Same inputs → same outputs (seed=1 default)
 
 ### 8. Frontend Integration
-- **API-first design** - frontend consumes clean REST endpoints
-- **State management** - React components reflect backend state accurately  
-- **Visualization priority** - Sankey charts (ECharts) are the primary UX
-- **Demo scenarios** - build for the three hackathon demo workflows
+- **API-first design** — frontend consumes clean REST endpoints
+- **State management** — React components reflect backend state accurately
+- **Visualization priority** — Sankey charts (ECharts), stepped UMAP trajectories, and temporal lag charts are the primary UX
 
-### 9. LLM Integration Guidelines
-- **User-supplied API keys** - no hardcoded credentials
-- **Rate limiting** - handle API limits gracefully
-- **Dual labeling** - LLMs generate BOTH cluster names AND archetypal path narratives
-- **Provenance tracking** - record which LLM generated which labels
+### 9. Claude Code as Runtime
+- Claude Code is the analysis runtime — it designs probes, runs analysis, labels outputs, and generates hypotheses
+- No separate LLM API keys needed — Claude Code does the reasoning directly
+- Skills (`.claude/skills/`) define the operational procedures for each pipeline stage
+- The human steers; Claude executes and reasons
 
 ### 10. Development Workflow
-- **Plan mode first** - use Claude's plan mode for complex implementations
-- **Incremental builds** - get basic functionality working before adding features
-- **Test early** - verify data contracts as soon as possible
-- **Update architecture.yaml** - keep status current as you implement
+- **Plan mode first** — use Claude's plan mode for complex implementations
+- **Incremental builds** — get basic functionality working before adding features
+- **Test early** — verify data contracts as soon as possible
 
 ### 11. CRITICAL: Change Management Rules
 - **NO aggressive bulk changes** - make small, targeted edits only
@@ -108,20 +106,15 @@ EXPERIMENT FLOW: word lists → highway selection → cohort → clustering/CTA 
 - **Explain changes clearly** - before making edits, explain what will change and why
 - **User must approve** - for any architectural or design changes, get explicit approval
 
+### 12. Certainty Protocol
+- **Never jump straight to implementation** — even in auto mode, any task that is not a direct continuation of a previously approved plan requires at minimum a certainty assessment before writing code or making changes.
+- **Certainty assessment**: Before implementation, state what you plan to do, which files you'll modify, and your confidence level (high/medium/low) for each change. If any change is medium or below, explain why and what you'd need to verify.
+- **New work needs a plan** — if the task involves more than a single targeted edit, write a plan and get approval before proceeding. Modifying scaffolding, architecture, or multi-file changes always require a plan.
+- **Plans expire on scope change** — if you discover the task is different from what the plan covers, stop and re-plan rather than stretching the existing plan to fit.
+
 ## Key Technical Decisions
 - **Backend**: Python 3.11, FastAPI, transformers, bitsandbytes (NF4)
-- **Storage**: Parquet + DuckDB (local for MVP)  
+- **Storage**: Parquet files in `data/lake/` — one directory per session
 - **Frontend**: React + Vite + TypeScript + Tailwind + ECharts
-- **Visualization**: Sankey diagrams for both Expert and Latent highways
-- **Window Strategy**: First window auto-selection only (MVP constraint)
-
-## Hackathon Scope Reminders
-- **Console logging only** - no file rotation or complex log management
-- **Essential features first** - defer nice-to-haves until core demos work
-- **User supplies LLM keys** - don't worry about cost optimization
-- **Simple deployment** - local development environment sufficient
-
-## Architecture Status Tracking
-Monitor implementation progress by checking component statuses in architecture.yaml. Update as you complete tasks to maintain accurate project state.
-
-Remember: This is context engineering, not prompt engineering. Provide Claude with complete context about data structures, algorithms, and system architecture so implementations are consistent and correct.
+- **Visualization**: Sankey diagrams (expert routing + latent space clusters), stepped UMAP trajectories, temporal lag charts
+- **Model**: gpt-oss-20b, NF4 quantized, ~15GB VRAM
