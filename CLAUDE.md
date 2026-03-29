@@ -129,3 +129,6 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - **Frontend**: React + Vite + TypeScript + Tailwind + ECharts
 - **Visualization**: Sankey diagrams (expert routing + latent space clusters), stepped UMAP trajectories, temporal lag charts
 - **Model**: gpt-oss-20b, NF4 quantized, ~15GB VRAM
+
+## Compact Instructions
+When compacting, always preserve: active session IDs, schema names, the WSL2 environment rules (fuser not pkill, .venv paths), and any in-progress pipeline stage.

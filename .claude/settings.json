@@ -1,0 +1,50 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(curl:*)",
+      "Bash(fuser:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite:*)",
+      "Bash(ps aux:*)",
+      "Bash(wc:*)",
+      "Bash(.venv/bin/python:*)",
+      "Bash(.venv/bin/pip:*)",
+      "WebSearch"
+    ],
+    "deny": [
+      "Bash(pkill:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); if ! echo \"$INPUT\" | grep -q '\"python3 '; then exit 0; fi; if echo \"$INPUT\" | grep -q 'python3 -m venv'; then exit 0; fi; echo 'Use .venv/bin/python, not bare python3.' >&2; exit 2"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'REMINDER: WSL2 environment. Use fuser -k (not pkill). Use .venv/bin/python (not python3). Temporal captures always need generate_output: false. Skills are authoritative over docs.'"
+          }
+        ]
+      }
+    ]
+  }
+}
