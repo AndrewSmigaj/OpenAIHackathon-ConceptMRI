@@ -4,6 +4,7 @@ FastAPI server for Concept MRI - MoE interpretability through Concept Trajectory
 """
 
 from contextlib import asynccontextmanager
+import logging
 import time
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,13 +12,15 @@ import torch
 from api.routers import probes, experiments, generation, prompts
 from api.dependencies import initialize_capture_service, is_model_loaded, get_loading_status
 
+logger = logging.getLogger(__name__)
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("🚀 Starting Concept MRI API...")
+    logger.info("Starting Concept MRI API")
     await initialize_capture_service()  # starts background thread, returns immediately
-    print("API serving — model loading in background")
+    logger.info("API serving — model loading in background")
     yield
-    print("🛑 Shutting down Concept MRI API")
+    logger.info("Shutting down Concept MRI API")
 
 # Create FastAPI app
 app = FastAPI(title="Concept MRI API", version="1.0", lifespan=lifespan)

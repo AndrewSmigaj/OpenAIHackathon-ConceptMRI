@@ -3,11 +3,14 @@
 Simple dependency injection for shared services.
 """
 
+import logging
 import sys
 import threading
 import time
 from pathlib import Path
 import torch
+
+logger = logging.getLogger(__name__)
 
 # Add backend to path
 backend_src = Path(__file__).parent.parent  # backend/src
@@ -40,7 +43,7 @@ def _load_model_sync():
 
     _loading_start_time = time.time()
     _loading_stage = "initializing"
-    print("Initializing capture service...")
+    logger.info("Initializing capture service")
 
     try:
         adapter = get_adapter("gpt-oss-20b")
@@ -51,7 +54,7 @@ def _load_model_sync():
             raise FileNotFoundError(f"Model not found at: {model_path}")
 
         _loading_stage = "loading_model"
-        print(f"Loading model from: {model_path} (adapter: {adapter.topology.model_name})")
+        logger.info("Loading model from: %s (adapter: %s)", model_path, adapter.topology.model_name)
         model, tokenizer = adapter.load_model(str(model_path))
 
         _loading_stage = "creating_service"
@@ -65,14 +68,14 @@ def _load_model_sync():
 
         elapsed = time.time() - _loading_start_time
         _loading_stage = "ready"
-        print(f"✅ Model loaded successfully in {elapsed:.0f}s — capture service ready")
+        logger.info("Model loaded successfully in %.0fs — capture service ready", elapsed)
 
     except Exception as e:
         elapsed = time.time() - _loading_start_time
         _loading_stage = "failed"
         _loading_error = str(e)
-        print(f"❌ Model loading failed after {elapsed:.0f}s: {e}")
-        print("API running in limited mode (analysis endpoints work, probe capture won't)")
+        logger.error("Model loading failed after %.0fs: %s", elapsed, e)
+        logger.warning("API running in limited mode (analysis endpoints work, probe capture won't)")
 
 
 async def initialize_capture_service():
