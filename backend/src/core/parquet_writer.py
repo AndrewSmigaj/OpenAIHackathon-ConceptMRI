@@ -11,7 +11,11 @@ import pyarrow.parquet as pq
 import numpy as np
 from dataclasses import asdict
 
+import logging
+
 from utils.parquet_utils import serialize_array_for_parquet
+
+logger = logging.getLogger(__name__)
 
 
 class BatchWriter:
@@ -86,7 +90,7 @@ class BatchWriter:
             
         except Exception as e:
             # Log error but don't crash - just keep records for retry
-            print(f"Failed to write batch to {self.file_path}: {e}")
+            logger.error("Failed to write batch to %s: %s", self.file_path, e)
             raise
     
     def __enter__(self):

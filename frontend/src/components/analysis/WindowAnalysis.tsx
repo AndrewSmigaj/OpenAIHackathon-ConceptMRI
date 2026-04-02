@@ -2,20 +2,7 @@
 import jStat from 'jStat'
 import ReactMarkdown from 'react-markdown'
 import { getAxisColor, rgbToHex, type GradientScheme } from '../../utils/colorBlending'
-
-interface SankeyNode {
-  name: string
-  id: string
-  layer: number
-  token_count: number
-  label_distribution?: Record<string, number>
-}
-
-interface SankeyLink {
-  source: string
-  target: string
-  value: number
-}
+import type { SankeyNode, SankeyLink } from '../../types/api'
 
 interface WindowAnalysisProps {
   routeData: {

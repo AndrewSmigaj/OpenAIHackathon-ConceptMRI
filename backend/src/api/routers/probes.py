@@ -101,7 +101,8 @@ async def list_probe_sessions(
                         labels=metadata.get("labels"),
                         state=metadata["state"]
                     ))
-                except Exception:
+                except Exception as e:
+                    logger.warning("Skipping session %s: %s", metadata.get("session_id", session_file.stem), e)
                     continue
 
         return sorted(sessions, key=lambda x: x.created_at, reverse=True)
