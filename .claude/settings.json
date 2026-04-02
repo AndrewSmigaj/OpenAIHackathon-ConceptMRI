@@ -35,6 +35,17 @@
         ]
       }
     ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | grep -o '\"file_path\": *\"[^\"]*\"' | head -1 | cut -d'\"' -f4); if [ -z \"$FILE\" ]; then exit 0; fi; case \"$FILE\" in */docs/*|*/LLMud/*|*CLAUDE.md) ;; *) exit 0;; esac; RELATED=$(head -5 \"$FILE\" 2>/dev/null | grep -i '^Related:'); if [ -n \"$RELATED\" ]; then echo \"DOC SYNC REMINDER: $RELATED -- check if your change requires updates to those files.\"; fi; exit 0"
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "matcher": "compact",

@@ -1,3 +1,5 @@
+Related: CLAUDE.md (pipeline skills table), docs/ANALYSIS.md (methodology detail), docs/PROBES.md (probe creation)
+
 # Concept MRI Analysis Pipeline
 
 This document is the master orchestration runbook for Claude Code. Read it at the start of any analysis session.

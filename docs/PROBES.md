@@ -1,3 +1,5 @@
+Related: docs/PIPELINE.md (pipeline stages), docs/ANALYSIS.md (what happens after capture), data/sentence_sets/GUIDE.md (sentence set design)
+
 # Probes — How to Create and Run
 
 Probes are captured model activations for individual sentences. Each probe records expert routing decisions, MLP output embeddings, and residual stream states at every layer for the target word.

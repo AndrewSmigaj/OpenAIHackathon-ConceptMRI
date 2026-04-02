@@ -1,3 +1,5 @@
+Related: docs/architecturemud.md (if adding phases/skills), docs/PIPELINE.md (if changing pipeline stages), LLMud/VISION.md (if changing project scope)
+
 # Concept MRI — Claude Code Context Engineering Guide
 
 ## Project Context
@@ -14,6 +16,7 @@ Claude Code uses these guides to execute the full pipeline:
 | `docs/PROBES.md` | How to create and run probes via API |
 | `data/sentence_sets/GUIDE.md` | How to design and write sentence set JSON files |
 | `docs/ANALYSIS.md` | Analysis methodology reference (cluster/route data, reports) |
+| `docs/scratchpad/` | Intermediate work products — research, drafts, explorations. Check for context from recent work. |
 
 **Skills** (`.claude/skills/`) are the authoritative operational procedures. Each skill has self-contained, copy-paste-ready commands. Docs provide background and reference. When they conflict, skills win.
 
@@ -25,6 +28,20 @@ Claude Code uses these guides to execute the full pipeline:
 | `/analyze` | Read cluster/route data, write reports and element descriptions |
 | `/temporal` | Run temporal basin capture experiments |
 | `/pipeline` | Check pipeline state, suggest next step |
+| `/cdd` | Uncertainty assessment before implementation |
+| `/devils-advocate` | Challenge a design — find real weaknesses, not performative objections |
+| `/competitive-design` | Generate and compare genuinely different approaches |
+| `/review-onboarding` | Could a newcomer understand and implement from this? |
+| `/review-deliverability` | Can phases ship independently with value? |
+| `/review-risks` | Failure modes, blast radius, recovery paths |
+| `/review-scope` | Is everything earning its complexity? Sunk cost check. |
+| `/review-interfaces` | Are boundaries clean, minimal, well-defined? |
+| `/review-consistency` | Do all the parts agree with each other? |
+| `/review-evolution` | What's locked in vs. flexible? Cost of being wrong? |
+| `/review-trace` | Walk a scenario end-to-end through the architecture |
+| `/review-drift` | Does implementation match design? |
+| `/review-best-practices` | Design quality against engineering principles |
+| `/thorough-review` | Fan-out all review skills via agents, synthesize findings |
 
 ## Environment Rules
 
@@ -109,6 +126,12 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - **Plan mode first** — use Claude's plan mode for complex implementations
 - **Incremental builds** — get basic functionality working before adding features
 - **Test early** — verify data contracts as soon as possible
+- **Check scratchpad first** — read `docs/scratchpad/` for context from recent conversations before starting new work
+- **Research before change** — read actual code, understand actual state, THEN decide what to change. Never jump to implementation based on pattern matching.
+- **Watch for attractor patterns** — over-abstracting, over-engineering for hypothetical requirements, adding error handling for impossible cases, summarizing what you just did. Counter: "what's simplest?" and "is this real or hypothetical?"
+- **Sunk cost awareness** — replace bad code, don't patch around it. We control everything; backward compatibility is unnecessary.
+- **Document sync** — after modifying any file in `docs/` or `LLMud/`, check its `Related:` header. Update anything that drifted. Updating related docs is always in scope — you do not need separate permission.
+- **Session-end review** — at the end of larger sessions, review what approaches worked or didn't and save insights to development feedback memories.
 
 ### 11. CRITICAL: Change Management Rules
 - **NO aggressive bulk changes** - make small, targeted edits only
@@ -117,9 +140,8 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - **Explain changes clearly** - before making edits, explain what will change and why
 - **User must approve** - for any architectural or design changes, get explicit approval
 
-### 12. Certainty Protocol
-- **Never jump straight to implementation** — even in auto mode, any task that is not a direct continuation of a previously approved plan requires at minimum a certainty assessment before writing code or making changes.
-- **Certainty assessment**: Before implementation, state what you plan to do, which files you'll modify, and your confidence level (high/medium/low) for each change. If any change is medium or below, explain why and what you'd need to verify.
+### 12. Uncertainty Assessment
+- **Never jump straight to implementation** — assess uncertainty first. Run `/cdd` for the structured procedure, or do a quick inline assessment for smaller tasks.
 - **New work needs a plan** — if the task involves more than a single targeted edit, write a plan and get approval before proceeding. Modifying scaffolding, architecture, or multi-file changes always require a plan.
 - **Plans expire on scope change** — if you discover the task is different from what the plan covers, stop and re-plan rather than stretching the existing plan to fit.
 
@@ -131,4 +153,4 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - **Model**: gpt-oss-20b, NF4 quantized, ~15GB VRAM
 
 ## Compact Instructions
-When compacting, always preserve: active session IDs, schema names, the WSL2 environment rules (fuser not pkill, .venv paths), and any in-progress pipeline stage.
+When compacting, always preserve: active session IDs, schema names, the WSL2 environment rules (fuser not pkill, .venv paths), any in-progress pipeline stage, and any active scratchpad file names and their purpose.

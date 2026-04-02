@@ -1,3 +1,5 @@
+Related: docs/PIPELINE.md (orchestration context), docs/PROBES.md (probe creation), data/sentence_sets/GUIDE.md (sentence set design)
+
 # Analysis Guide — Claude Code Cluster & Route Analysis
 
 **Primary workflow:** The `/analyze` skill (`.claude/skills/analyze/SKILL.md`) is the operational procedure. This document provides reference detail on methodology, data structures, and report formats.
