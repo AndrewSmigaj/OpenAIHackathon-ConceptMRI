@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 class SessionBatchWriters:
     """Coordinated batch writers for all 5 schemas."""
 
-    def __init__(self, session_id: str, data_lake_path: str = "data/lake", batch_size: int = 1000):
+    def __init__(self, session_id: str, data_lake_path: str, batch_size: int = 1000):
         self.session_id = session_id
         self.session_dir = Path(data_lake_path) / session_id
         self.session_dir.mkdir(parents=True, exist_ok=True)
@@ -86,7 +86,7 @@ class IntegratedCaptureService:
     """
 
     def __init__(self, model, tokenizer, layers_to_capture: Optional[List[int]] = None,
-                 data_lake_path: str = "data/lake", batch_size: int = 1000,
+                 *, data_lake_path: str, batch_size: int = 1000,
                  wordnet_miner=None, adapter=None):
         self.adapter = adapter
 

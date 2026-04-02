@@ -27,8 +27,7 @@ from services.probes.integrated_capture_service import IntegratedCaptureService
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-# Resolve data lake path once
-_data_lake_path = str(Path(__file__).resolve().parents[4] / "data" / "lake")
+from api.config import DATA_LAKE_PATH
 
 
 def _rebuild_output_nodes(
@@ -47,9 +46,9 @@ def _rebuild_output_nodes(
     base_links = [l for l in result["links"] if not l["target"].startswith("Out:")]
 
     # Load token records from parquet
-    session_path = Path(_data_lake_path) / session_id
+    session_path = DATA_LAKE_PATH / session_id
     if not session_path.exists():
-        session_path = Path(_data_lake_path) / f"session_{session_id}"
+        session_path = DATA_LAKE_PATH / f"session_{session_id}"
     token_records = read_records(str(session_path / "tokens.parquet"), ProbeRecord)
 
     # Reconstruct routes from cached node token data
@@ -161,7 +160,7 @@ async def analyze_expert_routes(
 
         # Load from cached schema if requested
         if request.clustering_schema and ids:
-            schema_dir = Path(_data_lake_path) / ids[0] / "clusterings" / request.clustering_schema
+            schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.clustering_schema
             wdir_cached = schema_dir / "expert_windows"
             cached_path = wdir_cached / f"{window_key}.json"
             if cached_path.exists():
@@ -194,7 +193,7 @@ async def analyze_expert_routes(
 
         # Auto-save if save_as provided
         if request.save_as and len(ids) == 1:
-            schema_dir = Path(_data_lake_path) / ids[0] / "clusterings" / request.save_as
+            schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.save_as
             wdir = schema_dir / "expert_windows"
             wdir.mkdir(parents=True, exist_ok=True)
             # Base file: apply first output axis (2 nodes) instead of raw cross-product
@@ -248,7 +247,7 @@ async def analyze_cluster_routes(
 
         # Load from cached schema if requested
         if request.clustering_schema and ids:
-            schema_dir = Path(_data_lake_path) / ids[0] / "clusterings" / request.clustering_schema
+            schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.clustering_schema
             wdir_cached = schema_dir / "cluster_windows"
             cached_path = wdir_cached / f"{window_key}.json"
             if cached_path.exists():
@@ -275,7 +274,7 @@ async def analyze_cluster_routes(
         if request.clustering_config:
             clustering_config_dict = request.clustering_config.dict(exclude_none=True)
         elif request.clustering_schema and ids:
-            meta_path = Path(_data_lake_path) / ids[0] / "clusterings" / request.clustering_schema / "meta.json"
+            meta_path = DATA_LAKE_PATH / ids[0] / "clusterings" / request.clustering_schema / "meta.json"
             if meta_path.exists():
                 meta = json.loads(meta_path.read_text())
                 clustering_config_dict = meta.get("params", {})
@@ -301,7 +300,7 @@ async def analyze_cluster_routes(
 
         # Auto-save if save_as provided
         if request.save_as and len(ids) == 1:
-            schema_dir = Path(_data_lake_path) / ids[0] / "clusterings" / request.save_as
+            schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.save_as
             wdir = schema_dir / "cluster_windows"
             wdir.mkdir(parents=True, exist_ok=True)
             # Base file: apply first output axis (2 nodes) instead of raw cross-product
@@ -448,7 +447,7 @@ async def reduce_embeddings(request: ReductionRequest):
         points = reducer.reduce_on_demand(
             session_ids=request.session_ids,
             layers=request.layers,
-            data_lake_path=_data_lake_path,
+            data_lake_path=str(DATA_LAKE_PATH),
             source=request.source,
             method=request.method,
             n_components=request.n_components,
@@ -510,7 +509,7 @@ def _run_temporal_capture_sync(
     try:
 
         # Load probe assignments
-        session_dir = Path(_data_lake_path) / request.session_id
+        session_dir = DATA_LAKE_PATH / request.session_id
         if not session_dir.exists():
             raise HTTPException(status_code=404, detail=f"Session '{request.session_id}' not found")
 
@@ -811,7 +810,7 @@ async def run_temporal_capture(
 @router.get("/experiments/temporal-runs/{session_id}")
 async def get_temporal_runs(session_id: str):
     """List temporal runs for a source session."""
-    runs_path = Path(_data_lake_path) / session_id / "temporal_runs.json"
+    runs_path = DATA_LAKE_PATH / session_id / "temporal_runs.json"
     if not runs_path.exists():
         return []
     return json.loads(runs_path.read_text())
@@ -831,8 +830,8 @@ async def get_temporal_lag_data(request: TemporalLagDataRequest):
     from sklearn.decomposition import PCA
 
     try:
-        source_dir = Path(_data_lake_path) / request.source_session_id
-        temporal_dir = Path(_data_lake_path) / request.temporal_session_id
+        source_dir = DATA_LAKE_PATH / request.source_session_id
+        temporal_dir = DATA_LAKE_PATH / request.temporal_session_id
 
         if not source_dir.exists():
             raise HTTPException(status_code=404, detail=f"Source session '{request.source_session_id}' not found")

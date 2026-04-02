@@ -18,6 +18,7 @@ project_root = backend_src.parent.parent     # project root
 sys.path.insert(0, str(backend_src))
 
 from adapters.registry import get_adapter
+from api.config import DATA_LAKE_PATH
 from services.probes.integrated_capture_service import IntegratedCaptureService
 from services.experiments.expert_route_analysis import ExpertRouteAnalysisService
 from services.experiments.cluster_route_analysis import ClusterRouteAnalysisService
@@ -48,7 +49,6 @@ def _load_model_sync():
     try:
         adapter = get_adapter("gpt-oss-20b")
         model_path = project_root / "data" / "models" / adapter.topology.model_dir
-        data_lake_path = project_root / "data" / "lake"
 
         if not model_path.exists():
             raise FileNotFoundError(f"Model not found at: {model_path}")
@@ -62,7 +62,7 @@ def _load_model_sync():
             model=model,
             tokenizer=tokenizer,
             layers_to_capture=adapter.layers_range(),
-            data_lake_path=str(data_lake_path),
+            data_lake_path=str(DATA_LAKE_PATH),
             adapter=adapter
         )
 
@@ -117,8 +117,7 @@ def get_route_analysis_service() -> ExpertRouteAnalysisService:
     global _route_analysis_service
 
     if _route_analysis_service is None:
-        data_lake_path = project_root / "data" / "lake"
-        _route_analysis_service = ExpertRouteAnalysisService(str(data_lake_path))
+        _route_analysis_service = ExpertRouteAnalysisService(str(DATA_LAKE_PATH))
 
     return _route_analysis_service
 
@@ -128,8 +127,7 @@ def get_cluster_analysis_service() -> ClusterRouteAnalysisService:
     global _cluster_analysis_service
 
     if _cluster_analysis_service is None:
-        data_lake_path = project_root / "data" / "lake"
-        _cluster_analysis_service = ClusterRouteAnalysisService(str(data_lake_path))
+        _cluster_analysis_service = ClusterRouteAnalysisService(str(DATA_LAKE_PATH))
 
     return _cluster_analysis_service
 
@@ -139,7 +137,6 @@ def get_llm_insights_service() -> LLMInsightsService:
     global _llm_insights_service
 
     if _llm_insights_service is None:
-        data_lake_path = project_root / "data" / "lake"
-        _llm_insights_service = LLMInsightsService(str(data_lake_path))
+        _llm_insights_service = LLMInsightsService(str(DATA_LAKE_PATH))
 
     return _llm_insights_service

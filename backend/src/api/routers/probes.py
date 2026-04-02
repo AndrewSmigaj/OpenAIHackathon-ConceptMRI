@@ -24,8 +24,7 @@ from schemas.tokens import ProbeRecord
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-# Data lake path for file-only endpoints (no model loading required)
-_data_lake_path = str(Path(__file__).resolve().parents[4] / "data" / "lake")
+from api.config import DATA_LAKE_PATH
 
 
 @router.get("/probes/{session_id}/status", response_model=StatusResponse)
@@ -290,7 +289,7 @@ async def run_sentence_experiment(
 async def get_generated_outputs(session_id: str):
     """Read generated outputs for Claude Code to categorize."""
     import pandas as pd
-    tokens_path = Path(_data_lake_path) / session_id / "tokens.parquet"
+    tokens_path = DATA_LAKE_PATH / session_id / "tokens.parquet"
     if not tokens_path.exists():
         raise HTTPException(status_code=404, detail=f"Session '{session_id}' tokens not found")
     df = pd.read_parquet(tokens_path)
@@ -303,7 +302,7 @@ async def get_generated_outputs(session_id: str):
 async def update_output_categories(session_id: str, categories: Dict[str, Dict[str, str]]):
     """Write output categories back to tokens.parquet (Claude Code POSTs after analysis)."""
     import pandas as pd
-    tokens_path = Path(_data_lake_path) / session_id / "tokens.parquet"
+    tokens_path = DATA_LAKE_PATH / session_id / "tokens.parquet"
     if not tokens_path.exists():
         raise HTTPException(status_code=404, detail=f"Session '{session_id}' tokens not found")
     df = pd.read_parquet(tokens_path)
@@ -322,7 +321,7 @@ async def update_output_categories(session_id: str, categories: Dict[str, Dict[s
 @router.get("/probes/sessions/{session_id}/clusterings")
 async def list_clusterings(session_id: str):
     """List available named clustering schemas for a session."""
-    clusterings_dir = Path(_data_lake_path) / session_id / "clusterings"
+    clusterings_dir = DATA_LAKE_PATH / session_id / "clusterings"
     if not clusterings_dir.exists():
         return {"clusterings": []}
     schemas = []
@@ -336,7 +335,7 @@ async def list_clusterings(session_id: str):
 @router.get("/probes/sessions/{session_id}/clusterings/{schema_name}")
 async def load_clustering(session_id: str, schema_name: str):
     """Load a specific clustering schema (meta + probe_assignments + reports)."""
-    schema_dir = Path(_data_lake_path) / session_id / "clusterings" / schema_name
+    schema_dir = DATA_LAKE_PATH / session_id / "clusterings" / schema_name
     if not schema_dir.exists():
         raise HTTPException(status_code=404, detail=f"Clustering '{schema_name}' not found")
     meta = json.loads((schema_dir / "meta.json").read_text())
@@ -356,7 +355,7 @@ async def load_clustering(session_id: str, schema_name: str):
 @router.post("/probes/sessions/{session_id}/clusterings/{schema_name}/element-descriptions")
 async def save_element_descriptions(session_id: str, schema_name: str, body: Dict):
     """Save element descriptions (cluster labels, route labels) for a clustering schema."""
-    schema_dir = Path(_data_lake_path) / session_id / "clusterings" / schema_name
+    schema_dir = DATA_LAKE_PATH / session_id / "clusterings" / schema_name
     if not schema_dir.exists():
         raise HTTPException(status_code=404, detail=f"Clustering '{schema_name}' not found")
     desc_path = schema_dir / "element_descriptions.json"
@@ -370,7 +369,7 @@ async def save_element_descriptions(session_id: str, schema_name: str, body: Dic
 @router.post("/probes/sessions/{session_id}/clusterings/{schema_name}/reports/{window_key}")
 async def save_report(session_id: str, schema_name: str, window_key: str, body: Dict):
     """Save a Claude Code analysis report for a specific window."""
-    reports_dir = Path(_data_lake_path) / session_id / "clusterings" / schema_name / "reports"
+    reports_dir = DATA_LAKE_PATH / session_id / "clusterings" / schema_name / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
     (reports_dir / f"{window_key}.md").write_text(body["report"])
     return {"saved": f"{schema_name}/{window_key}"}
