@@ -9,7 +9,7 @@ import time
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import torch
-from api.routers import probes, experiments, generation, prompts
+from api.routers import probes, routes, clustering, insights, temporal, generation, prompts
 from api.dependencies import initialize_capture_service, is_model_loaded, get_loading_status
 
 logger = logging.getLogger(__name__)
@@ -36,7 +36,10 @@ app.add_middleware(
 
 # Include routers
 app.include_router(probes.router, prefix="/api")
-app.include_router(experiments.router, prefix="/api")
+app.include_router(routes.router, prefix="/api")
+app.include_router(clustering.router, prefix="/api")
+app.include_router(insights.router, prefix="/api")
+app.include_router(temporal.router, prefix="/api")
 app.include_router(generation.router, prefix="/api")
 app.include_router(prompts.router, prefix="/api")
 
