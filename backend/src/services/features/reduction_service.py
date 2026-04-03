@@ -129,7 +129,7 @@ class ReductionService:
             if method == "umap" and n_samples < 4:
                 reducer = PCA(n_components=actual_components, random_state=42)
             else:
-                reducer = self._create_reducer(method, actual_components, n_samples=n_samples)
+                reducer = self._create_reducer(method, actual_components)
 
             coords = reducer.fit_transform(states)
 
@@ -155,7 +155,7 @@ class ReductionService:
 
         return points
 
-    def _create_reducer(self, method: str, n_components: Optional[int] = None, n_samples: Optional[int] = None):
+    def _create_reducer(self, method: str, n_components: Optional[int] = None):
         """Create a reducer instance for the given method."""
         n = n_components or self.n_components
 
@@ -163,11 +163,10 @@ class ReductionService:
             return PCA(n_components=n, random_state=42)
         elif method == "umap":
             import umap
-            neighbors = min(15, max(2, (n_samples or 15) - 1))
             return umap.UMAP(
                 n_components=n,
                 random_state=42,
-                n_neighbors=neighbors,
+                n_neighbors=min(15, max(2, n - 1)),
                 min_dist=0.1,
             )
         else:

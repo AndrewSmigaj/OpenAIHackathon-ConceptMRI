@@ -10,8 +10,12 @@ torch==2.9.1
 accelerate>=0.35.0
 bitsandbytes>=0.45.0
 kernels
-scikit-learn==1.3.2
-umap-learn>=0.5.0
+# IMPORTANT: These versions are pinned for reproducibility. umap-learn <0.5.11
+# uses unstable quicksort in neighbor graph construction, producing different
+# UMAP embeddings across installs. 0.5.11 fixed this (github.com/lmcinnes/umap/pull/1236).
+# scikit-learn >=1.6 is required by umap-learn 0.5.11.
+scikit-learn==1.7.2
+umap-learn==0.5.11
 numpy<2.0
 pandas==2.1.4
 
