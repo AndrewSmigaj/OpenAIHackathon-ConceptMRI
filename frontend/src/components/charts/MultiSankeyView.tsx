@@ -314,13 +314,4 @@ export default function MultiSankeyView({
   )
 }
 
-// Convert FilterState to API FilterConfig
-function convertFilterState(filterState: FilterState): any {
-  const filterConfig: any = {}
-
-  if (filterState.labels?.size > 0) {
-    filterConfig.labels = Array.from(filterState.labels)
-  }
-
-  return Object.keys(filterConfig).length > 0 ? filterConfig : undefined
-}
+import { convertFilterState } from '../../utils/filterState'

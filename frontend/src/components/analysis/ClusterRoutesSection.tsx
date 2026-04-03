@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react'
-import type { SessionDetailResponse, AnalyzeRoutesRequest, RouteAnalysisResponse } from '../../types/api'
+import type { SessionDetailResponse, RouteAnalysisResponse } from '../../types/api'
 import type { FilterState } from '../WordFilterPanel'
 import type { GradientScheme } from '../../utils/colorBlending'
 import type { SelectedCard } from '../../types/analysis'
@@ -8,23 +8,7 @@ import MultiSankeyView from '../charts/MultiSankeyView'
 import SteppedTrajectoryPlot from '../charts/SteppedTrajectoryPlot'
 
 import { LAYER_RANGES } from '../../constants/layerRanges'
-
-/**
- * Convert frontend FilterState to backend filter_config format.
- * Empty sets mean "include all" (no filtering), so we return undefined.
- */
-function convertFilterState(
-  filterState: FilterState,
-  sessionData?: SessionDetailResponse | null
-): AnalyzeRoutesRequest['filter_config'] {
-  const filterConfig: any = {};
-
-  if (filterState.labels.size > 0) {
-    filterConfig.labels = Array.from(filterState.labels);
-  }
-
-  return Object.keys(filterConfig).length > 0 ? filterConfig : undefined;
-}
+import { convertFilterState } from '../../utils/filterState'
 
 interface ClusterRoutesSectionProps {
   sessionIds: string[]
@@ -208,7 +192,7 @@ export default function ClusterRoutesSection({
             source={embeddingSource}
             method={reductionMethod}
             sessionData={sessionData}
-            filterConfig={convertFilterState(filterState, sessionData)}
+            filterConfig={convertFilterState(filterState)}
             nComponents={reductionDimensions}
             height={400}
             maxTrajectories={400}

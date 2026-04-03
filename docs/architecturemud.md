@@ -18,7 +18,7 @@ One interface for everyone. Toolbar (React controls) handles discoverable config
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│ Toolbar: [Session▼] [Schema▼] [Axis▼] [Grad▼] [K:6] [Mode] [Run]│
+│ Toolbar: [Session▼] [Schema▼] [Axis▼] [Grad▼] [K:6]              │
 ├───────────────────────────────┬──────────────────────────────────┤
 │                               │                                  │
 │  Q1: Viz Panel                │  Q2: Analysis Panel              │
@@ -38,21 +38,21 @@ One interface for everyone. Toolbar (React controls) handles discoverable config
 └───────────────────────────────┴──────────────────────────────────┘
 ```
 
-**Toolbar (top):** Compact ribbon (1-2 rows). Grouped into collapsible sections: **Session** (session, schema), **Visual** (axis, gradient, blend, output axes), **Analysis** (mode, K, method, source, run), **View** (range, routes, filters). Infrequent controls collapse into a "More" section by default.
+**Toolbar (top):** Compact ribbon (1-2 rows). Grouped sections: **Session** (session, schema), **Visual** (axis, gradient, blend, output axes), **Analysis** (K, method, source), **View** (range, routes, filters). Run stays in viz sections (ExpertRoutesSection, ClusterRoutesSection), not in toolbar.
 
-**Quadrant grid:** 2x2 CSS grid, each panel independently scrollable. Drag handles on center dividers for resizing. Desktop-only — no mobile/responsive.
+**Quadrant grid:** 2x2 CSS grid, each panel independently scrollable. Desktop-only — no mobile/responsive.
 
 **Q1 — Viz:** Sankey charts, trajectory plots, temporal analysis. Reused from current ExperimentPage.
 
 **Q2 — Analysis:** Statistical analysis and click-detail cards. Reused. Also shows schema reports and element descriptions.
 
-**Q3 — Terminal:** xterm.js for navigation, power-user commands, room descriptions, status feedback. Collapsible.
+**Q3 — Terminal:** xterm.js for Evennia connection (Phase 2+). Phase 1: empty placeholder with welcome message.
 
-**Q4 — Dataset / Agent Streams:** Phase 1: probe sentences + generated outputs (virtual-scrolled, filterable). Phase 4+: agent harmony channels (internal/external/output text streams).
+**Q4 — Dataset / Agent Streams:** Phase 1: probe sentences + generated outputs (filterable by label, color-coded by primary axis). Phase 4+: agent harmony channels (internal/external/output text streams).
 
 ### 1.B Data Flow
 
-Toolbar controls and terminal commands call the same React state setters. Evennia does NOT call the ConceptMRI API — React handles all API calls directly. Evennia manages the world, permissions, and room navigation only.
+Toolbar controls and terminal commands call the same React state setters. Evennia does NOT call the ConceptMRI API — React handles all API calls directly. Evennia manages the full MUD (world, combat, NPCs, objects, stats, permissions, rooms). Viz configuration stays React-local.
 
 ```
 Researcher clicks [Axis ▼] → "label" in toolbar
@@ -69,7 +69,7 @@ User enters a room (Phase 2)
   → Toolbar controls greyed out if role is 'visitor'
 ```
 
-**Config stays React-local in all phases.** Axis, gradient, range, clustering, and route config never go through Evennia — toolbar and terminal commands both call hooks directly. Evennia only handles navigation and room events.
+**Config stays React-local in all phases.** Axis, gradient, range, clustering, and route config never go through Evennia — toolbar and terminal commands both call hooks directly. Evennia handles the full MUD; viz config is separate.
 
 ### 1.C Micro-worlds
 
@@ -81,7 +81,7 @@ Existing Concept MRI probes ARE micro-worlds. The institute has content from day
 
 ### 1.D View Modes
 
-1. **Default view** (Phase 1): All sentences visible, full Sankey with all routes. Q4 shows complete dataset. Click a sentence in Q4 → highlights its route in Q1; click a route in Q1 → highlights matching sentences in Q4 (bidirectional sync). Selecting a sentence activates trace stepping — step controls (forward/back/auto-play) appear in Q4 to walk through the dataset sentence by sentence while highlighting the active route in Q1. This is basin identification — the current software's primary view.
+1. **Default view** (Phase 1): All sentences visible, full Sankey with all routes. Q4 shows complete dataset. Click a Sankey node → Q2 card shows details. This is basin identification — the current software's primary view, reorganized into the quadrant layout.
 2. **Live view** (Phase 4+): Like trace stepping, but data comes from a running agent session. After each tick, the backend captures residual streams (using the same batch forward pass as default view), streams the results via WebSocket, and the UI updates: new point on LiveUMAP, new route on Sankey, new reasoning entry in Q4. Timeline scrubber lets observers step through tick history.
 
 ### 1.E Hosting
@@ -171,63 +171,7 @@ Self-hosted on WSL2 machine. All services on localhost.
 
 ## 3. MUD Command Vocabulary
 
-Most configuration is done via toolbar controls. Terminal commands below are power-user shortcuts and navigation. Commands marked ⊞ have toolbar equivalents.
-
-### 3.A Session & Schema (researcher only)
-
-```
-sessions                       List available sessions
-load <name_or_id>              Load a session ⊞
-schema <name>                  Select clustering schema ⊞
-schema list                    List available schemas
-schema save <name>             Save current config as new schema
-```
-
-### 3.B Visual Encoding (researcher only)
-
-All visual encoding has toolbar equivalents. Terminal commands are shortcuts for keyboard-only workflow.
-
-```
-axis <axis_id> [gradient]      Set primary color axis ⊞
-axis2 <axis_id> [gradient]     Set secondary blend axis ⊞
-output-axis <axis_id> [grad]   Set output color axis ⊞
-output-axis2 <axis_id>         Set output secondary blend axis ⊞
-shape <axis_id>                Set trajectory shape axis ⊞
-range <1-4>                    Select layer range ⊞
-```
-
-### 3.C Analysis (researcher only)
-
-```
-cluster <n> [method] [source]  Configure clustering ⊞
-routes <n>                     Show top N routes ⊞
-routes all                     Show all routes ⊞
-run                            Trigger analysis with current config ⊞
-run expert                     Run expert route analysis ⊞
-run cluster                    Run cluster route analysis ⊞
-filter <label>                 Toggle label filter on/off ⊞
-filter clear                   Clear all filters ⊞
-filter all                     Select all labels ⊞
-```
-
-### 3.D Observation (everyone)
-
-```
-look                           Room description + current state summary
-inspect <element>              Show details for a Sankey node/route (same as click in Q2)
-dataset                        Toggle Q4 between dataset and agent streams view (Phase 4+)
-status                         Print current config state
-help                           List available commands
-say <message>                  Chat with others in the room (Phase 2+, Evennia)
-```
-
-### 3.E Navigation (everyone)
-
-```
-north/south/east/west          Move between rooms
-enter <room>                   Enter a micro-world
-leave / hub                    Return to hub
-```
+**TODO:** Design terminal commands together with user when Phase 2 (Evennia integration) begins. This section was previously populated with unreviewed commands and has been cleared. Standard MUD commands (`look`, `north`, `say`, etc.) will be handled by Evennia. Any ConceptMRI-specific terminal commands (if needed) will be designed at that time.
 
 ---
 
@@ -267,36 +211,22 @@ Two columns per row:
 1. **Input** — the probe sentence
 2. **Generated Output** — model's continuation + output category badge
 
-Filterable by label. Searchable. Color-coded by primary axis. Use virtual scrolling (react-window) for 400+ rows. Clicking a row highlights that sentence's route in Q1 Sankey (bidirectional sync — see §5.C).
+Filterable by label. Color-coded by primary axis. Scrollable within the grid cell.
 
 **Data source:** `apiClient.getSessionDetails()` already returns sentences with `generated_text` and `output_category` fields. DatasetPanel populates from this on session load. Shows "No generated outputs" placeholder if the session has no categorized outputs.
 
-### 5.B Trace Stepping
+### 5.B Stepping & Trace Highlighting
 
-When a sentence is selected (clicked in Q4 or via bidirectional sync from Q1), step controls appear in the Q4 header: [⏮] [◀] [▶] [⏭] [▶️ Auto]. Stepping walks through the dataset sentence by sentence:
+The scrubber (existing in TemporalAnalysisSection) steps through traces. Stepping forward/back updates which trace is highlighted on Sankeys and trajectory plot. Two use cases for the same UI pattern:
 
-- **Q4:** Current sentence row is highlighted and scrolled into view
-- **Q1:** Current sentence's route is highlighted (bright/thick links) while other routes dim (ECharts emphasis/blur via `dispatchAction` or dynamic `setOption`)
-- **Step forward/back:** Advances to next/previous sentence in dataset index order (skips filtered-out sentences), updates both Q1 and Q4. Stops at first/last — no wrapping.
-- **Auto-play:** Steps forward automatically on a timer (default 2s, speed slider in step controls)
+1. **Temporal expanding window analysis** (existing) — steps through traces as context window builds. Used in researcher's lab for temporal experiments.
+2. **Scenario tick stepping** (Phase 4+) — steps through an agent's ticks in a scenario. Used for observing agent behavior.
 
-Not a separate mode — step controls appear whenever a sentence is selected and disappear when selection is cleared.
-
-### 5.C Bidirectional Selection Sync
-
-Shared `highlightedProbeIds` state in MUDApp, passed as prop to MultiSankeyView and DatasetPanel:
-
-- **Click sentence in Q4** → sets `highlightedProbeIds` → Q1 Sankey highlights that sentence's route across all windows (bright/thick), dims others. Step controls appear.
-- **Click node/link in Q1** → sets `highlightedProbeIds` to matching probes → Q4 highlights and scrolls to matching sentence rows
-- **Step forward/back** → updates `highlightedProbeIds` → both Q1 and Q4 update
-
-SankeyChart gains a `highlightedRouteSignature` prop. Uses ECharts emphasis/blur to highlight matching links — same pattern as SteppedTrajectoryPlot's existing emphasis handling.
-
-**Multi-window probe mapping:** Q1 renders 6 SankeyChart instances (one per layer window). Clicking a node in one window (e.g., cluster C2 in layers 11-12) highlights probes that route through that node in those specific layers. In cluster mode: `probe_assignments` from `ClusterRouteAnalysisResponse` maps probeId → cluster_id per layer — MultiSankeyView computes matching probeIds from the clicked window's route data and emits them via `onNodeClick`. In expert mode: the probe's routing signature contains per-layer expert IDs, used for the same lookup. Q4 DatasetPanel filters/highlights the matching sentences.
+Implementation details and specific controls to be designed when each use case is implemented.
 
 ### 5.D Agent Streams (Phase 4+)
 
-Q4 gains a tab system: **Dataset** (sentences/outputs) and **Agent Streams** (harmony channels — internal reasoning, external actions, final output). Toggle between them via `dataset` terminal command or a tab header in Q4. Live view (§1.D) shows the latest trajectory from a running simulation with real-time updates.
+Q4 gains a tab system: **Dataset** (sentences/outputs) and **Agent Streams** (harmony channels — internal reasoning, external actions, final output). Toggle between them via a tab header in Q4. Live view (§1.D) shows the latest trajectory from a running simulation with real-time updates.
 
 **Future additions:** Scaffold context column (requires storing scaffold text in ProbeRecord).
 
@@ -321,16 +251,16 @@ This means sharing is a configuration task (edit YAML), not a runtime operation.
 
 MUDApp is simpler than ExperimentPage because it separates concerns into a clean layout:
 - **Toolbar** handles configuration (React controls — discoverable, frequent actions)
-- **Terminal** handles navigation and power-user shortcuts (additive, not required)
+- **Terminal** handles Evennia connection (Phase 2+, additive, not required)
 - **Hooks** hold state (same `useAxisControls`, `useClusteringConfig`, `useSchemaManagement` pattern)
 - **Quadrant panels** handle output (reused viz components in a 2x2 grid)
 - **Props** for everything — no React contexts needed
 
 No VizConfigContext. The current hooks (`useAxisControls`, `useClusteringConfig`, `useSchemaManagement`) work unchanged. All components receiving viz state accept hook return objects as typed props — 3 objects (`AxisControlsState`, `ClusteringConfigState`, schema state), not 30+ individual props. This applies to Toolbar, MultiSankeyView, SteppedTrajectoryPlot, and any other viz consumer. Each component destructures what it needs internally. SankeyChart is the exception — it's a pure rendering component that receives individual values from MultiSankeyView, not hook objects.
 
-Terminal commands call the same setters via `useCommandDispatch` at the MUDApp level. Components render directly in CSS grid cells — prop depth is MUDApp → MultiSankeyView → SankeyChart (2-3 levels, down from 4+ in ExperimentPage).
+Components render directly in CSS grid cells — prop depth is MUDApp → component → child (2-3 levels, down from 4+ in ExperimentPage).
 
-ExpertRoutesSection and ClusterRoutesSection (current tab wrappers) are eliminated. ExpertRoutesSection is 112 lines of pure passthrough + Run button — trivially removable. ClusterRoutesSection has real logic that moves to MUDApp: composition of MultiSankeyView + SteppedTrajectoryPlot (MUDApp JSX), `clusteringConfig` memoization into API format (`useMemo` in MUDApp), and `convertFilterState()` (deduplicated to `utils/filterState.ts` — currently duplicated in ClusterRoutesSection and MultiSankeyView). Mode is a prop on MultiSankeyView directly (already implemented).
+ExpertRoutesSection and ClusterRoutesSection are kept as-is. They manage their own Run state internally and wrap the viz components. `convertFilterState()` is deduplicated to `utils/filterState.ts` (currently duplicated in ClusterRoutesSection and MultiSankeyView).
 
 ### 7.B Component Tree
 
@@ -341,22 +271,20 @@ MUDApp (single page, single route: /)
 │   ├── SchemaSelector               ← dropdown + clustering param controls
 │   ├── AxisControls                 ← color/blend/shape/output + gradient pickers (currently inline in ExperimentPage lines 27-135, extract to own file)
 │   ├── FilterToggles                ← label filter chips
-│   ├── ModeToggle + RunButton       ← expert/cluster toggle + run
 │   ├── RangeSelector                ← layer range picker
 │   └── (reserved)                   ← future: live view toggle (Phase 4+)
-├── QuadrantGrid                     ← 2x2 CSS grid, resizable dividers
+├── QuadrantGrid                     ← 2x2 CSS grid
 │   ├── Q1 (CSS grid cell)
-│   │   ├── MultiSankeyView          ← mode/manualTrigger/onAnalysisReady already exist; add highlightedRouteSignature, accept hook objects
-│   │   ├── SteppedTrajectoryPlot    ← accept hook objects instead of individual props
+│   │   ├── ExpertRoutesSection      ← reused as-is (manages own Run state)
+│   │   ├── ClusterRoutesSection     ← reused as-is (manages own Run state)
 │   │   └── TemporalAnalysisSection  ← reused
 │   ├── Q2 (CSS grid cell)
 │   │   ├── WindowAnalysis            ← reused (fix: import SankeyNode/SankeyLink from types/api.ts)
 │   │   └── ContextSensitiveCard      ← reused
 │   ├── Q3 (CSS grid cell)
-│   │   └── MUDTerminal               ← xterm.js + useCommandDispatch
+│   │   └── MUDTerminal               ← xterm.js, empty in Phase 1
 │   └── Q4 (CSS grid cell)
-│       └── DatasetPanel               ← Phase 1: sentences + outputs
-│           ├── StepControls            ← [⏮][◀][▶][⏭][Auto] (visible when sentence selected)
+│       └── FilteredWordDisplay        ← reused (sentences, color-coded, filterable)
 │           └── (Phase 4+: AgentStreams tab)
 ```
 
@@ -374,54 +302,21 @@ Terminal: user types "axis label red-blue"
   → useCommandDispatch parses → calls setColorAxisId("label"), setGradient("red-blue")
 ```
 
-Config commands stay React-local in all phases. Evennia (Phase 2+) handles only navigation and room events — config never routes through Evennia.
+Config stays React-local in all phases. Evennia (Phase 2+) handles the full MUD — config never routes through Evennia.
 
-**Terminal dispatch table:** Commands handled by `useCommandDispatch`. Config commands marked ⊞ duplicate toolbar controls (power-user shortcuts).
-
-| Command | Dispatch Function(s) | Source |
-|---------|---------------------|--------|
-| `sessions` | (prints session list to terminal) | MUDApp |
-| `load <name_or_id>` | resetForNewSession(id) | MUDApp |
-| `schema <name>` | setSelectedSchema(name) ⊞ | useSchemaManagement |
-| `schema list` | (prints to terminal) | useSchemaManagement |
-| `schema save <name>` | saveSchema(name) → API call | MUDApp |
-| `run` / `run expert` | triggerAnalysis('expert') ⊞ | see §7.C.1 |
-| `run cluster` | triggerAnalysis('cluster') ⊞ | see §7.C.1 |
-| `axis <id> [gradient]` | setColorAxisId(id), setGradient(g) ⊞ | useAxisControls |
-| `axis2 <id>` | setColorAxis2Id(id) ⊞ | useAxisControls |
-| `output-axis <id> [grad]` | setOutputColorAxisId(id), setOutputGradient(g) ⊞ | useAxisControls |
-| `output-axis2 <id>` | setOutputColorAxis2Id(id) ⊞ | useAxisControls |
-| `shape <id>` | setShapeAxisId(id) ⊞ | useAxisControls |
-| `range <1-4>` | setSelectedRange(rangeKey) ⊞ | useAxisControls |
-| `cluster <n> [method] [source]` | setGlobalClusterCount(n), setClusteringMethod(m), setEmbeddingSource(s) ⊞ | useClusteringConfig |
-| `routes <n>` | setTopRoutes(n) ⊞ | MUDApp |
-| `filter <label>` | toggleFilter(label) ⊞ | MUDApp |
-| `inspect <element>` | setSelectedCard(element) | MUDApp |
-| `dataset` | toggleQ4View() | MUDApp |
-| `look` | (prints current state summary) | MUDApp |
-| `status` | (prints config details) | MUDApp |
-| `help` | (prints available commands) | MUDApp |
-
-| `agent start <name> <scenario>` | POST /api/agent/start → starts agent session | MUDApp (Phase 4) |
-| `agent stop` | POST /api/agent/stop → finalizes session | MUDApp (Phase 4) |
-
-Navigation (`north`, `enter`, `leave`) and chat (`say`) are Phase 2+ commands handled by Evennia. Agent commands (Phase 4) dispatch to backend REST endpoints, not Evennia.
+**Terminal commands:** See §3 (to be designed with user for Phase 2). Phase 1 terminal is empty.
 
 #### 7.C.1 Run Trigger Mechanism
 
-The toolbar [Run] button and terminal `run` command both call `triggerAnalysis(mode)`. With mode as a toolbar toggle (not a command), the stale-closure problem is eliminated — mode is already set before run fires.
-
-MUDApp uses the existing `onAnalysisReady` callback pattern: MultiSankeyView passes its `loadAllWindows` function up via `onAnalysisReady`, MUDApp stores it in a ref. The [Run] button and terminal `run` both call the stored function. `manualTrigger` stays `true` — analysis runs only on explicit trigger, not on every config change. **Exception:** `applyPreset()` (room entry) calls `triggerAnalysis()` after applying state — room entry is the one case where analysis auto-triggers, since visitors cannot click [Run].
-
-SteppedTrajectoryPlot uses the same pattern via a separate `onAnalysisReady` ref when in cluster mode.
+Run stays in the viz sections (ExpertRoutesSection and ClusterRoutesSection), not in the toolbar. Each section manages its own Run state internally via `manualTrigger={true}` on MultiSankeyView. This is the existing pattern — no changes needed.
 
 **Session list:** MUDApp calls `apiClient.listSessions()` on mount to populate SessionSelector (same pattern as WorkspacePage).
 
-**Session change invariant:** The `load` command (or toolbar session selector) calls `resetForNewSession(sessionId)`:
+**Session change invariant:** The toolbar session selector calls `resetForNewSession(sessionId)`:
 
 1. Set session ID
 2. Reset axes to defaults (colorAxisId='label', gradient='red-blue', range='range1')
-3. Clear route data, selected card, filter state, highlightedProbeIds
+3. Clear route data, selected card, filter state
 4. Clear schema selection (new session may not have the same schemas)
 5. Fetch session metadata via `apiClient.getSessionDetails()` → populate available schemas, Q4 sentences (axes populate after first `run` via handleRouteDataLoaded)
 
@@ -429,13 +324,9 @@ This is **new behavior** that fixes a current bug: ExperimentPage lines 291-301 
 
 **Axis auto-detection:** Axes are NOT available from session metadata — they come from `RouteAnalysisResponse.available_axes` after running analysis. MUDApp's `handleRouteDataLoaded` callback (same pattern as ExperimentPage lines 226-265) merges axes from all windows and populates `setAllAxes`. Toolbar axis dropdowns start empty and populate after the first `run`.
 
-**Schema → clustering sync:** When a schema is selected (toolbar or terminal), a useEffect syncs the schema's saved params into clustering config state (same pattern as ExperimentPage lines 186-202).
+**Schema → clustering sync:** When a schema is selected via toolbar, a useEffect syncs the schema's saved params into clustering config state (same pattern as ExperimentPage lines 186-202).
 
-**Error routing:** Two channels — terminal text and viz panel state.
-- Validation errors (bad command, unknown schema/axis): terminal only. State unchanged.
-- API errors during `run`: MultiSankeyView gains an `onError(windowId, message)` callback prop. On API failure, it calls `onError` (MUDApp writes to terminal) AND sets per-window error state in `errorMap`.
-- Session load errors: terminal prints error. Viz panels stay in "No session loaded" state.
-- API errors do NOT clear previous successful data.
+**Error handling:** API errors during analysis show in the viz panels (same as current ExperimentPage behavior). API errors do NOT clear previous successful data.
 
 ### 7.D State Management
 
@@ -446,11 +337,10 @@ No React contexts. The existing hooks are the state layer:
 - `useSchemaManagement(sessionIds, onDescLoaded)` — schema list + selection. Fetches schema details on change.
 - `useTemporalAnalysis(sessionId, clusterRouteData, clusteringSchema)` — basin selection, run management, grouping/aggregation, scrubber, lag metrics. 27 return values. Passed as `TemporalAnalysisState`.
 
-All four hooks live in MUDApp. Toolbar receives the hook return objects as props. Terminal's `useCommandDispatch` calls the same setters. Viz components receive values as props (2-3 levels).
+All four hooks live in MUDApp. Toolbar receives the hook return objects as props. Viz components receive values as props (2-3 levels).
 
 Additional MUDApp-level state (not in hooks):
-- `highlightedProbeIds: Set<string>` — drives bidirectional selection sync between Q1 Sankey and Q4 DatasetPanel (see §5.C). Clicking a sentence sets it to a single-element set; clicking a Sankey node sets it to all matching probes. When non-empty, step controls are visible in Q4.
-- `filterState: FilterState` — label filter and search. Passed to MultiSankeyView and DatasetPanel. Terminal commands can set filters (`filter label=military`, `filter clear`). Currently defined in `WordFilterPanel.tsx`.
+- `filterState: FilterState` — label filter. Passed to viz sections and Q4 sentence display. Currently defined in `WordFilterPanel.tsx`.
 
 ### 7.E What Changes from Current Architecture
 
@@ -458,14 +348,14 @@ Additional MUDApp-level state (not in hooks):
 |------|---------|--------|
 | Researcher interface | `/experiment/:id` with sidebar controls | Toolbar + terminal in lab room |
 | Visitor interface | (none) | Same layout, toolbar greyed out (room context) |
-| React controls | Sidebar (220px, always visible) | **Toolbar** (compact ribbon, collapsible sections) |
+| React controls | Sidebar (220px, always visible) | **Toolbar** (compact ribbon, grouped sections) |
 | ExperimentPage | 871-line monolith | **Replaced** by MUDApp (keep as `/legacy` during dev) |
 | WorkspacePage | Session list page | **Replaced** — SessionSelector in toolbar |
 | Sentence list | Always-visible left panel | Q4 DatasetPanel (permanent quadrant) |
 | State management | useAxisControls + useClusteringConfig + useSchemaManagement + useTemporalAnalysis + 30 individual props through 4+ levels | Same 4 hooks, hook objects as typed props through 2-3 levels (4 objects, not 30+ individual values) |
-| Tab sections | ExpertRoutesSection + ClusterRoutesSection tabs | **Eliminated** — mode as prop on MultiSankeyView |
+| Tab sections | ExpertRoutesSection + ClusterRoutesSection tabs | **Kept** — both visible in Q1, manage own Run state |
 | Layout | Header + sidebar + 3-column main area | Toolbar + 2x2 quadrant grid |
-| Terminal | (none) | Q3: xterm.js for navigation + power-user commands |
+| Terminal | (none) | Q3: xterm.js (empty in Phase 1, Evennia in Phase 2+) |
 | Number of React routes | 3 (`/`, `/experiment`, `/experiment/:id`) | 1 (`/` — the MUD interface) |
 
 ### 7.F Code Structure
@@ -488,13 +378,12 @@ OpenLLMRI/
 │       │   ├── useAxisControls.ts  # Visual encoding state (existing, reused)
 │       │   ├── useClusteringConfig.ts # Clustering params (existing, reused)
 │       │   ├── useSchemaManagement.ts # Schema selection (existing, reused)
-│       │   └── useCommandDispatch.ts  # Terminal command parsing (new)
+│       │   └── useTemporalAnalysis.ts # Temporal analysis (existing, reused)
 │       ├── components/
 │       │   ├── toolbar/            # Toolbar, SessionSelector, AxisControls (new)
 │       │   ├── charts/             # SankeyChart, MultiSankeyView (reused)
 │       │   ├── analysis/           # WindowAnalysis, ContextSensitiveCard (reused)
-│       │   ├── mud/                # MUDTerminal (new)
-│       │   ├── dataset/            # DatasetPanel (new)
+│       │   ├── mud/                # MUDTerminal (new, empty in Phase 1)
 │       │   └── shared/             # Primitives
 │       └── ...
 ├── evennia_world/                   # Evennia game directory (new)
@@ -513,7 +402,7 @@ OpenLLMRI/
 
 ## 8. OOB Event Protocol
 
-Config commands (axis, gradient, range, clustering, routes, filters) stay React-local in all phases — toolbar and terminal commands call hooks directly. Evennia only handles navigation, room context, and narrative text. This dramatically simplifies the OOB surface.
+Config commands (axis, gradient, range, clustering, routes, filters) stay React-local in all phases — toolbar controls call hooks directly. Evennia handles the full MUD; viz config is separate. OOB events are limited to room context changes.
 
 ### 8.A Evennia → React Events
 
@@ -640,55 +529,37 @@ Fix genuine tech debt that exists regardless of MUD. Backend-only + one trivial 
 - 0.5: Load sessions with a corrupted session dir → warning logged (not silently skipped)
 - 0.6: Trigger a batch write failure → error appears in log output (not just stdout)
 
-### Phase 1 — Hybrid Interface (toolbar + terminal, no Evennia)
+### Phase 1 — Layout Reorganization (no Evennia)
 
-Build MUDApp with the toolbar + 2x2 quadrant layout. Toolbar controls extracted from ExperimentPage sidebar. Terminal handles local command parsing. No Evennia yet — fully testable standalone.
+Reorganize the existing UI from sidebar+columns into toolbar+quadrant layout. Everything works exactly as it does now — same controls, same viz, same analysis workflow. The only change is where things are on screen.
 
 | Item | Task |
 |------|------|
-| 1.0 | Install dependencies: `npm install react-window @types/react-window` (needed for DatasetPanel virtual scrolling). |
-| 1.A | `MUDApp` page component — single route at `/`. 2x2 quadrant CSS grid + toolbar. ExperimentPage stays at `/legacy/:id` untouched. |
-| 1.B | `Toolbar` component — extracted from ExperimentPage sidebar. SessionSelector, AxisControls, SchemaSelector, ClusteringControls, FilterToggles, ModeToggle, RunButton, RangeSelector. Receives hook return objects as props. |
-| 1.C | `MUDTerminal` component (Q3) — xterm.js terminal with local command parsing, command history (up/down). Collapsible. |
-| 1.D | `DatasetPanel` component (Q4) — probe sentences + generated outputs + category badges. Virtual-scrolled (react-window). Filterable, color-coded by primary axis. Step controls (forward/back/auto-play) appear when a sentence is selected. |
-| 1.E | Wire existing viz components into Q1 (MultiSankeyView, SteppedTrajectoryPlot, TemporalAnalysisSection) and Q2 (WindowAnalysis, ContextSensitiveCard). MultiSankeyView keeps its self-loading pattern. Add `highlightedRouteSignature` prop to SankeyChart for selection highlighting (ECharts emphasis/blur). |
-| 1.F | `useCommandDispatch` hook — parses terminal text, calls hook setters. Returns feedback string for terminal display. Handles: `sessions`, `load`, `schema`, `run`, `look`, `status`, `help`, `inspect`, `dataset`, plus config shortcuts (axis, range, cluster, routes, filter). |
-| 1.G | Bidirectional selection sync — `highlightedProbeIds` state in MUDApp. Click sentence in Q4 → highlights route in Q1 Sankey and shows step controls. Click node/link in Q1 → highlights/scrolls to sentences in Q4. Step controls (forward/back/auto-play) appear whenever a sentence is selected (see §5.B, §5.C). |
-| 1.H | Terminal text feedback — MUDTerminal exposes `write(text)` via imperative ref. Command handlers call `terminalRef.current.write('Session loaded: ...')` for status feedback. |
+| 1.A | `MUDApp` page component — single route at `/`. 2x2 quadrant CSS grid + toolbar. ExperimentPage stays at `/legacy/:id` untouched. All 4 hooks instantiated. |
+| 1.B | `Toolbar` component — extracted from ExperimentPage sidebar. SessionSelector (single dropdown), AxisControls, SchemaSelector, ClusteringControls, FilterToggles, RangeSelector. Receives hook return objects as props. `resetForNewSession()` fixes session change bug. |
+| 1.C | Q1: ExpertRoutesSection + ClusterRoutesSection + TemporalAnalysisSection (reused as-is). Q2: WindowAnalysis + ContextSensitiveCard (reused as-is). Same props as ExperimentPage. |
+| 1.D | Q4: FilteredWordDisplay (reused) — probe sentences, color-coded by primary axis, filterable via toolbar label controls. |
+| 1.E | Q3: MUDTerminal — xterm.js widget, empty. Displays welcome message. No command parsing. Ready for Evennia in Phase 2. |
+| 1.F | Code prep: Add `TemporalAnalysisState` interface to useTemporalAnalysis.ts. Deduplicate `convertFilterState` to `utils/filterState.ts`. |
 
-**Initial state:** At startup before any session load: toolbar shows empty SessionSelector; Q1-Q2 show "No session loaded" placeholders; Q3 terminal shows welcome message ("Type `help` for commands, or select a session from the toolbar"); Q4 shows empty dataset panel.
+**Initial state:** At startup before any session load: toolbar shows empty SessionSelector; Q1-Q2 show "No session loaded" placeholders; Q3 terminal shows welcome message; Q4 shows empty sentence list.
 
 **Verification checklist** (test at `/` using session_1434a9be):
 - Open `/` — toolbar renders, quadrant grid visible, terminal shows welcome
-- Select session_1434a9be from toolbar dropdown → toolbar updates, Q4 populates with sentences
-- Select schema polysemy_explore from toolbar → terminal confirms
-- Set axis to label, gradient to red-blue via toolbar dropdowns
-- Toggle mode to cluster, click [Run] → Q1 Sankeys render across 6 windows + output
-- Change range via toolbar → Sankeys re-render for new layer range
-- Click a Sankey node → Q2 ContextSensitiveCard appears with cluster details
-- Toggle filter labels in toolbar → Sankeys re-render showing filtered probes
-- In cluster mode: Q1 shows SteppedTrajectoryPlot below Sankeys
-- Terminal: `sessions` → prints available sessions
-- Terminal: `load session_1434a9be` → same as toolbar selection
-- Terminal: `schema list` → prints schemas
-- Terminal: `run cluster` → same as toolbar [Run]
-- Terminal: `look` → prints current state summary
-- Terminal: `help` → lists available commands
-- Terminal: `inspect <node_name>` → Q2 card shows details (same as click)
-- Click a sentence in Q4 → Q1 Sankey highlights that sentence's route (bidirectional sync)
-- Click a node/link in Q1 → Q4 scrolls to and highlights matching sentences
-- Click a sentence in Q4 → step controls appear in Q4 header, route highlighted in Q1
-- Step forward → next sentence highlighted, previous dims
-- Step back → previous sentence highlighted
-- Auto-play → sentences step through automatically
-- Click away / clear selection → step controls disappear
-- Select a different session → axes reset, route data clears, toolbar updates
-- Invalid command → terminal prints helpful error, state unchanged
-- Legacy route `/experiment/:id` still works
+- Select session from toolbar dropdown → Q4 populates with sentences
+- Select schema → clustering params update
+- Set axis/gradient via toolbar → colors update
+- Click Run in expert section → Q1 Sankeys render
+- Click Run in cluster section → Q1 cluster Sankeys + trajectory render
+- Change range → re-render
+- Click Sankey node → Q2 card appears
+- Toggle filter labels in toolbar → Sankeys + Q4 sentence list filter
+- Select different session → axes reset, data clears
+- `/legacy/:id` still works unchanged
 
 ### Phase 2 — Evennia Integration
 
-Add Evennia for room navigation and visitor permissions. Config commands stay React-local — Evennia only handles navigation and room events. Much simpler OOB surface than originally designed.
+Add Evennia for the full MUD experience (rooms, NPCs, combat, objects, stats). Config commands stay React-local — Evennia handles the game world, viz config is separate. Terminal commands to be designed with user (see §3).
 
 **Prerequisite:** Verify Evennia's dependencies (Django, Twisted) are compatible with ConceptMRI's venv (FastAPI, transformers, torch). If they conflict, Evennia must run in a separate venv with IPC between services. Resolve before starting 2.A.
 
@@ -1001,13 +872,13 @@ Phase 5: ConceptMRI WS (proxies Evennia) + REST         (2 connections)
 | Start agent session | MUD command or Claude | `agent start em meadow` |
 | Stop agent session | MUD command or Claude | `agent stop` |
 | Monitor live traces | Frontend panels | Real-time viz |
-| Run interactive viz | Toolbar [Run] or terminal | `run cluster` in terminal, or click [Run] in toolbar |
+| Run interactive viz | Viz section Run buttons | Click Run in ExpertRoutesSection or ClusterRoutesSection |
 | Deep analysis + reports | Claude Code | `/analyze` — reads sentences, writes reports and element descriptions |
 | Review proposals | Claude Code or MUD | Approve/reject scaffold changes |
 
 ### 12.B Viz Presets in Room Config
 
-Researcher configures clustering schema, color axes, gradients, layer range via toolbar controls (or terminal shortcuts). Viz presets are saved to micro-world YAML; visitors entering rooms get that curated view automatically. Preset saving is a Phase 2+ feature (add `preset save <name>` to §3.A and §7.C when implementing). For Phase 1, presets are hand-configured in YAML.
+Researcher configures clustering schema, color axes, gradients, layer range via toolbar controls. Viz presets are saved to micro-world YAML; visitors entering rooms get that curated view automatically. Preset saving is a Phase 2+ feature. For Phase 1, presets are hand-configured in YAML.
 
 ### 12.C Data Model
 

@@ -9,6 +9,49 @@ interface UseTemporalAnalysisProps {
   clusteringSchema: string | null
 }
 
+export interface TemporalAnalysisState {
+  // Basin selection
+  availableLayers: number[]
+  basinLayer: number | null
+  setBasinLayer: React.Dispatch<React.SetStateAction<number | null>>
+  layerBasinOptions: BasinOption[]
+  basinA: number | null
+  setBasinA: React.Dispatch<React.SetStateAction<number | null>>
+  basinB: number | null
+  setBasinB: React.Dispatch<React.SetStateAction<number | null>>
+  instructionText: string
+
+  // Runs
+  runs: TemporalRunMetadata[]
+  loadRuns: () => Promise<void>
+  loadingRuns: boolean
+  selectedRunIds: string[]
+  toggleRunSelection: (runId: string) => void
+  lagDataMap: Record<string, TemporalLagData>
+
+  // Grouping & aggregation
+  runGroups: RunGroup[]
+  aggregateLines: Record<string, AggregateLine>
+  highlightedRunId: string | null
+  setHighlightedRunId: React.Dispatch<React.SetStateAction<string | null>>
+  showAggregate: boolean
+  setShowAggregate: React.Dispatch<React.SetStateAction<boolean>>
+  toggleGroupSelection: (group: RunGroup) => void
+
+  // Scrubber
+  scrubberPosition: number
+  setScrubberPosition: React.Dispatch<React.SetStateAction<number>>
+  scrubberPoint: TemporalLagPoint | null
+  maxPosition: number
+
+  // Metrics
+  lagMetrics: {
+    perRun: Record<string, { lag: number; processingMode: string }>
+    perGroup: Record<string, { meanLag: number; stdLag: number; count: number; mode: string }>
+    deltaPersistence: number | null
+  }
+}
+
 /** Build a condition key from a run's metadata */
 function conditionKey(run: TemporalRunMetadata): string {
   return `${run.clustering_schema || 'default'}_${run.basin_a_cluster_id}_${run.basin_b_cluster_id}_${run.basin_layer}_${run.processing_mode}_${run.sequence_config}`
@@ -48,7 +91,7 @@ function conditionColor(run: TemporalRunMetadata): string {
   return CONDITION_COLORS[modeKey] || '#6b7280'
 }
 
-export function useTemporalAnalysis({ sessionId, clusterRouteData, clusteringSchema }: UseTemporalAnalysisProps) {
+export function useTemporalAnalysis({ sessionId, clusterRouteData, clusteringSchema }: UseTemporalAnalysisProps): TemporalAnalysisState {
   // Basin selection state
   const [basinLayer, setBasinLayer] = useState<number | null>(null)
   const [basinA, setBasinA] = useState<number | null>(null)

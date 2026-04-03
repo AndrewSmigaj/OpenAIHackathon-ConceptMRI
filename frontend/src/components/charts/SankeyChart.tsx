@@ -85,13 +85,18 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
     chartInstance.current.on('click', handleClick);
 
     // Handle resize — observe container, not just window
+    // Use requestAnimationFrame to avoid resize during ECharts main process
     const handleResize = () => {
-      chartInstance.current?.resize();
+      requestAnimationFrame(() => {
+        chartInstance.current?.resize();
+      });
     };
     window.addEventListener('resize', handleResize);
 
     const resizeObserver = new ResizeObserver(() => {
-      chartInstance.current?.resize();
+      requestAnimationFrame(() => {
+        chartInstance.current?.resize();
+      });
     });
     resizeObserver.observe(chartRef.current);
 
@@ -142,8 +147,16 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
       }
     }
 
+    // Deduplicate nodes by name — ECharts Sankey requires unique names
+    const seenNames = new Set<string>()
+    const uniqueNodes = nodes.filter(node => {
+      if (seenNames.has(node.name)) return false
+      seenNames.add(node.name)
+      return true
+    })
+
     // Prepare node data with colors
-    const sankeyNodes = nodes.map(node => {
+    const sankeyNodes = uniqueNodes.map(node => {
       const isOutputNode = node.name.startsWith('Generated:');
 
       let nodeColor: string;

@@ -38,7 +38,7 @@ function computeContingency(nodes: SankeyNode[], links: SankeyLink[]): Contingen
 
   // Source nodes = unique sources of output links
   const sourceNames = [...new Set(outLinks.map(l => l.source))]
-  const outcomeLabels = outNodes.map(n => n.name.replace('Generated:', ''))
+  const outcomeLabels = [...new Set(outNodes.map(n => n.name.replace('Generated:', '')))]
 
   // Build contingency table
   const table = sourceNames.map(src => {
