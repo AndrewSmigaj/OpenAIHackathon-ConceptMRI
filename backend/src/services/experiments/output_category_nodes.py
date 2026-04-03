@@ -14,6 +14,33 @@ import json
 from schemas.tokens import ProbeRecord
 from services.experiments.route_analysis_common import axis_label
 
+# Single source of truth for the output node name prefix.
+# Used by the builder below and by experiments.py to strip/rebuild output nodes.
+OUTPUT_NODE_PREFIX = "Generated:"
+
+
+def is_output_node(name: str) -> bool:
+    return name.startswith(OUTPUT_NODE_PREFIX)
+
+
+def is_output_link(link: dict) -> bool:
+    return link.get("target", "").startswith(OUTPUT_NODE_PREFIX)
+
+
+def strip_output_prefix(name: str) -> str:
+    if name.startswith(OUTPUT_NODE_PREFIX):
+        return name[len(OUTPUT_NODE_PREFIX):]
+    return name
+
+
+def strip_output_nodes(
+    nodes: List[dict], links: List[dict]
+) -> Tuple[List[dict], List[dict]]:
+    """Remove output-category nodes and their links from a Sankey result."""
+    base_nodes = [n for n in nodes if not is_output_node(n["name"])]
+    base_links = [l for l in links if not is_output_link(l)]
+    return base_nodes, base_links
+
 
 def build_output_category_layer(
     nodes: List[dict],
@@ -108,7 +135,7 @@ def build_output_category_layer(
     # Build output nodes
     output_nodes = []
     for category, records in sorted(category_groups.items()):
-        node_name = f"Generated:{category}"
+        node_name = f"{OUTPUT_NODE_PREFIX}{category}"
 
         label_dist: Dict[str, int] = defaultdict(int)
         tw_dist: Dict[str, int] = defaultdict(int)
@@ -165,7 +192,7 @@ def build_output_category_layer(
         final_node_totals[final_node] = len(probe_ids)
 
     for (final_node, category), records in sorted(link_groups.items()):
-        node_name = f"Generated:{category}"
+        node_name = f"{OUTPUT_NODE_PREFIX}{category}"
         count = len(records)
         total_from_source = final_node_totals.get(final_node, 1)
 
