@@ -143,11 +143,11 @@ export default function MUDApp() {
       setSelectedRange, setOutputAxes, setOutputColorAxisId, setOutputColorAxis2Id,
       setOutputGradient, setSelectedSchema])
 
-  // Auto-detect axes from route analysis (same as ExperimentPage lines 226-265)
+  // Auto-detect axes from route analysis
   const handleRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
     setCurrentRouteData(routeDataMap)
+    // Collect all input axes from responses
     const axesMap = new Map<string, DynamicAxis>()
-    const outAxesMap = new Map<string, DynamicAxis>()
     for (const data of Object.values(routeDataMap)) {
       if (data?.available_axes) {
         for (const axis of data.available_axes) {
@@ -156,36 +156,56 @@ export default function MUDApp() {
           }
         }
       }
+    }
+    const detectedAxes = Array.from(axesMap.values())
+    if (detectedAxes.length > 0) {
+      setAllAxes(detectedAxes)
+      if (!detectedAxes.find(a => a.id === colorAxisId)) {
+        setColorAxisId(detectedAxes[0].id)
+      }
+    }
+
+    // Collect output axes from responses
+    const outputAxesMap = new Map<string, DynamicAxis>()
+    for (const data of Object.values(routeDataMap)) {
       if (data?.output_available_axes) {
         for (const axis of data.output_available_axes) {
-          if (!outAxesMap.has(axis.id)) {
-            outAxesMap.set(axis.id, axis)
+          if (!outputAxesMap.has(axis.id)) {
+            outputAxesMap.set(axis.id, axis)
           }
         }
       }
     }
-    const newAxes = Array.from(axesMap.values())
-    if (newAxes.length > 0) {
-      setAllAxes(prev => {
-        const merged = new Map(prev.map(a => [a.id, a]))
-        newAxes.forEach(a => merged.set(a.id, a))
-        return Array.from(merged.values())
-      })
+    const detectedOutputAxes = Array.from(outputAxesMap.values())
+    setOutputAxes(detectedOutputAxes)
+    if (outputColorAxisId !== '' && detectedOutputAxes.length > 0 && !detectedOutputAxes.find(a => a.id === outputColorAxisId)) {
+      setOutputColorAxisId('')
     }
-    const newOutputAxes = Array.from(outAxesMap.values())
-    if (newOutputAxes.length > 0) {
-      setOutputAxes(prev => {
-        const merged = new Map(prev.map(a => [a.id, a]))
-        newOutputAxes.forEach(a => merged.set(a.id, a))
-        return Array.from(merged.values())
-      })
-    }
-  }, [setAllAxes, setOutputAxes])
+  }, [colorAxisId, outputColorAxisId])
 
   const handleClusterRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
     setCurrentClusterRouteData(routeDataMap)
-    handleRouteDataLoaded(routeDataMap)
-  }, [handleRouteDataLoaded])
+
+    // Extract output axes from cluster route data
+    const outputAxesMap = new Map<string, DynamicAxis>()
+    for (const data of Object.values(routeDataMap)) {
+      if (data?.output_available_axes) {
+        for (const axis of data.output_available_axes) {
+          if (!outputAxesMap.has(axis.id)) {
+            outputAxesMap.set(axis.id, axis)
+          }
+        }
+      }
+    }
+    const detectedOutputAxes = Array.from(outputAxesMap.values())
+    if (detectedOutputAxes.length > 0) {
+      setOutputAxes(prev => {
+        const merged = new Map(prev.map(a => [a.id, a]))
+        detectedOutputAxes.forEach(a => { if (!merged.has(a.id)) merged.set(a.id, a) })
+        return Array.from(merged.values())
+      })
+    }
+  }, [outputColorAxisId])
 
   return (
     <div className="h-screen flex flex-col bg-gray-100">

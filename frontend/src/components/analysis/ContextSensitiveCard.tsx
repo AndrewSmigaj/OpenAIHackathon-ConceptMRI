@@ -1,4 +1,5 @@
 import { getNodeColor, getAxisColor, rgbToHex, type GradientScheme } from '../../utils/colorBlending'
+import { isOutputNode as checkIsOutputNode } from '../../constants/outputNodes'
 import SentenceHighlight from '../SentenceHighlight'
 import ReactMarkdown from 'react-markdown'
 
@@ -62,7 +63,7 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
 
   // Examples
   const rawExamples = selectedData.tokens || selectedData.example_tokens || []
-  const isOutputNode = selectedData.name?.startsWith('Generated:') || selectedData.id?.startsWith('Generated:')
+  const isOutputNode = checkIsOutputNode(selectedData.name || '') || checkIsOutputNode(selectedData.id || '')
 
   const shuffled = (arr: any[]) => {
     const a = [...arr]

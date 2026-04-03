@@ -2,6 +2,7 @@
 import jStat from 'jStat'
 import ReactMarkdown from 'react-markdown'
 import { getAxisColor, rgbToHex, type GradientScheme } from '../../utils/colorBlending'
+import { isOutputNode, isOutputLink, stripOutputPrefix, OUTPUT_NODE_PREFIX } from '../../constants/outputNodes'
 import type { SankeyNode, SankeyLink } from '../../types/api'
 
 interface WindowAnalysisProps {
@@ -30,22 +31,22 @@ interface ContingencyResult {
 
 function computeContingency(nodes: SankeyNode[], links: SankeyLink[]): ContingencyResult | null {
   // Find output nodes and the links feeding into them
-  const outNodes = nodes.filter(n => n.name.startsWith('Generated:'))
+  const outNodes = nodes.filter(n => isOutputNode(n.name))
   if (outNodes.length < 2) return null
 
-  const outLinks = links.filter(l => l.target.startsWith('Generated:'))
+  const outLinks = links.filter(l => isOutputLink(l))
   if (outLinks.length === 0) return null
 
   // Source nodes = unique sources of output links
   const sourceNames = [...new Set(outLinks.map(l => l.source))]
-  const outcomeLabels = [...new Set(outNodes.map(n => n.name.replace('Generated:', '')))]
+  const outcomeLabels = [...new Set(outNodes.map(n => stripOutputPrefix(n.name)))]
 
   // Build contingency table
   const table = sourceNames.map(src => {
     const outcomes: Record<string, number> = {}
     let total = 0
     for (const label of outcomeLabels) {
-      const link = outLinks.find(l => l.source === src && l.target === `Generated:${label}`)
+      const link = outLinks.find(l => l.source === src && l.target === `${OUTPUT_NODE_PREFIX}${label}`)
       const val = link?.value ?? 0
       outcomes[label] = val
       total += val

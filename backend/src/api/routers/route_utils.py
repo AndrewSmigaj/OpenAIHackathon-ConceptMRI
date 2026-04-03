@@ -17,14 +17,12 @@ def _rebuild_output_nodes(
     window_layers: list,
     output_grouping_axes: list,
 ) -> dict:
-    """Strip existing Out:* nodes/links from cached result and rebuild with dynamic grouping."""
+    """Strip existing output nodes/links from cached result and rebuild with dynamic grouping."""
     from core.parquet_reader import read_records
     from schemas.tokens import ProbeRecord
-    from services.experiments.output_category_nodes import build_output_category_layer
+    from services.experiments.output_category_nodes import build_output_category_layer, strip_output_nodes
 
-    # Strip Out:* nodes and links
-    base_nodes = [n for n in result["nodes"] if not n["name"].startswith("Out:")]
-    base_links = [l for l in result["links"] if not l["target"].startswith("Out:")]
+    base_nodes, base_links = strip_output_nodes(result["nodes"], result["links"])
 
     # Load token records from parquet
     session_path = DATA_LAKE_PATH / session_id

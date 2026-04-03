@@ -5,6 +5,7 @@ import type { GradientScheme } from '../../utils/colorBlending'
 import type { FilterState } from '../WordFilterPanel'
 import { apiClient } from '../../api/client'
 import { LAYER_RANGES } from '../../constants/layerRanges'
+import { isOutputNode, isOutputLink } from '../../constants/outputNodes'
 
 interface MultiSankeyViewProps {
   sessionIds: string[]
@@ -187,8 +188,8 @@ export default function MultiSankeyView({
                   </div>
                 ) : routeData ? (
                   <SankeyChart
-                    nodes={routeData.nodes.filter(n => !n.name.startsWith('Generated:'))}
-                    links={routeData.links.filter(l => !l.target.startsWith('Generated:'))}
+                    nodes={routeData.nodes.filter(n => !isOutputNode(n.name))}
+                    links={routeData.links.filter(l => !isOutputLink(l))}
                     primaryValues={primaryValues}
                     gradient={gradient}
                     secondaryValues={secondaryValues}
@@ -254,10 +255,10 @@ export default function MultiSankeyView({
           const lastWindow = currentRange.windows[currentRange.windows.length - 1]
           const lastData = routeDataMap[lastWindow?.id]
           if (!lastData) return null
-          const outputNodes = lastData.nodes.filter(n => n.name.startsWith('Generated:'))
+          const outputNodes = lastData.nodes.filter(n => isOutputNode(n.name))
           if (outputNodes.length === 0) return null
           // Get final-layer nodes that link to output nodes
-          const outputLinks = lastData.links.filter(l => l.target.startsWith('Generated:'))
+          const outputLinks = lastData.links.filter(l => isOutputLink(l))
           const sourceNames = new Set(outputLinks.map(l => l.source))
           const sourceNodes = lastData.nodes.filter(n => sourceNames.has(n.name))
           return (
