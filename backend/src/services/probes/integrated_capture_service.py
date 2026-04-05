@@ -148,6 +148,9 @@ class IntegratedCaptureService:
         categories: Optional[Dict[str, str]] = None,
         transition_step: int = None,
         generate_output: bool = False,
+        turn_id: int = None,
+        scenario_id: str = None,
+        capture_type: str = None,
     ) -> Tuple[str, any]:
         # 1. Validate session (restores from disk if needed)
         session_status = self.session_mgr.validate_active_session(session_id)
@@ -201,6 +204,8 @@ class IntegratedCaptureService:
                 experiment_id=experiment_id, sequence_id=sequence_id,
                 sentence_index=sentence_index, label=label, label2=label2,
                 categories=categories, transition_step=transition_step,
+                turn_id=turn_id, scenario_id=scenario_id,
+                capture_type=capture_type,
             )
 
             # 6. Generate continuation if requested

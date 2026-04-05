@@ -33,6 +33,11 @@ class RoutingRecord:
     # Metadata
     captured_at: str            # ISO timestamp for debugging
 
+    # Agent session fields (null for batch captures)
+    turn_id: Optional[int] = None
+    scenario_id: Optional[str] = None
+    capture_type: Optional[str] = None  # "batch", "reasoning", "knowledge_query"
+
     def __post_init__(self):
         """Validate routing data consistency."""
         context = f"Probe {self.probe_id} Layer {self.layer}"
@@ -97,7 +102,10 @@ ROUTING_PARQUET_SCHEMA = {
     "expert_top1_id": "int32",
     "expert_top1_weight": "float",
     "gate_entropy": "float",
-    "captured_at": "string"
+    "captured_at": "string",
+    "turn_id": "int32",
+    "scenario_id": "string",
+    "capture_type": "string",
 }
 
 
@@ -106,7 +114,10 @@ def create_routing_record(
     layer: int,
     token_position: int,
     routing_weights: np.ndarray,  # Shape: [num_experts] for all experts
-    captured_at: Optional[str] = None
+    captured_at: Optional[str] = None,
+    turn_id: Optional[int] = None,
+    scenario_id: Optional[str] = None,
+    capture_type: Optional[str] = None,
 ) -> RoutingRecord:
     """
     Create routing record from raw MoE router output.
@@ -147,7 +158,10 @@ def create_routing_record(
         expert_top1_id=expert_top1_id,
         expert_top1_weight=expert_top1_weight,
         gate_entropy=float(gate_entropy),
-        captured_at=captured_at
+        captured_at=captured_at,
+        turn_id=turn_id,
+        scenario_id=scenario_id,
+        capture_type=capture_type,
     )
 
 

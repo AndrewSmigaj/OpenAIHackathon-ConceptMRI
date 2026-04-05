@@ -98,6 +98,32 @@ class CaptureOrchestrator:
             if self.routing_capture is not None:
                 self.routing_capture.register_hooks(verbose=False)
 
+    def generate_continuation_with_ids(
+        self, input_tensor: torch.Tensor, max_new_tokens: int = 50
+    ) -> Tuple[str, List[int]]:
+        """Generate text continuation, returning both decoded text and token IDs.
+
+        Like generate_continuation() but also returns the raw token IDs,
+        enabling token-level concatenation without BPE re-tokenization.
+        """
+        if self.routing_capture is not None:
+            self.routing_capture.remove_hooks()
+
+        try:
+            with torch.no_grad():
+                gen_output = self.model.generate(
+                    input_ids=input_tensor,
+                    max_new_tokens=max_new_tokens,
+                    do_sample=False,
+                    pad_token_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
+                )
+            generated_ids = gen_output[0, input_tensor.shape[1]:]
+            text = self.tokenizer.decode(generated_ids, skip_special_tokens=True)
+            return text, generated_ids.tolist()
+        finally:
+            if self.routing_capture is not None:
+                self.routing_capture.register_hooks(verbose=False)
+
     def get_captured_data(self) -> Tuple[Dict, Dict, Dict]:
         """Return the three captured data dicts from the last forward pass."""
         return (

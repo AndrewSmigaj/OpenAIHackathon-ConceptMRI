@@ -41,6 +41,7 @@ class SessionStatus:
     failed_pairs: int
     current_probe: Optional[str] = None
     error_message: Optional[str] = None
+    current_turn_id: int = 0  # Agent sessions: auto-incremented per generate call
 
     @property
     def progress_percent(self) -> float:
@@ -115,6 +116,56 @@ class SessionManager:
             json.dump(session_metadata, f, indent=2)
 
         logger.info(f"Created sentence session {session_id} ({session_name}): {total_probes} probes")
+        return session_id
+
+    def create_agent_session(
+        self,
+        session_name: str,
+        scenario_id: str,
+        target_words: List[str],
+        bootstrap_session_id: str,
+        agent_name: str,
+        capture_type_config: List[str] = None,
+    ) -> str:
+        """Create a new agent capture session. Returns session_id."""
+        if capture_type_config is None:
+            capture_type_config = ["reasoning"]
+
+        session_id = generate_capture_id("session")
+
+        session_status = SessionStatus(
+            session_id=session_id,
+            state=SessionState.ACTIVE,
+            total_pairs=0,  # open-ended
+            completed_pairs=0,
+            failed_pairs=0,
+            current_turn_id=0,
+        )
+        self.active_sessions[session_id] = session_status
+
+        session_metadata = {
+            "session_id": session_id,
+            "session_name": session_name,
+            "target_word": target_words[0] if target_words else "",
+            "target_words": target_words,
+            "labels": [],
+            "layers_captured": self.layers_to_capture,
+            "total_pairs": 0,
+            "model_name": self.model_name,
+            "created_at": datetime.now().isoformat(),
+            "state": session_status.state.value,
+            "experiment_type": "agent",
+            "scenario_id": scenario_id,
+            "bootstrap_session_id": bootstrap_session_id,
+            "agent_name": agent_name,
+            "capture_type_config": capture_type_config,
+        }
+
+        session_file = self.sessions_dir / f"{session_id}.json"
+        with open(session_file, "w") as f:
+            json.dump(session_metadata, f, indent=2)
+
+        logger.info(f"Created agent session {session_id} ({session_name}): scenario={scenario_id}, targets={target_words}")
         return session_id
 
     def get_session_status(self, session_id: str) -> SessionStatus:
@@ -216,12 +267,21 @@ class SessionManager:
 
     def _restore_session(self, session_id: str, metadata: dict) -> None:
         """Restore an active session from persisted metadata."""
+        # For agent sessions, recover turn_id from tick_log line count
+        turn_id = 0
+        if metadata.get("experiment_type") == "agent":
+            tick_log = Path(self.data_lake_path) / session_id / "tick_log.jsonl"
+            if tick_log.exists():
+                turn_id = sum(1 for _ in tick_log.open())
+                logger.info(f"Recovered turn_id={turn_id} from tick_log for {session_id}")
+
         session_status = SessionStatus(
             session_id=session_id,
             state=SessionState.ACTIVE,
             total_pairs=metadata["total_pairs"],
             completed_pairs=metadata.get("completed_pairs", 0),
             failed_pairs=metadata.get("failed_pairs", 0),
+            current_turn_id=turn_id,
         )
         self.active_sessions[session_id] = session_status
         logger.info(

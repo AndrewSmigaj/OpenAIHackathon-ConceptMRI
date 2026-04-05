@@ -412,5 +412,49 @@ class TemporalLagDataResponse(BaseModel):
     points: List[TemporalLagPoint]
     regime_boundary: int
     processing_mode: str
-    temporal_run_id: str
-    basin_separation: float    # L2 distance between centroids
+
+
+# --- Agent session schemas ---
+
+class AgentStartRequest(BaseModel):
+    """Request to start a new agent capture session."""
+    session_name: str
+    scenario_id: str
+    target_words: List[str]
+    bootstrap_session_id: str
+    agent_name: str
+    capture_type_config: Optional[List[str]] = None
+
+class AgentStartResponse(BaseModel):
+    """Response from starting an agent session."""
+    session_id: str
+    session_name: str
+    target_words: List[str]
+    scenario_id: str
+
+class AgentStopRequest(BaseModel):
+    """Request to stop an agent session."""
+    session_id: str
+
+class AgentStopResponse(BaseModel):
+    """Response from stopping an agent session."""
+    session_id: str
+    state: str
+    total_turns: int
+
+class AgentGenerateRequest(BaseModel):
+    """Request for a single agent generate tick."""
+    session_id: str
+    prompt: str
+    target_words: List[str]
+    knowledge_probe: Optional[str] = None
+    max_new_tokens: int = 200
+
+class AgentGenerateResponse(BaseModel):
+    """Response from an agent generate tick."""
+    analysis: str
+    action: str
+    capture_id: str
+    generated_text: str
+    turn_id: int
+    knowledge_capture_id: Optional[str] = None

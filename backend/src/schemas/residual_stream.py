@@ -5,7 +5,7 @@ Captures the complete hidden state after attention + MLP (residual_in + attn + m
 """
 
 from dataclasses import dataclass
-from typing import Tuple
+from typing import Optional, Tuple
 import numpy as np
 
 from utils.numpy_utils import (
@@ -27,6 +27,11 @@ class ResidualStreamState:
     token_position: int                    # Token position in sequence (0=context, 1=target)
     residual_stream: np.ndarray            # Full decoder layer output (hidden_size D)
     residual_dims: Tuple[int, ...]         # Shape metadata
+
+    # Agent session fields (null for batch captures)
+    turn_id: Optional[int] = None
+    scenario_id: Optional[str] = None
+    capture_type: Optional[str] = None  # "batch", "reasoning", "knowledge_query"
 
     def __post_init__(self):
         """Ensure consistent data format and validate ranges."""
@@ -73,11 +78,18 @@ RESIDUAL_STREAM_PARQUET_SCHEMA = {
     "layer": "int32",
     "token_position": "int32",
     "residual_stream": "list<float>",
-    "residual_dims": "list<int32>"
+    "residual_dims": "list<int32>",
+    "turn_id": "int32",
+    "scenario_id": "string",
+    "capture_type": "string",
 }
 
 
-def create_residual_stream_state(probe_id: str, layer: int, token_position: int, residual_stream: np.ndarray) -> ResidualStreamState:
+def create_residual_stream_state(
+    probe_id: str, layer: int, token_position: int, residual_stream: np.ndarray,
+    turn_id: Optional[int] = None, scenario_id: Optional[str] = None,
+    capture_type: Optional[str] = None,
+) -> ResidualStreamState:
     """Create residual stream state record from decoder layer output."""
     residual_stream = ensure_numpy_array(residual_stream)
     residual_dims = tuple(residual_stream.shape)
@@ -87,5 +99,8 @@ def create_residual_stream_state(probe_id: str, layer: int, token_position: int,
         layer=layer,
         token_position=token_position,
         residual_stream=residual_stream,
-        residual_dims=residual_dims
+        residual_dims=residual_dims,
+        turn_id=turn_id,
+        scenario_id=scenario_id,
+        capture_type=capture_type,
     )

@@ -41,6 +41,11 @@ class ProbeRecord:
     output_category: Optional[str] = None
     output_category_json: Optional[str] = None
 
+    # Agent session fields (null for batch captures)
+    turn_id: Optional[int] = None
+    scenario_id: Optional[str] = None
+    capture_type: Optional[str] = None  # "batch", "reasoning", "knowledge_query"
+
     @classmethod
     def from_parquet_dict(cls, data: dict) -> 'ProbeRecord':
         """Reconstruct from Parquet dictionary."""
@@ -69,6 +74,9 @@ PROBE_RECORD_PARQUET_SCHEMA = {
     "generated_text": "string",
     "output_category": "string",
     "output_category_json": "string",
+    "turn_id": "int32",
+    "scenario_id": "string",
+    "capture_type": "string",
 }
 
 
@@ -90,6 +98,9 @@ def create_probe_record(
     categories: Optional[Dict[str, str]] = None,
     transition_step: int = None,
     created_at: str = None,
+    turn_id: int = None,
+    scenario_id: str = None,
+    capture_type: str = None,
 ) -> ProbeRecord:
     """Create probe record linking probe_id to input text and tracked words."""
     categories_json = json.dumps(categories) if categories else None
@@ -111,4 +122,7 @@ def create_probe_record(
         categories_json=categories_json,
         transition_step=transition_step,
         created_at=created_at,
+        turn_id=turn_id,
+        scenario_id=scenario_id,
+        capture_type=capture_type,
     )

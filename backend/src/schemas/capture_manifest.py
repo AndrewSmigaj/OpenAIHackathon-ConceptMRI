@@ -33,6 +33,10 @@ class CaptureManifest:
     num_layers: int = 0             # Total number of model layers
     hidden_size: int = 0            # Hidden dimension size
 
+    # Agent session fields (null for batch captures)
+    target_words: Optional[List[str]] = None  # Multi-word tracking for agent sessions
+    experiment_type: Optional[str] = None     # "sentence" or "agent"
+
     @classmethod
     def from_parquet_dict(cls, data: dict) -> 'CaptureManifest':
         """Reconstruct from Parquet dictionary with JSON deserialization."""
@@ -48,6 +52,8 @@ class CaptureManifest:
             num_experts=data.get('num_experts', 0),
             num_layers=data.get('num_layers', 0),
             hidden_size=data.get('hidden_size', 0),
+            target_words=data.get('target_words'),
+            experiment_type=data.get('experiment_type'),
         )
 
     def to_parquet_dict(self) -> dict:
@@ -64,6 +70,8 @@ class CaptureManifest:
             'num_experts': self.num_experts,
             'num_layers': self.num_layers,
             'hidden_size': self.hidden_size,
+            'target_words': self.target_words,
+            'experiment_type': self.experiment_type,
         }
 
 
@@ -80,6 +88,8 @@ CAPTURE_MANIFEST_PARQUET_SCHEMA = {
     "num_experts": "int32",
     "num_layers": "int32",
     "hidden_size": "int32",
+    "target_words": "list<string>",
+    "experiment_type": "string",
 }
 
 
@@ -94,6 +104,8 @@ def create_capture_manifest(
     num_experts: int = 0,
     num_layers: int = 0,
     hidden_size: int = 0,
+    target_words: Optional[List[str]] = None,
+    experiment_type: Optional[str] = None,
 ) -> CaptureManifest:
     """Create capture manifest for session tracking."""
     return CaptureManifest(
@@ -108,4 +120,6 @@ def create_capture_manifest(
         num_experts=num_experts,
         num_layers=num_layers,
         hidden_size=hidden_size,
+        target_words=target_words,
+        experiment_type=experiment_type,
     )

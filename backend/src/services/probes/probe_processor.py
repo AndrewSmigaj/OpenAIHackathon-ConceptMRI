@@ -74,6 +74,38 @@ class ProbeProcessor:
 
         return positions[-1], target_token_id
 
+    def find_all_word_token_positions(self, token_ids: list, word: str) -> List[Tuple[int, int]]:
+        """Find ALL positions where a word appears in a tokenized sequence.
+
+        Like find_word_token_position but returns every occurrence, not just the last.
+        Returns empty list (not ValueError) if word not found — absent target words
+        are expected per-tick in agent sessions.
+
+        Returns list of (position, token_id) tuples.
+        """
+        word_tokens = self.tokenizer.encode(word, add_special_tokens=False)
+        space_word_tokens = self.tokenizer.encode(f" {word}", add_special_tokens=False)
+
+        if len(word_tokens) == 1:
+            target_token_id = word_tokens[0]
+        elif len(space_word_tokens) == 1:
+            target_token_id = space_word_tokens[0]
+        else:
+            logger.warning(
+                f"Word '{word}' is multi-token ({len(word_tokens)} without space, "
+                f"{len(space_word_tokens)} with space) — skipping"
+            )
+            return []
+
+        positions = [i for i, tid in enumerate(token_ids) if tid == target_token_id]
+        if not positions:
+            alt_id = space_word_tokens[0] if len(word_tokens) == 1 else word_tokens[0]
+            positions = [i for i, tid in enumerate(token_ids) if tid == alt_id]
+            if positions:
+                target_token_id = alt_id
+
+        return [(pos, target_token_id) for pos in positions]
+
     def convert_to_schemas(
         self,
         probe_id: str,
@@ -95,6 +127,9 @@ class ProbeProcessor:
         label2: str = None,
         categories: Optional[Dict[str, str]] = None,
         transition_step: int = None,
+        turn_id: int = None,
+        scenario_id: str = None,
+        capture_type: str = None,
     ) -> ProbeCapture:
         """Convert raw capture data to schema records.
 
@@ -120,6 +155,9 @@ class ProbeProcessor:
             categories=categories,
             transition_step=transition_step,
             created_at=datetime.now().isoformat(),
+            turn_id=turn_id,
+            scenario_id=scenario_id,
+            capture_type=capture_type,
         )
 
         routing_records = []
@@ -145,6 +183,8 @@ class ProbeProcessor:
                     probe_id=probe_id, layer=layer,
                     token_position=semantic_pos,
                     routing_weights=routing_weights.numpy(),
+                    turn_id=turn_id, scenario_id=scenario_id,
+                    capture_type=capture_type,
                 ))
 
             if layer_key in embedding_data:
@@ -155,6 +195,8 @@ class ProbeProcessor:
                         probe_id=probe_id, layer=layer,
                         token_position=semantic_pos,
                         embedding=emb_vec.numpy(),
+                        turn_id=turn_id, scenario_id=scenario_id,
+                        capture_type=capture_type,
                     ))
 
             if layer_key in residual_stream_data:
@@ -165,6 +207,8 @@ class ProbeProcessor:
                         probe_id=probe_id, layer=layer,
                         token_position=semantic_pos,
                         residual_stream=residual_state.numpy(),
+                        turn_id=turn_id, scenario_id=scenario_id,
+                        capture_type=capture_type,
                     ))
 
         return ProbeCapture(
