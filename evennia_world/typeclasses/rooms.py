@@ -21,13 +21,26 @@ class Room(ObjectParent, DefaultRoom):
     def get_room_type(self):
         return self.db.room_type or "hub"
 
+    def _get_role_for(self, character):
+        """Determine role from account permissions. Builder+ = researcher."""
+        account = character.account
+        if not account:
+            return "visitor"
+        if account.check_permstring("Builder"):
+            return "researcher"
+        return "visitor"
+
+    def _send_room_oob(self, character):
+        """Send room_entered OOB to a character. Override in subclasses."""
+        character.msg(room_entered=[{
+            "room_type": self.get_room_type(),
+            "role": self._get_role_for(character),
+        }])
+
     def at_object_receive(self, moved_obj, source_location, **kwargs):
         super().at_object_receive(moved_obj, source_location, **kwargs)
         if moved_obj.account:
-            moved_obj.msg(room_entered=[{
-                "room_type": self.get_room_type(),
-                "role": "visitor",
-            }])
+            self._send_room_oob(moved_obj)
 
     def at_object_leave(self, moved_obj, target_location, **kwargs):
         super().at_object_leave(moved_obj, target_location, **kwargs)
@@ -40,21 +53,18 @@ class Room(ObjectParent, DefaultRoom):
 class ResearcherLab(Room):
     """
     Personal research lab. Full control over viz panels.
-    Sends role="researcher" with no forced session.
+    Sends role based on permissions, with no forced session.
     """
 
     def get_room_type(self):
         return "lab"
 
-    def at_object_receive(self, moved_obj, source_location, **kwargs):
-        # Skip Room's at_object_receive — send our own OOB
-        DefaultRoom.at_object_receive(self, moved_obj, source_location, **kwargs)
-        if moved_obj.account:
-            moved_obj.msg(room_entered=[{
-                "room_type": "lab",
-                "role": "researcher",
-                "session_id": None,
-            }])
+    def _send_room_oob(self, character):
+        character.msg(room_entered=[{
+            "room_type": "lab",
+            "role": self._get_role_for(character),
+            "session_id": None,
+        }])
 
 
 class MicroWorldRoom(Room):
@@ -66,14 +76,12 @@ class MicroWorldRoom(Room):
     def get_room_type(self):
         return "micro_world"
 
-    def at_object_receive(self, moved_obj, source_location, **kwargs):
-        DefaultRoom.at_object_receive(self, moved_obj, source_location, **kwargs)
-        if moved_obj.account:
-            config = self.db.world_config or {}
-            moved_obj.msg(room_entered=[{
-                "room_type": "micro_world",
-                "role": config.get("role", "visitor"),
-                "session_id": config.get("session_id"),
-                "clustering_schema": config.get("clustering_schema"),
-                "viz_preset": config.get("viz_preset"),
-            }])
+    def _send_room_oob(self, character):
+        config = self.db.world_config or {}
+        character.msg(room_entered=[{
+            "room_type": "micro_world",
+            "role": self._get_role_for(character),
+            "session_id": config.get("session_id"),
+            "clustering_schema": config.get("clustering_schema"),
+            "viz_preset": config.get("viz_preset"),
+        }])

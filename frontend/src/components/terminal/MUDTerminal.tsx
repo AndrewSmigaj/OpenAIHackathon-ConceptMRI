@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Terminal } from '@xterm/xterm'
 import { FitAddon } from '@xterm/addon-fit'
 import '@xterm/xterm/css/xterm.css'
@@ -20,14 +20,16 @@ export default function MUDTerminal({ onOOB }: MUDTerminalProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const terminalRef = useRef<Terminal | null>(null)
   const fitAddonRef = useRef<FitAddon | null>(null)
-  const lineBufferRef = useRef('')
   const prevStatusRef = useRef<ConnectionStatus>('disconnected')
+  const [inputValue, setInputValue] = useState('')
 
   // Write text to xterm.js, converting \n to \r\n for proper display
   const writeToTerminal = useCallback((text: string) => {
     if (!terminalRef.current) return
     // Evennia RAW mode sends \n — xterm.js needs \r\n
-    const normalized = text.replace(/\r?\n/g, '\r\n')
+    let normalized = text.replace(/\r?\n/g, '\r\n')
+    // Ensure each message ends with a newline so consecutive messages don't run together
+    if (!normalized.endsWith('\r\n')) normalized += '\r\n'
     terminalRef.current.write(normalized)
   }, [])
 
@@ -48,13 +50,13 @@ export default function MUDTerminal({ onOOB }: MUDTerminalProps) {
     terminalRef.current.write(`\r\n${color}[${status}]\x1b[0m\r\n`)
   }, [status])
 
-  // Initialize xterm.js
+  // Initialize xterm.js (output-only)
   useEffect(() => {
     if (!containerRef.current) return
 
     const terminal = new Terminal({
-      cursorBlink: true,
-      disableStdin: false,
+      cursorBlink: false,
+      disableStdin: true,
       fontSize: 12,
       fontFamily: 'monospace',
       theme: {
@@ -72,28 +74,6 @@ export default function MUDTerminal({ onOOB }: MUDTerminalProps) {
     terminalRef.current = terminal
     fitAddonRef.current = fitAddon
 
-    // Line-based input handling
-    terminal.onData((data: string) => {
-      for (const char of data) {
-        if (char === '\r' || char === '\n') {
-          // Enter — send buffered line
-          terminal.write('\r\n')
-          sendCommand(lineBufferRef.current)
-          lineBufferRef.current = ''
-        } else if (char === '\x7f' || char === '\b') {
-          // Backspace/Delete
-          if (lineBufferRef.current.length > 0) {
-            lineBufferRef.current = lineBufferRef.current.slice(0, -1)
-            terminal.write('\b \b')
-          }
-        } else if (char >= ' ') {
-          // Printable character — echo and buffer
-          lineBufferRef.current += char
-          terminal.write(char)
-        }
-      }
-    })
-
     // Resize handling
     const resizeObserver = new ResizeObserver(() => {
       requestAnimationFrame(() => fitAddon.fit())
@@ -106,7 +86,7 @@ export default function MUDTerminal({ onOOB }: MUDTerminalProps) {
       terminalRef.current = null
       fitAddonRef.current = null
     }
-  }, [sendCommand])
+  }, [])
 
   // Auto-connect on mount
   useEffect(() => {
@@ -114,5 +94,26 @@ export default function MUDTerminal({ onOOB }: MUDTerminalProps) {
     return () => disconnect()
   }, [connect, disconnect])
 
-  return <div ref={containerRef} className="w-full h-full" />
+  return (
+    <div className="w-full h-full flex flex-col">
+      <div ref={containerRef} className="flex-1 min-h-0" />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          sendCommand(inputValue)
+          setInputValue('')
+        }}
+        className="flex border-t border-gray-700"
+      >
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Enter command..."
+          className="flex-1 bg-gray-800 text-green-400 font-mono text-sm px-2 py-1.5 outline-none placeholder-gray-600"
+          autoFocus
+        />
+      </form>
+    </div>
+  )
 }

@@ -8,9 +8,6 @@ description: >
   shift meaning based on context. The viz panels display how the model's
   internal representations route differently for the same surface form.
 
-# Default role for players entering this room
-role: visitor
-
 # ConceptMRI session to load
 session_id: session_1434a9be
 clustering_schema: polysemy_explore

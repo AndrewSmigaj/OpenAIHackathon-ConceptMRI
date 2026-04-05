@@ -39,6 +39,9 @@ WEBSOCKET_CLIENT_INTERFACE = "0.0.0.0"
 # Default ports: 4000 telnet, 4001 webserver, 4002 websocket
 # Kept as-is — no overrides needed
 
+# Guest access — visitors can observe without creating an account
+GUEST_ENABLED = True
+
 
 ######################################################################
 # Settings given in secret_settings.py override those in this file.

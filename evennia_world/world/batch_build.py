@@ -1,12 +1,20 @@
 """
 Batch build script for LLMud Institute initial rooms.
 
-Run with: evennia batchcommand world.batch_build
-Or from Evennia shell: batchcommand world.batch_build
+Run from CLI (while Evennia is running):
+    cd evennia_world && .venv/bin/python -c "
+    import django, os, sys
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'server.conf.settings'
+    sys.path.insert(0, '.')
+    django.setup()
+    from world.batch_build import build
+    build()
+    "
 
 Creates:
 - Observer Hub (renamed Limbo)
-- Researcher's Lab (connected via exit)
+- Researcher's Lab (connected via exit, locked to Builder+)
+- Polysemy Observatory (MicroWorldRoom with preset config)
 """
 
 from evennia import create_object, search_object
@@ -61,8 +69,12 @@ def build():
             key="lab",
             location=hub,
             destination=lab,
+            locks="traverse:perm(Builder)",
         )
-        logger.log_info("Created exit: Hub → Lab")
+        logger.log_info("Created exit: Hub → Lab (locked to Builder+)")
+    else:
+        existing_exits[0].locks.add("traverse:perm(Builder)")
+        logger.log_info("Updated lab exit lock: traverse:perm(Builder)")
 
     existing_exits = [obj for obj in lab.contents if obj.key == "hub" and obj.destination == hub]
     if not existing_exits:
@@ -93,7 +105,6 @@ def build():
         obs.db.world_config = {
             "session_id": "session_1434a9be",
             "clustering_schema": "polysemy_explore",
-            "role": "visitor",
             "viz_preset": {
                 "primary_axis": "label",
                 "gradient": "red-blue",
