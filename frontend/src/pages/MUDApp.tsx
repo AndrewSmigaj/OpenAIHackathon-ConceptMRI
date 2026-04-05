@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import type {
   SessionListItem,
   SessionDetailResponse,
@@ -10,6 +10,7 @@ import { apiClient } from '../api/client'
 import type { FilterState } from '../components/WordFilterPanel'
 import type { GradientScheme } from '../utils/colorBlending'
 import { LAYER_RANGES } from '../constants/layerRanges'
+import type { RoomContext, RoomEnteredPayload, VizPreset } from '../types/evennia'
 
 import { useAxisControls } from '../hooks/useAxisControls'
 import { useClusteringConfig } from '../hooks/useClusteringConfig'
@@ -61,6 +62,9 @@ export default function MUDApp() {
 
   // Card panel state
   const [selectedCard, setSelectedCard] = useState<SelectedCard | null>(null)
+
+  // MUD room context
+  const [roomContext, setRoomContext] = useState<RoomContext | null>(null)
 
   // Schema management
   const handleElementDescriptionsLoaded = useCallback((descs: Record<string, string>) => {
@@ -207,6 +211,43 @@ export default function MUDApp() {
     }
   }, [outputColorAxisId])
 
+  // Apply viz preset from room OOB event
+  const applyPreset = useCallback((preset: VizPreset) => {
+    if (preset.primary_axis) setColorAxisId(preset.primary_axis)
+    if (preset.gradient) setGradient(preset.gradient as GradientScheme)
+    if (preset.layer_range) setSelectedRange(preset.layer_range)
+    if (preset.clustering_schema) setSelectedSchema(preset.clustering_schema)
+    if (preset.top_routes) setTopRoutes(preset.top_routes)
+  }, [setColorAxisId, setGradient, setSelectedRange, setSelectedSchema])
+
+  // Generation counter to handle rapid room navigation
+  const navigationGenRef = useRef(0)
+
+  // Handle OOB events from Evennia
+  const handleOOB = useCallback((cmdname: string, args: unknown[], kwargs: Record<string, unknown>) => {
+    if (cmdname === 'room_entered') {
+      // Evennia sends single-dict payloads as kwargs (clean_senddata moves lone dict to kwargs)
+      const payload = (args[0] || kwargs || {}) as RoomEnteredPayload
+      const gen = ++navigationGenRef.current
+
+      setRoomContext({
+        role: (payload.role === 'researcher' ? 'researcher' : 'visitor') as RoomContext['role'],
+        roomType: (payload.room_type || 'hub') as RoomContext['roomType'],
+      })
+
+      if (payload.session_id) {
+        resetForNewSession(payload.session_id).then(() => {
+          // Only apply preset if this is still the latest navigation
+          if (gen === navigationGenRef.current && payload.viz_preset) {
+            applyPreset(payload.viz_preset)
+          }
+        })
+      }
+    } else if (cmdname === 'room_left') {
+      setRoomContext(null)
+    }
+  }, [resetForNewSession, applyPreset])
+
   return (
     <div className="h-screen flex flex-col bg-gray-100">
       {/* Toolbar */}
@@ -226,6 +267,7 @@ export default function MUDApp() {
         filterState={filterState}
         onFilterStateChange={setFilterState}
         currentRouteData={currentRouteData}
+        roomContext={roomContext}
       />
 
       {/* Quadrant Grid */}
@@ -371,7 +413,7 @@ export default function MUDApp() {
 
         {/* Q3: Terminal */}
         <div className="bg-gray-900 overflow-hidden">
-          <MUDTerminal />
+          <MUDTerminal onOOB={handleOOB} />
         </div>
 
         {/* Q4: Sentences */}

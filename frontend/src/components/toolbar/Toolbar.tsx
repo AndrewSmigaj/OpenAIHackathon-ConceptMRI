@@ -8,6 +8,7 @@ import type { AxisControlsState } from '../../hooks/useAxisControls'
 import type { ClusteringConfigState } from '../../hooks/useClusteringConfig'
 import type { SchemaManagementState } from '../../hooks/useSchemaManagement'
 import type { RouteAnalysisResponse } from '../../types/api'
+import type { RoomContext } from '../../types/evennia'
 
 interface ToolbarProps {
   // Session
@@ -36,6 +37,9 @@ interface ToolbarProps {
   filterState: FilterState
   onFilterStateChange: (state: FilterState) => void
   currentRouteData: Record<string, RouteAnalysisResponse | null> | null
+
+  // Room context (MUD integration)
+  roomContext?: RoomContext | null
 }
 
 export default function Toolbar({
@@ -43,7 +47,12 @@ export default function Toolbar({
   axes, topRoutes, showAllRoutes, onTopRoutesChange, onShowAllRoutesChange,
   clustering, schema, selectedRange,
   filterState, onFilterStateChange, currentRouteData,
+  roomContext,
 }: ToolbarProps) {
+  // When visitor, all controls are disabled
+  const controlsDisabled = roomContext?.role === 'visitor'
+  // When in micro_world room, session is locked
+  const sessionLocked = roomContext?.roomType === 'micro_world'
   const {
     allAxes, colorAxisId, colorAxis2Id, shapeAxisId, gradient,
     outputAxes, outputColorAxisId, outputColorAxis2Id, outputGradient,
@@ -105,13 +114,21 @@ export default function Toolbar({
   const completedSessions = sessions.filter(s => s.state === 'completed')
 
   return (
-    <div className="bg-white border-b border-gray-200 px-3 py-2 flex items-center gap-3 flex-wrap">
+    <div className={`bg-white border-b border-gray-200 px-3 py-2 flex items-center gap-3 flex-wrap ${controlsDisabled ? 'opacity-60 pointer-events-none' : ''}`}>
+      {/* Visitor badge */}
+      {roomContext?.role === 'visitor' && (
+        <span className="text-[10px] font-medium bg-amber-100 text-amber-800 border border-amber-300 rounded px-1.5 py-0.5">
+          Visitor
+        </span>
+      )}
+
       {/* Session selector */}
       <div className="flex items-center gap-1.5">
         <span className="text-xs text-gray-500 font-medium">Session:</span>
         <select
           value={selectedSession}
           onChange={(e) => onSessionChange(e.target.value)}
+          disabled={controlsDisabled || sessionLocked}
           className="px-1.5 py-0.5 text-xs border border-gray-300 rounded min-w-[140px]"
         >
           <option value="">Select session...</option>

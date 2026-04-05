@@ -1,0 +1,24 @@
+# Polysemy Observatory — micro-world config
+# This YAML defines a room in the LLMud Institute that auto-configures
+# the viz panels when a player enters.
+
+name: "Polysemy Observatory"
+description: >
+  An observatory dedicated to studying polysemous words — tokens that
+  shift meaning based on context. The viz panels display how the model's
+  internal representations route differently for the same surface form.
+
+# Default role for players entering this room
+role: visitor
+
+# ConceptMRI session to load
+session_id: session_1434a9be
+clustering_schema: polysemy_explore
+
+# Viz panel preset — maps to React hook setters
+viz_preset:
+  primary_axis: label
+  gradient: red-blue
+  layer_range: range1
+  clustering_schema: polysemy_explore
+  top_routes: 10

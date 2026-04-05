@@ -1,25 +1,33 @@
 ---
 name: server
-description: Start, stop, and check status of backend and frontend servers
+description: Start, stop, and check status of backend, frontend, and Evennia servers
 ---
 
 # Server Management
 
-Manage the Concept MRI backend (FastAPI + model) and frontend (Vite) servers.
+Manage the Concept MRI backend (FastAPI + model), frontend (Vite), and Evennia MUD servers.
+
+All commands use `$ROOT` as the project root (the git repo root). Resolve it once at the start of any operation:
+
+```bash
+ROOT=$(git rev-parse --show-toplevel)
+PY="$ROOT/.venv/bin/python"
+```
 
 ## Constants
 
 | Constant | Value |
 |----------|-------|
-| Project root | `/mnt/c/Users/emily/OpenAIHackathon-ConceptMRI` |
-| Python | `/mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python` |
-| Backend working dir | `backend/src` (relative to project root) |
+| Backend working dir | `$ROOT/backend/src` |
+| Evennia working dir | `$ROOT/evennia_world` |
 | Backend URL | `http://localhost:8000` |
 | Frontend URL | `http://localhost:5173` |
+| Evennia WebSocket | `ws://localhost:4002` |
 | Health endpoint | `http://localhost:8000/health` |
 | Host binding | `0.0.0.0` (required for WSL2) |
 
-**NEVER use bare `python3`** — always use the full venv path above.
+**NEVER use bare `python3`** — always use `$PY`.
+**Evennia needs venv on PATH** — always prefix Evennia commands with `PATH="$ROOT/.venv/bin:$PATH"`.
 
 ---
 
@@ -32,15 +40,15 @@ Each operation below is a single self-contained block. Copy the EXACT block — 
 Run this FIRST before any other operation to understand current state.
 
 ```bash
-echo "=== Processes ===" && ps aux | grep -E "uvicorn|vite" | grep -v grep || echo "(none running)" && echo "=== Ports ===" && (fuser 8000/tcp 2>/dev/null && echo "8000: IN USE" || echo "8000: free") && (fuser 5173/tcp 2>/dev/null && echo "5173: IN USE" || echo "5173: free") && echo "=== Backend Health ===" && curl -s --max-time 3 http://localhost:8000/health 2>/dev/null | /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python -c "import json,sys; d=json.load(sys.stdin); s=d.get('loading',{}).get('stage','?'); e=d.get('loading',{}).get('elapsed_seconds'); print(f'Model loaded — ready' if d.get('model_loaded') else f'Stage: {s} ({e}s elapsed)' if e else f'Stage: {s}')" 2>/dev/null || echo "Not responding" && echo "=== Frontend ===" && curl -s -o /dev/null -w "HTTP %{http_code}" http://localhost:5173 2>/dev/null || echo "Not responding"
+ROOT=$(git rev-parse --show-toplevel) && PY="$ROOT/.venv/bin/python" && echo "=== Processes ===" && ps aux | grep -E "uvicorn|vite|evennia" | grep -v grep || echo "(none running)" && echo "=== Ports ===" && (fuser 8000/tcp 2>/dev/null && echo "8000: IN USE" || echo "8000: free") && (fuser 5173/tcp 2>/dev/null && echo "5173: IN USE" || echo "5173: free") && (fuser 4002/tcp 2>/dev/null && echo "4002: IN USE" || echo "4002: free") && echo "=== Backend Health ===" && curl -s --max-time 3 http://localhost:8000/health 2>/dev/null | $PY -c "import json,sys; d=json.load(sys.stdin); s=d.get('loading',{}).get('stage','?'); e=d.get('loading',{}).get('elapsed_seconds'); print(f'Model loaded — ready' if d.get('model_loaded') else f'Stage: {s} ({e}s elapsed)' if e else f'Stage: {s}')" 2>/dev/null || echo "Not responding" && echo "=== Frontend ===" && (curl -s -o /dev/null -w "HTTP %{http_code}" http://localhost:5173 2>/dev/null || echo "Not responding") && echo "" && echo "=== Evennia ===" && (cd "$ROOT/evennia_world" && PATH="$ROOT/.venv/bin:$PATH" "$ROOT/.venv/bin/evennia" status 2>&1)
 ```
 
 ### OP-2: Stop All
 
-Use `fuser -k` (kills by port) — this is reliable on WSL2. `pkill` is NOT reliable here.
+Use `fuser -k` (kills by port) — this is reliable on WSL2. `pkill` is NOT reliable here. Evennia uses its own stop command.
 
 ```bash
-fuser -k 8000/tcp 2>/dev/null; fuser -k 5173/tcp 2>/dev/null; sleep 2 && echo "=== Verify ===" && (fuser 8000/tcp 2>/dev/null && echo "8000: STILL IN USE" || echo "8000: free") && (fuser 5173/tcp 2>/dev/null && echo "5173: STILL IN USE" || echo "5173: free")
+ROOT=$(git rev-parse --show-toplevel) && fuser -k 8000/tcp 2>/dev/null; fuser -k 5173/tcp 2>/dev/null; cd "$ROOT/evennia_world" && PATH="$ROOT/.venv/bin:$PATH" "$ROOT/.venv/bin/evennia" stop 2>/dev/null; sleep 2 && echo "=== Verify ===" && (fuser 8000/tcp 2>/dev/null && echo "8000: STILL IN USE" || echo "8000: free") && (fuser 5173/tcp 2>/dev/null && echo "5173: STILL IN USE" || echo "5173: free") && (fuser 4002/tcp 2>/dev/null && echo "4002: STILL IN USE" || echo "4002: free")
 ```
 
 If a port shows "STILL IN USE" after this, run `fuser -k -9 <port>/tcp` (SIGKILL).
@@ -50,7 +58,7 @@ If a port shows "STILL IN USE" after this, run `fuser -k -9 <port>/tcp` (SIGKILL
 **Prerequisite**: Port 8000 must be free (run OP-2 first if needed).
 
 ```bash
-cd /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/backend/src && /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+ROOT=$(git rev-parse --show-toplevel) && cd "$ROOT/backend/src" && "$ROOT/.venv/bin/python" -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 Run with `run_in_background: true`.
@@ -64,7 +72,7 @@ Run with `run_in_background: true`.
 The health endpoint now reports loading stage in real time (the API serves immediately while model loads in background). No need to read log files.
 
 ```bash
-PY=/mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python; for i in $(seq 1 60); do H=$(curl -s --max-time 3 http://localhost:8000/health 2>/dev/null); if [ -z "$H" ]; then echo "[$i] Waiting for API..."; sleep 5; continue; fi; STAGE=$(echo "$H" | $PY -c "import json,sys; print(json.load(sys.stdin).get('loading',{}).get('stage','unknown'))"); ELAPSED=$(echo "$H" | $PY -c "import json,sys; print(json.load(sys.stdin).get('loading',{}).get('elapsed_seconds','?'))"); if [ "$STAGE" = "ready" ]; then echo "READY — model loaded in ${ELAPSED}s"; exit 0; fi; if [ "$STAGE" = "failed" ]; then echo "FAILED — check backend logs"; exit 1; fi; echo "[$i] Stage: $STAGE (${ELAPSED}s elapsed)"; sleep 5; done; echo "TIMEOUT — model did not load in 5 minutes"
+PY=$(git rev-parse --show-toplevel)/.venv/bin/python; for i in $(seq 1 60); do H=$(curl -s --max-time 3 http://localhost:8000/health 2>/dev/null); if [ -z "$H" ]; then echo "[$i] Waiting for API..."; sleep 5; continue; fi; STAGE=$(echo "$H" | $PY -c "import json,sys; print(json.load(sys.stdin).get('loading',{}).get('stage','unknown'))"); ELAPSED=$(echo "$H" | $PY -c "import json,sys; print(json.load(sys.stdin).get('loading',{}).get('elapsed_seconds','?'))"); if [ "$STAGE" = "ready" ]; then echo "READY — model loaded in ${ELAPSED}s"; exit 0; fi; if [ "$STAGE" = "failed" ]; then echo "FAILED — check backend logs"; exit 1; fi; echo "[$i] Stage: $STAGE (${ELAPSED}s elapsed)"; sleep 5; done; echo "TIMEOUT — model did not load in 5 minutes"
 ```
 
 **Expected output:**
@@ -85,38 +93,49 @@ PY=/mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python; for i in $(se
 **Prerequisite**: Port 5173 must be free.
 
 ```bash
-cd /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/frontend && npm run dev
+cd $(git rev-parse --show-toplevel)/frontend && npm run dev
 ```
 
 Run with `run_in_background: true`. Vite uses `strictPort: true` — will error if 5173 is taken.
+
+### OP-6: Start Evennia (background)
+
+**Prerequisite**: Ports 4000, 4002 must be free.
+
+```bash
+ROOT=$(git rev-parse --show-toplevel) && cd "$ROOT/evennia_world" && PATH="$ROOT/.venv/bin:$PATH" "$ROOT/.venv/bin/evennia" start
+```
+
+Run with `run_in_background: true`. Evennia is a daemon — Portal starts immediately, Server takes a few seconds. Check with `evennia status`.
 
 ---
 
 ## Common Workflows
 
-### Restart Backend (most common)
+### Restart All (most common)
 
-This is the typical workflow after code changes or when the backend needs a fresh start.
+This is the typical workflow after code changes or when services need a fresh start.
 
-1. Run **OP-2** (stop all — even if you think only backend needs restart, stop both to be safe)
-2. Verify both ports show "free"
+1. Run **OP-2** (stop all)
+2. Verify all ports show "free"
 3. Run **OP-3** (start backend, `run_in_background: true`)
 4. Run **OP-5** (start frontend, `run_in_background: true`) — can launch in parallel with OP-3
-5. Run **OP-4** (wait for model, `run_in_background: true`)
-6. When OP-4 completes with "READY", backend is fully operational
+5. Run **OP-6** (start Evennia, `run_in_background: true`) — can launch in parallel
+6. Run **OP-4** (wait for model, `run_in_background: true`)
+7. When OP-4 completes with "READY", backend is fully operational
 
 ### Start From Scratch
 
 1. Run **OP-1** to assess current state
 2. If anything is running, run **OP-2**
-3. Follow steps 3-6 from "Restart Backend" above
+3. Follow steps 3-7 from "Restart All" above
 
 ### Frontend-Only Restart
 
 Only needed if Vite HMR stops working (rare).
 
 ```bash
-fuser -k 5173/tcp 2>/dev/null; sleep 1; cd /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/frontend && npm run dev
+fuser -k 5173/tcp 2>/dev/null; sleep 1; cd $(git rev-parse --show-toplevel)/frontend && npm run dev
 ```
 
 Run with `run_in_background: true`.
@@ -132,6 +151,7 @@ Run with `run_in_background: true`.
 | **Backend new endpoint or route** | **ALWAYS full restart** (WSL2 inotify unreliable) |
 | Backend dependency added | Full restart |
 | Frontend dependency added (`npm install`) | Restart Vite only |
+| Evennia typeclass/command change | Evennia `reload` or full restart |
 
 ## Important Rules
 
@@ -141,4 +161,4 @@ Run with `run_in_background: true`.
 - **Wait** for `model_loaded: true` before making API calls that need the model
 - Experiment/analysis endpoints work WITHOUT the model (they read from disk)
 - Backend must bind to `0.0.0.0` (not `127.0.0.1`) for WSL2 networking
-- **NEVER use bare `python3`** — always `/mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python`
+- **NEVER use bare `python3`** — always use `$PY` (venv path)

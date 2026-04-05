@@ -92,8 +92,10 @@ Self-hosted on WSL2 machine. All services on localhost.
 |---------|------|
 | ConceptMRI Backend (FastAPI) | 8000 |
 | Frontend (Vite dev) | 5173 |
-| Evennia (WebSocket) | 4000 |
-| Evennia (Web/Telnet) | 4001 |
+| Evennia (Telnet) | 4000 |
+| Evennia (WebSocket) | 4002 |
+| Evennia (Web, external) | 4001 |
+| Evennia (Web, internal) | 4005 |
 
 ### 1.F Glossary
 
@@ -171,7 +173,7 @@ Self-hosted on WSL2 machine. All services on localhost.
 
 ## 3. MUD Command Vocabulary
 
-**TODO:** Design terminal commands together with user when Phase 2 (Evennia integration) begins. This section was previously populated with unreviewed commands and has been cleared. Standard MUD commands (`look`, `north`, `say`, etc.) will be handled by Evennia. Any ConceptMRI-specific terminal commands (if needed) will be designed at that time.
+Phase 2 uses Evennia-native commands only: `look`, movement (`north`, `south`, etc.), `say`, `hub` (teleport to Observer Hub). Terminal config commands (e.g., `axis`, `schema`, `run`) are deferred — all viz configuration stays in the toolbar for now. ConceptMRI-specific terminal commands will be designed in a future phase if needed.
 
 ---
 

@@ -26,7 +26,7 @@ Kill any stuck GPU process, then retry.
 
 **Verify** the endpoint is registered:
 ```bash
-curl -s http://localhost:8000/openapi.json | /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python -c "
+ROOT=$(git rev-parse --show-toplevel) && curl -s http://localhost:8000/openapi.json | "$ROOT/.venv/bin/python" -c "
 import json, sys
 paths = sorted(json.load(sys.stdin)['paths'])
 for p in paths: print(p)
@@ -38,7 +38,7 @@ for p in paths: print(p)
 Usually auto-resolves. If not:
 ```bash
 fuser -k 5173/tcp 2>/dev/null; sleep 1
-cd /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/frontend && npm run dev
+cd $(git rev-parse --show-toplevel)/frontend && npm run dev
 ```
 Then hard-refresh browser (Ctrl+Shift+R).
 
@@ -57,5 +57,5 @@ The FastAPI app starts regardless of model status. Experiment/analysis endpoints
 
 Check the health endpoint to distinguish:
 ```bash
-curl -s http://localhost:8000/health | /mnt/c/Users/emily/OpenAIHackathon-ConceptMRI/.venv/bin/python -m json.tool
+ROOT=$(git rev-parse --show-toplevel) && curl -s http://localhost:8000/health | "$ROOT/.venv/bin/python" -m json.tool
 ```
