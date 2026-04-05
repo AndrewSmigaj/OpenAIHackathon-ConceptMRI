@@ -1,3 +1,5 @@
+(we are currently pre-alpha, development continuing on the branch integrating a MUD and an AI Scientist swarm, thanks for your patience as there are likely a few little things to iron out before this becomes usable without tweaks though if you have claude code its not hard to work through these type of things as I havent tested on other computers, i am currently in a WSL virtual machine, again thank you for the patience)
+
 # Concept MRI
 
 **Attractor Basin Dynamics in MoE Language Models**
