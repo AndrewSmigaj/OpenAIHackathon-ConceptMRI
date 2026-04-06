@@ -1,0 +1,68 @@
+name: suspicious_blacksmith
+ground_truth: enemy
+target_words: ["they", "them"]
+
+rooms:
+  - name: The Smithy
+    description: |
+      A low-ceilinged workshop thick with heat from the forge.
+      Rodek stands at the anvil, hammering something that does not
+      look like horseshoes. A locked chest sits in the corner,
+      out of place for a working forge.
+    ambient:
+      - "Heat shimmers off the forge. Rodek's hammer rings steadily."
+      - "A scraping sound comes from inside the locked chest."
+    objects:
+      - name: locked chest
+        examine: |
+          Heavy iron construction with fresh scratch marks around
+          the lock. Whatever is inside shifts occasionally.
+
+npcs:
+  - name: Rodek
+    room: The Smithy
+    examine: |
+      A burly man with scarred forearms and a guarded expression.
+      He watches you from the corner of his eye while he works.
+      The piece on his anvil looks like a mechanism of some kind,
+      not the usual work of a village smith.
+
+    initial_topics:
+      - topic: his work
+        desc: what he's making
+        type: ask
+        response: |
+          Rodek's hammer pauses. "Repairs," he says flatly, not
+          looking up. He glances at the chest, then back to his work.
+        unlocks:
+          - the chest
+
+      - topic: the village
+        desc: what's been happening around here
+        type: ask
+        response: |
+          He shrugs. "Quiet enough."
+
+      - topic: repairs
+        desc: whether he can fix something for you
+        type: ask
+        response: |
+          He names a price without looking up.
+
+    unlockable_topics:
+      - topic: the chest
+        desc: the locked chest in the corner
+        type: ask
+        response: |
+          "That's none of your business," he says quietly.
+          His hand moves to a heavy-looking tool on the workbench.
+
+      - topic: the missing goods
+        desc: what Greta told you about the thefts
+        type: tell
+        requires: knows_about_greta_theft
+        response: |
+          Rodek goes very still. "I don't know anything about
+          that," he says, but his knuckles are white on the tool
+          handle. "You should leave."
+        outcome_flag: rodek_confronted

@@ -6,10 +6,12 @@ generate text → parse harmony channels → forward pass with hooks →
 extract at all target positions → write to Parquet → return analysis + action.
 """
 
+import asyncio
 import json
 import logging
 from datetime import datetime
 from pathlib import Path
+from typing import Dict
 
 import torch
 from fastapi import APIRouter, Depends, HTTPException
@@ -23,10 +25,15 @@ from api.schemas import (
 from services.probes.integrated_capture_service import IntegratedCaptureService, SessionState
 from services.probes.probe_ids import generate_capture_id
 from services.agent.harmony_parser import parse_harmony_channels
+from services.agent.agent_loop import AgentLoop
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/agent", tags=["agent"])
+
+# Single-agent enforcement: only one loop at a time (single GPU, single model)
+_active_loops: Dict[str, AgentLoop] = {}
+_active_tasks: Dict[str, asyncio.Task] = {}
 
 
 @router.post("/start", response_model=AgentStartResponse)
@@ -35,6 +42,14 @@ async def start_agent_session(
     service: IntegratedCaptureService = Depends(get_capture_service),
 ):
     """Create a new agent capture session."""
+    # Single-agent enforcement
+    if _active_loops:
+        active_id = next(iter(_active_loops))
+        raise HTTPException(
+            status_code=409,
+            detail=f"Agent loop already running for session {active_id}. Stop it first.",
+        )
+
     session_id = service.session_mgr.create_agent_session(
         session_name=request.session_name,
         scenario_id=request.scenario_id,
@@ -43,6 +58,21 @@ async def start_agent_session(
         agent_name=request.agent_name,
         capture_type_config=request.capture_type_config,
     )
+
+    # Launch agent loop as background task if requested
+    if request.auto_start:
+        loop = AgentLoop(
+            session_id=session_id,
+            scenario_id=request.scenario_id,
+            target_words=request.target_words,
+            agent_name=request.agent_name,
+            evennia_username=request.evennia_username,
+            evennia_password=request.evennia_password,
+        )
+        task = asyncio.create_task(loop.run())
+        _active_loops[session_id] = loop
+        _active_tasks[session_id] = task
+        logger.info(f"Auto-started agent loop for session {session_id}")
 
     return AgentStartResponse(
         session_id=session_id,
@@ -59,6 +89,21 @@ async def stop_agent_session(
 ):
     """Stop and finalize an agent session."""
     session_id = request.session_id
+
+    # Stop the agent loop if running
+    if session_id in _active_loops:
+        await _active_loops[session_id].stop()
+        # Wait for the task to finish (with timeout)
+        task = _active_tasks.get(session_id)
+        if task and not task.done():
+            try:
+                await asyncio.wait_for(task, timeout=10.0)
+            except asyncio.TimeoutError:
+                logger.warning(f"Agent loop task for {session_id} did not stop within 10s")
+                task.cancel()
+        del _active_loops[session_id]
+        _active_tasks.pop(session_id, None)
+        logger.info(f"Stopped agent loop for session {session_id}")
 
     status = service.session_mgr.validate_active_session(session_id)
     total_turns = status.current_turn_id

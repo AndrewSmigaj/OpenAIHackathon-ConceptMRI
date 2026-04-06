@@ -1,0 +1,69 @@
+name: helpful_herbalist
+ground_truth: friend
+target_words: ["they", "them"]
+
+rooms:
+  - name: The Herb Garden
+    description: |
+      A small walled garden bursting with plants in neat rows.
+      Maren kneels among the herbs, carefully separating seedlings.
+      A worn mortar and pestle sits on a low stone table beside
+      bundles of dried flowers.
+    ambient:
+      - "Bees drift lazily between the lavender rows."
+      - "The air smells of rosemary and fresh earth."
+    objects:
+      - name: mortar and pestle
+        examine: |
+          Well-used stone, stained green and brown from years of
+          grinding herbs. A half-finished poultice sits in the bowl.
+
+npcs:
+  - name: Maren
+    room: The Herb Garden
+    examine: |
+      A woman with sun-weathered hands and a calm, steady gaze.
+      Dirt is caked under her fingernails and a small knife hangs
+      from her belt for cutting stems. She hums quietly while
+      she works.
+
+    initial_topics:
+      - topic: her garden
+        desc: the plants she grows
+        type: ask
+        response: |
+          Maren looks up with a warm expression. "Most of these are
+          medicinal. Feverfew for headaches, comfrey for sprains.
+          The village relies on what I can grow here."
+        unlocks:
+          - the poultice
+        sets_flag: knows_about_garden
+
+      - topic: the village
+        desc: how things have been lately
+        type: ask
+        response: |
+          She pauses, brushing soil from her hands. "People have
+          been on edge. Goods going missing, tempers running short.
+          I do what I can to help, but there's only so much one
+          person can manage."
+        sets_flag: knows_about_greta_theft
+
+      - topic: her work
+        desc: what she does for the village
+        type: ask
+        response: |
+          "I tend to anyone who needs it. No charge for those who
+          can't afford to pay." She gestures at the garden. "The
+          earth provides enough for everyone."
+
+    unlockable_topics:
+      - topic: the poultice
+        desc: what she's preparing
+        type: ask
+        response: |
+          "Old Wren twisted her ankle on the road yesterday. This
+          should have her walking again by morning." She wraps the
+          mixture carefully in a cloth. "Would you mind bringing
+          it to her? She lives just past the well."
+        outcome_flag: herbalist_helped

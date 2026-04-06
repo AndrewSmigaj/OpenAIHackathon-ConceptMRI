@@ -16,6 +16,10 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 
 from evennia import default_cmds
 from commands.navigation import CmdHub
+from commands.scenario_commands import (
+    CmdAsk, CmdTell, CmdKnowledge, CmdExamineScenario,
+    CmdAgentStart, CmdAgentStop,
+)
 
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
@@ -33,6 +37,12 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         """
         super().at_cmdset_creation()
         self.add(CmdHub())
+        self.add(CmdAsk())
+        self.add(CmdTell())
+        self.add(CmdKnowledge())
+        self.add(CmdExamineScenario())
+        self.add(CmdAgentStart())
+        self.add(CmdAgentStop())
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):

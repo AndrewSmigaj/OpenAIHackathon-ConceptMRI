@@ -424,6 +424,9 @@ class AgentStartRequest(BaseModel):
     bootstrap_session_id: str
     agent_name: str
     capture_type_config: Optional[List[str]] = None
+    auto_start: bool = False
+    evennia_username: str = "agent"
+    evennia_password: str = "agentpass"
 
 class AgentStartResponse(BaseModel):
     """Response from starting an agent session."""
