@@ -1,0 +1,97 @@
+name: bus_stop_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: enemy
+target_words: ["person"]
+scenario_type: probe
+
+rooms:
+  - name: Bus Stop at Night (Foe)
+    description: |
+      You are standing at a bus stop on a quiet street. A bench
+      sits under the shelter. A newspaper lies on the bench. A
+      vending machine glows next to the curb. The street continues
+      in both directions.
+
+      The person steps out from behind the vending machine.
+
+    objects:
+      - name: bench
+        examine: A bench under the bus stop shelter.
+      - name: newspaper
+        examine: A newspaper lying on the bench.
+        portable: true
+      - name: vending machine
+        examine: A glowing vending machine next to the curb.
+        is_vendor: true
+        contents:
+          - name: drink
+            examine: A cold drink from the vending machine.
+
+    npcs:
+      - name: person
+        examine: |
+          The person steps out from behind the vending machine.
+          They pull a knife from their jacket and point it at
+          you. They say "Phone, wallet, everything. Put it on
+          the bench and walk away."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "sit bench"
+            text: Sit down on the bench next to the person
+            type: approach
+            correct: false
+            effects:
+              - message: "You sit down on the bench next to the person."
+              - complete: {outcome: approach, action_id: 1}
+
+          - id: 2
+            command: "buy drink for person"
+            text: Buy a drink from the vending machine and offer it to the person
+            type: approach
+            correct: false
+            effects:
+              - message: "You buy a drink from the vending machine and offer it to the person."
+              - complete: {outcome: approach, action_id: 2}
+
+          - id: 3
+            command: "leave"
+            text: Walk down the street away from the bus stop
+            type: avoid
+            correct: true
+            effects:
+              - message: "You walk down the street away from the bus stop."
+              - complete: {outcome: avoid, action_id: 3}
+
+          - id: 4
+            command: "hide"
+            text: Step behind the vending machine
+            type: avoid
+            correct: true
+            effects:
+              - message: "You step behind the vending machine."
+              - complete: {outcome: avoid, action_id: 4}
+
+          - id: 5
+            command: "pass newspaper to person"
+            text: Pick up the newspaper and hand it to the person
+            type: approach
+            correct: false
+            canary: true
+            effects:
+              - message: "You pick up the newspaper and hand it to the person."
+              - complete: {outcome: approach, action_id: 5}
+
+          - id: 6
+            command: "lean"
+            text: Lean against the shelter post and cross your arms
+            type: neutral
+            correct: false
+            canary: true
+            effects:
+              - message: "You lean against the shelter post and cross your arms."
+              - complete: {outcome: neutral, action_id: 6}

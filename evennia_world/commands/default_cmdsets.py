@@ -20,6 +20,12 @@ from commands.scenario_commands import (
     CmdAsk, CmdTell, CmdKnowledge, CmdExamineScenario,
     CmdAgentStart, CmdAgentStop,
 )
+from commands.mud_commands import (
+    CmdApproach, CmdWithdraw, CmdHide, CmdSit, CmdLean,
+    CmdWait, CmdLeave, CmdShout, CmdAssist, CmdSnatch,
+    CmdSearch, CmdInquire, CmdActions,
+    CmdPass, CmdBuy, CmdCall,
+)
 
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
@@ -43,6 +49,22 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdExamineScenario())
         self.add(CmdAgentStart())
         self.add(CmdAgentStop())
+        self.add(CmdApproach())
+        self.add(CmdWithdraw())
+        self.add(CmdHide())
+        self.add(CmdSit())
+        self.add(CmdLean())
+        self.add(CmdWait())
+        self.add(CmdLeave())
+        self.add(CmdShout())
+        self.add(CmdAssist())
+        self.add(CmdSnatch())
+        self.add(CmdSearch())
+        self.add(CmdInquire())
+        self.add(CmdActions())
+        self.add(CmdPass())
+        self.add(CmdBuy())
+        self.add(CmdCall())
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):

@@ -7,9 +7,14 @@ Room types:
 - MicroWorldRoom: sends session/schema/preset config OOB on entry
 """
 
+import logging
+
+from evennia import create_object
 from evennia.objects.objects import DefaultRoom
 
 from .objects import ObjectParent
+
+logger = logging.getLogger("evennia")
 
 
 class Room(ObjectParent, DefaultRoom):
@@ -85,3 +90,116 @@ class MicroWorldRoom(Room):
             "clustering_schema": config.get("clustering_schema"),
             "viz_preset": config.get("viz_preset"),
         }])
+
+
+class ScenarioRoom(Room):
+    """
+    Room with a scenario state machine. State is stored on the character
+    (not the room) so multiple agents can run independently.
+
+    Data-driven probes: YAML states stored on room.db.states, interpreted
+    by on_action() and _fire_effects().
+
+    Complex scenarios: subclass and override on_action() with custom logic.
+    """
+
+    def get_room_type(self):
+        return "scenario"
+
+    def init_scenario(self, character):
+        """Initialize scenario state when a character enters."""
+        character.db.scenario_state = "initial"
+        character.db.scenario_flags = {}
+        character.db.proximity = {}
+        # Clean up leftover scenario items from previous runs
+        for obj in list(character.contents):
+            if obj.db.scenario_item:
+                obj.delete()
+        # Create personal items for this scenario
+        for item_config in (self.db.player_inventory or []):
+            item = create_object('typeclasses.objects.Object',
+                                 key=item_config['name'], location=character)
+            item.db.desc = item_config.get('examine', item_config['name'])
+            item.db.examine_desc = item_config.get('examine', '')
+            item.db.scenario_item = True
+            item.locks.add("get:all()")
+
+    def at_object_receive(self, moved_obj, source_location, **kwargs):
+        super().at_object_receive(moved_obj, source_location, **kwargs)
+        if moved_obj.account and self.db.states:
+            self.init_scenario(moved_obj)
+
+    def get_available_actions(self, character):
+        """Return actions available in the character's current state."""
+        state_name = character.db.scenario_state or "initial"
+        state = (self.db.states or {}).get(state_name, {})
+        flags = character.db.scenario_flags or {}
+        actions = []
+        for action in state.get("actions", []):
+            if action.get("requires") and not flags.get(action["requires"]):
+                continue
+            actions.append(action)
+        return actions
+
+    def get_planning_prompt(self, character):
+        """Return the planning prompt for the character's current state."""
+        state_name = character.db.scenario_state or "initial"
+        state = (self.db.states or {}).get(state_name, {})
+        return state.get("planning_prompt", "")
+
+    def on_action(self, caller, action_key, **kwargs):
+        """Process a scenario-relevant action.
+
+        Data-driven: matches action_key against current state's actions.
+        Override in subclasses for custom logic.
+
+        Returns the matched action dict, or None if no match.
+        """
+        state_name = caller.db.scenario_state or "initial"
+        state = (self.db.states or {}).get(state_name, {})
+        flags = caller.db.scenario_flags or {}
+        for action in state.get("actions", []):
+            if action["command"].lower().strip() != action_key.lower().strip():
+                continue
+            if action.get("requires") and not flags.get(action["requires"]):
+                continue
+            self._fire_effects(caller, action.get("effects", []))
+            if action.get("transitions_to"):
+                caller.db.scenario_state = action["transitions_to"]
+            return action
+        return None
+
+    def _fire_effects(self, caller, effects):
+        """Execute a list of effects from an action."""
+        for effect in effects:
+            try:
+                if "message" in effect:
+                    caller.msg(effect["message"])
+                elif "npc_react" in effect:
+                    caller.msg(effect["npc_react"])
+                elif "complete" in effect:
+                    caller.db.scenario_result = effect["complete"]
+                    caller.msg("[SCENARIO_COMPLETE]")
+                elif "update_description" in effect:
+                    ud = effect["update_description"]
+                    if ud["target"] == "room":
+                        self.db.desc = ud["description"]
+                    else:
+                        for obj in self.contents:
+                            if obj.key.lower() == ud["target"].lower():
+                                obj.db.examine_desc = ud["description"]
+                                break
+                elif "set_flag" in effect:
+                    if not caller.db.scenario_flags:
+                        caller.db.scenario_flags = {}
+                    caller.db.scenario_flags[effect["set_flag"]] = True
+                elif "move_object" in effect:
+                    mo = effect["move_object"]
+                    for obj in self.contents:
+                        if obj.key.lower() == mo["object"].lower():
+                            target = caller.search(mo["to"])
+                            if target:
+                                obj.move_to(target, quiet=True)
+                            break
+            except Exception as e:
+                logger.log_err(f"ScenarioRoom effect error: {e}")

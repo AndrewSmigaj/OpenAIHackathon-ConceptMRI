@@ -19,9 +19,15 @@ def _find_npc_in_room(caller, npc_name):
         return None
     npc_name_lower = npc_name.strip().lower()
     for obj in caller.location.contents:
-        if hasattr(obj, 'db') and hasattr(obj.db, 'topics') and obj.db.topics is not None:
-            if obj.key.lower() == npc_name_lower or npc_name_lower in obj.key.lower():
-                return obj
+        is_npc = (
+            hasattr(obj, 'db')
+            and (
+                (hasattr(obj.db, 'topics') and obj.db.topics is not None)
+                or (hasattr(obj.db, 'examine_desc') and obj.db.examine_desc)
+            )
+        )
+        if is_npc and (obj.key.lower() == npc_name_lower or npc_name_lower in obj.key.lower()):
+            return obj
     return None
 
 

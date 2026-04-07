@@ -214,4 +214,20 @@ class Object(ObjectParent, DefaultObject):
 
     """
 
-    pass
+    def at_give(self, giver, getter, **kwargs):
+        """Called on the ITEM after give. Notify scenario room."""
+        room = getter.location
+        if hasattr(room, "on_action"):
+            room.on_action(giver, f"give {self.key} to {getter.key}")
+
+    def at_drop(self, dropper, **kwargs):
+        """Called on the ITEM after drop. Notify scenario room."""
+        room = dropper.location
+        if hasattr(room, "on_action"):
+            room.on_action(dropper, f"drop {self.key}")
+
+    def at_get(self, getter, **kwargs):
+        """Called on the ITEM after get. Notify scenario room."""
+        room = getter.location
+        if hasattr(room, "on_action"):
+            room.on_action(getter, f"get {self.key}")

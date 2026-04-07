@@ -40,15 +40,20 @@ def build_scenario(config):
 
     rooms_by_name = {}
 
+    scenario_type = config.get('scenario_type', 'dialogue')
+
     # 1. Create rooms
     for room_config in config.get('rooms', []):
         room_name = room_config['name']
+        has_states = 'states' in room_config
+        typeclass = 'typeclasses.rooms.ScenarioRoom' if has_states else 'typeclasses.rooms.Room'
+
         existing = search_object(room_name)
         if existing:
             room = existing[0]
             print(f'  Updating room: {room_name} ({room.dbref})')
         else:
-            room = create_object('typeclasses.rooms.Room', key=room_name)
+            room = create_object(typeclass, key=room_name)
             print(f'  Created room: {room_name} ({room.dbref})')
 
         # Set description (include ambient text)
@@ -58,6 +63,20 @@ def build_scenario(config):
             desc += '\n\n' + '\n'.join(ambient)
         room.db.desc = desc
         room.db.scenario_id = scenario_name
+        room.db.scenario_type = scenario_type
+
+        # Store player inventory config for init_scenario()
+        if room_config.get('inventory'):
+            room.db.player_inventory = room_config['inventory']
+
+        # Store probe metadata (top-level YAML fields)
+        for meta_field in ('scene_id', 'condition', 'ground_truth', 'target_words'):
+            if config.get(meta_field) is not None:
+                setattr(room.db, meta_field, config[meta_field])
+
+        # Store state machine data for ScenarioRooms
+        if has_states:
+            room.db.states = room_config['states']
 
         rooms_by_name[room_name] = room
 
@@ -101,6 +120,38 @@ def build_scenario(config):
             obj.db.desc = obj_config.get('examine', obj_name)
             obj.db.examine_desc = obj_config.get('examine', '')
 
+            # Object flags
+            if obj_config.get('is_vendor'):
+                obj.db.is_vendor = True
+            if obj_config.get('is_phone'):
+                obj.db.is_phone = True
+
+            # Portability: objects are non-portable by default (no "get" lock).
+            # Only objects with portable: true get the get:all() lock.
+            if obj_config.get('portable'):
+                obj.locks.add("get:all()")
+
+            # Nested contents (e.g. items inside a vendor)
+            for child_config in obj_config.get('contents', []):
+                child_name = child_config['name']
+                existing_children = [o for o in obj.contents
+                                     if o.key.lower() == child_name.lower()]
+                if existing_children:
+                    child = existing_children[0]
+                    print(f'      Updating child object: {child_name}')
+                else:
+                    child = create_object('typeclasses.objects.Object',
+                                          key=child_name, location=obj)
+                    print(f'      Created child object: {child_name} in {obj_name}')
+                child.db.desc = child_config.get('examine', child_name)
+                child.db.examine_desc = child_config.get('examine', '')
+                # Child items inside vendors should be gettable
+                child.locks.add("get:all()")
+
+        # Create NPCs nested under room
+        for npc_config in room_config.get('npcs', []):
+            _build_npc(npc_config, room, rooms_by_name)
+
     # 2. Create inter-room exits
     for room_config in config.get('rooms', []):
         room = rooms_by_name.get(room_config['name'])
@@ -121,32 +172,40 @@ def build_scenario(config):
                 )
                 print(f'    Created exit: {room_config["name"]} --{direction}--> {target_name}')
 
-    # 3. Create NPCs
+    # 3. Create top-level NPCs (legacy format: npc has 'room' field)
     for npc_config in config.get('npcs', []):
-        npc_name = npc_config['name']
         npc_room_name = npc_config.get('room', '')
         npc_room = rooms_by_name.get(npc_room_name)
         if not npc_room:
-            print(f'  WARNING: Room "{npc_room_name}" not found for NPC "{npc_name}"')
+            print(f'  WARNING: Room "{npc_room_name}" not found for NPC "{npc_config["name"]}"')
             continue
+        _build_npc(npc_config, npc_room, rooms_by_name)
 
-        # Find or create NPC
-        existing_npcs = [o for o in npc_room.contents
-                         if o.key.lower() == npc_name.lower()
-                         and hasattr(o.db, 'topics')]
-        if existing_npcs:
-            npc = existing_npcs[0]
-            print(f'  Updating NPC: {npc_name}')
-        else:
-            npc = create_object('typeclasses.npcs.ScenarioNPC', key=npc_name, location=npc_room)
-            print(f'  Created NPC: {npc_name} in {npc_room_name}')
+    print(f'  Scenario "{scenario_name}" build complete.')
 
-        # Set NPC attributes
-        npc.db.npc_name = npc_name
-        npc.db.examine_desc = npc_config.get('examine', '').strip()
-        npc.db.desc = npc_name  # brief desc for room look
 
-        # Build topics dict and unlocked list
+def _build_npc(npc_config, room, rooms_by_name):
+    """Create or update a single NPC in a room."""
+    npc_name = npc_config['name']
+
+    # Find existing NPC (not an exit)
+    existing_npcs = [o for o in room.contents
+                     if o.key.lower() == npc_name.lower()
+                     and not hasattr(o, 'destination')]
+    if existing_npcs:
+        npc = existing_npcs[0]
+        print(f'  Updating NPC: {npc_name}')
+    else:
+        npc = create_object('typeclasses.npcs.ScenarioNPC', key=npc_name, location=room)
+        print(f'  Created NPC: {npc_name} in {room.key}')
+
+    # Set NPC attributes
+    npc.db.npc_name = npc_name
+    npc.db.examine_desc = npc_config.get('examine', '').strip()
+    npc.db.desc = npc_config.get('desc', npc_name)
+
+    # Build topics (if present — probe NPCs may have none)
+    if npc_config.get('initial_topics') or npc_config.get('unlockable_topics'):
         topics = {}
         unlocked = []
 
@@ -174,12 +233,9 @@ def build_scenario(config):
                 'sets_flag': topic_config.get('sets_flag', ''),
                 'outcome_flag': topic_config.get('outcome_flag', ''),
             }
-            # NOT added to unlocked — must be unlocked via conversation
 
         npc.db.topics = topics
         npc.db.unlocked_topics = unlocked
-
-    print(f'  Scenario "{scenario_name}" build complete.')
 
 
 def build_all_scenarios():
