@@ -15,6 +15,7 @@ own cmdsets by inheriting from them or directly from `evennia.CmdSet`.
 """
 
 from evennia import default_cmds
+from commands.command import MuxCommand
 from commands.navigation import CmdHub
 from commands.scenario_commands import (
     CmdAsk, CmdTell, CmdKnowledge, CmdExamineScenario,
@@ -24,8 +25,13 @@ from commands.mud_commands import (
     CmdApproach, CmdWithdraw, CmdHide, CmdSit, CmdLean,
     CmdWait, CmdLeave, CmdShout, CmdAssist, CmdSnatch,
     CmdSearch, CmdInquire, CmdActions,
-    CmdPass, CmdBuy, CmdCall,
+    CmdPass, CmdGive, CmdBuy, CmdCall, CmdGoto,
 )
+
+
+class CmdLook(default_cmds.CmdLook, MuxCommand):
+    """Look at location or object. Sends prompt after output."""
+    pass
 
 
 class CharacterCmdSet(default_cmds.CharacterCmdSet):
@@ -42,6 +48,8 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         Populates the cmdset
         """
         super().at_cmdset_creation()
+        self.add(CmdLook())
+        self.add(CmdGoto())
         self.add(CmdHub())
         self.add(CmdAsk())
         self.add(CmdTell())
@@ -63,6 +71,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdInquire())
         self.add(CmdActions())
         self.add(CmdPass())
+        self.add(CmdGive())
         self.add(CmdBuy())
         self.add(CmdCall())
 

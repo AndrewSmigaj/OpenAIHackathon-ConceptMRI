@@ -3,6 +3,8 @@
 Simple Pydantic schemas for API requests/responses.
 """
 
+import os
+
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 
@@ -421,12 +423,13 @@ class AgentStartRequest(BaseModel):
     session_name: str
     scenario_id: str
     target_words: List[str]
-    bootstrap_session_id: str
-    agent_name: str
+    bootstrap_session_id: str = ""
+    agent_name: str = "agent"
     capture_type_config: Optional[List[str]] = None
     auto_start: bool = False
-    evennia_username: str = "agent"
-    evennia_password: str = "agentpass"
+    evennia_username: str = os.environ.get("EVENNIA_AGENT_USER", "agent")
+    evennia_password: str = os.environ.get("EVENNIA_AGENT_PASS", "")
+    scenario_list: Optional[List[str]] = None
 
 class AgentStartResponse(BaseModel):
     """Response from starting an agent session."""

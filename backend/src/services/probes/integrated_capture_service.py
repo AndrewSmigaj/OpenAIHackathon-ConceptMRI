@@ -235,6 +235,76 @@ class IntegratedCaptureService:
             logger.error(f"Failed to capture '{target_word}' in '{input_text[:40]}...': {e}")
             raise
 
+    def probe_tick(
+        self, session_id: str, new_text: str, target_words: List[str],
+        past_key_values=None, use_cache: bool = False,
+        turn_id: int = None, scenario_id: str = "",
+        capture_type: str = "game_text",
+        token_ids: List[int] = None,
+    ) -> Tuple[dict, object]:
+        """Forward pass with capture at all target word positions.
+
+        If token_ids is provided, uses pre-tokenized sequence directly
+        (for agent loop with apply_chat_template). Otherwise tokenizes new_text.
+        new_text is always used for the input_text field in probe records.
+
+        Returns (result_dict, new_past_key_values).
+        result_dict has: token_ids, probes_written, target_positions.
+        """
+        self.session_mgr.validate_active_session(session_id)
+        if session_id not in self.session_writers:
+            self.session_writers[session_id] = SessionBatchWriters(
+                session_id, self.session_mgr.data_lake_path, self.session_mgr.batch_size
+            )
+
+        self.orchestrator.initialize_hooks(session_id)
+
+        if token_ids is None:
+            token_ids = self.processor.tokenizer.encode(new_text, add_special_tokens=False)
+        input_tensor = torch.tensor([token_ids], device=self.orchestrator.model.device)
+
+        self.orchestrator.clear_captured_data()
+        outputs, new_past_key_values = self.orchestrator.run_forward_pass(
+            input_tensor, past_key_values, use_cache
+        )
+
+        routing_data, embedding_data, residual_data = self.orchestrator.get_captured_data()
+        probes_written = 0
+        target_positions = {}
+
+        for word in target_words:
+            positions = self.processor.find_all_word_token_positions(token_ids, word)
+            word_positions = []
+            if not positions:
+                logger.debug(f"Target word '{word}' not found in tick {turn_id}")
+                target_positions[word] = []
+                continue
+
+            for pos, token_id in positions:
+                probe_id = generate_probe_id()
+                probe_data = self.processor.convert_to_schemas(
+                    probe_id=probe_id, session_id=session_id,
+                    input_text=new_text, target_word=word,
+                    target_token_id=token_id, target_token_position=pos,
+                    total_tokens=len(token_ids),
+                    routing_data=routing_data, embedding_data=embedding_data,
+                    residual_stream_data=residual_data,
+                    turn_id=turn_id, scenario_id=scenario_id,
+                    capture_type=capture_type,
+                )
+                self.session_writers[session_id].write_probe_data(probe_data)
+                self.session_mgr.record_probe_success(session_id)
+                word_positions.append(pos)
+                probes_written += 1
+
+            target_positions[word] = word_positions
+
+        return {
+            "token_ids": token_ids,
+            "probes_written": probes_written,
+            "target_positions": target_positions,
+        }, new_past_key_values
+
     def finalize_session(self, session_id: str):
         if session_id not in self.session_mgr.active_sessions:
             raise ValueError(f"Session {session_id} not active")

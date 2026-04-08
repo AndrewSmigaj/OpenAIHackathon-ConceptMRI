@@ -2,7 +2,8 @@
 Navigation commands for LLMud Institute.
 """
 
-from evennia import Command, search_object
+from evennia import search_object
+from commands.command import Command
 
 
 class CmdHub(Command):

@@ -25,7 +25,7 @@ from api.schemas import (
 from services.probes.integrated_capture_service import IntegratedCaptureService, SessionState
 from services.probes.probe_ids import generate_capture_id
 from services.agent.harmony_parser import parse_harmony_channels
-from services.agent.agent_loop import AgentLoop
+from services.agent.agent_loop import AgentLoop, SYSTEM_PROMPT
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +34,22 @@ router = APIRouter(prefix="/agent", tags=["agent"])
 # Single-agent enforcement: only one loop at a time (single GPU, single model)
 _active_loops: Dict[str, AgentLoop] = {}
 _active_tasks: Dict[str, asyncio.Task] = {}
+
+
+async def _run_and_cleanup(loop: AgentLoop, session_id: str, service: IntegratedCaptureService):
+    """Wrap agent loop with cleanup on natural completion."""
+    try:
+        await loop.run()
+    finally:
+        _active_loops.pop(session_id, None)
+        _active_tasks.pop(session_id, None)
+        if session_id in service.session_writers:
+            service.session_writers[session_id].close_all()
+            del service.session_writers[session_id]
+        try:
+            service.session_mgr.finalize_session(session_id)
+        except Exception:
+            logger.error(f"Failed to finalize {session_id}", exc_info=True)
 
 
 @router.post("/start", response_model=AgentStartResponse)
@@ -66,10 +82,13 @@ async def start_agent_session(
             scenario_id=request.scenario_id,
             target_words=request.target_words,
             agent_name=request.agent_name,
+            service=service,
+            scenario_list=request.scenario_list,
+            data_lake_path=str(service.data_lake_path),
             evennia_username=request.evennia_username,
             evennia_password=request.evennia_password,
         )
-        task = asyncio.create_task(loop.run())
+        task = asyncio.create_task(_run_and_cleanup(loop, session_id, service))
         _active_loops[session_id] = loop
         _active_tasks[session_id] = task
         logger.info(f"Auto-started agent loop for session {session_id}")
@@ -101,7 +120,7 @@ async def stop_agent_session(
             except asyncio.TimeoutError:
                 logger.warning(f"Agent loop task for {session_id} did not stop within 10s")
                 task.cancel()
-        del _active_loops[session_id]
+        _active_loops.pop(session_id, None)
         _active_tasks.pop(session_id, None)
         logger.info(f"Stopped agent loop for session {session_id}")
 
@@ -148,19 +167,26 @@ async def agent_generate(
     status.current_turn_id += 1
     scenario_id = metadata.get("scenario_id", "")
 
-    # 3. Tokenize prompt
-    prompt_token_ids = service.processor.tokenizer.encode(
-        request.prompt, add_special_tokens=False
+    # 3. Tokenize prompt with Harmony chat template
+    tokenizer = service.orchestrator.tokenizer
+    messages = [
+        {"role": "developer", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": request.prompt},
+    ]
+    inputs = tokenizer.apply_chat_template(
+        messages, add_generation_prompt=True,
+        return_dict=True, return_tensors="pt",
     )
+    input_ids = inputs["input_ids"].to(service.orchestrator.model.device)
+    attention_mask = inputs["attention_mask"].to(service.orchestrator.model.device)
+    prompt_token_ids = input_ids[0].tolist()
     prompt_token_count = len(prompt_token_ids)
-    input_tensor = torch.tensor(
-        [prompt_token_ids], device=service.orchestrator.model.device
-    )
 
     # 4. Generate continuation (hooks OFF) — returns text + token IDs
     service.orchestrator.initialize_hooks(session_id)
     generated_text, generated_token_ids = service.orchestrator.generate_continuation_with_ids(
-        input_tensor, max_new_tokens=request.max_new_tokens
+        input_ids, max_new_tokens=request.max_new_tokens,
+        attention_mask=attention_mask, skip_special_tokens=False,
     )
 
     # 5. Parse harmony channels

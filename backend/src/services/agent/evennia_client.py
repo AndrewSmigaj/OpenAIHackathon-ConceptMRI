@@ -9,6 +9,7 @@ Handles auth, ANSI stripping, and message accumulation.
 """
 
 import asyncio
+import html
 import json
 import logging
 import re
@@ -17,13 +18,26 @@ import websockets
 
 logger = logging.getLogger(__name__)
 
-# Covers ANSI color codes, xterm256, cursor control, bell
+# ANSI escape sequences (cursor control, colors, bell)
 _ANSI_RE = re.compile(r'\033\[[0-9;]*[mKHJ]|\007')
+# Evennia markup codes: |c, |n, |w, |[R, etc. (same pattern as frontend evenniaAnsi.ts)
+_EVENNIA_MARKUP_RE = re.compile(r'\|\[[a-zA-Z]|\|[rgybmcwxRGYBMCWXnuis*^]')
 
 
-def strip_ansi(text: str) -> str:
-    """Remove ANSI escape codes from text."""
-    return _ANSI_RE.sub('', text)
+_DBREF_RE = re.compile(r'\(#\d+\)')
+
+
+def clean_evennia_text(text: str) -> str:
+    """Clean Evennia WebSocket text for model consumption.
+
+    Decodes HTML entities, strips Evennia color codes, strips ANSI escapes,
+    strips Evennia dbrefs like (#20).
+    """
+    text = html.unescape(text)
+    text = _EVENNIA_MARKUP_RE.sub('', text)
+    text = _ANSI_RE.sub('', text)
+    text = _DBREF_RE.sub('', text)
+    return text
 
 
 class EvenniaClient:
@@ -99,7 +113,7 @@ class EvenniaClient:
 
         welcome = "".join(accumulated)
         logger.info(f"Authenticated as {username}")
-        return strip_ansi(welcome)
+        return clean_evennia_text(welcome)
 
     async def send_command(self, text: str):
         """Send a text command to Evennia."""
@@ -127,10 +141,16 @@ class EvenniaClient:
         except asyncio.TimeoutError:
             logger.warning("read_until_prompt timed out waiting for text")
 
-        return strip_ansi("".join(accumulated))
+        return clean_evennia_text("".join(accumulated))
 
     async def disconnect(self):
-        """Close the WebSocket connection."""
+        """Send quit and close the WebSocket connection."""
+        if self.ws:
+            try:
+                await self.send_command("quit")
+                await asyncio.sleep(0.3)
+            except Exception:
+                pass
         if self._reader_task:
             self._reader_task.cancel()
             try:

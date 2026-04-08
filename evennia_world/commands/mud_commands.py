@@ -5,8 +5,7 @@ Each command implements a MUD mechanic (proximity, position, etc.)
 then calls room.on_action() to notify the scenario state machine.
 """
 
-from evennia import Command
-from evennia.commands.default.muxcommand import MuxCommand
+from commands.command import Command, MuxCommand
 
 
 class CmdApproach(Command):
@@ -341,6 +340,49 @@ class CmdPass(MuxCommand):
             room.on_action(self.caller, f"pass {item.key} to {target.key}")
 
 
+class CmdGive(MuxCommand):
+    """
+    Hand something in your inventory to someone.
+
+    Usage:
+      give <item> to <target>
+
+    Example:
+      give phone to person
+
+    Gives an item you are carrying to another character or NPC.
+    """
+
+    key = "give"
+    locks = "cmd:all()"
+    rhs_split = ("=", " to ")
+
+    def func(self):
+        if not self.lhs or not self.rhs:
+            self.caller.msg("Usage: give <item> to <target>")
+            return
+
+        room = self.caller.location
+        if not room:
+            return
+
+        # Find item in caller's inventory
+        item = self.caller.search(self.lhs, location=self.caller)
+        if not item:
+            return
+
+        # Find recipient in room
+        target = self.caller.search(self.rhs)
+        if not target:
+            return
+
+        item.move_to(target, quiet=True, move_type="give")
+        self.caller.msg(f"You hand {item.key} to {target.key}.")
+
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"give {item.key} to {target.key}")
+
+
 class CmdBuy(MuxCommand):
     """
     Buy something from a vendor.
@@ -409,6 +451,31 @@ class CmdBuy(MuxCommand):
             self.caller.msg(f"You buy {item.key} from {vendor.key}.")
             if hasattr(room, "on_action"):
                 room.on_action(self.caller, f"buy {item.key}")
+
+
+class CmdGoto(Command):
+    """
+    Teleport to a named room. Builder+ only.
+
+    Usage:
+        goto <room name>
+
+    Searches for a room by name and moves the caller there directly.
+    Used by agent loops for scenario entry.
+    """
+
+    key = "goto"
+    locks = "cmd:perm(Builder)"
+    help_category = "Building"
+
+    def func(self):
+        if not self.args:
+            self.caller.msg("Usage: goto <room name>")
+            return
+        target = self.caller.search(self.args.strip(), global_search=True)
+        if not target:
+            return
+        self.caller.move_to(target, move_type="teleport")
 
 
 class CmdCall(Command):

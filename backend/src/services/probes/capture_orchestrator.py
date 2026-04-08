@@ -55,6 +55,7 @@ class CaptureOrchestrator:
     def run_forward_pass(
         self, input_tensor: torch.Tensor,
         past_key_values=None, use_cache: bool = False,
+        attention_mask: Optional[torch.Tensor] = None,
     ) -> Tuple[object, Optional[object]]:
         """Run a single forward pass through the model.
 
@@ -62,6 +63,8 @@ class CaptureOrchestrator:
         """
         with torch.no_grad():
             forward_kwargs = {"input_ids": input_tensor}
+            if attention_mask is not None:
+                forward_kwargs["attention_mask"] = attention_mask
             if past_key_values is not None:
                 forward_kwargs["past_key_values"] = past_key_values
             if use_cache:
@@ -74,7 +77,11 @@ class CaptureOrchestrator:
 
         return outputs, new_past_key_values
 
-    def generate_continuation(self, input_tensor: torch.Tensor, max_new_tokens: int = 50) -> str:
+    def generate_continuation(
+        self, input_tensor: torch.Tensor, max_new_tokens: int = 50,
+        attention_mask: Optional[torch.Tensor] = None,
+        skip_special_tokens: bool = True,
+    ) -> str:
         """Generate a text continuation from the model.
 
         Temporarily removes routing hooks before calling model.generate(),
@@ -86,20 +93,25 @@ class CaptureOrchestrator:
 
         try:
             with torch.no_grad():
-                gen_output = self.model.generate(
-                    input_ids=input_tensor,
-                    max_new_tokens=max_new_tokens,
-                    do_sample=False,
-                    pad_token_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
-                )
+                gen_kwargs = {
+                    "input_ids": input_tensor,
+                    "max_new_tokens": max_new_tokens,
+                    "do_sample": False,
+                    "pad_token_id": self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
+                }
+                if attention_mask is not None:
+                    gen_kwargs["attention_mask"] = attention_mask
+                gen_output = self.model.generate(**gen_kwargs)
             generated_ids = gen_output[0, input_tensor.shape[1]:]
-            return self.tokenizer.decode(generated_ids, skip_special_tokens=True)
+            return self.tokenizer.decode(generated_ids, skip_special_tokens=skip_special_tokens)
         finally:
             if self.routing_capture is not None:
                 self.routing_capture.register_hooks(verbose=False)
 
     def generate_continuation_with_ids(
-        self, input_tensor: torch.Tensor, max_new_tokens: int = 50
+        self, input_tensor: torch.Tensor, max_new_tokens: int = 50,
+        attention_mask: Optional[torch.Tensor] = None,
+        skip_special_tokens: bool = True,
     ) -> Tuple[str, List[int]]:
         """Generate text continuation, returning both decoded text and token IDs.
 
@@ -111,14 +123,17 @@ class CaptureOrchestrator:
 
         try:
             with torch.no_grad():
-                gen_output = self.model.generate(
-                    input_ids=input_tensor,
-                    max_new_tokens=max_new_tokens,
-                    do_sample=False,
-                    pad_token_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
-                )
+                gen_kwargs = {
+                    "input_ids": input_tensor,
+                    "max_new_tokens": max_new_tokens,
+                    "do_sample": False,
+                    "pad_token_id": self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
+                }
+                if attention_mask is not None:
+                    gen_kwargs["attention_mask"] = attention_mask
+                gen_output = self.model.generate(**gen_kwargs)
             generated_ids = gen_output[0, input_tensor.shape[1]:]
-            text = self.tokenizer.decode(generated_ids, skip_special_tokens=True)
+            text = self.tokenizer.decode(generated_ids, skip_special_tokens=skip_special_tokens)
             return text, generated_ids.tolist()
         finally:
             if self.routing_capture is not None:

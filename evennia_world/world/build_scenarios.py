@@ -52,6 +52,14 @@ def build_scenario(config):
         if existing:
             room = existing[0]
             print(f'  Updating room: {room_name} ({room.dbref})')
+            # Clean up all non-exit, non-character objects (prevents duplicates)
+            for obj in list(room.contents):
+                if obj.destination:  # exit
+                    continue
+                if obj.account:  # player character
+                    continue
+                obj.delete()
+            print(f'    Cleaned {room_name} contents')
         else:
             room = create_object(typeclass, key=room_name)
             print(f'  Created room: {room_name} ({room.dbref})')
@@ -77,6 +85,11 @@ def build_scenario(config):
         # Store state machine data for ScenarioRooms
         if has_states:
             room.db.states = room_config['states']
+
+        # Store initial configs for scenario reset (init_scenario rebuilds from these)
+        room.db.initial_desc = desc
+        room.db.initial_objects_config = room_config.get('objects', [])
+        room.db.initial_player_inventory = room_config.get('inventory', [])
 
         rooms_by_name[room_name] = room
 
@@ -180,6 +193,18 @@ def build_scenario(config):
             print(f'  WARNING: Room "{npc_room_name}" not found for NPC "{npc_config["name"]}"')
             continue
         _build_npc(npc_config, npc_room, rooms_by_name)
+
+    # Store initial NPC states for scenario reset
+    for room_config in config.get('rooms', []):
+        room = rooms_by_name.get(room_config['name'])
+        if not room:
+            continue
+        npc_states = {}
+        for obj in room.contents:
+            if hasattr(obj, 'db') and obj.db.topics is not None:
+                npc_states[obj.key] = list(obj.db.unlocked_topics or [])
+        if npc_states:
+            room.db.initial_npc_states = npc_states
 
     print(f'  Scenario "{scenario_name}" build complete.')
 

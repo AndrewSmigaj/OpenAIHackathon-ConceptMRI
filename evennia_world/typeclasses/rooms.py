@@ -106,17 +106,82 @@ class ScenarioRoom(Room):
     def get_room_type(self):
         return "scenario"
 
+    def get_display_characters(self, looker, **kwargs):
+        """Hide player characters from look output.
+
+        NPCs are DefaultObject subclasses, so they appear under 'things',
+        not 'characters'. This prevents the agent from seeing other players
+        (e.g. Emily) and getting distracted from scenario NPCs.
+        """
+        return ""
+
     def init_scenario(self, character):
-        """Initialize scenario state when a character enters."""
+        """Initialize scenario state when a character enters.
+
+        Resets both character state and room state so scenarios are
+        fully idempotent across runs.
+        """
+        from typeclasses.npcs import ScenarioNPC
+
+        # 1. Reset character state
         character.db.scenario_state = "initial"
         character.db.scenario_flags = {}
         character.db.proximity = {}
-        # Clean up leftover scenario items from previous runs
+
+        # 2. Clean up character inventory from previous runs
         for obj in list(character.contents):
             if obj.db.scenario_item:
                 obj.delete()
-        # Create personal items for this scenario
-        for item_config in (self.db.player_inventory or []):
+
+        # 3. Clean NPC inventories (prevents accumulation from give/buy across runs)
+        for obj in self.contents:
+            if isinstance(obj, ScenarioNPC):
+                for held in list(obj.contents):
+                    held.delete()
+
+        # 4. Delete all non-NPC, non-exit objects in room (will recreate from config)
+        for obj in list(self.contents):
+            if isinstance(obj, ScenarioNPC):
+                continue
+            if obj.destination:  # it's an exit
+                continue
+            if obj.account:  # it's a character
+                continue
+            obj.delete()
+
+        # 5. Recreate objects from stored config
+        for obj_config in (self.db.initial_objects_config or []):
+            obj = create_object('typeclasses.objects.Object',
+                                key=obj_config['name'], location=self)
+            obj.db.desc = obj_config.get('examine', obj_config['name'])
+            obj.db.examine_desc = obj_config.get('examine', '')
+            if obj_config.get('is_vendor'):
+                obj.db.is_vendor = True
+            if obj_config.get('is_phone'):
+                obj.db.is_phone = True
+            if obj_config.get('portable'):
+                obj.locks.add("get:all()")
+            # Nested contents (e.g. items inside a vendor)
+            for child_config in obj_config.get('contents', []):
+                child = create_object('typeclasses.objects.Object',
+                                      key=child_config['name'], location=obj)
+                child.db.desc = child_config.get('examine', child_config['name'])
+                child.db.examine_desc = child_config.get('examine', '')
+                child.locks.add("get:all()")
+
+        # 6. Reset NPC topic states
+        for npc_name, initial_topics in (self.db.initial_npc_states or {}).items():
+            for obj in self.contents:
+                if isinstance(obj, ScenarioNPC) and obj.key == npc_name:
+                    obj.db.unlocked_topics = list(initial_topics)
+                    break
+
+        # 7. Restore room description
+        if self.db.initial_desc:
+            self.db.desc = self.db.initial_desc
+
+        # 8. Create personal items for this scenario
+        for item_config in (self.db.initial_player_inventory or self.db.player_inventory or []):
             item = create_object('typeclasses.objects.Object',
                                  key=item_config['name'], location=character)
             item.db.desc = item_config.get('examine', item_config['name'])
@@ -193,11 +258,30 @@ class ScenarioRoom(Room):
                     if not caller.db.scenario_flags:
                         caller.db.scenario_flags = {}
                     caller.db.scenario_flags[effect["set_flag"]] = True
+                elif "remove_flag" in effect:
+                    if caller.db.scenario_flags:
+                        caller.db.scenario_flags.pop(effect["remove_flag"], None)
+                elif "reveal_object" in effect:
+                    for obj in self.contents:
+                        if obj.key.lower() == effect["reveal_object"].lower():
+                            obj.db.visible = True
+                            break
+                elif "remove_object" in effect:
+                    for obj in self.contents:
+                        if obj.key.lower() == effect["remove_object"].lower():
+                            obj.move_to(None, quiet=True)
+                            break
                 elif "move_object" in effect:
                     mo = effect["move_object"]
                     for obj in self.contents:
                         if obj.key.lower() == mo["object"].lower():
-                            target = caller.search(mo["to"])
+                            dest_key = mo["to"]
+                            if dest_key == "player":
+                                target = caller
+                            elif dest_key == "room":
+                                target = self
+                            else:
+                                target = caller.search(dest_key)
                             if target:
                                 obj.move_to(target, quiet=True)
                             break

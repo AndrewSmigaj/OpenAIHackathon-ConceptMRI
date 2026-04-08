@@ -7,8 +7,10 @@ These enable NPC dialogue and agent session management.
 
 import json
 import logging
+import os
 
-from evennia import Command
+from commands.command import Command
+from typeclasses.npcs import ScenarioNPC
 
 logger = logging.getLogger(__name__)
 
@@ -19,14 +21,9 @@ def _find_npc_in_room(caller, npc_name):
         return None
     npc_name_lower = npc_name.strip().lower()
     for obj in caller.location.contents:
-        is_npc = (
-            hasattr(obj, 'db')
-            and (
-                (hasattr(obj.db, 'topics') and obj.db.topics is not None)
-                or (hasattr(obj.db, 'examine_desc') and obj.db.examine_desc)
-            )
-        )
-        if is_npc and (obj.key.lower() == npc_name_lower or npc_name_lower in obj.key.lower()):
+        if isinstance(obj, ScenarioNPC) and (
+            obj.key.lower() == npc_name_lower or npc_name_lower in obj.key.lower()
+        ):
             return obj
     return None
 
@@ -193,11 +190,12 @@ class CmdExamineScenario(Command):
         if not self.caller.location:
             return
 
-        # Search room contents
+        # Search room contents and caller's inventory
         target_name_lower = target_name.lower()
-        for obj in self.caller.location.contents:
+        search_areas = list(self.caller.location.contents) + list(self.caller.contents)
+        for obj in search_areas:
             if target_name_lower in obj.key.lower():
-                examine_desc = obj.db.examine_desc if hasattr(obj.db, 'examine_desc') else None
+                examine_desc = obj.db.examine_desc
                 if examine_desc:
                     self.caller.msg(examine_desc.strip())
                 else:
@@ -246,8 +244,8 @@ class CmdAgentStart(Command):
             "bootstrap_session_id": "",
             "agent_name": agent_name,
             "auto_start": True,
-            "evennia_username": "agent",
-            "evennia_password": "agentpass",
+            "evennia_username": os.environ.get("EVENNIA_AGENT_USER", "agent"),
+            "evennia_password": os.environ.get("EVENNIA_AGENT_PASS", ""),
         }).encode("utf-8")
 
         class _StringProducer:

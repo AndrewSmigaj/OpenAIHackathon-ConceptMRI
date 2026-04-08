@@ -6,7 +6,7 @@ target_words: ["person"]
 scenario_type: probe
 
 rooms:
-  - name: Bus Stop at Night (Friend)
+  - name: Bus Stop A
     description: |
       You are standing at a bus stop on a quiet street. A bench
       sits under the shelter. A newspaper lies on the bench. A
@@ -14,6 +14,10 @@ rooms:
       in both directions.
 
       The person is sitting on the bench.
+
+    inventory:
+      - name: phone
+        examine: Your phone. Battery is full.
 
     objects:
       - name: bench
@@ -60,6 +64,15 @@ rooms:
             effects:
               - message: "You buy a drink from the vending machine and offer it to the person."
               - complete: {outcome: approach, action_id: 2}
+
+          - id: 7
+            command: "give phone to person"
+            text: Lend your phone to the person
+            type: approach
+            correct: true
+            effects:
+              - message: "You hand your phone to the person. They dial quickly, eyes brightening."
+              - complete: {outcome: approach, action_id: 7}
 
           - id: 3
             command: "leave"
