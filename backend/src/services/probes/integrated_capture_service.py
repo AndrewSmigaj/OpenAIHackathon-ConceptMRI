@@ -239,14 +239,26 @@ class IntegratedCaptureService:
         self, session_id: str, new_text: str, target_words: List[str],
         past_key_values=None, use_cache: bool = False,
         turn_id: int = None, scenario_id: str = "",
-        capture_type: str = "game_text",
+        capture_type: str = "prompt",
         token_ids: List[int] = None,
+        label: str = None,
+        min_position: int = 0,
+        prompt_token_count: int = 0,
+        capture_generation: bool = True,
     ) -> Tuple[dict, object]:
         """Forward pass with capture at all target word positions.
 
         If token_ids is provided, uses pre-tokenized sequence directly
         (for agent loop with apply_chat_template). Otherwise tokenizes new_text.
-        new_text is always used for the input_text field in probe records.
+
+        input_text is the decoded full token sequence — what actually went
+        through the forward pass. Same definition as sentence set probes.
+
+        prompt_token_count: boundary between prompt and generated tokens.
+        Positions below get capture_type="prompt", at or above get "generation".
+        If 0, all positions use the passed capture_type (sentence set behavior).
+
+        capture_generation: if False, skip positions >= prompt_token_count.
 
         Returns (result_dict, new_past_key_values).
         result_dict has: token_ids, probes_written, target_positions.
@@ -268,12 +280,26 @@ class IntegratedCaptureService:
             input_tensor, past_key_values, use_cache
         )
 
+        # Decode the full token sequence — this is what went through the forward pass
+        input_text = self.processor.tokenizer.decode(token_ids, skip_special_tokens=True)
+
+        # Build character offset map: token position → char position in input_text
+        char_offsets = []
+        running = 0
+        for tid in token_ids:
+            char_offsets.append(running)
+            running += len(self.processor.tokenizer.decode([tid], skip_special_tokens=True))
+
         routing_data, embedding_data, residual_data = self.orchestrator.get_captured_data()
         probes_written = 0
         target_positions = {}
 
         for word in target_words:
             positions = self.processor.find_all_word_token_positions(token_ids, word)
+            if min_position > 0:
+                positions = [(pos, tid) for pos, tid in positions if pos >= min_position]
+            if prompt_token_count > 0 and not capture_generation:
+                positions = [(pos, tid) for pos, tid in positions if pos < prompt_token_count]
             word_positions = []
             if not positions:
                 logger.debug(f"Target word '{word}' not found in tick {turn_id}")
@@ -281,16 +307,24 @@ class IntegratedCaptureService:
                 continue
 
             for pos, token_id in positions:
+                # Label position as prompt or generation
+                if prompt_token_count > 0 and pos >= prompt_token_count:
+                    pos_capture_type = "generation"
+                else:
+                    pos_capture_type = capture_type
+
                 probe_id = generate_probe_id()
                 probe_data = self.processor.convert_to_schemas(
                     probe_id=probe_id, session_id=session_id,
-                    input_text=new_text, target_word=word,
+                    input_text=input_text, target_word=word,
                     target_token_id=token_id, target_token_position=pos,
                     total_tokens=len(token_ids),
                     routing_data=routing_data, embedding_data=embedding_data,
                     residual_stream_data=residual_data,
                     turn_id=turn_id, scenario_id=scenario_id,
-                    capture_type=capture_type,
+                    capture_type=pos_capture_type,
+                    label=label,
+                    target_char_offset=char_offsets[pos] if pos < len(char_offsets) else None,
                 )
                 self.session_writers[session_id].write_probe_data(probe_data)
                 self.session_mgr.record_probe_success(session_id)

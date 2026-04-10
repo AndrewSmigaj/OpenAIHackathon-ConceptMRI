@@ -6,6 +6,9 @@ FastAPI server for Concept MRI - MoE interpretability through Concept Trajectory
 from contextlib import asynccontextmanager
 import logging
 import time
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import torch

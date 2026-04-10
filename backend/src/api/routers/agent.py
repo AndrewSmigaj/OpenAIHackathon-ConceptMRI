@@ -25,7 +25,7 @@ from api.schemas import (
 from services.probes.integrated_capture_service import IntegratedCaptureService, SessionState
 from services.probes.probe_ids import generate_capture_id
 from services.agent.harmony_parser import parse_harmony_channels
-from services.agent.agent_loop import AgentLoop, SYSTEM_PROMPT
+from services.agent.agent_loop import AgentLoop, DEFAULT_SYSTEM_PROMPT
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +40,8 @@ async def _run_and_cleanup(loop: AgentLoop, session_id: str, service: Integrated
     """Wrap agent loop with cleanup on natural completion."""
     try:
         await loop.run()
+    except Exception:
+        logger.error(f"Agent loop crashed for {session_id}", exc_info=True)
     finally:
         _active_loops.pop(session_id, None)
         _active_tasks.pop(session_id, None)
@@ -87,6 +89,8 @@ async def start_agent_session(
             data_lake_path=str(service.data_lake_path),
             evennia_username=request.evennia_username,
             evennia_password=request.evennia_password,
+            system_prompt=request.system_prompt,
+            session_name=request.session_name,
         )
         task = asyncio.create_task(_run_and_cleanup(loop, session_id, service))
         _active_loops[session_id] = loop
@@ -170,12 +174,13 @@ async def agent_generate(
     # 3. Tokenize prompt with Harmony chat template
     tokenizer = service.orchestrator.tokenizer
     messages = [
-        {"role": "developer", "content": SYSTEM_PROMPT},
+        {"role": "developer", "content": DEFAULT_SYSTEM_PROMPT},
         {"role": "user", "content": request.prompt},
     ]
     inputs = tokenizer.apply_chat_template(
         messages, add_generation_prompt=True,
         return_dict=True, return_tensors="pt",
+        model_identity="You are an agent exploring a world.",
     )
     input_ids = inputs["input_ids"].to(service.orchestrator.model.device)
     attention_mask = inputs["attention_mask"].to(service.orchestrator.model.device)

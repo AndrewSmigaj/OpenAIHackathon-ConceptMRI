@@ -298,7 +298,7 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                             </span>
                           )}
                           {token.input_text ? (
-                            <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} />
+                            <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={token.target_char_offset} />
                           ) : (
                             <span className="text-gray-500">"{token.target_word || 'N/A'}"</span>
                           )}

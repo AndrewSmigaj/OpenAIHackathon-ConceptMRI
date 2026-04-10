@@ -21,6 +21,7 @@ def _rebuild_output_nodes(
     from core.parquet_reader import read_records
     from schemas.tokens import ProbeRecord
     from services.experiments.output_category_nodes import build_output_category_layer, strip_output_nodes
+    from services.probes.scenario_actions import enrich_records_with_scenario_actions
 
     base_nodes, base_links = strip_output_nodes(result["nodes"], result["links"])
 
@@ -29,6 +30,7 @@ def _rebuild_output_nodes(
     if not session_path.exists():
         session_path = DATA_LAKE_PATH / f"session_{session_id}"
     token_records = read_records(str(session_path / "tokens.parquet"), ProbeRecord)
+    enrich_records_with_scenario_actions(token_records, session_path)
 
     # Simpler approach: build a synthetic routes dict from final-layer nodes
     final_layer = max(window_layers)

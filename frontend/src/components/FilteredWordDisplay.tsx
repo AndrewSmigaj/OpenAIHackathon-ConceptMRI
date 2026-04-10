@@ -69,6 +69,20 @@ export default function FilteredWordDisplay({
               ? getNodeColor({ [sentence.label]: 1 }, primaryValues, gradient)
               : '#666666'
 
+            // Windowed excerpt when char offset is available (agent sessions)
+            const offset = sentence.target_char_offset
+            const fullText = sentence.input_text
+            let displayText = fullText
+            let displayOffset = offset
+            const WINDOW = 80
+
+            if (offset != null && fullText.length > WINDOW * 2 + sentence.target_word.length) {
+              const start = Math.max(0, offset - WINDOW)
+              const end = Math.min(fullText.length, offset + sentence.target_word.length + WINDOW)
+              displayText = (start > 0 ? '...' : '') + fullText.slice(start, end) + (end < fullText.length ? '...' : '')
+              displayOffset = offset - start + (start > 0 ? 3 : 0)
+            }
+
             return (
               <div key={sentence.probe_id || i} className="bg-gray-50 rounded px-1.5 py-1">
                 <p className="text-[10px] text-gray-700 leading-snug">
@@ -80,10 +94,16 @@ export default function FilteredWordDisplay({
                       {sentence.label}
                     </span>
                   )}
+                  {sentence.capture_type === 'generation' && (
+                    <span className="inline-block px-1 py-px text-[8px] font-medium rounded bg-purple-500 text-white mr-1 align-middle">
+                      gen
+                    </span>
+                  )}
                   <SentenceHighlight
-                    text={sentence.input_text}
+                    text={displayText}
                     targetWord={sentence.target_word}
                     color={color}
+                    charOffset={displayOffset}
                   />
                 </p>
               </div>

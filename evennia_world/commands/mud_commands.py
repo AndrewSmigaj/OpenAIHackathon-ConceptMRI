@@ -133,22 +133,22 @@ class CmdWait(Command):
             room.on_action(self.caller, "wait")
 
 
-class CmdLeave(Command):
+class CmdFlee(Command):
     """
-    Leave the area.
+    Flee the area.
 
     Usage:
-      leave
+      flee
     """
 
-    key = "leave"
+    key = "flee"
     locks = "cmd:all()"
 
     def func(self):
-        self.caller.msg("You leave.")
+        self.caller.msg("You flee.")
         room = self.caller.location
         if hasattr(room, "on_action"):
-            room.on_action(self.caller, "leave")
+            room.on_action(self.caller, "flee")
 
 
 class CmdShout(Command):
@@ -211,6 +211,28 @@ class CmdSnatch(Command):
         room = self.caller.location
         if hasattr(room, "on_action"):
             room.on_action(self.caller, f"snatch {target}")
+
+
+class CmdShove(Command):
+    """
+    Shove someone away from you.
+
+    Usage:
+      shove <target>
+    """
+
+    key = "shove"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Shove who?")
+            return
+        self.caller.msg(f"You shove {target}.")
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"shove {target}")
 
 
 class CmdSearch(Command):
@@ -325,7 +347,7 @@ class CmdPass(MuxCommand):
             return
 
         # Find recipient in room
-        target = self.caller.search(self.rhs)
+        target = self.caller.search(self.rhs, location=room)
         if not target:
             return
 
@@ -372,7 +394,7 @@ class CmdGive(MuxCommand):
             return
 
         # Find recipient in room
-        target = self.caller.search(self.rhs)
+        target = self.caller.search(self.rhs, location=room)
         if not target:
             return
 
@@ -438,7 +460,7 @@ class CmdBuy(MuxCommand):
 
         # If recipient specified, hand it over
         if self.rhs:
-            target = self.caller.search(self.rhs.strip())
+            target = self.caller.search(self.rhs.strip(), location=room)
             if not target:
                 return
             item.move_to(target, quiet=True, move_type="give")

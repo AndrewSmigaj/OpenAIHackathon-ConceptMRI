@@ -238,7 +238,9 @@ class SessionManager:
             hidden_size=self.hidden_size,
         )
 
-        manifest_path = Path(self.data_lake_path) / session_id / "capture_manifest.parquet"
+        session_dir = Path(self.data_lake_path) / session_id
+        session_dir.mkdir(parents=True, exist_ok=True)
+        manifest_path = session_dir / "capture_manifest.parquet"
         manifest_dict = manifest.to_parquet_dict()
         table = pa.Table.from_pylist([manifest_dict])
         pq.write_table(table, manifest_path)

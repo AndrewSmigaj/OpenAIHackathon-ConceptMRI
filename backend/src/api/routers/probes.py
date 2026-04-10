@@ -170,7 +170,9 @@ async def get_probe_session_details(
         sentences = None
         if tokens_path.exists():
             try:
+                from services.probes.scenario_actions import enrich_records_with_scenario_actions
                 token_records = read_records(str(tokens_path), ProbeRecord)
+                enrich_records_with_scenario_actions(token_records, session_dir)
                 sentences = [
                     ProbeExample(
                         target_word=t.target_word,
@@ -179,6 +181,9 @@ async def get_probe_session_details(
                         probe_id=t.probe_id,
                         generated_text=getattr(t, 'generated_text', None),
                         output_category=getattr(t, 'output_category', None),
+                        target_char_offset=getattr(t, 'target_char_offset', None),
+                        turn_id=getattr(t, 'turn_id', None),
+                        capture_type=getattr(t, 'capture_type', None),
                     )
                     for t in token_records
                 ]

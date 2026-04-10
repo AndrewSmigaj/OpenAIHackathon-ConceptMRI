@@ -210,7 +210,7 @@ export default function ClusterRoutesSection({
                     label: info.label,
                     tokens: [sentence],
                     example_tokens: [sentence],
-                    signature: `Trajectory: ${info.probe_id.slice(0, 8)}`,
+                    signature: `Trajectory: ${info.label || 'probe'} · ${info.target || ''}`,
                     probe_id: info.probe_id,
                   }
                 })

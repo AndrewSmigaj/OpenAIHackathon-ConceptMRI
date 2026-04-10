@@ -153,6 +153,9 @@ class ProbeExample(BaseModel):
     probe_id: str
     generated_text: Optional[str] = None
     output_category: Optional[str] = None
+    target_char_offset: Optional[int] = None
+    turn_id: Optional[int] = None
+    capture_type: Optional[str] = None
 
 # Resolve forward reference in SessionDetailResponse
 SessionDetailResponse.model_rebuild()
@@ -427,6 +430,7 @@ class AgentStartRequest(BaseModel):
     agent_name: str = "agent"
     capture_type_config: Optional[List[str]] = None
     auto_start: bool = False
+    system_prompt: Optional[str] = None
     evennia_username: str = os.environ.get("EVENNIA_AGENT_USER", "agent")
     evennia_password: str = os.environ.get("EVENNIA_AGENT_PASS", "")
     scenario_list: Optional[List[str]] = None

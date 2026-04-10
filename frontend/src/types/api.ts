@@ -67,6 +67,9 @@ interface ProbeExample {
   probe_id: string
   generated_text?: string
   output_category?: string
+  target_char_offset?: number
+  turn_id?: number
+  capture_type?: string
 }
 
 interface RouteStatistics {

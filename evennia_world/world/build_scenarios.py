@@ -227,6 +227,7 @@ def _build_npc(npc_config, room, rooms_by_name):
     # Set NPC attributes
     npc.db.npc_name = npc_name
     npc.db.examine_desc = npc_config.get('examine', '').strip()
+    npc.db.short_desc = npc_config.get('short_desc', '')
     npc.db.desc = npc_config.get('desc', npc_name)
 
     # Build topics (if present — probe NPCs may have none)

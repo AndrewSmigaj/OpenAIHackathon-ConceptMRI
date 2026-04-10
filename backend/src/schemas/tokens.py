@@ -44,7 +44,8 @@ class ProbeRecord:
     # Agent session fields (null for batch captures)
     turn_id: Optional[int] = None
     scenario_id: Optional[str] = None
-    capture_type: Optional[str] = None  # "batch", "reasoning", "knowledge_query"
+    capture_type: Optional[str] = None  # "prompt", "generation", "batch", "knowledge_query"
+    target_char_offset: Optional[int] = None  # Character position of target word in input_text
 
     @classmethod
     def from_parquet_dict(cls, data: dict) -> 'ProbeRecord':
@@ -77,6 +78,7 @@ PROBE_RECORD_PARQUET_SCHEMA = {
     "turn_id": "int32",
     "scenario_id": "string",
     "capture_type": "string",
+    "target_char_offset": "int32",
 }
 
 
@@ -101,6 +103,7 @@ def create_probe_record(
     turn_id: int = None,
     scenario_id: str = None,
     capture_type: str = None,
+    target_char_offset: int = None,
 ) -> ProbeRecord:
     """Create probe record linking probe_id to input text and tracked words."""
     categories_json = json.dumps(categories) if categories else None
@@ -125,4 +128,5 @@ def create_probe_record(
         turn_id=turn_id,
         scenario_id=scenario_id,
         capture_type=capture_type,
+        target_char_offset=target_char_offset,
     )

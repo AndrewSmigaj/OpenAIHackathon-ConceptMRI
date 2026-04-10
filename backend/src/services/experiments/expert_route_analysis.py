@@ -174,6 +174,8 @@ class ExpertRouteAnalysisService:
 
         tokens_path = session_path / "tokens.parquet"
         token_records = read_records(str(tokens_path), ProbeRecord)
+        from services.probes.scenario_actions import enrich_records_with_scenario_actions
+        enrich_records_with_scenario_actions(token_records, session_path)
 
         manifest = None
         manifest_path = session_path / "capture_manifest.parquet"

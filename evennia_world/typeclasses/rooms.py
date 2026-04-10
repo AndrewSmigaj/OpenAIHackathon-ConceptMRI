@@ -115,6 +115,34 @@ class ScenarioRoom(Room):
         """
         return ""
 
+    def get_display_things(self, looker, **kwargs):
+        """Show objects and NPCs, appending short_desc for NPCs.
+
+        Produces: "You see: a bench, a newspaper, a person sitting on the bench, and a vending machine"
+        instead of listing the NPC separately in the room description.
+        """
+        from typeclasses.npcs import ScenarioNPC
+        from collections import defaultdict
+        from evennia.utils.utils import iter_to_str
+
+        things = self.filter_visible(self.contents_get(content_type="object"), looker, **kwargs)
+        grouped_things = defaultdict(list)
+        for thing in things:
+            grouped_things[thing.get_display_name(looker, **kwargs)].append(thing)
+
+        thing_names = []
+        for thingname, thinglist in sorted(grouped_things.items()):
+            nthings = len(thinglist)
+            thing = thinglist[0]
+            singular, plural = thing.get_numbered_name(nthings, looker, key=thingname)
+            name = singular if nthings == 1 else plural
+            if isinstance(thing, ScenarioNPC) and thing.db.short_desc:
+                name = f"{name} {thing.db.short_desc}"
+            thing_names.append(name)
+
+        thing_names = iter_to_str(thing_names)
+        return f"|wYou see:|n {thing_names}" if thing_names else ""
+
     def init_scenario(self, character):
         """Initialize scenario state when a character enters.
 

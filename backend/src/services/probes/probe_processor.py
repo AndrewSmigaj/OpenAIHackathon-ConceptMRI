@@ -130,6 +130,7 @@ class ProbeProcessor:
         turn_id: int = None,
         scenario_id: str = None,
         capture_type: str = None,
+        target_char_offset: int = None,
     ) -> ProbeCapture:
         """Convert raw capture data to schema records.
 
@@ -158,6 +159,7 @@ class ProbeProcessor:
             turn_id=turn_id,
             scenario_id=scenario_id,
             capture_type=capture_type,
+            target_char_offset=target_char_offset,
         )
 
         routing_records = []

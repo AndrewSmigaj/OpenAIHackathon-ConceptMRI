@@ -128,6 +128,7 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - **Test early** — verify data contracts as soon as possible
 - **Check scratchpad first** — read `docs/scratchpad/` for context from recent conversations before starting new work
 - **Research before change** — read actual code, understand actual state, THEN decide what to change. Never jump to implementation based on pattern matching.
+- **Investigate before proposing** — when something is wrong, read the actual data and code before suggesting fixes. State what you found, what you're certain about, and what you're uncertain about. Never propose a fix with high confidence when you haven't verified the root cause.
 - **Watch for attractor patterns** — over-abstracting, over-engineering for hypothetical requirements, adding error handling for impossible cases, summarizing what you just did. Counter: "what's simplest?" and "is this real or hypothetical?"
 - **Sunk cost awareness** — replace bad code, don't patch around it. We control everything; backward compatibility is unnecessary.
 - **Document sync** — after modifying any file in `docs/` or `LLMud/`, check its `Related:` header. Update anything that drifted. Updating related docs is always in scope — you do not need separate permission.
