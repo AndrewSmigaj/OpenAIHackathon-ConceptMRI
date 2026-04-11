@@ -247,6 +247,8 @@ Use `bus_stop_friend.yaml` as your starting point. Copy it and change the name, 
 
 ### 5. Design the actions
 
+> **Action sets are designed per pair, not per scene.** Multiple pairs can share a scene archetype (`bus_stop` is reused by several pairs) but each pair picks its own objects, inventory, and actions appropriate to its NPC subtype combination. The matched-pair rule (identical action list) applies *within* a pair — friend and foe in the same pair must share actions exactly — not *across* pairs. Design each pair's actions so the right choice is obvious from the NPC description alone; if the reader has to squint, the signal is not strong enough.
+
 - **4 actions minimum**: 2 friend-engage + 2 enemy-engage
 - Use concrete physical verbs (sit, give, leave, shove — not "help" or "confront")
 - Every action must be physically possible in both conditions
@@ -521,30 +523,7 @@ The builder is idempotent — safe to re-run. It cleans room contents before reb
 
 ### Run an agent session
 
-```bash
-curl -X POST http://localhost:8000/api/agent/start \
-  -H "Content-Type: application/json" \
-  -d '{
-    "session_name": "bus_stop_friend_run1",
-    "scenario_id": "bus_stop_friend",
-    "target_words": ["person"],
-    "scenario_list": ["bus_stop_friend"],
-    "auto_start": true,
-    "system_prompt": "You are exploring a world..."
-  }'
-```
-
-Required fields: `session_name`, `scenario_id`, `target_words`. Set `auto_start: true` and provide `scenario_list` to launch the agent loop immediately. The `system_prompt` field is optional — if omitted, it uses `DEFAULT_SYSTEM_PROMPT` from `agent_loop.py`. Set it per session to vary the behavioral framing (e.g., "Help friends. Stand up to bad guys." vs. a neutral prompt).
-
-The agent connects to Evennia via WebSocket, teleports to the scenario room, and plays through the scenario. Activations are captured each tick.
-
-### Stop a running session
-
-```bash
-curl -X POST http://localhost:8000/api/agent/stop \
-  -H "Content-Type: application/json" \
-  -d '{"session_id": "<session_id>"}'
-```
+See the `/agent` skill (`.claude/skills/agent/SKILL.md`) for the canonical start/monitor/inspect/stop procedure. Required parameters, expected response format, and troubleshooting live there.
 
 ## Reviewing Results
 

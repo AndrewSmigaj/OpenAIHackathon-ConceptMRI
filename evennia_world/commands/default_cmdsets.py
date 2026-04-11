@@ -23,7 +23,8 @@ from commands.scenario_commands import (
 )
 from commands.mud_commands import (
     CmdApproach, CmdWithdraw, CmdHide, CmdSit, CmdLean,
-    CmdWait, CmdFlee, CmdShout, CmdAssist, CmdSnatch, CmdShove,
+    CmdWait, CmdFlee, CmdShout, CmdRefuse, CmdLeave,
+    CmdAssist, CmdSnatch, CmdShove,
     CmdSearch, CmdInquire, CmdActions,
     CmdPass, CmdGive, CmdBuy, CmdCall, CmdGoto,
 )
@@ -65,6 +66,8 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdWait())
         self.add(CmdFlee())
         self.add(CmdShout())
+        self.add(CmdRefuse())
+        self.add(CmdLeave())
         self.add(CmdAssist())
         self.add(CmdSnatch())
         self.add(CmdShove())

@@ -165,16 +165,79 @@ class CmdShout(Command):
 
     Usage:
       shout
+      shout <word>
+
+    Example:
+      shout thief
+      shout scam
     """
 
     key = "shout"
     locks = "cmd:all()"
 
     def func(self):
-        self.caller.msg("You shout.")
+        args = self.args.strip()
+        if args:
+            self.caller.msg(f'You shout "{args}!"')
+            self.caller.location.msg_contents(
+                f'{self.caller.key} shouts "{args}!"',
+                exclude=self.caller,
+            )
+            action_str = f"shout {args}"
+        else:
+            self.caller.msg("You shout.")
+            self.caller.location.msg_contents(
+                f"{self.caller.key} shouts.",
+                exclude=self.caller,
+            )
+            action_str = "shout"
         room = self.caller.location
         if hasattr(room, "on_action"):
-            room.on_action(self.caller, "shout")
+            room.on_action(self.caller, action_str)
+
+
+class CmdRefuse(Command):
+    """
+    Firmly say no to what someone is offering.
+
+    Usage:
+      refuse
+    """
+
+    key = "refuse"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You firmly say no.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} firmly says no.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "refuse")
+
+
+class CmdLeave(Command):
+    """
+    Turn and walk away from the current situation.
+
+    Usage:
+      leave
+    """
+
+    key = "leave"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You turn and walk away.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} turns and walks away.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "leave")
 
 
 class CmdAssist(Command):

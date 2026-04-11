@@ -47,7 +47,6 @@ class EvenniaClient:
         self.url = url
         self.ws = None
         self._text_buffer: asyncio.Queue = asyncio.Queue()
-        self._special_buffer: asyncio.Queue = asyncio.Queue()
         self._reader_task = None
 
     async def connect(self):
@@ -72,9 +71,7 @@ class EvenniaClient:
                         await self._text_buffer.put(text)
                     elif cmdname == "prompt":
                         await self._text_buffer.put(None)  # sentinel for prompt
-                    elif cmdname == "logged_in":
-                        await self._special_buffer.put("logged_in")
-                    # OOB events (room_entered, room_left, etc.) are silently ignored
+                    # OOB events (room_entered, room_left, logged_in, etc.) are silently ignored
                 except (json.JSONDecodeError, IndexError):
                     # Non-JSON or malformed — treat as raw text
                     await self._text_buffer.put(str(raw_msg))
@@ -84,36 +81,29 @@ class EvenniaClient:
             pass
 
     async def authenticate(self, username: str, password: str) -> str:
-        """Log in to Evennia. Returns accumulated welcome text."""
+        """Log in to Evennia. Verifies the session is actually authenticated
+        by sending a `look` probe and checking the response doesn't contain
+        the unauthenticated welcome banner. Raises RuntimeError on failure.
+        """
         await self.send_command(f"connect {username} {password}")
+        welcome = await self.read_until_prompt(timeout=10.0)
 
-        # Wait for logged_in signal or timeout
-        accumulated = []
-        try:
-            while True:
-                # Check for logged_in signal
-                try:
-                    signal = self._special_buffer.get_nowait()
-                    if signal == "logged_in":
-                        break
-                except asyncio.QueueEmpty:
-                    pass
+        # Verify auth actually succeeded — the welcome banner is distinctive
+        # and only shown to unauthenticated sessions. If we still see it
+        # after a look-probe, auth did not complete.
+        await self.send_command("look")
+        probe = await self.read_until_prompt(timeout=5.0)
 
-                # Accumulate text with timeout
-                try:
-                    item = await asyncio.wait_for(self._text_buffer.get(), timeout=10.0)
-                    if item is None:  # prompt sentinel
-                        continue
-                    accumulated.append(item)
-                except asyncio.TimeoutError:
-                    logger.warning("Auth timeout — no logged_in signal received")
-                    break
-        except Exception as e:
-            logger.error(f"Auth error: {e}")
+        if "Welcome to LLMud Institute" in probe or "connect <username>" in probe:
+            raise RuntimeError(
+                f"Evennia authentication failed for {username!r} — still on "
+                "welcome screen after connect. If Evennia has an orphaned "
+                "session for this account, run `evennia restart` (not reload) "
+                "to clear it."
+            )
 
-        welcome = "".join(accumulated)
         logger.info(f"Authenticated as {username}")
-        return clean_evennia_text(welcome)
+        return welcome
 
     async def send_command(self, text: str):
         """Send a text command to Evennia."""

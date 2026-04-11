@@ -27,6 +27,19 @@ SCENARIOS_DIR = os.path.join(
 )
 
 
+def _purge_recursive(obj):
+    """Delete obj and all nested contents.
+
+    Evennia's DefaultObject.delete() calls clear_contents() which MOVES
+    children to their home location (DEFAULT_HOME=#2 if unset) before
+    deleting the container. Without a recursive pre-pass this leaks
+    nested items into the Hub on every scenario rebuild.
+    """
+    for child in list(obj.contents):
+        _purge_recursive(child)
+    obj.delete()
+
+
 def build_scenario(config):
     """Create or update rooms, NPCs, and objects for a scenario."""
     scenario_name = config['name']
@@ -58,7 +71,7 @@ def build_scenario(config):
                     continue
                 if obj.account:  # player character
                     continue
-                obj.delete()
+                _purge_recursive(obj)
             print(f'    Cleaned {room_name} contents')
         else:
             room = create_object(typeclass, key=room_name)

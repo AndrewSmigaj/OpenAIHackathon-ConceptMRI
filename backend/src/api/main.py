@@ -3,6 +3,18 @@
 FastAPI server for Concept MRI - MoE interpretability through Concept Trajectory Analysis.
 """
 
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load .env from project root BEFORE importing anything that reads env vars
+# at module-import time. `api.schemas.AgentStartRequest` evaluates
+# `os.environ.get("EVENNIA_AGENT_PASS", "")` as a Pydantic field default at
+# import time, so the dotenv load must happen before the router imports
+# below. Without this, the backend can't authenticate as the agent unless
+# the launching shell manually exported the env vars.
+_PROJECT_ROOT = Path(__file__).resolve().parents[3]
+load_dotenv(_PROJECT_ROOT / ".env")
+
 from contextlib import asynccontextmanager
 import logging
 import time

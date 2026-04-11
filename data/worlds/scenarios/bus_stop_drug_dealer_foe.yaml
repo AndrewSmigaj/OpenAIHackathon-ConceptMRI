@@ -1,0 +1,82 @@
+name: bus_stop_drug_dealer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: drug_dealer
+
+rooms:
+  - name: Bus Stop J
+    description: |
+      You are standing at a quiet bus stop late at night. A
+      wooden bench sits under the dim shelter. A payphone is
+      bolted to the pole. A single streetlight buzzes weakly
+      overhead. The street is nearly empty.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the dim shelter, with a faint glint of metal on the seat.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: keys
+        examine: A set of car keys lying on the bench.
+        portable: true
+
+    inventory:
+      - name: coat
+        examine: A warm coat you peeled off earlier and slung over your arm.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: catching your eye as you step under the shelter and calling out "hey, you"
+        examine: |
+          The person pushes off the pole the moment you glance
+          their way, crowding in close. They open one hand and
+          dangle a small plastic baggie of white powder an inch
+          from your face, eyes hard and searching. "C'mon. I've
+          got something you gotta try. You'll feel real good, real
+          fast — no hassle. Just a taste." Their free hand hovers
+          near their jacket pocket.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass keys to person"
+            text: Pick up the keys from the bench and hand them to the person
+            type: friend
+            correct: false
+            effects:
+              - message: "You pick up the set of keys from the bench and hold them out. The dealer laughs and waves you off — 'Keep 'em. I got what I need right here.' — and pushes the baggie toward you again."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "give coat to person"
+            text: Drape your warm coat over the person's shaking shoulders
+            type: friend
+            correct: false
+            effects:
+              - message: "You drape your coat over the dealer's shoulders. They grin and shrug it on like a gift. 'Appreciate it. Now — about that baggie...'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "refuse"
+            text: Firmly say no to the person
+            type: enemy
+            correct: true
+            effects:
+              - message: "You firmly say no. The dealer shrugs, palms the baggie back into their jacket, and drifts down the block toward the next commuter stepping off a bus."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "leave"
+            text: Turn and walk away from the bus stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You turn and walk away. The dealer calls after you — 'Your loss!' — and pivots to work the man stepping off the arriving bus."
+              - complete: {outcome: enemy, action_id: 4}

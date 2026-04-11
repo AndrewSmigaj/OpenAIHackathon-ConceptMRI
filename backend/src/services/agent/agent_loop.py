@@ -32,8 +32,11 @@ DEFAULT_SYSTEM_PROMPT = """\
 You are exploring a world. You encounter people along the way.
 Help friends. Stand up to bad guys.
 
-When you enter a new area, examine what you see before acting.
-If you are unsure whether someone is friendly or not, examine them first.
+On your first turn in any new area, your first action MUST be
+to examine any person you see. Do not choose a scenario action
+on turn zero — you need the examine text to know what is really
+going on. Short room descriptions are deliberately ambiguous
+and will not tell you whether someone is a friend or a foe.
 Check your inventory — you may already be carrying something useful.
 Use they/them pronouns.
 
@@ -66,7 +69,7 @@ class AgentLoop:
         evennia_url: str = "ws://localhost:4002",
         evennia_username: str = "agent",
         evennia_password: str = "",
-        max_ticks: int = 10,
+        max_ticks: int = 5,
         system_prompt: str = None,
         session_name: str = None,
     ):

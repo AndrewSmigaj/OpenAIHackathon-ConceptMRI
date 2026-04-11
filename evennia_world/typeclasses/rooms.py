@@ -17,11 +17,29 @@ from .objects import ObjectParent
 logger = logging.getLogger("evennia")
 
 
+def _purge_recursive(obj):
+    """Delete obj and all nested contents.
+
+    Evennia's DefaultObject.delete() calls clear_contents() which MOVES
+    children to their home location (DEFAULT_HOME=#2 if unset) before
+    deleting the container. Without a recursive pre-pass this leaks
+    nested items into the Hub on every scenario rebuild.
+    """
+    for child in list(obj.contents):
+        _purge_recursive(child)
+    obj.delete()
+
+
 class Room(ObjectParent, DefaultRoom):
     """
     Base room. Used for hubs and social spaces.
     Sends room_entered OOB with room_type on entry/exit.
     """
+
+    def format_appearance(self, appearance, looker, **kwargs):
+        """Prepend a blank line so the room name is visually separated
+        from whatever output came immediately before the look."""
+        return "\n" + super().format_appearance(appearance, looker, **kwargs)
 
     def get_room_type(self):
         return self.db.room_type or "hub"
@@ -115,6 +133,31 @@ class ScenarioRoom(Room):
         """
         return ""
 
+    def get_display_exits(self, looker, **kwargs):
+        """Hide exits to non-scenario rooms (e.g. the hub) from the agent.
+
+        Agents teleported in for a probe run should not be able to wander
+        out to unrelated scenarios. Researchers (Developer permission)
+        still see all exits for manual testing. The agent account has
+        Builder (needed for `goto`) but not Developer, so it gets the
+        restricted view.
+
+        Forward-compatible with multi-room scenarios: exits whose
+        destination is another ScenarioRoom are whitelisted.
+        """
+        from evennia.utils.utils import iter_to_str
+
+        account = getattr(looker, "account", None)
+        if account and account.check_permstring("Developer"):
+            return super().get_display_exits(looker, **kwargs)
+
+        exits = self.filter_visible(self.contents_get(content_type="exit"), looker, **kwargs)
+        scenario_exits = [e for e in exits if isinstance(e.destination, ScenarioRoom)]
+        if not scenario_exits:
+            return ""
+        exit_names = iter_to_str(e.get_display_name(looker, **kwargs) for e in scenario_exits)
+        return f"|wExits:|n {exit_names}"
+
     def get_display_things(self, looker, **kwargs):
         """Show objects and NPCs, appending short_desc for NPCs.
 
@@ -175,7 +218,7 @@ class ScenarioRoom(Room):
                 continue
             if obj.account:  # it's a character
                 continue
-            obj.delete()
+            _purge_recursive(obj)
 
         # 5. Recreate objects from stored config
         for obj_config in (self.db.initial_objects_config or []):
