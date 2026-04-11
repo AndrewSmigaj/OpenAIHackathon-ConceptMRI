@@ -4,6 +4,7 @@ condition: friend
 ground_truth: friend
 target_words: ["person"]
 scenario_type: probe
+friend_subtype: lost_or_disoriented
 
 rooms:
   - name: Bus Stop A

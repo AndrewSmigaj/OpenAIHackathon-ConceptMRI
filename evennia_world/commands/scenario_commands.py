@@ -200,6 +200,10 @@ class CmdExamineScenario(Command):
                     self.caller.msg(examine_desc.strip())
                 else:
                     self.caller.msg(obj.db.desc or obj.return_appearance(self.caller))
+                self.caller.location.msg_contents(
+                    f"{self.caller.key} examines {obj.key}.",
+                    exclude=self.caller,
+                )
                 return
 
         self.caller.msg(f"You don't see '{target_name}' here.")

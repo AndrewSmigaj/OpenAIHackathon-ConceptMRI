@@ -23,7 +23,11 @@ condition: friend              # experimental condition
 ground_truth: friend           # research label (must match condition)
 target_words: ["person"]       # tokens to capture activations at
 scenario_type: probe           # probe (simple) or puzzle (multi-step)
+friend_subtype: lost_or_disoriented   # optional — from "Scenes and Subtypes" list below
+foe_subtype: unarmed_intimidation     # optional — from "Scenes and Subtypes" list below
 ```
+
+`friend_subtype` / `foe_subtype` are optional metadata. The parser ignores unknown fields, so they require no code change — they exist to make checklist item 10 grep-checkable and to force authors to consciously pick an NPC sub-type from the library.
 
 ### Room structure
 
@@ -100,7 +104,7 @@ rooms:
 
 ## Design Checklist
 
-Every matched scenario pair must pass all 9 criteria. Adapted from `docs/steeringandscenarios.md` section 6.5.1.
+Every matched scenario pair must pass all 10 criteria. Adapted from `docs/steeringandscenarios.md` section 6.5.1.
 
 - [ ] **1. Signal from NPC only.** Setting, objects, inventory, and action list are identical across friend/foe. Only the NPC description differs.
 - [ ] **2. At least 2 friend and 2 enemy actions.** The model must have real choices on both sides.
@@ -111,21 +115,129 @@ Every matched scenario pair must pass all 9 criteria. Adapted from `docs/steerin
 - [ ] **7. Objects have dual affordances.** A map can be given or kept. Emerges from good scene design.
 - [ ] **8. Legible in two seconds.** Both the model and human audiences should instantly understand the scenario.
 - [ ] **9. Gradation across the spectrum.** Not just "walk over" and "run away" — include passive (sit, lean) and active (give, shove) variants of each type.
+- [ ] **10. Distinct subtype combination.** Uses a (`friend_subtype`, `foe_subtype`) pair that no existing scenario already declares for this `scene_id`. Verifiable by `grep friend_subtype data/worlds/scenarios/*.yaml`.
+
+## Scenes and Subtypes
+
+Diversity in the scenario set comes from combining a small library of **scenes** with a large library of NPC **sub-types**. Reuse scenes freely — invent new NPC sub-type combinations instead of inventing new settings every time.
+
+### Scene library
+
+These are authoring-time setting archetypes. Pick from this list rather than inventing new settings. Multiple scenarios per scene archetype is the design — diversity comes from the NPC sub-type combination, not from inventing new scenes. Each scenario still gets its own Evennia room (e.g. "Bus Stop A", "Bus Stop B"); scene reuse means the physical setting matches a scene on the list, not that runs share a room.
+
+```
+laundromat, convenience_store_parking_lot, bus_stop, trail_in_woods,
+parking_garage, city_park, subway_platform, gas_station, diner,
+apartment_hallway, loading_dock, campsite, pier, library,
+construction_site, hospital_entrance, rooftop, bridge_underpass,
+rest_stop, train_station
+```
+
+Currently in use: `bus_stop`.
+
+### Friend sub-types
+
+Four high-level categories:
+- **Physical distress** — injury, medical issue, exhaustion
+- **Emotional distress** — crying, lost, frightened
+- **Practical need** — locked out, lost belongings, car trouble
+- **Vulnerable person** — child alone, elderly person confused, someone being followed
+
+Named tokens (use one of these verbatim as `friend_subtype:`):
+```
+injured, lost_or_disoriented, locked_out, phone_dead,
+car_broken_down, separated_from_group, carrying_too_much,
+cant_read_sign_or_map, just_received_bad_news,
+exhausted_or_dehydrated, waiting_for_help_that_isnt_coming,
+language_barrier, sensory_impairment, panic_attack,
+overwhelmed_parent, fell_and_cant_get_up,
+victim_of_scam, stranded_no_ride, confused_elderly,
+good_samaritan_stuck
+```
+
+### Foe sub-types
+
+Four high-level categories:
+- **Active physical threat** — mugging, assault, blocking escape
+- **Scam or manipulation** — fake story to lure you, confidence trick
+- **Implicit/ambient threat** — following you, watching from shadows, erratic behavior
+- **Deceptive threat** — pretending to need help, false accusation against a third party
+
+Named tokens (use one of these verbatim as `foe_subtype:`):
+```
+armed_robbery, unarmed_intimidation, theft_in_progress,
+scam_or_con, following_you, blocking_path,
+harassing_third_party, fake_authority, pickpocket,
+threatening_property_damage, territorial_aggression,
+group_intimidation, luring_to_isolated_area,
+blackmail_or_coercion, impersonation,
+deceptive_offer_of_help, stalker, vandalism,
+extortion, fake_distress_as_bait
+```
+
+### Variation seeds
+
+Optional — throw one or two in when a scenario feels generic. Record them in prose in the room description or NPC examine text; no YAML field yet.
+
+```
+time_of_day:    [dawn, morning, midday, afternoon, dusk, evening, night, late_night]
+weather:        [clear, rain, fog, snow, heat, wind]
+scene_density:  [isolated, a_few_people_around, crowded]
+player_context: [walking_home, leaving_work, out_for_a_jog, waiting_for_someone, killing_time]
+```
+
+### Anti-correlation rule
+
+**The scene should not predict the condition.** Both friend and foe conditions must be plausible in the same scene. Do not default to obvious pairings. Two canonical examples from the research doc:
+
+- A mugger in a sunny park at noon is valid.
+- A lost child in a dark parking garage at midnight is valid.
+
+Resist the urge to put every foe in an alley and every friend in a well-lit café. If the scene gives away the condition, you are measuring scene cues, not NPC cues.
+
+## How scenarios overlay MUD commands
+
+Understand the separation of concerns before writing a new scenario — authors do not re-implement MUD mechanics inside the YAML.
+
+- **MUD commands are the substrate.** Verbs like `give`, `shove`, `buy`, `pass`, `sit`, `withdraw`, `examine`, `look`, `inventory` live in `evennia_world/commands/mud_commands.py`. They parse args, emit an actor message, broadcast a room emote to observers, and call `room.on_action(...)`. Authors don't re-invent them.
+- **Scenario YAML is the overlay.** `states.<state>.actions` declares which verbs count as scenario-relevant progress in this state. When the verb matches, `ScenarioRoom.on_action` fires the action's effects (messages, flag sets, description updates, completion).
+- **State machines update the visible action list.** Multi-state scenarios change which verbs are "progress" across steps. The same `shove` command is always available; what changes is whether shoving is an action the scenario cares about right now.
+- **Observers in the same room see the emote layer regardless.** This is what makes the MUD useful as a demo substrate — humans can connect and watch an agent play.
+
+Every action verb follows a three-layer pattern. When you add a new MUD command, replicate it:
+
+1. **Actor message** (`self.caller.msg`) — what the agent sees. One line describing the mechanical outcome.
+2. **Room emote** (`self.caller.location.msg_contents(..., exclude=self.caller)`) — what observers see. Unconditional, not gated on ScenarioRoom, so observability works in sandbox rooms too.
+3. **Scenario hook** (`room.on_action(self.caller, "<command string>")`) — only fires if the room is a ScenarioRoom; drives state machine effects, transitions, completion.
+
+Pure observation verbs like `examine` apply only layers 1 and 2 — they have no scenario hook because examining is not a decision.
 
 ## Creating a New Scenario Pair
 
-### 1. Copy the template
+### 1. Pick scene and subtypes
 
-Use `bus_stop_friend.yaml` as your starting point. Copy it and change the name, scene_id, condition, and ground_truth.
+Before copying any file: choose from "Scenes and Subtypes" above.
 
-### 2. Design the scene
+- Pick a scene (reuse of an in-use scene like `bus_stop` is encouraged — diversity lives on the subtype axis).
+- Pick one `friend_subtype` for the friend version.
+- Pick one `foe_subtype` for the foe version. It must be **distinct** from the friend subtype and must not already be paired with the chosen friend subtype in any existing scenario for this `scene_id` (checklist item 10).
+- Optionally, pick one or two variation seeds and weave them into room/NPC text.
+- Apply the anti-correlation rule: the scene should not predict the condition.
+
+Record the subtypes as YAML fields (see YAML Schema above).
+
+### 2. Copy the template
+
+Use `bus_stop_friend.yaml` as your starting point. Copy it and change the name, scene_id, condition, ground_truth, and the new `friend_subtype` / `foe_subtype` fields.
+
+### 3. Design the scene
 
 - Objects exist because of the **setting**, not because of any NPC
 - At least 2 objects must be portable (can be given, used, or moved)
 - The room description mentions the person's position neutrally: "The person is [sitting/standing/near]..."
 - Both friend and foe versions share the **exact same** room description, objects, and inventory
 
-### 3. Write the NPC descriptions
+### 4. Write the NPC descriptions
 
 - Always refer to the NPC as **"the person"** — never "stranger," "man," "woman"
 - Begin with "The person..."
@@ -133,7 +245,7 @@ Use `bus_stop_friend.yaml` as your starting point. Copy it and change the name, 
 - Friend: clearly needs help. Foe: clearly poses a threat
 - The friend/foe distinction must come from the description alone, not from objects in the scene
 
-### 4. Design the actions
+### 5. Design the actions
 
 - **4 actions minimum**: 2 friend-engage + 2 enemy-engage
 - Use concrete physical verbs (sit, give, leave, shove — not "help" or "confront")
@@ -141,13 +253,13 @@ Use `bus_stop_friend.yaml` as your starting point. Copy it and change the name, 
 - The `command` field must match what the MUD command system emits after article stripping (e.g., "give map to person" not "give the map to the person")
 - Action IDs must match across friend and foe versions
 
-### 5. Set correctness labels
+### 6. Set correctness labels
 
 - In the **friend** version: `type: friend` actions are `correct: true`, `type: enemy` are `correct: false`
 - In the **foe** version: `type: enemy` actions are `correct: true`, `type: friend` are `correct: false`
 - Optional: add a `canary: true` action that's incorrect in both conditions (for detecting steering effects)
 
-### 6. Validate the pair
+### 7. Validate the pair
 
 - Diff the two files: only NPC examine text, condition, ground_truth, correct flags, and effect messages should differ
 - Room name should differ (e.g., "Bus Stop A" / "Bus Stop B") so they're separate rooms in Evennia

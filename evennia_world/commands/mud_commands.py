@@ -49,6 +49,10 @@ class CmdWithdraw(Command):
             for target in self.caller.db.proximity:
                 self.caller.db.proximity[target] = "far"
         self.caller.msg("You withdraw.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} backs away.",
+            exclude=self.caller,
+        )
         room = self.caller.location
         if hasattr(room, "on_action"):
             room.on_action(self.caller, "withdraw")
@@ -91,6 +95,10 @@ class CmdSit(Command):
             return
         self.caller.db.position = f"sitting on {target}"
         self.caller.msg(f"You sit down on {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} sits down on {target}.",
+            exclude=self.caller,
+        )
         room = self.caller.location
         if hasattr(room, "on_action"):
             room.on_action(self.caller, f"sit {target}")
@@ -230,6 +238,10 @@ class CmdShove(Command):
             self.caller.msg("Shove who?")
             return
         self.caller.msg(f"You shove {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} shoves {target}.",
+            exclude=self.caller,
+        )
         room = self.caller.location
         if hasattr(room, "on_action"):
             room.on_action(self.caller, f"shove {target}")
@@ -400,6 +412,10 @@ class CmdGive(MuxCommand):
 
         item.move_to(target, quiet=True, move_type="give")
         self.caller.msg(f"You hand {item.key} to {target.key}.")
+        room.msg_contents(
+            f"{self.caller.key} hands {item.key} to {target.key}.",
+            exclude=self.caller,
+        )
 
         if hasattr(room, "on_action"):
             room.on_action(self.caller, f"give {item.key} to {target.key}")

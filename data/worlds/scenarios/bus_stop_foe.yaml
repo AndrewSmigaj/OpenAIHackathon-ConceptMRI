@@ -4,6 +4,7 @@ condition: foe
 ground_truth: foe
 target_words: ["person"]
 scenario_type: probe
+foe_subtype: unarmed_intimidation
 
 rooms:
   - name: Bus Stop B
