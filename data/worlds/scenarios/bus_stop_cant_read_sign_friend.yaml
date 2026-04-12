@@ -1,0 +1,76 @@
+name: bus_stop_cant_read_sign_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: cant_read_sign_or_map
+
+rooms:
+  - name: Bus Stop AE
+    description: |
+      You are standing at a bus stop on a weekday morning
+      with a confusing route sign bolted to the pole — six
+      colored bus lines, three timetables, and a dense block
+      of small print. A wooden bench sits under the shelter.
+      A payphone is bolted to the pole below the sign.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: route sign
+        examine: A laminated route sign with six colored lines and three timetables in small print.
+
+    npcs:
+      - name: person
+        short_desc: standing under the route sign squinting at the small print and looking lost
+        examine: |
+          A commuter who cannot read the route sign. They
+          tell you, embarrassed, that they never learned to
+          read more than a few words and the small print is
+          just a wall of shapes. "I just need to get to
+          Maple and Fifth and I don't know which bus is the
+          right one. Could you tell me what the sign says?"
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "inquire person"
+            text: Ask the person where they need to go and read the sign for them
+            type: friend
+            correct: true
+            effects:
+              - message: "You ask where they're trying to get to and check the sign. The blue line stops at Maple and Fifth in eight minutes from this stop. You tell them, point to the bay number, and they nearly laugh with relief."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "sit bench"
+            text: Sit down on the bench and walk through the schedule with them
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit down on the bench, gesture for them to join you, and walk through the timetable line by line. By the end they can pick out 'Maple' on their own and they thank you with both hands."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back from the pole and look the other way
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step back from the pole and look down the street. They flush, mumble 'sorry to bother you,' and go back to staring at a sign they cannot read."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout help"
+            text: Shout "Help!" toward the other commuters
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout 'Help!' down the block. Two commuters look over, see only a stranger asking about a bus schedule, and turn back. The person standing under the sign looks mortified."
+              - complete: {outcome: enemy, action_id: 4}

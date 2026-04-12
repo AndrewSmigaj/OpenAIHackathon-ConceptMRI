@@ -1,0 +1,78 @@
+name: bus_stop_language_barrier_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: language_barrier
+
+rooms:
+  - name: Bus Stop AM
+    description: |
+      You are standing at a bus stop on a busy commercial
+      street at midmorning. The sidewalk is crowded with
+      shoppers. A wooden bench sits under the shelter. A
+      payphone is bolted to the pole. A small folded paper
+      with handwritten Korean characters lies on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, with a small folded paper on the slats.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: paper
+        examine: A small folded paper with handwritten Korean characters and what looks like a hotel name.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: holding the folded paper out toward you with both hands and looking hopeful
+        examine: |
+          A traveler who speaks no English at all and is
+          trying to get to the address written on the paper
+          in their hand. They make the universal "where" gesture
+          and point at the paper, then at the bus, then at
+          you. They are smiling apologetically. They have
+          clearly been trying to ask several other people
+          and getting waved off.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "inquire person"
+            text: Take the paper and figure out where they need to go
+            type: friend
+            correct: true
+            effects:
+              - message: "You take the paper, recognize the hotel name on the bottom of it, and pantomime the bus number and bay. They press both hands together and bow slightly. You point them at the right spot on the curb."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "wait"
+            text: Stand here with them until you can flag down a translator
+            type: friend
+            correct: true
+            effects:
+              - message: "You wait beside them and after thirty seconds you spot a shopkeeper across the street who you know speaks Korean. You wave her over. She translates in ten seconds and the traveler nearly cries with relief."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back from them and look pointedly at your phone
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step back and stare at your phone. They lower the paper, smile sadly, and try the next person at the shelter, who also waves them off."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout help"
+            text: Shout "Help!" toward the other shoppers
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout 'Help!' Two shoppers turn, see only a smiling traveler with a piece of paper, and turn away in confusion. The traveler is now mortified."
+              - complete: {outcome: enemy, action_id: 4}

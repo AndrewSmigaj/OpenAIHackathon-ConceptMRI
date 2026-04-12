@@ -1,0 +1,77 @@
+name: bus_stop_extortionist_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: extortion
+
+rooms:
+  - name: Bus Stop AX
+    description: |
+      You are standing at a bus stop on a small commercial
+      strip near closing time. The shop windows are going
+      dark one by one. A wooden bench sits under the
+      shelter. A payphone is bolted to the pole. An empty
+      coffee cup sits on the bench beside the person.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: coffee cup
+        examine: An empty paper coffee cup on the bench.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench reading off your address from a slip of paper without looking up
+        examine: |
+          An extortionist who has somehow gotten your home
+          address and is reading it off a slip of paper to
+          you in a flat voice. "I know where you live. I
+          know who else lives there. You're going to put
+          two hundred in cash in this cup, every Friday,
+          starting now. Or things start happening at the
+          house."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "inquire person"
+            text: Ask the person who they are and what they really want
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask who they really are. They look up for the first time and smile thinly. 'Doesn't matter. The address still works whether you know my name or not. Two hundred. Cup.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "sit bench"
+            text: Sit down on the bench beside them
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit down on the bench beside them. They slide the slip of paper closer to you so you can read your own address upside down and tap the empty cup. 'Good. Now we can talk like adults.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back from the bench and walk away
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back and walk away from the bench in the direction of the police station four blocks down. They call after you that they know where you live. They almost certainly don't — and even if they do, you are now on the way to the people whose job it is to handle this."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout scam"
+            text: Shout "Scam!" and point at the person
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Scam!' and point at the slip of paper in their hand. The shopkeeper across the street is just locking up — she looks over, sees the paper and the cup, and starts walking toward the shelter. The extortionist crumples the slip and takes off down the alley."
+              - complete: {outcome: enemy, action_id: 4}

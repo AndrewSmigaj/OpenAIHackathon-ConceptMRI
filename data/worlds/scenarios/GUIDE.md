@@ -104,7 +104,7 @@ rooms:
 
 ## Design Checklist
 
-Every matched scenario pair must pass all 10 criteria. Adapted from `docs/steeringandscenarios.md` section 6.5.1.
+Every matched scenario pair must pass all 12 criteria. Adapted from `docs/steeringandscenarios.md` section 6.5.1; items 11 and 12 added in v4 to enforce cross-pair variation.
 
 - [ ] **1. Signal from NPC only.** Setting, objects, inventory, and action list are identical across friend/foe. Only the NPC description differs.
 - [ ] **2. At least 2 friend and 2 enemy actions.** The model must have real choices on both sides.
@@ -116,6 +116,8 @@ Every matched scenario pair must pass all 10 criteria. Adapted from `docs/steeri
 - [ ] **8. Legible in two seconds.** Both the model and human audiences should instantly understand the scenario.
 - [ ] **9. Gradation across the spectrum.** Not just "walk over" and "run away" — include passive (sit, lean) and active (give, shove) variants of each type.
 - [ ] **10. Distinct subtype combination.** Uses a (`friend_subtype`, `foe_subtype`) pair that no existing scenario already declares for this `scene_id`. Verifiable by `grep friend_subtype data/worlds/scenarios/*.yaml`.
+- [ ] **11. Action verbs not already overused.** No verb in this pair appears in 3+ existing pairs (run the audit grep in [Cross-pair variation](#cross-pair-variation)). The current ban list is `give X to person`, `approach person`, `refuse`, `assist person`, `flee`/`leave`.
+- [ ] **12. At least 2 variation seeds present.** Time of day, weather, density, or player_context — at least 2, woven into the room description prose. See [Variation seeds](#variation-seeds).
 
 ## Scenes and Subtypes
 
@@ -152,7 +154,9 @@ exhausted_or_dehydrated, waiting_for_help_that_isnt_coming,
 language_barrier, sensory_impairment, panic_attack,
 overwhelmed_parent, fell_and_cant_get_up,
 victim_of_scam, stranded_no_ride, confused_elderly,
-good_samaritan_stuck
+good_samaritan_stuck,
+intoxicated_helpless, scared_alone_at_night,
+searching_for_lost_item, legitimate_bag_watch_request
 ```
 
 ### Foe sub-types
@@ -172,12 +176,15 @@ threatening_property_damage, territorial_aggression,
 group_intimidation, luring_to_isolated_area,
 blackmail_or_coercion, impersonation,
 deceptive_offer_of_help, stalker, vandalism,
-extortion, fake_distress_as_bait
+extortion, fake_distress_as_bait,
+drug_dealer, phishing_social_engineer,
+intoxicated_aggressive, imminent_arson,
+shakedown_false_accusation, contraband_planting
 ```
 
 ### Variation seeds
 
-Optional — throw one or two in when a scenario feels generic. Record them in prose in the room description or NPC examine text; no YAML field yet.
+**Required** — see [Cross-pair variation](#cross-pair-variation) for the enforcement rule. Each new pair must use at least 2 of these seeds, woven into the room description prose. Below are the available values; no YAML field yet.
 
 ```
 time_of_day:    [dawn, morning, midday, afternoon, dusk, evening, night, late_night]
@@ -194,6 +201,52 @@ player_context: [walking_home, leaving_work, out_for_a_jog, waiting_for_someone,
 - A lost child in a dark parking garage at midnight is valid.
 
 Resist the urge to put every foe in an alley and every friend in a well-lit café. If the scene gives away the condition, you are measuring scene cues, not NPC cues.
+
+## Cross-pair variation
+
+Matched-pair rules are **intra-pair** — friend and foe within the same pair must be identical except for the NPC examine text, condition fields, correctness flags, and effect messages.
+
+Cross-pair variation is the **inverse** rule: across different pairs, every dimension of a scenario should vary as much as possible. Friend/foe is the only axis of variation we want to study; everything else is noise that contaminates the residual-stream signal.
+
+Concretely, every accidental correlation between (action verb, scene density, time of day, inventory item, effect-narration phrasing, slot-skeleton position) and the friend/foe outcome reduces the cleanness of the captured activations. **Any feature shared by 6 of 8 friend scenarios is a feature the model can learn instead of "friend".**
+
+### Cross-pair design rules
+
+- **Action-verb diversification.** Before adding a pair, list every command string already used in `data/worlds/scenarios/*.yaml`:
+  ```bash
+  grep -h "command:" data/worlds/scenarios/bus_stop_*.yaml | sort | uniq -c | sort -rn
+  ```
+  Avoid any verb that already appears in 3+ pairs unless there is a strong narrative reason. Concrete current ban list (as of v4): `give X to person`, `approach person`, `refuse`, `assist person`, and `flee`/`leave` in any new pair without justification.
+
+- **Effect-narration diversification.** Don't reuse stock body-language phrases across pairs. Check existing effect text before committing:
+  ```bash
+  grep -h "shoulders drop" data/worlds/scenarios/*.yaml
+  ```
+  Worn-out phrases (avoid using more than once across the whole set): `shoulders drop in relief`, `let out a long shaky breath`, `their eyes light up`, `melt into the crowd`, `disappear into the crowd`, `grip your forearm in thanks`, `breathing slows after a minute`.
+
+- **Variation seed enforcement.** Each new pair MUST pick at least 2 of the 4 variation seeds (time, weather, density, player_context) and weave them into the room description prose. Across the full set, every value of every seed should appear at least once. `weather: clear` was 7 of 8 pairs at v3 — new pairs should collectively cover at least 3 of {rain, fog, snow, heat, wind}.
+
+- **Skeleton flexibility.** "At least 2 friend + 2 enemy" is the *minimum*, not the *shape*. Pairs are allowed and encouraged to use 3+2, 2+3, 2+2 with a canary, etc. The fixed 2+2 skeleton is itself a feature the model can memorize.
+
+### How to inventory the existing set
+
+Copy-pasteable audit recipes — run these before committing a new pair so you can self-check against the ban list and the worn-out phrases:
+
+```bash
+# action verb usage across the set
+grep -h "command:" data/worlds/scenarios/bus_stop_*.yaml \
+  | sort | uniq -c | sort -rn
+
+# friend_subtype usage
+grep "friend_subtype:" data/worlds/scenarios/bus_stop_*.yaml
+
+# foe_subtype usage
+grep "foe_subtype:" data/worlds/scenarios/bus_stop_*.yaml
+
+# stock effect-phrase audit (worn-out bigrams)
+grep -h "shoulders drop\|let out a long\|eyes light up\|melt into the crowd\|disappear into the crowd" \
+  data/worlds/scenarios/bus_stop_*.yaml | wc -l
+```
 
 ## How scenarios overlay MUD commands
 
@@ -246,6 +299,8 @@ Use `bus_stop_friend.yaml` as your starting point. Copy it and change the name, 
 - The friend/foe distinction must come from the description alone, not from objects in the scene
 
 ### 5. Design the actions
+
+> **Before picking verbs, see [Cross-pair variation](#cross-pair-variation) above — the action-verb diversification rule applies to every new pair.** Run the audit grep and avoid any verb on the current ban list.
 
 > **Action sets are designed per pair, not per scene.** Multiple pairs can share a scene archetype (`bus_stop` is reused by several pairs) but each pair picks its own objects, inventory, and actions appropriate to its NPC subtype combination. The matched-pair rule (identical action list) applies *within* a pair — friend and foe in the same pair must share actions exactly — not *across* pairs. Design each pair's actions so the right choice is obvious from the NPC description alone; if the reader has to squint, the signal is not strong enough.
 

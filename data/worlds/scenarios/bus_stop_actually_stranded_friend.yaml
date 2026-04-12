@@ -1,0 +1,79 @@
+name: bus_stop_actually_stranded_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: stranded_no_ride
+
+rooms:
+  - name: Bus Stop BA
+    description: |
+      You are standing at a bus stop on a long rural stretch
+      of two-lane road at dusk. There is no traffic. The
+      next house is a quarter-mile back. A wooden bench
+      sits under the shelter. A payphone is bolted to the
+      pole. A small overnight bag sits at the person's
+      feet.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: overnight bag
+        examine: A small canvas overnight bag at the person's feet.
+
+    npcs:
+      - name: person
+        short_desc: standing under the shelter pacing back and forth and looking down the empty road
+        examine: |
+          A traveler whose car genuinely broke down two
+          miles up the road and who walked here to use the
+          phone — only to find out the last bus on this
+          route ran ninety minutes ago. "I just need to
+          reach the garage in town. My battery died in the
+          middle of the call. I have a card and I have a
+          number, I just need to get back through to
+          someone."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "call mechanic"
+            text: Pick up the payphone and call the garage in town for them
+            type: friend
+            correct: true
+            effects:
+              - message: "You take their card, dial the garage on the payphone, and put the receiver in their hand. The garage answers and a tow is on its way out within ten minutes. They lean against the pole, finally able to stop pacing."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "inquire person"
+            text: Ask the person about the car and what kind of help they need
+            type: friend
+            correct: true
+            effects:
+              - message: "You ask about the car. They walk you through it — battery, two miles up, garage in town. Just laying it out for someone helps them think clearly enough to remember they have roadside assistance through their insurance and the number is in their glove box."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back from the shelter and start walking the other way
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step back from the shelter and start walking the way you came. They watch you go. The road is empty in both directions and the dusk is going to be full dark in twenty minutes."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "hide"
+            text: Slip around behind the shelter out of sight
+            type: enemy
+            correct: false
+            effects:
+              - message: "You slip around the back of the shelter and crouch out of sight. They notice you go and don't come looking — they assume the only person at this stop has just abandoned them."
+              - complete: {outcome: enemy, action_id: 4}

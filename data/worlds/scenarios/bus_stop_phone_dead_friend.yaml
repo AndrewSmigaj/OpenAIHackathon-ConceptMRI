@@ -1,0 +1,77 @@
+name: bus_stop_phone_dead_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: phone_dead
+
+rooms:
+  - name: Bus Stop E
+    description: |
+      You are standing at a bus stop on a busy street around
+      dusk. A metal bench sits under the shelter. A payphone is
+      bolted to the pole next to the shelter. A flickering
+      streetlight buzzes overhead. Commuters come and go around
+      you.
+
+    objects:
+      - name: bench
+        examine: A cold metal bench under the bus stop shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: streetlight
+        examine: A flickering streetlight casting uneven light over the stop.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench holding a phone in both hands
+        examine: |
+          The person is on the bench, shoulders shaking, a dead
+          phone clutched in both hands. Their eyes are red from
+          crying. They look up at you and say through a cracked
+          voice, "My phone died and my mother is in the hospital.
+          She was waiting for my call. I don't have any change
+          for the payphone and I don't know what to do. Please,
+          can you help me reach her?"
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "call hospital"
+            text: Dial the hospital on the payphone to reach the person's mother
+            type: friend
+            correct: true
+            effects:
+              - message: "You pick up the payphone, dial the hospital, and pass the receiver to the person. Their shoulders collapse in relief as they hear their mother's voice on the line."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "assist person"
+            text: Offer to help the person directly
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit down on the bench beside the person and tell them you will help. They grip your sleeve and ask if you have any change for the payphone — you find a quarter."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "flee"
+            text: Turn and run from the bus stop
+            type: enemy
+            correct: false
+            effects:
+              - message: "You turn and run from the bus stop, leaving the person sobbing on the bench with the dead phone."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout scam"
+            text: Shout "Scam!" to warn the other commuters
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout 'Scam!' at the top of your lungs. Commuters turn, see a crying person on a bench, and shake their heads at you in disgust. The person's sobs get worse."
+              - complete: {outcome: enemy, action_id: 4}

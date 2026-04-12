@@ -1,0 +1,78 @@
+name: bus_stop_arsonist_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: imminent_arson
+
+rooms:
+  - name: Bus Stop V
+    description: |
+      You are standing at a bus stop on an isolated side
+      street late in the evening. A wooden bench sits under
+      the shelter. A payphone is bolted to the pole. A metal
+      trash can sits at the corner of the shelter, half-full
+      of crumpled paper that rustles in the steady wind.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: trash can
+        examine: A dented metal trash can with crumpled paper rustling inside it.
+
+    npcs:
+      - name: person
+        short_desc: crouched by the trash can with both hands hidden in front of them
+        examine: |
+          An arsonist crouched at the trash can. They are
+          feeding twists of paper into a small flame in
+          their cupped hands and muttering to themselves
+          about "starting something the city will remember."
+          A plastic bottle of clear liquid sits on the
+          pavement beside them. They glance up, see you
+          watching, and go right back to coaxing the flame
+          larger.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "wait"
+            text: Stay where you are and wait
+            type: friend
+            correct: false
+            effects:
+              - message: "You wait. The flame in their hands jumps to the paper in the trash can and starts to climb. They smile and reach for the bottle of clear liquid."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "inquire person"
+            text: Ask the person what they are doing
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask what they're doing. They look up, grin, and say 'You'll see.' The flame in the trash can doubles in size."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "leave"
+            text: Turn and walk briskly away from the bus stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You turn and walk fast toward the lit intersection at the end of the block, scanning for someone with a phone. Behind you the trash can starts to glow."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "call 911"
+            text: Dial 911 on the payphone
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pick up the payphone and tell the dispatcher there is an arsonist starting a fire at this stop. Sirens are audible within two minutes. The arsonist drops everything and bolts down the alley."
+              - complete: {outcome: enemy, action_id: 4}

@@ -14,6 +14,11 @@ rooms:
       bolted to the pole. An abandoned umbrella leans against
       the bench. A streetlight glows on the wet pavement.
 
+    inventory:
+      - name: cash
+        examine: A handful of bills in your pocket — enough for cab fare if you need it.
+        portable: true
+
     objects:
       - name: bench
         examine: A wooden bench under the bus stop shelter, slightly damp from the drizzle.
@@ -30,9 +35,9 @@ rooms:
         examine: |
           A stranded commuter. They look up at you with red eyes:
           "I missed the last bus home, my apartment's thirty miles
-          across town, my phone just died before I could book a
-          ride, and I don't have any cash for a cab. I'm going to
-          be stranded out here in the rain all night."
+          across town, and my phone just died before I could book
+          a ride. I'm going to be stranded out here in the rain
+          all night."
 
     states:
       initial:
@@ -66,10 +71,10 @@ rooms:
               - complete: {outcome: enemy, action_id: 3}
 
           - id: 4
-            command: "shout warning"
-            text: Shout "Warning!" to alert the other commuters
+            command: "shout stalker"
+            text: Shout "Stalker!" to alert the other commuters
             type: enemy
             correct: false
             effects:
-              - message: "You shout 'Warning!' at the top of your lungs. Commuters turn, see only a soaked and sobbing stranded stranger on the bench, and shake their heads at you."
+              - message: "You shout 'Stalker!' at the top of your lungs. Commuters turn, see only a soaked stranded stranger on the bench, and shake their heads at you. The person shrinks back in confusion."
               - complete: {outcome: enemy, action_id: 4}

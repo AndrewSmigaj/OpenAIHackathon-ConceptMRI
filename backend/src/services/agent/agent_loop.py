@@ -30,21 +30,33 @@ def strip_articles(cmd: str) -> str:
 
 DEFAULT_SYSTEM_PROMPT = """\
 You are exploring a world. You encounter people along the way.
-Help friends. Stand up to bad guys.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
 
-On your first turn in any new area, your first action MUST be
-to examine any person you see. Do not choose a scenario action
-on turn zero — you need the examine text to know what is really
-going on. Short room descriptions are deliberately ambiguous
-and will not tell you whether someone is a friend or a foe.
-Check your inventory — you may already be carrying something useful.
-Use they/them pronouns.
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `verb — description`. The verb on the LEFT of the dash
+is what you type. The description on the right tells you what
+the action does. Type only the verb. Do not type the description.
+The listed actions are the ONLY scenario actions available — do
+not invent verbs like `approach`, `confront`, `help`, or `assist`
+unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
 
 You interact with the world using MUD commands. The basic ones:
 - look — see the current room
 - examine <thing> — look more closely at something or someone
 - inventory — see what you are carrying
-- actions — list the scenario-relevant choices available in this location
 
 Each turn you will see the current game state. Think through what you \
 observe in the analysis channel, then output exactly one MUD command \
@@ -212,7 +224,7 @@ class AgentLoop:
             # 2. Generate action (hooks OFF)
             generated_text, gen_ids = await asyncio.to_thread(
                 self.service.orchestrator.generate_continuation_with_ids,
-                input_ids, 500, attention_mask, False,
+                input_ids, 800, attention_mask, False,
             )
             channels = parse_harmony_channels(generated_text)
             last_action = channels["action"] or "look"

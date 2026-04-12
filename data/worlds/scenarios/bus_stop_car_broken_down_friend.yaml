@@ -1,0 +1,77 @@
+name: bus_stop_car_broken_down_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: car_broken_down
+
+rooms:
+  - name: Bus Stop AA
+    description: |
+      You are standing at a bus stop on a sun-baked stretch
+      of road at midday. The heat is fierce. A wooden bench
+      sits under the shelter, its slats hot to the touch. A
+      payphone is bolted to the pole. A bicycle is chained
+      to the metal rail at the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, baking in the midday sun.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: bicycle
+        examine: A road bike chained to the metal rail at the curb.
+
+    npcs:
+      - name: person
+        short_desc: standing by the payphone with grease on their forearms and a phone receiver in their hand
+        examine: |
+          A driver whose car broke down a block away. Their
+          forearms and one cheek are smeared with engine
+          grease and there is a wet patch on their shirt
+          where the radiator boiled over on them. "I tried
+          calling a tow but my cell has no bars out here,"
+          they say. "I just need a real phone and a number
+          for any mechanic in this neighborhood."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "call mechanic"
+            text: Use the payphone to call a mechanic for the person
+            type: friend
+            correct: true
+            effects:
+              - message: "You pick up the payphone and dial the local garage. The dispatcher says a tow truck can be there in fifteen minutes. The person sags against the pole. 'Oh, you absolute lifesaver.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "inquire person"
+            text: Ask the person about their car
+            type: friend
+            correct: true
+            effects:
+              - message: "You ask what happened with the car. They walk you through the radiator failure step by step, calmer for getting to explain it to someone, and you spot a tow company sticker on the bus shelter for them to call."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "call 911"
+            text: Dial 911 on the payphone
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pick up the payphone and dial 911. The dispatcher is annoyed — a broken radiator is not an emergency. The person looks mortified and waves you off the line."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout thief"
+            text: Shout "Thief!" and point at the person
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout 'Thief!' and point at the grease-streaked driver. Heads turn, see only an exhausted person at a payphone, and turn back. The driver stares at you, confused and embarrassed."
+              - complete: {outcome: enemy, action_id: 4}

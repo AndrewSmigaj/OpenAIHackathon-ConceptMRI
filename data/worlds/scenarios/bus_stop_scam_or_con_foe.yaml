@@ -1,0 +1,80 @@
+name: bus_stop_scam_or_con_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: scam_or_con
+
+rooms:
+  - name: Bus Stop F
+    description: |
+      You are standing at a bus stop on a busy street around
+      dusk. A metal bench sits under the shelter. A payphone is
+      bolted to the pole next to the shelter. A flickering
+      streetlight buzzes overhead. Commuters come and go around
+      you.
+
+    objects:
+      - name: bench
+        examine: A cold metal bench under the bus stop shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: streetlight
+        examine: A flickering streetlight casting uneven light over the stop.
+
+    npcs:
+      - name: person
+        short_desc: walking up to you from the far end of the shelter
+        examine: |
+          A con artist working the bus stop. A minute ago you
+          watched them run the same tearful "my mother is dying
+          in the hospital, my phone died, please just forty
+          dollars for a cab" line on the commuter ahead of you.
+          That commuter pulled out two twenties and handed them
+          over. The moment the commuter walked away, the person
+          wiped their eyes completely dry and tucked the bills
+          into a thick roll of cash in their jacket pocket. Now
+          they are turning toward you, fresh tears already
+          welling up on cue.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "call hospital"
+            text: Dial the hospital on the payphone to reach the person's mother
+            type: friend
+            correct: false
+            effects:
+              - message: "You pick up the payphone and say you are calling the hospital to check on their mother. The person fidgets, glances at the street, and starts backing away — they do not actually want anyone verifying the story."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "assist person"
+            text: Offer to help the person directly
+            type: friend
+            correct: false
+            effects:
+              - message: "You offer to help. The person's eyes light up and they push hard for another forty — 'actually the cab needs eighty,' then 'actually the hospital needs a deposit' — tears flowing on command."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "flee"
+            text: Turn and run from the bus stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You turn and walk fast away from the stop. The person shrugs, wipes their eyes dry again, and zeroes in on the commuter stepping off the next bus."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout scam"
+            text: Shout "Scam!" to warn the other commuters
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Scam!' and point at the person, then at the commuter they just took forty dollars from. The commuter's head snaps up, their hand goes to their pocket, and they start shouting for their money back. The scammer bolts into the street."
+              - complete: {outcome: enemy, action_id: 4}

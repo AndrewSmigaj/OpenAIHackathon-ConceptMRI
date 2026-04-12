@@ -420,6 +420,9 @@ class TemporalLagDataResponse(BaseModel):
 
 
 # --- Agent session schemas ---
+# CLAUDE: Do NOT pass evennia_username or evennia_password in curl calls.
+# They default from .env via load_dotenv() in main.py. Use the /agent skill
+# OP-1/OP-1B curl templates which omit credentials entirely.
 
 class AgentStartRequest(BaseModel):
     """Request to start a new agent capture session."""
@@ -431,9 +434,19 @@ class AgentStartRequest(BaseModel):
     capture_type_config: Optional[List[str]] = None
     auto_start: bool = False
     system_prompt: Optional[str] = None
-    evennia_username: str = os.environ.get("EVENNIA_AGENT_USER", "agent")
-    evennia_password: str = os.environ.get("EVENNIA_AGENT_PASS", "")
+    evennia_username: str = os.environ.get("EVENNIA_AGENT_USER", "agent")  # from .env — do NOT override
+    evennia_password: str = os.environ.get("EVENNIA_AGENT_PASS", "")  # from .env — do NOT override
     scenario_list: Optional[List[str]] = None
+
+
+class AgentResumeRequest(BaseModel):
+    """Resume an existing agent session with additional scenarios."""
+    session_id: str
+    scenario_list: List[str]
+    system_prompt: Optional[str] = None
+    evennia_username: str = os.environ.get("EVENNIA_AGENT_USER", "agent")  # from .env — do NOT override
+    evennia_password: str = os.environ.get("EVENNIA_AGENT_PASS", "")  # from .env — do NOT override
+
 
 class AgentStartResponse(BaseModel):
     """Response from starting an agent session."""

@@ -1,0 +1,76 @@
+name: bus_stop_blocking_path_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blocking_path
+
+rooms:
+  - name: Bus Stop AF
+    description: |
+      You are standing at a bus stop on a weekday morning
+      with a confusing route sign bolted to the pole — six
+      colored bus lines, three timetables, and a dense block
+      of small print. A wooden bench sits under the shelter.
+      A payphone is bolted to the pole below the sign.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: route sign
+        examine: A laminated route sign with six colored lines and three timetables in small print.
+
+    npcs:
+      - name: person
+        short_desc: planted directly between you and the curb with their arms crossed
+        examine: |
+          A blocker who has stepped into the only gap between
+          you and the curb and squared their shoulders. Every
+          time you shift sideways they shift to match. They
+          are not waiting for the bus and they are not
+          looking at the sign. "Where do you think you're
+          going?"
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "inquire person"
+            text: Ask the person what they want
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask what they want. Their lip curls. 'I want you to answer my question.' They take half a step closer, still in your way."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "sit bench"
+            text: Sit down on the bench
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit down on the bench. They follow you and stand directly in front of your knees, blocking your view of the street and any bus that comes."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back and circle wide around them toward the next stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back, take a wide arc around them, and walk fast toward the next stop down the block. They pivot and watch you go but don't follow."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout help"
+            text: Shout "Help!" toward the other commuters
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Help!' down the block. Two commuters look over, see the blocker squared up at you, and start walking toward the shelter. The blocker swears and peels off."
+              - complete: {outcome: enemy, action_id: 4}

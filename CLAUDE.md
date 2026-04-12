@@ -18,11 +18,12 @@ Claude Code uses these guides to execute the full pipeline:
 | `docs/ANALYSIS.md` | Analysis methodology reference (cluster/route data, reports) |
 | `docs/scratchpad/` | Intermediate work products — research, drafts, explorations. Check for context from recent work. |
 
-**Skills** (`.claude/skills/`) are the authoritative operational procedures. Each skill has self-contained, copy-paste-ready commands. Docs provide background and reference. When they conflict, skills win.
+**Skills** (`.claude/skills/`) are the authoritative operational procedures. Each skill has self-contained, copy-paste-ready commands. Docs provide background and reference. When they conflict, skills win. **Before any API call to `/api/agent/*`, invoke the `/agent` skill and copy its curl template. Never construct agent curl commands from memory or from reading schemas.py — the skill templates omit credentials because they default from `.env`.**
 
 | Skill | Purpose |
 |-------|---------|
 | `/server` | Start, stop, check status of backend and frontend |
+| `/agent` | Start, resume, monitor, stop agent scenario sessions — **always use for agent API calls** |
 | `/probe` | Co-design a new experiment |
 | `/categorize` | Classify model-generated outputs |
 | `/analyze` | Read cluster/route data, write reports and element descriptions |

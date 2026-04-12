@@ -4,7 +4,7 @@ Related: LLMud/VISION.md (research context), CLAUDE.md §Guide Index (if adding 
 
 Living document. Tracks all design decisions, integration phases, and implementation items for the unified MUD-driven interpretability interface.
 
-**Reading order:** Start with Section 1 (system overview) → Section 7 (component architecture) → Section 10 (phases) for implementation context. Sections 2-6 are reference material. Sections 8-9 are protocol specs for Phase 2+. Section 12 captures key design decisions and their rationale.
+**Reading order:** Start with Section 1 (system overview) → Section 7 (component architecture) → Section 10 (phases) for implementation context. Sections 2-6 are reference material. Sections 8-9 are protocol specs for Phase 2+. Section 12 captures key design decisions and their rationale. → 15 (lens switching) → 16 (steering panel) → 17 (token knowledge graph) for the analysis layer architecture.
 
 **Cross-document prereqs:** Read VISION.md first for the research concepts (scaffolds, attractor basins, the research question). The other 3 LLMud design docs are frozen reference for future phases — consult as-needed per the cross-reference table in Section 13.
 
@@ -121,59 +121,85 @@ Self-hosted on WSL2 machine. All services on localhost.
 
 ## 2. Current System Audit
 
-### 2.A Backend (~5000+ lines, 61 files)
+### 2.A Backend (~7000 lines, 59 files)
 
 | Router | Lines | Endpoints |
 |--------|-------|-----------|
-| `probes.py` | 375 | Session CRUD, sentence experiments, clustering schemas, reports |
-| `experiments.py` | 980 | Route analysis, cluster analysis, temporal capture, lag data, reduction, insights (11 endpoints) |
-| `generation.py` | 99 | Sentence set management |
-| `prompts.py` | 39 | Scaffold templates |
+| `probes.py` | 380 | Session CRUD, sentence experiments, clustering schemas, reports |
+| `temporal.py` | 497 | Temporal capture, lag data, scrubber state (extracted from old `experiments.py`) |
+| `routes.py` | 163 | Expert + cluster route analysis (extracted from old `experiments.py`) |
+| `route_utils.py` | 106 | Shared helpers between expert/cluster route paths |
+| `clustering.py` | 183 | Clustering schemas, dimensionality reduction, schema CRUD |
+| `insights.py` | 70 | LLM insights / scaffold-step (extracted from old `experiments.py`) |
+| `generation.py` | 98 | Sentence set management |
+| `prompts.py` | 38 | Scaffold templates |
+| `agent.py` | 299 | Agent session start/stop/generate (Phase 4) |
 
-**Services:** SessionManager, ProbeProcessor, CaptureOrchestrator, IntegratedCaptureService (facade — wraps SessionManager + ProbeProcessor + CaptureOrchestrator), ExpertRouteAnalysis, ClusterRouteAnalysis, LLMInsightsService, ReductionService
+The 980-line `experiments.py` is gone — split into `routes.py`, `temporal.py`, `clustering.py`, `insights.py` plus shared `route_utils.py`. Module-level lock `_temporal_capture_busy` lives in `temporal.py:21`.
+
+**Services:**
+- `services/probes/` — `SessionManager`, `ProbeProcessor`, `CaptureOrchestrator`, `IntegratedCaptureService` (facade), `RoutingCapture`, `ProbeIDs`, `ScenarioActions` (74L — Phase 4 helper that resolves YAML scenario actions)
+- `services/agent/` — `AgentLoop` (408L), `EvenniaClient` (154L), `HarmonyParser` (50L). Agent loop runs **inside** the backend Python process as an asyncio task; there is no separate agent process.
+- `services/experiments/` — `ExpertRouteAnalysis`, `ClusterRouteAnalysis`
+- `services/features/` — `ReductionService` (UMAP wrapper)
+- `services/insights/` — `LLMInsightsService`
 
 **Data:** Pydantic schemas → Parquet files in `data/lake/{session_id}/`. Clean adapter pattern for model abstraction (gpt-oss-20b).
 
-**Missing for MUD:** No WebSocket endpoints, no event bus, no agent loop.
+**MUD additions shipped:** WebSocket endpoints for Evennia (Phase 2), agent loop with per-tick capture (Phase 4.0/4.1), scenario action resolver (Phase 4.H). New endpoints: `POST /api/agent/start`, `POST /api/agent/stop`, `POST /api/agent/generate`.
 
-### 2.B Frontend (~5900 lines, 33 files)
+### 2.B Frontend (~6500 lines, 38 files)
 
 | Page | Lines | State |
 |------|-------|-------|
-| WorkspacePage | 186 | Session list, loading, error |
-| ExperimentPage | 871 | Everything — sessions, filters, axes, clustering, schemas, route data, card selection |
+| WorkspacePage | 185 | Session list, loading, error |
+| ExperimentPage | 870 | Legacy at `/legacy/:id` — kept untouched |
+| MUDApp | 433 | Phase 1 layout — toolbar + 2x2 quadrant grid, single route at `/` |
 
-**Extracted hooks:** useAxisControls (102L), useClusteringConfig (44L), useSchemaManagement (49L), useTemporalAnalysis (375L)
+**Extracted hooks:** `useAxisControls` (101L), `useClusteringConfig` (43L), `useSchemaManagement` (48L), `useTemporalAnalysis` (417L), `useEvennia` (145L — Phase 2, WebSocket connection + OOB handling).
 
-**Viz components:** SankeyChart (311L), MultiSankeyView (327L), WindowAnalysis (260L), ContextSensitiveCard (340L), SteppedTrajectoryPlot (536L)
+**Viz components:** SankeyChart, MultiSankeyView, WindowAnalysis, ContextSensitiveCard, SteppedTrajectoryPlot — all reused unchanged from ExperimentPage.
 
-**Existing infrastructure:** react-router-dom v7 (BrowserRouter, 3 routes), ECharts, Tailwind, jStat
-
-**Missing for MUD:** No WebSocket, no xterm.js. ExperimentPage props-drills 15+ visual encoding props through 4+ levels (eliminated by MUDApp's flatter component tree — see §7.A).
+**Existing infrastructure:** react-router-dom v7 (BrowserRouter, routes for `/`, `/legacy/:id`), ECharts, Tailwind, jStat, xterm.js (Q3 terminal), WebSocket (Evennia connection).
 
 ### 2.C Data Layer
 
-- **84 sessions** in `data/lake/` (Parquet: tokens, routing, embeddings, residual_streams, manifest)
+- **134 sessions** in `data/lake/` (Parquet: tokens, routing, embeddings, residual_streams, manifest)
 - **12 sentence sets** across polysemy, safety, role_framing categories
-- **Clustering schemas** per session: meta.json, probe_assignments, centroids, element_descriptions, reports
-- **Micro-world YAML configs** — not yet created
+- **Clustering schemas** per session: `meta.json`, `probe_assignments`, `centroids.json`, `element_descriptions`, `reports/`
+- **Agent session artifacts** (Phase 4.0/4.1): `tick_log.jsonl`, `probe_results.jsonl`, `session_analysis.md`
+- **Scenario YAMLs**: `data/worlds/scenarios/` — 52 active bus_stop probe scenarios (26 matched friend/foe pairs from v3/v4/v5), 2 legacy single-room files (`bus_stop_friend.yaml`, `bus_stop_foe.yaml`), 2 placeholder Phase 4.1 scenarios (`helpful_herbalist`, `suspicious_blacksmith`), and `GUIDE.md` cataloging the design rules
 
 ### 2.D Design Documents
 
 4 files in `/LLMud/`. VISION.md is active reference; the other 3 are frozen for future phases:
 
-| Document | Lines | Covers | Phase |
-|----------|-------|--------|-------|
-| VISION.md | 152 | Research motivation, scaffold concept | Active |
-| AI_SYSTEM_DESIGN.md | 442 | Cognitive loop, scaffolds, memory, tools | Phase 4+ |
-| WORLD_DESIGN.md | 469 | Evennia world, micro-worlds, tick system | Phase 2-4 |
-| INSTITUTION_DESIGN.md | 252 | Public institute, AI scientists | Phase 5-6 |
+| Document | Covers | Phase |
+|----------|--------|-------|
+| VISION.md | Research motivation, scaffold concept | Active |
+| AI_SYSTEM_DESIGN.md | Cognitive loop, scaffolds, memory, tools | Phase 4+ (frozen) |
+| WORLD_DESIGN.md | Evennia world, micro-worlds, tick system | Phase 2-4 (frozen) |
+| INSTITUTION_DESIGN.md | Public institute, AI scientists | Phase 5-6 (frozen) |
+
+In `docs/`:
+
+| Document | Covers | Status |
+|----------|--------|--------|
+| `steeringandscenarios.md` | Discriminating neurons, lens registry, steering experiments, scenario design (matched friend/foe pairs, cross-probe matrix) | Active reference for Pending Work C–F |
 
 ---
 
 ## 3. MUD Command Vocabulary
 
-Phase 2 uses Evennia-native commands only: `look`, movement (`north`, `south`, etc.), `say`, `hub` (teleport to Observer Hub). Terminal config commands (e.g., `axis`, `schema`, `run`) are deferred — all viz configuration stays in the toolbar for now. ConceptMRI-specific terminal commands will be designed in a future phase if needed.
+Phase 2 ships two command vocabularies on top of Evennia's defaults:
+
+1. **Researcher commands** — concrete physical verbs the scenario layer exposes:
+   - `evennia_world/commands/mud_commands.py`: `approach`, `withdraw`, `hide`, `sit <x>`, `lean`, `wait`, `flee`, `shout <x>`, `refuse`, `leave`, `assist <x>`, `snatch <x>`, `shove <x>`, `search <x>`, `inquire <x>`, `pass`, `give <x> to <y>`, `buy <x> from <y>`, `goto <room>`, `call <x>`, `actions` (meta-command that prints available scenario actions).
+   - `evennia_world/commands/scenario_commands.py`: `ask <npc> <topic>`, `tell <npc> <topic>`, `knowledge`, `examine` (scenario-specific override of Evennia's built-in), `agent start <name> <scenario>` (Builder-only), `agent stop` (Builder-only).
+   - Evennia built-ins also available: `look`, `inventory`, `get`, `drop`, movement (`north`, `south`, etc.), `say`, `who`.
+2. **Scenario actions**, declared per-scenario in YAML, that map a verb above onto an outcome via `effects:` blocks. Each action is typed `friend`/`enemy` and labeled `correct: true|false`. The agent loop tracks the first scenario-action selection per session as the probe result (`bus_stop_*` results in `probe_results.jsonl`).
+
+Terminal config commands (axis, schema, run) remain deferred — the toolbar handles all viz configuration in Phase 1.
 
 ---
 
@@ -306,7 +332,7 @@ Terminal: user types "axis label red-blue"
 
 Config stays React-local in all phases. Evennia (Phase 2+) handles the full MUD — config never routes through Evennia.
 
-**Terminal commands:** See §3 (to be designed with user for Phase 2). Phase 1 terminal is empty.
+**Terminal commands:** See §3 for the shipped command vocabulary. Phase 1 terminal is empty; Phase 2+ connects to Evennia.
 
 #### 7.C.1 Run Trigger Mechanism
 
@@ -363,41 +389,67 @@ Additional MUDApp-level state (not in hooks):
 ### 7.F Code Structure
 
 ```
-OpenLLMRI/
-├── backend/                     # ConceptMRI API (existing)
-│   └── src/api/routers/
-│       ├── routes.py            # Route analysis (from experiments.py split)
-│       ├── temporal.py          # Temporal capture (from split)
-│       ├── reduction.py         # Dimensionality reduction (from split)
-│       ├── insights.py          # LLM insights (from split)
-│       ├── probes.py            # Session management (existing)
-│       └── generation.py        # Sentence sets (existing)
-├── frontend/
-│   └── src/
-│       ├── pages/
-│       │   └── MUDApp.tsx          # Unified interface (replaces ExperimentPage)
-│       ├── hooks/
-│       │   ├── useAxisControls.ts  # Visual encoding state (existing, reused)
-│       │   ├── useClusteringConfig.ts # Clustering params (existing, reused)
-│       │   ├── useSchemaManagement.ts # Schema selection (existing, reused)
-│       │   └── useTemporalAnalysis.ts # Temporal analysis (existing, reused)
-│       ├── components/
-│       │   ├── toolbar/            # Toolbar, SessionSelector, AxisControls (new)
-│       │   ├── charts/             # SankeyChart, MultiSankeyView (reused)
-│       │   ├── analysis/           # WindowAnalysis, ContextSensitiveCard (reused)
-│       │   ├── mud/                # MUDTerminal (new, empty in Phase 1)
-│       │   └── shared/             # Primitives
-│       └── ...
-├── evennia_world/                   # Evennia game directory (new)
-│   ├── typeclasses/
+ConceptMRI/
+├── backend/src/
+│   ├── adapters/                # Model adapter pattern (gpt-oss-20b)
+│   ├── algorithms/              # Clustering, routing algorithms
+│   ├── api/
+│   │   ├── config.py            # DATA_LAKE_PATH, env var config
+│   │   ├── dependencies.py      # FastAPI dependency injection (service factories)
+│   │   ├── main.py              # App + router registration
+│   │   ├── schemas.py           # Pydantic request/response models
+│   │   └── routers/
+│   │       ├── agent.py         # Agent session start/stop/generate (Phase 4)
+│   │       ├── clustering.py    # Schema CRUD, reduction, cluster route analysis
+│   │       ├── generation.py    # Sentence sets
+│   │       ├── insights.py      # LLM insights
+│   │       ├── probes.py        # Session CRUD, sentence experiments
+│   │       ├── prompts.py       # Scaffold templates
+│   │       ├── route_utils.py   # Shared helpers for route analysis
+│   │       ├── routes.py        # Expert + cluster route analysis
+│   │       └── temporal.py      # Temporal capture, lag data, _temporal_capture_busy lock
+│   ├── cli/                     # CLI utilities
+│   ├── core/                    # Parquet reader/writer, data lake helpers
+│   ├── schemas/                 # Parquet schema definitions (tokens, routing, embedding, residual_stream)
+│   ├── services/
+│   │   ├── agent/               # AgentLoop (408L), EvenniaClient (154L), HarmonyParser (50L)
+│   │   ├── experiments/         # ExpertRouteAnalysis, ClusterRouteAnalysis, LLMInsightsService
+│   │   ├── features/            # ReductionService (UMAP/PCA wrapper)
+│   │   ├── generation/          # Text generation service
+│   │   └── probes/              # SessionManager, ProbeProcessor, CaptureOrchestrator, ScenarioActions
+│   └── utils/                   # Shared utilities
+├── frontend/src/
+│   ├── pages/
+│   │   ├── MUDApp.tsx           # Unified interface at / (Phase 1)
+│   │   ├── ExperimentPage.tsx   # Legacy (retained as file, not currently routed)
+│   │   └── WorkspacePage.tsx    # Session list (unused since Phase 1)
+│   ├── hooks/
+│   │   ├── useAxisControls.ts   # Visual encoding state
+│   │   ├── useClusteringConfig.ts
+│   │   ├── useSchemaManagement.ts
+│   │   ├── useTemporalAnalysis.ts
+│   │   └── useEvennia.ts        # WebSocket connection (Phase 2)
+│   └── components/
+│       ├── toolbar/             # Toolbar, SessionSelector, AxisControls
+│       ├── charts/              # SankeyChart, MultiSankeyView
+│       ├── analysis/            # WindowAnalysis, ContextSensitiveCard
+│       ├── terminal/            # MUDTerminal (xterm.js)
+│       └── icons/               # SVG icon components
+├── evennia_world/               # Evennia game directory
+│   ├── typeclasses/rooms.py     # ScenarioRoom, MicroWorldRoom
 │   ├── commands/
-│   └── world/
+│   │   ├── mud_commands.py      # Scenario verb vocabulary (21 commands) + CmdActions
+│   │   ├── scenario_commands.py # examine, ask, tell, knowledge, agent start/stop
+│   │   └── navigation.py       # Movement overrides
+│   └── server/conf/settings.py  # Evennia config (GUEST_ENABLED, ports)
 ├── data/
-│   ├── lake/                        # Session data (existing)
-│   └── worlds/                      # Micro-world YAML configs (new)
-├── LLMud/                           # Frozen design docs (VISION.md is active)
+│   ├── lake/                    # 134 sessions (Parquet + agent artifacts)
+│   ├── worlds/scenarios/        # 52 active probe YAMLs + GUIDE.md
+│   └── sentence_sets/           # 12 probe sentence set JSONs
+├── LLMud/                       # Frozen design docs (VISION.md active)
 └── docs/
-    └── architecturemud.md           # This document
+    ├── architecturemud.md       # This document
+    └── steeringandscenarios.md  # Neuron analysis, steering, scenario design
 ```
 
 ---
@@ -501,7 +553,7 @@ class MicroWorldRoom(DefaultRoom):
 
 ## 10. Implementation Phases
 
-### Phase 0 — Backend Cleanup
+### Phase 0 — Backend Cleanup ✅ shipped
 
 Fix genuine tech debt that exists regardless of MUD. Backend-only + one trivial frontend fix. No changes to ExperimentPage — it stays working untouched as `/legacy` during Phase 1.
 
@@ -531,9 +583,9 @@ Fix genuine tech debt that exists regardless of MUD. Backend-only + one trivial 
 - 0.5: Load sessions with a corrupted session dir → warning logged (not silently skipped)
 - 0.6: Trigger a batch write failure → error appears in log output (not just stdout)
 
-### Phase 1 — Layout Reorganization (no Evennia)
+### Phase 1 — Layout Reorganization (no Evennia) ✅ shipped
 
-Reorganize the existing UI from sidebar+columns into toolbar+quadrant layout. Everything works exactly as it does now — same controls, same viz, same analysis workflow. The only change is where things are on screen.
+Reorganize the existing UI from sidebar+columns into toolbar+quadrant layout. Everything works exactly as it does now — same controls, same viz, same analysis workflow. The only change is where things are on screen. **Status:** MUDApp.tsx (433L) replaces ExperimentPage as the primary `/` route. ExperimentPage.tsx (870L) retained as a file but not currently routed in App.tsx. All four hooks survived the move unchanged.
 
 | Item | Task |
 |------|------|
@@ -559,9 +611,9 @@ Reorganize the existing UI from sidebar+columns into toolbar+quadrant layout. Ev
 - Select different session → axes reset, data clears
 - `/legacy/:id` still works unchanged
 
-### Phase 2 — Evennia Integration
+### Phase 2 — Evennia Integration ✅ shipped (commit `dd86fa6`)
 
-Add Evennia for the full MUD experience (rooms, NPCs, combat, objects, stats). Config commands stay React-local — Evennia handles the game world, viz config is separate. Terminal commands to be designed with user (see §3).
+Add Evennia for the full MUD experience (rooms, NPCs, combat, objects, stats). Config commands stay React-local — Evennia handles the game world, viz config is separate. **Status:** Evennia runs in the same `.venv`, MUDTerminal connects via WebSocket on port 4002, OOB `room_entered` flows wired up, `ScenarioRoom` typeclass enforces the per-state action graph for probe scenarios, and `mud_commands.py` ships the researcher command vocabulary (§3).
 
 **Prerequisite:** Verify Evennia's dependencies (Django, Twisted) are compatible with ConceptMRI's venv (FastAPI, transformers, torch). If they conflict, Evennia must run in a separate venv with IPC between services. Resolve before starting 2.A.
 
@@ -586,13 +638,14 @@ Add Evennia for the full MUD experience (rooms, NPCs, combat, objects, stats). C
 - Disconnect WiFi → terminal shows disconnected indicator, toolbar + viz still functional (config is local)
 - Reconnect → Evennia re-sends room state via OOB
 
-### Phase 3 — Multi-User & Chat
+### Phase 3 — Multi-User & Chat ✅ shipped (commit `4a4b250`)
 
 | Item | Task |
 |------|------|
 | 3.A | Auth/permissions — researcher vs visitor role distinction (Evennia auth). Designated researchers get full lab access; visitors get observation-only in micro-worlds. |
 | 3.B | Visitor chat — `say`, `whisper`, channel commands via Evennia's built-in chat system. Visitors can chat with each other and researchers in the same room. (Evennia default — testing, not implementation.) |
 | 3.C | Multiple concurrent viewers — multiple visitors in the same micro-world room see the same dataset and preset config. (Evennia default — testing, not implementation.) |
+| 3.D | Guest access — anonymous visitors can land in social/observer rooms without an Evennia account. |
 
 **Verification checklist:**
 - Researcher logs in with credentials; visitor connects as guest
@@ -603,9 +656,16 @@ Add Evennia for the full MUD experience (rooms, NPCs, combat, objects, stats). C
 - Visitor cannot `load`, `schema`, `axis`, `cluster`, or `run` (toolbar greyed out)
 - Visitor CAN use `look`, `inspect`, `dataset`, `help`, `say`, navigation
 
-### Phase 4 — Live Agent Sessions & Streaming
+### Phase 4 — Live Agent Sessions & Streaming ⚙️ partially shipped
 
 Agent plays scenarios in Evennia. ConceptMRI captures residual streams using the existing batch capture pipeline — no hook modifications needed. Observers watch live via streaming.
+
+**Status (April 2026):**
+- 4.A–4.C, 4.H **shipped** in commits `174f41e`, `e73e786`, `f847d7a`. Per-tick agent loop runs inside the backend Python process as an asyncio task. Capture pipeline uses the existing `CaptureOrchestrator`. Session lifecycle endpoints `POST /api/agent/start` and `POST /api/agent/stop` work.
+- **Reality check — divergence from original Phase 4 framing:** Phase 4 was originally written assuming a long-running agent in the researcher's lab playing a multi-room Evennia scenario with rich combat and NPCs. What actually got built is the **probe scenario** variant: matched friend/foe pairs declared in YAML (`data/worlds/scenarios/*.yaml`), a `ScenarioRoom` typeclass enforcing the per-state action graph, and `probe_results.jsonl` recording the agent's first scenario-action selection plus the YAML ground-truth label. This is the right shape for Pending Work C–E (per-cluster discriminating neurons need labeled probe data) but it is narrower than the original Phase 4 vision. The richer agent-in-world framing is deferred until Phase 5+.
+- 4.D **not done** — no WebSocket streaming yet. Observers monitor via the backend log and the on-disk `tick_log.jsonl`.
+- 4.F **not done** — no live mode panels in the frontend.
+- 4.G **not done** — no timeline scrubber for agent sessions.
 
 #### 4.A Per-Tick Loop
 
@@ -871,12 +931,12 @@ Phase 5: ConceptMRI WS (proxies Evennia) + REST         (2 connections)
 |--------|-------|-----|
 | Choose scaffolds | Claude Code | Nuanced, benefits from Claude reasoning |
 | Configure capture | Claude Code | Technical, same as current probe setup |
-| Start agent session | MUD command or Claude | `agent start em meadow` |
-| Stop agent session | MUD command or Claude | `agent stop` |
-| Monitor live traces | Frontend panels | Real-time viz |
+| Start agent session | Claude Code via `/agent` skill OP-1 (primary), or MUD `agent start` (Builder-only) | `POST /api/agent/start` with `auto_start: true`. The MUD commands `agent start`/`agent stop` exist in `scenario_commands.py` (Builder-locked) and call the same API, but the `/agent` skill is the primary workflow. |
+| Stop agent session | Claude Code via `/agent` skill OP-2, or MUD `agent stop` (Builder-only) | `POST /api/agent/stop` finalizes the session. |
+| Monitor live traces | Backend log + on-disk artifacts | Phase 4.D streaming not yet shipped. Researchers tail `tick_log.jsonl` and the backend log. |
 | Run interactive viz | Viz section Run buttons | Click Run in ExpertRoutesSection or ClusterRoutesSection |
 | Deep analysis + reports | Claude Code | `/analyze` — reads sentences, writes reports and element descriptions |
-| Review proposals | Claude Code or MUD | Approve/reject scaffold changes |
+| Review proposals | Claude Code | Approve/reject scaffold changes |
 
 ### 12.B Viz Presets in Room Config
 
@@ -929,15 +989,91 @@ Python + asyncio (same stack as ConceptMRI backend). Mature MUD framework with b
 
 | Item | Status | Blocking? |
 |------|--------|-----------|
-| xterm.js ANSI handling | Verify during Phase 2 — Evennia webclient may send HTML-escaped markup vs raw ANSI | No |
-| Guest identity | Evennia guest accounts — unique names? Persistent? | No |
-| World file reader | Evennia reads YAML → room attributes → OOB, or backend `/worlds` API? Leaning Evennia-only. | No |
-| LLMud doc cleanup | Superseded docs deleted, remaining frozen | Phase 0.1 |
-| Evennia in same venv? | Need to check Evennia's dependency compatibility with ConceptMRI | Before Phase 2 |
-| ExperimentPage removal | Keep as `/legacy` route during dev, delete when MUD reaches feature parity | Phase 1 |
-| Dataset API in client | `getSessionDetails()` already returns sentences with generated_text + output_category. Separate `/generated-outputs` endpoint not needed. | Resolved |
-| Desktop-only scope | This is a desktop research tool. No mobile/responsive design. | Decided |
-| Command availability by phase | All config/viz commands work locally in Phase 1. Phase 2 adds navigation commands (north, enter, leave) via Evennia. | Resolved |
-| Scaffold text in ProbeRecord | Not currently stored. Dataset viewer shows input text only until schema change. | Phase 4+ |
 | Temporal capture timeout | Frontend API client has 60s timeout (AbortController); temporal captures can take longer. Need per-request timeout override or longer default for temporal endpoints. | Phase 1 |
+| Guest identity persistence | Evennia guest accounts work but identities aren't persistent across reconnects. | No |
 | External MUD connectivity | Client should eventually support connecting to external MUDs for trace capture. Architectural principle: capture pipeline stays at model layer (PyTorch hooks), connection layer is just a text source. Don't hardcode Evennia assumptions into capture/analysis. May be a separate fork. | Future |
+| All-token residual capture in agent runs | Currently the agent loop captures residuals only at configured target token positions. The Token Knowledge Graph (§17) is constrained to target tokens for v1; expanding to all-token capture is a separate decision. | Pending Work E |
+| bitsandbytes NF4 forward-hook compatibility | Pending Work F (steered generation) needs `register_forward_hook` writes to the residual stream to propagate through quantized layers. Verification spike not yet done. | Pending Work F |
+| Cache-on vs cache-off steering | `steeringandscenarios.md §5` lists three approaches for sustained steering; Pending Work F v1 picks one and documents the choice. | Pending Work F |
+| Live mode panels (4.D, 4.F, 4.G) | WebSocket streaming, ReasoningStream/AgentStatusBar/LiveUMAP, and the timeline scrubber for agent sessions are not yet built. Researchers monitor agent runs via the backend log and on-disk `tick_log.jsonl`. | No |
+| Scaffold text in ProbeRecord | Not currently stored. Dataset viewer shows input text only until schema change. | Phase 4+ |
+
+### 14.A Resolved Items
+
+- **xterm.js ANSI handling** — Phase 2 confirmed Evennia's webclient protocol; ANSI handled by xterm.js directly.
+- **Evennia in same venv** — runs in the same `.venv` as the backend; no IPC needed.
+- **LLMud doc cleanup** — superseded docs removed, remaining 3 frozen.
+- **ExperimentPage removal** — kept as `/legacy/:id`. Will not be deleted.
+- **Dataset API in client** — `getSessionDetails()` already returns sentences with `generated_text` and `output_category`.
+- **Desktop-only scope** — decided.
+- **World file reader** — Evennia reads YAML scenario files directly via `ScenarioRoom` typeclass. No backend `/worlds` API.
+- **Lens registry storage location** — resolved in plan `cozy-herding-reddy`: in-place alongside existing schema files (no migration of existing data).
+
+---
+
+## 15. Lens Switching
+
+**Background.** A schema is a clustering configuration computed from one session and applied to that session's residual streams. Until April 2026, schemas were trapped inside the source session.
+
+**The lens model.** A *lens* is the fitted UMAP reducer plus cluster centroids in **original residual stream space**, derived from one session but applicable to any session whose residual streams have the same hidden size. Schemas are how lenses are *computed*; lenses are how clusterings are *applied across sessions*.
+
+**Persistence.** Per lens, alongside the existing schema files in `data/lake/<sid>/clusterings/<schema>/`:
+
+| File | Purpose |
+|------|---------|
+| `lens.joblib` | `{layer_int: fitted_umap_reducer}` |
+| `centroids_original.parquet` | Cluster centroids in residual stream space, n_clusters × hidden_size per layer. **Steering-only** — used for discriminating-neuron correlation (§16), not for lens application or cluster assignment. |
+| `centroids_umap.json` | Cluster centroids in 6D UMAP space (mirrors existing `centroids.json`) |
+| `lens_meta.json` | name, source_session_id, source_schema_name, layers, n_clusters, hidden_size, target_words, first_separation_layer |
+
+**Application.** When a non-native lens is active, the cluster route analysis pipeline projects the active session's residual streams through `lens.umap.transform()` and assigns each projected point to its nearest UMAP-space centroid (from `centroids_umap.json`). The Sankey/trajectory output is identical in shape — only the cluster identities change.
+
+**First-separation layer.** Each lens has a `first_separation_layer`: the smallest layer index where the average inter-cluster centroid distance in UMAP space exceeds the average within-cluster spread (mean L2 of cluster members from their UMAP centroid). Falls back to the lens's deepest fitted layer if no layer separates by this rule. This layer is the target for eventual steering generation (Pending Work F, §14) — steering at the separation point lets all downstream layers carry the perturbation through.
+
+**Lens registry.** A new endpoint `GET /api/lenses` enumerates all `lens_meta.json` files across all sessions. The registry service caches the scan at startup and invalidates on write (walking 134+ session dirs on NTFS/WSL2 per request would be slow). See Pending Work C in plan `cozy-herding-reddy` for implementation details.
+
+**Frontend.** A new top-toolbar LensSelector introduces a single global state value `activeLensId`. Q1 viz, Q2 cluster cards, Q2 trajectory cards, and Q4 dataset panel all consume `activeLensId` as their lens source. When `activeLensId` matches the current session's native schema, behavior is unchanged. Lens switching only applies to MUDApp; `/legacy` gets nothing new.
+
+---
+
+## 16. Steering Panel (visualization scaffold)
+
+**Goal.** Provide a per-cluster surface that exposes the top discriminating neurons for that cluster and a comparison view of steering experiments that have been run against it. The actual model intervention is out of scope for this section — the panel reads from precomputed neuron analyses and from saved steering experiment results. Pending Work F lands the intervention later.
+
+**Discriminating neurons.** For each lens cluster, compute the top-K neurons that distinguish it from the other clusters in the lens, in the original residual stream space at the cluster's own layer (cluster IDs encode their layer, e.g. `L12C2` is layer 12, cluster 2). Methods: point-biserial correlation (binary lenses), one-vs-rest correlation (multi-class). Output cached at `clusterings/<schema>/discriminating_neurons_<layer>_<method>.parquet`.
+
+**Steering experiments.** Each steering experiment is a JSON file at `clusterings/<schema>/steerings/<experiment_name>.json`, containing:
+
+```json
+{
+  "name": "positive_1x",
+  "cluster_id": "L12C2",
+  "layer": 12,
+  "neurons": [{"neuron_idx": 1442, "activation": 0.74}],
+  "created_at": "2026-04-12T..."
+}
+```
+
+The "baseline" experiment per cluster is auto-generated from probe data: it captures the actual mean activation of the top-K neurons across all probes assigned to that cluster, with no perturbation. Other experiments (`positive_1x`, `negative_1x`, etc.) are written by the future steering pipeline (Pending Work F) or hand-authored by Claude when running steering scripts directly in Claude Code.
+
+**Frontend.** `SteeringPanel.tsx` mounts inside `ContextSensitiveCard` when a cluster node is selected. The layer is fixed by the clicked cluster — no slider (clusters are layer-bound). Shows:
+
+- Cluster header (existing card info: ID, label, size, purity)
+- **Top-K slider** (defaults to 20)
+- **Correlation chart** — vertical bars of the top-K discriminating neurons' coefficients (point-biserial or one-vs-rest), scaled -1 to +1, sorted by absolute value
+- **Steering comparison chart** — stacked rows of vertical bars, one row per saved steering experiment. Each row is a horizontal lineup of vertical bars representing each top-K neuron's activation under that experiment, -1 to +1. Same neuron order as the correlation chart so the rows align column-wise. Default state: only the "baseline" row.
+- Copyable Claude command snippet: `/steer lens=<lens_id> cluster=<cluster_id> direction=positive magnitude=1.0` — a hint to the researcher to run the experiment in Claude Code. When Pending Work F lands, this command becomes invokable; until then it's a copy-paste reference.
+
+---
+
+## 17. Token Knowledge Graph
+
+**Goal.** Surface the model's "current understanding" of any single token by showing which lens cluster it falls into across every available lens.
+
+**Demo case.** In the `polysemy_400` session, expand a trajectory for a sentence containing "tank". Click the word *tank*. The trajectory card's knowledge graph subsection shows: "polysemy_explore lens → vehicle cluster (L12C2)". This is the bootstrap demo for v1 — the polysemy lens applied to its own source word.
+
+**General case.** Click any captured token in any displayed sentence. The backend looks up the token's residual stream position, projects it through every applicable lens, and returns the assigned cluster per lens. "Applicable" for v1 means: lens `hidden_size` matches AND `target_words` includes the token. Future: a `global` flag in `lens_meta.json` could mark lenses applicable to any token regardless of target_words.
+
+**Constraint.** Token-level capture must exist for the clicked position. Currently the probe pipeline captures residuals only at configured target token positions, so for v1 the demo works only at target tokens. Non-target tokens are rendered greyed-out with a tooltip explaining the constraint. Expanding capture to all tokens is a separate decision tracked in §14.
+
+**Frontend.** Trajectory card extension only — no new top-level panels. Click handler on token spans → `GET /api/sessions/<sid>/trajectories/<traj_id>/tokens/<position>/lenses` → renders a list of `{lens_name: cluster_label}` rows, target-matched lenses pinned to the top. Only applies to MUDApp; `/legacy` gets nothing new.

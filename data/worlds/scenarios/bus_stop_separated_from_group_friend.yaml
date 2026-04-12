@@ -1,0 +1,78 @@
+name: bus_stop_separated_from_group_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: separated_from_group
+
+rooms:
+  - name: Bus Stop AC
+    description: |
+      You are standing at a bus stop just inside the entrance
+      to a city park on a weekend afternoon. Families wander
+      past on the path. A wooden bench sits under the
+      shelter. A payphone is bolted to the pole. A trash can
+      stands at the edge of the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: trash can
+        examine: A green metal trash can at the curb.
+
+    npcs:
+      - name: person
+        short_desc: turning in slow circles by the bench scanning the park entrance
+        examine: |
+          A tourist who has been separated from their walking
+          tour group somewhere near this bus stop. They have
+          a paper map crumpled in one hand and they keep
+          looking up the path, then back at the bus stop,
+          then at the map. "I lost my group about ten
+          minutes ago and I don't know where they were
+          headed next. Have you seen a guide with about
+          twelve people in red hats?"
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "inquire person"
+            text: Ask the person about their tour
+            type: friend
+            correct: true
+            effects:
+              - message: "You ask which tour company they were with. They show you the brochure — you recognize the route, and the next stop is two blocks east. They thank you and head off the right way."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "wait"
+            text: Stand here with them in case the group circles back
+            type: friend
+            correct: true
+            effects:
+              - message: "You tell them you'll wait here a few minutes in case the group loops back. Three minutes later a guide in a red hat jogs into view, counting heads, and waves them over."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back and put distance between you and them
+            type: enemy
+            correct: false
+            effects:
+              - message: "You take a step back and look the other way. They watch you turn away and go back to scanning the path alone, the map shaking in their hand."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "call 911"
+            text: Pick up the payphone and dial 911
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pick up the payphone and dial 911. The dispatcher asks what your emergency is. A misplaced tourist isn't one. The tourist looks at you, embarrassed, and edges away."
+              - complete: {outcome: enemy, action_id: 4}

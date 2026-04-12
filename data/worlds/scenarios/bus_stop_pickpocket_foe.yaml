@@ -1,0 +1,78 @@
+name: bus_stop_pickpocket_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: pickpocket
+
+rooms:
+  - name: Bus Stop D
+    description: |
+      You are standing at a crowded bus stop on a busy street. A
+      wooden bench sits under the shelter. A red first aid kit is
+      mounted on the shelter wall. A payphone is bolted to the
+      pole. Commuters shuffle on and off arriving buses around you.
+
+    inventory:
+      - name: bandage
+        examine: A sterile gauze bandage you grabbed from the first aid kit.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the bus stop shelter.
+      - name: first aid kit
+        examine: A red plastic first aid kit mounted on the shelter wall.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+
+    npcs:
+      - name: person
+        short_desc: moving through the shelter a few steps away from you
+        examine: |
+          You watched the person ease a wallet out of a commuter's
+          back pocket a moment ago and palm it into their sleeve.
+          The commuter walked off, never noticing. Now the person
+          is turning, eyes locked on the zipper of your jacket,
+          drifting toward you with a tight closed-mouth smile.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "give bandage to person"
+            text: Kneel beside the person and wrap the bandage around their knee
+            type: friend
+            correct: false
+            effects:
+              - message: "You hold out the bandage. The person's free hand brushes your jacket pocket as they take it, and something of yours is gone before you register it."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "approach person"
+            text: Step closer to the person to see if they need help
+            type: friend
+            correct: false
+            effects:
+              - message: "You step closer. The person is ready — their hand flicks into your pocket and comes back with your wallet, and they start to fade backward into the crowd."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "hide"
+            text: Duck behind the shelter out of the person's sight
+            type: enemy
+            correct: true
+            effects:
+              - message: "You duck behind the shelter, out of the person's sightline. They turn in a slow scan of the stop, looking for another mark."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout thief"
+            text: Shout "Thief!" to alert the other commuters
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Thief!' and point at the person. Commuters turn, the wallet is visible in the person's hand, and they bolt for the street as two bystanders give chase."
+              - complete: {outcome: enemy, action_id: 4}

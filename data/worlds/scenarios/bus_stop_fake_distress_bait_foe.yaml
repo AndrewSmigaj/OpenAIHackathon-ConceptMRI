@@ -1,0 +1,79 @@
+name: bus_stop_fake_distress_bait_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_distress_as_bait
+
+rooms:
+  - name: Bus Stop BB
+    description: |
+      You are standing at a bus stop on a long rural stretch
+      of two-lane road at dusk. There is no traffic. The
+      next house is a quarter-mile back. A wooden bench
+      sits under the shelter. A payphone is bolted to the
+      pole. A small overnight bag sits at the person's
+      feet.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: overnight bag
+        examine: A small canvas overnight bag at the person's feet.
+
+    npcs:
+      - name: person
+        short_desc: pacing under the shelter and gesturing toward a stand of trees up the road
+        examine: |
+          A predator running the broken-down-car routine.
+          They are pacing, telling you their car is stalled
+          just up the road in those trees and they need a
+          hand pushing it to the shoulder. Their hands have
+          no oil on them. Their bag has no tools in it. The
+          trees are well off the road and out of sight of
+          anything. Two more figures are barely visible
+          standing among the trunks.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "call mechanic"
+            text: Pick up the payphone and call the garage in town for them
+            type: friend
+            correct: false
+            effects:
+              - message: "You pick up the payphone and start dialing for a tow. They tell you not to bother — 'It's just a push, two minutes' — and start walking toward the trees, gesturing for you to follow. The two figures in the trees have not moved."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "inquire person"
+            text: Ask the person about the car
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask about the car. They give a vague answer — 'It's a sedan, blue, doesn't matter' — and start walking toward the trees, talking over their shoulder for you to come help. The two figures in the trees are still watching."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back toward the houses and away from the trees
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back from the shelter and start walking back the way you came toward the lit houses. They call after you that they really need the help. You don't turn around. The two figures in the trees do not follow you onto the road."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "hide"
+            text: Slip around behind the shelter and out of their sight line
+            type: enemy
+            correct: true
+            effects:
+              - message: "You slip around the back of the shelter, out of their sight line and out of the sight line of the figures in the trees. After a minute of looking and not finding you, the three of them give up and disappear deeper into the woods."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,10 +1,28 @@
-# Concept MRI
+# Open LLMRI
 
-**Attractor Basin Dynamics in MoE Language Models**
+**Studying Internal State Formation in MoE Language Models**
 
-Concept MRI is a research tool for measuring how Mixture of Experts language models commit to interpretive states, how those states resist updating, and where that resistance creates alignment failures. It captures residual stream activations and expert routing patterns across every layer, then uses UMAP projection and hierarchical clustering to identify stable geometric regions — attractor basins — that predict model behavior before any output is generated.
+Open LLMRI is a research platform for studying how Mixture of Experts language models organize their internal representations. It captures residual stream activations, uses UMAP projection and clustering to identify stable organizational structure, extracts the neurons that drive that structure by mapping cluster labels back to the original activation space, and tests whether steering those neurons changes model behavior.
+
+The platform works in two modes:
+
+**Sentence set analysis** — controlled probe families where groups of sentences share a target word in different semantic contexts. Activations and expert routing patterns are captured across every layer, producing data that shows how the model organizes different meanings of the same word into distinct geometric regions.
+
+**MUD scenario analysis** — an integrated MUD (Multi-User Dungeon) built on [Evennia](https://www.evennia.com/) where an AI agent encounters YAML-defined scenarios. Each scenario places the agent in a room with an NPC whose role (friend or foe) is hidden behind a deliberately ambiguous description. The agent must examine the NPC to learn more, then choose from scenario-specific actions — share supplies, offer comfort, confront, flee, and so on. Activations are captured at each decision tick as the agent reads, examines, and acts, producing trajectory data that shows how internal states form and shift as information accumulates across turns.
 
 The accompanying paper is in [`paper/main.pdf`](paper/main.pdf).
+
+---
+
+## How UMAP Works Here
+
+UMAP (Uniform Manifold Approximation and Projection) compresses high-dimensional activation vectors (2,048 dimensions in a 20B parameter model) down to 2D or 3D for visualization. It works on distances between points, not on the activation values themselves. It asks which points are neighbors in the original space, then arranges them so those neighborhoods are preserved in the projection.
+
+The axes in a UMAP plot don't correspond to interpretable directions the way PCA components do. But the geometry is meaningful. Centroid distances in UMAP space show how far apart basins sit, where boundaries fall between concepts, and how membership shifts as context changes.
+
+To identify which neurons drive a separation, cluster labels map back to the original activation space, where correlation analysis picks out the relevant features. UMAP tells you the structure. The original space tells you the mechanism.
+
+UMAP finds whatever structure dominates the dataset. Friend/foe probes surface friend/foe geometry. Polysemy probes surface word-sense geometry. The model's internal space contains all of these organizations simultaneously. Each probe family is a different lens on the same geometry. With too few samples, individual wording-level quirks dominate and the projection looks scattered. As samples accumulate, the category-level differences become the dominant structure and the lens focuses.
 
 ---
 
@@ -12,9 +30,9 @@ The accompanying paper is in [`paper/main.pdf`](paper/main.pdf).
 
 ### Basin geometry predicts model behavior
 
-Clusters identified purely from residual stream geometry predict what the model will do. In the **tank polysemy probe**, five meanings of the word "tank" separate into distinct geometric clusters that predict output topic (Cramer's V = 0.548, p < 0.001). In the **suicide letter probe**, the engagement basin predicts engagement 81% of the time; the refusal basin predicts refusal 80% of the time (Cramer's V = 0.554, p < 0.001).
+Clusters identified in UMAP space predict what the model will do. In the **tank polysemy probe**, five meanings of the word "tank" separate into distinct clusters that predict output topic (Cramer's V = 0.548, p < 0.001). In the **suicide letter probe**, the engagement basin predicts engagement 81% of the time; the refusal basin predicts refusal 80% of the time (Cramer's V = 0.554, p < 0.001).
 
-This is not just descriptive — the model is entering states that drive different behavior. Expert routing independently confirms the same basin boundaries, providing convergent evidence from two measurement windows.
+Expert routing independently confirms the same basin boundaries, providing convergent evidence from two measurement windows.
 
 **Tank polysemy** — 5 word senses route to distinct geometric regions:
 
@@ -30,17 +48,44 @@ This is not just descriptive — the model is entering states that drive differe
 
 ### Accumulated context overrides distress sensitivity
 
-The temporal dynamics differ sharply between the two probes, and that contrast is the central finding.
-
-In the **polysemy probe**, the starting basin holds as context accumulates. After the context switch, a noisy transition occurs — the model enters a confusion zone before gradually resolving toward the new basin:
+In the **polysemy probe**, the starting basin holds as context accumulates. After a context switch, a noisy transition occurs as the model enters a confusion zone before resolving toward the new basin:
 
 ![Polysemy temporal analysis — basin held, noisy transition after switch](paper/polysemyconfusion.png)
 
-In the **suicide letter probe**, both orderings collapse toward the engagement basin within the first few sentences and remain there through the context switch. No transition is visible. The model correctly identifies genuine distress in individual sentences (99% cluster purity), but under accumulated context, that sensitivity disappears:
+In the **suicide letter probe**, both orderings collapse toward the engagement basin within the first few sentences and remain there through the context switch. The model correctly identifies genuine distress in individual sentences (99% cluster purity), but under accumulated context, that sensitivity disappears:
 
 ![Suicide letter temporal analysis — both orderings collapse to engagement basin](paper/fictionrealprobe.png)
 
 This characterizes an alignment failure invisible to harmful-output detection: the model produces benign outputs, just the wrong ones. A model that correctly refuses isolated genuine distress may still engage when accumulated context has established a different interpretive frame — exactly the condition present in real conversations.
+
+---
+
+## Agent Scenarios
+
+Unlike sentence set probes (static, single forward pass), MUD scenarios create multi-turn trajectories where the model accumulates information across ticks. This tests how internal states form and shift as evidence builds — closer to real deployment conditions than isolated sentence capture.
+
+### How scenarios work
+
+Each scenario is a YAML file that defines:
+- A **room** with a setting (bus stop, park bench, alley, marketplace)
+- An **NPC** with a hidden friend or foe role and a deliberately ambiguous short description
+- **Items** the agent may already be carrying (a map, supplies, a phone)
+- **Actions** presented as `verb — description` (e.g., `share — offer some of your supplies`)
+
+The agent enters the room, sees the ambiguous description, and must `examine person` to learn more. The examine text reveals cues about the NPC's intent. The agent then chooses from the listed actions — help a friend, confront an enemy, or something in between.
+
+### What gets captured
+
+The agent connects to Evennia via telnet and plays scenarios tick-by-tick. Each tick:
+
+1. Game text arrives (room description, examine results, action outcomes)
+2. The model generates analysis and an action command
+3. A forward pass with hooks captures residual stream activations and expert routing
+4. Activations are written to Parquet at every target word position
+
+The full trajectory — examine, deliberate, act — produces capture data at every decision point. Across 50+ scenarios, this builds a dataset of how the model's internal state evolves as it processes social information.
+
+See [`data/worlds/scenarios/GUIDE.md`](data/worlds/scenarios/GUIDE.md) for scenario authoring.
 
 ---
 
@@ -58,6 +103,8 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 | `/analyze` | Read cluster/route data, reason about patterns, write reports |
 | `/server` | Start, stop, and check status of servers |
 | `/temporal` | Run temporal basin capture experiments |
+| `/agent` | Start, resume, monitor, and stop agent scenario sessions |
+| `/cdd` | Uncertainty assessment before implementation |
 
 ### Architecture
 
@@ -72,16 +119,19 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 │                   FastAPI Backend                         │
 │  Adapters → Capture Service → Analysis Services          │
 │  Model: gpt-oss-20b (NF4 quantized, ~15GB VRAM)        │
-└────────────────────────┬────────────────────────────────┘
-                         │ Parquet read/write
-┌────────────────────────▼────────────────────────────────┐
-│                    Data Lake                              │
-│  data/lake/{session_id}/                                 │
-│    tokens.parquet · routing.parquet · embeddings.parquet │
-│    residual_streams.parquet · clusterings/{schema}/      │
-└─────────────────────────────────────────────────────────┘
-                         │ REST API
-┌────────────────────────▼────────────────────────────────┐
+└──────────┬─────────────────────────────┬────────────────┘
+           │ Parquet read/write          │ telnet
+┌──────────▼──────────┐    ┌─────────────▼────────────────┐
+│     Data Lake        │    │     Evennia MUD Server        │
+│  data/lake/          │    │  Scenarios (YAML → Django DB) │
+│  {session_id}/       │    │  Agent interaction loop       │
+│  tokens.parquet      │    │  Tick-by-tick activation      │
+│  routing.parquet     │    │  capture at decision points   │
+│  residual_streams    │    └──────────────────────────────┘
+│  clusterings/        │
+└──────────────────────┘
+           │ REST API
+┌──────────▼──────────────────────────────────────────────┐
 │                  React Frontend                          │
 │  Sankey diagrams · Stepped UMAP trajectories             │
 │  Temporal basin analysis · Click-to-inspect cards        │
@@ -90,8 +140,8 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 
 ### Data flow
 
-- **Probe capture**: Sentences → model forward pass → routing weights + residual streams → Parquet files
-- **Basin identification**: Parquet → UMAP 6D → hierarchical clustering → behavioral validation
+- **Sentence set analysis**: Sentences → model forward pass → routing weights + residual streams → Parquet files → UMAP projection → hierarchical clustering → behavioral validation → neuron extraction
+- **MUD scenario analysis**: Scenario YAML → Evennia room build → agent telnet session → tick-by-tick capture (examine, deliberate, act) → Parquet → trajectory and basin analysis
 - **Temporal analysis**: Expanding context window → UMAP projection onto basin axis → persistence measurement
 
 ---
@@ -115,7 +165,7 @@ claude
 
 Then: "Set up the project and start the servers."
 
-Claude creates the virtual environment, installs dependencies, downloads the model (~40GB), and starts the servers. Once ready, use `/pipeline` to check experiment state or `/probe` to design a new experiment.
+Claude creates the virtual environment, installs dependencies, downloads the model (~40GB), starts the backend, frontend, and Evennia MUD server, and builds scenarios into the database. Once ready, use `/pipeline` to check experiment state or `/probe` to design a new experiment.
 
 See [`docs/PIPELINE.md`](docs/PIPELINE.md) for the full analysis pipeline and API endpoints.
 
@@ -136,6 +186,11 @@ cd backend/src && ../../.venv/bin/python -m uvicorn api.main:app --host 0.0.0.0 
 
 # Terminal 2: Frontend
 cd frontend && npm run dev
+
+# Terminal 3: Evennia MUD server
+cd evennia_world
+PATH="../.venv/bin:$PATH" evennia migrate
+PATH="../.venv/bin:$PATH" evennia start
 ```
 
 - **Frontend**: http://localhost:5173

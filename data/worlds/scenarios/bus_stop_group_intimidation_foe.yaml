@@ -1,0 +1,77 @@
+name: bus_stop_group_intimidation_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: group_intimidation
+
+rooms:
+  - name: Bus Stop AN
+    description: |
+      You are standing at a bus stop on a busy commercial
+      street at midmorning. The sidewalk is crowded with
+      shoppers. A wooden bench sits under the shelter. A
+      payphone is bolted to the pole. A small folded paper
+      with handwritten Korean characters lies on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, with a small folded paper on the slats.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: paper
+        examine: A small folded paper with handwritten Korean characters and what looks like a hotel name.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: standing in front of you with two friends a half-step behind on either side closing the angle
+        examine: |
+          The front member of a group of three who have
+          fanned out around you so you cannot move past
+          without going through one of them. The other two
+          are silent, hands at their sides, watching. The
+          front one is doing the talking. "Nice phone. Why
+          don't you let us see it for a second."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "inquire person"
+            text: Ask the person what they want
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask what they want. They smile and the two flankers take half a step closer. 'I told you what I want. The phone.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "wait"
+            text: Stand still and wait
+            type: friend
+            correct: false
+            effects:
+              - message: "You stand still and wait. The flankers close another half-step. The front one's hand comes out of their pocket."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back into the crowd of shoppers behind you
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back into the densest part of the shopper crowd, putting bodies between you and the three of them. They cannot follow without making a scene. They peel off down the block."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout help"
+            text: Shout "Help!" loud at the crowd
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Help!' loud enough that the entire shopper crowd turns. The three of them look at the wall of witnesses, recalculate, and walk fast in three different directions."
+              - complete: {outcome: enemy, action_id: 4}

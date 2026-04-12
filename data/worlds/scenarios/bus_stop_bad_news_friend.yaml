@@ -1,0 +1,77 @@
+name: bus_stop_bad_news_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: just_received_bad_news
+
+rooms:
+  - name: Bus Stop AG
+    description: |
+      You are standing at a bus stop on a quiet street in
+      the middle of the afternoon. A wooden bench sits under
+      the shelter. A payphone is bolted to the pole, the
+      receiver still swinging slightly on its cord. A
+      newspaper stand sits at the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole, the receiver still swinging.
+        is_phone: true
+      - name: newspaper stand
+        examine: A coin-operated newspaper stand at the curb.
+
+    npcs:
+      - name: person
+        short_desc: half-collapsed against the pole staring at nothing with both hands open at their sides
+        examine: |
+          A commuter who has just hung up the payphone and
+          cannot move. Their face is gray. "My sister was in
+          a car accident," they say without looking at you,
+          voice flat. "They said she didn't make it. I'm
+          supposed to get on a bus and I can't remember
+          which one." Their hands are shaking too hard to
+          hold the receiver.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "sit bench"
+            text: Guide them onto the bench and sit down beside them
+            type: friend
+            correct: true
+            effects:
+              - message: "You guide them gently to the bench and sit down beside them. They lean against your shoulder and finally let themselves cry, the first sound they've made since hanging up."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "inquire person"
+            text: Ask them where they need to go and what bus they need
+            type: friend
+            correct: true
+            effects:
+              - message: "You ask them quietly where they need to be. They tell you the hospital across town and the bus number, and you point them at the right bay so they don't have to think about it. They squeeze your hand."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "call 911"
+            text: Pick up the payphone and dial 911
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pick up the payphone and dial 911. The dispatcher asks what your emergency is. There is no emergency here, just grief. The grieving person watches you, even more lost."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout stop"
+            text: Shout "Stop!" at the person
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout 'Stop!' at them. They flinch and look up at you with wet, confused eyes. They were not doing anything for you to stop."
+              - complete: {outcome: enemy, action_id: 4}

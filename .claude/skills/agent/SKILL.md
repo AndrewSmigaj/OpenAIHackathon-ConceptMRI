@@ -24,6 +24,7 @@ The backend (with model loaded), Evennia, and the scenario build must all be rea
 |----------|-------|
 | Backend URL | `http://localhost:8000` |
 | Start endpoint | `POST /api/agent/start` |
+| Resume endpoint | `POST /api/agent/resume` |
 | Stop endpoint | `POST /api/agent/stop` |
 | Results dir | `$ROOT/data/lake/<session_id>/` |
 | Tick log | `$ROOT/data/lake/<session_id>/tick_log.jsonl` |
@@ -64,6 +65,38 @@ ROOT=$(git rev-parse --show-toplevel) && PY="$ROOT/.venv/bin/python" && curl -s 
 ```
 
 Save the returned `session_id`. If `auto_start` is omitted or `false`, the session is created but the loop never runs — a very common mistake.
+
+### OP-1B: Resume an existing session
+
+Add more scenarios to a session that already ran (completed or stopped). Results are appended to `probe_results.jsonl`. If the resume list includes scenarios that already have entries (e.g. retrying failures), duplicates will exist in the file. **Always run OP-1C after a resume completes** to deduplicate.
+
+Replace `SESSION_ID` and `SCENARIOS` (a JSON array of scenario names to run). **Do not pass `evennia_username` or `evennia_password`** — the schema defaults read from `.env`.
+
+```bash
+ROOT=$(git rev-parse --show-toplevel) && PY="$ROOT/.venv/bin/python" && curl -s -X POST http://localhost:8000/api/agent/resume -H "Content-Type: application/json" -d '{"session_id":"SESSION_ID","scenario_list":SCENARIOS}' | $PY -m json.tool
+```
+
+Optionally pass `"system_prompt":"..."` to override the default prompt for the resumed run.
+
+### OP-1C: Deduplicate probe results after resume
+
+Keeps only the **last** entry per `scenario_name` — later retries replace earlier failures. Run this after a resumed session finishes.
+
+```bash
+ROOT=$(git rev-parse --show-toplevel) && PY="$ROOT/.venv/bin/python" && $PY -c "
+import json
+path = '$ROOT/data/lake/<session_id>/probe_results.jsonl'
+lines = [json.loads(l) for l in open(path) if l.strip()]
+seen = {}
+for entry in lines:
+    seen[entry['scenario_name']] = entry  # last wins
+deduped = list(seen.values())
+with open(path, 'w') as f:
+    for entry in deduped:
+        f.write(json.dumps(entry) + '\n')
+print(f'Deduplicated: {len(lines)} entries -> {len(deduped)} unique scenarios')
+"
+```
 
 ### OP-2: Monitor a running session
 

@@ -1,0 +1,78 @@
+name: bus_stop_stuck_helper_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: good_samaritan_stuck
+
+rooms:
+  - name: Bus Stop AW
+    description: |
+      You are standing at a bus stop on a small commercial
+      strip near closing time. The shop windows are going
+      dark one by one. A wooden bench sits under the
+      shelter. A payphone is bolted to the pole. An empty
+      coffee cup sits on the bench beside the person.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: coffee cup
+        examine: An empty paper coffee cup on the bench.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench staring at the empty coffee cup with their head in one hand
+        examine: |
+          A commuter who spent their last cash and the last
+          twenty minutes of their bus window helping a
+          stranger find a hospital pharmacy a few blocks
+          away. The pharmacy run worked — and the last bus
+          left without them. "I gave my fare card to the
+          pharmacy guy because he didn't have one and I
+          thought I'd just buy another. I have nothing on
+          me. The next bus isn't until five in the morning."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "inquire person"
+            text: Ask the person what they need to get home
+            type: friend
+            correct: true
+            effects:
+              - message: "You ask what they need. They walk you through it — a single fare and a five-block walk on the other side. You hand them the fare you have on you and they squeeze your hand and refuse to look away from the road, embarrassed and grateful."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "sit bench"
+            text: Sit down on the bench beside them
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit down on the bench beside them. After a long minute they straighten up and laugh weakly. 'I'm not used to being on this side of it.' Just having the company helps them think — they remember a friend who lives two blocks away who can lend them fare."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back from the bench and walk past
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step back and walk past without a word. They watch you go and put their head back in their hand. The shop windows finish going dark."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout scam"
+            text: Shout "Scam!" and point at the person
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout 'Scam!' and point at the slumped commuter. There is no one left on the strip to hear you. The commuter does not even look up."
+              - complete: {outcome: enemy, action_id: 4}

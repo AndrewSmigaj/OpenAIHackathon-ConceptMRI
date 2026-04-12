@@ -1,0 +1,76 @@
+name: bus_stop_bike_thief_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: theft_in_progress
+
+rooms:
+  - name: Bus Stop AB
+    description: |
+      You are standing at a bus stop on a sun-baked stretch
+      of road at midday. The heat is fierce. A wooden bench
+      sits under the shelter, its slats hot to the touch. A
+      payphone is bolted to the pole. A bicycle is chained
+      to the metal rail at the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, baking in the midday sun.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: bicycle
+        examine: A road bike chained to the metal rail at the curb. The chain is half-cut.
+
+    npcs:
+      - name: person
+        short_desc: crouched at the bicycle working a bolt cutter on the chain
+        examine: |
+          A bike thief crouched at the rail with a pair of
+          bolt cutters around the chain of the road bike.
+          They have already chewed halfway through one link.
+          They glance up at you, register that you've
+          noticed, and keep working — betting you won't do
+          anything about it in this heat.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "call mechanic"
+            text: Use the payphone to call a mechanic
+            type: friend
+            correct: false
+            effects:
+              - message: "You pick up the payphone and ask the dispatcher for a mechanic. By the time you're explaining the address the thief has finished the second link, freed the bike, and pedaled off down the block."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "inquire person"
+            text: Ask the person what they are doing
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask what they're doing. Without looking up they say 'It's my bike, lost the key' in a flat voice and keep cutting. The chain parts a second later and they ride off."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "call 911"
+            text: Dial 911 on the payphone
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pick up the payphone and tell the dispatcher there is a theft in progress at this stop. The thief hears the address, swears, and bolts on foot leaving the bolt cutters behind."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout thief"
+            text: Shout "Thief!" and point at the person
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Thief!' and point at the crouched figure with the bolt cutters. Two commuters across the street look over, see the cut chain, and start moving toward you. The thief drops the cutters and runs."
+              - complete: {outcome: enemy, action_id: 4}

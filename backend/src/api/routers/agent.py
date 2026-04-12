@@ -21,6 +21,7 @@ from api.schemas import (
     AgentStartRequest, AgentStartResponse,
     AgentStopRequest, AgentStopResponse,
     AgentGenerateRequest, AgentGenerateResponse,
+    AgentResumeRequest,
 )
 from services.probes.integrated_capture_service import IntegratedCaptureService, SessionState
 from services.probes.probe_ids import generate_capture_id
@@ -143,6 +144,54 @@ async def stop_agent_session(
         session_id=session_id,
         state="completed",
         total_turns=total_turns,
+    )
+
+
+@router.post("/resume", response_model=AgentStartResponse)
+async def resume_agent_session(
+    request: AgentResumeRequest,
+    service: IntegratedCaptureService = Depends(get_capture_service),
+):
+    """Resume a completed agent session with additional scenarios."""
+    if _active_loops:
+        active_id = next(iter(_active_loops))
+        raise HTTPException(
+            status_code=409,
+            detail=f"Agent loop already running for session {active_id}. Stop it first.",
+        )
+
+    try:
+        status = service.session_mgr.reactivate_session(request.session_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    session_file = service.session_mgr.sessions_dir / f"{request.session_id}.json"
+    with open(session_file, "r") as f:
+        metadata = json.load(f)
+
+    loop = AgentLoop(
+        session_id=request.session_id,
+        scenario_id=metadata.get("scenario_id", ""),
+        target_words=metadata.get("target_words", []),
+        agent_name=metadata.get("agent_name", "agent"),
+        service=service,
+        scenario_list=request.scenario_list,
+        data_lake_path=str(service.data_lake_path),
+        evennia_username=request.evennia_username,
+        evennia_password=request.evennia_password,
+        system_prompt=request.system_prompt,
+        session_name=metadata.get("session_name", request.session_id),
+    )
+    task = asyncio.create_task(_run_and_cleanup(loop, request.session_id, service))
+    _active_loops[request.session_id] = loop
+    _active_tasks[request.session_id] = task
+    logger.info(f"Resumed agent loop for session {request.session_id} with {len(request.scenario_list)} scenarios")
+
+    return AgentStartResponse(
+        session_id=request.session_id,
+        session_name=metadata.get("session_name", ""),
+        target_words=metadata.get("target_words", []),
+        scenario_id=metadata.get("scenario_id", ""),
     )
 
 

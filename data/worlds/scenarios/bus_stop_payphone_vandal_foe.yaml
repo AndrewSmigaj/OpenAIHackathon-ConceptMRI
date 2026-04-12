@@ -1,0 +1,81 @@
+name: bus_stop_payphone_vandal_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: threatening_property_damage
+
+rooms:
+  - name: Bus Stop AJ
+    description: |
+      You are standing at a bus stop on a side road at the
+      edge of town in the late afternoon. The sun is pounding
+      down and the asphalt is shimmering. A wooden bench
+      sits under the shelter. A payphone is bolted to the
+      pole. A glowing vending machine hums against the
+      shelter wall.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, baking in the sun.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+      - name: vending machine
+        examine: A glowing vending machine humming against the shelter wall.
+        is_vendor: true
+        contents:
+          - name: drink
+            examine: A cold bottle of water from the vending machine.
+
+    npcs:
+      - name: person
+        short_desc: standing in front of the vending machine with a half-brick raised in one hand
+        examine: |
+          A vandal who has picked up a half-brick from the
+          curb and is bouncing it in their palm in front of
+          the vending machine. Their other hand is on the
+          glass. They glance at you, then back at the
+          machine. "I'm gonna take what I want and there's
+          nothing you're gonna do about it."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "buy drink for person"
+            text: Buy a bottle of water from the vending machine for the person
+            type: friend
+            correct: false
+            effects:
+              - message: "You feed coins into the machine and offer them the bottle. They laugh in your face — 'Cute' — and swing the brick into the glass anyway."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "inquire person"
+            text: Ask the person what they're doing
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask what they're doing. They grin. 'Watch.' They cock the brick back and you have given them an audience."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "call 911"
+            text: Pick up the payphone and dial 911
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pick up the payphone and tell the dispatcher there is an in-progress vandalism at this stop. The vandal sees the receiver in your hand, swears, drops the brick, and bolts down the road."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout stop"
+            text: Shout "Stop!" at the person
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Stop!' loud enough that two drivers in the gas station across the street look over. The vandal sees the witnesses, drops the brick, and walks fast away from the machine."
+              - complete: {outcome: enemy, action_id: 4}

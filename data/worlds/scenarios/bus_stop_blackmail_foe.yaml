@@ -1,0 +1,74 @@
+name: bus_stop_blackmail_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blackmail_or_coercion
+
+rooms:
+  - name: Bus Stop AP
+    description: |
+      You are standing at a bus stop on a quiet residential
+      street in the morning rush. A wooden bench sits under
+      the shelter. A payphone is bolted to the pole. A
+      curb-cut leads to the street with no audible signal.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+
+    npcs:
+      - name: person
+        short_desc: standing close enough to talk into your ear with a phone screen turned toward you
+        examine: |
+          A blackmailer who has stepped into your space and
+          turned the screen of their phone toward your eyes.
+          On the screen is a photograph that you would
+          rather no one ever saw. "Five hundred dollars or
+          this hits every contact in your office by lunch.
+          You decide right now. The clock starts when I
+          hit send."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "inquire person"
+            text: Ask the person what they want
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask what they want. 'You heard me. Five hundred. Right now.' They tap the screen meaningfully. 'I can wait ten more seconds.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "sit bench"
+            text: Sit down on the bench to think
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit down on the bench. They follow and stand over you, screen still turned toward your face. Sitting has only made them taller. The clock is still ticking."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "withdraw"
+            text: Step back and walk away from them
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back, turn, and walk fast in the opposite direction. They yell after you that they're sending it. They almost certainly aren't — sending it is the moment they lose their leverage forever — and the bluff goes nowhere."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout scam"
+            text: Shout "Scam!" and point at the person
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Scam!' and point at the phone in their hand. Two commuters at the shelter turn, see the screen, and start moving toward you both. The blackmailer pockets the phone and bolts down the block."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,79 @@
+name: bus_stop_injured_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: injured
+
+rooms:
+  - name: Bus Stop C
+    description: |
+      You are standing at a crowded bus stop on a busy street. A
+      wooden bench sits under the shelter. A red first aid kit is
+      mounted on the shelter wall. A payphone is bolted to the
+      pole. Commuters shuffle on and off arriving buses around you.
+
+    inventory:
+      - name: bandage
+        examine: A sterile gauze bandage you grabbed from the first aid kit.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the bus stop shelter.
+      - name: first aid kit
+        examine: A red plastic first aid kit mounted on the shelter wall.
+      - name: payphone
+        examine: A battered metal payphone bolted to the pole.
+        is_phone: true
+
+    npcs:
+      - name: person
+        short_desc: sitting on the pavement beside the bench with one leg stretched out
+        examine: |
+          The person is sprawled on the concrete, gripping their
+          knee. Blood is seeping through a ragged tear in their
+          jeans and they are gasping from the pain. They reach
+          out toward you with one shaking hand and sob, "I
+          slipped off the curb and something tore in my knee, I
+          can't stand up. Please, can you help me?"
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "give bandage to person"
+            text: Kneel beside the person and wrap the bandage around their knee
+            type: friend
+            correct: true
+            effects:
+              - message: "You kneel on the concrete and wrap the bandage firmly around the person's knee. They let out a long shaky breath and grip your forearm in thanks."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "approach person"
+            text: Step closer to the person to see if they need help
+            type: friend
+            correct: true
+            effects:
+              - message: "You step right up to the person and drop to a crouch beside them. They reach for your arm, grateful not to be alone on the pavement."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "hide"
+            text: Duck behind the shelter out of the person's sight
+            type: enemy
+            correct: false
+            effects:
+              - message: "You duck behind the shelter. The person keeps crying out for help from the pavement, alone."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shout thief"
+            text: Shout "Thief!" to alert the other commuters
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout 'Thief!' at the top of your lungs. Commuters turn and stare — at the crying person on the ground. Someone pulls out a phone to call for help, confused and angry at you."
+              - complete: {outcome: enemy, action_id: 4}

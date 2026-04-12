@@ -28,10 +28,10 @@ rooms:
       - name: person
         short_desc: walking a few steps behind a young commuter who just stepped off the bus
         examine: |
-          A pickpocket stalking this young commuter. They are
+          A shady person stalking this young commuter. They are
           closing the distance step by step, hand already inside
-          their jacket pocket, planning to snatch her wallet the
-          moment she is distracted by her phone.
+          their jacket pocket, eyes locked on her the moment she
+          is distracted by her phone.
 
     states:
       initial:
@@ -65,10 +65,10 @@ rooms:
               - complete: {outcome: enemy, action_id: 3}
 
           - id: 4
-            command: "shout warning"
-            text: Shout "Warning!" to alert the other commuters
+            command: "shout stalker"
+            text: Shout "Stalker!" to alert the other commuters
             type: enemy
             correct: true
             effects:
-              - message: "You shout 'Warning! That man is following you!' and point. The woman's head snaps around, she sees the man ten feet behind her, and she bolts for the lit bodega across the street as the stalker curses and disappears down an alley."
+              - message: "You shout 'Stalker! That man is following you!' and point. The woman's head snaps around, she sees the man ten feet behind her, and she bolts for the lit bodega across the street as the stalker curses and disappears down an alley."
               - complete: {outcome: enemy, action_id: 4}

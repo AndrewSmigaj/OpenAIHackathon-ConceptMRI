@@ -206,6 +206,28 @@ class SessionManager:
             raise ValueError(f"Session {session_id} is not in ACTIVE state: {status.state}")
         return status
 
+    def reactivate_session(self, session_id: str) -> "SessionStatus":
+        """Reactivate a completed session for additional scenarios."""
+        if session_id in self.active_sessions:
+            return self.active_sessions[session_id]
+
+        session_file = self.sessions_dir / f"{session_id}.json"
+        if not session_file.exists():
+            raise ValueError(f"Session {session_id} not found")
+
+        with open(session_file, "r") as f:
+            metadata = json.load(f)
+
+        if metadata.get("experiment_type") != "agent":
+            raise ValueError(f"Session {session_id} is not an agent session")
+
+        metadata["state"] = SessionState.ACTIVE.value
+        with open(session_file, "w") as f:
+            json.dump(metadata, f, indent=2)
+
+        self._restore_session(session_id, metadata)
+        return self.active_sessions[session_id]
+
     def record_probe_success(self, session_id: str) -> None:
         status = self.active_sessions[session_id]
         status.completed_pairs += 1
