@@ -22,6 +22,7 @@ Claude Code uses these guides to execute the full pipeline:
 
 | Skill | Purpose |
 |-------|---------|
+| `/setup` | First-time project setup — venv, Evennia, agent account, .env, scenarios |
 | `/server` | Start, stop, check status of backend and frontend |
 | `/agent` | Start, resume, monitor, stop agent scenario sessions — **always use for agent API calls** |
 | `/probe` | Co-design a new experiment |

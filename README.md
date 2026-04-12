@@ -103,6 +103,7 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 | `/pipeline` | Check pipeline state and suggest next step |
 | `/categorize` | Classify model-generated outputs along semantic axes |
 | `/analyze` | Read cluster/route data, reason about patterns, write reports |
+| `/setup` | First-time project setup — venv, Evennia, agent account, scenarios |
 | `/server` | Start, stop, and check status of servers |
 | `/temporal` | Run temporal capture experiments |
 | `/agent` | Start, resume, monitor, and stop agent scenario sessions |
