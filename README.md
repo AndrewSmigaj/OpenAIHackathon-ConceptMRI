@@ -8,7 +8,7 @@ The platform works in two modes:
 
 **Sentence set analysis** — controlled probe families where groups of sentences share a target word in different semantic contexts. Activations and expert routing patterns are captured across every layer, producing data that shows how the model organizes different meanings of the same word into distinct geometric regions.
 
-**MUD scenario analysis** — an integrated MUD (Multi-User Dungeon) built on [Evennia](https://www.evennia.com/) where an AI agent encounters YAML-defined scenarios. Each scenario places the agent in a room with an NPC whose role (friend or foe) is hidden behind a deliberately ambiguous description. The agent must examine the NPC to learn more, then choose from scenario-specific actions — share supplies, offer comfort, confront, flee, and so on. Activations are captured at each decision tick as the agent reads, examines, and acts, producing trajectory data that shows how internal states form and shift as information accumulates across turns.
+**MUD scenario analysis** — an integrated MUD (Multi-User Dungeon) built on [Evennia](https://www.evennia.com/) where an AI agent encounters YAML-defined scenarios. Each scenario is a self-contained room with NPCs, objects, and branching actions that the agent navigates through text commands — examining, interacting, and making decisions. Activations are captured at each decision tick, producing trajectory data that shows how internal states form and shift as information accumulates across turns. Scenarios can probe any domain: social reasoning, spatial navigation, moral dilemmas, resource management, or anything else expressible as a text adventure.
 
 The accompanying paper is in [`paper/main.pdf`](paper/main.pdf).
 
@@ -18,9 +18,9 @@ The accompanying paper is in [`paper/main.pdf`](paper/main.pdf).
 
 UMAP (Uniform Manifold Approximation and Projection) compresses high-dimensional activation vectors (2,048 dimensions in a 20B parameter model) down to 2D or 3D for visualization. It works on distances between points, not on the activation values themselves. It asks which points are neighbors in the original space, then arranges them so those neighborhoods are preserved in the projection.
 
-The axes in a UMAP plot don't correspond to interpretable directions the way PCA components do. But the geometry is meaningful. Centroid distances in UMAP space show how far apart basins sit, where boundaries fall between concepts, and how membership shifts as context changes.
+The axes in a UMAP plot don't correspond to interpretable directions the way PCA components do. But the geometry is meaningful. Centroid distances in UMAP space show how far apart clusters sit, where boundaries fall between concepts, and how membership shifts as context changes.
 
-To identify which neurons drive a separation, cluster labels map back to the original activation space, where correlation analysis picks out the relevant features. UMAP tells you the structure. The original space tells you the mechanism.
+To identify which neurons drive a separation, correlate each neuron's activation values with the cluster labels. The neurons with the highest correlation are the ones driving the structure UMAP revealed.
 
 UMAP finds whatever structure dominates the dataset. Friend/foe probes surface friend/foe geometry. Polysemy probes surface word-sense geometry. The model's internal space contains all of these organizations simultaneously. Each probe family is a different lens on the same geometry. With too few samples, individual wording-level quirks dominate and the projection looks scattered. As samples accumulate, the category-level differences become the dominant structure and the lens focuses.
 
@@ -67,12 +67,14 @@ Unlike sentence set probes (static, single forward pass), MUD scenarios create m
 ### How scenarios work
 
 Each scenario is a YAML file that defines:
-- A **room** with a setting (bus stop, park bench, alley, marketplace)
-- An **NPC** with a hidden friend or foe role and a deliberately ambiguous short description
-- **Items** the agent may already be carrying (a map, supplies, a phone)
+- A **room** with a setting and description
+- **NPCs** and **objects** the agent can examine and interact with
 - **Actions** presented as `verb — description` (e.g., `share — offer some of your supplies`)
+- **Outcome classification** that maps each action to a labeled result
 
-The agent enters the room, sees the ambiguous description, and must `examine person` to learn more. The examine text reveals cues about the NPC's intent. The agent then chooses from the listed actions — help a friend, confront an enemy, or something in between.
+Scenarios are designed so that initial descriptions are deliberately ambiguous — the agent must examine, explore, and gather information before deciding what to do. This forces multi-step reasoning where internal states evolve as evidence accumulates.
+
+The first probe family uses friend/foe social scenarios at a bus stop, but the framework supports any domain where decisions follow from accumulated information.
 
 ### What gets captured
 
@@ -83,7 +85,7 @@ The agent connects to Evennia via telnet and plays scenarios tick-by-tick. Each 
 3. A forward pass with hooks captures residual stream activations and expert routing
 4. Activations are written to Parquet at every target word position
 
-The full trajectory — examine, deliberate, act — produces capture data at every decision point. Across 50+ scenarios, this builds a dataset of how the model's internal state evolves as it processes social information.
+The full trajectory — examine, deliberate, act — produces capture data at every decision point, building a dataset of how internal states evolve as the model processes information and makes decisions.
 
 See [`data/worlds/scenarios/GUIDE.md`](data/worlds/scenarios/GUIDE.md) for scenario authoring.
 
@@ -102,7 +104,7 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 | `/categorize` | Classify model-generated outputs along semantic axes |
 | `/analyze` | Read cluster/route data, reason about patterns, write reports |
 | `/server` | Start, stop, and check status of servers |
-| `/temporal` | Run temporal basin capture experiments |
+| `/temporal` | Run temporal capture experiments |
 | `/agent` | Start, resume, monitor, and stop agent scenario sessions |
 | `/cdd` | Uncertainty assessment before implementation |
 
@@ -134,15 +136,15 @@ This project uses **Claude Code not as a development tool, but as the analysis r
 ┌──────────▼──────────────────────────────────────────────┐
 │                  React Frontend                          │
 │  Sankey diagrams · Stepped UMAP trajectories             │
-│  Temporal basin analysis · Click-to-inspect cards        │
+│  Temporal analysis · Click-to-inspect cards               │
 └─────────────────────────────────────────────────────────┘
 ```
 
 ### Data flow
 
 - **Sentence set analysis**: Sentences → model forward pass → routing weights + residual streams → Parquet files → UMAP projection → hierarchical clustering → behavioral validation → neuron extraction
-- **MUD scenario analysis**: Scenario YAML → Evennia room build → agent telnet session → tick-by-tick capture (examine, deliberate, act) → Parquet → trajectory and basin analysis
-- **Temporal analysis**: Expanding context window → UMAP projection onto basin axis → persistence measurement
+- **MUD scenario analysis**: Scenario YAML → Evennia room build → agent telnet session → tick-by-tick capture → Parquet → trajectory and cluster analysis
+- **Temporal analysis**: Expanding context window → UMAP projection onto cluster axis → persistence measurement
 
 ---
 
