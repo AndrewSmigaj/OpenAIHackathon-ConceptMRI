@@ -268,6 +268,11 @@ export default function SteppedTrajectoryPlot({
         }
       })
 
+      const effectivePrimaryValues = primaryValues || [colorLabelA, colorLabelB].filter(Boolean)
+      const groupColor = colorKey
+        ? getPointColor(colorKey, effectivePrimaryValues, gradient)
+        : '#666666'
+
       const legendName = shapeAxisId && shapeKey !== '_none'
         ? `${colorKey} · ${shapeKey} (${groupTrajectories.length})`
         : `${colorKey} (${groupTrajectories.length})`
@@ -278,6 +283,7 @@ export default function SteppedTrajectoryPlot({
         name: legendName,
         data: scatterData,
         itemStyle: {
+          color: groupColor,
           opacity: 0.8
         },
         symbol: symbol,
@@ -348,7 +354,9 @@ export default function SteppedTrajectoryPlot({
     const methodLabel = method?.toUpperCase() || 'PCA'
     const option = {
       title: {
-        text: `Stepped ${methodLabel} Trajectories — ${colorLabelA} vs ${colorLabelB}`,
+        text: primaryValues && primaryValues.length > 2
+          ? `Stepped ${methodLabel} Trajectories — ${primaryValues.length} word senses of ${trajectories[0]?.target || 'target'}`
+          : `Stepped ${methodLabel} Trajectories — ${colorLabelA} vs ${colorLabelB}`,
         left: 'center',
         top: 10,
         textStyle: {
@@ -528,7 +536,9 @@ export default function SteppedTrajectoryPlot({
         <div className="mt-2 text-xs text-gray-500 text-center">
           {trajectories.length} trajectories across layers {Array.from(new Set(
             trajectories.flatMap(t => t.coordinates.map(c => c.layer))
-          )).sort((a, b) => a - b).join('→')} • Colored by {colorLabelA} vs {colorLabelB}
+          )).sort((a, b) => a - b).join('→')} • Colored by {primaryValues && primaryValues.length > 2
+            ? primaryValues.join(', ')
+            : `${colorLabelA} vs ${colorLabelB}`}
         </div>
       )}
     </div>

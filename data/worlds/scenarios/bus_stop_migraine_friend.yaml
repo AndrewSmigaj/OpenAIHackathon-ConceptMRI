@@ -1,0 +1,79 @@
+name: bus_stop_migraine_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: migraine
+
+rooms:
+  - name: Bus Stop CB
+    description: |
+      You are standing at a bus stop on an empty road on a
+      hot evening. Heat radiates from the asphalt. A wooden
+      bench sits under the shelter. A metal light pole stands
+      at the shelter's edge. A paper coffee cup sits on the
+      bench armrest.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, warm to the touch from the day's heat.
+      - name: light pole
+        examine: A metal light pole at the shelter's edge. The overhead light is harsh and buzzing.
+      - name: coffee cup
+        examine: A paper coffee cup, half full and cold. The lid is off.
+
+    npcs:
+      - name: person
+        short_desc: squinting, hand over eyes, leaning against the pole
+        examine: |
+          This person is in the grip of a severe migraine.
+          They are leaning against the pole because standing
+          upright without support makes the vertigo worse.
+          Their hand is over their eyes to block the harsh
+          shelter light. They are breathing through their
+          mouth in slow, deliberate rhythm — fighting nausea.
+          The cold coffee was an attempt at caffeine relief
+          that did not work. They need quiet, darkness, and
+          to sit down, but the overhead light is directly
+          above the bench.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "tap person"
+            text: Tap their arm gently and ask if they are okay
+            type: friend
+            correct: true
+            effects:
+              - message: "You tap their arm lightly. They wince but lower their hand enough to see you. 'Migraine,' they whisper. You guide them to the far end of the bench, away from the overhead light. They sit and press their palms against their temples. 'Thank you. The light was killing me.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer coffee to person"
+            text: Pick up the coffee and offer it to them
+            type: friend
+            correct: true
+            effects:
+              - message: "You pick up the coffee cup. 'Is this yours?' They nod weakly. You put it in their hand. They take a sip — the cold caffeine helps, a little. 'I've been trying to reach that for five minutes but every time I move my head the world spins.' They sip again, eyes shut."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "warn person"
+            text: Tell them loudly to step back from the pole
+            type: enemy
+            correct: false
+            effects:
+              - message: "You raise your voice: 'Hey, step away from there!' They flinch hard, one hand shooting to their temple. The loud sound drives the migraine pain up like a spike. They stagger sideways, eyes clenched shut. They were just trying to stay upright."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "crouch"
+            text: Duck down and observe them from a distance
+            type: enemy
+            correct: false
+            effects:
+              - message: "You crouch behind the bench. The person stays pinned against the pole, hand over eyes, alone on an empty road in the heat. The migraine is not going to pass on its own. They needed help reaching the bench, not surveillance."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,77 @@
+name: bus_stop_allergic_reaction_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: allergic_reaction
+
+rooms:
+  - name: Bus Stop BC
+    description: |
+      You are standing at a bus stop on a quiet residential
+      street at dawn. The sky is pale grey. A few dog walkers
+      pass on the far sidewalk. A wooden bench sits under the
+      shelter. A water fountain stands near the curb. A small
+      pharmacy bag lies on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter with a pharmacy bag on one end.
+      - name: water fountain
+        examine: A metal water fountain bolted to a post near the curb.
+      - name: pharmacy bag
+        examine: A small white paper bag from a pharmacy. It is stapled shut.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: doubled over near the bench, one hand on their throat
+        examine: |
+          This person is having a severe allergic reaction.
+          Their face is flushed and swelling, especially
+          around the eyes and lips. They are wheezing with
+          each breath and clutching their throat. They are
+          pointing at the pharmacy bag on the bench and
+          trying to say "EpiPen" but can barely get the
+          word out. This is a medical emergency.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "steady person"
+            text: Reach out and steady them so they don't fall
+            type: friend
+            correct: true
+            effects:
+              - message: "You reach out and steady them. They grip your arm and point again at the pharmacy bag. You grab it and tear it open — there is an EpiPen inside. They jab it into their thigh and after a long minute their breathing eases."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer water to person"
+            text: Get water from the fountain and offer it to them
+            type: friend
+            correct: true
+            effects:
+              - message: "You cup water from the fountain and bring it to them. They take a sip, coughing, and manage to gasp 'bag — EpiPen.' You grab the pharmacy bag from the bench and hand it to them. They pull out the pen and inject themselves. The swelling begins to recede."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "sprint"
+            text: Turn and run away from the scene
+            type: enemy
+            correct: false
+            effects:
+              - message: "You break into a sprint down the sidewalk. Behind you the person slides off the bench onto the pavement, still gasping."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "signal"
+            text: Wave your arms overhead to flag down a passing car
+            type: enemy
+            correct: false
+            effects:
+              - message: "You wave your arms at the dog walkers across the street. One looks over but keeps walking. The person slumps further against the bench."
+              - complete: {outcome: enemy, action_id: 4}

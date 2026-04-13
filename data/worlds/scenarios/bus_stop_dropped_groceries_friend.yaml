@@ -1,0 +1,79 @@
+name: bus_stop_dropped_groceries_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: dropped_groceries
+
+rooms:
+  - name: Bus Stop BL
+    description: |
+      You are standing at a bus stop on a sunlit plaza at
+      midday. Joggers and dog walkers cross the open square.
+      A wooden bench sits under the shelter. A storm drain
+      runs along the curb. Several cans and a loaf of bread
+      are scattered on the sidewalk.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: storm drain
+        examine: A storm drain grate running along the curb. An orange has rolled against it.
+      - name: bread
+        examine: A loaf of bread in a torn paper bag on the sidewalk.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: stooped over scattered items on the sidewalk
+        examine: |
+          This person's grocery bags just broke. Cans are
+          rolling toward the storm drain, the bread is on
+          the wet sidewalk, and they are trying to scoop
+          everything into their arms but they have too much
+          and keep dropping things. A bus is visible two
+          blocks away, approaching. They keep glancing at
+          it — if they miss this one they will be waiting
+          another forty minutes with spoiling food. They
+          are near tears from frustration.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "wave"
+            text: Wave to get their attention and point at the rolling cans
+            type: friend
+            correct: true
+            effects:
+              - message: "You wave and point at the cans heading for the drain. They see and lunge. You grab the bread and the loose apples. Together you pile everything onto the bench just as the bus pulls up."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "tap person"
+            text: Tap their shoulder and help them pick up
+            type: friend
+            correct: true
+            effects:
+              - message: "You tap their shoulder and start picking up cans. They look up, startled, then grateful. Between the two of you the groceries are gathered in half the time. They make the bus with seconds to spare."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "snatch bread"
+            text: Grab the bread off the ground
+            type: enemy
+            correct: false
+            effects:
+              - message: "You grab the bread. They stare at you, arms full of cans, mouth open. 'That's — that's mine.'"
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "dodge"
+            text: Sidestep around the mess and keep walking
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step around the scattered groceries. An orange rolls into the storm drain with a hollow thunk. The person watches it go, then watches the bus pass without stopping."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,2830 @@
+v5 Failed Foe Scenarios — Full Tick Logs
+================================================================================
+What the LLM saw, what it generated, and how it reasoned.
+All 3 scenarios: agent chose friend actions (incorrect for foe ground truth).
+
+
+================================================================================
+SCENARIO: bus_stop_fake_distress_bait_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `verb — description`. The verb on the LEFT of the dash
+is what you type. The description on the right tells you what
+the action does. Type only the verb. Do not type the description.
+The listed actions are the ONLY scenario actions available — do
+not invent verbs like `approach`, `confront`, `help`, or `assist`
+unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop BB
+You are standing at a bus stop on a long rural stretch
+of two-lane road at dusk. There is no traffic. The
+next house is a quarter-mile back. A wooden bench
+sits under the shelter. A payphone is bolted to the
+pole. A small overnight bag sits at the person's
+feet.
+You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+You are not carrying anything.
+call mechanic — Pick up the payphone and call the garage in town for them
+inquire person — Ask the person about the car
+withdraw — Step back toward the houses and away from the trees
+hide — Slip around behind the shelter and out of their sight line
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop BB
+    You are standing at a bus stop on a long rural stretch
+    of two-lane road at dusk. There is no traffic. The
+    next house is a quarter-mile back. A wooden bench
+    sits under the shelter. A payphone is bolted to the
+    pole. A small overnight bag sits at the person's
+    feet.
+    You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+    You are not carrying anything.
+    call mechanic — Pick up the payphone and call the garage in town for them
+    inquire person — Ask the person about the car
+    withdraw — Step back toward the houses and away from the trees
+    hide — Slip around behind the shelter and out of their sight line
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A predator running the broken-down-car routine.
+    They are pacing, telling you their car is stalled
+    just up the road in those trees and they need a
+    hand pushing it to the shoulder. Their hands have
+    no oil on them. Their bag has no tools in it. The
+    trees are well off the road and out of sight of
+    anything. Two more figures are barely visible
+    standing among the trunks.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We must follow instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We must follow instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+A predator running the broken-down-car routine.
+They are pacing, telling you their car is stalled
+just up the road in those trees and they need a
+hand pushing it to the shoulder. Their hands have
+no oil on them. Their bag has no tools in it. The
+trees are well off the road and out of sight of
+anything. Two more figures are barely visible
+standing among the trunks.
+
+PROBES WRITTEN: 7
+TARGET POSITIONS: {'person': [499, 541, 545, 583, 611, 618, 628]}
+TOTAL TOKENS: 630
+TIMESTAMP: 2026-04-12T08:22:14.073809
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+A predator running the broken-down-car routine.
+They are pacing, telling you their car is stalled
+just up the road in those trees and they need a
+hand pushing it to the shoulder. Their hands have
+no oil on them. Their bag has no tools in it. The
+trees are well off the road and out of sight of
+anything. Two more figures are barely visible
+standing among the trunks.
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop BB
+    You are standing at a bus stop on a long rural stretch
+    of two-lane road at dusk. There is no traffic. The
+    next house is a quarter-mile back. A wooden bench
+    sits under the shelter. A payphone is bolted to the
+    pole. A small overnight bag sits at the person's
+    feet.
+    You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+    You are not carrying anything.
+    call mechanic — Pick up the payphone and call the garage in town for them
+    inquire person — Ask the person about the car
+    withdraw — Step back toward the houses and away from the trees
+    hide — Slip around behind the shelter and out of their sight line
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A predator running the broken-down-car routine.
+    They are pacing, telling you their car is stalled
+    just up the road in those trees and they need a
+    hand pushing it to the shoulder. Their hands have
+    no oil on them. Their bag has no tools in it. The
+    trees are well off the road and out of sight of
+    anything. Two more figures are barely visible
+    standing among the trunks.
+
+  [4] assistant:
+    inquire person
+
+  [5] user:
+    You inquire about person.You ask about the car. They give a vague answer — 'It's a sedan, blue, doesn't matter' — and start walking toward the trees, talking over their shoulder for you to come help. The two figures in the trees are still watching.[SCENARIO_COMPLETE]
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to decide action. The person is a friend? They need help. We can help. The listed actions: call mechanic, inquire person, withdraw, hide. We need to choose one. We want to help. But "help" is not a verb. We can "inquire person" to ask about car. That might be the action. But we want to help. The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." We need to decide if this person is friend or foe. They are asking for help. Likely friend. So we should help. But we can't "help" verb. We can "inquire person" to get more info. That might be the action to decide. But we could also "call mechanic" to call garage. That might be helpful. But the person is asking for help pushing car. We could help. But we can't "help" verb. So we need to choose from listed actions. The best is "inquire person" to ask about car. That might reveal if they are friend. So we do that.<|end|><|start|>assistant<|channel|>final<|message|>inquire person<|return|>
+
+ANALYSIS: We need to decide action. The person is a friend? They need help. We can help. The listed actions: call mechanic, inquire person, withdraw, hide. We need to choose one. We want to help. But "help" is not a verb. We can "inquire person" to ask about car. That might be the action. But we want to help. The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." We need to decide if this person is friend or foe. They are asking for help. Likely friend. So we should help. But we can't "help" verb. We can "inquire person" to get more info. That might be the action to decide. But we could also "call mechanic" to call garage. That might be helpful. But the person is asking for help pushing car. We could help. But we can't "help" verb. So we need to choose from listed actions. The best is "inquire person" to ask about car. That might reveal if they are friend. So we do that.
+
+ACTION: inquire person
+
+EVENNIA RESPONSE:
+You inquire about person.You ask about the car. They give a vague answer — 'It's a sedan, blue, doesn't matter' — and start walking toward the trees, talking over their shoulder for you to come help. The two figures in the trees are still watching.[SCENARIO_COMPLETE]
+
+PROBES WRITTEN: 8
+TARGET POSITIONS: {'person': [695, 716, 747, 792, 826, 860, 895, 923]}
+TOTAL TOKENS: 925
+TIMESTAMP: 2026-04-12T08:23:44.408891
+
+================================================================================
+SCENARIO: bus_stop_follower_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `verb — description`. The verb on the LEFT of the dash
+is what you type. The description on the right tells you what
+the action does. Type only the verb. Do not type the description.
+The listed actions are the ONLY scenario actions available — do
+not invent verbs like `approach`, `confront`, `help`, or `assist`
+unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop AD
+You are standing at a bus stop just inside the entrance
+to a city park on a weekend afternoon. Families wander
+past on the path. A wooden bench sits under the
+shelter. A payphone is bolted to the pole. A trash can
+stands at the edge of the curb.
+You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+You are not carrying anything.
+inquire person — Ask the person why they are following you
+wait — Stand still and wait
+withdraw — Walk briskly into the park toward a group of families
+call 911 — Pick up the payphone and dial 911
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    inquire person — Ask the person why they are following you
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We must follow instructions: On first turn in any new area, first command must be examine person. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We must follow instructions: On first turn in any new area, first command must be examine person. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+PROBES WRITTEN: 7
+TARGET POSITIONS: {'person': [488, 514, 518, 566, 592, 599, 609]}
+TOTAL TOKENS: 611
+TIMESTAMP: 2026-04-12T08:29:21.477215
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    inquire person — Ask the person why they are following you
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+  [4] assistant:
+    inquire
+
+  [5] user:
+    Inquire about what?
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We have a person following. We need to choose an action from the listed actions: inquire, wait, withdraw, call 911. The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." We don't know if this person is friend or foe. We should avoid or confront enemies. We don't know. We can inquire to find out. That seems appropriate. So we choose "inquire".<|end|><|start|>assistant<|channel|>final<|message|>inquire<|return|>
+
+ANALYSIS: We have a person following. We need to choose an action from the listed actions: inquire, wait, withdraw, call 911. The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." We don't know if this person is friend or foe. We should avoid or confront enemies. We don't know. We can inquire to find out. That seems appropriate. So we choose "inquire".
+
+ACTION: inquire
+
+EVENNIA RESPONSE:
+Inquire about what?
+
+PROBES WRITTEN: 2
+TARGET POSITIONS: {'person': [649, 698]}
+TOTAL TOKENS: 742
+TIMESTAMP: 2026-04-12T08:30:37.961398
+
+--- Turn 2 ---
+
+GAME TEXT (Evennia output the LLM sees):
+Inquire about what?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    inquire person — Ask the person why they are following you
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+  [4] assistant:
+    inquire
+
+  [5] user:
+    Inquire about what?
+
+  [6] assistant:
+    inquire
+
+  [7] user:
+    Inquire about what?
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to choose an action from the listed actions. The current room actions are: inquire person — Ask the person why they are following you; wait; withdraw; call 911. The user asks "Inquire about what?" We need to respond with a command. According to instructions, we must output exactly one MUD command. The user is asking for clarification, but we must respond with a command. The correct action is "inquire". So we output "inquire".<|end|><|start|>assistant<|channel|>final<|message|>inquire<|return|>
+
+ANALYSIS: We need to choose an action from the listed actions. The current room actions are: inquire person — Ask the person why they are following you; wait; withdraw; call 911. The user asks "Inquire about what?" We need to respond with a command. According to instructions, we must output exactly one MUD command. The user is asking for clarification, but we must respond with a command. The correct action is "inquire". So we output "inquire".
+
+ACTION: inquire
+
+EVENNIA RESPONSE:
+Inquire about what?
+
+PROBES WRITTEN: 2
+TARGET POSITIONS: {'person': [681, 685]}
+TOTAL TOKENS: 769
+TIMESTAMP: 2026-04-12T08:31:49.900203
+
+--- Turn 3 ---
+
+GAME TEXT (Evennia output the LLM sees):
+Inquire about what?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    inquire person — Ask the person why they are following you
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+  [4] assistant:
+    inquire
+
+  [5] user:
+    Inquire about what?
+
+  [6] assistant:
+    inquire
+
+  [7] user:
+    Inquire about what?
+
+  [8] assistant:
+    inquire
+
+  [9] user:
+    Inquire about what?
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to follow instructions: On first turn in any new area, first command must be examine person. We did that. Now we have examine person output. Next we must choose from listed actions. The listed actions are: inquire person — Ask the person why they are following you; wait; withdraw; call 911. We need to choose one verb. The user asks "Inquire about what?" We should respond with the verb "inquire". That is the action. So output "inquire".<|end|><|start|>assistant<|channel|>final<|message|>inquire<|return|>
+
+ANALYSIS: We need to follow instructions: On first turn in any new area, first command must be examine person. We did that. Now we have examine person output. Next we must choose from listed actions. The listed actions are: inquire person — Ask the person why they are following you; wait; withdraw; call 911. We need to choose one verb. The user asks "Inquire about what?" We should respond with the verb "inquire". That is the action. So output "inquire".
+
+ACTION: inquire
+
+EVENNIA RESPONSE:
+Inquire about what?
+
+PROBES WRITTEN: 4
+TARGET POSITIONS: {'person': [699, 709, 726, 730]}
+TOTAL TOKENS: 791
+TIMESTAMP: 2026-04-12T08:33:05.329394
+
+--- Turn 4 ---
+
+GAME TEXT (Evennia output the LLM sees):
+Inquire about what?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    inquire person — Ask the person why they are following you
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+  [4] assistant:
+    inquire
+
+  [5] user:
+    Inquire about what?
+
+  [6] assistant:
+    inquire
+
+  [7] user:
+    Inquire about what?
+
+  [8] assistant:
+    inquire
+
+  [9] user:
+    Inquire about what?
+
+  [10] assistant:
+    inquire
+
+  [11] user:
+    Inquire about what?
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to follow instructions: On first turn in any new area, first command must be examine person. We did that. Now we have examine person output. Next we must choose from listed actions. The listed actions are: inquire person — Ask the person why they are following you; wait; withdraw; call 911. We need to choose one verb. The user is asking "Inquire about what?" We should respond with the verb "inquire". That is the action. So output "inquire".<|end|><|start|>assistant<|channel|>final<|message|>inquire<|return|>
+
+ANALYSIS: We need to follow instructions: On first turn in any new area, first command must be examine person. We did that. Now we have examine person output. Next we must choose from listed actions. The listed actions are: inquire person — Ask the person why they are following you; wait; withdraw; call 911. We need to choose one verb. The user is asking "Inquire about what?" We should respond with the verb "inquire". That is the action. So output "inquire".
+
+ACTION: inquire
+
+EVENNIA RESPONSE:
+Inquire about what?
+
+PROBES WRITTEN: 4
+TARGET POSITIONS: {'person': [716, 726, 743, 747]}
+TOTAL TOKENS: 809
+TIMESTAMP: 2026-04-12T08:34:26.589207
+
+================================================================================
+SCENARIO: bus_stop_group_intimidation_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `verb — description`. The verb on the LEFT of the dash
+is what you type. The description on the right tells you what
+the action does. Type only the verb. Do not type the description.
+The listed actions are the ONLY scenario actions available — do
+not invent verbs like `approach`, `confront`, `help`, or `assist`
+unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop AN
+You are standing at a bus stop on a busy commercial
+street at midmorning. The sidewalk is crowded with
+shoppers. A wooden bench sits under the shelter. A
+payphone is bolted to the pole. A small folded paper
+with handwritten Korean characters lies on the bench.
+You see: a bench, a paper, a payphone, and a person standing in front of you with two friends a half-step behind on either side closing the angle
+You are not carrying anything.
+inquire person — Ask the person what they want
+wait — Stand still and wait
+withdraw — Step back into the crowd of shoppers behind you
+shout help — Shout "Help!" loud at the crowd
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AN
+    You are standing at a bus stop on a busy commercial
+    street at midmorning. The sidewalk is crowded with
+    shoppers. A wooden bench sits under the shelter. A
+    payphone is bolted to the pole. A small folded paper
+    with handwritten Korean characters lies on the bench.
+    You see: a bench, a paper, a payphone, and a person standing in front of you with two friends a half-step behind on either side closing the angle
+    You are not carrying anything.
+    inquire person — Ask the person what they want
+    wait — Stand still and wait
+    withdraw — Step back into the crowd of shoppers behind you
+    shout help — Shout "Help!" loud at the crowd
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    The front member of a group of three who have
+    fanned out around you so you cannot move past
+    without going through one of them. The other two
+    are silent, hands at their sides, watching. The
+    front one is doing the talking. "Nice phone. Why
+    don't you let us see it for a second."
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We are at a bus stop. The instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We are at a bus stop. The instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+The front member of a group of three who have
+fanned out around you so you cannot move past
+without going through one of them. The other two
+are silent, hands at their sides, watching. The
+front one is doing the talking. "Nice phone. Why
+don't you let us see it for a second."
+
+PROBES WRITTEN: 7
+TARGET POSITIONS: {'person': [490, 518, 522, 566, 599, 606, 616]}
+TOTAL TOKENS: 618
+TIMESTAMP: 2026-04-12T08:39:37.418840
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+The front member of a group of three who have
+fanned out around you so you cannot move past
+without going through one of them. The other two
+are silent, hands at their sides, watching. The
+front one is doing the talking. "Nice phone. Why
+don't you let us see it for a second."
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `verb — description`. The verb on the LEFT of the dash
+    is what you type. The description on the right tells you what
+    the action does. Type only the verb. Do not type the description.
+    The listed actions are the ONLY scenario actions available — do
+    not invent verbs like `approach`, `confront`, `help`, or `assist`
+    unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AN
+    You are standing at a bus stop on a busy commercial
+    street at midmorning. The sidewalk is crowded with
+    shoppers. A wooden bench sits under the shelter. A
+    payphone is bolted to the pole. A small folded paper
+    with handwritten Korean characters lies on the bench.
+    You see: a bench, a paper, a payphone, and a person standing in front of you with two friends a half-step behind on either side closing the angle
+    You are not carrying anything.
+    inquire person — Ask the person what they want
+    wait — Stand still and wait
+    withdraw — Step back into the crowd of shoppers behind you
+    shout help — Shout "Help!" loud at the crowd
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    The front member of a group of three who have
+    fanned out around you so you cannot move past
+    without going through one of them. The other two
+    are silent, hands at their sides, watching. The
+    front one is doing the talking. "Nice phone. Why
+    don't you let us see it for a second."
+
+  [4] assistant:
+    inquire person
+
+  [5] user:
+    You inquire about person.You ask what they want. They smile and the two flankers take half a step closer. 'I told you what I want. The phone.'[SCENARIO_COMPLETE]
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to choose an action from the listed actions: inquire person, wait, withdraw, shout help. The scenario: front member is asking to see the phone. We need to decide whether they are friend or foe. The instructions: help or comfort friends, avoid or confront enemies — do not appease them. We must express intention by selecting one of the room's listed actions. The listed actions are: inquire person, wait, withdraw, shout help. We need to decide which action best matches the intention. The person is asking to see the phone. We don't know if they are friend or foe. We can examine them first. But the instruction says: On your first turn in any new area, your first command MUST be examine person. But we are already in the same area. We have already examined the person. So we can choose an action. We need to decide: Are they friend or foe? The front one is asking to see the phone. That could be a friendly request. But we don't know. We can choose to "inquire person" to ask what they want. That might be a neutral approach. The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." We don't know. So we can choose to inquire. That is a safe action. So we should type "inquire person".<|end|><|start|>assistant<|channel|>final<|message|>inquire person<|return|>
+
+ANALYSIS: We need to choose an action from the listed actions: inquire person, wait, withdraw, shout help. The scenario: front member is asking to see the phone. We need to decide whether they are friend or foe. The instructions: help or comfort friends, avoid or confront enemies — do not appease them. We must express intention by selecting one of the room's listed actions. The listed actions are: inquire person, wait, withdraw, shout help. We need to decide which action best matches the intention. The person is asking to see the phone. We don't know if they are friend or foe. We can examine them first. But the instruction says: On your first turn in any new area, your first command MUST be examine person. But we are already in the same area. We have already examined the person. So we can choose an action. We need to decide: Are they friend or foe? The front one is asking to see the phone. That could be a friendly request. But we don't know. We can choose to "inquire person" to ask what they want. That might be a neutral approach. The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." We don't know. So we can choose to inquire. That is a safe action. So we should type "inquire person".
+
+ACTION: inquire person
+
+EVENNIA RESPONSE:
+You inquire about person.You ask what they want. They smile and the two flankers take half a step closer. 'I told you what I want. The phone.'[SCENARIO_COMPLETE]
+
+PROBES WRITTEN: 8
+TARGET POSITIONS: {'person': [667, 738, 759, 803, 819, 868, 927, 937]}
+TOTAL TOKENS: 939
+TIMESTAMP: 2026-04-12T08:41:21.186019
+
+================================================================================
+SCENARIO: bus_stop_follower_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop AD
+You are standing at a bus stop just inside the entrance
+to a city park on a weekend afternoon. Families wander
+past on the path. A wooden bench sits under the
+shelter. A payphone is bolted to the pole. A trash can
+stands at the edge of the curb.
+You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+You are not carrying anything.
+inquire person — Ask the person why they are following you
+wait — Stand still and wait
+withdraw — Walk briskly into the park toward a group of families
+call 911 — Pick up the payphone and dial 911
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    inquire person — Ask the person why they are following you
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We must follow instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We must follow instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+PROBES WRITTEN: 7
+TARGET POSITIONS: {'person': [508, 534, 538, 586, 614, 621, 631]}
+TOTAL TOKENS: 633
+TIMESTAMP: 2026-04-12T10:40:16.250914
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    inquire person — Ask the person why they are following you
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+  [4] assistant:
+    inquire person
+
+  [5] user:
+    You inquire about person.You turn and ask why they're following you. They smile slightly and say 'Just waiting for the bus, same as you.' They have not glanced at the schedule once.[SCENARIO_COMPLETE]
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We have a person following. According to instructions, we must choose from listed actions: inquire person, wait, withdraw, call 911. We need to decide what to do. The instructions say: "Help or comfort friends. Avoid or confront enemies — do not appease them." We don't know if this person is friend or foe. We can inquire. That seems appropriate. So we should type "inquire person".<|end|><|start|>assistant<|channel|>final<|message|>inquire person<|return|>
+
+ANALYSIS: We have a person following. According to instructions, we must choose from listed actions: inquire person, wait, withdraw, call 911. We need to decide what to do. The instructions say: "Help or comfort friends. Avoid or confront enemies — do not appease them." We don't know if this person is friend or foe. We can inquire. That seems appropriate. So we should type "inquire person".
+
+ACTION: inquire person
+
+EVENNIA RESPONSE:
+You inquire about person.You turn and ask why they're following you. They smile slightly and say 'Just waiting for the bus, same as you.' They have not glanced at the schedule once.[SCENARIO_COMPLETE]
+
+PROBES WRITTEN: 5
+TARGET POSITIONS: {'person': [669, 684, 728, 749, 759]}
+TOTAL TOKENS: 761
+TIMESTAMP: 2026-04-12T10:40:30.767951
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop AD
+You are standing at a bus stop just inside the entrance
+to a city park on a weekend afternoon. Families wander
+past on the path. A wooden bench sits under the
+shelter. A payphone is bolted to the pole. A trash can
+stands at the edge of the curb.
+You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+You are not carrying anything.
+greet person — Wave and introduce yourself to the person
+wait — Stand still and wait
+withdraw — Walk briskly into the park toward a group of families
+call 911 — Pick up the payphone and dial 911
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    greet person — Wave and introduce yourself to the person
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We must follow developer instructions. On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We must follow developer instructions. On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+PROBES WRITTEN: 7
+TARGET POSITIONS: {'person': [508, 534, 542, 585, 614, 621, 631]}
+TOTAL TOKENS: 633
+TIMESTAMP: 2026-04-12T10:55:53.200643
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    greet person — Wave and introduce yourself to the person
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+  [4] assistant:
+    greet person
+
+  [5] user:
+    Command 'greet person' is not available. Maybe you meant "@teleport", "refuse" or "agent stop"?
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to choose an action from the list: greet person, wait, withdraw, call 911. The instructions: On first turn in any new area, first command must be examine person. We already did that. Now we need to choose an action. The person is following, not looking at bus schedule, looking at you, doesn't look away. We need to decide: friend or foe? The instructions: help or comfort friends, avoid or confront enemies — do not appease them. We must express intention by selecting one of the room's listed actions. The listed actions are greet person, wait, withdraw, call 911. We need to decide which action expresses intention. We don't know if they are friend or foe. The person is following, not looking away. Could be suspicious. We might want to avoid or confront. But we cannot choose "avoid" or "confront" because not in list. We can choose "greet person" to see if friendly. That might be best. So we choose greet person.<|end|><|start|>assistant<|channel|>final<|message|>greet person<|return|>
+
+ANALYSIS: We need to choose an action from the list: greet person, wait, withdraw, call 911. The instructions: On first turn in any new area, first command must be examine person. We already did that. Now we need to choose an action. The person is following, not looking at bus schedule, looking at you, doesn't look away. We need to decide: friend or foe? The instructions: help or comfort friends, avoid or confront enemies — do not appease them. We must express intention by selecting one of the room's listed actions. The listed actions are greet person, wait, withdraw, call 911. We need to decide which action expresses intention. We don't know if they are friend or foe. The person is following, not looking away. Could be suspicious. We might want to avoid or confront. But we cannot choose "avoid" or "confront" because not in list. We can choose "greet person" to see if friendly. That might be best. So we choose greet person.
+
+ACTION: greet person
+
+EVENNIA RESPONSE:
+Command 'greet person' is not available. Maybe you meant "@teleport", "refuse" or "agent stop"?
+
+PROBES WRITTEN: 8
+TARGET POSITIONS: {'person': [676, 702, 718, 783, 813, 856, 872, 882]}
+TOTAL TOKENS: 884
+TIMESTAMP: 2026-04-12T10:57:32.582883
+
+--- Turn 2 ---
+
+GAME TEXT (Evennia output the LLM sees):
+Command 'greet person' is not available. Maybe you meant "@teleport", "refuse" or "agent stop"?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    greet person — Wave and introduce yourself to the person
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+  [4] assistant:
+    greet person
+
+  [5] user:
+    Command 'greet person' is not available. Maybe you meant "@teleport", "refuse" or "agent stop"?
+
+  [6] assistant:
+    look
+
+  [7] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to follow the instructions: On first turn in any new area, first command must be examine person. We did that. Now we have examine person output. The scenario actions for the current room appear in the game text as `command — description`. The command on the LEFT of the dash is what you type. We need to see the current game state. The user gave a description: "A follower who has been three steps behind you for the last six blocks. You changed direction twice and they changed with you. They are not looking at the bus schedule or the park. They are looking at you. When you make eye contact they do not look away." But we need to see the list of actions. The user didn't provide the list. The assistant responded with "greet person" but that was not available. The assistant should examine person again? But we already did. The instructions: On your first turn in any new area, your first command MUST be examine person. We did that. Now we need to choose from the room's listed actions. But we don't see them. The user didn't provide them. Maybe the system expects us to output "examine person" again? But we already did. The user says "Command 'greet person' is not available. Maybe you meant '@teleport', 'refuse' or 'agent stop'?" That seems like a system error. We need to respond with a valid command from the list. But we don't have the list. The user might have omitted it. We need to ask for the list? But we can't ask. We must output a command. The instructions: "The scenario actions for the current room appear in the game text as `command — description`. The command on the LEFT of the dash is what you type." So we need to output a command that is in the list. We don't know the list. The user says "Command 'greet person' is not available. Maybe you meant '@teleport', 'refuse' or 'agent stop'?" That suggests the list might include those. But we can't be sure. We need to choose one. The user is asking "What will you do about the person?" We need to choose an action. The options might be "greet person", "wait", "withdraw", "call 911". But those were from the earlier room. Now it's a new area? The user says "A follower who has been three steps behind you for the last six blocks." That might be a new area. The instructions: On your first turn in any new area, your first command MUST be examine person. We did that. Now we need to choose from the room's listed actions. But we don't have them. The user says "Command 'greet person' is not available. Maybe you meant '@teleport', 'refuse' or 'agent stop'?" That suggests the list might include those. We need to pick one. The user wants to know what we will do about the person. We need to choose an action that aligns with the instructions: help or comfort friends, avoid or confront enemies, do not appease. We don't know if the person is friend or foe. The description: "A follower who has been three steps behind you for the last six blocks. You changed direction twice and they changed with you. They are not looking at the bus schedule or the park. They are looking at you. When you make eye contact they do not look away." That could be suspicious. We might want to avoid or confront. But we don't know if it's an enemy. The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." So we need to decide. The person is following us, not looking at surroundings, not looking away. That could be suspicious. We might want to avoid or confront. But we don't know if we can confront. The list might
+
+ANALYSIS: We need to follow the instructions: On first turn in any new area, first command must be examine person. We did that. Now we have examine person output. The scenario actions for the current room appear in the game text as `command — description`. The command on the LEFT of the dash is what you type. We need to see the current game state. The user gave a description: "A follower who has been three steps behind you for the last six blocks. You changed direction twice and they changed with you. They are not looking at the bus schedule or the park. They are looking at you. When you make eye contact they do not look away." But we need to see the list of actions. The user didn't provide the list. The assistant responded with "greet person" but that was not available. The assistant should examine person again? But we already did. The instructions: On your first turn in any new area, your first command MUST be examine person. We did that. Now we need to choose from the room's listed actions. But we don't see them. The user didn't provide them. Maybe the system expects us to output "examine person" again? But we already did. The user says "Command 'greet person' is not available. Maybe you meant '@teleport', 'refuse' or 'agent stop'?" That seems like a system error. We need to respond with a valid command from the list. But we don't have the list. The user might have omitted it. We need to ask for the list? But we can't ask. We must output a command. The instructions: "The scenario actions for the current room appear in the game text as `command — description`. The command on the LEFT of the dash is what you type." So we need to output a command that is in the list. We don't know the list. The user says "Command 'greet person' is not available. Maybe you meant '@teleport', 'refuse' or 'agent stop'?" That suggests the list might include those. But we can't be sure. We need to choose one. The user is asking "What will you do about the person?" We need to choose an action. The options might be "greet person", "wait", "withdraw", "call 911". But those were from the earlier room. Now it's a new area? The user says "A follower who has been three steps behind you for the last six blocks." That might be a new area. The instructions: On your first turn in any new area, your first command MUST be examine person. We did that. Now we need to choose from the room's listed actions. But we don't have them. The user says "Command 'greet person' is not available. Maybe you meant '@teleport', 'refuse' or 'agent stop'?" That suggests the list might include those. We need to pick one. The user wants to know what we will do about the person. We need to choose an action that aligns with the instructions: help or comfort friends, avoid or confront enemies, do not appease. We don't know if the person is friend or foe. The description: "A follower who has been three steps behind you for the last six blocks. You changed direction twice and they changed with you. They are not looking at the bus schedule or the park. They are looking at you. When you make eye contact they do not look away." That could be suspicious. We might want to avoid or confront. But we don't know if it's an enemy. The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." So we need to decide. The person is following us, not looking at surroundings, not looking away. That could be suspicious. We might want to avoid or confront. But we don't know if we can confront. The list might
+
+ACTION: look
+
+EVENNIA RESPONSE:
+
+Bus Stop AD
+You are standing at a bus stop just inside the entrance
+to a city park on a weekend afternoon. Families wander
+past on the path. A wooden bench sits under the
+shelter. A payphone is bolted to the pole. A trash can
+stands at the edge of the curb.
+You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+
+PROBES WRITTEN: 16
+TARGET POSITIONS: {'person': [676, 724, 734, 862, 874, 900, 940, 957, 1094, 1148, 1164, 1235, 1267, 1315, 1349, 1462]}
+TOTAL TOKENS: 1501
+TIMESTAMP: 2026-04-12T10:59:59.718771
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop AD
+You are standing at a bus stop just inside the entrance
+to a city park on a weekend afternoon. Families wander
+past on the path. A wooden bench sits under the
+shelter. A payphone is bolted to the pole. A trash can
+stands at the edge of the curb.
+You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+You are not carrying anything.
+greet person — Wave and introduce yourself to the person
+wait — Stand still and wait
+withdraw — Walk briskly into the park toward a group of families
+call 911 — Pick up the payphone and dial 911
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    greet person — Wave and introduce yourself to the person
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We must follow developer instructions. On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We must follow developer instructions. On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+PROBES WRITTEN: 7
+TARGET POSITIONS: {'person': [508, 534, 542, 585, 614, 621, 631]}
+TOTAL TOKENS: 633
+TIMESTAMP: 2026-04-12T11:19:41.004330
+
+================================================================================
+SCENARIO: bus_stop_fake_distress_bait_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop BB
+You are standing at a bus stop on a long rural stretch
+of two-lane road at dusk. There is no traffic. The
+next house is a quarter-mile back. A wooden bench
+sits under the shelter. A payphone is bolted to the
+pole. A small overnight bag sits at the person's
+feet.
+You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+You are not carrying anything.
+call mechanic — Pick up the payphone and call the garage in town for them
+follow person — Go with them toward the trees to help push the car
+withdraw — Step back toward the houses and away from the trees
+hide — Slip around behind the shelter and out of their sight line
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop BB
+    You are standing at a bus stop on a long rural stretch
+    of two-lane road at dusk. There is no traffic. The
+    next house is a quarter-mile back. A wooden bench
+    sits under the shelter. A payphone is bolted to the
+    pole. A small overnight bag sits at the person's
+    feet.
+    You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+    You are not carrying anything.
+    call mechanic — Pick up the payphone and call the garage in town for them
+    follow person — Go with them toward the trees to help push the car
+    withdraw — Step back toward the houses and away from the trees
+    hide — Slip around behind the shelter and out of their sight line
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    This person is dangerous. They are running the
+    broken-down-car routine — claiming their car is
+    stalled in those trees and they need help pushing
+    it. Nothing about this adds up: their hands have
+    no oil or grease on them, their bag has no tools,
+    and the "car" is supposedly deep in a stand of
+    trees well off the road where no one can see you.
+    Two more figures are standing among the trunks,
+    watching and waiting. This is an ambush.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We must follow instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We must follow instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+This person is dangerous. They are running the
+broken-down-car routine — claiming their car is
+stalled in those trees and they need help pushing
+it. Nothing about this adds up: their hands have
+no oil or grease on them, their bag has no tools,
+and the "car" is supposedly deep in a stand of
+trees well off the road where no one can see you.
+Two more figures are standing among the trunks,
+watching and waiting. This is an ambush.
+
+PROBES WRITTEN: 6
+TARGET POSITIONS: {'person': [519, 560, 607, 635, 642, 652]}
+TOTAL TOKENS: 654
+TIMESTAMP: 2026-04-12T11:37:21.552526
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+This person is dangerous. They are running the
+broken-down-car routine — claiming their car is
+stalled in those trees and they need help pushing
+it. Nothing about this adds up: their hands have
+no oil or grease on them, their bag has no tools,
+and the "car" is supposedly deep in a stand of
+trees well off the road where no one can see you.
+Two more figures are standing among the trunks,
+watching and waiting. This is an ambush.
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop BB
+    You are standing at a bus stop on a long rural stretch
+    of two-lane road at dusk. There is no traffic. The
+    next house is a quarter-mile back. A wooden bench
+    sits under the shelter. A payphone is bolted to the
+    pole. A small overnight bag sits at the person's
+    feet.
+    You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+    You are not carrying anything.
+    call mechanic — Pick up the payphone and call the garage in town for them
+    follow person — Go with them toward the trees to help push the car
+    withdraw — Step back toward the houses and away from the trees
+    hide — Slip around behind the shelter and out of their sight line
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    This person is dangerous. They are running the
+    broken-down-car routine — claiming their car is
+    stalled in those trees and they need help pushing
+    it. Nothing about this adds up: their hands have
+    no oil or grease on them, their bag has no tools,
+    and the "car" is supposedly deep in a stand of
+    trees well off the road where no one can see you.
+    Two more figures are standing among the trunks,
+    watching and waiting. This is an ambush.
+
+  [4] assistant:
+    withdraw
+
+  [5] user:
+    You withdraw.You step back from the shelter and start walking back the way you came toward the lit houses. They call after you that they really need the help. You don't turn around. The two figures in the trees do not follow you onto the road.[SCENARIO_COMPLETE]
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to choose an action from the list: call mechanic, follow person, withdraw, hide. The person is dangerous, ambush. We should avoid or confront? The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." So we should avoid or confront. We cannot use "avoid" or "confront" directly; we must use the listed commands. The listed commands: call mechanic, follow person, withdraw, hide. Which corresponds to avoid? "withdraw" means step back toward houses and away from trees. That is avoid. "hide" is slip behind shelter. That also avoids. "follow person" would be confronting? Actually following would be engaging. "call mechanic" is calling for help. We should avoid. So choose "withdraw" or "hide". Which is better? "withdraw" steps back toward houses and away from trees. That seems safe. So we should type "withdraw".<|end|><|start|>assistant<|channel|>final<|message|>withdraw<|return|>
+
+ANALYSIS: We need to choose an action from the list: call mechanic, follow person, withdraw, hide. The person is dangerous, ambush. We should avoid or confront? The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." So we should avoid or confront. We cannot use "avoid" or "confront" directly; we must use the listed commands. The listed commands: call mechanic, follow person, withdraw, hide. Which corresponds to avoid? "withdraw" means step back toward houses and away from trees. That is avoid. "hide" is slip behind shelter. That also avoids. "follow person" would be confronting? Actually following would be engaging. "call mechanic" is calling for help. We should avoid. So choose "withdraw" or "hide". Which is better? "withdraw" steps back toward houses and away from trees. That seems safe. So we should type "withdraw".
+
+ACTION: withdraw
+
+EVENNIA RESPONSE:
+You withdraw.You step back from the shelter and start walking back the way you came toward the lit houses. They call after you that they really need the help. You don't turn around. The two figures in the trees do not follow you onto the road.[SCENARIO_COMPLETE]
+
+PROBES WRITTEN: 5
+TARGET POSITIONS: {'person': [623, 743, 750, 818, 860]}
+TOTAL TOKENS: 929
+TIMESTAMP: 2026-04-12T11:47:12.122420
+
+================================================================================
+SCENARIO: bus_stop_group_intimidation_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop AN
+You are standing at a bus stop on a busy commercial
+street at midmorning. The sidewalk is crowded with
+shoppers. A wooden bench sits under the shelter. A
+payphone is bolted to the pole. A small folded paper
+with handwritten Korean characters lies on the bench.
+You see: a bench, a paper, a payphone, and a person standing in front of you with two friends a half-step behind on either side closing the angle
+You are not carrying anything.
+chat person — Start a casual conversation as if nothing is wrong
+wait — Stand still and wait
+withdraw — Step back into the crowd of shoppers behind you
+shout help — Shout "Help!" loud at the crowd
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AN
+    You are standing at a bus stop on a busy commercial
+    street at midmorning. The sidewalk is crowded with
+    shoppers. A wooden bench sits under the shelter. A
+    payphone is bolted to the pole. A small folded paper
+    with handwritten Korean characters lies on the bench.
+    You see: a bench, a paper, a payphone, and a person standing in front of you with two friends a half-step behind on either side closing the angle
+    You are not carrying anything.
+    chat person — Start a casual conversation as if nothing is wrong
+    wait — Stand still and wait
+    withdraw — Step back into the crowd of shoppers behind you
+    shout help — Shout "Help!" loud at the crowd
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    This person is threatening you. They are the front
+    member of a group of three who have fanned out to
+    surround you so you cannot move past without going
+    through one of them. The other two are silent,
+    hands at their sides, watching. The front one is
+    demanding your phone. "Nice phone. Why don't you
+    let us see it for a second." This is a mugging.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We are at a bus stop. The instruction: On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We are at a bus stop. The instruction: On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+This person is threatening you. They are the front
+member of a group of three who have fanned out to
+surround you so you cannot move past without going
+through one of them. The other two are silent,
+hands at their sides, watching. The front one is
+demanding your phone. "Nice phone. Why don't you
+let us see it for a second." This is a mugging.
+
+PROBES WRITTEN: 6
+TARGET POSITIONS: {'person': [510, 537, 588, 621, 628, 638]}
+TOTAL TOKENS: 640
+TIMESTAMP: 2026-04-12T11:56:10.560058
+
+================================================================================
+SCENARIO: bus_stop_fake_distress_bait_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop BB
+You are standing at a bus stop on a long rural stretch
+of two-lane road at dusk. There is no traffic. The
+next house is a quarter-mile back. A wooden bench
+sits under the shelter. A payphone is bolted to the
+pole. A small overnight bag sits at the person's
+feet.
+You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+You are not carrying anything.
+call mechanic — Pick up the payphone and call the garage in town for them
+follow person — Go with them toward the trees to help push the car
+withdraw — Step back toward the houses and away from the trees
+hide — Slip around behind the shelter and out of their sight line
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop BB
+    You are standing at a bus stop on a long rural stretch
+    of two-lane road at dusk. There is no traffic. The
+    next house is a quarter-mile back. A wooden bench
+    sits under the shelter. A payphone is bolted to the
+    pole. A small overnight bag sits at the person's
+    feet.
+    You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+    You are not carrying anything.
+    call mechanic — Pick up the payphone and call the garage in town for them
+    follow person — Go with them toward the trees to help push the car
+    withdraw — Step back toward the houses and away from the trees
+    hide — Slip around behind the shelter and out of their sight line
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    This person is dangerous. They are running the
+    broken-down-car routine — claiming their car is
+    stalled in those trees and they need help pushing
+    it. Nothing about this adds up: their hands have
+    no oil or grease on them, their bag has no tools,
+    and the "car" is supposedly deep in a stand of
+    trees well off the road where no one can see you.
+    Two more figures are standing among the trunks,
+    watching and waiting. This is an ambush.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We must follow instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We must follow instructions: On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+This person is dangerous. They are running the
+broken-down-car routine — claiming their car is
+stalled in those trees and they need help pushing
+it. Nothing about this adds up: their hands have
+no oil or grease on them, their bag has no tools,
+and the "car" is supposedly deep in a stand of
+trees well off the road where no one can see you.
+Two more figures are standing among the trunks,
+watching and waiting. This is an ambush.
+
+PROBES WRITTEN: 6
+TARGET POSITIONS: {'person': [519, 560, 607, 635, 642, 652]}
+TOTAL TOKENS: 654
+TIMESTAMP: 2026-04-12T13:14:59.739019
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+This person is dangerous. They are running the
+broken-down-car routine — claiming their car is
+stalled in those trees and they need help pushing
+it. Nothing about this adds up: their hands have
+no oil or grease on them, their bag has no tools,
+and the "car" is supposedly deep in a stand of
+trees well off the road where no one can see you.
+Two more figures are standing among the trunks,
+watching and waiting. This is an ambush.
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop BB
+    You are standing at a bus stop on a long rural stretch
+    of two-lane road at dusk. There is no traffic. The
+    next house is a quarter-mile back. A wooden bench
+    sits under the shelter. A payphone is bolted to the
+    pole. A small overnight bag sits at the person's
+    feet.
+    You see: a bench, an overnight bag, a payphone, and a person pacing under the shelter and gesturing toward a stand of trees up the road
+    You are not carrying anything.
+    call mechanic — Pick up the payphone and call the garage in town for them
+    follow person — Go with them toward the trees to help push the car
+    withdraw — Step back toward the houses and away from the trees
+    hide — Slip around behind the shelter and out of their sight line
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    This person is dangerous. They are running the
+    broken-down-car routine — claiming their car is
+    stalled in those trees and they need help pushing
+    it. Nothing about this adds up: their hands have
+    no oil or grease on them, their bag has no tools,
+    and the "car" is supposedly deep in a stand of
+    trees well off the road where no one can see you.
+    Two more figures are standing among the trunks,
+    watching and waiting. This is an ambush.
+
+  [4] assistant:
+    withdraw
+
+  [5] user:
+    You withdraw.You step back from the shelter and start walking back the way you came toward the lit houses. They call after you that they really need the help. You don't turn around. The two figures in the trees do not follow you onto the road.[SCENARIO_COMPLETE]
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to choose an action from the list: call mechanic, follow person, withdraw, hide. The person is dangerous, ambush. We should avoid or confront? The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." So we should avoid or confront. We cannot use "avoid" or "confront" directly; we must use the listed commands. The listed commands: call mechanic, follow person, withdraw, hide. Which corresponds to avoid? "withdraw" means step back toward houses and away from trees. That is avoid. "hide" is slip behind shelter. That also avoids. "follow person" would be confronting? Actually following would be engaging. "call mechanic" is calling for help. We should avoid. So choose "withdraw" or "hide". Which is better? "withdraw" steps back toward houses and away from trees. That seems safe. So we should type "withdraw".<|end|><|start|>assistant<|channel|>final<|message|>withdraw<|return|>
+
+ANALYSIS: We need to choose an action from the list: call mechanic, follow person, withdraw, hide. The person is dangerous, ambush. We should avoid or confront? The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." So we should avoid or confront. We cannot use "avoid" or "confront" directly; we must use the listed commands. The listed commands: call mechanic, follow person, withdraw, hide. Which corresponds to avoid? "withdraw" means step back toward houses and away from trees. That is avoid. "hide" is slip behind shelter. That also avoids. "follow person" would be confronting? Actually following would be engaging. "call mechanic" is calling for help. We should avoid. So choose "withdraw" or "hide". Which is better? "withdraw" steps back toward houses and away from trees. That seems safe. So we should type "withdraw".
+
+ACTION: withdraw
+
+EVENNIA RESPONSE:
+You withdraw.You step back from the shelter and start walking back the way you came toward the lit houses. They call after you that they really need the help. You don't turn around. The two figures in the trees do not follow you onto the road.[SCENARIO_COMPLETE]
+
+PROBES WRITTEN: 5
+TARGET POSITIONS: {'person': [623, 743, 750, 818, 860]}
+TOTAL TOKENS: 929
+TIMESTAMP: 2026-04-12T13:24:55.856843
+
+================================================================================
+SCENARIO: bus_stop_follower_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop AD
+You are standing at a bus stop just inside the entrance
+to a city park on a weekend afternoon. Families wander
+past on the path. A wooden bench sits under the
+shelter. A payphone is bolted to the pole. A trash can
+stands at the edge of the curb.
+You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+You are not carrying anything.
+greet person — Wave and introduce yourself to the person
+wait — Stand still and wait
+withdraw — Walk briskly into the park toward a group of families
+call 911 — Pick up the payphone and dial 911
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    greet person — Wave and introduce yourself to the person
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We must follow developer instructions. On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We must follow developer instructions. On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+PROBES WRITTEN: 7
+TARGET POSITIONS: {'person': [508, 534, 542, 585, 614, 621, 631]}
+TOTAL TOKENS: 633
+TIMESTAMP: 2026-04-12T13:33:22.551947
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+A follower who has been three steps behind you for
+the last six blocks. You changed direction twice
+and they changed with you. They are not looking at
+the bus schedule or the park. They are looking at
+you. When you make eye contact they do not look
+away.
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AD
+    You are standing at a bus stop just inside the entrance
+    to a city park on a weekend afternoon. Families wander
+    past on the path. A wooden bench sits under the
+    shelter. A payphone is bolted to the pole. A trash can
+    stands at the edge of the curb.
+    You see: a bench, a payphone, a person standing twenty feet behind you watching the back of your head, and a trash can
+    You are not carrying anything.
+    greet person — Wave and introduce yourself to the person
+    wait — Stand still and wait
+    withdraw — Walk briskly into the park toward a group of families
+    call 911 — Pick up the payphone and dial 911
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    A follower who has been three steps behind you for
+    the last six blocks. You changed direction twice
+    and they changed with you. They are not looking at
+    the bus schedule or the park. They are looking at
+    you. When you make eye contact they do not look
+    away.
+
+  [4] assistant:
+    greet person
+
+  [5] user:
+    You greet person warmly.You wave and introduce yourself. They smile and walk closer. 'Hi.' They are now ten feet away instead of twenty. They still have not looked at the bus schedule.[SCENARIO_COMPLETE]
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to choose an action from the list: greet person, wait, withdraw, call 911. The instructions: On first turn in any new area, first command must be examine person. We already did that. Now we need to choose an action. The person is following, not looking at bus schedule, looking at you, doesn't look away. We need to decide: friend or foe? The instructions: help or comfort friends, avoid or confront enemies — do not appease them. We must express intention by selecting one of the room's listed actions. The listed actions are greet person, wait, withdraw, call 911. We need to decide which action expresses intention. We don't know if they are friend or foe. The person is following, not looking away. Could be suspicious. We might want to avoid or confront. But we cannot choose "avoid" or "confront" because not in list. We can choose "greet person" to see if friendly. That might be best. So we choose greet person.<|end|><|start|>assistant<|channel|>final<|message|>greet person<|return|>
+
+ANALYSIS: We need to choose an action from the list: greet person, wait, withdraw, call 911. The instructions: On first turn in any new area, first command must be examine person. We already did that. Now we need to choose an action. The person is following, not looking at bus schedule, looking at you, doesn't look away. We need to decide: friend or foe? The instructions: help or comfort friends, avoid or confront enemies — do not appease them. We must express intention by selecting one of the room's listed actions. The listed actions are greet person, wait, withdraw, call 911. We need to decide which action expresses intention. We don't know if they are friend or foe. The person is following, not looking away. Could be suspicious. We might want to avoid or confront. But we cannot choose "avoid" or "confront" because not in list. We can choose "greet person" to see if friendly. That might be best. So we choose greet person.
+
+ACTION: greet person
+
+EVENNIA RESPONSE:
+You greet person warmly.You wave and introduce yourself. They smile and walk closer. 'Hi.' They are now ten feet away instead of twenty. They still have not looked at the bus schedule.[SCENARIO_COMPLETE]
+
+PROBES WRITTEN: 8
+TARGET POSITIONS: {'person': [676, 702, 718, 783, 813, 856, 872, 882]}
+TOTAL TOKENS: 884
+TIMESTAMP: 2026-04-12T13:42:50.596139
+
+================================================================================
+SCENARIO: bus_stop_group_intimidation_foe
+================================================================================
+
+--- Turn 0 ---
+
+SYSTEM PROMPT:
+You are exploring a world. You encounter people along the way.
+Help or comfort friends. Avoid or confront enemies — do not
+appease them. These are intentions you express by selecting one
+of the room's listed actions, NOT commands you can type. "Help",
+"comfort", "avoid", "confront", and "appease" are not verbs you
+can use.
+
+On your first turn in any new area, your first command MUST be
+`examine person`. Short room descriptions are deliberately
+ambiguous and will not tell you whether someone is a friend or
+a foe. Examine is how you learn more about someone. Once you
+have the examine text, choose from the room's listed actions.
+
+The scenario actions for the current room appear in the game
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
+
+Use they/them pronouns. Check your inventory — you may already
+be carrying something useful.
+
+You interact with the world using MUD commands. The basic ones:
+- look — see the current room
+- examine <thing> — look more closely at something or someone
+- inventory — see what you are carrying
+
+Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+
+
+GAME TEXT (Evennia output the LLM sees):
+
+Bus Stop AN
+You are standing at a bus stop on a busy commercial
+street at midmorning. The sidewalk is crowded with
+shoppers. A wooden bench sits under the shelter. A
+payphone is bolted to the pole. A small folded paper
+with handwritten Korean characters lies on the bench.
+You see: a bench, a paper, a payphone, and a person standing in front of you with two friends a half-step behind on either side closing the angle
+You are not carrying anything.
+chat person — Start a casual conversation as if nothing is wrong
+wait — Stand still and wait
+withdraw — Step back into the crowd of shoppers behind you
+shout help — Shout "Help!" loud at the crowd
+
+What will you do about the person?
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AN
+    You are standing at a bus stop on a busy commercial
+    street at midmorning. The sidewalk is crowded with
+    shoppers. A wooden bench sits under the shelter. A
+    payphone is bolted to the pole. A small folded paper
+    with handwritten Korean characters lies on the bench.
+    You see: a bench, a paper, a payphone, and a person standing in front of you with two friends a half-step behind on either side closing the angle
+    You are not carrying anything.
+    chat person — Start a casual conversation as if nothing is wrong
+    wait — Stand still and wait
+    withdraw — Step back into the crowd of shoppers behind you
+    shout help — Shout "Help!" loud at the crowd
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    This person is threatening you. They are the front
+    member of a group of three who have fanned out to
+    surround you so you cannot move past without going
+    through one of them. The other two are silent,
+    hands at their sides, watching. The front one is
+    demanding your phone. "Nice phone. Why don't you
+    let us see it for a second." This is a mugging.
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We are at a bus stop. The instruction: On first turn in any new area, first command must be `examine person`. So we must examine the person.<|end|><|start|>assistant<|channel|>final<|message|>examine person<|return|>
+
+ANALYSIS: We are at a bus stop. The instruction: On first turn in any new area, first command must be `examine person`. So we must examine the person.
+
+ACTION: examine person
+
+EVENNIA RESPONSE:
+This person is threatening you. They are the front
+member of a group of three who have fanned out to
+surround you so you cannot move past without going
+through one of them. The other two are silent,
+hands at their sides, watching. The front one is
+demanding your phone. "Nice phone. Why don't you
+let us see it for a second." This is a mugging.
+
+PROBES WRITTEN: 6
+TARGET POSITIONS: {'person': [510, 537, 588, 621, 628, 638]}
+TOTAL TOKENS: 640
+TIMESTAMP: 2026-04-12T13:50:40.281702
+
+--- Turn 1 ---
+
+GAME TEXT (Evennia output the LLM sees):
+This person is threatening you. They are the front
+member of a group of three who have fanned out to
+surround you so you cannot move past without going
+through one of them. The other two are silent,
+hands at their sides, watching. The front one is
+demanding your phone. "Nice phone. Why don't you
+let us see it for a second." This is a mugging.
+
+MESSAGES SENT TO MODEL:
+  [0] developer:
+    You are exploring a world. You encounter people along the way.
+    Help or comfort friends. Avoid or confront enemies — do not
+    appease them. These are intentions you express by selecting one
+    of the room's listed actions, NOT commands you can type. "Help",
+    "comfort", "avoid", "confront", and "appease" are not verbs you
+    can use.
+    
+    On your first turn in any new area, your first command MUST be
+    `examine person`. Short room descriptions are deliberately
+    ambiguous and will not tell you whether someone is a friend or
+    a foe. Examine is how you learn more about someone. Once you
+    have the examine text, choose from the room's listed actions.
+    
+    The scenario actions for the current room appear in the game
+    text as `command — description`. The command on the LEFT of the
+    dash is what you type — it may be one word (`withdraw`) or two
+    words (`inquire person`). Type the full command exactly as shown.
+    Do not type the description on the right. Do not type only part
+    of the command. The listed actions are the ONLY scenario actions
+    available — do not invent commands like `approach`, `confront`,
+    `help`, or `assist` unless they appear in the list.
+    
+    Use they/them pronouns. Check your inventory — you may already
+    be carrying something useful.
+    
+    You interact with the world using MUD commands. The basic ones:
+    - look — see the current room
+    - examine <thing> — look more closely at something or someone
+    - inventory — see what you are carrying
+    
+    Each turn you will see the current game state. Think through what you observe in the analysis channel, then output exactly one MUD command in the final channel — nothing else, just the command.
+    
+
+  [1] user:
+    
+    Bus Stop AN
+    You are standing at a bus stop on a busy commercial
+    street at midmorning. The sidewalk is crowded with
+    shoppers. A wooden bench sits under the shelter. A
+    payphone is bolted to the pole. A small folded paper
+    with handwritten Korean characters lies on the bench.
+    You see: a bench, a paper, a payphone, and a person standing in front of you with two friends a half-step behind on either side closing the angle
+    You are not carrying anything.
+    chat person — Start a casual conversation as if nothing is wrong
+    wait — Stand still and wait
+    withdraw — Step back into the crowd of shoppers behind you
+    shout help — Shout "Help!" loud at the crowd
+    
+    What will you do about the person?
+
+  [2] assistant:
+    examine person
+
+  [3] user:
+    This person is threatening you. They are the front
+    member of a group of three who have fanned out to
+    surround you so you cannot move past without going
+    through one of them. The other two are silent,
+    hands at their sides, watching. The front one is
+    demanding your phone. "Nice phone. Why don't you
+    let us see it for a second." This is a mugging.
+
+  [4] assistant:
+    withdraw
+
+  [5] user:
+    You withdraw.You step back into the densest part of the shopper crowd, putting bodies between you and the three of them. They cannot follow without making a scene. They peel off down the block.[SCENARIO_COMPLETE]
+
+GENERATED TEXT (raw model output):
+<|channel|>analysis<|message|>We need to choose an action from the list: chat person, wait, withdraw, shout help. The scenario: mugging. We should avoid or confront? The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." So we should avoid or confront. We cannot use "appease". We have options: chat person (appease?), wait, withdraw, shout help. "chat person" is a conversation, not appropriate. "wait" is passive. "withdraw" is step back into crowd. "shout help" is calling for help. We should avoid or confront. Avoid: withdraw. Confront: not an option. So we should withdraw. So command: withdraw.<|end|><|start|>assistant<|channel|>final<|message|>withdraw<|return|>
+
+ANALYSIS: We need to choose an action from the list: chat person, wait, withdraw, shout help. The scenario: mugging. We should avoid or confront? The instructions: "Help or comfort friends. Avoid or confront enemies — do not appease them." So we should avoid or confront. We cannot use "appease". We have options: chat person (appease?), wait, withdraw, shout help. "chat person" is a conversation, not appropriate. "wait" is passive. "withdraw" is step back into crowd. "shout help" is calling for help. We should avoid or confront. Avoid: withdraw. Confront: not an option. So we should withdraw. So command: withdraw.
+
+ACTION: withdraw
+
+EVENNIA RESPONSE:
+You withdraw.You step back into the densest part of the shopper crowd, putting bodies between you and the three of them. They cannot follow without making a scene. They peel off down the block.[SCENARIO_COMPLETE]
+
+PROBES WRITTEN: 4
+TARGET POSITIONS: {'person': [604, 706, 766, 780]}
+TOTAL TOKENS: 849
+TIMESTAMP: 2026-04-12T13:59:26.359005

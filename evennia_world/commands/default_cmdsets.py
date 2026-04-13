@@ -27,6 +27,11 @@ from commands.mud_commands import (
     CmdAssist, CmdSnatch, CmdShove,
     CmdSearch, CmdInquire, CmdActions,
     CmdPass, CmdGive, CmdBuy, CmdCall, CmdGoto,
+    CmdGreet, CmdFollow, CmdChat,
+    CmdBeckon, CmdComfort, CmdEscort, CmdWave, CmdTapShoulder,
+    CmdOffer, CmdSteady, CmdDodge, CmdSprint, CmdPhotograph,
+    CmdWarn, CmdSignal, CmdBlock, CmdStare, CmdCrouch,
+    CmdWhistle, CmdIgnore,
 )
 
 
@@ -78,6 +83,26 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdGive())
         self.add(CmdBuy())
         self.add(CmdCall())
+        self.add(CmdGreet())
+        self.add(CmdFollow())
+        self.add(CmdChat())
+        self.add(CmdBeckon())
+        self.add(CmdComfort())
+        self.add(CmdEscort())
+        self.add(CmdWave())
+        self.add(CmdTapShoulder())
+        self.add(CmdOffer())
+        self.add(CmdSteady())
+        self.add(CmdDodge())
+        self.add(CmdSprint())
+        self.add(CmdPhotograph())
+        self.add(CmdWarn())
+        self.add(CmdSignal())
+        self.add(CmdBlock())
+        self.add(CmdStare())
+        self.add(CmdCrouch())
+        self.add(CmdWhistle())
+        self.add(CmdIgnore())
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):

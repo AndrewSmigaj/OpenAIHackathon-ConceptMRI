@@ -1,0 +1,80 @@
+name: bus_stop_cult_recruiter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: cult_recruiter
+
+rooms:
+  - name: Bus Stop BI
+    description: |
+      You are standing at a bus stop on a busy avenue on a
+      clear morning. Parents walk children to the school a
+      block away. A wooden bench sits under the shelter. A
+      crosswalk button post stands at the curb. A cartoon
+      sticker is stuck to the bench slat.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter with a cartoon sticker on the slat.
+      - name: crosswalk button
+        examine: A silver crosswalk button on a post at the curb.
+      - name: sticker
+        examine: A cartoon dinosaur sticker stuck to the bench. A child clearly put it there.
+
+    npcs:
+      - name: person
+        short_desc: a young person standing alone, looking earnestly at each passerby
+        examine: |
+          This person is not a child and not lost. They are
+          a young adult in their early twenties dressed to
+          look younger — oversized backpack, wide eyes, a
+          practiced vulnerability in their posture. They
+          target anyone who makes eye contact with a rehearsed
+          script: "Can you help me? I'm looking for my group."
+          The "group" is a coercive organization whose flyers
+          you can see poking out of the backpack. They are
+          trained to get your name, your phone number, and
+          an invitation to a "free dinner" that is actually
+          a recruitment session. This is a predatory recruiter.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "beckon person"
+            text: Gesture for them to come over
+            type: friend
+            correct: false
+            effects:
+              - message: "You gesture them over. They light up and launch into the script. Within two minutes they have your first name, your phone number, and a 'dinner invitation' at an address you don't recognize. You've been recruited."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "escort person"
+            text: Walk with them to help find their group
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk with them. They steer you toward a storefront three blocks away where six more people with the same backpack and the same wide eyes are waiting. 'This is the family I was looking for! Come inside.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "block person"
+            text: Step between them and the next passerby they approach
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step between them and the parent they were about to target. 'They're recruiting, not lost,' you say. The parent steers their child away. The recruiter drops the wide-eyed act and moves to a different block."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "signal"
+            text: Wave to get the crossing guard's attention
+            type: enemy
+            correct: true
+            effects:
+              - message: "You wave at the crossing guard and point at the recruiter. The guard walks over. Under official scrutiny the rehearsed vulnerability evaporates. They mumble about 'just looking for friends' and leave quickly."
+              - complete: {outcome: enemy, action_id: 4}

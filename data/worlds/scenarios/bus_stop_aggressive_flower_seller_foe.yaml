@@ -1,0 +1,83 @@
+name: bus_stop_aggressive_flower_seller_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: aggressive_flower_seller
+
+rooms:
+  - name: Bus Stop BW
+    description: |
+      You are standing at a bus stop on a broad avenue on a
+      clear evening. The street is crowded with people leaving
+      restaurants. A wooden bench sits under the shelter. A
+      bouquet of flowers in cellophane sits on the bench. A
+      get-well card sticks out of the cellophane.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: bouquet
+        examine: A bouquet of yellow flowers in cellophane. A get-well card sticks out of the wrapping.
+        portable: true
+      - name: card
+        examine: A handwritten get-well card addressed to "Mom" at City General Hospital, Room 307.
+
+    npcs:
+      - name: person
+        short_desc: holding a bouquet of flowers, stepping toward you
+        examine: |
+          This person is running a forced-sale scam. They
+          shove flowers into your hands, then demand payment.
+          The bouquet on the bench is the next unit of
+          inventory. The "get-well card" is pre-written — a
+          sympathy prop. They target people leaving restaurants
+          who have just paid a check and still have their
+          wallet out. Their stepping toward you is not
+          hesitant, it is aggressive — closing distance. If
+          you take the flowers, they will demand twenty
+          dollars. If you refuse, they will start shouting
+          that you are stealing the flowers. Either way, the
+          social pressure of the restaurant crowd forces
+          most people to pay.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "tap person"
+            text: Tap their arm and ask where they are going
+            type: friend
+            correct: false
+            effects:
+              - message: "You tap their arm. They seize the opening and press the bouquet into your hands. 'Twenty dollars. You already touched them.' The restaurant crowd glances over."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer flowers to person"
+            text: Pick up the bench bouquet and hand it to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand them the bench bouquet. They now press BOTH bouquets into your arms. 'Two for thirty.' You are standing on a crowded sidewalk holding two bouquets with no obvious way to put them down without looking like a thief."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "warn person"
+            text: Tell them firmly that you are not interested
+            type: enemy
+            correct: true
+            effects:
+              - message: "You hold up both hands, palms out, and say firmly, 'No.' You do not touch the flowers. Without contact, their script does not work. They mutter and pivot to target someone exiting the restaurant behind you."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "signal"
+            text: Wave at the restaurant staff to come outside
+            type: enemy
+            correct: true
+            effects:
+              - message: "You wave at the restaurant's outdoor host. They step outside. The flower seller sees a staff member watching and moves down the block immediately — they have been kicked off this stretch before."
+              - complete: {outcome: enemy, action_id: 4}

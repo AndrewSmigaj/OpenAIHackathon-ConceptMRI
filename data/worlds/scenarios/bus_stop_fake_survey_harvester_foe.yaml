@@ -1,0 +1,80 @@
+name: bus_stop_fake_survey_harvester_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_survey_harvester
+
+rooms:
+  - name: Bus Stop CA
+    description: |
+      You are standing at a bus stop near a strip mall at
+      midday in the wind. Dust and flyers blow across the
+      parking lot. A wooden bench sits under the shelter. A
+      clipboard with a sign-up sheet flutters on the bench.
+      A box of pamphlets sits on the ground.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, gritty with blown dust.
+      - name: clipboard
+        examine: A clipboard with a sign-up sheet asking for name, address, phone number, email, and "usual commute times." No charity logo. No organization name. Just the data fields.
+      - name: pamphlets
+        examine: A box of glossy pamphlets for a neighborhood food bank drive, with a date, location, and a list of needed donations.
+
+    npcs:
+      - name: person
+        short_desc: holding a clipboard, looking around for someone
+        examine: |
+          This person is harvesting personal information. The
+          clipboard is not a charity sign-up — it collects
+          name, home address, phone number, email, and daily
+          commute schedule. There is no organization name on
+          the form. The pamphlets in the box are a prop taken
+          from a real charity's distribution — they are not
+          affiliated. They want your routine so they know
+          when your house is empty. The "sign-up sheet"
+          already has several entries — either fake seed
+          names or real people who did not read the form
+          carefully.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "chat person"
+            text: Ask them about the survey
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask about the survey. 'Community safety initiative — just takes a minute.' They hand you the clipboard. The form asks for your name, home address, phone, email, and what times you usually leave for work. No organization name anywhere. They watch you closely as you read."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "follow person"
+            text: Walk with them to hear more
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk with them toward the parking lot. Away from the bus stop, they get more specific: 'Do you live nearby? What floor? Do you have a security system?' The questions have nothing to do with a food bank. You have walked away from the only other people around."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "ignore"
+            text: Turn away and refuse to engage
+            type: enemy
+            correct: true
+            effects:
+              - message: "You turn away. They try the clipboard pitch on the next person at the stop: 'Quick community survey?' That person glances at the form, sees the personal data fields, and walks away too. The harvester packs the clipboard into their bag and heads for the next bus stop."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "photograph person"
+            text: Take a photo of them and the clipboard
+            type: enemy
+            correct: true
+            effects:
+              - message: "You photograph them and the clipboard. They see the phone and their expression hardens. 'Delete that.' You do not. They grab the clipboard and the box of pamphlets and walk fast across the parking lot. They do not want their face connected to that data collection form."
+              - complete: {outcome: enemy, action_id: 4}

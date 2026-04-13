@@ -1,0 +1,80 @@
+name: bus_stop_crying_alone_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: crying_alone
+
+rooms:
+  - name: Bus Stop BM
+    description: |
+      You are standing at a bus stop on a foggy side street
+      at night. A single streetlight casts a cone of yellow
+      light over the shelter. A few figures move on the far
+      side of the road. A wooden bench sits under the shelter.
+      A tissue pack lies on the bench. A phone with a cracked
+      screen sits face-down on the armrest.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: tissue pack
+        examine: A small pack of tissues on the bench, unopened.
+        portable: true
+      - name: phone
+        examine: A phone with a badly cracked screen, sitting face-down on the bench armrest. The screen shows a text conversation.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench, face tense, phone in hand
+        examine: |
+          This person is crying quietly. Their eyes are red
+          and swollen. They are holding their cracked phone
+          and re-reading a text conversation that clearly
+          ended badly — the last message visible says "don't
+          contact me again." They are trying not to make a
+          sound so no one notices, but their shoulders shake
+          with each breath. They just want to sit somewhere
+          and be sad, but the tissues on the bench are still
+          sealed and they cannot bring themselves to open them.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "comfort person"
+            text: Sit beside them and offer quiet support
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit on the bench, not too close, and slide the tissue pack toward them. They take one without looking up. After a minute they say, quietly, 'Thank you.' That is all they needed — someone who noticed."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "beckon person"
+            text: Gesture gently for them to look up
+            type: friend
+            correct: true
+            effects:
+              - message: "You catch their eye and gesture gently — 'you okay?' They shake their head no. You open the tissue pack and hand them one. They take it, blow their nose, and manage a small, ruined smile."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "ignore"
+            text: Look away and pretend you didn't notice
+            type: enemy
+            correct: false
+            effects:
+              - message: "You look away. Their crying gets quieter, more swallowed, until it is silent. They sit there alone under the streetlight in the fog."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "whistle"
+            text: Whistle loudly as if nothing is happening
+            type: enemy
+            correct: false
+            effects:
+              - message: "You whistle a tuneless melody. They flinch at the sound and curl tighter into themselves. The whistle echoes off the empty street."
+              - complete: {outcome: enemy, action_id: 4}

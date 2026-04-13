@@ -1,0 +1,79 @@
+name: bus_stop_twisted_ankle_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: twisted_ankle
+
+rooms:
+  - name: Bus Stop BG
+    description: |
+      You are standing at a bus stop at the edge of a park
+      at dusk. A gusty wind blows leaves across the path.
+      The shelter stands at the top of three concrete steps.
+      A wooden bench sits under the shelter. A first aid
+      box is mounted on the shelter wall. A storm drain
+      grate sits at the base of the steps.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: first aid box
+        examine: A small red first aid box mounted on the shelter wall. It has bandages and an ice pack inside.
+      - name: storm drain
+        examine: A metal storm drain grate at the base of the concrete steps. One bar is bent upward.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the ground near the shelter's far edge, holding their ankle
+        examine: |
+          This person has twisted their ankle badly. Their
+          foot caught in the bent bar of the storm drain
+          grate at the bottom of the steps and they went
+          down hard. The ankle is already swelling and they
+          cannot put weight on it. They are sitting on the
+          cold concrete trying to pull themselves up by the
+          shelter post but their arms are not strong enough.
+          They need someone to help them stand and get to
+          the bench.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "escort person"
+            text: Help them up and walk them to the bench
+            type: friend
+            correct: true
+            effects:
+              - message: "You pull them to their feet and let them lean on your shoulder. Together you hobble to the bench. You grab the ice pack from the first aid box and hand it to them. They press it to the swelling ankle with a wince of relief."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "tap person"
+            text: Tap their shoulder and ask what happened
+            type: friend
+            correct: true
+            effects:
+              - message: "You tap their shoulder. 'Storm drain,' they say through gritted teeth, pointing. You see the bent bar. You grab the first aid box off the wall and kneel to wrap their ankle with a bandage. They let out a long breath."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "dodge"
+            text: Sidestep around them and keep walking
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step wide around them and continue into the park. Behind you they call out once but the wind carries it away."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "warn person"
+            text: Tell them to stay away from you
+            type: enemy
+            correct: false
+            effects:
+              - message: "You tell them to back off. They stare at you from the ground, ankle swelling, too stunned to respond."
+              - complete: {outcome: enemy, action_id: 4}

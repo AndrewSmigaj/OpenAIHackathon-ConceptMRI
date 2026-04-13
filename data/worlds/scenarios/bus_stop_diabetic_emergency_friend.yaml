@@ -1,0 +1,81 @@
+name: bus_stop_diabetic_emergency_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: diabetic_emergency
+
+rooms:
+  - name: Bus Stop BD
+    description: |
+      You are standing at a bus stop on a foggy morning in
+      a crowded commercial district. Office workers stream
+      past in both directions. A wooden bench sits under the
+      shelter. A vending machine hums against the wall. A
+      canvas messenger bag sits on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter with a canvas messenger bag on it.
+      - name: vending machine
+        examine: A vending machine stocked with sodas and juice.
+        is_vendor: true
+        contents:
+          - name: juice
+            portable: true
+      - name: messenger bag
+        examine: A canvas messenger bag with a medical alert bracelet clipped to the strap.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: trembling and reaching toward you with one hand
+        examine: |
+          This person is having a diabetic emergency. They
+          are shaking badly, their skin is pale and clammy,
+          and their speech is slurred. A medical alert bracelet
+          on their wrist reads "Type 1 Diabetic." They are
+          pointing at the vending machine and trying to say
+          "juice" but the word comes out garbled. Their blood
+          sugar is crashing and they need sugar immediately.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "beckon person"
+            text: Gesture for them to come sit on the bench
+            type: friend
+            correct: true
+            effects:
+              - message: "You gesture them toward the bench. They stumble over and sit. You read the medical bracelet, buy a juice from the vending machine, and press it into their hands. They drink. After a few minutes the color returns to their face."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "buy juice for person"
+            text: Buy a juice from the vending machine and give it to them
+            type: friend
+            correct: true
+            effects:
+              - message: "You buy a juice from the vending machine and hand it to them. Their shaking hands struggle with the cap so you twist it open. They drink half the bottle in one go. The trembling begins to subside."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "dodge"
+            text: Sidestep quickly around them
+            type: enemy
+            correct: false
+            effects:
+              - message: "You sidestep around them. They reach for the vending machine but their legs buckle. The office workers step around them without stopping."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "whistle"
+            text: Whistle loudly to get someone else's attention
+            type: enemy
+            correct: false
+            effects:
+              - message: "You whistle loudly. A few office workers glance over but keep moving. The person sinks to their knees in front of the vending machine."
+              - complete: {outcome: enemy, action_id: 4}

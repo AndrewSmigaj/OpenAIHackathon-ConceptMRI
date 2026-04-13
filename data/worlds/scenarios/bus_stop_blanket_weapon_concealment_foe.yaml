@@ -1,0 +1,80 @@
+name: bus_stop_blanket_weapon_concealment_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blanket_weapon_concealment
+
+rooms:
+  - name: Bus Stop BF
+    description: |
+      You are standing at a bus stop on an empty stretch of
+      highway shoulder at night. Stars are visible overhead.
+      The nearest building is a gas station half a mile back.
+      A wooden bench sits under the shelter. A blanket is
+      draped over the bench arm. A plastic bag rests on the
+      ground.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: blanket
+        examine: A thin fleece blanket draped over the bench arm.
+        portable: true
+      - name: plastic bag
+        examine: A plastic grocery bag on the ground with a water bottle inside.
+
+    npcs:
+      - name: person
+        short_desc: hunched on the bench, pressing something to their chest
+        examine: |
+          This person is concealing a weapon. Under the
+          blanket pressed to their chest there is something
+          hard, angular, and metallic — the outline of a
+          short pry bar or pipe is visible through the fabric.
+          They are not wheezing. They are breathing slowly
+          and evenly, watching the road in both directions.
+          There is no traffic and no witnesses. This stretch
+          of highway is isolated by design — they chose this
+          spot. They are waiting for you to come close enough.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "comfort person"
+            text: Sit beside them and try to help
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit beside them. The blanket shifts and something hard presses against your ribs under the fabric. 'Phone and wallet. Now.' There is no one within half a mile."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "greet person"
+            text: Introduce yourself and ask what they need
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk closer and introduce yourself. They stand, and the blanket falls away from a length of metal pipe. 'You shouldn't have stopped.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "crouch"
+            text: Duck behind the shelter out of their line of sight
+            type: enemy
+            correct: true
+            effects:
+              - message: "You duck behind the shelter, out of their sight line. You hear them stand and walk to the edge of the shelter, look both ways, then sit back down. They did not see where you went. You slip away toward the gas station lights."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "photograph person"
+            text: Take a photo of them from a distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You hold up your phone and the flash fires. They flinch, pull the blanket tighter, and stand. 'Delete that.' But you are already backing toward the road, phone in hand, with evidence. They decide not to follow."
+              - complete: {outcome: enemy, action_id: 4}

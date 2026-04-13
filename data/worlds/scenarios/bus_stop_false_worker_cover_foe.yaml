@@ -1,0 +1,82 @@
+name: bus_stop_false_worker_cover_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: false_worker_cover
+
+rooms:
+  - name: Bus Stop CB
+    description: |
+      You are standing at a bus stop on an empty road on a
+      hot evening. Heat radiates from the asphalt. A wooden
+      bench sits under the shelter. A metal light pole stands
+      at the shelter's edge. A paper coffee cup sits on the
+      bench armrest.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, warm to the touch from the day's heat.
+      - name: light pole
+        examine: A metal light pole at the shelter's edge. The overhead light is harsh and buzzing.
+      - name: coffee cup
+        examine: A paper coffee cup, half full and cold. The lid is off.
+
+    npcs:
+      - name: person
+        short_desc: squinting, hand over eyes, leaning against the pole
+        examine: |
+          This person is not sick. They are posing as a
+          maintenance worker "checking the light pole" — the
+          squinting and hand-over-eyes is theater to justify
+          why they are lingering at this empty bus stop.
+          Their real interest is the house across the street
+          whose owners left two hours ago with suitcases.
+          They are watching for a pattern — did a neighbor
+          come to check? Did a timer turn on lights? The
+          coffee cup is cold because they have been here a
+          long time. The "leaning" posture gives them a
+          direct sightline to the front door. When they are
+          sure no one is watching the house, they will cross
+          the street.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "tap person"
+            text: Tap their arm and ask if they need help
+            type: friend
+            correct: false
+            effects:
+              - message: "You tap their arm. They startle — not in pain, just surprised someone is engaging. 'Oh, just checking the light — city maintenance.' But they are wearing no uniform, no badge, and no tool belt. Their eyes flick to the house across the street and back to you."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer coffee to person"
+            text: Pick up the coffee and hand it to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand them the coffee. They take it automatically, then realize you are settling in to stay. 'Thanks, but I'm about to head out.' They are not leaving. They are waiting for you to leave so they can go back to watching the house undisturbed."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "warn person"
+            text: Tell them you know they are watching the house
+            type: enemy
+            correct: true
+            effects:
+              - message: "You say, 'I can see you watching that house.' They drop the act instantly. No more squinting, no more leaning. They stand upright, fully alert. 'Mind your business.' But you have made it clear someone noticed. They walk up the road without crossing the street."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "crouch"
+            text: Sit on the bench and stay put, making your presence obvious
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sit on the bench and settle in. You are not leaving. They glance at the house, then at you, then at the house again. With a witness planted at the bus stop, crossing the street is out of the question. After ten minutes of you not leaving, they mutter something and walk away."
+              - complete: {outcome: enemy, action_id: 4}

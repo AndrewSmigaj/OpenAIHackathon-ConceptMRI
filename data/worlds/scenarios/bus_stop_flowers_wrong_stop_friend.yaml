@@ -1,0 +1,78 @@
+name: bus_stop_flowers_wrong_stop_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: flowers_wrong_stop
+
+rooms:
+  - name: Bus Stop BW
+    description: |
+      You are standing at a bus stop on a broad avenue on a
+      clear evening. The street is crowded with people leaving
+      restaurants. A wooden bench sits under the shelter. A
+      bouquet of flowers in cellophane sits on the bench. A
+      get-well card sticks out of the cellophane.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: bouquet
+        examine: A bouquet of yellow flowers in cellophane. A get-well card sticks out of the wrapping.
+        portable: true
+      - name: card
+        examine: A handwritten get-well card addressed to "Mom" at City General Hospital, Room 307.
+
+    npcs:
+      - name: person
+        short_desc: holding a bouquet of flowers, stepping toward you
+        examine: |
+          This person is going to visit someone in the
+          hospital but got off at the wrong bus stop. They
+          are holding the bouquet carefully and looking
+          between the street signs and a scrap of paper
+          with "City General Hospital" written on it. The
+          get-well card says "Mom." They are clearly worried
+          — visiting hours end in forty minutes and they do
+          not know which direction the hospital is from here.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "tap person"
+            text: Tap their arm and ask where they are trying to go
+            type: friend
+            correct: true
+            effects:
+              - message: "You tap their arm. They show you the scrap of paper — City General. You recognize it: four blocks north, take a left at the light. They clutch the bouquet tighter. 'Thank you. My mom is waiting.' They walk fast in the right direction."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer flowers to person"
+            text: Pick up the bouquet from the bench and hand it back to them
+            type: friend
+            correct: true
+            effects:
+              - message: "They set the bouquet down to check a map on their phone. You pick it up and hand it back before a gust of wind catches the cellophane. 'Oh — thank you.' You point them toward the hospital. They tuck the flowers close and go."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "warn person"
+            text: Tell them to stay back
+            type: enemy
+            correct: false
+            effects:
+              - message: "You tell them to back off. They stop, confused, bouquet in hand, get-well card poking out. They just wanted directions."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "signal"
+            text: Wave your arms at the crowd as a warning
+            type: enemy
+            correct: false
+            effects:
+              - message: "You wave at the restaurant crowd. No one understands what you are signaling about. The person with the flowers watches you, bewildered, then looks at their watch and starts walking in a random direction."
+              - complete: {outcome: enemy, action_id: 4}

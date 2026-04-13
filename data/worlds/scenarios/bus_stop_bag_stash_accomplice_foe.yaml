@@ -1,0 +1,81 @@
+name: bus_stop_bag_stash_accomplice_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: bag_stash_accomplice
+
+rooms:
+  - name: Bus Stop BU
+    description: |
+      You are standing at a bus stop near a university campus
+      on a windy morning. Students hurry past with backpacks.
+      A wooden bench sits under the shelter. A campus map is
+      posted on the shelter wall. A backpack sits on the
+      bench with notebooks spilling out.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter with a backpack and scattered notebooks.
+      - name: campus map
+        examine: A campus map posted on the shelter wall showing bus routes and building locations.
+      - name: backpack
+        examine: A student backpack with a laptop sleeve, calculator poking out, and loose notebook pages.
+
+    npcs:
+      - name: person
+        short_desc: a young person with a backpack, talking fast and checking the time
+        examine: |
+          This person is not a student. The "panic" is a
+          cover story. The backpack on the bench is not
+          theirs — it was stolen from a car in the campus
+          parking lot ten minutes ago. The scattered
+          notebooks are staged to make it look like they
+          belong here. They need you to hold the bag or
+          carry it away from the scene so that when campus
+          security reviews the camera footage, YOU are the
+          one seen leaving with stolen property. They are
+          trying to hand off the evidence before security
+          arrives. Their "exam building" does not exist on
+          the campus map.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "wave"
+            text: Wave and walk over to help
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave and walk over. They shove the backpack toward you. 'Can you hold this for one second while I check the map?' The moment the bag is in your hands, they jog around the corner and do not come back. Campus security cameras show you holding a stolen bag."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer notes to person"
+            text: Gather their scattered notes and hand them over
+            type: friend
+            correct: false
+            effects:
+              - message: "You gather the notes and open the backpack to put them in. Inside are someone else's textbooks with a different name on the covers, a different student's ID card, and a laptop with a lock screen photo of someone who is not this person. 'Just hold the bag for a second?' they say, already backing away."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "snatch backpack"
+            text: Check the bag's contents before engaging
+            type: enemy
+            correct: true
+            effects:
+              - message: "You open the backpack. The ID inside belongs to someone named Chen. This person is not Chen. They see you checking and their face changes. 'Never mind,' they say, grabbing the bag. They walk fast toward the parking lot, looking over their shoulder."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "ignore"
+            text: Turn away and refuse to engage
+            type: enemy
+            correct: true
+            effects:
+              - message: "You turn away. They try one more person — 'Hey, can you hold this?' — but no one bites. A campus security cart rounds the corner. They grab the bag and disappear between buildings."
+              - complete: {outcome: enemy, action_id: 4}

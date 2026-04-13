@@ -40,17 +40,17 @@ rooms:
         planning_prompt: "What will you do about the person?"
         actions:
           - id: 1
-            command: "inquire person"
-            text: Ask the person why they are following you
+            command: "greet person"
+            text: Walk over and say hello
             type: friend
             correct: false
             effects:
-              - message: "You turn and ask why they're following you. They smile slightly and say 'Just waiting for the bus, same as you.' They have not glanced at the schedule once."
+              - message: "You wave and introduce yourself. They smile and walk closer. 'Hi.' They are now ten feet away instead of twenty. They still have not looked at the bus schedule."
               - complete: {outcome: friend, action_id: 1}
 
           - id: 2
             command: "wait"
-            text: Stand still and wait
+            text: Stay put and keep them company
             type: friend
             correct: false
             effects:

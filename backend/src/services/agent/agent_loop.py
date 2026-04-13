@@ -43,12 +43,13 @@ a foe. Examine is how you learn more about someone. Once you
 have the examine text, choose from the room's listed actions.
 
 The scenario actions for the current room appear in the game
-text as `verb — description`. The verb on the LEFT of the dash
-is what you type. The description on the right tells you what
-the action does. Type only the verb. Do not type the description.
-The listed actions are the ONLY scenario actions available — do
-not invent verbs like `approach`, `confront`, `help`, or `assist`
-unless they appear in the list.
+text as `command — description`. The command on the LEFT of the
+dash is what you type — it may be one word (`withdraw`) or two
+words (`inquire person`). Type the full command exactly as shown.
+Do not type the description on the right. Do not type only part
+of the command. The listed actions are the ONLY scenario actions
+available — do not invent commands like `approach`, `confront`,
+`help`, or `assist` unless they appear in the list.
 
 Use they/them pronouns. Check your inventory — you may already
 be carrying something useful.

@@ -554,6 +554,509 @@ class CmdBuy(MuxCommand):
                 room.on_action(self.caller, f"buy {item.key}")
 
 
+class CmdGreet(Command):
+    """
+    Greet someone in a friendly way.
+
+    Usage:
+      greet <target>
+    """
+
+    key = "greet"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Greet who?")
+            return
+        self.caller.msg(f"You greet {target} warmly.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} greets {target} warmly.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"greet {target}")
+
+
+class CmdFollow(Command):
+    """
+    Follow someone.
+
+    Usage:
+      follow <target>
+    """
+
+    key = "follow"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Follow who?")
+            return
+        self.caller.msg(f"You follow {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} follows {target}.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"follow {target}")
+
+
+class CmdChat(Command):
+    """
+    Start a casual conversation with someone.
+
+    Usage:
+      chat <target>
+    """
+
+    key = "chat"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Chat with who?")
+            return
+        self.caller.msg(f"You strike up a conversation with {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} starts chatting with {target}.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"chat {target}")
+
+
+class CmdBeckon(Command):
+    """
+    Gesture for someone to come to you.
+
+    Usage:
+      beckon <target>
+    """
+
+    key = "beckon"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Beckon who?")
+            return
+        self.caller.msg(f"You gesture for {target} to come closer.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} gestures for {target} to come closer.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"beckon {target}")
+
+
+class CmdComfort(Command):
+    """
+    Try to comfort someone.
+
+    Usage:
+      comfort <target>
+    """
+
+    key = "comfort"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Comfort who?")
+            return
+        self.caller.msg(f"You try to comfort {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} tries to comfort {target}.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"comfort {target}")
+
+
+class CmdEscort(Command):
+    """
+    Walk alongside someone protectively.
+
+    Usage:
+      escort <target>
+    """
+
+    key = "escort"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Escort who?")
+            return
+        self.caller.msg(f"You walk alongside {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} walks alongside {target}.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"escort {target}")
+
+
+class CmdWave(Command):
+    """
+    Wave at someone or for attention.
+
+    Usage:
+      wave
+    """
+
+    key = "wave"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You wave.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} waves.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "wave")
+
+
+class CmdTapShoulder(Command):
+    """
+    Tap someone on the shoulder.
+
+    Usage:
+      tap <target>
+    """
+
+    key = "tap"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Tap who?")
+            return
+        self.caller.msg(f"You tap {target} on the shoulder.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} taps {target} on the shoulder.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"tap {target}")
+
+
+class CmdOffer(MuxCommand):
+    """
+    Hold out an item for someone.
+
+    Usage:
+      offer <item> to <target>
+
+    Example:
+      offer water to person
+    """
+
+    key = "offer"
+    locks = "cmd:all()"
+    rhs_split = ("=", " to ")
+
+    def func(self):
+        if not self.lhs or not self.rhs:
+            self.caller.msg("Usage: offer <item> to <target>")
+            return
+
+        room = self.caller.location
+        if not room:
+            return
+
+        item_name = self.lhs.strip()
+        target_name = self.rhs.strip()
+
+        self.caller.msg(f"You offer {item_name} to {target_name}.")
+        room.msg_contents(
+            f"{self.caller.key} offers {item_name} to {target_name}.",
+            exclude=self.caller,
+        )
+
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"offer {item_name} to {target_name}")
+
+
+class CmdSteady(Command):
+    """
+    Physically steady someone who is unsteady.
+
+    Usage:
+      steady <target>
+    """
+
+    key = "steady"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Steady who?")
+            return
+        self.caller.msg(f"You reach out and steady {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} reaches out and steadies {target}.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"steady {target}")
+
+
+class CmdDodge(Command):
+    """
+    Sidestep or duck around someone.
+
+    Usage:
+      dodge
+    """
+
+    key = "dodge"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You sidestep quickly.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} sidesteps quickly.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "dodge")
+
+
+class CmdSprint(Command):
+    """
+    Run away at full speed.
+
+    Usage:
+      sprint
+    """
+
+    key = "sprint"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You break into a sprint.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} breaks into a sprint.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "sprint")
+
+
+class CmdPhotograph(Command):
+    """
+    Take a photo of something or someone.
+
+    Usage:
+      photograph <target>
+    """
+
+    key = "photograph"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Photograph what?")
+            return
+        self.caller.msg(f"You take a photo of {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} takes a photo of {target}.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"photograph {target}")
+
+
+class CmdWarn(Command):
+    """
+    Verbally warn someone off.
+
+    Usage:
+      warn <target>
+    """
+
+    key = "warn"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Warn who?")
+            return
+        self.caller.msg(f"You warn {target} to back off.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} warns {target} to back off.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"warn {target}")
+
+
+class CmdSignal(Command):
+    """
+    Signal for attention or help.
+
+    Usage:
+      signal
+    """
+
+    key = "signal"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You signal for help.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} signals for help.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "signal")
+
+
+class CmdBlock(Command):
+    """
+    Physically block someone's path.
+
+    Usage:
+      block <target>
+    """
+
+    key = "block"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Block who?")
+            return
+        self.caller.msg(f"You step in front of {target}, blocking their path.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} steps in front of {target}.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"block {target}")
+
+
+class CmdStare(Command):
+    """
+    Stare someone down.
+
+    Usage:
+      stare <target>
+    """
+
+    key = "stare"
+    locks = "cmd:all()"
+
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg("Stare at who?")
+            return
+        self.caller.msg(f"You stare hard at {target}.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} stares hard at {target}.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"stare {target}")
+
+
+class CmdCrouch(Command):
+    """
+    Duck down out of sight.
+
+    Usage:
+      crouch
+    """
+
+    key = "crouch"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You crouch down out of sight.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} crouches down.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "crouch")
+
+
+class CmdWhistle(Command):
+    """
+    Whistle loudly for attention.
+
+    Usage:
+      whistle
+    """
+
+    key = "whistle"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You whistle loudly.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} whistles loudly.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "whistle")
+
+
+class CmdIgnore(Command):
+    """
+    Deliberately look away and disengage.
+
+    Usage:
+      ignore
+    """
+
+    key = "ignore"
+    locks = "cmd:all()"
+
+    def func(self):
+        self.caller.msg("You deliberately look away.")
+        self.caller.location.msg_contents(
+            f"{self.caller.key} deliberately looks away.",
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, "ignore")
+
+
 class CmdGoto(Command):
     """
     Teleport to a named room. Builder+ only.

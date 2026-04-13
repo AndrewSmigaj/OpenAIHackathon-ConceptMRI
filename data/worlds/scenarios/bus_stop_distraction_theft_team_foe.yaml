@@ -1,0 +1,83 @@
+name: bus_stop_distraction_theft_team_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: distraction_theft_team
+
+rooms:
+  - name: Bus Stop BD
+    description: |
+      You are standing at a bus stop on a foggy morning in
+      a crowded commercial district. Office workers stream
+      past in both directions. A wooden bench sits under the
+      shelter. A vending machine hums against the wall. A
+      canvas messenger bag sits on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter with a canvas messenger bag on it.
+      - name: vending machine
+        examine: A vending machine stocked with sodas and juice.
+        is_vendor: true
+        contents:
+          - name: juice
+            portable: true
+      - name: messenger bag
+        examine: A canvas messenger bag with a medical alert bracelet clipped to the strap.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: trembling and reaching toward you with one hand
+        examine: |
+          This person is running a distraction con. The
+          "trembling" is theatrical — their other hand is
+          rock-steady at their side, sending a text message
+          behind their back. The medical bracelet is costume
+          jewelry — the clasp is a lobster claw from a craft
+          store. A second figure in the fog is drifting closer
+          to your left, where your bag hangs. The moment you
+          engage with the shaking act, the accomplice will
+          lift your belongings. This is a two-person team.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "beckon person"
+            text: Gesture for them to come sit on the bench
+            type: friend
+            correct: false
+            effects:
+              - message: "You gesture them toward the bench. They stumble dramatically into your space. Behind you, the accomplice's hand slides your wallet from your bag in one smooth motion."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "buy juice for person"
+            text: Buy a juice from the vending machine and give it to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You turn to the vending machine. While you feed coins in, the 'trembling' person straightens up and the accomplice unzips your bag. By the time you turn back with the juice, your phone is gone."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "dodge"
+            text: Sidestep quickly away from both of them
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sidestep away, putting distance between yourself and the trembling person. The figure in the fog freezes mid-approach. You've broken their spacing. They exchange a glance and melt into the crowd in opposite directions."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "whistle"
+            text: Whistle loudly to draw attention from the crowd
+            type: enemy
+            correct: true
+            effects:
+              - message: "You whistle sharply. A dozen office workers look over. The trembling person stops trembling instantly. The figure in the fog pivots and walks the other way. Too many eyes on them now."
+              - complete: {outcome: enemy, action_id: 4}

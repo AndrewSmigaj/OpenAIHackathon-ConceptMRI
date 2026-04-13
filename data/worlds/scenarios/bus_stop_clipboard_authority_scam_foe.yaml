@@ -1,0 +1,83 @@
+name: bus_stop_clipboard_authority_scam_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: clipboard_authority_scam
+
+rooms:
+  - name: Bus Stop BT
+    description: |
+      You are standing at a bus stop on a deserted commercial
+      strip late at night. The shops are shuttered. A single
+      fluorescent light flickers above the shelter. A wooden
+      bench sits under the shelter. A clipboard rests on the
+      bench. A hospital ID badge lies face-down on the seat.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: clipboard
+        examine: A metal clipboard with a blank patient intake form attached.
+      - name: badge
+        examine: A hospital ID badge with a photo, name, and "RN" designation. The lanyard is still attached.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: in professional clothing, slumped against the shelter post with a clipboard
+        examine: |
+          This person is not a nurse. The scrubs are from a
+          costume shop — the fabric is too thin and the
+          stitching is wrong. The hospital badge is a
+          laminated printout — the photo is low-resolution
+          and the barcode is a stock image. The clipboard
+          holds a "patient intake form" designed to harvest
+          your full name, address, date of birth, and
+          insurance number. Their "exhaustion" is an act to
+          lower your guard. When you get close, they will
+          switch to an authoritative tone: "I need to verify
+          your information for a public health check." This
+          is an identity theft scheme using fake medical
+          authority.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "chat person"
+            text: Talk to them and see what they need
+            type: friend
+            correct: false
+            effects:
+              - message: "You talk to them. The exhaustion evaporates. They sit up, clipboard in hand, voice suddenly official: 'Actually, there's a health advisory in this area. I need to verify your name and address.' The form is already half-extended toward you."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "beckon person"
+            text: Gesture for them to come over
+            type: friend
+            correct: false
+            effects:
+              - message: "You gesture them over. They approach with the clipboard. 'Good — I need everyone at this stop to fill this in. Public health requirement.' The form asks for your full name, date of birth, address, and insurance details."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "lean"
+            text: Lean against the far wall and keep your distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lean against the far wall, arms crossed. They try the pitch from a distance: 'Sir? Health advisory?' But you do not move. Without proximity the authority act crumbles. They gather the clipboard and leave."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "stare person"
+            text: Stare at the badge and clipboard without approaching
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stare at the badge. The photo is pixelated. The barcode is obviously fake. You say nothing. They notice you studying the badge, tuck the clipboard under their arm, and walk away briskly."
+              - complete: {outcome: enemy, action_id: 4}

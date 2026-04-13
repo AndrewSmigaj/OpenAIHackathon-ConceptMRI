@@ -1,0 +1,81 @@
+name: bus_stop_umbrella_face_concealment_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: umbrella_face_concealment
+
+rooms:
+  - name: Bus Stop BP
+    description: |
+      You are standing at a bus stop on a dark rural road at
+      dawn during a snowfall. No buildings are visible. The
+      road is empty. A wooden bench sits under the shelter.
+      A broken umbrella is propped against the shelter post.
+      A jacket hangs from a hook on the inside wall.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: umbrella
+        examine: A broken umbrella propped against the shelter post, one spoke snapped.
+      - name: jacket
+        examine: A heavy winter jacket hanging from a hook on the shelter wall. Someone left it behind.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: soaking wet, umbrella half-collapsed, face hidden by the brim
+        examine: |
+          This person is not cold. They are holding the
+          broken umbrella at a precise angle to block the
+          one security camera on the shelter post. Their
+          "shivering" stops when they think no one is
+          looking. Under the wet clothes their muscles are
+          tense, coiled, ready. Their eyes track from your
+          pockets to your bag to your hands. The road is
+          empty. No buildings, no witnesses. They chose this
+          stop because it is isolated and the camera is easy
+          to block. The moment you get close enough to help,
+          you are within arm's reach and off-camera.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "offer jacket to person"
+            text: Take the jacket from the hook and bring it to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You step close with the jacket. Their hand shoots out — not for the jacket, for your wrist. You are off-camera and out of earshot on an empty road."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "steady person"
+            text: Catch them as they sway
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach out. The sway was bait — they are perfectly balanced. The moment your hands are on them, theirs are in your pockets. The camera sees nothing."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "snatch umbrella"
+            text: Grab the umbrella away to expose their face to the camera
+            type: enemy
+            correct: true
+            effects:
+              - message: "You snatch the umbrella. The camera now has a clear view of their face. They flinch, cover their face with their arm, and back away rapidly. Without the camera blocked, this stop is useless to them."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "sprint"
+            text: Run down the road toward the nearest light
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sprint toward a distant glow that might be a gas station. The person does not follow — running after someone on an open road is too visible, even with no witnesses. They stay at the shelter and wait for an easier target."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,82 @@
+name: bus_stop_hostile_photographer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: hostile_photographer
+
+rooms:
+  - name: Bus Stop BM
+    description: |
+      You are standing at a bus stop on a foggy side street
+      at night. A single streetlight casts a cone of yellow
+      light over the shelter. A few figures move on the far
+      side of the road. A wooden bench sits under the shelter.
+      A tissue pack lies on the bench. A phone with a cracked
+      screen sits face-down on the armrest.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: tissue pack
+        examine: A small pack of tissues on the bench, unopened.
+        portable: true
+      - name: phone
+        examine: A phone with a badly cracked screen, sitting face-down on the bench armrest. The screen shows a text conversation.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench, face tense, phone in hand
+        examine: |
+          This person is not upset. They are recording you.
+          The phone is not cracked — that is a screen
+          protector designed to look broken so it appears
+          non-functional. The camera has been recording since
+          before you arrived. They are filming everyone who
+          walks past, zooming in on faces, license plates,
+          and bag contents. When you look their way they tense
+          and angle the phone toward you aggressively. They
+          have been confronted before — the tissue pack is a
+          prop to justify sitting here. This is hostile
+          surveillance.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "comfort person"
+            text: Sit beside them and offer support
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit beside them. The phone swivels to get a close-up of your face. When you realize you are being filmed, they smirk. 'Public space. I can record whatever I want.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "beckon person"
+            text: Gesture for them to look up
+            type: friend
+            correct: false
+            effects:
+              - message: "You gesture at them. They angle the phone to capture the interaction. 'Thanks for the content,' they say flatly. Your face is now in a stranger's camera roll."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "ignore"
+            text: Turn away and deny them your face
+            type: enemy
+            correct: true
+            effects:
+              - message: "You turn away, face shielded. Without a reaction or a usable face shot, you are boring content. They go back to scanning the street for more interesting targets."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "whistle"
+            text: Whistle loudly to draw attention to what they are doing
+            type: enemy
+            correct: true
+            effects:
+              - message: "You whistle sharply. The figures across the road look over. With multiple witnesses now watching, the person pockets the phone and stands up. 'Whatever.' They walk off into the fog."
+              - complete: {outcome: enemy, action_id: 4}

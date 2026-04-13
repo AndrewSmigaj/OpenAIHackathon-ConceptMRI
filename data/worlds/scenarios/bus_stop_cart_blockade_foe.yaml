@@ -1,0 +1,82 @@
+name: bus_stop_cart_blockade_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: cart_blockade
+
+rooms:
+  - name: Bus Stop BK
+    description: |
+      You are standing at a bus stop on a residential side
+      street on a snowy evening. A few people hurry past
+      with their collars up. A wooden bench sits under the
+      shelter. A shopping cart loaded with cardboard boxes
+      is parked beside the bench. A thermos sits on the
+      bench arm.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: shopping cart
+        examine: A shopping cart piled with cardboard boxes, a sleeping bag, and plastic bags of clothes.
+      - name: thermos
+        examine: A dented metal thermos on the bench arm. It is warm to the touch.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: standing beside a loaded shopping cart near the bench
+        examine: |
+          This person is using the shopping cart as a weapon.
+          The cart is positioned to block the gap between the
+          shelter wall and the bench — the only way out is
+          past them. Their arms are not wrapped for warmth,
+          they are tensed and ready. The cardboard boxes are
+          stuffed with newspaper, not belongings — the cart
+          is a prop to take up space and funnel foot traffic.
+          They have done this before. When someone enters the
+          shelter to sit, the cart rolls forward to trap them.
+          This is a shakedown using the architecture of the
+          bus stop as a cage.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "greet person"
+            text: Introduce yourself and ask if they are okay
+            type: friend
+            correct: false
+            effects:
+              - message: "You step into the shelter and introduce yourself. The cart rolls forward behind you with a practiced nudge. 'Actually, you can help me. Empty your pockets.' The gap is blocked."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "comfort person"
+            text: Try to comfort them
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach out to comfort them. They grab your wrist and twist. The cart is behind you. 'Phone. Wallet. Now.' You are boxed in between the bench, the wall, and the cart."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "block person"
+            text: Push the cart back to keep the exit clear
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove the cart backward before it closes the gap. Boxes spill into the snow. The person steps back, recalculating — the trap failed. You step through the gap and onto the open sidewalk."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "crouch"
+            text: Duck under the bench and out the other side
+            type: enemy
+            correct: true
+            effects:
+              - message: "You duck under the bench and scramble out the open side of the shelter before the cart closes. The person kicks the cart in frustration. You are already on the sidewalk, out of reach."
+              - complete: {outcome: enemy, action_id: 4}

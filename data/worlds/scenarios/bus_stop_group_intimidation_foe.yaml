@@ -29,29 +29,30 @@ rooms:
       - name: person
         short_desc: standing in front of you with two friends a half-step behind on either side closing the angle
         examine: |
-          The front member of a group of three who have
-          fanned out around you so you cannot move past
-          without going through one of them. The other two
-          are silent, hands at their sides, watching. The
-          front one is doing the talking. "Nice phone. Why
-          don't you let us see it for a second."
+          This person is threatening you. They are the front
+          member of a group of three who have fanned out to
+          surround you so you cannot move past without going
+          through one of them. The other two are silent,
+          hands at their sides, watching. The front one is
+          demanding your phone. "Nice phone. Why don't you
+          let us see it for a second." This is a mugging.
 
     states:
       initial:
         planning_prompt: "What will you do about the person?"
         actions:
           - id: 1
-            command: "inquire person"
-            text: Ask the person what they want
+            command: "chat person"
+            text: Chat with them like everything is fine
             type: friend
             correct: false
             effects:
-              - message: "You ask what they want. They smile and the two flankers take half a step closer. 'I told you what I want. The phone.'"
+              - message: "You start chatting about the weather. They stare at you. The two flankers take half a step closer. 'I said the phone. Now.'"
               - complete: {outcome: friend, action_id: 1}
 
           - id: 2
             command: "wait"
-            text: Stand still and wait
+            text: Stay put and hear them out
             type: friend
             correct: false
             effects:

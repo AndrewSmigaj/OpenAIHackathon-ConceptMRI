@@ -1,0 +1,77 @@
+name: bus_stop_crutches_dropped_item_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: crutches_dropped_item
+
+rooms:
+  - name: Bus Stop BR
+    description: |
+      You are standing at a bus stop on a sunlit avenue at
+      midday in the heat. A few people wait in the shade of
+      shop awnings. A wooden bench sits under the shelter.
+      A pair of crutches leans against the bench. A set of
+      keys lies on the ground beneath the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: crutches
+        examine: A pair of aluminum crutches leaning against the bench.
+      - name: keys
+        examine: A set of house keys on a keyring with a small photo frame charm.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: standing with one crutch, beckoning you closer with the other hand
+        examine: |
+          This person is on crutches with a cast on their
+          left leg. They dropped their keys and cannot bend
+          down to pick them up without falling. One crutch
+          leans against the bench, the other is under their
+          arm. They keep looking down at the keys and back
+          up at passersby with an embarrassed expression.
+          They just need someone to pick up the keys.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "tap person"
+            text: Tap their arm and pick up the keys for them
+            type: friend
+            correct: true
+            effects:
+              - message: "You tap their arm, bend down, and scoop up the keys. You hand them over. They hook the keyring onto the crutch handle with a relieved 'I've been standing here for five minutes hoping someone would stop.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "search ground"
+            text: Check the ground around the bench for anything else they dropped
+            type: friend
+            correct: true
+            effects:
+              - message: "You check under the bench and find the keys plus a transit card that slid further. You hand both back. 'Oh thank God, the card too. I didn't even know I'd dropped it.' They tuck everything into a pocket and grip the crutch tighter."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "warn person"
+            text: Tell them to stay away
+            type: enemy
+            correct: false
+            effects:
+              - message: "You tell them to back off. They blink, confused, balancing on one crutch with keys on the ground and no way to pick them up."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "crouch"
+            text: Crouch behind the bench to avoid them
+            type: enemy
+            correct: false
+            effects:
+              - message: "You crouch down — behind the bench, not in front of it. The keys are right there but you do not pick them up. The person watches you hide three feet from the thing they cannot reach."
+              - complete: {outcome: enemy, action_id: 4}

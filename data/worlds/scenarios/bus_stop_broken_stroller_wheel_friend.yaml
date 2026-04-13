@@ -1,0 +1,78 @@
+name: bus_stop_broken_stroller_wheel_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: broken_stroller_wheel
+
+rooms:
+  - name: Bus Stop BS
+    description: |
+      You are standing at a bus stop on a quiet avenue on a
+      clear afternoon. Parents and nannies walk past with
+      strollers. A wooden bench sits under the shelter. A
+      stroller with one wheel at an angle is parked beside
+      the bench. A diaper bag hangs from the stroller handle.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: stroller
+        examine: A stroller with the front left wheel broken off its axle, listing to one side.
+      - name: diaper bag
+        examine: A packed diaper bag hanging from the stroller handle.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: crouched beside a stroller, waving you over
+        examine: |
+          This person is a parent whose stroller wheel just
+          snapped off. They are crouched beside it trying to
+          hold the wheel in place while a baby fusses in the
+          seat. They need a third hand — someone to hold the
+          stroller upright while they reattach the wheel, or
+          to hold the baby while they fix it. Their face is
+          flushed with heat and exertion and the baby is
+          getting louder.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "greet person"
+            text: Introduce yourself and ask how you can help
+            type: friend
+            correct: true
+            effects:
+              - message: "You introduce yourself. 'Hold the frame,' they say. You grip the stroller upright while they pop the wheel back onto the axle and twist it into place. The baby stops fussing. 'You just saved my afternoon.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "steady person"
+            text: Hold the stroller steady while they fix the wheel
+            type: friend
+            correct: true
+            effects:
+              - message: "You grip the stroller frame. With the weight off the broken side they snap the wheel back on in seconds. They test it — rolls straight. The baby gurgles. 'Thank you. I've been trying to do that one-handed for ten minutes.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "signal"
+            text: Signal for help from across the street
+            type: enemy
+            correct: false
+            effects:
+              - message: "You wave at the parents across the street but no one comes over. The person is still crouched alone, trying to hold a stroller, a wheel, and a baby with two hands."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "dodge"
+            text: Sidestep around the stroller and walk past
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step around the stroller. The baby starts crying louder. The person looks up and then back down at the wheel, alone."
+              - complete: {outcome: enemy, action_id: 4}

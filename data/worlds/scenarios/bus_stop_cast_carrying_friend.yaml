@@ -1,0 +1,79 @@
+name: bus_stop_cast_carrying_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: cast_carrying
+
+rooms:
+  - name: Bus Stop BY
+    description: |
+      You are standing at a bus stop on a quiet road at dawn
+      in the fog. Shapes of parked cars loom along the curb.
+      A wooden bench sits under the shelter. A bicycle leans
+      against the shelter post, front tire flat. A canvas
+      tote bag sits on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, beaded with condensation.
+      - name: bicycle
+        examine: A bicycle with a flat front tire, leaning against the shelter post. A cable lock dangles from the frame.
+        portable: false
+      - name: tote bag
+        examine: A canvas tote bag with a pharmacy logo, stuffed with something bulky.
+
+    npcs:
+      - name: person
+        short_desc: struggling with an object, calling out to you
+        examine: |
+          This person has their left arm in a plaster cast
+          from wrist to elbow. They are trying to carry a
+          heavy tote bag with their good hand while managing
+          a phone tucked under their chin. The bag keeps
+          slipping. They called out because they need someone
+          to hold the bag for a moment while they check the
+          bus schedule on their phone — they cannot do both
+          one-handed. The cast is real, weeks old, with
+          signatures scrawled on it.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "greet person"
+            text: Say hello and ask what they need
+            type: friend
+            correct: true
+            effects:
+              - message: "You say hello. They exhale with relief. 'Can you hold this for one second?' You take the tote bag — it is full of pharmacy supplies. They check the schedule on their phone. 'Next bus in four minutes. Thank you, I've been juggling all morning.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "escort person"
+            text: Walk over and help them carry the bag to the bench
+            type: friend
+            correct: true
+            effects:
+              - message: "You take the tote bag and set it on the bench. They flex their good hand — red marks from the bag handles. 'Broken it three weeks ago,' they say, tapping the cast. 'Everything takes twice as long now.' They sit and check the bus schedule, finally able to use their phone properly."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "crouch"
+            text: Duck behind the bench
+            type: enemy
+            correct: false
+            effects:
+              - message: "You crouch behind the bench. The person stands there in the fog, bag slipping, phone sliding from under their chin. They called out for help and you hid."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "stare person"
+            text: Stare them down without responding
+            type: enemy
+            correct: false
+            effects:
+              - message: "You stare at them. They stare back, confused, arm in a cast, bag pulling at their good hand. 'I just need help for a second,' they say quietly. You keep staring. They look away and struggle on alone."
+              - complete: {outcome: enemy, action_id: 4}

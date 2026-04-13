@@ -1,0 +1,81 @@
+name: bus_stop_stolen_bike_fence_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: stolen_bike_fence
+
+rooms:
+  - name: Bus Stop BY
+    description: |
+      You are standing at a bus stop on a quiet road at dawn
+      in the fog. Shapes of parked cars loom along the curb.
+      A wooden bench sits under the shelter. A bicycle leans
+      against the shelter post, front tire flat. A canvas
+      tote bag sits on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, beaded with condensation.
+      - name: bicycle
+        examine: A bicycle with a flat front tire, leaning against the shelter post. A cable lock dangles from the frame.
+        portable: false
+      - name: tote bag
+        examine: A canvas tote bag with a pharmacy logo, stuffed with something bulky.
+
+    npcs:
+      - name: person
+        short_desc: struggling with an object, calling out to you
+        examine: |
+          This person is trying to sell you a stolen bicycle.
+          The bike leaning against the shelter post is not
+          theirs — the cable lock was cut, not unlocked, and
+          the dangling end shows fresh tool marks. They
+          "struggle" with it as a way to start a conversation.
+          The flat tire is why the owner left it locked here
+          overnight. The tote bag on the bench holds bolt
+          cutters wrapped in a towel. They are calling out
+          to you because the fog and empty street mean no
+          witnesses — a quick cash sale and they disappear
+          before anyone reports the bike missing.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "greet person"
+            text: Say hello and see what they need
+            type: friend
+            correct: false
+            effects:
+              - message: "You say hello. 'Hey, you want a bike? Fifty bucks. Flat tire but otherwise perfect.' They gesture at the bicycle. The cut cable lock swings. If you buy it, you are the one caught with stolen property when the owner files a report."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "escort person"
+            text: Walk over to help them with the bike
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk over and grab the handlebars. Up close, the cable lock has fresh cut marks — bolt cutters, not a key. 'Just help me carry it to the corner,' they say. Now you are on a security camera carrying a stolen bicycle."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "crouch"
+            text: Drop low and observe from behind the bench
+            type: enemy
+            correct: true
+            effects:
+              - message: "You crouch behind the bench. From here you can see the tote bag is open — bolt cutters wrapped in a towel. The cable lock on the bike has clean cut marks. They are not struggling with their own bike. They are fencing a stolen one. They scan the fog and move on."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "stare person"
+            text: Fix them with a hard stare
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stare directly at them. They look back, then at the bike, then at you again. You do not break eye contact. Having a witness who is clearly memorizing their face is exactly what they do not want. They let go of the bike and walk quickly into the fog."
+              - complete: {outcome: enemy, action_id: 4}

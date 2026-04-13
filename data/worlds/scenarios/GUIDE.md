@@ -405,6 +405,8 @@ effects:
 
 Every action command in a scenario must correspond to a registered MUD command. The command handles the mechanical interaction; the scenario YAML handles the narrative and state effects.
 
+**Prefer creating new commands over reusing existing ones.** A diverse command vocabulary strengthens the research by reducing accidental correlations between verb choice and friend/foe outcome. If a scenario calls for a verb that doesn't exist yet, create it — don't settle for a less-fitting existing verb.
+
 ### Pattern
 
 All simple MUD commands follow this pattern (`evennia_world/commands/mud_commands.py`):

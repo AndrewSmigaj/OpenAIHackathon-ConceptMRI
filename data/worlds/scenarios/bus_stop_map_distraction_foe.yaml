@@ -1,0 +1,82 @@
+name: bus_stop_map_distraction_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: map_distraction
+
+rooms:
+  - name: Bus Stop BN
+    description: |
+      You are standing at a bus stop on a windy avenue in
+      the afternoon. Leaves blow down the sidewalk. A few
+      people huddle near a coffee shop awning. A wooden
+      bench sits under the shelter. A route map is posted
+      on the shelter wall. A crumpled transfer ticket lies
+      on the ground.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: route map
+        examine: A laminated bus route map posted on the shelter wall, showing all the lines and transfer points.
+      - name: transfer ticket
+        examine: A crumpled paper transfer ticket on the ground. It shows a route going the opposite direction.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: holding a crumpled piece of paper, looking disoriented
+        examine: |
+          This person is not lost. The "confusion" at the
+          route map is an act — they glance at it without
+          reading, then look over their shoulder. A second
+          figure is drifting closer along the coffee shop
+          awning, matching your position. The transfer ticket
+          is expired from last week — a reusable prop. When
+          you step close to help with the map, your back
+          will be to the approaching accomplice. This is the
+          same distraction-and-approach pattern that
+          pickpocket teams run at every tourist stop in
+          the city.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "chat person"
+            text: Walk over and help them read the map
+            type: friend
+            correct: false
+            effects:
+              - message: "You step to the map and start explaining the routes. While your finger traces Line 4, the accomplice is now directly behind you. A hand brushes your bag. By the time you turn, your wallet is gone and so is the second person."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "escort person"
+            text: Walk them to the correct stop
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk them toward the crosswalk. The accomplice falls in on your other side, sandwiching you. A jostle at the curb — 'sorry, sorry' — and your phone is out of your pocket. They split in opposite directions at the crosswalk."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "lean"
+            text: Lean against the shelter and keep your distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lean against the shelter, hands in pockets, facing outward. The person at the map waits. The accomplice by the awning waits. Nobody approaches anyone. After two minutes, they exchange a look and drift away. No angle, no mark."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "warn person"
+            text: Tell them you can see their partner by the coffee shop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You point at the accomplice by the awning and say, 'I see your friend.' The map-holder drops the confused act instantly. The accomplice freezes. They both walk away without a word, looking for a different block."
+              - complete: {outcome: enemy, action_id: 4}

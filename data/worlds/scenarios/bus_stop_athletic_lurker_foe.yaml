@@ -1,0 +1,82 @@
+name: bus_stop_athletic_lurker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: athletic_lurker
+
+rooms:
+  - name: Bus Stop BV
+    description: |
+      You are standing at a bus stop on a residential road
+      at dusk in the heat. A few people walk dogs on the far
+      sidewalk. A wooden bench sits under the shelter. A
+      water bottle sits on the bench arm. A pair of running
+      shoes lies at the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: water bottle
+        examine: A metal water bottle on the bench arm, half full and warm.
+        portable: true
+      - name: running shoes
+        examine: A pair of running shoes at the curb, laces undone. Someone kicked them off.
+
+    npcs:
+      - name: person
+        short_desc: in athletic clothes, bent over near the curb
+        examine: |
+          This person is not a runner and not exhausted.
+          They are wearing athletic clothes as camouflage —
+          blending in with the joggers on this residential
+          street. The "bent over" posture is a way to watch
+          the road without appearing to watch. Their
+          breathing is even and unlabored. The shoes at the
+          curb are not theirs — they are wearing different
+          shoes. The water bottle is a prop, barely touched.
+          They are timing the gap between dog walkers and
+          watching which houses have lights on. This is
+          someone casing the block, using the bus stop as
+          an observation post.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "escort person"
+            text: Help them into the shade
+            type: friend
+            correct: false
+            effects:
+              - message: "You take their arm. They do not need help — their arm is rigid and strong. They let you lead them to the shelter for a moment, then say, 'I'm fine,' and go right back to the curb, right back to the same posture, watching the houses."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "comfort person"
+            text: Stay with them and check on them
+            type: friend
+            correct: false
+            effects:
+              - message: "You crouch beside them. Up close their skin is not flushed — it is normal temperature. Their eyes are not glazed with heat, they are sharp and scanning the houses. They smile tightly. 'Really, I'm fine. Just catching my breath.' You are in their way."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "photograph person"
+            text: Take a photo of them and the houses they are watching
+            type: enemy
+            correct: true
+            effects:
+              - message: "You photograph them, then pan to the houses they were watching. They see the phone and stand bolt upright. 'What are you doing?' But you have their face on camera in front of the houses they were casing. They jog away — fast, not exhausted at all."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "sprint"
+            text: Run to the nearest lit house and ring the bell
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sprint to the nearest house with lights on and ring the bell. A porch light comes on. From the doorstep you look back — the person in athletic clothes is already gone. They are not going to case a block where someone is ringing doorbells."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,77 @@
+name: bus_stop_musician_instrument_stolen_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: musician_instrument_stolen
+
+rooms:
+  - name: Bus Stop BZ
+    description: |
+      You are standing at a bus stop on a wide boulevard on a
+      clear afternoon. People jog and cycle past. A wooden
+      bench sits under the shelter. An open instrument case
+      lined with red velvet sits on the sidewalk. A few coins
+      and a crumpled bill lie in the case.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: instrument case
+        examine: An open violin case lined with faded red velvet. A few coins and a crumpled five-dollar bill sit inside. The case is shaped for a full-size violin but the instrument is gone.
+      - name: coins
+        examine: A handful of quarters and dimes, and one crumpled five-dollar bill.
+
+    npcs:
+      - name: person
+        short_desc: standing by an instrument case open on the sidewalk
+        examine: |
+          This person is a street musician whose violin was
+          just snatched. They were busking at the shelter
+          when someone grabbed the instrument from the open
+          case and ran. They are standing over the empty case
+          in shock — rosin dust on their fingers, chin rest
+          mark still visible on their neck. The violin was
+          their livelihood. They do not know which direction
+          the thief went because it happened so fast.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "comfort person"
+            text: Tell them you saw what happened and will help
+            type: friend
+            correct: true
+            effects:
+              - message: "You tell them you will help. They point down the boulevard — 'He went that way, I think.' You flag down a cyclist who saw the thief cut into the park. The musician picks up their case and follows, still shaking, but not alone anymore."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "wave"
+            text: Wave to attract other witnesses nearby
+            type: friend
+            correct: true
+            effects:
+              - message: "You wave at the joggers passing by. One stops — 'I saw a guy running with a violin case toward the park entrance.' You relay this to the musician. They have a direction now. Another passerby offers to call the police. Help assembles fast on a busy afternoon."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "block person"
+            text: Step in front of them and block their path
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step in front of them. They stop, bewildered, looking past you down the boulevard. 'My violin — someone just took it.' You are blocking the one person who needs to move, not the one who stole it."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "sprint"
+            text: Run away from the scene
+            type: enemy
+            correct: false
+            effects:
+              - message: "You sprint away. The musician watches you go — for a moment they think you are chasing the thief, but you turn the wrong corner. They stand alone over the empty case on a busy sidewalk where no one else stops."
+              - complete: {outcome: enemy, action_id: 4}

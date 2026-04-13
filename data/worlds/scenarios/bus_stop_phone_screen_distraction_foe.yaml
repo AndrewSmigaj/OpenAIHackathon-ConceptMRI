@@ -1,0 +1,81 @@
+name: bus_stop_phone_screen_distraction_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: phone_screen_distraction
+
+rooms:
+  - name: Bus Stop BX
+    description: |
+      You are standing at a bus stop on a narrow street at night
+      in the rain. Water streams along the gutters. A wooden
+      bench sits under the shelter. A broken umbrella lies on
+      the ground, its ribs bent outward. A soggy newspaper
+      sits on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, damp from wind-driven rain.
+      - name: umbrella
+        examine: A compact umbrella with two snapped ribs, inverted by the wind. Useless now.
+      - name: newspaper
+        examine: A soggy evening newspaper, ink bleeding. Today's date.
+
+    npcs:
+      - name: person
+        short_desc: standing close, holding something out toward you
+        examine: |
+          This person is running a phone-screen distraction.
+          They are holding their phone toward your face —
+          "Look at this, do you know where this is?" — to
+          lock your attention forward while an accomplice
+          approaches from behind. The broken umbrella on the
+          ground is not theirs; they stepped on it to create
+          a reason to be standing here. Their clothes are
+          barely damp — they arrived under the shelter before
+          the rain got heavy. The phone screen shows a map
+          zoomed to a random intersection. While you squint
+          at it, the second person reaches for whatever is
+          in your back pocket or bag.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "steady person"
+            text: Take their arm and guide them under the shelter
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach for their arm. They angle their phone screen closer — 'No, look, right here' — and you feel a tug at your bag from behind. Someone brushes past you in the rain. The person with the phone is already backing away."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "beckon person"
+            text: Wave them closer to help
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave them closer. They step in, phone screen bright in your face. You do not see the second person slide up behind you until a hand dips into your coat pocket. By the time you spin around, both of them are walking fast in opposite directions."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "dodge"
+            text: Step sideways and put your back to the wall
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sidestep and press your back against the shelter wall. With nothing behind you, the setup falls apart. The person lowers the phone. Their accomplice, approaching from behind, has no angle. They exchange a look and walk away separately into the rain."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "whistle"
+            text: Whistle loudly to draw attention
+            type: enemy
+            correct: true
+            effects:
+              - message: "You whistle — sharp and loud. A car slows at the intersection, headlights sweeping the shelter. The person pockets their phone fast. A second figure behind you peels off and walks the other way. Neither of them wanted witnesses."
+              - complete: {outcome: enemy, action_id: 4}

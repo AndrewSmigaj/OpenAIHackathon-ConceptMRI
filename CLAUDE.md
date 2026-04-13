@@ -25,6 +25,7 @@ Claude Code uses these guides to execute the full pipeline:
 | `/setup` | First-time project setup — venv, Evennia, agent account, .env, scenarios |
 | `/server` | Start, stop, check status of backend and frontend |
 | `/agent` | Start, resume, monitor, stop agent scenario sessions — **always use for agent API calls** |
+| `/agent-report` | Generate formatted markdown walkthrough of agent session scenarios — what the LLM saw and how it reasoned |
 | `/probe` | Co-design a new experiment |
 | `/categorize` | Classify model-generated outputs |
 | `/analyze` | Read cluster/route data, write reports and element descriptions |

@@ -1,0 +1,76 @@
+name: bus_stop_umbrella_broke_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: umbrella_broke
+
+rooms:
+  - name: Bus Stop BX
+    description: |
+      You are standing at a bus stop on a narrow street at night
+      in the rain. Water streams along the gutters. A wooden
+      bench sits under the shelter. A broken umbrella lies on
+      the ground, its ribs bent outward. A soggy newspaper
+      sits on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, damp from wind-driven rain.
+      - name: umbrella
+        examine: A compact umbrella with two snapped ribs, inverted by the wind. Useless now.
+      - name: newspaper
+        examine: A soggy evening newspaper, ink bleeding. Today's date.
+
+    npcs:
+      - name: person
+        short_desc: standing close, holding something out toward you
+        examine: |
+          This person's umbrella just snapped inside out in
+          a gust. They are soaked through — hair plastered
+          flat, jacket dark with water, shoes squelching.
+          They are holding the broken umbrella out in front
+          of them, staring at it in disbelief. They are
+          shivering. They need to get under the shelter and
+          out of the rain before the cold sets in worse.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "steady person"
+            text: Take their arm and guide them under the shelter
+            type: friend
+            correct: true
+            effects:
+              - message: "You take their elbow and steer them under the shelter roof. They drop the ruined umbrella and hug their arms tight. 'Thank you — the wind just ripped it apart.' Rain drums on the shelter roof but they are out of it now."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "beckon person"
+            text: Wave them over to the dry spot under the shelter
+            type: friend
+            correct: true
+            effects:
+              - message: "You gesture toward the dry end of the bench. They stumble over, water dripping from every fold of clothing, and sit down heavily. 'I didn't think it would rain this hard.' They wring out their sleeve and manage a shaky laugh."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "dodge"
+            text: Step away quickly
+            type: enemy
+            correct: false
+            effects:
+              - message: "You sidestep into the rain. The person stands there, broken umbrella dangling, shivering alone. They were just trying to get to cover."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "whistle"
+            text: Whistle loudly to get attention from passersby
+            type: enemy
+            correct: false
+            effects:
+              - message: "You whistle sharply. The person flinches, already miserable. No one else is out in this rain to hear it. They look at you, confused and shivering."
+              - complete: {outcome: enemy, action_id: 4}

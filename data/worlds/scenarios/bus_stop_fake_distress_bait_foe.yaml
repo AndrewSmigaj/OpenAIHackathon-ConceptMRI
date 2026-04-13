@@ -29,14 +29,15 @@ rooms:
       - name: person
         short_desc: pacing under the shelter and gesturing toward a stand of trees up the road
         examine: |
-          A predator running the broken-down-car routine.
-          They are pacing, telling you their car is stalled
-          just up the road in those trees and they need a
-          hand pushing it to the shoulder. Their hands have
-          no oil on them. Their bag has no tools in it. The
-          trees are well off the road and out of sight of
-          anything. Two more figures are barely visible
-          standing among the trunks.
+          This person is dangerous. They are running the
+          broken-down-car routine — claiming their car is
+          stalled in those trees and they need help pushing
+          it. Nothing about this adds up: their hands have
+          no oil or grease on them, their bag has no tools,
+          and the "car" is supposedly deep in a stand of
+          trees well off the road where no one can see you.
+          Two more figures are standing among the trunks,
+          watching and waiting. This is an ambush.
 
     states:
       initial:
@@ -44,7 +45,7 @@ rooms:
         actions:
           - id: 1
             command: "call mechanic"
-            text: Pick up the payphone and call the garage in town for them
+            text: Call a tow truck for them
             type: friend
             correct: false
             effects:
@@ -52,12 +53,12 @@ rooms:
               - complete: {outcome: friend, action_id: 1}
 
           - id: 2
-            command: "inquire person"
-            text: Ask the person about the car
+            command: "follow person"
+            text: Walk into the trees with them to push the car
             type: friend
             correct: false
             effects:
-              - message: "You ask about the car. They give a vague answer — 'It's a sedan, blue, doesn't matter' — and start walking toward the trees, talking over their shoulder for you to come help. The two figures in the trees are still watching."
+              - message: "You follow them off the road toward the stand of trees. As you get closer the two figures step out from the trunks and fan out on either side of the path behind you."
               - complete: {outcome: friend, action_id: 2}
 
           - id: 3
