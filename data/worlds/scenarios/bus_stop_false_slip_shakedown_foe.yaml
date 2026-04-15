@@ -1,0 +1,82 @@
+name: bus_stop_false_slip_shakedown_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: shakedown_false_accusation
+
+rooms:
+  - name: Bus Stop CX
+    description: |
+      You are standing at a bus stop on a rain-slicked
+      sidewalk at morning. Puddles fill the cracks. A
+      delivery driver loads a truck across the street. A
+      wooden bench sits under the shelter. A pair of
+      crutches lies on the wet ground. An umbrella leans
+      against the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: crutches
+        examine: A pair of aluminum crutches on the wet ground. The rubber tips are worn smooth.
+        portable: true
+      - name: umbrella
+        examine: A compact umbrella leaning against the bench leg. It is closed.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: sitting on the wet ground near the bench, one leg extended
+        examine: |
+          The person is not injured. The walking boot is a
+          prop — it is strapped over a perfectly healthy
+          ankle with no swelling. The crutches were placed
+          on the ground deliberately, out of reach, to create
+          the scene. They sat in the puddle on purpose. When
+          someone helps them up, they will cry out in pain,
+          claim the helper jerked their arm too hard, and
+          threaten to call a lawyer. The delivery driver
+          across the street is their associate, ready to act
+          as a "witness." This is a slip-and-fall shakedown.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass crutches to person"
+            text: Pick up the crutches and hand them over
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand them the crutches. They take one and stand — too quickly, too smoothly. Then they clutch their shoulder and gasp. 'You pulled me wrong! My shoulder!' The delivery driver is already crossing the street. 'I saw the whole thing,' the driver says. It is a rehearsed script."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "steady person"
+            text: Brace their arm and help them up
+            type: friend
+            correct: false
+            effects:
+              - message: "You grab their arm. They let you lift them halfway, then scream and drop back to the ground. 'My arm! You twisted it!' You did not. The delivery driver is walking over with a phone recording. 'We can handle this between us,' the person says from the ground. 'Or we can call my lawyer.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "photograph person"
+            text: Take a photo of them and the scene before helping
+            type: enemy
+            correct: true
+            effects:
+              - message: "You photograph them on the ground, the crutches, the puddle, the boot. The person freezes. Documentation ruins a shakedown. The delivery driver sees the camera and stays on his side of the street. The person stands up without help — smoothly, no pain. They pick up the crutches and leave."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "dodge"
+            text: Walk a wide arc and keep distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You walk a wide arc. They call after you: 'Please, I just need a hand!' But you keep walking. Without physical contact there is no shakedown. They sit in the puddle for another five minutes, then stand up perfectly fine when no one is watching. The delivery driver shrugs and goes back to loading."
+              - complete: {outcome: enemy, action_id: 4}

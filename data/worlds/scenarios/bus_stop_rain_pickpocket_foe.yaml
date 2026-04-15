@@ -1,0 +1,81 @@
+name: bus_stop_rain_pickpocket_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: pickpocket
+
+rooms:
+  - name: Bus Stop DG
+    description: |
+      You are standing at a bus stop on a downtown street in
+      steady rain. The afternoon crowd has thinned. A wooden
+      bench sits under the shelter. A payphone is bolted to
+      the shelter wall. A soggy bus schedule is taped to the
+      inside of the glass.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, water pooled on the slats.
+      - name: payphone
+        examine: A scratched payphone bolted to the shelter wall. The coin slot works.
+      - name: bus schedule
+        examine: A soggy paper bus schedule taped to the glass. The ink has run but some routes are still legible.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: holding a dark phone screen, standing near the payphone
+        examine: |
+          The person is holding a phone with a dark screen,
+          but the phone is not dead — you can see a faint
+          notification light blinking on the edge. They are
+          not pressing the power button; they are watching
+          your pockets in the reflection of the glass shelter
+          wall. Their other hand hangs loose at their side,
+          fingers slightly curled, ready. Their shoes are dry
+          under the mud spatter — they have been standing
+          under cover the whole time, not walking in rain.
+          This is a dip artist using the dead-phone story to
+          close distance.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "wave"
+            text: Wave them over to share the shelter
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave them closer. They step in right beside you — too close. Their hand brushes your jacket pocket as they 'stumble' on the wet bench slat. Your wallet shifts. They apologize smoothly, already palming it."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "pass schedule to person"
+            text: Peel the bus schedule off the glass and hand it to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You turn to the glass to peel the schedule. Both your hands are occupied. They step behind you to 'look over your shoulder.' A light tug at your back pocket. By the time you turn with the schedule, your phone is gone and they are studying the route map intently."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "block person"
+            text: Step back and keep distance between you
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back and put the bench between you. They cannot close the distance without it being obvious. They hold up the 'dead' phone one more time, then pocket it — the notification light blinks as it goes in. They drift to the next shelter down the block."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "crouch"
+            text: Crouch down and check your pockets
+            type: enemy
+            correct: true
+            effects:
+              - message: "You crouch and pat your pockets — everything is still there. From this angle you can see their phone screen reflected in a puddle. It is on. The battery icon shows eighty percent. They see you looking at the puddle and walk away without a word."
+              - complete: {outcome: enemy, action_id: 4}

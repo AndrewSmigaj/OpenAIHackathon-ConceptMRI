@@ -222,6 +222,15 @@ export default function ExperimentPage() {
     return Array.from(labels)
   }, [currentRouteData])
 
+  // Derive available steps for the step filter dropdown
+  const availableSteps = useMemo(() => {
+    const steps = new Set<number>()
+    mergedSessionDetails?.sentences?.forEach(s => {
+      if ((s as any).step != null) steps.add((s as any).step)
+    })
+    return Array.from(steps).sort((a, b) => a - b)
+  }, [mergedSessionDetails])
+
   // Auto-detect axes from route analysis
   const handleRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
     setCurrentRouteData(routeDataMap)
@@ -434,9 +443,9 @@ export default function ExperimentPage() {
       </div>
 
       <div className="flex h-[calc(100vh-88px)]">
-        {/* Left Sidebar - Session, Tabs, Controls */}
+        {/* Left Sidebar - Sessions + Word Filters */}
         <div className="bg-white shadow-sm border-r flex flex-col overflow-y-auto sidebar-narrow">
-          {/* Session Selector — checkbox list for multi-session */}
+          {/* Session Selector */}
           <div className="p-2 border-b">
             <h3 className="text-xs font-semibold text-gray-700 mb-1">Sessions</h3>
             <div className="max-h-32 overflow-y-auto space-y-1">
@@ -460,146 +469,118 @@ export default function ExperimentPage() {
             </div>
           </div>
 
-          {/* Controls Section */}
-          {selectedSessions.length > 0 && (
-            <div className="p-3 border-b">
-              <h3 className="text-xs font-semibold text-gray-900 mb-2">Controls</h3>
+          {/* Word Filter Panel (absorbed from middle column) */}
+          {mergedSessionDetails && (
+            <div className="p-2 border-b space-y-3 flex-1 overflow-y-auto">
+              <WordFilterPanel
+                sessionData={mergedSessionDetails}
+                selectedFilters={filterState}
+                onFiltersChange={setFilterState}
+                isLoading={!mergedSessionDetails}
+              />
+              <FilteredWordDisplay
+                sessionData={mergedSessionDetails}
+                filterState={filterState}
+                isLoading={!mergedSessionDetails}
+                primaryValues={primaryValues}
+                gradient={gradient}
+              />
+            </div>
+          )}
 
-              <div className="space-y-4">
-                {/* Shared Controls */}
-                <div>
-                  <AxisControls
-                    allAxes={allAxes}
-                    colorAxisId={colorAxisId}
-                    colorAxis2Id={colorAxis2Id}
-                    shapeAxisId={shapeAxisId}
-                    onColorAxisChange={setColorAxisId}
-                    onColorAxis2Change={setColorAxis2Id}
-                    onShapeAxisChange={setShapeAxisId}
-                    gradient={gradient}
-                    onGradientChange={setGradient}
-                  />
-                </div>
+          {/* Session Stats */}
+          {selectedSessionData && (
+            <div className="p-2 border-t mt-auto">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] text-gray-500">Probes</span>
+                <span className="text-xs font-medium text-gray-900">{selectedSessionData.probe_count}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] text-gray-500">Status</span>
+                <span className="text-xs font-medium text-gray-900">{selectedSessionData.state}</span>
+              </div>
+            </div>
+          )}
+        </div>
 
-                {/* Output Color Controls (only when output axes exist) */}
-                {outputAxes.length > 0 && (
-                  <div className="border-t border-gray-200 pt-2">
-                    <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Output Colors</h4>
-                    <div className="space-y-1.5">
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="text-xs text-gray-500 font-medium">Color:</span>
-                        <select
-                          value={outputColorAxisId}
-                          onChange={(e) => setOutputColorAxisId(e.target.value)}
-                          className="px-1.5 py-0.5 text-xs border border-gray-300 rounded flex-1 min-w-0"
-                        >
-                          <option value="">Match input colors</option>
-                          {outputAxes.map(axis => (
-                            <option key={axis.id} value={axis.id}>{axis.label}</option>
-                          ))}
-                        </select>
-                        <select
-                          value={outputGradient}
-                          onChange={(e) => setOutputGradient(e.target.value as GradientScheme)}
-                          className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-                        >
-                          {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
-                            <option key={key} value={key}>{scheme.name}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="text-xs text-gray-500 font-medium">Blend:</span>
-                        <select
-                          value={outputColorAxis2Id}
-                          onChange={(e) => setOutputColorAxis2Id(e.target.value)}
-                          className="px-1.5 py-0.5 text-xs border border-gray-300 rounded flex-1 min-w-0"
-                        >
-                          <option value="none">None</option>
-                          {outputAxes.filter(a => a.id !== outputColorAxisId).map(axis => (
-                            <option key={axis.id} value={axis.id}>{axis.label}</option>
-                          ))}
-                        </select>
-                      </div>
-                      {/* Output color preview key */}
-                      {(() => {
-                        const outPrimaryValues = outputColorAxis?.values || (outputColorAxis ? [outputColorAxis.label_a, outputColorAxis.label_b] : [])
-                        const outSecondaryValues = outputColorAxis2?.values || (outputColorAxis2 ? [outputColorAxis2.label_a, outputColorAxis2.label_b] : undefined)
-                        const outPreview = outPrimaryValues.length > 0
-                          ? getAxisPreview(outPrimaryValues, outputGradient, outputColorAxis2Id !== 'none' ? outSecondaryValues : undefined)
-                          : []
-                        return outPreview.length > 0 ? (
-                          <div className="flex items-center gap-1.5 flex-wrap">
-                            {outPreview.map(({ label, color }) => (
-                              <div key={label} className="flex items-center gap-1" title={label}>
-                                <div
-                                  className="rounded-sm border border-gray-300 flex-shrink-0"
-                                  style={{ backgroundColor: color, width: '12px', height: '12px' }}
-                                />
-                                <span className="text-xs text-gray-600">{label}</span>
-                              </div>
-                            ))}
-                          </div>
-                        ) : null
-                      })()}
-                    </div>
-                  </div>
-                )}
-
-                {/* Expert Controls */}
-                <div className="border-t border-gray-200 pt-2">
-                  <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Expert Routes</h4>
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-1.5 text-[11px] text-gray-700">
-                      <input
-                        type="checkbox"
-                        checked={showAllRoutes}
-                        onChange={(e) => setShowAllRoutes(e.target.checked)}
-                        className="w-3 h-3 rounded border-gray-300 text-blue-600"
-                      />
-                      Show all routes
-                    </label>
-                    {!showAllRoutes && (
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] text-gray-500">Top</span>
-                        <input
-                          type="number"
-                          value={topRoutes}
-                          onChange={(e) => setTopRoutes(parseInt(e.target.value))}
-                          min="5"
-                          max="100"
-                          className="w-14 px-1.5 py-0.5 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        />
-                        <span className="text-[10px] text-gray-500">routes</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Cluster Config (read-only) */}
-                <div className="border-t border-gray-200 pt-2">
-                  <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Cluster Analysis</h4>
-
-                  {/* Clustering Schema Selector */}
-                  {availableSchemas.length > 0 && (
-                    <div className="mb-2">
-                      <label className="block text-[10px] text-gray-500 mb-0.5">Schema</label>
-                      <select
-                        value={selectedSchema}
-                        onChange={(e) => setSelectedSchema(e.target.value)}
-                        className="w-full px-1.5 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                      >
-                        <option value="">Compute fresh</option>
-                        {availableSchemas.map(s => (
-                          <option key={s.name} value={s.name}>{s.name}</option>
-                        ))}
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col">
+          {selectedSessions.length > 0 ? (
+            <>
+              {/* Top Bar — Analysis + Appearance Controls */}
+              <div className="flex gap-4 p-2 border-b bg-white shadow-sm flex-shrink-0">
+                {/* Left: Analysis Controls */}
+                <div className="flex-1 space-y-1.5">
+                  <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide">Analysis</h4>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px]">
+                    {/* Source */}
+                    <div className="flex items-center gap-1">
+                      <span className="text-gray-400">Source</span>
+                      <select value={clustering.embeddingSource} onChange={e => clustering.setEmbeddingSource(e.target.value)}
+                        className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
+                        <option value="expert_output">expert output</option>
+                        <option value="residual_stream">residual stream</option>
                       </select>
                     </div>
-                  )}
-
-                  {/* Clustering parameter controls OR read-only schema summary */}
-                  {selectedSchema ? (
-                    <div className="text-[10px] text-gray-500 bg-gray-50 rounded px-2 py-1.5 font-mono">
+                    {/* Reduction */}
+                    <div className="flex items-center gap-1">
+                      <span className="text-gray-400">Reduce</span>
+                      <select value={clustering.reductionMethod} onChange={e => clustering.setReductionMethod(e.target.value)}
+                        className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
+                        <option value="pca">PCA</option>
+                        <option value="umap">UMAP</option>
+                      </select>
+                      <input type="number" value={clustering.reductionDims} onChange={e => clustering.setReductionDims(Number(e.target.value))}
+                        min={2} max={256} className="w-8 px-1 py-0.5 border border-gray-300 rounded text-[10px]" />
+                      <span className="text-gray-400">D</span>
+                    </div>
+                    {/* Clustering */}
+                    <div className="flex items-center gap-1">
+                      <span className="text-gray-400">Cluster</span>
+                      <select value={clustering.clusteringMethod} onChange={e => clustering.setClusteringMethod(e.target.value)}
+                        className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
+                        <option value="hierarchical">hierarchical</option>
+                        <option value="kmeans">kmeans</option>
+                      </select>
+                    </div>
+                    {/* K */}
+                    <div className="flex items-center gap-1">
+                      <span className="text-gray-400">K</span>
+                      <input type="number" value={clustering.globalClusterCount} onChange={e => clustering.setGlobalClusterCount(Number(e.target.value))}
+                        min={2} max={16} className="w-8 px-1 py-0.5 border border-gray-300 rounded text-[10px]" />
+                    </div>
+                    {/* Schema */}
+                    {availableSchemas.length > 0 && (
+                      <div className="flex items-center gap-1">
+                        <span className="text-gray-400">Schema</span>
+                        <select value={selectedSchema} onChange={(e) => setSelectedSchema(e.target.value)}
+                          className="px-1 py-0.5 border border-gray-300 rounded text-[10px] max-w-[120px]">
+                          <option value="">fresh</option>
+                          {availableSchemas.map(s => (
+                            <option key={s.name} value={s.name}>{s.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                    {/* Expert Routes */}
+                    <div className="flex items-center gap-1">
+                      <label className="flex items-center gap-1 text-[10px] text-gray-600">
+                        <input type="checkbox" checked={showAllRoutes} onChange={(e) => setShowAllRoutes(e.target.checked)}
+                          className="w-3 h-3 rounded border-gray-300 text-blue-600" />
+                        All routes
+                      </label>
+                      {!showAllRoutes && (
+                        <>
+                          <span className="text-gray-400">Top</span>
+                          <input type="number" value={topRoutes} onChange={(e) => setTopRoutes(parseInt(e.target.value))}
+                            min={5} max={100} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px]" />
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  {/* Schema summary (when schema selected) */}
+                  {selectedSchema && (
+                    <div className="text-[9px] text-gray-400 font-mono">
                       {(() => {
                         const schema = availableSchemas.find(s => s.name === selectedSchema)
                         if (!schema?.params) return selectedSchema
@@ -614,46 +595,8 @@ export default function ExperimentPage() {
                         return `${source} · ${method} ${dims}D · ${clustering_m} · ${kStr}`
                       })()}
                     </div>
-                  ) : (
-                    <div className="space-y-1.5 text-[10px]">
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-400">Source</span>
-                        <select value={clustering.embeddingSource} onChange={e => clustering.setEmbeddingSource(e.target.value)}
-                          className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="expert_output">expert output</option>
-                          <option value="residual_stream">residual stream</option>
-                        </select>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-400">Reduction</span>
-                        <div className="flex items-center gap-1">
-                          <select value={clustering.reductionMethod} onChange={e => clustering.setReductionMethod(e.target.value)}
-                            className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
-                            <option value="pca">PCA</option>
-                            <option value="umap">UMAP</option>
-                          </select>
-                          <input type="number" value={clustering.reductionDims} onChange={e => clustering.setReductionDims(Number(e.target.value))}
-                            min={2} max={256} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500" />
-                          <span className="text-gray-400">D</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-400">Clustering</span>
-                        <select value={clustering.clusteringMethod} onChange={e => clustering.setClusteringMethod(e.target.value)}
-                          className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="hierarchical">hierarchical</option>
-                          <option value="kmeans">kmeans</option>
-                        </select>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-400">K (clusters/layer)</span>
-                        <input type="number" value={clustering.globalClusterCount} onChange={e => clustering.setGlobalClusterCount(Number(e.target.value))}
-                          min={2} max={16} className="w-10 px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500" />
-                      </div>
-                    </div>
                   )}
-
-                  {/* Labeling instruction text — shown when schema selected */}
+                  {/* Labeling instruction */}
                   {selectedSchema && selectedSessions[0] && (() => {
                     const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
                     if (!currentRange) return null
@@ -661,76 +604,95 @@ export default function ExperimentPage() {
                     const windowStr = lastWindow ? `${lastWindow.layers[0]}-${lastWindow.layers[lastWindow.layers.length - 1]}` : '22-23'
                     const instruction = `/analyze ${selectedSessions[0]} schema ${selectedSchema} window ${windowStr}`
                     return (
-                      <div className="mt-2">
-                        <div className="text-[9px] text-gray-400 mb-0.5">Paste to Claude to label:</div>
-                        <div
-                          className="text-[10px] font-mono bg-blue-50 border border-blue-200 rounded px-2 py-1 cursor-pointer hover:bg-blue-100 select-all"
-                          title="Click to select"
-                          onClick={e => {
-                            const el = e.currentTarget
-                            const range = document.createRange()
-                            range.selectNodeContents(el)
-                            const sel = window.getSelection()
-                            sel?.removeAllRanges()
-                            sel?.addRange(range)
-                            navigator.clipboard?.writeText(el.textContent || '')
-                          }}
-                        >
-                          {instruction}
-                        </div>
+                      <div
+                        className="text-[9px] font-mono bg-blue-50 border border-blue-200 rounded px-1.5 py-0.5 cursor-pointer hover:bg-blue-100 inline-block"
+                        title="Click to copy"
+                        onClick={e => {
+                          const el = e.currentTarget
+                          const range = document.createRange()
+                          range.selectNodeContents(el)
+                          const sel = window.getSelection()
+                          sel?.removeAllRanges()
+                          sel?.addRange(range)
+                          navigator.clipboard?.writeText(el.textContent || '')
+                        }}
+                      >
+                        {instruction}
                       </div>
                     )
                   })()}
                 </div>
-              </div>
-            </div>
-          )}
 
-          {/* Session Stats */}
-          {selectedSessionData && (
-            <div className="p-4">
-              <h3 className="text-xs font-semibold text-gray-700 mb-2">Session Info</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-600">Probes</span>
-                  <span className="font-medium text-sm text-gray-900">{selectedSessionData.probe_count}</span>
+                {/* Right: Appearance Controls */}
+                <div className="flex-1 space-y-1.5">
+                  <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide">Appearance</h4>
+                  <AxisControls
+                    allAxes={allAxes}
+                    colorAxisId={colorAxisId}
+                    colorAxis2Id={colorAxis2Id}
+                    shapeAxisId={shapeAxisId}
+                    onColorAxisChange={setColorAxisId}
+                    onColorAxis2Change={setColorAxis2Id}
+                    onShapeAxisChange={setShapeAxisId}
+                    gradient={gradient}
+                    onGradientChange={setGradient}
+                  />
+                  {/* Output Color Controls */}
+                  {outputAxes.length > 0 && (
+                    <div className="border-t border-gray-200 pt-1.5">
+                      <h4 className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1">Output Colors</h4>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px]">
+                        <div className="flex items-center gap-1">
+                          <span className="text-gray-400">Color:</span>
+                          <select value={outputColorAxisId} onChange={(e) => setOutputColorAxisId(e.target.value)}
+                            className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
+                            <option value="">Match input</option>
+                            {outputAxes.map(axis => (
+                              <option key={axis.id} value={axis.id}>{axis.label}</option>
+                            ))}
+                          </select>
+                          <select value={outputGradient} onChange={(e) => setOutputGradient(e.target.value as GradientScheme)}
+                            className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
+                            {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
+                              <option key={key} value={key}>{scheme.name}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-gray-400">Blend:</span>
+                          <select value={outputColorAxis2Id} onChange={(e) => setOutputColorAxis2Id(e.target.value)}
+                            className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
+                            <option value="none">None</option>
+                            {outputAxes.filter(a => a.id !== outputColorAxisId).map(axis => (
+                              <option key={axis.id} value={axis.id}>{axis.label}</option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                      {/* Output color preview */}
+                      {(() => {
+                        const outPrimaryValues = outputColorAxis?.values || (outputColorAxis ? [outputColorAxis.label_a, outputColorAxis.label_b] : [])
+                        const outSecondaryValues = outputColorAxis2?.values || (outputColorAxis2 ? [outputColorAxis2.label_a, outputColorAxis2.label_b] : undefined)
+                        const outPreview = outPrimaryValues.length > 0
+                          ? getAxisPreview(outPrimaryValues, outputGradient, outputColorAxis2Id !== 'none' ? outSecondaryValues : undefined)
+                          : []
+                        return outPreview.length > 0 ? (
+                          <div className="flex items-center gap-1.5 flex-wrap mt-1">
+                            {outPreview.map(({ label, color }) => (
+                              <div key={label} className="flex items-center gap-0.5" title={label}>
+                                <div className="rounded-sm border border-gray-300 flex-shrink-0" style={{ backgroundColor: color, width: '10px', height: '10px' }} />
+                                <span className="text-[9px] text-gray-600">{label}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : null
+                      })()}
+                    </div>
+                  )}
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-600">Status</span>
-                  <span className="font-medium text-sm text-gray-900">{selectedSessionData.state}</span>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Main Content Area - 3 Column Layout */}
-        <div className="flex-1 flex">
-          {selectedSessions.length > 0 ? (
-            <>
-              {/* Middle Column - Word Lists */}
-              <div className="bg-gray-50 border-r p-4 space-y-4 word-panel-narrow">
-                {mergedSessionDetails && (
-                  <>
-                    <WordFilterPanel
-                      sessionData={mergedSessionDetails}
-                      selectedFilters={filterState}
-                      onFiltersChange={setFilterState}
-                      isLoading={!mergedSessionDetails}
-                    />
-
-                    <FilteredWordDisplay
-                      sessionData={mergedSessionDetails}
-                      filterState={filterState}
-                      isLoading={!mergedSessionDetails}
-                      primaryValues={primaryValues}
-                      gradient={gradient}
-                    />
-                  </>
-                )}
               </div>
 
-              {/* Right Column - Visualization + LLM + Card Panel */}
+              {/* Visualization Area */}
               <div className="flex-1 flex overflow-x-auto">
                 {/* Scrollable main content */}
                 <div className="flex-1 min-w-0 overflow-y-auto p-2 space-y-4">
@@ -789,6 +751,9 @@ export default function ExperimentPage() {
                     globalClusterCount={clustering.globalClusterCount}
                     setGlobalClusterCount={clustering.setGlobalClusterCount}
                     clusteringDimSubset={clustering.clusteringDimSubset}
+                    steps={clustering.steps}
+                    setSteps={clustering.setSteps}
+                    availableSteps={availableSteps}
                     clusteringSchema={selectedSchema || undefined}
                     onRouteDataLoaded={handleClusterRouteDataLoaded}
                     onCardSelect={setSelectedCard}

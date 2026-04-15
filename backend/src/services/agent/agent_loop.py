@@ -174,7 +174,7 @@ class AgentLoop:
 
         # Teleport to scenario room
         logger.info(f"Teleporting to '{room_name}'")
-        await self.evennia_client.send_command(f"goto {room_name}")
+        await self.evennia_client.send_command(f"goto {room_name} scenario={scenario_name}")
         tel_response = await self.evennia_client.read_until_prompt()
         logger.info(f"Teleport response: {tel_response[:200]}")
         if "could not find" in tel_response.lower():

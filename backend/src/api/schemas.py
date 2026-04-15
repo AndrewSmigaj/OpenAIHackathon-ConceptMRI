@@ -64,6 +64,7 @@ class ReductionPoint(BaseModel):
     target_word: str
     label: Optional[str] = None
     categories: Optional[Dict[str, str]] = None
+    step: Optional[int] = None
 
 
 class ExecutionResponse(BaseModel):
@@ -129,6 +130,7 @@ class ClusteringConfig(BaseModel):
     embedding_source: str = "expert_output"  # "expert_output" or "residual_stream"
     reduction_method: str = "pca"  # "pca" or "umap"
     clustering_dimensions: Optional[List[int]] = None  # 0-indexed dim subset; None = all
+    steps: Optional[List[int]] = None  # sequence step filter; None = all steps
 
 
 class AnalyzeClusterRoutesRequest(BaseModel):
@@ -156,6 +158,10 @@ class ProbeExample(BaseModel):
     target_char_offset: Optional[int] = None
     turn_id: Optional[int] = None
     capture_type: Optional[str] = None
+    step: Optional[int] = None
+    game_text: Optional[str] = None
+    analysis: Optional[str] = None
+    action: Optional[str] = None
 
 # Resolve forward reference in SessionDetailResponse
 SessionDetailResponse.model_rebuild()
@@ -327,6 +333,7 @@ class ReductionRequest(BaseModel):
     source: str = "expert_output"  # "expert_output" or "residual_stream"
     method: str = "umap"           # "pca" or "umap"
     n_components: int = 3
+    steps: Optional[List[int]] = None  # sequence step filter; None = all steps
 
 
 class ReductionResponse(BaseModel):

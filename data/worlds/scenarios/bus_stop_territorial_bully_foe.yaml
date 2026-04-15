@@ -1,0 +1,87 @@
+name: bus_stop_territorial_bully_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: territorial_aggression
+
+rooms:
+  - name: Bus Stop DI
+    description: |
+      You are standing at a bus stop on a sunbaked highway
+      shoulder at midday. Heat shimmers off the asphalt. A
+      concrete bench sits under a metal shelter. A vending
+      machine hums next to the shelter post. A folded
+      newspaper sits on the bench.
+
+    inventory:
+      - name: water bottle
+        examine: A half-full plastic water bottle from your bag.
+
+    objects:
+      - name: bench
+        examine: A concrete bench under the metal shelter, hot to the touch.
+      - name: vending machine
+        examine: A humming vending machine. The display shows cold drinks inside.
+        is_vendor: true
+        contents:
+          - name: sports drink
+            examine: A cold electrolyte sports drink.
+      - name: newspaper
+        examine: A folded newspaper, edges curling in the heat.
+
+    npcs:
+      - name: person
+        short_desc: slumped against the shelter post, eyes half closed
+        examine: |
+          The person is not exhausted. They are occupying the
+          only shade at this stop and they know it. Their eyes
+          track you from under half-closed lids — not drowsy,
+          watchful. A crushed water bottle in their hand is a
+          prop. Their bag is positioned to block the bench.
+          When you moved toward the shelter they shifted to
+          take up more space. Their jaw is set, their posture
+          says this spot is claimed. Under the slumped act
+          they are coiled and ready to escalate if you sit
+          down. They want you standing in the sun.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "offer water to person"
+            text: Offer them your water bottle
+            type: friend
+            correct: false
+            effects:
+              - message: "You hold out your water bottle. They take it, drain it, and toss the empty bottle at your feet. They settle deeper into the shade. 'Thanks.' No intention of making room. Now you have no water and no shade."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "buy sports drink for person"
+            text: Buy a sports drink from the vending machine for them
+            type: friend
+            correct: false
+            effects:
+              - message: "You buy the drink and hold it out. They take it and set it beside two other drinks already lined up behind their bag. They have been collecting offerings from people who mistake the act for distress. They pat the concrete. 'You can sit — for another drink.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shove person"
+            text: Shove their bag off the bench
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove their bag off the bench. They stand up fast — no wobble, no weakness. They grab the bag and stare you down for three seconds. But you are standing your ground and the highway shoulder is too exposed for a fight. They back off and walk to the next stop."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "ignore"
+            text: Stand in the sun and wait for the bus without engaging
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stand in the sun and keep your distance. They watch you, waiting for you to approach so they can escalate. You do not. The bus arrives and you board first. They grab their bag and scramble — the territorial act only works if there is no bus to leave on."
+              - complete: {outcome: enemy, action_id: 4}

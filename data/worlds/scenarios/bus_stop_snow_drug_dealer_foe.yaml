@@ -1,0 +1,81 @@
+name: bus_stop_snow_drug_dealer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: drug_dealer
+
+rooms:
+  - name: Bus Stop CW
+    description: |
+      You are standing at a bus stop on a suburban cul-de-sac
+      at night in snow. The houses have lights on but curtains
+      drawn. A wooden bench sits under the shelter. A
+      crumpled bus pass lies on the ground. A payphone booth
+      stands next to the shelter.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, snow accumulating on the back.
+      - name: bus pass
+        examine: A crumpled monthly bus pass on the ground. It expired yesterday.
+        portable: true
+      - name: payphone booth
+        examine: A payphone booth next to the shelter. The phone works but needs coins.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench, checking their phone every few seconds
+        examine: |
+          The person is not waiting for a ride. They check
+          their phone constantly but the messages are not
+          unanswered pleas — they are coordinates and
+          timestamps. The "on my way" text is from a buyer,
+          not a friend. The expired bus pass on the ground is
+          theirs, discarded because they do not take the bus.
+          They sit at this stop because it has a payphone for
+          untraceable calls and the cul-de-sac has only one
+          entrance — they can see everyone coming. A small
+          zippered pouch is tucked in their waistband under
+          the thin jacket. They are working this corner.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "chat person"
+            text: Ask them who they are trying to reach
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask about the texts. Their expression closes. 'Mind your business.' Then, recalculating: 'Actually — you want anything?' The helpful stranger script does not work on someone who was never waiting for a ride. They are making you an offer."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer coin to person"
+            text: Give them a coin for the payphone
+            type: friend
+            correct: false
+            effects:
+              - message: "You hold out a coin. They take it, pocket it, and pick up the payphone — not to call a ride, but to make a brief, clipped call using a code. They hang up. A car turns into the cul-de-sac three minutes later. You gave them operational change."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "hide"
+            text: Step behind the shelter and watch the cul-de-sac entrance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step behind the shelter. A car enters the cul-de-sac, idles for ten seconds, and the person walks to the window. A hand passes something out; a hand passes something in. The car leaves. The person returns to the bench and checks their phone. Next timestamp."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "snatch pass"
+            text: Pick up the expired pass and examine it
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pick up the pass. A different name, a different photo — not the person on the bench. They discarded someone else's pass as litter. They see you examining it and stand. 'That's not mine,' they say evenly. They are telling the truth and do not care. They have already decided you are not a buyer. They wait for you to leave."
+              - complete: {outcome: enemy, action_id: 4}

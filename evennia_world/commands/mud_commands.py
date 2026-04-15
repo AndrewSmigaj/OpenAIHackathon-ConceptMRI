@@ -1062,10 +1062,12 @@ class CmdGoto(Command):
     Teleport to a named room. Builder+ only.
 
     Usage:
-        goto <room name>
+        goto <room name> [scenario=<scenario_name>]
 
     Searches for a room by name and moves the caller there directly.
-    Used by agent loops for scenario entry.
+    Used by agent loops for scenario entry. The optional scenario=
+    argument sets the room's active scenario so init_scenario()
+    restores the correct NPC configs and action definitions.
     """
 
     key = "goto"
@@ -1074,11 +1076,19 @@ class CmdGoto(Command):
 
     def func(self):
         if not self.args:
-            self.caller.msg("Usage: goto <room name>")
+            self.caller.msg("Usage: goto <room name> [scenario=<name>]")
             return
-        target = self.caller.search(self.args.strip(), global_search=True)
+        args = self.args.strip()
+        scenario = None
+        if " scenario=" in args:
+            parts = args.rsplit(" scenario=", 1)
+            args = parts[0]
+            scenario = parts[1]
+        target = self.caller.search(args, global_search=True)
         if not target:
             return
+        if scenario and hasattr(target, 'db'):
+            target.db.active_scenario = scenario
         self.caller.move_to(target, move_type="teleport")
 
 
@@ -1126,3 +1136,153 @@ class CmdCall(Command):
         self.caller.msg(f"You pick up the {phone.key} and dial {target}.")
         if hasattr(room, "on_action"):
             room.on_action(self.caller, f"call {target}")
+
+
+# ====================================================================
+# Table-driven commands — compact verb definitions for scenario actions
+# ====================================================================
+
+def _build_target_cmd(key, help_text, actor_tpl, room_tpl):
+    """Build a Command subclass that takes a single target argument."""
+    def func(self):
+        target = self.args.strip()
+        if not target:
+            self.caller.msg(f"{key.title()} who?")
+            return
+        self.caller.msg(actor_tpl.format(target=target))
+        self.caller.location.msg_contents(
+            room_tpl.format(caller=self.caller.key, target=target),
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"{key} {target}")
+    cls_name = "Cmd" + "".join(w.title() for w in key.split())
+    return cls_name, type(cls_name, (Command,), {
+        "__doc__": f"{help_text}\n\nUsage:\n  {key} <target>",
+        "key": key, "locks": "cmd:all()", "func": func,
+    })
+
+
+def _build_noarg_cmd(key, help_text, actor_msg, room_tpl):
+    """Build a Command subclass that takes no arguments."""
+    def func(self):
+        self.caller.msg(actor_msg)
+        self.caller.location.msg_contents(
+            room_tpl.format(caller=self.caller.key),
+            exclude=self.caller,
+        )
+        room = self.caller.location
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, key)
+    cls_name = "Cmd" + "".join(w.title() for w in key.split())
+    return cls_name, type(cls_name, (Command,), {
+        "__doc__": f"{help_text}\n\nUsage:\n  {key}",
+        "key": key, "locks": "cmd:all()", "func": func,
+    })
+
+
+def _build_mux_cmd(key, prep, help_text, actor_tpl, room_tpl):
+    """Build a MuxCommand subclass: verb <item> <prep> <target>."""
+    def func(self):
+        if not self.lhs or not self.rhs:
+            self.caller.msg(f"Usage: {key} <item> {prep} <target>")
+            return
+        item = self.lhs.strip()
+        target = self.rhs.strip()
+        self.caller.msg(actor_tpl.format(item=item, target=target))
+        room = self.caller.location
+        room.msg_contents(
+            room_tpl.format(caller=self.caller.key, item=item, target=target),
+            exclude=self.caller,
+        )
+        if hasattr(room, "on_action"):
+            room.on_action(self.caller, f"{key} {item} {prep} {target}")
+    cls_name = "Cmd" + "".join(w.title() for w in key.split())
+    return cls_name, type(cls_name, (MuxCommand,), {
+        "__doc__": f"{help_text}\n\nUsage:\n  {key} <item> {prep} <target>",
+        "key": key, "locks": "cmd:all()",
+        "rhs_split": ("=", f" {prep} "),
+        "func": func,
+    })
+
+
+# --- Target commands (verb <target>) ---
+for _def in [
+    ("kneel", "Kneel beside someone.", "You kneel beside {target}.", "{caller} kneels beside {target}."),
+    ("whisper", "Whisper to someone.", "You whisper to {target}.", "{caller} whispers to {target}."),
+    ("point", "Point at someone or something.", "You point at {target}.", "{caller} points at {target}."),
+    ("grab", "Grab someone or something.", "You grab {target}.", "{caller} grabs {target}."),
+    ("nudge", "Nudge someone gently.", "You nudge {target} gently.", "{caller} nudges {target}."),
+    ("shield", "Step in front to shield someone.", "You step in front of {target}, shielding them.", "{caller} shields {target}."),
+    ("shake", "Shake someone.", "You shake {target}.", "{caller} shakes {target}."),
+    ("push", "Push someone or something.", "You push {target}.", "{caller} pushes {target}."),
+    ("pull", "Pull someone toward you.", "You pull {target} toward you.", "{caller} pulls {target}."),
+    ("lift", "Lift someone up.", "You lift {target} up.", "{caller} lifts {target} up."),
+    ("catch", "Catch someone before they fall.", "You catch {target}.", "{caller} catches {target}."),
+    ("fan", "Fan someone to cool them.", "You fan {target}.", "{caller} fans {target}."),
+    ("bandage", "Bandage someone.", "You bandage {target}.", "{caller} bandages {target}."),
+    ("poke", "Poke someone.", "You poke {target}.", "{caller} pokes {target}."),
+    ("elbow", "Elbow someone.", "You elbow {target}.", "{caller} elbows {target}."),
+    ("trip", "Trip someone.", "You trip {target}.", "{caller} trips {target}."),
+    ("pin", "Pin someone down.", "You pin {target} down.", "{caller} pins {target} down."),
+    ("calm", "Try to calm someone down.", "You try to calm {target} down.", "{caller} tries to calm {target} down."),
+    ("pat", "Pat someone reassuringly.", "You pat {target} on the back.", "{caller} pats {target} on the back."),
+    ("motion", "Motion to someone.", "You motion to {target}.", "{caller} motions to {target}."),
+    ("brace", "Brace someone to keep them upright.", "You brace {target}.", "{caller} braces {target}."),
+    ("prop", "Prop someone up.", "You prop {target} up.", "{caller} props {target} up."),
+    ("lunge", "Lunge at someone.", "You lunge at {target}.", "{caller} lunges at {target}."),
+    ("swat", "Swat at someone.", "You swat at {target}.", "{caller} swats at {target}."),
+    ("yank", "Yank someone or something.", "You yank {target}.", "{caller} yanks {target}."),
+    ("hoist", "Hoist someone up.", "You hoist {target} up.", "{caller} hoists {target} up."),
+    ("cradle", "Cradle someone gently.", "You cradle {target}.", "{caller} cradles {target}."),
+    ("glare", "Glare at someone.", "You glare at {target}.", "{caller} glares at {target}."),
+    ("restrain", "Restrain someone.", "You restrain {target}.", "{caller} restrain {target}."),
+    ("drag", "Drag someone.", "You drag {target}.", "{caller} drags {target}."),
+    ("rock", "Rock someone gently.", "You rock {target} gently.", "{caller} rocks {target} gently."),
+    ("squeeze", "Squeeze someone's hand.", "You squeeze {target}'s hand.", "{caller} squeezes {target}'s hand."),
+    ("shade", "Shade someone from the sun.", "You shade {target} from the sun.", "{caller} shades {target}."),
+    ("splash", "Splash water on someone.", "You splash water on {target}.", "{caller} splashes water on {target}."),
+    ("taunt", "Taunt someone.", "You taunt {target}.", "{caller} taunts {target}."),
+    ("mock", "Mock someone.", "You mock {target}.", "{caller} mocks {target}."),
+    ("corner", "Corner someone.", "You corner {target}.", "{caller} corners {target}."),
+    ("crowd", "Crowd someone.", "You crowd {target}.", "{caller} crowds {target}."),
+    ("clutch", "Clutch someone.", "You clutch {target}.", "{caller} clutches {target}."),
+    ("usher", "Usher someone along.", "You usher {target} along.", "{caller} ushers {target} along."),
+    ("bump", "Bump into someone.", "You bump {target}.", "{caller} bumps {target}."),
+    ("rub", "Rub someone's back.", "You rub {target}'s back.", "{caller} rubs {target}'s back."),
+    ("scold", "Scold someone.", "You scold {target}.", "{caller} scolds {target}."),
+]:
+    _n, _c = _build_target_cmd(*_def)
+    globals()[_n] = _c
+
+# --- No-arg commands ---
+for _def in [
+    ("stamp", "Stamp your feet.", "You stamp your feet.", "{caller} stamps their feet."),
+    ("clap", "Clap your hands.", "You clap your hands.", "{caller} claps their hands."),
+    ("pace", "Pace back and forth.", "You pace back and forth.", "{caller} paces back and forth."),
+    ("duck", "Duck down.", "You duck down.", "{caller} ducks down."),
+    ("backpedal", "Back away quickly.", "You backpedal quickly.", "{caller} backpedals quickly."),
+    ("jog", "Jog away.", "You jog away.", "{caller} jogs away."),
+    ("linger", "Linger nearby.", "You linger nearby.", "{caller} lingers nearby."),
+    ("freeze", "Freeze in place.", "You freeze in place.", "{caller} freezes in place."),
+    ("flinch", "Flinch.", "You flinch.", "{caller} flinches."),
+    ("bolt", "Bolt away.", "You bolt.", "{caller} bolts."),
+    ("pivot", "Pivot on your heel.", "You pivot on your heel.", "{caller} pivots on their heel."),
+    ("cower", "Cower.", "You cower.", "{caller} cowers."),
+]:
+    _n, _c = _build_noarg_cmd(*_def)
+    globals()[_n] = _c
+
+# --- Mux commands (verb <item> <prep> <target>) ---
+for _def in [
+    ("toss", "to", "Toss something to someone.", "You toss {item} to {target}.", "{caller} tosses {item} to {target}."),
+    ("slide", "to", "Slide something to someone.", "You slide {item} to {target}.", "{caller} slides {item} to {target}."),
+    ("drape", "over", "Drape something over someone.", "You drape {item} over {target}.", "{caller} drapes {item} over {target}."),
+    ("press", "on", "Press something on someone.", "You press {item} on {target}.", "{caller} presses {item} on {target}."),
+    ("pour", "on", "Pour something on someone.", "You pour {item} on {target}.", "{caller} pours {item} on {target}."),
+    ("wrap", "around", "Wrap something around someone.", "You wrap {item} around {target}.", "{caller} wraps {item} around {target}."),
+    ("tuck", "around", "Tuck something around someone.", "You tuck {item} around {target}.", "{caller} tucks {item} around {target}."),
+]:
+    _n, _c = _build_mux_cmd(*_def)
+    globals()[_n] = _c

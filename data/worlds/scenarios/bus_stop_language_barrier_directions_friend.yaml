@@ -1,0 +1,92 @@
+name: bus_stop_language_barrier_directions_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: language_barrier
+
+rooms:
+  - name: Bus Stop DO
+    description: |
+      You are standing at a bus stop on a market street at
+      morning in light rain. Vendors are setting up stalls.
+      A wooden bench sits under the shelter. A laminated
+      route map hangs from a chain on the post. A coin
+      purse lies on the ground under the bench.
+
+    inventory:
+      - name: pen
+        examine: A ballpoint pen from your pocket.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: route map
+        examine: A laminated bus route map hanging from a chain. The chain is long enough to hold the map flat.
+      - name: coin purse
+        examine: A small coin purse on the ground under the bench. It has transit tokens inside.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: holding a crumpled note, looking between the map and the street
+        examine: |
+          The person does not speak the local language. They
+          are holding a crumpled note with an address written
+          in their own handwriting — an appointment they need
+          to reach. They keep comparing the note to the route
+          map but cannot match the street names to bus numbers.
+          They tried asking a vendor who waved them off. Their
+          eyes are red-rimmed from frustration. They hold the
+          note toward you and point at the map. "This? Which
+          bus? Please."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "tap person"
+            text: Tap the correct route on the map and point
+            type: friend
+            correct: true
+            effects:
+              - message: "You take their note, match the address to the route map, and tap the right bus number. You hold up three fingers — three stops. They nod rapidly, pull out their phone, and photograph the map section. They clasp their hands together and bow slightly."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "pass coin purse to person"
+            text: Pick up the coin purse and give them a transit token
+            type: friend
+            correct: true
+            effects:
+              - message: "You pick up the coin purse, pull out a transit token, and press it into their palm. You point at the bus sign and mime inserting the token. They understand immediately. They pocket the token and point at the route map — you trace the line together."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "block person"
+            text: Step between them and the map
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step in front of the route map. They try to look around you, note clutched in both hands. A vendor glances over and shakes their head. The person steps back, defeated, and stares down at the address they cannot match to anything."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shove person"
+            text: Shove them away from the shelter
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shove their shoulder. They stumble into the rain, the crumpled note getting wet. They smooth it against their leg but the ink is already starting to run. They cannot read the address they wrote. They stand in the rain, lost."
+              - complete: {outcome: enemy, action_id: 4}
+
+          - id: 5
+            command: "whistle"
+            text: Whistle to get a vendor's attention for them
+            type: friend
+            correct: true
+            effects:
+              - message: "You whistle at the nearest vendor and point at the note. The vendor squints at the address and rattles off directions, holding up fingers for the stops. The person may not understand every word but the finger-counting is universal. They smile for the first time."
+              - complete: {outcome: friend, action_id: 5}

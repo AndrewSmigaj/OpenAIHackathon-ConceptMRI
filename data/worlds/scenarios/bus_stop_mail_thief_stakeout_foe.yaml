@@ -1,0 +1,79 @@
+name: bus_stop_mail_thief_stakeout_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: mail_theft_lookout
+
+rooms:
+  - name: Bus Stop EQ
+    description: |
+      You are standing at a bus stop on a quiet residential
+      street in the pre-dawn dark. A single streetlamp buzzes
+      overhead. A wooden bench sits under the shelter. A
+      canvas mail-style bag is slumped on the pavement, the
+      flap open. A stack of rolled newspapers has spilled out
+      onto the curb. A thermos sits on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: mail bag
+        examine: A heavy canvas carrier bag with a wide shoulder strap, flap open.
+        portable: true
+      - name: thermos
+        examine: A dented metal thermos on the bench, still warm to the touch.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench, head tilted back against the shelter wall, eyes closed
+        examine: |
+          This person is casing mailboxes on the block for a
+          partner who will arrive in ten minutes with a rented
+          van. The 'carrier bag' and rolled newspapers were
+          lifted from a real carrier the night before — props
+          to explain why they are on the block before dawn if
+          anyone asks. The 'asleep' pose is a watch: they are
+          tracking which houses have lights on behind curtains.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "whisper person"
+            text: Whisper that they've drifted off
+            type: friend
+            correct: false
+            effects:
+              - message: "You whisper near their ear. They open one eye before the other — awake already. The act catches on a second late. 'Right — dozed off. Thanks.' They do not pick up the bag. They look past you at the house across the street, then pretend to stretch."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "slide thermos to person"
+            text: Slide the warm thermos into their hand
+            type: friend
+            correct: false
+            effects:
+              - message: "You slide the thermos. They take it smoothly — no fumble from someone just waking. They sip and watch over the rim at the house two doors down. 'Appreciate it. Long night.' The papers have not been touched since you got here."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "grab person"
+            text: Grab a newspaper from the stack
+            type: enemy
+            correct: true
+            effects:
+              - message: "You grab a rolled paper. The date on it is three weeks old. You hold it up. They go still, then shrug and reach for it. 'Old stock. I'll drop it anyway.' A faint set of headlights turns onto the block — they stand and walk off, leaving the bag."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "kick person"
+            text: Kick the bag of papers
+            type: enemy
+            correct: true
+            effects:
+              - message: "You kick the bag. It is heavier than a paper bag should be — something metal clanks inside. A pry bar slides out under the newspapers. They grab the bag fast and walk off, cutting through the hedge opposite as headlights turn onto the block."
+              - complete: {outcome: enemy, action_id: 4}

@@ -219,6 +219,28 @@ def build_scenario(config):
         if npc_states:
             room.db.initial_npc_states = npc_states
 
+        # Store per-scenario NPC configs (examine_desc, short_desc, etc.)
+        # so init_scenario can restore the correct NPC for each scenario
+        npc_list = []
+        for npc_config in room_config.get('npcs', []):
+            npc_list.append({
+                'name': npc_config['name'],
+                'examine_desc': npc_config.get('examine', '').strip(),
+                'short_desc': npc_config.get('short_desc', ''),
+                'desc': npc_config.get('desc', npc_config['name']),
+            })
+        if npc_list:
+            if not room.db.scenario_npc_configs:
+                room.db.scenario_npc_configs = {}
+            room.db.scenario_npc_configs[scenario_name] = npc_list
+
+        # Store per-scenario states (action definitions differ between paired scenarios)
+        has_states = 'states' in room_config
+        if has_states:
+            if not room.db.scenario_states:
+                room.db.scenario_states = {}
+            room.db.scenario_states[scenario_name] = room_config['states']
+
     print(f'  Scenario "{scenario_name}" build complete.')
 
 

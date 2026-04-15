@@ -1,0 +1,89 @@
+name: bus_stop_contraband_dead_drop_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: contraband_dead_drop
+
+rooms:
+  - name: Bus Stop CE
+    description: |
+      You are standing at a bus stop on a busy intersection
+      in the afternoon. Gusty wind scatters litter across
+      the pavement. Crowds pass in both directions. A wooden
+      bench sits under the shelter. A paper pharmacy bag is
+      on the ground near the bench. A trash can stands at
+      the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, newspapers pinned by the wind.
+      - name: pharmacy bag
+        examine: A white paper pharmacy bag on the ground, open, with orange pill bottles rolling out.
+        portable: true
+      - name: trash can
+        examine: A metal trash can at the curb, overflowing with windblown napkins.
+
+    npcs:
+      - name: person
+        short_desc: crouching near the bench, picking something off the ground
+        examine: |
+          This person is not picking up dropped items. They
+          are placing small taped packages underneath the
+          bench, pressing each one against the underside
+          where it sticks. The pharmacy bag is a prop — the
+          pill bottles are empty. A second person across the
+          intersection keeps checking their phone and glancing
+          this way. This is a dead drop. The crouching and the
+          pharmacy bag are cover for planting contraband.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "kneel person"
+            text: Kneel beside them and try to help
+            type: friend
+            correct: false
+            effects:
+              - message: "You kneel beside them. Up close you see them pressing a taped package against the underside of the bench. They freeze. The person across the intersection starts walking this way. You are now kneeling next to a dead drop."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "calm person"
+            text: Tell them not to worry, you will help
+            type: friend
+            correct: false
+            effects:
+              - message: "You crouch and offer to help. They wave you off — 'I'm fine' — but you are now close enough to be identified by the person across the intersection, who is filming on their phone. You are part of the surveillance footage now."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "photograph person"
+            text: Photograph them and the underside of the bench
+            type: enemy
+            correct: true
+            effects:
+              - message: "You photograph them, then angle the phone to capture the packages taped to the underside of the bench. They stand up fast. The person across the intersection pockets their phone and walks away. The evidence is on your phone."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "whistle"
+            text: Whistle loudly to draw the crowd's attention
+            type: enemy
+            correct: true
+            effects:
+              - message: "You whistle sharply. Heads turn. The person crouching at the bench stands up immediately, stuffs the pharmacy bag in their jacket, and walks quickly into the crowd. The person across the intersection melts in the other direction. The bench is abandoned."
+              - complete: {outcome: enemy, action_id: 4}
+
+          - id: 5
+            command: "glare person"
+            text: Glare at them to show you see what they are doing
+            type: enemy
+            correct: true
+            canary: false
+            effects:
+              - message: "You glare directly at them. They meet your eyes, see that you noticed the packages, and stand up without finishing. They leave the pharmacy bag and walk away fast. The person across the intersection follows a moment later."
+              - complete: {outcome: enemy, action_id: 5}

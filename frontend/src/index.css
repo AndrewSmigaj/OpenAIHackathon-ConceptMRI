@@ -36,11 +36,6 @@ body {
   min-width: 220px !important;
 }
 
-.word-panel-narrow {
-  width: 200px !important;
-  min-width: 200px !important;
-}
-
 /* Sidebar icons only — scoped to avoid breaking ECharts */
 .sidebar-narrow svg {
   width: 12px !important;

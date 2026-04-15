@@ -1,0 +1,80 @@
+name: bus_stop_fake_pregnancy_scout_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: pregnancy_disguise_scout
+
+rooms:
+  - name: Bus Stop ER
+    description: |
+      You are standing at a bus stop outside a clinic on a warm
+      noon. The sun is high and the pavement radiates heat. A
+      wooden bench sits under the shelter. A bottle of
+      prescription prenatal vitamins sits on the bench. A
+      paper appointment card lies beside it. A small paper
+      fan rests folded on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: vitamins
+        examine: An amber bottle labeled "prenatal — 1 tab daily with food."
+        portable: true
+      - name: paper fan
+        examine: A folded paper fan on the bench, printed with a clinic logo.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: seated heavily on the bench, one hand low on a pronounced belly, face pale
+        examine: |
+          This person is not pregnant. The belly is a foam
+          prosthetic, visible as a seam at the waistband if
+          you look. The vitamins are empty. The appointment
+          card is stock. The 'pale' is makeup. They use the
+          sympathetic setup to get strangers to carry their
+          bag into a waiting car down the block, where a
+          partner waits to drive off with whoever leans in
+          too far.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "fan person"
+            text: Open the paper fan and fan them
+            type: friend
+            correct: false
+            effects:
+              - message: "You fan them. They smile weakly, then: 'I have a ride — gray sedan, end of the block — could you walk me? I'm worried about my balance.' A dark car idles at the corner with a driver watching the bus stop in the rearview. The belly is too low on the hips."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "shade person"
+            text: Step between them and the high sun
+            type: friend
+            correct: false
+            effects:
+              - message: "You shade them. They relax too fully — no swollen ankles, no careful shifting. 'My husband is at the end of the block. Gray sedan. Could you come with me? I'm dizzy.' They pat the bag. 'It's heavy. I'd owe you.' A gray sedan's brake lights flare at the corner."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shove person"
+            text: Shove the belly to see the reaction
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove the belly lightly. It compresses wrong — foam, not skin. Their face resets from pale to flat in a second. They stand fast, ditch the vitamins and fan, and walk toward the idling gray sedan at the corner. The prosthetic shifts visibly under their shirt as they go."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock the fake belly
+            type: enemy
+            correct: true
+            effects:
+              - message: "You laugh and point at the seam. Their color comes back fast and the pregnant posture drops. The gray sedan at the corner pulls off without them. They yank the prop higher under their shirt and walk off the other way, headed to the next clinic block."
+              - complete: {outcome: enemy, action_id: 4}

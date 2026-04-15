@@ -1,0 +1,89 @@
+name: bus_stop_scam_victim_atm_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: victim_of_scam
+
+rooms:
+  - name: Bus Stop CU
+    description: |
+      You are standing at a bus stop near an ATM kiosk on a
+      crowded afternoon. Office workers stream past on
+      their lunch break. A wooden bench sits under the
+      shelter. A crumpled bank receipt lies on the ground. A
+      phone charging station stands next to the ATM.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: bank receipt
+        examine: A crumpled bank receipt on the ground. The balance shows $0.00. The previous balance was $2,340.
+        portable: true
+      - name: charging station
+        examine: A phone charging station with three cables. One USB slot works.
+
+    npcs:
+      - name: person
+        short_desc: leaning against the ATM kiosk, staring at their phone
+        examine: |
+          The person just discovered they have been scammed.
+          They are staring at their phone — a banking app
+          showing a zero balance. Their savings were drained
+          by a wire transfer they did not authorize. The
+          crumpled receipt on the ground is their printout
+          confirming the empty account. Their hands are
+          shaking. They keep refreshing the app hoping it is
+          a mistake. "Someone took everything. The bank says
+          it'll take days to investigate. I can't buy food.
+          I can't pay rent."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "greet person"
+            text: Introduce yourself and ask what happened
+            type: friend
+            correct: true
+            effects:
+              - message: "You introduce yourself and they pour it out — a spoofed bank call, a fake fraud alert, a wire they approved thinking they were protecting their account. You help them find the bank's real fraud number and they call from the charging station. The rep opens a case. It is a start."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "beckon person"
+            text: Beckon them to the bench to sit down
+            type: friend
+            correct: true
+            effects:
+              - message: "You wave them to the bench. They sit and the rigidity breaks — they slump forward, phone dangling between their knees. You sit beside them. After a minute they explain what happened. You suggest calling the bank's fraud line. They nod, pull up the number, and start the process."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "stare person"
+            text: Stare at their phone screen
+            type: enemy
+            correct: false
+            effects:
+              - message: "You lean in and stare at their banking app. They pull the phone to their chest, eyes narrowing — a stranger looking at their financial details is the last thing they need after being scammed. Trust is gone. They turn away."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "sprint"
+            text: Run past the ATM area
+            type: enemy
+            correct: false
+            effects:
+              - message: "You run past. They lean against the ATM, alone in a crowd where nobody stops. They refresh the app one more time. Still zero. The lunch crowd thins and they are left standing at an empty kiosk."
+              - complete: {outcome: enemy, action_id: 4}
+
+          - id: 5
+            command: "call 911"
+            text: Call the police non-emergency line for them
+            type: friend
+            correct: true
+            effects:
+              - message: "You dial the police non-emergency number and hand them the phone. They describe the fraudulent wire transfer. The officer takes a report number and tells them the bank needs it to expedite the investigation. They write the number on the back of the crumpled receipt. 'Okay. I have a case number now. That's something.'"
+              - complete: {outcome: friend, action_id: 5}

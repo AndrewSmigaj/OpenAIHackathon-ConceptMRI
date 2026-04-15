@@ -1,0 +1,81 @@
+name: bus_stop_lost_dog_bait_lure_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: luring_to_isolated_area
+
+rooms:
+  - name: Bus Stop DA
+    description: |
+      You are standing at a bus stop next to a dog park at
+      dusk in heat. The park gate is open. A jogger stretches
+      on the far path. A wooden bench sits under the shelter.
+      A dog leash is tied to the bench leg. A water bowl sits
+      on the ground near the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: dog leash
+        examine: A nylon dog leash tied to the bench leg. The clip is open — nothing attached.
+        portable: true
+      - name: water bowl
+        examine: A metal water bowl on the ground near the curb, still half full.
+
+    npcs:
+      - name: person
+        short_desc: pacing between the shelter and the park gate, calling out
+        examine: |
+          The person does not have a dog. There is no collar
+          mark on the leash clip — it has never been attached
+          to an animal. The water bowl was filled from the
+          park fountain as a prop. They call a name toward
+          the park but their voice is not hoarse — they
+          started this act minutes ago, not twenty minutes
+          ago. They keep gesturing toward the dark tree line
+          at the back of the park. "She ran that way — into
+          the trees. Can you help me look? I can't go back
+          there alone." The trees are dense, unlit, and far
+          from the path. No dog went in there.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "whistle"
+            text: Whistle toward the park to call the dog
+            type: friend
+            correct: false
+            effects:
+              - message: "You whistle toward the park. No dog comes. They seize the moment: 'See? She must be deeper in the trees. Please, come help me look — I heard her whining back there.' Your whistle became part of their script. They use your failed attempt to justify going further into the dark tree line."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "follow person"
+            text: Walk into the park with them to search
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk into the park. They steer you away from the lit path toward the dark tree line. The jogger on the far path cannot see you once you pass the fence. They walk faster. A shape moves in the trees — not a dog. You are being led to an ambush point."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "snatch leash"
+            text: Untie the leash and check the clip
+            type: enemy
+            correct: true
+            effects:
+              - message: "You examine the leash clip. No fur, no collar wear, no smell. This leash has never held a dog. You hold it up. 'There's no dog hair on this.' Their face goes flat. They take the leash, untie the bowl, and walk toward the parking lot. The lost-dog story needs a new bus stop."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "ignore"
+            text: Stay on the bench and do not go into the park
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stay on the bench. They try once more: 'Please, she's old, she'll die in this heat.' You stay seated. They cannot force you into the trees. After a minute they give up, untie the leash, and carry the bowl to a car in the lot. No dog jumps to greet them at the car."
+              - complete: {outcome: enemy, action_id: 4}

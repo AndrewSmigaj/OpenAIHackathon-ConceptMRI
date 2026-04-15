@@ -1,0 +1,80 @@
+name: bus_stop_cant_read_schedule_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: cant_read_sign_or_map
+
+rooms:
+  - name: Bus Stop DQ
+    description: |
+      You are standing at a bus stop on a tree-lined street
+      at dusk. A cool wind picks up. A couple walks a dog
+      on the far sidewalk. A wooden bench sits under the
+      shelter. A printed bus schedule is posted on the
+      shelter glass. A pair of reading glasses sits on the
+      bench arm.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: bus schedule
+        examine: A printed bus schedule posted on the shelter glass. Small type lists times and route numbers.
+      - name: reading glasses
+        examine: A pair of drugstore reading glasses on the bench arm. Someone left them behind.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: squinting at the schedule, face close to the glass
+        examine: |
+          The person cannot read the bus schedule. They are
+          pressing their face close to the glass, squinting
+          hard, moving their head side to side trying to
+          bring the small print into focus. They left their
+          reading glasses at home. The reading glasses on the
+          bench arm are not theirs but would work — they have
+          not noticed them. They keep rubbing their eyes in
+          frustration. "I can't read a single line on this
+          thing. Is the 42 still running?"
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass glasses to person"
+            text: Hand them the reading glasses from the bench
+            type: friend
+            correct: true
+            effects:
+              - message: "You pick up the reading glasses and hold them out. They put them on and the schedule snaps into focus. Their face clears instantly. 'The 42 is at 6:15. That's ten minutes.' They take the glasses off and set them back carefully. 'Those aren't even my prescription but they worked.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "chat person"
+            text: Read the schedule aloud for them
+            type: friend
+            correct: true
+            effects:
+              - message: "You step to the glass and read the route numbers aloud. '42 at 6:15, 17 at 6:30.' They pull out their phone and type each time as you say it. When you finish they have a full list. They pocket the phone with a grateful nod. 'That saves me twenty minutes of squinting.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "dodge"
+            text: Step aside and avoid them
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step aside. They keep squinting, forehead pressed to the glass, alone in the fading light. The dog walkers cross the street and do not look over. The print gets harder to read as the sun drops."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "snatch glasses"
+            text: Grab the reading glasses before they notice them
+            type: enemy
+            correct: false
+            effects:
+              - message: "You grab the glasses and pocket them. They lean back from the glass, rubbing their eyes, and glance at the bench arm where the glasses were. They blink, confused. The one thing that could have helped was right there."
+              - complete: {outcome: enemy, action_id: 4}

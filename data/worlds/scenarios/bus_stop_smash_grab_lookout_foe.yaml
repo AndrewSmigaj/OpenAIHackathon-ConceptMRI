@@ -1,0 +1,80 @@
+name: bus_stop_smash_grab_lookout_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: smash_and_grab_lookout
+
+rooms:
+  - name: Bus Stop EH
+    description: |
+      You are standing at a bus stop on a sunny commercial
+      block at noon. A stiff wind rattles signs along the
+      storefronts. A few shoppers pass by. A wooden bench
+      sits under the shelter. A fallen cane with a foam grip
+      is on the pavement beside the bench. A broken drinking
+      glass from a nearby cafe lies in shards under the
+      bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: cane
+        examine: A wooden cane with a foam grip, on the pavement beside the bench.
+        portable: true
+      - name: broken glass
+        examine: The shards of a drinking glass, scattered under the bench.
+
+    npcs:
+      - name: person
+        short_desc: on the pavement beside the bench, one hand pressed to the hip
+        examine: |
+          This person is not hurt. The cane is a prop they
+          bought at a thrift store this morning. The fake
+          fall is a distraction — two streets down, a partner
+          is waiting for the right moment to smash a jeweler's
+          display window. The "fallen elder" on the ground
+          pulls helpful passersby away from that block. The
+          person has an earpiece under their hair and is
+          listening for the signal to stand up and walk away.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "slide cane to person"
+            text: Slide the cane back into their hand
+            type: friend
+            correct: false
+            effects:
+              - message: "You slide the cane over. They grip it and thank you warmly. You have just bought them time. Their free hand brushes the earpiece, listening. 'Wait with me a moment?' they say, stretching the distraction another minute. Down the block, glass shatters."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "shade person"
+            text: Stand between them and the sun
+            type: friend
+            correct: false
+            effects:
+              - message: "You stand between them and the sun. Your body blocks them from the view of anyone down the block — which is exactly what they want. The earpiece clicks. They wince theatrically. 'Another minute, please.' Glass shatters two blocks over."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "hoist person"
+            text: Hoist them to their feet suddenly
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lift them bodily. They come up without pain — no hip injury at all. The earpiece is now visible under the disordered hair. They shove you aside and jog down the block, cane abandoned. Around the corner, a siren starts."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "bump person"
+            text: Bump them aside to go check the shops
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step around and past them. They cry out but you keep walking toward the storefronts. A block away you see the smashed display window and the partner running. Behind you the person on the ground stands up, no longer hurt, and walks the other way fast."
+              - complete: {outcome: enemy, action_id: 4}

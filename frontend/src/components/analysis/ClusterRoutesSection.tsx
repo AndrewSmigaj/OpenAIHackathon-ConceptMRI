@@ -40,6 +40,9 @@ interface ClusterRoutesSectionProps {
   globalClusterCount: number
   setGlobalClusterCount: (value: number) => void
   clusteringDimSubset: number[] | null
+  steps?: number[] | null
+  setSteps?: (steps: number[] | null) => void
+  availableSteps?: number[]
   clusteringSchema?: string
   onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
   onCardSelect: (card: SelectedCard) => void
@@ -75,6 +78,9 @@ export default function ClusterRoutesSection({
   globalClusterCount,
   setGlobalClusterCount,
   clusteringDimSubset,
+  steps,
+  setSteps,
+  availableSteps,
   clusteringSchema,
   onRouteDataLoaded,
   onCardSelect
@@ -123,14 +129,34 @@ export default function ClusterRoutesSection({
       layer_cluster_counts: effectiveLayerClusterCounts,
       embedding_source: embeddingSource,
       reduction_method: reductionMethod,
-      ...(clusteringDimSubset ? { clustering_dimensions: clusteringDimSubset } : {})
+      ...(clusteringDimSubset ? { clustering_dimensions: clusteringDimSubset } : {}),
+      ...(steps ? { steps } : {})
     };
-  }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod, clusteringDimSubset])
+  }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod, clusteringDimSubset, steps])
 
   return (
     <div className="bg-white rounded-xl shadow-sm p-1">
       <div className="flex items-center gap-2 mb-1 px-1">
-        <span className="text-xs font-semibold text-gray-900">Latent Space</span>
+        <span className="text-xs font-semibold text-gray-900">Clusters & Routes</span>
+        <span className="text-[9px] text-gray-400 italic">hierarchical clustering on UMAP-reduced residual stream</span>
+        {availableSteps && availableSteps.length > 1 && setSteps && (
+          <div className="flex items-center gap-1 ml-2">
+            <span className="text-[10px] text-gray-400">Steps</span>
+            <select
+              value={steps === null ? 'all' : JSON.stringify(steps)}
+              onChange={e => {
+                const v = e.target.value
+                setSteps(v === 'all' ? null : JSON.parse(v))
+              }}
+              className="px-1 py-0.5 border border-gray-300 rounded text-[10px]"
+            >
+              <option value="all">All</option>
+              <option value="[0]">Step 0 only</option>
+              <option value="[1]">Step 1 only</option>
+              <option value="[0,1]">Steps 0-1</option>
+            </select>
+          </div>
+        )}
         <button
           onClick={() => {
             runAnalysis?.()
@@ -198,6 +224,7 @@ export default function ClusterRoutesSection({
             maxTrajectories={400}
             manualTrigger={true}
             onAnalysisReady={handleTrajectoryAnalysisReady}
+            steps={steps}
             onPointClick={useCallback((info: { probe_id: string; target: string; label?: string }) => {
               // Look up the full sentence from session data
               const sentence = sessionData?.sentences?.find(s => s.probe_id === info.probe_id)

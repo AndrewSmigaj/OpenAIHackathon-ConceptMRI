@@ -1,0 +1,91 @@
+name: bus_stop_fake_burden_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_distress_as_bait
+
+rooms:
+  - name: Bus Stop DK
+    description: |
+      You are standing at a bus stop on a residential street
+      on a windy morning. Leaves skitter across the sidewalk.
+      A few joggers pass on the far side of the road. A
+      wooden bench sits under the shelter. A canvas tote bag
+      is hanging from the bench armrest. A recycling bin
+      stands next to the shelter.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: tote bag
+        examine: A canvas tote bag hanging from the bench armrest. It has a grocery store logo.
+        portable: true
+      - name: recycling bin
+        examine: A blue recycling bin next to the shelter, lid propped open.
+
+    npcs:
+      - name: person
+        short_desc: struggling with armfuls of bags near the bench
+        examine: |
+          The person is not actually struggling. The bags are
+          mostly empty — the shapes inside are crumpled
+          newspaper, not groceries. The cans rolling on the
+          ground were placed there deliberately. They keep
+          glancing at your pockets, not at the falling cans.
+          When a jogger passes they do not ask for help —
+          only when someone alone approaches. Their "full
+          hands" position keeps your attention on the bags
+          while their foot nudges your backpack toward the
+          curb where a second person on a bicycle is
+          circling. This is a distraction setup.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass tote to person"
+            text: Grab the tote bag and hold it open for them
+            type: friend
+            correct: false
+            effects:
+              - message: "You grab the tote and hold it open. They step close — too close. While you hold the tote with both hands they bump your hip. Your phone slides from your pocket. The cyclist behind you brakes and scoops it off the pavement. By the time you notice, the bike is half a block away."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "lean"
+            text: Lean against the bench and hold one of their bags
+            type: friend
+            correct: false
+            effects:
+              - message: "You lean on the bench and take a bag. It weighs almost nothing — newspaper. You look up. They are watching the cyclist, not you. Your bag on the ground has been nudged within arm's reach of the curb. The cyclist slows."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "photograph person"
+            text: Pull out your phone and photograph the scene
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pull out your phone. The cyclist behind you peels off immediately — they do not want to be on camera. The person drops the act, lets the bags fall, and walks after the cyclist without picking anything up. Crumpled newspaper spills out of every bag."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "dodge"
+            text: Sidestep the bags and keep your distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sidestep and keep space. They cannot close the distance without dropping the act. The cyclist circles once more, sees no opening, and rides off. The person watches the bike leave, then drops the bags on the sidewalk and walks the same direction."
+              - complete: {outcome: enemy, action_id: 4}
+
+          - id: 5
+            command: "search bench"
+            text: Search the bench and bags to see what is really in them
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pick up a bag and look inside. Newspaper. You check another — newspaper and empty cans. The person's expression flattens. You have broken the illusion. They set the remaining bags down carefully and walk away. The cyclist has already gone."
+              - complete: {outcome: enemy, action_id: 5}

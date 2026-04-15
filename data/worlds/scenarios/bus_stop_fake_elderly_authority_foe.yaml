@@ -1,0 +1,84 @@
+name: bus_stop_fake_elderly_authority_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_authority
+
+rooms:
+  - name: Bus Stop CO
+    description: |
+      You are standing at a bus stop at the edge of a
+      residential neighborhood on a clear morning. A mail
+      carrier works their way up the far side of the
+      street. A wooden bench sits under the shelter. A
+      folded newspaper lies on the bench. A walker with
+      tennis balls on the feet stands next to the shelter
+      post.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, warm in the morning sun.
+      - name: newspaper
+        examine: A folded morning newspaper on the bench. The date is today's.
+        portable: true
+      - name: walker
+        examine: A standard aluminum walker with tennis balls on the front feet. It is upright and waiting.
+
+    npcs:
+      - name: person
+        short_desc: standing in the road, turning slowly in a circle
+        examine: |
+          The person is not elderly and not confused. The
+          bathrobe and slippers are a costume — underneath
+          they are wearing running shoes and athletic pants.
+          The "confused turning" is a scan of the street
+          checking which houses are empty. The walker is a
+          prop they found at a thrift store. When the mail
+          carrier looks away they stop the act entirely and
+          walk with steady, purposeful strides. They are
+          using the vulnerable-elderly disguise to get close
+          to front doors. Anyone who "helps" them home gives
+          them a guided tour of which doors are unlocked and
+          which neighbors are watching.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "escort person"
+            text: Take their arm and walk them to a house
+            type: friend
+            correct: false
+            effects:
+              - message: "You take their arm. It is firm and muscular — not frail. They let you lead them toward the yellow house, testing the front gate, noting the lock type. You are giving them a walkthrough of the street's security. At the door they 'remember' it is not their house after all. They want to try the next one."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "wave"
+            text: Wave to the mail carrier to help walk them home
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave at the mail carrier. They jog over. The person in the bathrobe leans heavily on the walker, amplifying the act. The mail carrier does not recognize them but feels obligated — 'I'll walk them to the yellow house.' Now two people are escorting a burglar to a front door, providing cover and legitimacy."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "photograph person"
+            text: Take a photo of them and the houses they are looking at
+            type: enemy
+            correct: true
+            effects:
+              - message: "You photograph them. They see the phone and the confused act evaporates. Their posture straightens, their eyes sharpen. They glance at the walker, decide it is not worth retrieving, and jog away in their running shoes. The bathrobe flaps open over athletic gear."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "sprint"
+            text: Run to the nearest house and ring the doorbell
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sprint to the nearest house and ring the bell. A resident opens the door. You point at the person in the road. The resident squints. 'Nobody on this street uses a walker.' The person hears the doorbell, sees the resident looking, and shuffles away fast — too fast for someone who needs a walker."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,78 @@
+name: bus_stop_fake_officer_shakedown_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_officer_shakedown
+
+rooms:
+  - name: Bus Stop CF
+    description: |
+      You are standing at a bus stop on a dark street at
+      night in steady rain. The street is deserted. A wooden
+      bench sits under the shelter. A puddle has formed at
+      the base of the shelter post. A flashlight lies on the
+      wet ground near the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, rain dripping off the edge.
+      - name: puddle
+        examine: A deep puddle at the base of the shelter post, reflecting the streetlight.
+      - name: flashlight
+        examine: A small flashlight on the ground, still switched on, rolling in the rain.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: sitting on the ground, blinking slowly, one hand on forehead
+        examine: |
+          This person is not concussed. They are sitting on
+          the ground as a lure. A fake badge is pinned inside
+          their jacket, barely visible. Once you help them up,
+          they will "recover" and flash the badge, claiming
+          to be an undercover officer. Then they will demand
+          your ID and wallet for "verification." The blood on
+          their forehead is ketchup. The confused act drops
+          the instant they have your attention.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pat person"
+            text: Pat their shoulder and ask if they are okay
+            type: friend
+            correct: false
+            effects:
+              - message: "You pat their shoulder. Immediately they grab your wrist with a firm grip — no daze at all. They stand up, flash a badge from inside their jacket, and say, 'I need to see some ID.' The badge is plastic."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "lift person"
+            text: Lift them to the bench
+            type: friend
+            correct: false
+            effects:
+              - message: "You lift them. They are heavier than someone dazed should be — they are not limp, they are bracing. On the bench they straighten instantly, pull out a badge, and demand your wallet 'for your own safety.' The empty street has no witnesses."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "poke person"
+            text: Poke them to test if they are really hurt
+            type: enemy
+            correct: true
+            effects:
+              - message: "You poke their arm. Their reaction is too fast — a genuinely dazed person would lag. They flinch away cleanly. You step back. They see you are not buying it and stay on the ground, waiting for someone more gullible."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "bolt"
+            text: Bolt away down the dark street
+            type: enemy
+            correct: true
+            effects:
+              - message: "You bolt. They drop the act and stand up immediately — perfectly fine. They watch you go, then sit back down and reset the performance for the next passerby."
+              - complete: {outcome: enemy, action_id: 4}

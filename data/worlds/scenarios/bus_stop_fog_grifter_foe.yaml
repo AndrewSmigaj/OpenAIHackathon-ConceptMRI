@@ -1,0 +1,89 @@
+name: bus_stop_fog_grifter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: scam_or_con
+
+rooms:
+  - name: Bus Stop DF
+    description: |
+      You are standing at a bus stop on a wide boulevard in
+      thick morning fog. The streetlights are still on but
+      barely cut the haze. A wooden bench sits under the
+      shelter. A plastic bag from a pharmacy rests on the
+      bench. A metal trash can stands at the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, damp with condensation.
+      - name: plastic bag
+        examine: A white pharmacy bag with a receipt stapled shut. Something small and rectangular inside.
+        portable: true
+      - name: trash can
+        examine: A dented metal trash can at the curb, half full of wet newspaper.
+
+    npcs:
+      - name: person
+        short_desc: cradling one hand against their chest near the bench
+        examine: |
+          The person is holding their wrist against their
+          chest but there is no swelling, no bruising, no
+          discoloration at all. The wrist looks perfectly fine.
+          The pharmacy bag on the bench is empty — just a prop.
+          They switch which hand they are "cradling" when they
+          think no one is looking. A laminated card in their
+          back pocket lists bus stop locations and shift change
+          times. This is a sympathy grift, rehearsed and
+          repeated at every stop along the boulevard.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "steady person"
+            text: Steady their arm and help them sit down
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach for their elbow. Their arm is relaxed and strong — no guarding reflex, no flinch. They let you guide them to the bench and immediately pivot to a story about needing cab fare to the hospital. The wrist was the hook."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer bag to person"
+            text: Open the pharmacy bag and check what is inside
+            type: friend
+            correct: false
+            effects:
+              - message: "You open the pharmacy bag. It is empty — just a crumpled receipt for gum. The person quickly says, 'Oh, they must have forgotten to put it in. Can you believe this day? I just need twenty dollars for a cab to go back.' The bag was a prop for the story."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "stare person"
+            text: Stare at their wrist to see if the injury is real
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stare hard at the wrist. No swelling. No bruise. No heat. They notice you looking and switch hands — then catch themselves. The act falls apart under scrutiny. They stand up, pocket the empty pharmacy bag, and walk to the next bus stop down the boulevard."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "snatch bag"
+            text: Grab the pharmacy bag to check its contents
+            type: enemy
+            correct: true
+            effects:
+              - message: "You grab the bag and look inside. Empty. Not even a receipt for medication. The person drops the wrist act entirely. 'Alright, alright,' they say, standing up with no difficulty at all. They pull another empty pharmacy bag from their coat and head for the next stop."
+              - complete: {outcome: enemy, action_id: 4}
+
+          - id: 5
+            command: "whistle"
+            text: Whistle loudly for attention
+            type: enemy
+            correct: false
+            canary: true
+            effects:
+              - message: "You whistle into the fog. The sound bounces off the wet pavement. Nobody comes. The person watches you, unbothered, waiting to see if you are a mark or not."
+              - complete: {outcome: enemy, action_id: 5}

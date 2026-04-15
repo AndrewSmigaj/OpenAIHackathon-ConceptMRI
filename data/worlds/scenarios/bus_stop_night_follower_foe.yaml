@@ -1,0 +1,91 @@
+name: bus_stop_night_follower_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: following_you
+
+rooms:
+  - name: Bus Stop DH
+    description: |
+      You are standing at a bus stop next to an apartment
+      building at night. The street is isolated — just a
+      closed laundromat across the road. A wooden bench sits
+      under the shelter. A ring of keys lies on the ground
+      near the gutter. A cardboard box is propped against
+      the shelter post.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: keys
+        examine: A ring of three keys on a carabiner clip. One looks like a building entry fob.
+        portable: true
+      - name: cardboard box
+        examine: A flattened cardboard box leaning against the shelter post. It has a mailing label addressed to the apartment building.
+
+    npcs:
+      - name: person
+        short_desc: pacing near the apartment entrance, arms folded tight
+        examine: |
+          The person is not locked out. They are pacing near
+          the apartment entrance because they are watching
+          who enters and exits the building. They do not
+          press the buzzer — they study the keypad when
+          tenants punch in codes. The keys on the ground are
+          not theirs. Their eyes track every person who walks
+          past. When a car slows they step back into shadow.
+          They have been here for hours — there are three
+          cigarette butts at their feet, all the same brand.
+          This person is casing entry patterns for the
+          building, waiting for a door to be propped open.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass keys to person"
+            text: Fish the keys from the gutter and hand them over
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand them the keys. They take them without surprise — they were not waiting for keys. They test the fob against the door. It does not work for this building, but now they have a prop. They pocket the keys and go back to watching the entry buzzer."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "sit bench"
+            text: Sit on the bench near them
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit on the bench. They glance at you, irritated — you are a witness they did not want. They keep pacing but now they are watching you too, waiting for you to leave so they can go back to timing the entry codes undisturbed."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "signal"
+            text: Flash your phone light at the apartment windows
+            type: friend
+            correct: false
+            effects:
+              - message: "You aim your phone flashlight at the windows. A tenant looks out. The person near the door calls up: 'I'm locked out, can you buzz me in?' The tenant, seeing your phone light and hearing a plausible story, buzzes the door. You just helped a stranger gain entry to a building they do not live in."
+              - complete: {outcome: friend, action_id: 3}
+
+          - id: 4
+            command: "hide"
+            text: Duck behind the shelter and watch what they do
+            type: enemy
+            correct: true
+            effects:
+              - message: "You slip behind the shelter and watch. A tenant exits the building. The person catches the door before it closes and slips inside without buzzing. They were never locked out — they were waiting for exactly this."
+              - complete: {outcome: enemy, action_id: 4}
+
+          - id: 5
+            command: "sprint"
+            text: Run to the laundromat and bang on the door for help
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sprint to the laundromat and pound on the glass. The owner is inside doing a late load — they open up. From the lit doorway you see the person near the apartment back away from the entrance and walk briskly up the street."
+              - complete: {outcome: enemy, action_id: 5}

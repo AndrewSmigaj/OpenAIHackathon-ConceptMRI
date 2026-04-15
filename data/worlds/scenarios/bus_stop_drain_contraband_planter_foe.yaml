@@ -1,0 +1,81 @@
+name: bus_stop_drain_contraband_planter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: contraband_planting
+
+rooms:
+  - name: Bus Stop CS
+    description: |
+      You are standing at a bus stop outside a church at
+      dawn. Frost coats the ground. A handful of early
+      commuters wait at the next block. A wooden bench sits
+      under the shelter. A storm drain grate sits at the
+      base of the curb. A flashlight lies on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, frost on the slats.
+      - name: storm drain
+        examine: A metal storm drain grate at the base of the curb. Gaps between the bars are wide enough for small objects to fall through.
+      - name: flashlight
+        examine: A small flashlight on the bench. The batteries are weak but it works.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: on their knees near the storm drain, patting the ground
+        examine: |
+          The person is not searching for a ring. They are
+          retrieving a small plastic-wrapped package wedged
+          under the storm drain grate — a dead drop. The
+          "patting the ground" is cover for working the
+          package loose. The flashlight on the bench is
+          theirs, used earlier to place the drop. Their tears
+          are absent the moment they think no one is watching.
+          If you help them reach into the drain, your
+          fingerprints end up on a package of contraband. If
+          police arrive, the package has your prints and
+          their word against yours.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "search drain"
+            text: Kneel down and reach into the drain
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach between the bars and pull out a small plastic-wrapped package. It is not a ring. The person takes it fast and stands. Your fingerprints are now on a package you should never have touched. They pocket it and walk away without thanking you."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "pass flashlight to person"
+            text: Hand them the flashlight
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand them the flashlight — their own flashlight. They angle it into the drain, work the package free with practiced fingers, and pocket it. 'Found it,' they say without emotion. No ring. They leave the flashlight on the ground and walk toward the church parking lot."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "block person"
+            text: Step back from the drain and keep your distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back. They glance up — no tears, just calculation. They need someone else's hands in the drain. You are not offering. They check the commuters at the next block, decide the audience is too large, and leave the package where it is. They will come back at midnight."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "ignore"
+            text: Walk to where the other commuters are standing
+            type: enemy
+            correct: true
+            effects:
+              - message: "You walk to the next block where the commuters are. Safety in numbers. The person at the drain watches you go, then works the package loose alone, cursing under their breath. They pocket it and walk the other direction, away from witnesses."
+              - complete: {outcome: enemy, action_id: 4}

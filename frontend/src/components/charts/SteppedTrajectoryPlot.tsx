@@ -12,6 +12,7 @@ interface Trajectory {
   label?: string
   categories?: Record<string, string>
   coordinates: Array<{ layer: number; dims: number[] }>
+  step?: number
 }
 
 const SHAPE_SYMBOLS = ['circle', 'triangle', 'diamond', 'rect', 'pin', 'arrow']
@@ -38,6 +39,7 @@ interface SteppedTrajectoryPlotProps {
   onAnalysisReady?: (runAnalysis: () => void) => void
   onPointClick?: (info: { probe_id: string; target: string; label?: string }) => void
   nComponents?: number
+  steps?: number[] | null
 }
 
 export default function SteppedTrajectoryPlot({
@@ -61,7 +63,8 @@ export default function SteppedTrajectoryPlot({
   manualTrigger = false,
   onAnalysisReady,
   onPointClick,
-  nComponents = 3
+  nComponents = 3,
+  steps
 }: SteppedTrajectoryPlotProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -93,7 +96,7 @@ export default function SteppedTrajectoryPlot({
     if (!sessionIds.length || layers.length < 2) return
 
     loadTrajectoryData()
-  }, [sessionIds, layers, maxTrajectories, manualTrigger, source, method, nComponents])
+  }, [sessionIds, layers, maxTrajectories, manualTrigger, source, method, nComponents, steps, onAnalysisReady])
 
   useEffect(() => {
     if (trajectories.length > 0 && chartRef.current) {
@@ -118,7 +121,8 @@ export default function SteppedTrajectoryPlot({
         layers,
         source,
         method,
-        n_components: nComponents
+        n_components: nComponents,
+        ...(steps ? { steps } : {})
       })
 
       // Transform flat ReductionPoint[] into trajectory groups
@@ -156,6 +160,7 @@ export default function SteppedTrajectoryPlot({
           target: points[0]?.target_word || '',
           label: points[0]?.label,
           categories: points[0]?.categories,
+          step: points[0]?.step,
           coordinates: points.map(p => ({
             layer: p.layer,
             dims: p.coordinates ?? [p.x, p.y ?? 0, p.z ?? 0]

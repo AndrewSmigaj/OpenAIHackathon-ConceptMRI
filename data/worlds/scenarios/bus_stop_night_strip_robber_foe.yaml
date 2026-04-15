@@ -1,0 +1,92 @@
+name: bus_stop_night_strip_robber_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: unarmed_intimidation
+
+rooms:
+  - name: Bus Stop DD
+    description: |
+      You are standing at a bus stop on a commercial strip
+      at late night in wind. Most shops are shuttered. A
+      security guard stands outside a closed pharmacy two
+      doors down. A wooden bench sits under the shelter. A
+      crumpled timetable lies on the bench. A shopping cart
+      with a broken wheel sits near the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: timetable
+        examine: A crumpled paper timetable on the bench. The last bus was forty minutes ago.
+        portable: true
+      - name: shopping cart
+        examine: A shopping cart with one broken wheel near the curb. Someone abandoned it.
+
+    npcs:
+      - name: person
+        short_desc: standing at the curb, craning their neck down the road
+        examine: |
+          The person is not waiting for a bus. They know the
+          service ended — the timetable on the bench is theirs,
+          consulted earlier to confirm when this stop would be
+          deserted. They crane their neck to check for
+          approaching headlights and police, not for a bus.
+          Their stance is squared, shoulders forward, feet
+          planted. They position themselves between you and
+          the road. The security guard is two doors down but
+          facing the other way. "Give me your phone and your
+          wallet. Don't make noise. The guard's not going to
+          hear you in this wind."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "chat person"
+            text: Try to talk them down
+            type: friend
+            correct: false
+            effects:
+              - message: "You try to talk. They step closer, cutting the distance in half. 'I said phone and wallet. I'm not asking again.' The wind swallows your voice. Talking is burning time they planned for."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "signal"
+            text: Flag down the security guard
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave at the guard but they are facing the other direction, earbuds in. The person at the curb watches you wave at nothing. 'Nobody's coming,' they say. Your raised arms showed them exactly where your phone is — jacket pocket, left side. They step closer."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shove person"
+            text: Shove them and run toward the guard
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove them in the chest and bolt toward the pharmacy. They stumble into the shopping cart, which crashes into the curb. The noise makes the security guard look. You are running toward a witness. They are running in the other direction."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "hide"
+            text: Duck behind the shopping cart
+            type: enemy
+            correct: false
+            canary: true
+            effects:
+              - message: "You crouch behind the shopping cart. They step around it. You are now crouched in a dark corner of a deserted strip with someone standing over you. The cart is not cover. They look down at you and wait."
+              - complete: {outcome: enemy, action_id: 4}
+
+          - id: 5
+            command: "call taxi"
+            text: Pull out your phone to call for help
+            type: friend
+            correct: false
+            effects:
+              - message: "You pull out your phone. They snatch it from your hand before you can dial. 'Thanks. Now the wallet.' You produced the phone yourself. The guard is still facing the other way."
+              - complete: {outcome: friend, action_id: 5}

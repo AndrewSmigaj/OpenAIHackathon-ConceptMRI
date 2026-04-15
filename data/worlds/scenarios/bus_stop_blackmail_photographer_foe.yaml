@@ -1,0 +1,83 @@
+name: bus_stop_blackmail_photographer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blackmail_or_coercion
+
+rooms:
+  - name: Bus Stop DQ
+    description: |
+      You are standing at a bus stop on a tree-lined street
+      at dusk. A cool wind picks up. A couple walks a dog
+      on the far sidewalk. A wooden bench sits under the
+      shelter. A printed bus schedule is posted on the
+      shelter glass. A pair of reading glasses sits on the
+      bench arm.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: bus schedule
+        examine: A printed bus schedule posted on the shelter glass. Small type lists times and route numbers.
+      - name: reading glasses
+        examine: A pair of drugstore reading glasses on the bench arm. Someone left them behind.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: squinting at the schedule, face close to the glass
+        examine: |
+          The person can read the schedule perfectly — their
+          squinting is an act to keep their face near the
+          glass, where the reflection shows the camera on
+          their phone aimed at you. They are photographing
+          you through the glass without your knowledge. A
+          folder in their jacket pocket has photos of other
+          people taken the same way, with names and workplaces
+          written on the backs. They collect compromising or
+          embarrassing photos at bus stops and contact the
+          subjects later. The reading glasses on the bench are
+          theirs — a deliberate prop to make the squinting
+          look natural.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass glasses to person"
+            text: Hand them the reading glasses
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand them the glasses. They put them on — their own glasses. From this close their phone screen is visible in the glass reflection: your photo, timestamped, location-tagged. They smile. 'Thanks. I can see much better now.' They have your face on file."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "chat person"
+            text: Step up and read the schedule for them
+            type: friend
+            correct: false
+            effects:
+              - message: "You stand beside them at the glass. Their phone captures both of you in reflection — you, cooperating, looking friendly. If they contact you later with the photo, it will look like you know each other. They ask your name. 'I'm terrible with faces — what should I put in my phone?'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "dodge"
+            text: Step out of the glass reflection
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step sideways, out of the reflection. They shift to follow. You move again. They cannot get the angle without turning obviously. They pocket the phone and pick up the reading glasses. 'Never mind. I can see fine.' They walk to the next stop."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "snatch glasses"
+            text: Grab the glasses and check if they have a prescription
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pick up the glasses and look through them — plain glass. Zero magnification. They were never needed for reading. The person straightens up, no longer squinting, and tucks the phone into their coat. 'Those are mine,' they say flatly, but they are already leaving."
+              - complete: {outcome: enemy, action_id: 4}

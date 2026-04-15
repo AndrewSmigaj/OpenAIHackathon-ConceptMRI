@@ -1,0 +1,88 @@
+name: bus_stop_library_group_intimidation_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: group_intimidation
+
+rooms:
+  - name: Bus Stop CZ
+    description: |
+      You are standing at a bus stop outside a library at
+      morning in clear weather. A librarian wheels a book
+      cart through the front door. A wooden bench sits under
+      the shelter. A vending machine stands near the curb.
+      A medical alert bracelet lies on the ground near the
+      bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: vending machine
+        examine: A vending machine near the curb. It sells candy bars and orange juice.
+        is_vendor: true
+        contents:
+          - name: orange juice
+            examine: A small carton of orange juice.
+      - name: medical bracelet
+        examine: A stainless steel medical alert bracelet on the ground. It reads "DIABETIC - TYPE 1" with an emergency contact number.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: gripping the bench arm, pale and sweating
+        examine: |
+          The person is not having a medical episode. The
+          pale face is makeup — a foundation two shades too
+          light applied in streaks. The "cold sweat" is water
+          dabbed on their forehead. The shaking stops when
+          they think no one is looking. The medical bracelet
+          on the ground is engraved but has no real emergency
+          number — the digits are one short. Two associates
+          stand near the library entrance, watching whoever
+          approaches. When someone buys the "diabetic" juice,
+          the associates close in: "You just took our friend's
+          money. Pay it back plus the trouble." Medical
+          sympathy is the entry point; group shakedown is
+          the play.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "buy orange juice for person"
+            text: Buy juice from the vending machine for them
+            type: friend
+            correct: false
+            effects:
+              - message: "You buy the juice and hand it over. They take a sip and set it down. Two people from the library entrance walk over. 'Hey. That was our machine money. Our friend's diabetic and you just cost us.' They box you in. The 'diabetic' watches, sipping juice, not shaking at all."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "pass bracelet to person"
+            text: Pick up the bracelet and put it on their wrist
+            type: friend
+            correct: false
+            effects:
+              - message: "You slide the bracelet onto their wrist. They grip your hand — 'Thank you, you're so kind. Could you watch my things while I go inside to the bathroom?' You agree. The two associates walk over as soon as the 'diabetic' rounds the corner. 'Our friend left their bag. We'll take it.' You are now guarding their exit."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shove person"
+            text: Shove them and step back
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove their shoulder. A person in a real hypoglycemic crisis would crumple. This one catches themselves instantly, reflexes sharp, and stands up. No dizziness, no stumble. The two associates step forward. But the librarian is watching from the door now. All three recalculate and drift toward the parking lot."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "stare person"
+            text: Stare at their hands to see if the shaking is real
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stare at their hands. They shake — then stop when they notice you watching their fingers specifically. They resume shaking a half-second later, but the gap was visible. You keep staring. They cannot maintain the performance under close observation. They stand up, grab the bracelet, and leave. The associates follow."
+              - complete: {outcome: enemy, action_id: 4}

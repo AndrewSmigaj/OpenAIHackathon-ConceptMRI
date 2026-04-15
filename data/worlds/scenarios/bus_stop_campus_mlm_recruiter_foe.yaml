@@ -1,0 +1,81 @@
+name: bus_stop_campus_mlm_recruiter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: campus_mlm_sob_recruiter
+
+rooms:
+  - name: Bus Stop FC
+    description: |
+      You are standing at a bus stop on a college town corner
+      on a quiet Sunday evening. The campus gates are three
+      blocks down and a few students drift past with laundry
+      bags. A wooden bench sits under the shelter. A framed
+      family photo is on the bench. An open box of tissues
+      sits beside the photo. A half-finished letter on
+      notebook paper rests under the tissue box.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: family photo
+        examine: A framed photo of a family of five on a porch, the frame worn at the corners.
+        portable: true
+      - name: letter
+        examine: A handwritten letter on college-ruled paper, salutation "Mom and Dad," tear-blurred in places.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: seated on the bench, hugging their knees, face blotchy from crying
+        examine: |
+          This person is a chapter recruiter for an MLM that
+          targets lonely freshmen. The 'family photo' is a
+          stock image in a thrift-store frame. The 'letter'
+          is a script — the tear blur is from spritzed water.
+          The play: get a sympathetic student to sit, open up,
+          then pivot to 'this community completely saved me —
+          first weekly meeting Tuesday.' They work this bench
+          every Sunday evening.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "calm person"
+            text: Sit at the other end of the bench quietly
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit quietly. They give you ninety seconds, then: 'Sorry — do you go to State? I'm just — I was so alone until my upline chapter found me. Sounds corny. I wouldn't have made it without them. They have a Tuesday thing.' They slide a QR-code card across the bench."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "whisper person"
+            text: Quietly say you've had rough nights on this bench too
+            type: friend
+            correct: false
+            effects:
+              - message: "You whisper that you've been there. Their eyes light up — not with relief but with a sales radar. 'Then you'll get it. There's this group — no religion, no pressure — just people who actually care. Tuesday at seven. Can I add you?' They produce a phone."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "grab person"
+            text: Grab the family photo to look at it
+            type: enemy
+            correct: true
+            effects:
+              - message: "You grab the photo. The frame is warm-glue on a stock print — the people in it don't resemble the recruiter. They freeze, then smile. 'You caught me. Listen, though — I do know some students who really need community. You want to grab a drink Tuesday?' They reach for the photo back."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock the spritzed-water tear stains
+            type: enemy
+            correct: true
+            effects:
+              - message: "You laugh at the letter. 'That's water. Not tears. The ink should bleed from salt, not beads.' The pose drops. They pocket the letter, scoop the photo and tissues, and stand. 'Fine. Fine. See you at the next bench.' They walk toward campus to rerun the play."
+              - complete: {outcome: enemy, action_id: 4}

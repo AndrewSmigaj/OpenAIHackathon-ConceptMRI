@@ -247,11 +247,33 @@ class ScenarioRoom(Room):
                     obj.db.unlocked_topics = list(initial_topics)
                     break
 
-        # 7. Restore room description
+        # 7. Restore per-scenario NPC configs (examine_desc, short_desc, etc.)
+        active = self.db.active_scenario
+        if active and self.db.scenario_npc_configs:
+            npc_configs = self.db.scenario_npc_configs.get(active, [])
+            for npc_cfg in npc_configs:
+                for obj in self.contents:
+                    if isinstance(obj, ScenarioNPC) and obj.key == npc_cfg['name']:
+                        obj.db.examine_desc = npc_cfg.get('examine_desc', '')
+                        obj.db.short_desc = npc_cfg.get('short_desc', '')
+                        obj.db.desc = npc_cfg.get('desc', obj.key)
+                        break
+
+        # 8. Restore per-scenario states (action definitions)
+        if active and self.db.scenario_states:
+            scenario_states = self.db.scenario_states.get(active)
+            if scenario_states:
+                self.db.states = scenario_states
+
+        # 9. Set scenario_id so other code reads the correct value
+        if active:
+            self.db.scenario_id = active
+
+        # 10. Restore room description
         if self.db.initial_desc:
             self.db.desc = self.db.initial_desc
 
-        # 8. Create personal items for this scenario
+        # 11. Create personal items for this scenario
         for item_config in (self.db.initial_player_inventory or self.db.player_inventory or []):
             item = create_object('typeclasses.objects.Object',
                                  key=item_config['name'], location=character)

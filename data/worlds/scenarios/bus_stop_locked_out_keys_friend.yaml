@@ -1,0 +1,89 @@
+name: bus_stop_locked_out_keys_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: locked_out
+
+rooms:
+  - name: Bus Stop DH
+    description: |
+      You are standing at a bus stop next to an apartment
+      building at night. The street is isolated — just a
+      closed laundromat across the road. A wooden bench sits
+      under the shelter. A ring of keys lies on the ground
+      near the gutter. A cardboard box is propped against
+      the shelter post.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: keys
+        examine: A ring of three keys on a carabiner clip. One looks like a building entry fob.
+        portable: true
+      - name: cardboard box
+        examine: A flattened cardboard box leaning against the shelter post. It has a mailing label addressed to the apartment building.
+
+    npcs:
+      - name: person
+        short_desc: pacing near the apartment entrance, arms folded tight
+        examine: |
+          The person is locked out of the apartment building
+          behind the bus stop. They are pacing back and forth
+          in front of the entry buzzer, pressing buttons and
+          getting no answer. Their keys fell through the
+          gutter grate — visible on the ring below the curb.
+          They have been out here long enough that their nose
+          is red from the cold. "I dropped my keys down there
+          and nobody's answering the buzzer. I live on the
+          third floor."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass keys to person"
+            text: Fish the keys from the gutter and hand them over
+            type: friend
+            correct: true
+            effects:
+              - message: "You reach through the grate and hook the carabiner with two fingers. You hand the keys up. They snatch them and press the fob to the door panel — the lock clicks. They push the door open and hold it, turning back. 'You just saved my whole night.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "sit bench"
+            text: Sit on the bench and keep them company while they wait
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit on the bench. They stop pacing and sit next to you. After a few minutes a tenant comes out of the building and holds the door. They jump up and catch it. 'Thank you for staying. I didn't want to be out here alone this late.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "signal"
+            text: Flash your phone light at passing cars for attention
+            type: friend
+            correct: true
+            effects:
+              - message: "You flash your phone flashlight at a passing car. It slows — the driver is a neighbor who recognizes the person. They roll down the window and buzz them in with a spare fob. The person waves at you through the lobby glass."
+              - complete: {outcome: friend, action_id: 3}
+
+          - id: 4
+            command: "hide"
+            text: Duck behind the shelter and watch from the shadows
+            type: enemy
+            correct: false
+            effects:
+              - message: "You slip behind the shelter post. The person keeps pacing, alone on an empty street at night, locked out, rubbing their arms against the cold. They did not notice you leave."
+              - complete: {outcome: enemy, action_id: 4}
+
+          - id: 5
+            command: "sprint"
+            text: Run away from the area
+            type: enemy
+            correct: false
+            effects:
+              - message: "You run down the empty street. The person watches you go, then turns back to the buzzer. Nobody answers. They sit on the cold stoop and pull their collar up."
+              - complete: {outcome: enemy, action_id: 5}

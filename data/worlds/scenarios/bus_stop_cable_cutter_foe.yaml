@@ -1,0 +1,79 @@
+name: bus_stop_cable_cutter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: cable_cutter
+
+rooms:
+  - name: Bus Stop CH
+    description: |
+      You are standing at a bus stop on a quiet residential
+      street at dawn during a light snowfall. Frost covers
+      the sidewalk. No one else is in sight. A wooden bench
+      sits under the shelter. A storm grate runs along the
+      curb. A wool scarf hangs from the shelter railing.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, dusted with snow.
+      - name: storm grate
+        examine: A metal storm grate along the curb. The gaps between bars are wide enough to catch a wheel.
+      - name: scarf
+        examine: A thick wool scarf hanging from the shelter railing, left behind by someone.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: at the curb in a wheelchair, rocking back and forth
+        examine: |
+          This person is not stuck. The wheelchair rolls fine —
+          they tested it a moment ago. They are positioned at
+          the grate because the utility junction box is beneath
+          it. A pair of cable cutters sits in their lap under
+          a blanket. They have already cut two copper lines
+          running through the grate and are working on a third.
+          The rocking motion is cover for reaching down through
+          the grate bars with the cutters. They are stealing
+          copper from the neighborhood utility lines.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "push person"
+            text: Push their wheelchair off the grate
+            type: friend
+            correct: false
+            effects:
+              - message: "You push the chair. It rolls smoothly — it was never stuck. They grip the blanket to keep the cable cutters hidden. You just moved them to a better angle on the utility box. 'Thanks,' they say, already reaching back toward the grate."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "brace person"
+            text: Brace the chair to help them
+            type: friend
+            correct: false
+            effects:
+              - message: "You brace the frame. With your support, they lean further down toward the grate — exactly what they wanted. The blanket shifts and you hear a metallic snip from underneath. They have just cut another cable."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "stamp"
+            text: Stamp your feet loudly near the grate
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stamp hard on the grate. The vibration rattles the bars. They jerk upright, the cable cutters sliding off their lap onto the snow. You both look at the cutters. They grab them and wheel away fast. The remaining cables are intact."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "pivot"
+            text: Pivot and walk toward the nearest house
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pivot toward the nearest house with lights on. They see where you are heading and wheel away in the other direction before you reach the door. The copper cables they have not yet cut stay connected."
+              - complete: {outcome: enemy, action_id: 4}

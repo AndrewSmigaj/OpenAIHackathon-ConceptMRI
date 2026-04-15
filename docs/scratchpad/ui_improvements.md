@@ -2,35 +2,25 @@
 
 ## Overview
 
-Three targeted improvements to the experiment page. Each is independent.
+Three targeted improvements to the experiment page. Each is independent except that Task 3A (ProbeExample.step) must land before Task 1's step selector.
 
 ---
 
-## 1. Tick/Turn Filter for Trajectories
+## 1. Sequence Step Filter for Trajectories
 
-**Problem:** Agent sessions produce ~12 ticks per scenario following nearly identical routes. This adds visual noise.
+**Problem:** Multi-step sessions produce overlapping trajectories. Agent sessions have ~12 ticks per scenario, temporal captures have up to 40 expanding-context steps. No way to filter by step.
 
-**Current state:**
-- `tokens.parquet` has `turn_id` (0, 1, 2, ...)
-- `ReductionPoint` schema does NOT include `turn_id`
-- Frontend `Trajectory` interface has no `turn_id`
-- No tick filtering UI exists
+**Design:** Unified `step` field on both `ReductionPoint` and `ProbeExample`, populated from `turn_id` (agents) or `sentence_index` (temporal). Filter works for all session types. Basic sentence sets (1 step) hide the selector.
 
-**Proposed approach:**
+**Backend:**
+- `ReductionPoint` gets `step: Optional[int] = None`
+- `reduction_service.py` extracts: `turn_id if turn_id is not None else sentence_index`
+- `ProbeExample` gets `step` (via Task 3A)
 
-Backend:
-- Add `turn_id` to `ReductionPoint` (`schemas.py:55`)
-- Extract it in `reduction_service.py:85-90`
-- Add `turn_ids` filter param to the reduce request
-
-Frontend:
-- Add `turn_id` to Trajectory interface (`SteppedTrajectoryPlot.tsx:9`)
-- Add tick selector UI in `ClusterRoutesSection.tsx` (multi-select chips)
-- Filter trajectories by selected ticks before rendering
-
-**Open questions:**
-- Should clustering also filter by tick? Or just the trajectory viz?
-- Better UX: chips, checkboxes, or a range slider?
+**Frontend:**
+- `Trajectory` interface gets `step?: number`
+- `SteppedTrajectoryPlot` gets `selectedSteps` prop for filtering
+- `ClusterRoutesSection` gets step selector chips between Sankey and trajectory plot
 
 ---
 
@@ -38,74 +28,47 @@ Frontend:
 
 **Problem:** Controls cramped in 220px sidebar. Source label buried. Color and clustering controls mixed.
 
-**Current state:**
-- All controls stacked vertically in sidebar (`ExperimentPage.tsx:463-684`)
-- `AxisControls` is an inline function (lines 39-135)
-- Clustering controls at lines 579-684
-- Separated by thin border-t dividers
+**Design:** Horizontal top bar above content with two panels (Analysis | Appearance). Sidebar keeps session selector + word filter panel (absorbed from middle column). Middle `word-panel-narrow` column eliminated.
 
-**Proposed layout:** Horizontal top bar, two panels:
-
+**Layout:**
 ```
-┌─────────────────────────────┬──────────────────────────────┐
-│ ANALYSIS                    │ APPEARANCE                   │
-│ Source: [residual stream ▾] │ Color: [label ▾] [red-blue▾] │
-│ Reduction: [PCA▾] [6]D     │ Blend: [none ▾]              │
-│ Clustering: [hierarchical▾] │ Shape: [none ▾]              │
-│ K: [6] Schema: [select ▾]  │ [color preview swatches]     │
-└─────────────────────────────┴──────────────────────────────┘
++------------------------------------------------------------------+
+| ANALYSIS                         | APPEARANCE                    |
+| Source: [residual stream v]      | Color: [label v] [red-blue v] |
+| Reduction: [PCA v] [6]D         | Blend: [none v]               |
+| Clustering: [hierarchical v]    | Shape: [none v]               |
+| K: [6]  Schema: [select v]      | [color preview swatches]      |
+| Show all routes  Top: [10]      | Output color (if exists)      |
++------------------------------------------------------------------+
 ```
-
-- Left panel: Source, Reduction, Clustering, K, Schema
-- Right panel: Color axis, Gradient, Blend, Shape, Preview
-- Top bar: auto height, `border-b bg-white shadow-sm`
-- Source label: clear, readable, not tiny
-
-**Open questions:**
-- Keep sidebar for session list only, or remove sidebar entirely?
-- Expert routes checkbox — left panel or its own section?
 
 ---
 
 ## 3. Detail Panel — Agent Reasoning & Action
 
-**Problem:** Clicking a trajectory point shows raw input_text (full prompt). Agent reasoning and action not surfaced clearly.
+**Problem:** Clicking a trajectory point shows raw input_text (full decoded chat template blob). Agent reasoning and action not surfaced.
 
-**Current state:**
-- `ContextSensitiveCard.tsx:288-317` renders input_text + generated_text
-- Agent `input_text` contains full conversation (system prompt + game text + analysis + action)
-- No parsing of analysis/action into distinct sections
-- Right panel: 384px wide (`w-96`)
+**Design:** Enrich `ProbeExample` with `game_text`, `analysis`, `action` from `tick_log.jsonl` at query time. Detect agent data via `game_text !== undefined` (not `turn_id`, since temporal captures also have steps).
 
-**Proposed design:**
-
+**Card layout:**
 ```
-┌────────────────────────────────┐
-│ [friend] bus_stop_foo_friend   │
-│                                │
-│ "You are standing at a bus..." │
-│ (game text with highlighted    │
-│  target word)                  │
-│                                │
-│ ── Internal Reasoning ──────── │
-│ "We must examine the person    │
-│  first because..."             │
-│ (teal/green background)        │
-│                                │
-│ ► Action: examine person       │
-│ (amber, bold, own line)        │
-└────────────────────────────────┘
++--------------------------------+
+| [friend] Step 2                |
+|                                |
+| "You are standing at a bus..." |
+| (game_text with SentenceHigh)  |
+|                                |
+| -- Internal Reasoning -------- |
+| "We must examine the person    |
+|  first because..."             |
+| (teal-50 bg, text-sm)          |
+|                                |
+| > Action: examine person       |
+| (amber-600, font-bold)         |
++--------------------------------+
 ```
 
-Implementation:
-- Detect agent data via `turn_id !== undefined` or `capture_type`
-- Parse `input_text` to extract game text, analysis channel, final channel
-- Render three sections: game text, "Internal Reasoning" (teal bg), action (amber)
-- Reduce right panel from `w-96` (384px) to `w-80` (320px)
-
-**Open questions:**
-- Parse using channel markers (`analysis`, `final`) or role markers (`user`, `assistant`)?
-- Should non-agent sessions render differently or stay as-is?
+**Right panel width:** DEFERRED at 384px (`w-96`). Shrinking would penalize other card types.
 
 ---
 
@@ -113,15 +76,25 @@ Implementation:
 
 | File | What changes |
 |------|-------------|
-| `backend/src/api/schemas.py` | `ReductionPoint` + reduce request: add `turn_id` |
-| `backend/src/services/features/reduction_service.py` | Extract `turn_id`, filter by it |
-| `frontend/src/pages/ExperimentPage.tsx` | Top bar layout, right panel width |
-| `frontend/src/components/charts/SteppedTrajectoryPlot.tsx` | Trajectory interface, tick filtering |
-| `frontend/src/components/analysis/ClusterRoutesSection.tsx` | Tick selector UI |
-| `frontend/src/components/analysis/ContextSensitiveCard.tsx` | Agent data parsing + rendering |
+| `backend/src/api/schemas.py` | `ReductionPoint.step`, `ProbeExample.step/game_text/analysis/action` |
+| `backend/src/services/features/reduction_service.py` | Extract unified `step` into token_meta |
+| `backend/src/api/routers/probes.py` | ProbeExample construction: add step + tick_log enrichment |
+| `backend/src/services/probes/tick_log_enrichment.py` | NEW: load tick_log.jsonl → lookup dict |
+| `frontend/src/types/api.ts` | `ReductionPoint.step`, `ProbeExample.step/game_text/analysis/action` |
+| `frontend/src/pages/ExperimentPage.tsx` | Top bar layout, word panel absorbed into sidebar |
+| `frontend/src/index.css` | Remove `word-panel-narrow` class |
+| `frontend/src/components/charts/SteppedTrajectoryPlot.tsx` | `Trajectory.step`, `selectedSteps` filter |
+| `frontend/src/components/analysis/ClusterRoutesSection.tsx` | Step selector chips |
+| `frontend/src/components/analysis/ContextSensitiveCard.tsx` | Agent data rendering |
 
 ---
 
 ## Iteration Log
 
-*(Notes from design discussion go here)*
+- 2026-04-12: Initial design with `turn_id` on ReductionPoint
+- 2026-04-12: Unified to `step` field after design review (works for agents, temporal, future multi-step)
+- 2026-04-12: Fixed Python `0 or None` truthiness bug in extraction code
+- 2026-04-12: Deferred right panel width change (384px stays)
+- 2026-04-12: Absorbed word filter panel into sidebar instead of leaving sidebar empty
+- 2026-04-12: Agent detection changed from `turn_id !== undefined` to `game_text !== undefined`
+- 2026-04-12: 7 review skills completed, certainty assessment done, plan approved

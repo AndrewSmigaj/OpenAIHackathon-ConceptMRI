@@ -166,6 +166,7 @@ async def reduce_embeddings(request: ReductionRequest):
             source=request.source,
             method=request.method,
             n_components=request.n_components,
+            steps=request.steps,
         )
 
         logger.info(f"Reduced {len(points)} points for {len(request.session_ids)} sessions")

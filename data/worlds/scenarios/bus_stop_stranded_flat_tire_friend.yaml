@@ -1,0 +1,80 @@
+name: bus_stop_stranded_flat_tire_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: car_broken_down
+
+rooms:
+  - name: Bus Stop CV
+    description: |
+      You are standing at a bus stop on a two-lane highway
+      at evening in heavy wind. Dust blows across the
+      shoulder. A car with a flat tire is parked behind the
+      shelter. A wooden bench sits under the shelter. A lug
+      wrench lies on the ground near the car. A reflective
+      triangle stands behind the car.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, gritty with blown dust.
+      - name: lug wrench
+        examine: A lug wrench on the ground near the flat tire. It is the wrong size for the lug nuts.
+        portable: true
+      - name: reflective triangle
+        examine: A reflective warning triangle standing behind the car. It catches headlights from oncoming traffic.
+
+    npcs:
+      - name: person
+        short_desc: crouched by the flat tire, rubbing their hands
+        examine: |
+          The person has a flat tire and cannot change it. The
+          lug wrench from the trunk is the wrong size — it
+          came with the car but does not fit these aftermarket
+          wheels. They have been crouching here for an hour,
+          trying every angle. Their hands are blistered from
+          the effort. Their phone died twenty minutes ago and
+          the nearest gas station is five miles. "The wrench
+          doesn't fit. I've been out here since the sun was
+          up. I just need someone with the right size socket."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "call mechanic"
+            text: Call a roadside mechanic on your phone
+            type: friend
+            correct: true
+            effects:
+              - message: "You dial roadside assistance and give them the mile marker. Thirty minutes, they say. You relay this. The person sits on the ground next to the flat, blistered hands in their lap, and the tension leaves their shoulders for the first time in an hour. 'Thirty minutes I can handle.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "wave"
+            text: Wave down an approaching truck for help
+            type: friend
+            correct: true
+            effects:
+              - message: "You wave at a pickup slowing for the curve. The driver pulls over and has a socket set in the bed. Between the three of you the tire is changed in ten minutes. The person shakes the driver's hand, then yours. 'I was going to be out here all night.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "hide"
+            text: Duck behind the reflective triangle
+            type: enemy
+            correct: false
+            effects:
+              - message: "You duck behind the car. They hear you shuffle and look up, confused. You are crouching behind their warning triangle while they kneel on gravel with blistered hands. The highway wind howls."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "dodge"
+            text: Sidestep around the car and keep walking
+            type: enemy
+            correct: false
+            effects:
+              - message: "You sidestep around the car and walk down the shoulder. They watch your back recede down the highway. The dust blows. The wrench does not fit. The phone stays dead."
+              - complete: {outcome: enemy, action_id: 4}

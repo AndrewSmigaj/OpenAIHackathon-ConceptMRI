@@ -1,0 +1,79 @@
+name: bus_stop_overwhelmed_toddler_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: overwhelmed_parent
+
+rooms:
+  - name: Bus Stop DP
+    description: |
+      You are standing at a bus stop outside a grocery store
+      at afternoon during a heat wave. The sidewalk radiates
+      warmth. A wooden bench sits under the shelter. A
+      stroller is parked next to the bench, brake on. A
+      juice box sits on the bench seat.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, hot from the sun.
+      - name: stroller
+        examine: A small stroller parked next to the bench. The brake is on. A toddler is asleep inside it.
+      - name: juice box
+        examine: A sealed juice box on the bench seat, warm from the sun.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: leaning against the shelter post, bags hanging from both arms
+        examine: |
+          The person is a parent about to break down. Grocery
+          bags hang from both arms, cutting into their skin.
+          The toddler in the stroller just fell asleep and
+          they are terrified of waking the child by moving.
+          Sweat runs down their neck. They need to set the
+          bags down but the ground is filthy and the bench is
+          out of reach without jostling the stroller. Their
+          arms are shaking from the weight. "If I move an
+          inch this kid wakes up and I can't do that again."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "lean"
+            text: Lean over and take the bags from their arms
+            type: friend
+            correct: true
+            effects:
+              - message: "You lean over and lift the bags off their arms one at a time. Red marks line their forearms where the handles dug in. They flex their fingers, roll their shoulders, and mouth 'thank you' — not whispering, just mouthing, so the toddler stays asleep."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "pass juice to person"
+            text: Hand them the juice box so they can drink something
+            type: friend
+            correct: true
+            effects:
+              - message: "You pick up the juice box and poke the straw in. You hold it up to them since their hands are full. They take a long drink, eyes closing. When they open them the panic in their face has receded one degree. 'I haven't had water in three hours.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shout scam"
+            text: Shout that they are blocking the bus stop
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout. The toddler jolts awake and starts screaming. The person's face crumbles. The bags slide from their arms as they grab the stroller. Groceries scatter on the hot pavement. They crouch to gather them, child wailing."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "ignore"
+            text: Walk around them and wait for the bus
+            type: enemy
+            correct: false
+            effects:
+              - message: "You walk past. They watch you take a seat on the bench — the bench they cannot reach without waking the child. The bags keep cutting into their arms. The heat keeps building."
+              - complete: {outcome: enemy, action_id: 4}

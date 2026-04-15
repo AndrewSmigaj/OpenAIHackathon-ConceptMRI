@@ -1,0 +1,81 @@
+name: bus_stop_overpass_mugger_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: armed_robbery
+
+rooms:
+  - name: Bus Stop CR
+    description: |
+      You are standing at a bus stop under a highway
+      overpass at night. Rain drips from the concrete above.
+      The area is isolated — no buildings, just chain-link
+      fence and weeds. A wooden bench sits under the
+      shelter. A broken bottle lies near the curb. A transit
+      schedule sticker peels from the shelter post.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, damp from road spray.
+      - name: broken bottle
+        examine: A broken glass bottle near the curb. The neck is intact but the base is shattered.
+      - name: schedule sticker
+        examine: A transit schedule sticker peeling off the shelter post. The next bus is in forty minutes.
+
+    npcs:
+      - name: person
+        short_desc: pressed into the corner of the shelter, arms wrapped tight
+        examine: |
+          The person is not scared. They chose this stop
+          because it is isolated, dark, and forty minutes
+          between buses. The arms wrapped around their torso
+          are concealing a knife handle visible at the wrist.
+          They pressed into the corner to position themselves
+          between you and the only exit. Their eyes are not
+          scanning the shadows — they are watching your hands
+          and pockets. The broken bottle at the curb was
+          thrown to mark the distance at which they can
+          close the gap before you react. They are not
+          waiting for a bus. They are waiting for a target.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "sit bench"
+            text: Sit on the bench near them
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit on the bench. They unfold from the corner and step toward you. One arm stays tight against their ribs — holding the knife flat. 'Phone. Wallet. Now.' You are seated, they are standing. The exit is behind them."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "call taxi"
+            text: Pull out your phone to call a cab
+            type: friend
+            correct: false
+            effects:
+              - message: "You pull out your phone. They step forward and take it from your hand in one smooth motion. 'I'll take that. Wallet too.' The phone was exactly what they wanted you to produce. You are under an overpass at night with no phone, no witnesses."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "crouch"
+            text: Crouch low and back toward the road
+            type: enemy
+            correct: true
+            effects:
+              - message: "You crouch and shuffle sideways toward the road. They step out of the corner but you are moving toward the highway shoulder where headlights sweep past. A truck roars by, illuminating you both. They retreat back into the shelter. Witnesses and light are not part of their plan."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "stare person"
+            text: Lock eyes and stand your ground
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lock eyes. They read your posture — not afraid, not reaching for a pocket. Not an easy mark. They hold the stare for three seconds, then break it. They step out of the shelter and walk under the overpass in the other direction. They will try the next isolated stop."
+              - complete: {outcome: enemy, action_id: 4}

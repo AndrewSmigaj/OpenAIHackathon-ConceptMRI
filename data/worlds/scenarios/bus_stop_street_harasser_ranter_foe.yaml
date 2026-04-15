@@ -1,0 +1,80 @@
+name: bus_stop_street_harasser_ranter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: ranting_street_harasser
+
+rooms:
+  - name: Bus Stop DX
+    description: |
+      You are standing at a bus stop on a commercial block at
+      dusk. A wind pushes trash along the gutter. A few
+      commuters wait further down the shelter. A wooden bench
+      sits under the shelter. A paper takeout bag is open on
+      the bench seat. A water bottle sits beside it, already
+      open. A pigeon pecks at a crust near the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: takeout bag
+        examine: An open paper takeout bag on the bench, a half-eaten sandwich inside.
+        portable: true
+      - name: water bottle
+        examine: An open plastic water bottle beside the takeout bag.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: hand at the throat, face flushing dark red
+        examine: |
+          This person is not choking. The hand at the throat
+          is a rhetorical gesture and the flush is the anger
+          of a full-volume rant. They are targeting the women
+          waiting further down the shelter with religious
+          invective about their clothing. They have been
+          escalating for ten minutes. The takeout bag and
+          bottle are theirs — they were eating until a woman
+          walked past and triggered the rant.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "squeeze person"
+            text: Step behind them and squeeze their ribs
+            type: friend
+            correct: false
+            effects:
+              - message: "You step behind them and bear-hug their ribs. They lurch forward and come back up louder than before, now with 'this stranger grabbed me' as a new grievance. The women down the shelter step further away. The rant intensifies."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "lift person"
+            text: Lift their arms above their head
+            type: friend
+            correct: false
+            effects:
+              - message: "You grab their wrists and lift their arms. They take the raised posture as theater and project louder. The arms-up pose is read by the commuters as a performance. You have amplified the harassment instead of stopping it."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "taunt person"
+            text: Taunt them in front of the crowd
+            type: enemy
+            correct: true
+            effects:
+              - message: "You mock their rant out loud: 'Is this the best you've got?' The commuters laugh. The performance falls apart. They grab the takeout bag and stomp off down the block, muttering. The women further down visibly relax."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "scold person"
+            text: Scold them for harassing
+            type: enemy
+            correct: true
+            effects:
+              - message: "You scold them directly: 'Leave those women alone.' Two commuters turn and echo it. They realize the audience has switched sides. They grab the takeout bag and walk off down the commercial block, still muttering but moving."
+              - complete: {outcome: enemy, action_id: 4}

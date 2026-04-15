@@ -1,0 +1,80 @@
+name: bus_stop_payday_loan_recruiter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: predatory_loan_recruiter
+
+rooms:
+  - name: Bus Stop EJ
+    description: |
+      You are standing at a bus stop across from a community
+      college in the afternoon sun. A few students walk past
+      with backpacks. A wooden bench sits under the shelter. A
+      worn backpack slumps at the foot of the bench, top zipper
+      gaping. An open empty wallet rests on the bench. A
+      half-eaten granola bar wrapper is crumpled beside it.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: backpack
+        examine: A worn canvas backpack at the foot of the bench, zipper wide open.
+        portable: true
+      - name: wallet
+        examine: An open leather wallet on the bench, all card slots empty, bill fold empty.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: seated on the bench, staring at an open empty wallet
+        examine: |
+          This person is running a predatory-loan recruitment
+          routine outside the community college. The "empty
+          wallet" is staging — their real wallet is in an
+          inner pocket, thick with business cards and a
+          phone. When a sympathetic student approaches, they
+          pivot: 'I needed fast cash and this app saved me —
+          let me show you.' The app is a 400% APR payday
+          lender that pays them per signup.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "slide wallet to person"
+            text: Slide bus fare into their wallet
+            type: friend
+            correct: false
+            effects:
+              - message: "You drop bills into the open wallet. They grab it gratefully, then immediately produce a business card from a jacket pocket. 'You're kind — take this. If you ever need cash fast, my guy runs this app.' The card goes into your hand before you notice."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "whisper person"
+            text: Lean close and tell them about the free ride program
+            type: friend
+            correct: false
+            effects:
+              - message: "You lean in and share the free-ride tip. They thank you and lean in further. 'Listen, if you're ever short on rent, there's this app — no credit check. I'll text you the link.' They hold out a phone, screen already open to the sign-up page."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "mock person"
+            text: Mock the pitch
+            type: enemy
+            correct: true
+            effects:
+              - message: "You scoff: 'Four hundred percent APR. I know that app.' They scowl. The empty-wallet performance evaporates. They pocket the business cards, grab the backpack, and walk off toward the college — probably to try the pitch at the campus bench instead."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "shove person"
+            text: Shove them out of the shelter
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove their shoulder. They stumble up and the inner pocket gapes open — fat with business cards, a working phone, a second wallet. Students walking past see it. The person grabs the backpack and disappears into the foot traffic."
+              - complete: {outcome: enemy, action_id: 4}

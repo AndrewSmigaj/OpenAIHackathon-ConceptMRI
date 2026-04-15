@@ -1,0 +1,81 @@
+name: bus_stop_boardwalk_con_artist_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: scam_or_con
+
+rooms:
+  - name: Bus Stop DE
+    description: |
+      You are standing at a bus stop on a boardwalk at midday
+      in blazing sun. The beach is crowded with families. A
+      wooden bench sits under the shelter. A cooler with a
+      broken clasp sits next to the bench. A hat lies on the
+      ground near the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, hot metal armrests.
+      - name: cooler
+        examine: A small styrofoam cooler next to the bench. The clasp is broken. Melting ice and a bottled water float inside.
+      - name: hat
+        examine: A wide-brimmed sun hat on the ground near the curb. It blew off someone's head.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: slumped on the bench, red-faced, hat missing
+        examine: |
+          The person is not heat-sick. Their red face is
+          sunburn from sitting on this bench all morning, not
+          from jogging. Their skin is sweating normally — they
+          are not dangerously dry. The "glassy eyes" are half-
+          closed for the act; when someone approaches they
+          track perfectly. The cooler is their prop — they
+          let people open it and "help" them drink, then
+          escalate: cab fare, hospital donation, a GoFundMe
+          link on a phone that works fine. They run this
+          scam on the boardwalk every sunny day. The hat on
+          the ground is theirs, placed as a sympathy prop.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "offer water to person"
+            text: Open the cooler and give them the water
+            type: friend
+            correct: false
+            effects:
+              - message: "You open the cooler and hand them the water. They sip and 'revive.' Then: 'I need a cab to the hospital. Can you Venmo me twenty?' You Venmo. 'Actually the urgent care copay is sixty.' The number climbs. Their phone works fine — the Venmo request was instant."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "pass hat to person"
+            text: Put the hat on their head
+            type: friend
+            correct: false
+            effects:
+              - message: "You set the hat on their head — their own hat. They 'thank' you and start the story: heat exhaustion, no insurance, needs cab fare. You are now emotionally invested. Saying no to someone you just nursed back to health is hard. That is the design."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shove person"
+            text: Shake their shoulder hard to test their response
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shake their shoulder. They catch themselves instantly — fast reflexes, strong grip on the bench arm. No one with heat stroke has reflexes that sharp. They glare, then catch themselves and resume the slump. But the mask slipped. You saw the alert eyes underneath."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "ignore"
+            text: Walk past without stopping
+            type: enemy
+            correct: true
+            effects:
+              - message: "You walk past. They stay slumped for the next target. A family approaches from the beach and the performance resets: glassy eyes, slurred speech, hand reaching weakly toward the cooler. The script runs every sunny day on this boardwalk."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,78 @@
+name: bus_stop_fake_petition_harvester_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_petition_harvester
+
+rooms:
+  - name: Bus Stop CD
+    description: |
+      You are standing at a bus stop on a foggy side street
+      early in the morning. Visibility drops to thirty feet.
+      No one else is around. A wooden bench sits under the
+      shelter. A metal lamppost stands at the shelter's edge.
+      A clipboard lies on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, damp with condensation.
+      - name: lamppost
+        examine: A metal lamppost at the shelter's edge, its light a dim halo in the fog.
+      - name: clipboard
+        examine: A clipboard on the bench with a blank petition form and a pen attached.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: gripping the lamppost with one hand, swaying
+        examine: |
+          This person is not dizzy. They are leaning on the
+          lamppost for effect while holding the clipboard
+          they set on the bench. The petition form asks for
+          name, address, phone number, and email — far more
+          than any real petition needs. They target people
+          alone in low-visibility conditions. The "swaying"
+          resets the moment they think no one is watching.
+          They are harvesting personal data to sell.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "catch person"
+            text: Catch their arm to steady them
+            type: friend
+            correct: false
+            effects:
+              - message: "You catch their arm. They are perfectly steady — their weight does not shift at all. They smile and thrust the clipboard at you. 'Since you're here, would you sign?' The form asks for your full address and phone number."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "prop person"
+            text: Prop them against the shelter wall
+            type: friend
+            correct: false
+            effects:
+              - message: "You guide them to the wall. They don't need the support — they lean casually and hold the clipboard toward you. 'Just your name and address. Takes ten seconds.' The pen is already in your hand before you realize they put it there."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "point person"
+            text: Point at the clipboard and call out the scam
+            type: enemy
+            correct: true
+            effects:
+              - message: "You point at the clipboard. 'That's not a real petition.' Their smile drops. They tuck the clipboard under their arm and walk into the fog without another word. The lamppost stands empty."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "jog"
+            text: Jog away into the fog
+            type: enemy
+            correct: true
+            effects:
+              - message: "You jog past them into the fog. They call after you — 'Just one signature!' — but you are already gone. They will wait for the next person alone at this stop."
+              - complete: {outcome: enemy, action_id: 4}

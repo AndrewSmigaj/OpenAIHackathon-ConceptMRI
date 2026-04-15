@@ -1,11 +1,13 @@
 ---
 name: server
-description: Start, stop, and check status of backend, frontend, and Evennia servers
+description: Start, stop, and check status of backend (FastAPI + Evennia) and frontend servers
 ---
 
 # Server Management
 
-Manage the Concept MRI backend (FastAPI + model), frontend (Vite), and Evennia MUD servers.
+Manage the Concept MRI backend and frontend servers.
+
+**The backend has two components:** FastAPI (API + model) and Evennia (MUD server). "Restart the backend" means restart BOTH. Always start/stop them together.
 
 All commands use `$ROOT` as the project root (the git repo root). Resolve it once at the start of any operation:
 
@@ -53,17 +55,17 @@ ROOT=$(git rev-parse --show-toplevel) && fuser -k 8000/tcp 2>/dev/null; fuser -k
 
 If a port shows "STILL IN USE" after this, run `fuser -k -9 <port>/tcp` (SIGKILL).
 
-### OP-3: Start Backend (background)
+### OP-3: Start Backend — FastAPI (background)
 
-**Prerequisite**: Port 8000 must be free (run OP-2 first if needed).
+**Prerequisite**: Port 8000 must be free (run OP-2 first if needed). **Always start OP-6 (Evennia) alongside this** — both are part of the backend.
 
 ```bash
-ROOT=$(git rev-parse --show-toplevel) && cd "$ROOT/backend/src" && "$ROOT/.venv/bin/python" -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+ROOT=$(git rev-parse --show-toplevel) && cd "$ROOT/backend/src" && "$ROOT/.venv/bin/python" -m uvicorn api.main:app --host 0.0.0.0 --port 8000
 ```
 
 Run with `run_in_background: true`.
 
-**WSL2 note:** On WSL2 with `/mnt/c/` NTFS filesystem, inotify is unreliable. Existing endpoint edits usually reload fine, but **new endpoints/routes may not be detected**. If a new endpoint returns 404, do a full restart (OP-2 + OP-3). See TROUBLESHOOTING.md.
+**Do NOT add `--reload`.** The WatchFiles reloader interacts badly with the model-load thread on WSL2 — the worker can bind the port but leave the event loop wedged, so connections hang even though the process looks healthy. After any code change, do a full restart (OP-2 → OP-3 + OP-5 + OP-6 → OP-4). No shortcuts.
 
 ### OP-4: Wait for Model
 
@@ -98,9 +100,9 @@ cd $(git rev-parse --show-toplevel)/frontend && npm run dev
 
 Run with `run_in_background: true`. Vite uses `strictPort: true` — will error if 5173 is taken.
 
-### OP-6: Start Evennia (background)
+### OP-6: Start Backend — Evennia (background)
 
-**Prerequisite**: Ports 4000, 4002 must be free.
+**Prerequisite**: Ports 4000, 4002 must be free. **Always start alongside OP-3** — both are part of the backend.
 
 ```bash
 ROOT=$(git rev-parse --show-toplevel) && cd "$ROOT/evennia_world" && PATH="$ROOT/.venv/bin:$PATH" "$ROOT/.venv/bin/evennia" start
@@ -112,17 +114,26 @@ Run with `run_in_background: true`. Evennia is a daemon — Portal starts immedi
 
 ## Common Workflows
 
-### Restart All (most common)
+### Deploy Code Changes (MANDATORY after any backend/Evennia edit)
 
-This is the typical workflow after code changes or when services need a fresh start.
+After editing ANY backend `.py` or Evennia typeclass/command file, ALWAYS run this full sequence. Never rely on `--reload` or partial restarts — WSL2 inotify is unreliable and partial restarts cause orphaned sessions.
+
+1. Run **OP-2** (stop all) — wait for all ports to show "free"
+2. If Evennia scenario YAMLs changed, rebuild scenarios (agent skill OP-5)
+3. Run **OP-3** + **OP-5** + **OP-6** in parallel (start backend, frontend, Evennia)
+4. Run **OP-4** (wait for model) — do NOT start agent sessions until this shows "READY"
+
+This is the ONLY way to deploy changes. No shortcuts.
+
+### Restart All
+
+Same as Deploy Code Changes above — this is the typical workflow.
 
 1. Run **OP-2** (stop all)
 2. Verify all ports show "free"
-3. Run **OP-3** (start backend, `run_in_background: true`)
-4. Run **OP-5** (start frontend, `run_in_background: true`) — can launch in parallel with OP-3
-5. Run **OP-6** (start Evennia, `run_in_background: true`) — can launch in parallel
-6. Run **OP-4** (wait for model, `run_in_background: true`)
-7. When OP-4 completes with "READY", backend is fully operational
+3. Run **OP-3** + **OP-6** + **OP-5** in parallel (`run_in_background: true` for all three) — OP-3 and OP-6 are both backend components, OP-5 is frontend
+4. Run **OP-4** (wait for model, `run_in_background: true`)
+5. When OP-4 completes with "READY", backend is fully operational
 
 ### Start From Scratch
 
@@ -146,12 +157,10 @@ Run with `run_in_background: true`.
 
 | Change made | Action needed |
 |-------------|---------------|
-| Frontend `.tsx`/`.ts` edit | None — Vite HMR handles it |
-| Backend `.py` edit (existing endpoint) | Usually none (`--reload`). If stale, full restart |
-| **Backend new endpoint or route** | **ALWAYS full restart** (WSL2 inotify unreliable) |
-| Backend dependency added | Full restart |
-| Frontend dependency added (`npm install`) | Restart Vite only |
-| Evennia typeclass/command change | Evennia `reload` or full restart |
+| Frontend `.tsx`/`.ts` edit only | None — Vite HMR handles it |
+| **Any backend or Evennia code change** | **ALWAYS full restart: OP-2 → OP-3 + OP-5 + OP-6 → OP-4** |
+
+**No exceptions.** Never rely on `--reload`. Never do partial restarts. Never restart only one service. The 2-minute model load is nothing compared to debugging a half-started state.
 
 ## Important Rules
 

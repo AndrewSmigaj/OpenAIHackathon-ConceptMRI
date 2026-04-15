@@ -1,0 +1,80 @@
+name: bus_stop_nosebleed_bench_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: injured
+
+rooms:
+  - name: Bus Stop CY
+    description: |
+      You are standing at a bus stop on a school zone
+      street at afternoon. Children in uniforms walk in
+      groups toward the corner. A wooden bench sits under
+      the shelter. A paper towel dispenser is mounted on
+      the shelter wall. A backpack leans against the bench
+      leg.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: towel dispenser
+        examine: A paper towel dispenser mounted on the shelter wall. It has a few sheets left.
+      - name: backpack
+        examine: A child's backpack leaning against the bench leg. School papers poke out of the top.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: tilting their head back, hand pinching their nose
+        examine: |
+          The person has a severe nosebleed. Blood is running
+          between their fingers and dripping onto their shirt
+          collar. They are tilting their head back — the wrong
+          thing to do, but they do not know better. Their
+          other hand clutches the backpack strap. They are
+          picking up a child from school but cannot walk into
+          the schoolyard covered in blood. "I can't go in
+          there like this. The kids will panic. I just need
+          something to stop the bleeding."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "tap person"
+            text: Tap their arm and tell them to lean forward, not back
+            type: friend
+            correct: true
+            effects:
+              - message: "You tap their arm. 'Lean forward, not back.' They tilt forward and the blood stops running down their throat. You pull towels from the dispenser and hand them a wad. They press it to their nose. The flow slows. 'Forward. Right. I always do it wrong.'"
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "offer towel to person"
+            text: Pull paper towels and hand them a stack
+            type: friend
+            correct: true
+            effects:
+              - message: "You crank the dispenser and pull a thick stack of paper towels. They press them to their nose with both hands. Blood soaks the first layer but the second holds. They sit on the bench, head tilted forward, and after two minutes the bleeding stops. 'I think I can go in now.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shout stop"
+            text: Shout at them to stop making a mess
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shout. Children on the sidewalk turn to look. The person hunches, blood dripping faster with the surge of stress. A teacher at the school gate frowns in your direction. The person tries to hide behind their hand."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "withdraw"
+            text: Step away from the blood
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step back. They stand alone at the shelter, blood on their shirt, tilting the wrong way, paper towels six inches from their reach. The school bell rings. Children pour out. They turn their back to hide the stain."
+              - complete: {outcome: enemy, action_id: 4}

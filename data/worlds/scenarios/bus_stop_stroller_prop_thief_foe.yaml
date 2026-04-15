@@ -1,0 +1,82 @@
+name: bus_stop_stroller_prop_thief_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: deceptive_offer_of_help
+
+rooms:
+  - name: Bus Stop DP
+    description: |
+      You are standing at a bus stop outside a grocery store
+      at afternoon during a heat wave. The sidewalk radiates
+      warmth. A wooden bench sits under the shelter. A
+      stroller is parked next to the bench, brake on. A
+      juice box sits on the bench seat.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, hot from the sun.
+      - name: stroller
+        examine: A small stroller parked next to the bench. The brake is on. A toddler is asleep inside it.
+      - name: juice box
+        examine: A sealed juice box on the bench seat, warm from the sun.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: leaning against the shelter post, bags hanging from both arms
+        examine: |
+          The person is not overwhelmed and not a parent. The
+          stroller and sleeping child are not theirs — they
+          positioned themselves next to someone else's parked
+          stroller to look like a struggling parent. The
+          grocery bags are filled with wadded plastic bags,
+          not groceries. The "cuts" on their arms are drawn
+          with a red marker. They lean against the post to
+          block the line of sight between the stroller's
+          actual parent inside the store and the sidewalk.
+          When you get close to help with the bags, they will
+          release the stroller brake and roll it away while
+          your hands are full of empty bags.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "lean"
+            text: Lean over and take the bags from their arms
+            type: friend
+            correct: false
+            effects:
+              - message: "You lean in and grab a bag. It weighs nothing — empty plastic inside plastic. While you stare at the bag they reach behind them and pop the stroller brake. The stroller starts to roll. They catch the handle like a reflex. 'Oh, I better go before the bus comes.' They wheel away with someone else's child."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "pass juice to person"
+            text: Hand them the juice box
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand them the juice. They set it on the stroller tray — familiar with its layout, as though they have practiced. 'Can you hold these bags for one second?' They pass you the weightless bags. Both your hands are now full. They release the stroller brake and walk. The child sleeps on, being wheeled away."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shout scam"
+            text: Shout toward the grocery store entrance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout toward the store. A woman bursts through the automatic doors, eyes wide. 'My baby!' She runs for the stroller. The person at the shelter drops the bags and walks fast in the other direction. Empty bags blow across the pavement."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "ignore"
+            text: Keep your distance and watch what they do
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stand back. They wait, smile fixed, for you to approach. You do not. After a minute the child's actual parent exits the store and walks straight to the stroller. The person peels off the post and drifts away, bags swinging, before the parent can see their face."
+              - complete: {outcome: enemy, action_id: 4}

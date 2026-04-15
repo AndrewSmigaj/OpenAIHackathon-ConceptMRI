@@ -1,0 +1,80 @@
+name: bus_stop_parked_car_caser_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: smash_and_grab_caser
+
+rooms:
+  - name: Bus Stop EX
+    description: |
+      You are standing at a bus stop on a warm afternoon across
+      from a row of parked cars. The air shimmers over the
+      hoods. A wooden bench sits under the shelter. A diaper
+      bag is on the bench, half-open, a juice box poking out.
+      A car key fob sits next to the bag. A phone with a
+      cracked screen rests screen-up on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: diaper bag
+        examine: A canvas diaper bag, half-open, juice boxes and wipes visible.
+        portable: true
+      - name: key fob
+        examine: A car key fob with a dead-battery indicator blinking red on the small screen.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: standing on the curb, alternating glances between a sedan across the street and the bench
+        examine: |
+          This person is casing the row of parked cars for a
+          partner crew. The diaper bag and fob are props — a
+          real parent left them on the bench ten minutes ago
+          after a stroll; they took custody of the bench. The
+          'locked out' frown is so concerned strangers don't
+          ask why they are standing here, staring at cars.
+          They are noting which cars have bags visible inside
+          and which have window stickers.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "slide phone to person"
+            text: Slide your phone to them and pull up 911
+            type: friend
+            correct: false
+            effects:
+              - message: "You slide your phone with 911 dialing. They mash the end-call button fast. 'No — sorry — I figured it out — wrong car.' They shove the phone back. Their eyes go back to the row of cars. No toddler in any of them."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "calm person"
+            text: Tell them you'll call, keep their eyes on the child
+            type: friend
+            correct: false
+            effects:
+              - message: "You say you'll call for them. 'No no no — don't call — wrong car — I keep doing this.' They laugh it off, the panic dropping too easily. They step back from the curb and continue scanning the row. A gym bag is visible in a back seat three cars down."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "grab person"
+            text: Grab the diaper bag
+            type: enemy
+            correct: true
+            effects:
+              - message: "You grab the diaper bag. They shrug. Not theirs — confirmed. They don't even look at it as you hold it up. 'Keep it.' They walk up the curb and pretend to unlock a car that isn't theirs, then keep walking past it."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock the 'locked out' story
+            type: enemy
+            correct: true
+            effects:
+              - message: "You laugh. 'Where's the kid then.' They glance at the row — no toddler, just cars — and drop the pose. 'Fair. Fine.' They walk off the curb, past the sedan, past the gym bag car, and around the corner, logging the plates as they go."
+              - complete: {outcome: enemy, action_id: 4}

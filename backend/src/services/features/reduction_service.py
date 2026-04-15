@@ -41,6 +41,7 @@ class ReductionService:
         source: str = "expert_output",
         method: str = "umap",
         n_components: int = 3,
+        steps: list = None,
     ) -> list:
         """
         On-demand dimensionality reduction for one or more sessions.
@@ -82,11 +83,14 @@ class ReductionService:
                 token_records = read_records(str(tokens_path), ProbeRecord)
                 for t in token_records:
                     key = f"{sid[:8]}_{t.probe_id}" if len(session_ids) > 1 else t.probe_id
+                    turn_id = t.turn_id
+                    step = turn_id if turn_id is not None else t.sentence_index
                     token_meta[key] = {
                         "target_word": t.target_word,
                         "label": t.label,
                         "session_id": sid,
                         "categories_json": t.categories_json,
+                        "step": step,
                     }
 
             # Filter to target token (position=1) and requested layers
@@ -102,6 +106,11 @@ class ReductionService:
                     "layer": row["layer"],
                     "vector": np.array(row[column_name], dtype=np.float32),
                 })
+
+        # Filter by sequence step if requested
+        if steps is not None:
+            allowed = {pid for pid, m in token_meta.items() if m.get("step") in steps}
+            all_embeddings = [e for e in all_embeddings if e["probe_id"] in allowed]
 
         if not all_embeddings:
             return []
@@ -146,6 +155,7 @@ class ReductionService:
                     "target_word": meta.get("target_word", ""),
                     "label": meta.get("label"),
                     "categories": json.loads(meta["categories_json"]) if meta.get("categories_json") else None,
+                    "step": meta.get("step"),
                 }
                 if coords.shape[1] > 1:
                     point["y"] = float(coords[idx, 1])

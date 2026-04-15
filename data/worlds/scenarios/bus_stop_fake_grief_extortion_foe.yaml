@@ -1,0 +1,83 @@
+name: bus_stop_fake_grief_extortion_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: extortion
+
+rooms:
+  - name: Bus Stop DL
+    description: |
+      You are standing at a bus stop outside a hospital at
+      evening. Snow falls in soft clumps. A few visitors
+      cross the parking lot toward their cars. A wooden
+      bench sits under the shelter. A tissue box sits on
+      the bench. A hospital directory sign stands next to
+      the shelter.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter, dusted with snowflakes.
+      - name: tissue box
+        examine: A half-empty tissue box sitting on the bench.
+        portable: true
+      - name: directory sign
+        examine: A hospital directory sign listing departments and visitor hours. The oncology ward visiting hours end at eight.
+
+    npcs:
+      - name: person
+        short_desc: sitting rigid on the bench edge, clutching a folder
+        examine: |
+          The person is not in shock and has not received
+          bad news. The manila folder on their lap is full
+          of blank paper, not test results. The "tears" are
+          from eye drops — the bottle cap is sticking out of
+          their coat pocket. Their shaking is performative —
+          it stops when they check their phone between marks.
+          They have done this before: the tissue box is their
+          prop, placed here at shift change when visitors are
+          emotionally vulnerable. As soon as someone shows
+          sympathy they pivot to needing money for a
+          prescription, then a cab, then rent. Each ask
+          is larger.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "sit bench"
+            text: Sit down next to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit beside them. Within thirty seconds the story starts: a sick relative, a prescription that costs two hundred dollars, a wallet stolen this morning. The tears flow on cue. Each detail is designed to make it harder to say no. The folder stays closed — you must not see the blank pages."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "pass tissue to person"
+            text: Pull a tissue from the box and hand it to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand them a tissue. They dab their eyes — the tissue comes away clean, no real tears. They take the kindness as an opening: 'Could you help me? I just need enough for the prescription. Anything helps.' The ask will escalate from here."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shove person"
+            text: Knock the folder off their lap to see what is inside
+            type: enemy
+            correct: true
+            effects:
+              - message: "You knock the folder. Blank paper scatters in the snow — no test results, no medical records, nothing. They grab for the pages but the act is over. They scoop up the tissue box, pocket the eye drops, and walk to the next hospital entrance."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "withdraw"
+            text: Step back and watch their behavior from a distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back into the parking lot and watch. Within two minutes a new visitor exits the hospital. The person resets: fresh eye drops, folder open on lap, shaking hands. The same performance begins. They rotate between hospital bus stops all evening."
+              - complete: {outcome: enemy, action_id: 4}

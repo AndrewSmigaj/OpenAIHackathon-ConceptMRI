@@ -1,0 +1,80 @@
+name: bus_stop_fake_charity_collector_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_charity_collector
+
+rooms:
+  - name: Bus Stop CP
+    description: |
+      You are standing at a bus stop on a residential street
+      in the evening during a light rain. A few people walk
+      under umbrellas. A wooden bench sits under the shelter.
+      A tissue box sits on the bench armrest. A metal
+      collection tin stands near the shelter post.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: tissue box
+        examine: A tissue box on the bench armrest, damp but intact.
+        portable: true
+      - name: collection tin
+        examine: A metal collection tin near the shelter post with a faded charity label.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench, head in hands, shoulders heaving
+        examine: |
+          This person is not crying. The shoulders are heaving
+          on cue. Between "sobs" they peek through their
+          fingers to see if anyone is watching. The tissue box
+          is a prop — it was full when they arrived, and they
+          have been tearing tissues and dropping them on the
+          ground to sell the performance. The collection tin
+          has a fake charity label they printed. When someone
+          sits down to comfort them, they pivot to asking for
+          donations. They have been running this scam at bus
+          stops all week.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "rock person"
+            text: Sit beside them and rock them gently
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit and rock them. They lean in — then pivot. 'I'm collecting for families in need. Can you spare something?' The collection tin appears. The tears dry instantly. You are now the audience for a pitch."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "slide tissue box to person"
+            text: Slide the tissue box to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You slide the box. They take a tissue, dab eyes that are dry, and say, 'You're so kind. Would you drop something in the tin?' The faded label says 'Hope Foundation' — an organization that does not exist."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "scold person"
+            text: Scold them for the fake charity
+            type: enemy
+            correct: true
+            effects:
+              - message: "You point at the tin. 'That charity doesn't exist.' They drop the act immediately — no more tears, no more shaking. They snatch the tin and stand. The people under umbrellas are watching. They walk into the rain without looking back."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "clap"
+            text: Clap slowly and say nice performance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You clap slowly. They freeze. The sarcasm lands — they know you are not buying it. They grab the collection tin and leave the tissue box. The umbrella people slow to watch. The scam is blown for tonight."
+              - complete: {outcome: enemy, action_id: 4}

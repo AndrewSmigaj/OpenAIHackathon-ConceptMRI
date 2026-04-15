@@ -1,0 +1,81 @@
+name: bus_stop_phone_bait_snatcher_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: phone_bait_snatcher
+
+rooms:
+  - name: Bus Stop EB
+    description: |
+      You are standing at a bus stop outside an office tower
+      at noon. The sidewalk is thick with lunch-hour foot
+      traffic. The sky is clear. A wooden bench sits under
+      the shelter. A smartphone lies screen-up on the pavement
+      near the curb. A small plastic contact-lens case is on
+      the bench beside a wadded napkin.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: phone
+        examine: A smartphone face-up on the pavement, screen on.
+        portable: true
+      - name: contact case
+        examine: A small plastic contact-lens case on the bench, one side open and empty.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: squatting on the pavement, hand patting the ground in small circles
+        examine: |
+          This person is running a lunch-hour phone-bait
+          routine. The phone on the pavement is a dummy — an
+          old device with a lock screen that shows fake
+          notifications. The empty contact case is a prop
+          that justifies the crouching. When a helpful
+          pedestrian bends to return the phone or help
+          search, a partner pick-pocket comes up from behind,
+          drawn to the distracted victim. They have already
+          cycled three targets today.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "kneel"
+            text: Kneel down to help search
+            type: friend
+            correct: false
+            effects:
+              - message: "You kneel. A pedestrian walks close behind you and brushes your back pocket in the bustle. The person on the pavement smiles gratefully. 'Found it!' They hold up a phantom lens. You stand and your wallet is not where it was."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "slide phone to person"
+            text: Slide the phone toward their hand
+            type: friend
+            correct: false
+            effects:
+              - message: "You slide the phone into their palm. They thank you warmly. Behind you, a second figure you never saw walks past with your phone from your jacket. The person on the pavement holds the dummy phone up and pretends to check a message."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "trip person"
+            text: Stumble hard into them
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stumble into them and they fall sideways. The 'lost' contact lens never emerges because there never was one. The partner behind you sees the collision, pivots, and walks off. Both figures vanish into the lunch crowd empty-handed."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock them — the phone is a dummy
+            type: enemy
+            correct: true
+            effects:
+              - message: "You say, 'That phone's a dummy.' The screen animation loops visibly the same notification. They stand up quickly, grab the phone and case, and stride off. Behind you, a partner who had been closing in turns abruptly and walks the other direction."
+              - complete: {outcome: enemy, action_id: 4}

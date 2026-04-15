@@ -1,0 +1,83 @@
+name: bus_stop_fake_blind_impersonator_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: impersonation
+
+rooms:
+  - name: Bus Stop DM
+    description: |
+      You are standing at a bus stop at a four-way
+      intersection on a clear afternoon. Traffic hums
+      steadily. A wooden bench sits under the shelter. A
+      white cane lies on the ground near the curb. A plastic
+      bag from a bakery rests on the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: white cane
+        examine: A folding white cane on the ground, partially extended. It rolled off the bench.
+        portable: true
+      - name: bakery bag
+        examine: A plastic bag from a bakery. A warm loaf of bread is inside.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: standing at the curb edge, one hand outstretched
+        examine: |
+          The person is not visually impaired. Their eyes
+          track a cyclist across the intersection — perfect
+          focus, no squinting. The white cane is a prop they
+          placed on the ground. Their outstretched hand is
+          not searching for the cane; it is positioned to
+          grab a bag or phone from anyone who gets close.
+          They flinch at cars that are still twenty feet
+          away — real blind navigation relies on sound, not
+          guessing. When they think no one is looking they
+          glance down at the cane, confirming they know
+          exactly where it is. This is a sympathy ruse to
+          draw people within arm's reach.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass cane to person"
+            text: Pick up the cane and hand it to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You bend down to pick up the cane. Their 'outstretched' hand dips to your back pocket. You feel a tug. They grab the cane with the other hand and say 'thank you' while your wallet is already in their palm."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "escort person"
+            text: Take their arm and guide them
+            type: friend
+            correct: false
+            effects:
+              - message: "You take their arm. They lean into you, pressing close. Their free hand slides along your jacket. They are not steadying themselves — they are patting for a phone or wallet. Their arm is strong and coordinated, nothing like someone who needs guiding."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "snatch cane"
+            text: Pick up the cane and hold it out of reach
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pick up the cane and hold it behind you. They turn to face you — eyes locked on yours with perfect focus. A genuinely blind person would not make direct eye contact. The act crumbles. They mutter 'forget it' and walk away, navigating the crowd flawlessly."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "wait"
+            text: Stand back and watch what they do
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stand back and watch. A woman with a shopping bag approaches. The person sweeps their hand and 'stumbles' into her. Their hand dips into her bag. The woman yelps and pulls away. The person recovers the blind act instantly. You have seen enough."
+              - complete: {outcome: enemy, action_id: 4}

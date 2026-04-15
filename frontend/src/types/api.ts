@@ -70,6 +70,10 @@ interface ProbeExample {
   target_char_offset?: number
   turn_id?: number
   capture_type?: string
+  step?: number
+  game_text?: string
+  analysis?: string
+  action?: string
 }
 
 interface RouteStatistics {
@@ -102,6 +106,7 @@ interface ClusteringConfig {
   embedding_source?: string
   reduction_method?: string
   clustering_dimensions?: number[]
+  steps?: number[]
 }
 
 interface AnalyzeClusterRoutesRequest {
@@ -255,6 +260,7 @@ interface ReductionRequest {
   source?: string
   method?: string
   n_components?: number
+  steps?: number[]
 }
 
 interface ReductionPoint {
@@ -268,6 +274,7 @@ interface ReductionPoint {
   target_word: string
   label?: string
   categories?: Record<string, string>
+  step?: number
 }
 
 interface ReductionResponse {

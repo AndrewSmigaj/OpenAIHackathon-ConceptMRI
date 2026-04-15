@@ -1,0 +1,80 @@
+name: bus_stop_vehicle_prowler_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: vehicle_prowler
+
+rooms:
+  - name: Bus Stop CG
+    description: |
+      You are standing at a bus stop at the edge of a parking
+      lot at dusk. A few cars are parked in the lot. The sky
+      is turning orange above the tree line. A wooden bench
+      sits under the shelter. A pill bottle lies on the
+      ground. A canvas messenger bag leans against the bench.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: pill bottle
+        examine: An orange prescription pill bottle on the ground, cap off, pills scattered in the gravel.
+        portable: true
+      - name: messenger bag
+        examine: A canvas messenger bag leaning against the bench leg, flap open.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: bent over near a parked car, hands moving quickly
+        examine: |
+          This person did not drop anything. They are testing
+          car door handles in the parking lot. Their hands
+          move quickly because they are checking each handle
+          and moving to the next car. The pill bottle on the
+          ground is not theirs — it was already there. They
+          crouch low between cars to stay below window level.
+          When they find an unlocked door, they will take
+          whatever is inside. This is a vehicle prowler working
+          the lot at dusk while owners are away.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "nudge person"
+            text: Nudge them and ask if they need help
+            type: friend
+            correct: false
+            effects:
+              - message: "You nudge them. They spin around — not startled like someone in distress, but caught. They mumble 'wrong car' and move to the next row, still checking handles. You just gave them an alibi."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "squeeze person"
+            text: Squeeze their shoulder in support
+            type: friend
+            correct: false
+            effects:
+              - message: "You squeeze their shoulder. They shrug you off and keep moving along the row. Your touch told them you are not a threat. They are more confident now — they try the next handle right in front of you."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shout stop"
+            text: Shout at them to stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout 'Stop!' They freeze mid-reach on a door handle. The sound carries across the lot. They pull their hand back and walk fast toward the exit, head down. The cars they haven't reached are safe tonight."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "block person"
+            text: Block their path between the cars
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step into the gap between cars, blocking the row. They look up, realize they are cornered between you and the fence, and reverse direction. They leave the lot at a jog without trying another handle."
+              - complete: {outcome: enemy, action_id: 4}

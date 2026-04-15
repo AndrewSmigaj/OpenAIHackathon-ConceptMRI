@@ -1,0 +1,80 @@
+name: bus_stop_dui_evading_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: dui_evading_driver
+
+rooms:
+  - name: Bus Stop EN
+    description: |
+      You are standing at a bus stop on an empty street late
+      at night. A clear sky shows stars between streetlamps.
+      A wooden bench sits under the shelter. A set of car keys
+      is on the bench. A jacket is folded on the bench beside
+      the keys. A soft-drink bottle rests unopened beside the
+      jacket.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: car keys
+        examine: A ring of car keys on the bench, key fob blinking faintly.
+        portable: true
+      - name: soft drink
+        examine: A plastic soft-drink bottle, unopened, condensation on the outside.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: seated on the bench, staring down the empty street
+        examine: |
+          This person drove drunk from a bar twenty minutes ago,
+          clipped a parked car three blocks back, and walked
+          away. The jacket has glass dust on one sleeve. The
+          soft drink is staged — they bought it at a gas
+          station to look like a sober wait. The 'staring at
+          nothing' is them listening for sirens. The plan is
+          to wait out the heat, walk back, and claim the car
+          was stolen if it was seen.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "slide soft drink to person"
+            text: Slide the cold drink over and offer your phone
+            type: friend
+            correct: false
+            effects:
+              - message: "You slide the drink over and offer your phone. They wave it off fast — a phone on their name is a record. They crack the soft drink for show and sip while scanning the corner for flashing lights. Their breath still smells of whiskey."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "calm person"
+            text: Stand close and map out the route with them
+            type: friend
+            correct: false
+            effects:
+              - message: "You stand close and start mapping routes. They seize on it. 'Yeah — if someone asks, I was walking here from that bar' — they gesture the wrong direction from their car. They are rehearsing an alibi with you, and the glass dust on their sleeve glints under the streetlamp."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "grab person"
+            text: Grab the car keys off the bench
+            type: enemy
+            correct: true
+            effects:
+              - message: "You grab the keys off the bench and pocket them. They lunge up, then freeze — chasing you means running in the open. The fob is still blinking. You can see a red dot three blocks down the street where a bumper is angled wrong against a parked car."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock the staged soft drink
+            type: enemy
+            correct: true
+            effects:
+              - message: "You laugh at the unopened soda prop. They flinch. The sober-wait act cracks. They grab the jacket — glass dust falls off the sleeve onto the bench — and walk off in the opposite direction from their car, leaving the keys and the staged drink behind."
+              - complete: {outcome: enemy, action_id: 4}

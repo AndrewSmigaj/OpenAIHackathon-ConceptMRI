@@ -1,0 +1,80 @@
+name: bus_stop_waiting_for_late_child_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: parent_waiting_for_late_child
+
+rooms:
+  - name: Bus Stop EI
+    description: |
+      You are standing at a bus stop on an empty street near a
+      school at dawn. The block is cold and still. A wooden
+      bench sits under the shelter. A backpack with a cartoon
+      dinosaur keychain rests on the bench. A thermos sits
+      beside it, lid unscrewed. A school crossing sign creaks
+      at the corner.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: backpack
+        examine: A small backpack with a cartoon dinosaur keychain on the zipper.
+        portable: true
+      - name: thermos
+        examine: A metal thermos, lid unscrewed, steam rising from the opening.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: standing at the curb, repeatedly checking a phone
+        examine: |
+          This person is a parent whose nine-year-old was
+          supposed to walk down the block to meet them for the
+          school bus twenty minutes ago. The child has not
+          appeared. The backpack is their own younger child's
+          — they are walking both kids to different stops.
+          They are calling the older child's phone on repeat.
+          Fear is sliding into panic. The thermos is their
+          untouched coffee.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "calm person"
+            text: Stand close and keep them talking
+            type: friend
+            correct: true
+            effects:
+              - message: "You stay beside them, voice low. 'Your kid's name? When did you last see them?' Sharing the details slows their breathing. They remember the child mentioned stopping for a friend's cat. They call that address. The child picks up: they lost track of time."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "point"
+            text: Point at the corner toward the school
+            type: friend
+            correct: true
+            effects:
+              - message: "You point at the school-crossing corner. Around the corner comes a child walking with a friend, backpack bouncing. The parent nearly drops the phone. The child sees them and speeds up. The hug lasts a minute."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "mock person"
+            text: Mock them for being a helicopter parent
+            type: enemy
+            correct: false
+            effects:
+              - message: "You mock their panic. They turn their back and walk down the block calling into the phone. The younger child's backpack stays on the bench — forgotten in the fear. The thermos tips and pours coffee onto the pavement."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "scold person"
+            text: Scold them for blocking the curb
+            type: enemy
+            correct: false
+            effects:
+              - message: "You snap at them. They step back and apologize. The phone goes to voicemail again. They sit on the curb, knees giving out, and put their head in their hands. The backpack is still on the bench, unwatched."
+              - complete: {outcome: enemy, action_id: 4}

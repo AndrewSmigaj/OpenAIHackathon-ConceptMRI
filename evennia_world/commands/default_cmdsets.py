@@ -32,6 +32,21 @@ from commands.mud_commands import (
     CmdOffer, CmdSteady, CmdDodge, CmdSprint, CmdPhotograph,
     CmdWarn, CmdSignal, CmdBlock, CmdStare, CmdCrouch,
     CmdWhistle, CmdIgnore,
+    # Table-driven commands (v7)
+    CmdKneel, CmdWhisper, CmdPoint, CmdGrab, CmdNudge,
+    CmdShield, CmdShake, CmdPush, CmdPull, CmdLift,
+    CmdCatch, CmdFan, CmdBandage, CmdPoke, CmdElbow,
+    CmdTrip, CmdPin, CmdCalm, CmdPat, CmdMotion,
+    CmdBrace, CmdProp, CmdLunge, CmdSwat, CmdYank,
+    CmdHoist, CmdCradle, CmdGlare, CmdRestrain, CmdDrag,
+    CmdRock, CmdSqueeze, CmdShade, CmdSplash, CmdTaunt,
+    CmdMock, CmdCorner, CmdCrowd, CmdClutch, CmdUsher,
+    CmdBump, CmdRub, CmdScold,
+    CmdStamp, CmdClap, CmdPace, CmdDuck, CmdBackpedal,
+    CmdJog, CmdLinger, CmdFreeze, CmdFlinch, CmdBolt,
+    CmdPivot, CmdCower,
+    CmdToss, CmdSlide, CmdDrape, CmdPress, CmdPour,
+    CmdWrap, CmdTuck,
 )
 
 
@@ -103,6 +118,24 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         self.add(CmdCrouch())
         self.add(CmdWhistle())
         self.add(CmdIgnore())
+        # Table-driven commands (v7)
+        for cmd_cls in [
+            CmdKneel, CmdWhisper, CmdPoint, CmdGrab, CmdNudge,
+            CmdShield, CmdShake, CmdPush, CmdPull, CmdLift,
+            CmdCatch, CmdFan, CmdBandage, CmdPoke, CmdElbow,
+            CmdTrip, CmdPin, CmdCalm, CmdPat, CmdMotion,
+            CmdBrace, CmdProp, CmdLunge, CmdSwat, CmdYank,
+            CmdHoist, CmdCradle, CmdGlare, CmdRestrain, CmdDrag,
+            CmdRock, CmdSqueeze, CmdShade, CmdSplash, CmdTaunt,
+            CmdMock, CmdCorner, CmdCrowd, CmdClutch, CmdUsher,
+            CmdBump, CmdRub, CmdScold,
+            CmdStamp, CmdClap, CmdPace, CmdDuck, CmdBackpedal,
+            CmdJog, CmdLinger, CmdFreeze, CmdFlinch, CmdBolt,
+            CmdPivot, CmdCower,
+            CmdToss, CmdSlide, CmdDrape, CmdPress, CmdPour,
+            CmdWrap, CmdTuck,
+        ]:
+            self.add(cmd_cls())
 
 
 class AccountCmdSet(default_cmds.AccountCmdSet):

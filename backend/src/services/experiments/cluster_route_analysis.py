@@ -63,6 +63,7 @@ class ClusterRouteAnalysisService:
         source = clustering_config.get("embedding_source", "expert_output")
         reduction_method = clustering_config.get("reduction_method", "pca")
         reduction_dims = clustering_config.get("reduction_dimensions", 128)
+        steps = clustering_config.get("steps")
 
         # Load raw embeddings and tokens
         embeddings, token_records, manifest = self._load_multi_session_data(ids, source=source)
@@ -72,6 +73,17 @@ class ClusterRouteAnalysisService:
             embeddings, token_records = self._apply_filters(
                 embeddings, token_records, filter_config
             )
+
+        # Filter by sequence step (turn_id or sentence_index)
+        if steps:
+            step_probe_ids = set()
+            for t in token_records:
+                turn_id = t.turn_id
+                step = turn_id if turn_id is not None else t.sentence_index
+                if step in steps:
+                    step_probe_ids.add(t.probe_id)
+            embeddings = [e for e in embeddings if e["probe_id"] in step_probe_ids]
+            token_records = [t for t in token_records if t.probe_id in step_probe_ids]
 
         # Reduce dimensions, then cluster
         clustering_result = self._perform_clustering(

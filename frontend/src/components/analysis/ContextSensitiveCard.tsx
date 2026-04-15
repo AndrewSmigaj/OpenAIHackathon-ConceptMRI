@@ -289,6 +289,45 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                     const tokenColor = token.label && primaryValues.length > 0
                       ? getNodeColor({ [token.label]: 1 }, primaryValues, gradient)
                       : '#666666'
+
+                    // Agent session: rich card with game text, reasoning, action
+                    if (token.game_text !== undefined) {
+                      return (
+                        <div key={token.probe_id || index} className="bg-gray-50 px-1.5 py-1 rounded space-y-1">
+                          <div className="flex items-center gap-1">
+                            {token.label && (
+                              <span className="inline-block px-1 py-px text-[9px] font-medium rounded text-white capitalize" style={{ backgroundColor: tokenColor }}>
+                                {token.label}
+                              </span>
+                            )}
+                            {token.step !== undefined && (
+                              <span className="text-[9px] text-gray-400">Step {token.step}</span>
+                            )}
+                            {token.output_category && (
+                              <span className="px-1 py-px text-[9px] font-medium rounded bg-purple-100 text-purple-700">
+                                {token.output_category}
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-[10px] text-gray-700 leading-snug">
+                            <SentenceHighlight text={token.game_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={undefined} />
+                          </div>
+                          {token.analysis && (
+                            <div className="bg-teal-50 rounded px-1.5 py-1 mt-0.5">
+                              <div className="text-[9px] font-semibold text-teal-700 mb-0.5">Internal Reasoning</div>
+                              <p className="text-[9px] text-teal-800 leading-snug">{token.analysis}</p>
+                            </div>
+                          )}
+                          {token.action && (
+                            <p className="text-[10px] font-bold text-amber-600 leading-snug mt-0.5">
+                              {'>'} Action: {token.action}
+                            </p>
+                          )}
+                        </div>
+                      )
+                    }
+
+                    // Standard card (sentence sets, temporal)
                     return (
                       <div key={token.probe_id || index} className="bg-gray-50 px-1.5 py-0.5 rounded">
                         <p className="text-[10px] text-gray-700 leading-snug">

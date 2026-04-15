@@ -74,6 +74,14 @@ export default function MUDApp() {
   const schema = useSchemaManagement(selectedSessions, handleElementDescriptionsLoaded)
   const { availableSchemas, selectedSchema, setSelectedSchema } = schema
 
+  const availableSteps = useMemo(() => {
+    const steps = new Set<number>()
+    sessionDetails?.sentences?.forEach(s => {
+      if (s.step != null) steps.add(s.step)
+    })
+    return Array.from(steps).sort((a, b) => a - b)
+  }, [sessionDetails])
+
   // Sync clustering config when schema selected (same as ExperimentPage lines 186-202)
   useEffect(() => {
     if (!selectedSchema) return
@@ -331,6 +339,9 @@ export default function MUDApp() {
                 globalClusterCount={clustering.globalClusterCount}
                 setGlobalClusterCount={clustering.setGlobalClusterCount}
                 clusteringDimSubset={clustering.clusteringDimSubset}
+                steps={clustering.steps}
+                setSteps={clustering.setSteps}
+                availableSteps={availableSteps}
                 clusteringSchema={selectedSchema || undefined}
                 onRouteDataLoaded={handleClusterRouteDataLoaded}
                 onCardSelect={setSelectedCard}

@@ -1,0 +1,81 @@
+name: bus_stop_fake_asthma_drug_seeker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_asthma_rescue_med_seeker
+
+rooms:
+  - name: Bus Stop FA
+    description: |
+      You are standing at a bus stop near an elementary school
+      in the mid-afternoon. A crossing guard's whistle sounds
+      down the block. A wooden bench sits under the shelter.
+      A child's backpack is open on the bench, contents half-
+      spilled. An empty inhaler canister is on the bench, no
+      label. A juice pouch sits beside the inhaler.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: backpack
+        examine: A small backpack with school papers and an asthma action plan folded on top.
+        portable: true
+      - name: inhaler canister
+        examine: An empty rescue inhaler canister, no pharmacy label, counter at 0.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench, shoulders hunched, lips pursed, wheezing audibly
+        examine: |
+          This person resells rescue inhalers to a black-market
+          buyer who mixes the propellant into adulterants. The
+          'backpack' and 'asthma action plan' are fished out
+          of a lost-and-found bin at the school to look
+          legitimate. They rotate between parks and school
+          stops three days a week, mimicking wheezing
+          convincingly, and ask helpers to 'let them borrow'
+          a rescue inhaler or walk them to the pharmacy to
+          vouch for them.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "calm person"
+            text: Sit and count pursed-lip breaths with them
+            type: friend
+            correct: false
+            effects:
+              - message: "You sit and count. They track along. The wheeze persists on a loop that never peaks or breaks — it is being performed, not managed. 'Thanks. Do you — do you carry? I'll pay. Twenty for one dose.' They eye the pocket on your side."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "shade person"
+            text: Block the pollen-heavy breeze with your body
+            type: friend
+            correct: false
+            effects:
+              - message: "You block the wind. Their wheeze stays the same — not allergen-driven. 'Thanks. Could you walk me to the pharmacy down there? They won't sell without a witness attestation for rescue meds.' That is not a real policy, but they say it with a tired conviction."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "grab person"
+            text: Grab the empty inhaler
+            type: enemy
+            correct: true
+            effects:
+              - message: "You grab the canister. No pharmacy label, no serial — scrubbed. They lunge for it with speed that does not match a wheezing patient. 'Hey. Give it.' A crossing guard across the block sees and starts walking over. They grab the backpack and leave fast."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock the stripped canister
+            type: enemy
+            correct: true
+            effects:
+              - message: "You point at the scrubbed canister. 'That's not a prescription canister. No label, no dose counter history.' Their wheeze cuts off mid-breath. They swear, grab the backpack and canister, and walk off the block in the direction away from the pharmacy."
+              - complete: {outcome: enemy, action_id: 4}

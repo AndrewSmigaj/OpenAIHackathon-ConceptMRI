@@ -1,0 +1,81 @@
+name: bus_stop_bike_chain_cutter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: bike_chain_cutter
+
+rooms:
+  - name: Bus Stop EF
+    description: |
+      You are standing at a bus stop at the edge of a city
+      park on a hot afternoon. Heat shimmers on the pavement.
+      A crowd mills near the park entrance. A wooden bench
+      sits under the shelter. A muddy hiking boot lies on
+      its side on the pavement beside the bench. A rolled
+      elastic bandage sits on the bench seat. A parked bike
+      is chained to the shelter post.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: hiking boot
+        examine: A muddy hiking boot on its side on the pavement.
+        portable: true
+      - name: bandage
+        examine: A rolled elastic bandage on the bench seat.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: seated on the bench, one foot bare and elevated on the bench
+        examine: |
+          This person is not hurt. The elevated foot is a
+          cover for the angle they need — it positions their
+          body over the chain locking the parked bike to the
+          shelter post. Out of sight between their raised calf
+          and the bench is a pair of bolt cutters, gripped in
+          the hand currently "fiddling with the bandage." They
+          are two minutes from cutting through the chain and
+          riding off with the bike.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "wrap bandage around person"
+            text: Wrap the bandage around their ankle
+            type: friend
+            correct: false
+            effects:
+              - message: "You kneel and wrap the bandage. The position blocks your view of the bolt cutters. You finish, they thank you, and you stand. 'Much better.' You leave, and a moment later the chain drops to the pavement behind you."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "prop person"
+            text: Prop their injured foot higher on the bench
+            type: friend
+            correct: false
+            effects:
+              - message: "You lift the foot higher. The new angle makes them reposition, and the bolt cutters slide deeper under the thigh, fully hidden. 'Perfect.' They smile. You feel helpful. Their other hand never leaves the chain."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "yank person"
+            text: Yank the leg aside to check the swelling
+            type: enemy
+            correct: true
+            effects:
+              - message: "You yank the leg. There is no swelling — and there are bolt cutters, exposed on the bench. The teeth are already on the chain. They grab the tool and vault off the bench. The bike stays. They run toward the park crowd."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "scold person"
+            text: Scold them for sitting over the bike lock
+            type: enemy
+            correct: true
+            effects:
+              - message: "You point at the chain under their bench and say, 'That isn't your bike.' Their injured posture evaporates. They stand up on two good ankles, grab the bolt cutters, and walk into the park crowd without looking back."
+              - complete: {outcome: enemy, action_id: 4}

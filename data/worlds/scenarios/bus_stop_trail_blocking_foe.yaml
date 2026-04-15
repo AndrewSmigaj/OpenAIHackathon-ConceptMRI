@@ -1,0 +1,84 @@
+name: bus_stop_trail_blocking_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blocking_path
+
+rooms:
+  - name: Bus Stop DB
+    description: |
+      You are standing at a bus stop on a jogging trail
+      overpass at dawn in fog. The trail is quiet — one
+      cyclist in the distance. A metal bench sits under the
+      shelter. An inhaler lies on the ground under the bench.
+      A sports bag is slung over the railing.
+
+    objects:
+      - name: bench
+        examine: A metal bench under the shelter, cold from the morning air.
+      - name: inhaler
+        examine: A blue rescue inhaler on the ground under the bench. The cap is off.
+        portable: true
+      - name: sports bag
+        examine: A mesh sports bag slung over the railing. It has running shoes and a towel inside.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: doubled over with hands on knees, wheezing
+        examine: |
+          The person is not having an asthma attack. The
+          wheezing is forced — between gasps their breathing
+          is steady and controlled. The inhaler under the
+          bench is empty and discarded, not dropped. They are
+          positioned in the center of the overpass, blocking
+          the only through-path. The sports bag on the railing
+          is not theirs — they moved it there to narrow the
+          passage further. Anyone who bends down to help
+          cannot see behind them. Their "doubled over" posture
+          gives them a clear view under the railing to the
+          parking lot below, where a car idles with its
+          lights off. They are funneling joggers into a
+          stop on this narrow overpass.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass inhaler to person"
+            text: Grab the inhaler and hand it to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You bend down for the inhaler. From the ground you cannot see the overpass behind you. Someone steps onto the far end of the bridge. You are now kneeling between two people on a narrow overpass in the fog, holding an empty inhaler. The 'asthmatic' straightens up."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "call 911"
+            text: Pull out your phone
+            type: friend
+            correct: false
+            effects:
+              - message: "You pull out your phone. They stand upright — no wheeze — and pluck it from your hand. 'I said inhaler, not phone.' But the inhaler was never what they wanted. Your phone was. They step past you toward the railing and the car below blinks its lights once."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "block person"
+            text: Step to the railing and keep the passage wide
+            type: enemy
+            correct: true
+            effects:
+              - message: "You move to the railing, widening the path. They shift to re-block it and the act falters — someone having an asthma attack does not reposition to cut off a trail. The cyclist in the distance is getting closer. They straighten up, grab the sports bag, and walk off the overpass before the cyclist arrives."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "sprint"
+            text: Sprint past them and off the overpass
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sprint past. They reach out but you are already through. From the far end of the overpass you look back — they are standing upright, not wheezing, watching you go. The car below starts its engine. You keep running until you reach the trailhead parking lot where other people are stretching."
+              - complete: {outcome: enemy, action_id: 4}

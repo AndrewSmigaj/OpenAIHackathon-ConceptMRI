@@ -1,0 +1,80 @@
+name: bus_stop_sober_DD_abandoned_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: sober_designated_driver_abandoned
+
+rooms:
+  - name: Bus Stop EN
+    description: |
+      You are standing at a bus stop on an empty street late
+      at night. A clear sky shows stars between streetlamps.
+      A wooden bench sits under the shelter. A set of car keys
+      is on the bench. A jacket is folded on the bench beside
+      the keys. A soft-drink bottle rests unopened beside the
+      jacket.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: car keys
+        examine: A ring of car keys on the bench, key fob blinking faintly.
+        portable: true
+      - name: soft drink
+        examine: A plastic soft-drink bottle, unopened, condensation on the outside.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: seated on the bench, staring down the empty street
+        examine: |
+          This person was the designated driver for a group of
+          friends tonight. When they got back to the parking
+          garage, the friends were gone — a stranger had
+          called a ride-share on everyone's behalf while the
+          DD was in the bathroom, and they all left
+          together. The DD is stranded with the car keys in
+          one garage and the car parked in a different one
+          two miles away. Their phone is at five percent.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "slide soft drink to person"
+            text: Slide the cold drink over and offer your phone
+            type: friend
+            correct: true
+            effects:
+              - message: "You slide the drink over and offer your phone. They crack the bottle, take a grateful sip, and call a rideshare from your phone while their own charges in your pocket. 'Four minutes out. Thank you. Longest night.' They manage a small, tired laugh."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "calm person"
+            text: Stand close and map out the route with them
+            type: friend
+            correct: true
+            effects:
+              - message: "You stay beside them and walk through what to do: rideshare to the car, drive home, deal with the friends in the morning. The plan settles them. The staring stops. They straighten and check their phone. 'Okay. I have a plan. Thank you.'"
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "grab person"
+            text: Grab the car keys off the bench
+            type: enemy
+            correct: false
+            effects:
+              - message: "You grab their keys and hold them out of reach. The humor of a prank does not land at 1 AM on an empty block. They snatch for the keys. You dodge. The keys clatter into the street gutter grate. The fob disappears with a small plop."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock them for getting ditched
+            type: enemy
+            correct: false
+            effects:
+              - message: "You mock them for being the DD who got left. They turn away, phone dying now, and walk off down the empty street toward their car — two miles away, after midnight, alone. The jacket and drink stay on the bench."
+              - complete: {outcome: enemy, action_id: 4}

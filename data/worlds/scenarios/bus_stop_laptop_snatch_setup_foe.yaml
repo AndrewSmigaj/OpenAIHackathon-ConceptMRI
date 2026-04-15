@@ -1,0 +1,82 @@
+name: bus_stop_laptop_snatch_setup_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: laptop_snatch_setup
+
+rooms:
+  - name: Bus Stop EC
+    description: |
+      You are standing at a bus stop on an office row in a
+      morning rain. A few commuters wait along the shelter
+      with umbrellas. A wooden bench sits under the shelter.
+      A large black laptop bag lies on the pavement with one
+      strap torn free. A spilled travel coffee cup has rolled
+      against the bench leg. A soaked resume packet lies
+      half on the bench and half on the ground.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: laptop bag
+        examine: A large black laptop bag on the pavement, one shoulder strap ripped off.
+        portable: true
+      - name: resume packet
+        examine: A stapled resume packet, the top page soaked through and running ink.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: crouched over a large black bag, one hand on the torn strap
+        examine: |
+          This person is running a laptop-snatch setup. The
+          bag on the pavement is empty — the "laptop" is a
+          stack of magazines. The torn strap is pre-cut. The
+          resume packet was downloaded off the internet this
+          morning and crumpled for authenticity. When a
+          passerby bends to help, the person drops a twenty-
+          dollar bill "from their wallet" and points down the
+          street. The moment the helper turns, the person
+          grabs the helper's actual laptop bag and bolts.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "kneel"
+            text: Kneel and help gather everything
+            type: friend
+            correct: false
+            effects:
+              - message: "You kneel. 'Oh no my twenty — down there,' they gasp, pointing down the block. You glance where they point. When you turn back, your own laptop bag is gone and so are they, slipping between parked cars."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "slide resume packet to person"
+            text: Slide the resume packet back under the shelter roof
+            type: friend
+            correct: false
+            effects:
+              - message: "You slide the packet under the roof. They thank you and set the empty bag beside your bag. In one smooth motion they pick up yours, mumble 'wrong one,' and walk off. Your bag is gone before you register the switch."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "taunt person"
+            text: Taunt them about the staged scene
+            type: enemy
+            correct: true
+            effects:
+              - message: "You mock the performance: 'No laptop in this bag. Just magazines.' You hook a finger through the open zipper. Glossy paper visible. They abandon the bag and walk fast down the block, resume packet left in the gutter."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "swat person"
+            text: Swat the bag open to expose it
+            type: enemy
+            correct: true
+            effects:
+              - message: "You swat the bag flap open. Magazines tumble out. A commuter under an umbrella sees and shouts. The person jumps up, no longer stricken, and sprints into the alley between offices. The bag and the fake resume stay on the pavement."
+              - complete: {outcome: enemy, action_id: 4}

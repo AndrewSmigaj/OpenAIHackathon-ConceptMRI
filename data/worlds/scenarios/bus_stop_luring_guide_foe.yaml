@@ -1,0 +1,82 @@
+name: bus_stop_luring_guide_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: luring_to_isolated_area
+
+rooms:
+  - name: Bus Stop DJ
+    description: |
+      You are standing at a bus stop on a busy avenue at
+      dusk. Wind gusts rattle the shelter panels. A crowd of
+      commuters streams past on the sidewalk. A wooden bench
+      sits under the shelter. A city map is posted behind
+      scratched plexiglass. A paper coffee cup sits on the
+      ground near the curb.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: city map
+        examine: A city map behind scratched plexiglass. Bus routes and landmarks are marked in faded ink.
+      - name: coffee cup
+        examine: A paper coffee cup on the ground, still warm. Someone set it down recently.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: turning in circles, scanning the crowd
+        examine: |
+          The person is not lost and not a tourist. The tour
+          lanyard is a costume-shop prop — the badge has no
+          barcode, no date, no tour company logo. They are
+          scanning the crowd but not looking for a group;
+          they are selecting a target. When they "check"
+          faces they linger on people carrying bags or
+          wearing jewelry. The itinerary they hold is blank
+          on the back — a printed prop. They keep gesturing
+          toward a narrow side alley between two buildings,
+          saying "I think my hotel is down there — can you
+          walk me?" The alley has no hotel. It has no exit.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "beckon person"
+            text: Beckon them to the city map on the shelter wall
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave them to the map. They glance at it without interest — they know exactly where they are. Instead they lean close and whisper, 'Actually, can you just walk me? It's that alley right there.' The map was never the point. The alley was."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "greet person"
+            text: Greet them and offer to help with directions
+            type: friend
+            correct: false
+            effects:
+              - message: "You say hello. They latch on immediately, linking their arm through yours before you can react. 'Oh thank goodness. Can you walk me? It's just down here.' They steer you toward the narrow alley. A second figure is leaning against the wall inside it."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shove person"
+            text: Shove their arm away when they grab yours
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove their arm off yours. The friendly tourist mask slips — their eyes go hard for a moment. Then they recover the act and turn to the next person in the crowd, already reaching for a new arm."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "stare person"
+            text: Stare at the alley they keep pointing toward
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stare past them into the alley. A figure in the shadows shifts. The person follows your gaze and realizes you have seen the setup. They drop the itinerary on the ground and walk into the crowd without picking it up. The prop is disposable."
+              - complete: {outcome: enemy, action_id: 4}

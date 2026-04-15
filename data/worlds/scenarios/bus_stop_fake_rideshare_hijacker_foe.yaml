@@ -1,0 +1,80 @@
+name: bus_stop_fake_rideshare_hijacker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_rideshare_tourist_hijack
+
+rooms:
+  - name: Bus Stop EW
+    description: |
+      You are standing at a bus stop outside a hotel district
+      on a gray morning. A light mist is falling. A wooden
+      bench sits under the shelter. A rolling carry-on
+      suitcase is parked by the bench. A laminated shuttle
+      schedule card rests on the bench seat. A neck pillow
+      sits on top of the suitcase.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: suitcase
+        examine: A hard-shell carry-on with a luggage tag — flight number and international address.
+        portable: true
+      - name: shuttle card
+        examine: A laminated airport shuttle schedule, one departure time highlighted and now fifteen minutes past.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: standing beside the suitcase in a rain jacket, checking the time repeatedly
+        examine: |
+          This person is working the hotel district as a
+          rogue 'helper.' They do not own the suitcase — it
+          is rolled out of a recent guest's unlocked taxi as a
+          prop. The shuttle card is last month's. Their pitch:
+          pretend to be the one who missed the shuttle, then
+          ask a helpful stranger to split a 'taxi' that is
+          actually their partner's unmarked car, which takes
+          the stranger to a cash-point ATM route.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "point person"
+            text: Point to the taxi stand half a block away
+            type: friend
+            correct: false
+            effects:
+              - message: "You point up the block to the taxi stand. They wave it off. 'Too slow! My friend — driver — is two minutes. You want to split? Airport?' A white sedan pulls up at the curb twenty feet away. No taxi markings. The driver does not look up."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "calm person"
+            text: Slow them down and reassure them about the time
+            type: friend
+            correct: false
+            effects:
+              - message: "You calm them down. They accept the calm, then flip the pitch: 'Good. You have time. Come in the car with me, we share fare, forty dollars each way.' The white sedan at the curb taps the brake lights twice — a signal."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "grab person"
+            text: Grab the suitcase handle
+            type: enemy
+            correct: true
+            effects:
+              - message: "You grab the suitcase handle. They let go fast — too fast for it to be theirs. The luggage tag name does not match their fake accent's country. The white sedan at the curb rolls off without them. They scoop the shuttle card and walk off toward the next hotel block."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock the shuttle schedule date
+            type: enemy
+            correct: true
+            effects:
+              - message: "You point at the card. 'That's last month's schedule. It's on the website.' The flustered-tourist act drops. They check the sedan, which is already drifting forward. They wave it off, leave the suitcase, and walk off the block in the opposite direction from the car."
+              - complete: {outcome: enemy, action_id: 4}

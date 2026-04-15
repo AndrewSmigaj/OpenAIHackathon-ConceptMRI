@@ -1,0 +1,81 @@
+name: bus_stop_maternity_scam_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: maternity_medical_bill_scam
+
+rooms:
+  - name: Bus Stop EZ
+    description: |
+      You are standing at a bus stop four blocks from a
+      hospital on a cold evening. A light snow has started. A
+      wooden bench sits under the shelter. A packed overnight
+      hospital bag is on the bench. A plastic water cup has
+      tipped on its side and soaked part of the pavement. A
+      phone is on the bench beside the bag, screen lit with an
+      ongoing call.
+
+    objects:
+      - name: bench
+        examine: A wooden bench under the shelter.
+      - name: hospital bag
+        examine: A small duffel with a hospital admission packet poking out of the side pocket.
+        portable: true
+      - name: phone
+        examine: A phone on the bench, screen on, call to "Mom" in progress.
+        portable: true
+
+    npcs:
+      - name: person
+        short_desc: leaning against the bench, one hand under a large belly, breathing in long slow exhales
+        examine: |
+          This person runs a 'stranded in labor' scam near
+          hospitals. The belly is a prosthetic. The 'water'
+          is from the tipped cup. The admission packet is
+          copied off a hospital's website. The phone call is
+          to a partner, not a mother. They ask helpers to
+          accompany them to 'admitting' and then to advance
+          cash for a 'co-pay' at a side kiosk that will be a
+          cash handoff point.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "brace person"
+            text: Let them lean on your arm through the contraction
+            type: friend
+            correct: false
+            effects:
+              - message: "They grip your arm softly, not the iron grip of a real contraction. After forty seconds the 'contraction' ends on a clean beat. 'Oh thank you. Listen — my card was declined — the co-pay — could you float me three hundred? I'll Venmo you.' The phone on the bench is on mute, not an active call."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "calm person"
+            text: Talk them through the contraction
+            type: friend
+            correct: false
+            effects:
+              - message: "You talk them through. They follow your voice but their breathing never actually accelerates. The 'peak' is missing. As the fake contraction ends they grab your sleeve. 'The ER won't take me without co-pay. Please. I'll pay you back tonight.' The hospital bag is lighter than a packed one should be."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "shove person"
+            text: Shove them to hurry them up
+            type: enemy
+            correct: true
+            effects:
+              - message: "You push at their shoulder. They step back — agile, balanced, no belly-protective crouch. The prosthetic shifts visibly high under the coat. They swear, grab the bag and phone in one motion, and walk off in the opposite direction from the hospital."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "mock person"
+            text: Mock the prosthetic belly
+            type: enemy
+            correct: true
+            effects:
+              - message: "You laugh at the belly — it is sitting too high and rides wrong when they turn. Their eyes flash. The labor pose evaporates. They grab the bag, kick the tipped cup into the gutter, and walk off the block fast. The phone goes dark — never was a live call."
+              - complete: {outcome: enemy, action_id: 4}
