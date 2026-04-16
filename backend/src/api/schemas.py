@@ -5,7 +5,7 @@ Simple Pydantic schemas for API requests/responses.
 
 import os
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 
 
@@ -116,10 +116,13 @@ class AnalyzeRoutesRequest(BaseModel):
     session_ids: Optional[List[str]] = None
     window_layers: List[int]
     filter_config: Optional[FilterConfig] = None
+    steps: Optional[List[int]] = None  # sequence step filter; None = all steps
     top_n_routes: int = 20
     clustering_schema: Optional[str] = None  # Load from named schema (skip computation)
     save_as: Optional[str] = None            # Compute AND save result under this name
     output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
+    expert_rank: int = Field(1, ge=1, le=32)  # rank of expert per (probe, layer) to visualize (1=top)
+    last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
 
 
 class ClusteringConfig(BaseModel):
@@ -130,7 +133,6 @@ class ClusteringConfig(BaseModel):
     embedding_source: str = "expert_output"  # "expert_output" or "residual_stream"
     reduction_method: str = "pca"  # "pca" or "umap"
     clustering_dimensions: Optional[List[int]] = None  # 0-indexed dim subset; None = all
-    steps: Optional[List[int]] = None  # sequence step filter; None = all steps
 
 
 class AnalyzeClusterRoutesRequest(BaseModel):
@@ -140,11 +142,13 @@ class AnalyzeClusterRoutesRequest(BaseModel):
     window_layers: List[int]
     clustering_config: Optional[ClusteringConfig] = None  # Required unless clustering_schema resolves config from meta.json
     filter_config: Optional[FilterConfig] = None
+    steps: Optional[List[int]] = None  # sequence step filter; None = all steps
     top_n_routes: int = 20
     clustering_schema: Optional[str] = None  # Load from named schema (skip computation)
     save_as: Optional[str] = None            # Compute AND save result under this name
     output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
     max_examples_per_node: Optional[int] = None  # Cap examples per node/link; None = all
+    last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
 
 
 class ProbeExample(BaseModel):
@@ -334,6 +338,7 @@ class ReductionRequest(BaseModel):
     method: str = "umap"           # "pca" or "umap"
     n_components: int = 3
     steps: Optional[List[int]] = None  # sequence step filter; None = all steps
+    last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
 
 
 class ReductionResponse(BaseModel):

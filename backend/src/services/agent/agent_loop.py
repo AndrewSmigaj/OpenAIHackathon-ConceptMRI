@@ -7,6 +7,7 @@ word positions via forward pass on the full token sequence.
 """
 
 import asyncio
+import gc
 import json
 import logging
 import re
@@ -17,6 +18,7 @@ import yaml
 
 from services.agent.evennia_client import EvenniaClient
 from services.agent.harmony_parser import parse_harmony_channels
+from utils.memory_utils import cleanup_gpu_memory, get_gpu_memory_info
 
 logger = logging.getLogger(__name__)
 
@@ -208,8 +210,12 @@ class AgentLoop:
         while not complete and self.running and tick < self.max_ticks:
             # Current game text is the latest user message
             game_text = messages[-1]["content"]
+            mem = get_gpu_memory_info()
             logger.info(
-                f"--- {scenario_name} tick {tick} ---\n"
+                f"--- {scenario_name} tick {tick} --- "
+                f"GPU: {mem.get('allocated_gb', '?')}GB alloc / "
+                f"{mem.get('reserved_gb', '?')}GB reserved "
+                f"({mem.get('utilization_percent', '?')}%)\n"
                 f"  Game text ({len(game_text)} chars): {game_text[:200]}..."
             )
 
@@ -299,6 +305,13 @@ class AgentLoop:
 
             tick += 1
 
+            # 8. Release transient tensors + defrag the CUDA allocator.
+            #    Without this, generate() + probe_fwd caches accumulate under
+            #    memory pressure and tick latency climbs several-fold on long runs.
+            del inputs, input_ids, attention_mask
+            gc.collect()
+            cleanup_gpu_memory()
+
         # Record result
         action_meta = action_lookup.get(last_action.lower().strip(), {})
         self._write_probe_result(results_path, {
@@ -318,9 +331,18 @@ class AgentLoop:
             "error": None if complete else "max_ticks_exceeded",
         })
 
+        # Scenario boundary cleanup — drop per-scenario message tensors and
+        # defrag again before the next scenario begins.
+        del messages
+        gc.collect()
+        cleanup_gpu_memory()
+        mem = get_gpu_memory_info()
         logger.info(
             f"Scenario {scenario_name} finished: "
-            f"action='{last_action}' correct={action_meta.get('correct')} ticks={tick}"
+            f"action='{last_action}' correct={action_meta.get('correct')} ticks={tick} "
+            f"| GPU post-cleanup: {mem.get('allocated_gb', '?')}GB alloc / "
+            f"{mem.get('reserved_gb', '?')}GB reserved "
+            f"({mem.get('utilization_percent', '?')}%)"
         )
 
     def _load_scenario_config(self, scenario_name: str) -> dict:

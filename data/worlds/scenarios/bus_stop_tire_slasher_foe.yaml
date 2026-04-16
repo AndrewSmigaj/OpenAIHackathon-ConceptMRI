@@ -71,8 +71,8 @@ rooms:
               - complete: {outcome: enemy, action_id: 3}
 
           - id: 4
-            command: "lunge"
-            text: Lunge toward them suddenly
+            command: "lunge person"
+            text: Lunge at them suddenly
             type: enemy
             correct: true
             effects:

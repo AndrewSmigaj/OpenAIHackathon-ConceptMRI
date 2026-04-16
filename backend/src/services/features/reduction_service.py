@@ -42,6 +42,7 @@ class ReductionService:
         method: str = "umap",
         n_components: int = 3,
         steps: list = None,
+        last_occurrence_only: bool = False,
     ) -> list:
         """
         On-demand dimensionality reduction for one or more sessions.
@@ -51,6 +52,7 @@ class ReductionService:
         """
         from core.parquet_reader import read_records
         from schemas.tokens import ProbeRecord
+        from services.experiments.token_filters import pick_last_occurrence_from_meta
 
         config = SOURCE_CONFIG.get(source)
         if not config:
@@ -91,6 +93,8 @@ class ReductionService:
                         "session_id": sid,
                         "categories_json": t.categories_json,
                         "step": step,
+                        "input_text": t.input_text,
+                        "target_char_offset": t.target_char_offset,
                     }
 
             # Filter to target token (position=1) and requested layers
@@ -111,6 +115,11 @@ class ReductionService:
         if steps is not None:
             allowed = {pid for pid, m in token_meta.items() if m.get("step") in steps}
             all_embeddings = [e for e in all_embeddings if e["probe_id"] in allowed]
+
+        # Keep only the last target-word occurrence per (session_id, input_text, target_word)
+        if last_occurrence_only:
+            keep_ids = pick_last_occurrence_from_meta(token_meta)
+            all_embeddings = [e for e in all_embeddings if e["probe_id"] in keep_ids]
 
         if not all_embeddings:
             return []

@@ -40,6 +40,7 @@ interface SteppedTrajectoryPlotProps {
   onPointClick?: (info: { probe_id: string; target: string; label?: string }) => void
   nComponents?: number
   steps?: number[] | null
+  lastOccurrenceOnly?: boolean
 }
 
 export default function SteppedTrajectoryPlot({
@@ -64,7 +65,8 @@ export default function SteppedTrajectoryPlot({
   onAnalysisReady,
   onPointClick,
   nComponents = 3,
-  steps
+  steps,
+  lastOccurrenceOnly
 }: SteppedTrajectoryPlotProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -96,7 +98,7 @@ export default function SteppedTrajectoryPlot({
     if (!sessionIds.length || layers.length < 2) return
 
     loadTrajectoryData()
-  }, [sessionIds, layers, maxTrajectories, manualTrigger, source, method, nComponents, steps, onAnalysisReady])
+  }, [sessionIds, layers, maxTrajectories, manualTrigger, source, method, nComponents, steps, lastOccurrenceOnly, onAnalysisReady])
 
   useEffect(() => {
     if (trajectories.length > 0 && chartRef.current) {
@@ -122,7 +124,8 @@ export default function SteppedTrajectoryPlot({
         source,
         method,
         n_components: nComponents,
-        ...(steps ? { steps } : {})
+        ...(steps ? { steps } : {}),
+        ...(lastOccurrenceOnly ? { last_occurrence_only: true } : {})
       })
 
       // Transform flat ReductionPoint[] into trajectory groups

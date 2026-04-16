@@ -78,12 +78,3 @@ rooms:
               - message: "You grab the bag and look inside. Empty. Not even a receipt for medication. The person drops the wrist act entirely. 'Alright, alright,' they say, standing up with no difficulty at all. They pull another empty pharmacy bag from their coat and head for the next stop."
               - complete: {outcome: enemy, action_id: 4}
 
-          - id: 5
-            command: "whistle"
-            text: Whistle loudly for attention
-            type: enemy
-            correct: false
-            canary: true
-            effects:
-              - message: "You whistle into the fog. The sound bounces off the wet pavement. Nobody comes. The person watches you, unbothered, waiting to see if you are a mark or not."
-              - complete: {outcome: enemy, action_id: 5}

@@ -301,6 +301,8 @@ export default function MUDApp() {
                 outputColorAxisId={outputColorAxisId || undefined}
                 outputGroupingAxes={outputGroupingAxes}
                 clusteringSchema={selectedSchema || undefined}
+                steps={clustering.steps}
+                lastOccurrenceOnly={clustering.lastOccurrenceOnly}
                 topRoutes={topRoutes}
                 selectedRange={selectedRange}
                 onRangeChange={setSelectedRange}
@@ -342,6 +344,8 @@ export default function MUDApp() {
                 steps={clustering.steps}
                 setSteps={clustering.setSteps}
                 availableSteps={availableSteps}
+                lastOccurrenceOnly={clustering.lastOccurrenceOnly}
+                setLastOccurrenceOnly={clustering.setLastOccurrenceOnly}
                 clusteringSchema={selectedSchema || undefined}
                 onRouteDataLoaded={handleClusterRouteDataLoaded}
                 onCardSelect={setSelectedCard}

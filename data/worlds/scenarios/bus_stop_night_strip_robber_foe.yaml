@@ -72,16 +72,6 @@ rooms:
               - message: "You shove them in the chest and bolt toward the pharmacy. They stumble into the shopping cart, which crashes into the curb. The noise makes the security guard look. You are running toward a witness. They are running in the other direction."
               - complete: {outcome: enemy, action_id: 3}
 
-          - id: 4
-            command: "hide"
-            text: Duck behind the shopping cart
-            type: enemy
-            correct: false
-            canary: true
-            effects:
-              - message: "You crouch behind the shopping cart. They step around it. You are now crouched in a dark corner of a deserted strip with someone standing over you. The cart is not cover. They look down at you and wait."
-              - complete: {outcome: enemy, action_id: 4}
-
           - id: 5
             command: "call taxi"
             text: Pull out your phone to call for help

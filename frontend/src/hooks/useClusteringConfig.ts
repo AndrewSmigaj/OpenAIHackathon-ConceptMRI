@@ -11,6 +11,7 @@ export interface ClusteringConfigState {
   clusteringDimSubset: number[] | null
   clusterDimInput: string
   steps: number[] | null
+  lastOccurrenceOnly: boolean
   setLayerClusterCounts: React.Dispatch<React.SetStateAction<Record<number, number>>>
   setClusteringMethod: React.Dispatch<React.SetStateAction<string>>
   setReductionDims: React.Dispatch<React.SetStateAction<number>>
@@ -21,6 +22,7 @@ export interface ClusteringConfigState {
   setClusteringDimSubset: React.Dispatch<React.SetStateAction<number[] | null>>
   setClusterDimInput: React.Dispatch<React.SetStateAction<string>>
   setSteps: React.Dispatch<React.SetStateAction<number[] | null>>
+  setLastOccurrenceOnly: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function useClusteringConfig(): ClusteringConfigState {
@@ -34,13 +36,14 @@ export function useClusteringConfig(): ClusteringConfigState {
   const [clusteringDimSubset, setClusteringDimSubset] = useState<number[] | null>(null)
   const [clusterDimInput, setClusterDimInput] = useState('all')
   const [steps, setSteps] = useState<number[] | null>(null)
+  const [lastOccurrenceOnly, setLastOccurrenceOnly] = useState<boolean>(false)
 
   return {
     layerClusterCounts, clusteringMethod, reductionDims, embeddingSource,
     reductionMethod, useAllLayersSameClusters, globalClusterCount,
-    clusteringDimSubset, clusterDimInput, steps,
+    clusteringDimSubset, clusterDimInput, steps, lastOccurrenceOnly,
     setLayerClusterCounts, setClusteringMethod, setReductionDims, setEmbeddingSource,
     setReductionMethod, setUseAllLayersSameClusters, setGlobalClusterCount,
-    setClusteringDimSubset, setClusterDimInput, setSteps,
+    setClusteringDimSubset, setClusterDimInput, setSteps, setLastOccurrenceOnly,
   }
 }

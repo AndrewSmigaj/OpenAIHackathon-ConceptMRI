@@ -47,7 +47,7 @@ class ConceptMriApiClient {
     this.baseUrl = baseUrl;
   }
 
-  private async request<T>(endpoint: string, options: RequestInit = {}, timeoutMs = 60000): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestInit = {}, timeoutMs = 300000): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
 
     const controller = new AbortController();
@@ -187,7 +187,7 @@ class ConceptMriApiClient {
     return this.request<RouteAnalysisResponse>('/experiments/analyze-cluster-routes', {
       method: 'POST',
       body: JSON.stringify(request),
-    });
+    }, 300000);
   }
 
   /**

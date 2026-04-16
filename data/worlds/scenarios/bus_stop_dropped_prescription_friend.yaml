@@ -78,12 +78,3 @@ rooms:
               - message: "You whistle. They look up, startled, and lose their grip on the one bottle they managed to grab. It rolls into the gutter. They are still on the ground, alone in the crowd, with fewer bottles than before."
               - complete: {outcome: enemy, action_id: 4}
 
-          - id: 5
-            command: "glare person"
-            text: Glare at them suspiciously
-            type: enemy
-            correct: false
-            canary: true
-            effects:
-              - message: "You glare at them. They shrink back, ashamed, as though picking up their own medication were something to hide. They stop reaching for the bottles and just kneel there."
-              - complete: {outcome: enemy, action_id: 5}

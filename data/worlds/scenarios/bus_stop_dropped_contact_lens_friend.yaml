@@ -44,8 +44,8 @@ rooms:
         planning_prompt: "What will you do about the person?"
         actions:
           - id: 1
-            command: "kneel"
-            text: Kneel down to help search
+            command: "kneel person"
+            text: Kneel beside them to help search
             type: friend
             correct: true
             effects:

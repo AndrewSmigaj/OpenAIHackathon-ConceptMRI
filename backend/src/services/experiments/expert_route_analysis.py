@@ -18,6 +18,7 @@ from services.experiments.route_analysis_common import (
     axis_label, generate_specialization, analyze_top_routes,
     compute_available_axes, build_sankey_links,
 )
+from services.experiments.token_filters import pick_last_occurrence
 
 
 class ExpertRouteAnalysisService:
@@ -32,8 +33,11 @@ class ExpertRouteAnalysisService:
         session_ids: Optional[List[str]] = None,
         window_layers: List[int] = None,
         filter_config: Optional[Dict[str, Any]] = None,
+        steps: Optional[List[int]] = None,
         top_n_routes: int = 20,
         output_grouping_axes: Optional[List[str]] = None,
+        expert_rank: int = 1,
+        last_occurrence_only: bool = False,
     ) -> Dict[str, Any]:
         """Analyze expert routes for one or more capture sessions within specified window."""
         ids = session_ids or ([session_id] if session_id else [])
@@ -47,7 +51,23 @@ class ExpertRouteAnalysisService:
                 routing_records, token_records, filter_config
             )
 
-        routes = self._extract_target_routes(routing_records, token_records, window_layers)
+        # Filter by sequence step (turn_id or sentence_index)
+        if steps:
+            step_probe_ids = set()
+            for t in token_records:
+                step = t.turn_id if t.turn_id is not None else t.sentence_index
+                if step in steps:
+                    step_probe_ids.add(t.probe_id)
+            routing_records = [r for r in routing_records if r.probe_id in step_probe_ids]
+            token_records = [t for t in token_records if t.probe_id in step_probe_ids]
+
+        # Keep only the last target-word occurrence per (session_id, input_text, target_word)
+        if last_occurrence_only:
+            keep_ids = pick_last_occurrence(token_records)
+            routing_records = [r for r in routing_records if r.probe_id in keep_ids]
+            token_records = [t for t in token_records if t.probe_id in keep_ids]
+
+        routes = self._extract_target_routes(routing_records, token_records, window_layers, expert_rank=expert_rank)
 
         top_routes_data = analyze_top_routes(routes, top_n_routes)
 
@@ -251,7 +271,8 @@ class ExpertRouteAnalysisService:
         self,
         routing_records: List[RoutingRecord],
         token_records: List[ProbeRecord],
-        window_layers: List[int]
+        window_layers: List[int],
+        expert_rank: int = 1,
     ) -> Dict[str, Dict]:
         """Extract expert routes for target tokens within specified window layers."""
         routing_by_probe = defaultdict(list)
@@ -278,7 +299,7 @@ class ExpertRouteAnalysisService:
             target_routing.sort(key=lambda r: r.layer)
 
             try:
-                signature = highway_signature(target_routing, target_tokens_only=True)
+                signature = highway_signature(target_routing, target_tokens_only=True, expert_rank=expert_rank)
             except ValueError:
                 continue
 

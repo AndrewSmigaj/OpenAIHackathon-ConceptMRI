@@ -43,6 +43,8 @@ interface ClusterRoutesSectionProps {
   steps?: number[] | null
   setSteps?: (steps: number[] | null) => void
   availableSteps?: number[]
+  lastOccurrenceOnly?: boolean
+  setLastOccurrenceOnly?: (value: boolean) => void
   clusteringSchema?: string
   onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
   onCardSelect: (card: SelectedCard) => void
@@ -81,6 +83,8 @@ export default function ClusterRoutesSection({
   steps,
   setSteps,
   availableSteps,
+  lastOccurrenceOnly,
+  setLastOccurrenceOnly,
   clusteringSchema,
   onRouteDataLoaded,
   onCardSelect
@@ -130,9 +134,8 @@ export default function ClusterRoutesSection({
       embedding_source: embeddingSource,
       reduction_method: reductionMethod,
       ...(clusteringDimSubset ? { clustering_dimensions: clusteringDimSubset } : {}),
-      ...(steps ? { steps } : {})
     };
-  }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod, clusteringDimSubset, steps])
+  }, [reductionDimensions, clusteringMethod, layerClusterCounts, useAllLayersSameClusters, globalClusterCount, memoizedLayers, embeddingSource, reductionMethod, clusteringDimSubset])
 
   return (
     <div className="bg-white rounded-xl shadow-sm p-1">
@@ -156,6 +159,16 @@ export default function ClusterRoutesSection({
               <option value="[0,1]">Steps 0-1</option>
             </select>
           </div>
+        )}
+        {setLastOccurrenceOnly && (
+          <label className="flex items-center gap-1 text-[10px] text-gray-400 ml-2" title="Keep only the last target-word occurrence per prompt">
+            <input
+              type="checkbox"
+              checked={!!lastOccurrenceOnly}
+              onChange={e => setLastOccurrenceOnly(e.target.checked)}
+            />
+            Last only
+          </label>
         )}
         <button
           onClick={() => {
@@ -199,6 +212,8 @@ export default function ClusterRoutesSection({
             onAnalysisReady={handleSankeyAnalysisReady}
             clusteringConfig={memoizedClusteringConfig}
             clusteringSchema={clusteringSchema}
+            steps={steps}
+            lastOccurrenceOnly={lastOccurrenceOnly}
           />
         </div>
 
@@ -225,6 +240,7 @@ export default function ClusterRoutesSection({
             manualTrigger={true}
             onAnalysisReady={handleTrajectoryAnalysisReady}
             steps={steps}
+            lastOccurrenceOnly={lastOccurrenceOnly}
             onPointClick={useCallback((info: { probe_id: string; target: string; label?: string }) => {
               // Look up the full sentence from session data
               const sentence = sessionData?.sentences?.find(s => s.probe_id === info.probe_id)

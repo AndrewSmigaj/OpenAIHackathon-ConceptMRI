@@ -33,6 +33,9 @@ interface MultiSankeyViewProps {
   mode?: 'expert' | 'cluster'
   clusteringConfig?: ClusteringConfig
   clusteringSchema?: string
+  steps?: number[] | null
+  expertRank?: number | null
+  lastOccurrenceOnly?: boolean
   manualTrigger?: boolean
   onAnalysisReady?: (runAnalysis: () => void) => void
 }
@@ -64,6 +67,9 @@ export default function MultiSankeyView({
   mode = 'expert',
   clusteringConfig,
   clusteringSchema,
+  steps,
+  expertRank,
+  lastOccurrenceOnly,
   manualTrigger = false,
   onAnalysisReady
 }: MultiSankeyViewProps) {
@@ -96,16 +102,20 @@ export default function MultiSankeyView({
           filter_config: filterConfig,
           top_n_routes: showAllRoutes ? 1000 : topRoutes,
           ...(outputGroupingAxes ? { output_grouping_axes: outputGroupingAxes } : {}),
+          ...(steps ? { steps } : {}),
+          ...(lastOccurrenceOnly ? { last_occurrence_only: true } : {}),
         }
         const response = mode === 'cluster' && clusteringConfig
           ? await apiClient.analyzeClusterRoutes({
               ...request,
               clustering_config: clusteringConfig,
+              max_examples_per_node: 5,
               ...(clusteringSchema ? { clustering_schema: clusteringSchema } : {})
             })
           : await apiClient.analyzeRoutes({
               ...request,
-              ...(clusteringSchema ? { clustering_schema: clusteringSchema } : {})
+              ...(clusteringSchema ? { clustering_schema: clusteringSchema } : {}),
+              ...(expertRank && expertRank !== 1 ? { expert_rank: expertRank } : {})
             })
         newRouteDataMap[window.id] = response
         newErrorMap[window.id] = null
@@ -125,7 +135,7 @@ export default function MultiSankeyView({
     setLoadingMap(newLoadingMap)
 
     onRouteDataLoaded?.(newRouteDataMap)
-  }, [sessionIds, sessionData, selectedRange, filterState, showAllRoutes, topRoutes, mode, clusteringConfig, clusteringSchema, outputGroupingAxes, onRouteDataLoaded])
+  }, [sessionIds, sessionData, selectedRange, filterState, showAllRoutes, topRoutes, mode, clusteringConfig, clusteringSchema, outputGroupingAxes, steps, expertRank, lastOccurrenceOnly, onRouteDataLoaded])
 
   React.useEffect(() => {
     if (onAnalysisReady) {

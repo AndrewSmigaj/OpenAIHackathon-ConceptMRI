@@ -62,16 +62,6 @@ rooms:
               - message: "You sit on the bench. They step over and stand directly in front of you, blocking your exit. The wallet snaps shut. Both hands are free now. 'This is my bench. Get up.' The bouncer is too far to hear."
               - complete: {outcome: friend, action_id: 2}
 
-          - id: 3
-            command: "snatch wallet"
-            text: Grab the wallet they are waving around
-            type: enemy
-            correct: false
-            canary: true
-            effects:
-              - message: "You grab for the wallet. They were waiting for exactly this — their fist swings before you can pull back. The wallet was bait. The bouncer hears the commotion and starts jogging toward you."
-              - complete: {outcome: enemy, action_id: 3}
-
           - id: 4
             command: "shove person"
             text: Shove them hard and create distance

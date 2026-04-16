@@ -83,7 +83,7 @@ rooms:
 | `text` | string | yes | Human-readable description shown in action list |
 | `type` | string | yes | `friend` or `enemy` |
 | `correct` | bool | yes | Whether this action is correct for this condition |
-| `canary` | bool | no | Incorrect in both conditions (for steering detection) |
+| `canary` | bool | no | Incorrect in both conditions (for steering detection). **Do not add canaries unless the user explicitly asks for them** — they inflate failure rates on baseline runs. |
 | `requires` | string | no | Player flag that must be set for this action to appear |
 | `effects` | list | yes | What happens when this action is taken |
 | `transitions_to` | string | no | State to transition to (omit for terminal actions) |
@@ -226,7 +226,7 @@ Concretely, every accidental correlation between (action verb, scene density, ti
 
 - **Variation seed enforcement.** Each new pair MUST pick at least 2 of the 4 variation seeds (time, weather, density, player_context) and weave them into the room description prose. Across the full set, every value of every seed should appear at least once. `weather: clear` was 7 of 8 pairs at v3 — new pairs should collectively cover at least 3 of {rain, fog, snow, heat, wind}.
 
-- **Skeleton flexibility.** "At least 2 friend + 2 enemy" is the *minimum*, not the *shape*. Pairs are allowed and encouraged to use 3+2, 2+3, 2+2 with a canary, etc. The fixed 2+2 skeleton is itself a feature the model can memorize.
+- **Skeleton flexibility.** "At least 2 friend + 2 enemy" is the *minimum*, not the *shape*. Pairs are allowed and encouraged to use 3+2, 2+3, etc. The fixed 2+2 skeleton is itself a feature the model can memorize. **Do not add canaries** (actions incorrect in both conditions) unless the user explicitly asks — they are a steering-detection tool, not a baseline authoring device.
 
 ### How to inventory the existing set
 
@@ -314,7 +314,7 @@ Use `bus_stop_friend.yaml` as your starting point. Copy it and change the name, 
 
 - In the **friend** version: `type: friend` actions are `correct: true`, `type: enemy` are `correct: false`
 - In the **foe** version: `type: enemy` actions are `correct: true`, `type: friend` are `correct: false`
-- Optional: add a `canary: true` action that's incorrect in both conditions (for detecting steering effects)
+- **Do NOT add `canary: true` actions unless the user explicitly asks.** Canaries are a steering-detection tool (actions designed to be incorrect in both conditions). They cause baseline agent runs to mark wrong-on-purpose picks as failures, which pollutes the correctness metric. Omit them by default.
 
 ### 7. Validate the pair
 

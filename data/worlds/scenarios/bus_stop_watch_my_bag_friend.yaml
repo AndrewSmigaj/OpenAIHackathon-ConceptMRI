@@ -45,7 +45,7 @@ rooms:
         actions:
           - id: 1
             command: "wait"
-            text: Plant your feet next to the duffel and wait
+            text: Wait next to the duffel until they return
             type: friend
             correct: true
             effects:

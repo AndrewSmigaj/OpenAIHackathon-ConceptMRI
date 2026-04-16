@@ -23,6 +23,8 @@ interface ExpertRoutesSectionProps {
   outputColorAxisId?: string
   outputGroupingAxes?: string[]
   clusteringSchema?: string
+  steps?: number[] | null
+  lastOccurrenceOnly?: boolean
   topRoutes: number
   selectedRange: string
   onRangeChange: (range: string) => void
@@ -48,6 +50,8 @@ export default function ExpertRoutesSection({
   outputColorAxisId,
   outputGroupingAxes,
   clusteringSchema,
+  steps,
+  lastOccurrenceOnly,
   topRoutes,
   selectedRange,
   onRangeChange,
@@ -56,6 +60,7 @@ export default function ExpertRoutesSection({
   onCardSelect
 }: ExpertRoutesSectionProps) {
   const [runAnalysis, setRunAnalysis] = useState<(() => void) | null>(null)
+  const [expertRank, setExpertRank] = useState<number>(1)
 
   const handleSankeyClick = (elementType: 'expert' | 'route', data: any) => {
     onCardSelect({
@@ -75,6 +80,18 @@ export default function ExpertRoutesSection({
         >
           Run
         </button>
+        <label className="text-[10px] text-gray-600 flex items-center gap-1">
+          Rank
+          <select
+            value={expertRank}
+            onChange={(e) => setExpertRank(Number(e.target.value))}
+            className="px-1 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+          </select>
+        </label>
       </div>
 
       <div className="bg-gray-50 rounded-lg p-1">
@@ -95,6 +112,9 @@ export default function ExpertRoutesSection({
           outputColorAxisId={outputColorAxisId}
           outputGroupingAxes={outputGroupingAxes}
           clusteringSchema={clusteringSchema}
+          steps={steps}
+          lastOccurrenceOnly={lastOccurrenceOnly}
+          expertRank={expertRank}
           showAllRoutes={showAllRoutes}
           topRoutes={topRoutes}
           selectedRange={selectedRange}

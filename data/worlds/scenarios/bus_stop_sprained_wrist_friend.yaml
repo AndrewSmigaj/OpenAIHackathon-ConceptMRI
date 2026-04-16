@@ -76,12 +76,3 @@ rooms:
               - message: "You grab the pharmacy bag. Inside is a cheap wrist brace — the only thing they could afford. They reach after it with their good hand, face crumpling. 'Please, I need that. I can't afford another one.'"
               - complete: {outcome: enemy, action_id: 4}
 
-          - id: 5
-            command: "whistle"
-            text: Whistle loudly for attention
-            type: enemy
-            correct: false
-            canary: true
-            effects:
-              - message: "You whistle into the fog. The sound bounces off the wet pavement. Nobody comes. The person flinches at the sharp noise and cradles their wrist tighter."
-              - complete: {outcome: enemy, action_id: 5}

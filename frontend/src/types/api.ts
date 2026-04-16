@@ -93,10 +93,13 @@ interface AnalyzeRoutesRequest {
   session_ids?: string[]
   window_layers: number[]
   filter_config?: FilterConfig
+  steps?: number[]
   top_n_routes: number
   clustering_schema?: string
   save_as?: string
   output_grouping_axes?: string[]
+  expert_rank?: number
+  last_occurrence_only?: boolean
 }
 
 interface ClusteringConfig {
@@ -106,7 +109,6 @@ interface ClusteringConfig {
   embedding_source?: string
   reduction_method?: string
   clustering_dimensions?: number[]
-  steps?: number[]
 }
 
 interface AnalyzeClusterRoutesRequest {
@@ -115,10 +117,13 @@ interface AnalyzeClusterRoutesRequest {
   window_layers: number[]
   clustering_config: ClusteringConfig
   filter_config?: FilterConfig
+  steps?: number[]
   top_n_routes: number
   clustering_schema?: string
   save_as?: string
   output_grouping_axes?: string[]
+  max_examples_per_node?: number
+  last_occurrence_only?: boolean
 }
 
 interface SankeyNode {
@@ -261,6 +266,7 @@ interface ReductionRequest {
   method?: string
   n_components?: number
   steps?: number[]
+  last_occurrence_only?: boolean
 }
 
 interface ReductionPoint {

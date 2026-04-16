@@ -22,6 +22,7 @@ from services.experiments.route_analysis_common import (
     axis_label, generate_specialization, analyze_top_routes,
     compute_available_axes, build_sankey_links,
 )
+from services.experiments.token_filters import pick_last_occurrence
 import pandas as pd
 
 
@@ -51,9 +52,11 @@ class ClusterRouteAnalysisService:
         window_layers: List[int] = None,
         clustering_config: Dict[str, Any] = None,
         filter_config: Optional[Dict[str, Any]] = None,
+        steps: Optional[List[int]] = None,
         top_n_routes: int = 20,
         output_grouping_axes: Optional[List[str]] = None,
         max_examples_per_node: Optional[int] = None,
+        last_occurrence_only: bool = False,
     ) -> Dict[str, Any]:
         """Analyze cluster routes for one or more capture sessions within specified window."""
         ids = session_ids or ([session_id] if session_id else [])
@@ -63,7 +66,6 @@ class ClusterRouteAnalysisService:
         source = clustering_config.get("embedding_source", "expert_output")
         reduction_method = clustering_config.get("reduction_method", "pca")
         reduction_dims = clustering_config.get("reduction_dimensions", 128)
-        steps = clustering_config.get("steps")
 
         # Load raw embeddings and tokens
         embeddings, token_records, manifest = self._load_multi_session_data(ids, source=source)
@@ -78,12 +80,17 @@ class ClusterRouteAnalysisService:
         if steps:
             step_probe_ids = set()
             for t in token_records:
-                turn_id = t.turn_id
-                step = turn_id if turn_id is not None else t.sentence_index
+                step = t.turn_id if t.turn_id is not None else t.sentence_index
                 if step in steps:
                     step_probe_ids.add(t.probe_id)
             embeddings = [e for e in embeddings if e["probe_id"] in step_probe_ids]
             token_records = [t for t in token_records if t.probe_id in step_probe_ids]
+
+        # Keep only the last target-word occurrence per (session_id, input_text, target_word)
+        if last_occurrence_only:
+            keep_ids = pick_last_occurrence(token_records)
+            embeddings = [e for e in embeddings if e["probe_id"] in keep_ids]
+            token_records = [t for t in token_records if t.probe_id in keep_ids]
 
         # Reduce dimensions, then cluster
         clustering_result = self._perform_clustering(
