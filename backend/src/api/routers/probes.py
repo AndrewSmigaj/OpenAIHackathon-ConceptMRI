@@ -174,12 +174,13 @@ async def get_probe_session_details(
                 from services.probes.tick_log_enrichment import load_tick_log
                 token_records = read_records(str(tokens_path), ProbeRecord)
                 enrich_records_with_scenario_actions(token_records, session_dir)
-                tick_data = load_tick_log(session_dir)
+                tick_data, system_prompts = load_tick_log(session_dir)
 
                 def _build_example(t: ProbeRecord) -> ProbeExample:
                     turn_id = getattr(t, 'turn_id', None)
                     step = turn_id if turn_id is not None else getattr(t, 'sentence_index', None)
-                    tick_key = (getattr(t, 'scenario_id', ''), turn_id if turn_id is not None else -1)
+                    scenario_id = getattr(t, 'scenario_id', '') or ''
+                    tick_key = (scenario_id, turn_id if turn_id is not None else -1)
                     tick = tick_data.get(tick_key, {})
                     return ProbeExample(
                         target_word=t.target_word,
@@ -195,6 +196,7 @@ async def get_probe_session_details(
                         game_text=tick.get('game_text'),
                         analysis=tick.get('analysis'),
                         action=tick.get('action'),
+                        system_prompt=system_prompts.get(scenario_id),
                     )
 
                 sentences = [_build_example(t) for t in token_records]

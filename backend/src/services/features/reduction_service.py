@@ -43,6 +43,7 @@ class ReductionService:
         n_components: int = 3,
         steps: list = None,
         last_occurrence_only: bool = False,
+        max_probes: Optional[int] = None,
     ) -> list:
         """
         On-demand dimensionality reduction for one or more sessions.
@@ -52,7 +53,7 @@ class ReductionService:
         """
         from core.parquet_reader import read_records
         from schemas.tokens import ProbeRecord
-        from services.experiments.token_filters import pick_last_occurrence_from_meta
+        from services.experiments.token_filters import pick_last_occurrence_from_meta, subsample_probes_from_meta
 
         config = SOURCE_CONFIG.get(source)
         if not config:
@@ -121,6 +122,19 @@ class ReductionService:
             keep_ids = pick_last_occurrence_from_meta(token_meta)
             all_embeddings = [e for e in all_embeddings if e["probe_id"] in keep_ids]
 
+        # Deterministic stratified subsample, restricted to probes surviving
+        # steps + last_occurrence_only so clusters, expert routes, and the UMAP
+        # trajectory all see the same N when max_probes is set. Passing the
+        # unfiltered token_meta would make the subsampler stratify across the
+        # full session distribution, and most of the N probe_ids it picks
+        # wouldn't be in the already-narrowed all_embeddings.
+        if max_probes is not None:
+            surviving_ids = {e["probe_id"] for e in all_embeddings}
+            filtered_meta = {pid: m for pid, m in token_meta.items() if pid in surviving_ids}
+            subset = subsample_probes_from_meta(filtered_meta, max_probes)
+            if subset is not None:
+                all_embeddings = [e for e in all_embeddings if e["probe_id"] in subset]
+
         if not all_embeddings:
             return []
 
@@ -147,7 +161,7 @@ class ReductionService:
             if method == "umap" and n_samples < 4:
                 reducer = PCA(n_components=actual_components, random_state=42)
             else:
-                reducer = self._create_reducer(method, actual_components)
+                reducer = self._create_reducer(method, actual_components, n_samples)
 
             coords = reducer.fit_transform(states)
 
@@ -174,7 +188,7 @@ class ReductionService:
 
         return points
 
-    def _create_reducer(self, method: str, n_components: Optional[int] = None):
+    def _create_reducer(self, method: str, n_components: Optional[int] = None, n_samples: Optional[int] = None):
         """Create a reducer instance for the given method."""
         n = n_components or self.n_components
 
@@ -182,10 +196,15 @@ class ReductionService:
             return PCA(n_components=n, random_state=42)
         elif method == "umap":
             import umap
+            # n_neighbors MUST be bounded by n_samples - 1 to keep the kNN graph
+            # connected; otherwise UMAP's spectral init calls scipy eigsh with
+            # k >= component_size and fails ("Cannot use scipy.linalg.eigh for
+            # sparse A with k >= N").
+            neighbors_cap = (n_samples - 1) if n_samples else 15
             return umap.UMAP(
                 n_components=n,
                 random_state=42,
-                n_neighbors=min(15, max(2, n - 1)),
+                n_neighbors=min(15, max(2, neighbors_cap)),
                 min_dist=0.1,
             )
         else:

@@ -18,7 +18,7 @@ from services.experiments.route_analysis_common import (
     axis_label, generate_specialization, analyze_top_routes,
     compute_available_axes, build_sankey_links,
 )
-from services.experiments.token_filters import pick_last_occurrence
+from services.experiments.token_filters import pick_last_occurrence, subsample_probes
 
 
 class ExpertRouteAnalysisService:
@@ -38,6 +38,7 @@ class ExpertRouteAnalysisService:
         output_grouping_axes: Optional[List[str]] = None,
         expert_rank: int = 1,
         last_occurrence_only: bool = False,
+        max_probes: Optional[int] = None,
     ) -> Dict[str, Any]:
         """Analyze expert routes for one or more capture sessions within specified window."""
         ids = session_ids or ([session_id] if session_id else [])
@@ -66,6 +67,13 @@ class ExpertRouteAnalysisService:
             keep_ids = pick_last_occurrence(token_records)
             routing_records = [r for r in routing_records if r.probe_id in keep_ids]
             token_records = [t for t in token_records if t.probe_id in keep_ids]
+
+        # Deterministic stratified subsample (applied after last_occurrence_only
+        # so we pick a representative N of the collapsed set).
+        subset = subsample_probes(token_records, max_probes)
+        if subset is not None:
+            routing_records = [r for r in routing_records if r.probe_id in subset]
+            token_records = [t for t in token_records if t.probe_id in subset]
 
         routes = self._extract_target_routes(routing_records, token_records, window_layers, expert_rank=expert_rank)
 
@@ -195,7 +203,9 @@ class ExpertRouteAnalysisService:
         tokens_path = session_path / "tokens.parquet"
         token_records = read_records(str(tokens_path), ProbeRecord)
         from services.probes.scenario_actions import enrich_records_with_scenario_actions
+        from services.probes.tick_log_enrichment import enrich_records_with_tick_log
         enrich_records_with_scenario_actions(token_records, session_path)
+        enrich_records_with_tick_log(token_records, session_path)
 
         manifest = None
         manifest_path = session_path / "capture_manifest.parquet"
@@ -363,6 +373,7 @@ class ExpertRouteAnalysisService:
                             for axis_id, value in cats.items():
                                 expert_category_counts[part][axis_id][value] += 1
                         if len(expert_example_tokens[part]) < 10:
+                            turn_id = getattr(token_record, 'turn_id', None)
                             expert_example_tokens[part].append({
                                 "target_word": token_record.target_word,
                                 "label": token_record.label,
@@ -370,6 +381,13 @@ class ExpertRouteAnalysisService:
                                 "probe_id": probe_id,
                                 "generated_text": getattr(token_record, 'generated_text', None),
                                 "output_category": getattr(token_record, 'output_category', None),
+                                "target_char_offset": getattr(token_record, 'target_char_offset', None),
+                                "turn_id": turn_id,
+                                "step": turn_id if turn_id is not None else getattr(token_record, 'sentence_index', None),
+                                "game_text": getattr(token_record, 'game_text', None),
+                                "analysis": getattr(token_record, 'analysis', None),
+                                "action": getattr(token_record, 'action', None),
+                                "system_prompt": getattr(token_record, 'system_prompt', None),
                             })
 
             for i in range(len(parts) - 1):

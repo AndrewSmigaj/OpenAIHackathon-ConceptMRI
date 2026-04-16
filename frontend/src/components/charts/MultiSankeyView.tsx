@@ -36,6 +36,7 @@ interface MultiSankeyViewProps {
   steps?: number[] | null
   expertRank?: number | null
   lastOccurrenceOnly?: boolean
+  maxProbes?: number | null
   manualTrigger?: boolean
   onAnalysisReady?: (runAnalysis: () => void) => void
 }
@@ -70,6 +71,7 @@ export default function MultiSankeyView({
   steps,
   expertRank,
   lastOccurrenceOnly,
+  maxProbes,
   manualTrigger = false,
   onAnalysisReady
 }: MultiSankeyViewProps) {
@@ -104,6 +106,7 @@ export default function MultiSankeyView({
           ...(outputGroupingAxes ? { output_grouping_axes: outputGroupingAxes } : {}),
           ...(steps ? { steps } : {}),
           ...(lastOccurrenceOnly ? { last_occurrence_only: true } : {}),
+          ...(maxProbes != null ? { max_probes: maxProbes } : {}),
         }
         const response = mode === 'cluster' && clusteringConfig
           ? await apiClient.analyzeClusterRoutes({
@@ -135,7 +138,7 @@ export default function MultiSankeyView({
     setLoadingMap(newLoadingMap)
 
     onRouteDataLoaded?.(newRouteDataMap)
-  }, [sessionIds, sessionData, selectedRange, filterState, showAllRoutes, topRoutes, mode, clusteringConfig, clusteringSchema, outputGroupingAxes, steps, expertRank, lastOccurrenceOnly, onRouteDataLoaded])
+  }, [sessionIds, sessionData, selectedRange, filterState, showAllRoutes, topRoutes, mode, clusteringConfig, clusteringSchema, outputGroupingAxes, steps, expertRank, lastOccurrenceOnly, maxProbes, onRouteDataLoaded])
 
   React.useEffect(() => {
     if (onAnalysisReady) {
@@ -272,7 +275,7 @@ export default function MultiSankeyView({
           const sourceNames = new Set(outputLinks.map(l => l.source))
           const sourceNodes = lastData.nodes.filter(n => sourceNames.has(n.name))
           return (
-            <div className="bg-white flex-shrink-0" style={{ width: '120px' }}>
+            <div className="bg-white flex-shrink-0" style={{ width: '240px' }}>
               <div className="p-0" style={{ height: '200px' }}>
                 <SankeyChart
                   nodes={[...sourceNodes, ...outputNodes]}

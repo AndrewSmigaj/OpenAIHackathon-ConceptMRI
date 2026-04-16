@@ -41,6 +41,7 @@ interface SteppedTrajectoryPlotProps {
   nComponents?: number
   steps?: number[] | null
   lastOccurrenceOnly?: boolean
+  maxProbes?: number | null
 }
 
 export default function SteppedTrajectoryPlot({
@@ -66,7 +67,8 @@ export default function SteppedTrajectoryPlot({
   onPointClick,
   nComponents = 3,
   steps,
-  lastOccurrenceOnly
+  lastOccurrenceOnly,
+  maxProbes
 }: SteppedTrajectoryPlotProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -98,7 +100,7 @@ export default function SteppedTrajectoryPlot({
     if (!sessionIds.length || layers.length < 2) return
 
     loadTrajectoryData()
-  }, [sessionIds, layers, maxTrajectories, manualTrigger, source, method, nComponents, steps, lastOccurrenceOnly, onAnalysisReady])
+  }, [sessionIds, layers, manualTrigger, source, method, nComponents, steps, lastOccurrenceOnly, maxProbes, onAnalysisReady])
 
   useEffect(() => {
     if (trajectories.length > 0 && chartRef.current) {
@@ -125,7 +127,8 @@ export default function SteppedTrajectoryPlot({
         method,
         n_components: nComponents,
         ...(steps ? { steps } : {}),
-        ...(lastOccurrenceOnly ? { last_occurrence_only: true } : {})
+        ...(lastOccurrenceOnly ? { last_occurrence_only: true } : {}),
+        ...(maxProbes != null ? { max_probes: maxProbes } : {})
       })
 
       // Transform flat ReductionPoint[] into trajectory groups
@@ -135,27 +138,14 @@ export default function SteppedTrajectoryPlot({
         trajectoryMap.get(point.probe_id)!.push(point)
       }
 
-      // Stratified sampling: equal count from each primary label class
-      const labelGroups = new Map<string, string[]>()
-      for (const [probeId, points] of trajectoryMap) {
-        const label = points[0]?.label || 'unknown'
-        if (!labelGroups.has(label)) labelGroups.set(label, [])
-        labelGroups.get(label)!.push(probeId)
+      // Backend already applied max_probes subsampling (if set). Render every
+      // probe the backend returned, up to maxTrajectories as a safety ceiling
+      // for accidental unbounded fetches.
+      let probeIds = Array.from(trajectoryMap.keys())
+      if (probeIds.length > maxTrajectories) {
+        probeIds.sort()
+        probeIds = probeIds.slice(0, maxTrajectories)
       }
-
-      const numLabels = labelGroups.size
-      const perLabel = Math.floor(maxTrajectories / numLabels)
-      const sampledIds: string[] = []
-
-      for (const [, ids] of labelGroups) {
-        // Fisher-Yates shuffle within each label group
-        for (let i = ids.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [ids[i], ids[j]] = [ids[j], ids[i]]
-        }
-        sampledIds.push(...ids.slice(0, perLabel))
-      }
-      const probeIds = sampledIds
       const built: Trajectory[] = probeIds.map(probeId => {
         const points = trajectoryMap.get(probeId)!.sort((a, b) => a.layer - b.layer)
         return {

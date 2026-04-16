@@ -37,7 +37,7 @@ async def analyze_cluster_routes(
         window_key = f"w_{'_'.join(str(l) for l in request.window_layers)}"
 
         # Load from cached schema if requested
-        if request.clustering_schema and ids and not request.last_occurrence_only:
+        if request.clustering_schema and ids and not request.last_occurrence_only and request.max_probes is None:
             schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.clustering_schema
             wdir_cached = schema_dir / "cluster_windows"
             cached_path = wdir_cached / f"{window_key}.json"
@@ -85,6 +85,7 @@ async def analyze_cluster_routes(
             output_grouping_axes=request.output_grouping_axes,
             max_examples_per_node=request.max_examples_per_node,
             last_occurrence_only=request.last_occurrence_only,
+            max_probes=request.max_probes,
         )
 
         # Extract and strip internal clustering artifacts (non-JSON-serializable)
@@ -92,7 +93,7 @@ async def analyze_cluster_routes(
         result.pop("_reducers", None)
 
         # Auto-save if save_as provided
-        if request.save_as and len(ids) == 1 and not request.last_occurrence_only:
+        if request.save_as and len(ids) == 1 and not request.last_occurrence_only and request.max_probes is None:
             schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.save_as
             wdir = schema_dir / "cluster_windows"
             wdir.mkdir(parents=True, exist_ok=True)
@@ -170,6 +171,7 @@ async def reduce_embeddings(request: ReductionRequest):
             n_components=request.n_components,
             steps=request.steps,
             last_occurrence_only=request.last_occurrence_only,
+            max_probes=request.max_probes,
         )
 
         logger.info(f"Reduced {len(points)} points for {len(request.session_ids)} sessions")

@@ -303,6 +303,7 @@ export default function MUDApp() {
                 clusteringSchema={selectedSchema || undefined}
                 steps={clustering.steps}
                 lastOccurrenceOnly={clustering.lastOccurrenceOnly}
+                maxProbes={clustering.maxProbes}
                 topRoutes={topRoutes}
                 selectedRange={selectedRange}
                 onRangeChange={setSelectedRange}
@@ -346,6 +347,8 @@ export default function MUDApp() {
                 availableSteps={availableSteps}
                 lastOccurrenceOnly={clustering.lastOccurrenceOnly}
                 setLastOccurrenceOnly={clustering.setLastOccurrenceOnly}
+                maxProbes={clustering.maxProbes}
+                setMaxProbes={clustering.setMaxProbes}
                 clusteringSchema={selectedSchema || undefined}
                 onRouteDataLoaded={handleClusterRouteDataLoaded}
                 onCardSelect={setSelectedCard}

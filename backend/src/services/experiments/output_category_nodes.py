@@ -158,6 +158,7 @@ def build_output_category_layer(
         # Build example tokens (all records for output nodes)
         example_tokens = []
         for record in records:
+            turn_id = getattr(record, 'turn_id', None)
             example_tokens.append({
                 "target_word": record.target_word,
                 "label": record.label,
@@ -165,6 +166,13 @@ def build_output_category_layer(
                 "probe_id": record.probe_id,
                 "generated_text": getattr(record, 'generated_text', None),
                 "output_category": getattr(record, 'output_category', None),
+                "target_char_offset": getattr(record, 'target_char_offset', None),
+                "turn_id": turn_id,
+                "step": turn_id if turn_id is not None else getattr(record, 'sentence_index', None),
+                "game_text": getattr(record, 'game_text', None),
+                "analysis": getattr(record, 'analysis', None),
+                "action": getattr(record, 'action', None),
+                "system_prompt": getattr(record, 'system_prompt', None),
             })
 
         output_nodes.append({

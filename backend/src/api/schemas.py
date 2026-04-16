@@ -123,6 +123,7 @@ class AnalyzeRoutesRequest(BaseModel):
     output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
     expert_rank: int = Field(1, ge=1, le=32)  # rank of expert per (probe, layer) to visualize (1=top)
     last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
+    max_probes: Optional[int] = None  # cap total probes via deterministic stratified subsample; None = no cap
 
 
 class ClusteringConfig(BaseModel):
@@ -149,6 +150,7 @@ class AnalyzeClusterRoutesRequest(BaseModel):
     output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
     max_examples_per_node: Optional[int] = None  # Cap examples per node/link; None = all
     last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
+    max_probes: Optional[int] = None  # cap total probes via deterministic stratified subsample; None = no cap
 
 
 class ProbeExample(BaseModel):
@@ -166,6 +168,7 @@ class ProbeExample(BaseModel):
     game_text: Optional[str] = None
     analysis: Optional[str] = None
     action: Optional[str] = None
+    system_prompt: Optional[str] = None
 
 # Resolve forward reference in SessionDetailResponse
 SessionDetailResponse.model_rebuild()
@@ -339,6 +342,7 @@ class ReductionRequest(BaseModel):
     n_components: int = 3
     steps: Optional[List[int]] = None  # sequence step filter; None = all steps
     last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
+    max_probes: Optional[int] = None  # cap total probes via deterministic stratified subsample; None = no cap
 
 
 class ReductionResponse(BaseModel):

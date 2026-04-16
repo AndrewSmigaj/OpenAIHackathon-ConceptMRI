@@ -37,7 +37,7 @@ async def analyze_expert_routes(
         window_key = f"w_{'_'.join(str(l) for l in request.window_layers)}"
 
         # Load from cached schema if requested (only for rank 1 — cached results are rank-1)
-        if request.clustering_schema and ids and request.expert_rank == 1 and not request.last_occurrence_only:
+        if request.clustering_schema and ids and request.expert_rank == 1 and not request.last_occurrence_only and request.max_probes is None:
             schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.clustering_schema
             wdir_cached = schema_dir / "expert_windows"
             cached_path = wdir_cached / f"{window_key}.json"
@@ -70,10 +70,11 @@ async def analyze_expert_routes(
             output_grouping_axes=request.output_grouping_axes,
             expert_rank=request.expert_rank,
             last_occurrence_only=request.last_occurrence_only,
+            max_probes=request.max_probes,
         )
 
         # Auto-save if save_as provided (only at rank 1 — schema namespace has no rank dimension)
-        if request.save_as and len(ids) == 1 and request.expert_rank == 1 and not request.last_occurrence_only:
+        if request.save_as and len(ids) == 1 and request.expert_rank == 1 and not request.last_occurrence_only and request.max_probes is None:
             schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.save_as
             wdir = schema_dir / "expert_windows"
             wdir.mkdir(parents=True, exist_ok=True)

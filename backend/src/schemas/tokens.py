@@ -47,6 +47,13 @@ class ProbeRecord:
     capture_type: Optional[str] = None  # "prompt", "generation", "batch", "knowledge_query"
     target_char_offset: Optional[int] = None  # Character position of target word in input_text
 
+    # Tick-log enrichments (runtime-only; populated by enrich_records_with_tick_log
+    # after load, never persisted to Parquet).
+    game_text: Optional[str] = None
+    analysis: Optional[str] = None
+    action: Optional[str] = None
+    system_prompt: Optional[str] = None
+
     @classmethod
     def from_parquet_dict(cls, data: dict) -> 'ProbeRecord':
         """Reconstruct from Parquet dictionary."""

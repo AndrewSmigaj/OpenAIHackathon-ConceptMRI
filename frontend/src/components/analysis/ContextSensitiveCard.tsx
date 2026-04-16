@@ -290,8 +290,11 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                       ? getNodeColor({ [token.label]: 1 }, primaryValues, gradient)
                       : '#666666'
 
-                    // Agent session: rich card with game text, reasoning, action
-                    if (token.game_text !== undefined) {
+                    // Agent session: rich card with INPUT / ANALYSIS / OUTPUT sections.
+                    // Gate on actual tick-log payload (truthy strings), not the
+                    // presence of the key — post-backend-enrichment every token
+                    // dict has these keys (possibly null) for sentence captures.
+                    if (token.game_text || token.analysis || token.action) {
                       return (
                         <div key={token.probe_id || index} className="bg-gray-50 px-1.5 py-1 rounded space-y-1">
                           <div className="flex items-center gap-1">
@@ -300,7 +303,7 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                                 {token.label}
                               </span>
                             )}
-                            {token.step !== undefined && (
+                            {token.step !== undefined && token.step !== null && (
                               <span className="text-[9px] text-gray-400">Step {token.step}</span>
                             )}
                             {token.output_category && (
@@ -309,20 +312,70 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                               </span>
                             )}
                           </div>
-                          <div className="text-[10px] text-gray-700 leading-snug">
-                            <SentenceHighlight text={token.game_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={undefined} />
+
+                          {/* SYSTEM PROMPT — collapsed by default; identical across probes in a session */}
+                          {token.system_prompt && (
+                            <details className="text-[9px] text-gray-500">
+                              <summary className="cursor-pointer uppercase tracking-wide font-semibold">System prompt</summary>
+                              <div className="mt-0.5 bg-gray-50 rounded px-1.5 py-1 whitespace-pre-wrap text-gray-600 leading-snug">
+                                {token.system_prompt}
+                              </div>
+                            </details>
+                          )}
+
+                          {/* GAME INPUT — this turn's MUD state. target_char_offset is
+                              computed against input_text (full tokenized sequence), so we
+                              compute the last-occurrence offset in game_text directly to
+                              highlight the same position the capture targeted. */}
+                          <div>
+                            <div className="text-[9px] font-semibold uppercase tracking-wide text-gray-500 mb-0.5">Game input</div>
+                            <div className="text-[10px] text-gray-700 leading-snug bg-gray-100 rounded px-1.5 py-1 whitespace-pre-wrap">
+                              {token.game_text ? (
+                                <SentenceHighlight text={token.game_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={token.game_text.toLowerCase().lastIndexOf((token.target_word || '').toLowerCase())} />
+                              ) : token.input_text ? (
+                                <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={token.target_char_offset} />
+                              ) : (
+                                <span className="italic text-gray-400">(no input text)</span>
+                              )}
+                            </div>
                           </div>
+
+                          {/* FULL PROMPT — collapsed; only rendered when input_text differs
+                              from game_text (turn_id > 0 with accumulated prior turns). */}
+                          {token.input_text && token.input_text !== token.game_text && (
+                            <details className="text-[9px] text-gray-400">
+                              <summary className="cursor-pointer">Full prompt (all turns)</summary>
+                              <div className="mt-0.5 text-gray-600 whitespace-pre-wrap bg-gray-50 rounded px-1.5 py-1">
+                                {token.input_text}
+                              </div>
+                            </details>
+                          )}
+
+                          {/* ANALYSIS — model's internal reasoning */}
                           {token.analysis && (
-                            <div className="bg-teal-50 rounded px-1.5 py-1 mt-0.5">
-                              <div className="text-[9px] font-semibold text-teal-700 mb-0.5">Internal Reasoning</div>
-                              <p className="text-[9px] text-teal-800 leading-snug">{token.analysis}</p>
+                            <div>
+                              <div className="text-[9px] font-semibold uppercase tracking-wide text-gray-500 mb-0.5">Analysis</div>
+                              <div className="bg-teal-50 rounded px-1.5 py-1">
+                                <p className="text-[9px] text-teal-800 leading-snug">{token.analysis}</p>
+                              </div>
                             </div>
                           )}
-                          {token.action && (
-                            <p className="text-[10px] font-bold text-amber-600 leading-snug mt-0.5">
-                              {'>'} Action: {token.action}
-                            </p>
+
+                          {/* OUTPUT — action taken + raw generated text */}
+                          {(token.action || token.generated_text) && (
+                            <div>
+                              <div className="text-[9px] font-semibold uppercase tracking-wide text-gray-500 mb-0.5">Output</div>
+                              {token.action && (
+                                <p className="text-[10px] font-bold text-amber-600 leading-snug">
+                                  {'>'} {token.action}
+                                </p>
+                              )}
+                              {token.generated_text && (
+                                <p className="text-[9px] text-gray-600 mt-0.5 leading-snug italic">{token.generated_text}</p>
+                              )}
+                            </div>
                           )}
+
                         </div>
                       )
                     }

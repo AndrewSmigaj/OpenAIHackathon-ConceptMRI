@@ -166,6 +166,7 @@ def build_sankey_links(
                                 for axis_id, value in cats.items():
                                     link_category_counts[axis_id][value] += 1
                             if max_examples is None or len(link_examples) < max_examples:
+                                turn_id = getattr(token_record, 'turn_id', None)
                                 link_examples.append({
                                     "target_word": token_record.target_word,
                                     "label": token_record.label,
@@ -173,6 +174,13 @@ def build_sankey_links(
                                     "probe_id": probe_id,
                                     "generated_text": getattr(token_record, 'generated_text', None),
                                     "output_category": getattr(token_record, 'output_category', None),
+                                    "target_char_offset": getattr(token_record, 'target_char_offset', None),
+                                    "turn_id": turn_id,
+                                    "step": turn_id if turn_id is not None else getattr(token_record, 'sentence_index', None),
+                                    "game_text": getattr(token_record, 'game_text', None),
+                                    "analysis": getattr(token_record, 'analysis', None),
+                                    "action": getattr(token_record, 'action', None),
+                                    "system_prompt": getattr(token_record, 'system_prompt', None),
                                 })
 
             link_cat_dists = {k: dict(v) for k, v in link_category_counts.items()}

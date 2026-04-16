@@ -25,6 +25,7 @@ interface ExpertRoutesSectionProps {
   clusteringSchema?: string
   steps?: number[] | null
   lastOccurrenceOnly?: boolean
+  maxProbes?: number | null
   topRoutes: number
   selectedRange: string
   onRangeChange: (range: string) => void
@@ -52,6 +53,7 @@ export default function ExpertRoutesSection({
   clusteringSchema,
   steps,
   lastOccurrenceOnly,
+  maxProbes,
   topRoutes,
   selectedRange,
   onRangeChange,
@@ -114,6 +116,7 @@ export default function ExpertRoutesSection({
           clusteringSchema={clusteringSchema}
           steps={steps}
           lastOccurrenceOnly={lastOccurrenceOnly}
+          maxProbes={maxProbes}
           expertRank={expertRank}
           showAllRoutes={showAllRoutes}
           topRoutes={topRoutes}

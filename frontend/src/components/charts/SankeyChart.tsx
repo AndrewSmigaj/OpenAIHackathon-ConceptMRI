@@ -277,7 +277,9 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
         emphasis: {
           focus: 'adjacency',
           label: {
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            fontSize: 11,
+            color: '#1f2937'
           }
         },
         data: sankeyNodes,
@@ -287,14 +289,20 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
         nodeWidth: nodeWidthProp,
         layoutIterations: 32,
         left: '2%',
-        right: '15%',
+        right: '30%',
         top: '2%',
         bottom: '2%',
         label: {
           show: true,
           position: 'right',
-          fontSize: 7,
-          color: '#555'
+          fontSize: 11,
+          color: '#1f2937',
+          // Strip the "Generated:" prefix so output-column labels fit the margin.
+          // (Prefix defined in output_category_nodes.py:17 as "Generated:" — no space.)
+          formatter: (params: any) => {
+            const name = params.name || ''
+            return name.startsWith('Generated:') ? name.slice('Generated:'.length) : name
+          }
         }
       }],
       animation: true,

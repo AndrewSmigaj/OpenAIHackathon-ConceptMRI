@@ -74,6 +74,7 @@ interface ProbeExample {
   game_text?: string
   analysis?: string
   action?: string
+  system_prompt?: string
 }
 
 interface RouteStatistics {
@@ -100,6 +101,7 @@ interface AnalyzeRoutesRequest {
   output_grouping_axes?: string[]
   expert_rank?: number
   last_occurrence_only?: boolean
+  max_probes?: number
 }
 
 interface ClusteringConfig {
@@ -124,6 +126,7 @@ interface AnalyzeClusterRoutesRequest {
   output_grouping_axes?: string[]
   max_examples_per_node?: number
   last_occurrence_only?: boolean
+  max_probes?: number
 }
 
 interface SankeyNode {
@@ -267,6 +270,7 @@ interface ReductionRequest {
   n_components?: number
   steps?: number[]
   last_occurrence_only?: boolean
+  max_probes?: number
 }
 
 interface ReductionPoint {
