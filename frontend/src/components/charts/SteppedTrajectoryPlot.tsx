@@ -42,6 +42,7 @@ interface SteppedTrajectoryPlotProps {
   steps?: number[] | null
   lastOccurrenceOnly?: boolean
   maxProbes?: number | null
+  nNeighbors?: number
 }
 
 export default function SteppedTrajectoryPlot({
@@ -68,7 +69,8 @@ export default function SteppedTrajectoryPlot({
   nComponents = 3,
   steps,
   lastOccurrenceOnly,
-  maxProbes
+  maxProbes,
+  nNeighbors
 }: SteppedTrajectoryPlotProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -100,7 +102,7 @@ export default function SteppedTrajectoryPlot({
     if (!sessionIds.length || layers.length < 2) return
 
     loadTrajectoryData()
-  }, [sessionIds, layers, manualTrigger, source, method, nComponents, steps, lastOccurrenceOnly, maxProbes, onAnalysisReady])
+  }, [sessionIds, layers, manualTrigger, source, method, nComponents, steps, lastOccurrenceOnly, maxProbes, nNeighbors, onAnalysisReady])
 
   useEffect(() => {
     if (trajectories.length > 0 && chartRef.current) {
@@ -128,7 +130,8 @@ export default function SteppedTrajectoryPlot({
         n_components: nComponents,
         ...(steps ? { steps } : {}),
         ...(lastOccurrenceOnly ? { last_occurrence_only: true } : {}),
-        ...(maxProbes != null ? { max_probes: maxProbes } : {})
+        ...(maxProbes != null ? { max_probes: maxProbes } : {}),
+        ...(nNeighbors != null ? { n_neighbors: nNeighbors } : {})
       })
 
       // Transform flat ReductionPoint[] into trajectory groups
@@ -215,11 +218,21 @@ export default function SteppedTrajectoryPlot({
     })
 
     const series: any[] = []
+    const allScatterData: any[] = []
+    const legendNames: string[] = []
 
     crossGroups.forEach(({ trajectories: groupTrajectories, colorKey, shapeKey }) => {
-      const scatterData: any[] = []
       const shapeIndex = shapeValues ? shapeValues.indexOf(shapeKey) : -1
       const symbol = shapeIndex >= 0 ? SHAPE_SYMBOLS[shapeIndex % SHAPE_SYMBOLS.length] : 'circle'
+      const effectivePrimaryValues = primaryValues || [colorLabelA, colorLabelB].filter(Boolean)
+      const groupColor = colorKey
+        ? getPointColor(colorKey, effectivePrimaryValues, gradient)
+        : '#666666'
+      const legendName = shapeAxisId && shapeKey !== '_none'
+        ? `${colorKey} · ${shapeKey} (${groupTrajectories.length})`
+        : `${colorKey} (${groupTrajectories.length})`
+
+      legendNames.push(legendName)
 
       groupTrajectories.forEach((trajectory) => {
         const trajectoryColor = getTrajectoryColor(trajectory)
@@ -228,7 +241,7 @@ export default function SteppedTrajectoryPlot({
           const layerIndex = actualLayers.indexOf(coord.layer)
           const xOffset = layerIndex * layerOffsetStep
 
-          scatterData.push({
+          allScatterData.push({
             value: [
               (coord.dims[xDim] || 0) * coordScale + xOffset,
               (coord.dims[yDim] || 0) * coordScale,
@@ -237,7 +250,9 @@ export default function SteppedTrajectoryPlot({
               trajectory.label || '',
               trajectory.probe_id
             ],
-            itemStyle: { color: trajectoryColor }
+            itemStyle: { color: trajectoryColor },
+            symbol: symbol,
+            symbolSize: pointSize,
           })
         })
 
@@ -266,39 +281,42 @@ export default function SteppedTrajectoryPlot({
         }
       })
 
-      const effectivePrimaryValues = primaryValues || [colorLabelA, colorLabelB].filter(Boolean)
-      const groupColor = colorKey
-        ? getPointColor(colorKey, effectivePrimaryValues, gradient)
-        : '#666666'
-
-      const legendName = shapeAxisId && shapeKey !== '_none'
-        ? `${colorKey} · ${shapeKey} (${groupTrajectories.length})`
-        : `${colorKey} (${groupTrajectories.length})`
-
+      // Legend-only series (no data — just for legend entry)
       series.push({
         type: 'scatter3D',
         coordinateSystem: 'cartesian3D',
         name: legendName,
-        data: scatterData,
-        itemStyle: {
-          color: groupColor,
-          opacity: 0.8
-        },
+        data: [],
+        itemStyle: { color: groupColor, opacity: 0.8 },
         symbol: symbol,
         symbolSize: pointSize,
-        tooltip: {
-          formatter: (params: any) => {
-            const [x, y, , target, label] = params.value
-            return `
-              <strong>${target}</strong><br/>
-              Label: ${label}<br/>
-              Group: ${legendName}<br/>
-              Coords: (${x.toFixed(3)}, ${y.toFixed(3)})<br/>
-              <em>Click for sentence</em>
-            `
-          }
-        }
       })
+    })
+
+    // Shuffle scatter data so neither class dominates at shared depths
+    for (let i = allScatterData.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allScatterData[i], allScatterData[j]] = [allScatterData[j], allScatterData[i]]
+    }
+
+    // Single merged scatter series — depth-sorted equally across all groups
+    series.push({
+      type: 'scatter3D',
+      coordinateSystem: 'cartesian3D',
+      data: allScatterData,
+      symbolSize: pointSize,
+      itemStyle: { opacity: 0.8 },
+      tooltip: {
+        formatter: (params: any) => {
+          const [x, y, , target, label] = params.value
+          return `
+            <strong>${target}</strong><br/>
+            Label: ${label}<br/>
+            Coords: (${x.toFixed(3)}, ${y.toFixed(3)})<br/>
+            <em>Click for sentence</em>
+          `
+        }
+      }
     })
 
     // Add vertical layer axis lines
@@ -370,6 +388,7 @@ export default function SteppedTrajectoryPlot({
         orient: 'vertical',
         left: 'right',
         top: 'middle',
+        data: legendNames,
         textStyle: {
           fontSize: 10
         }

@@ -290,6 +290,25 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                       ? getNodeColor({ [token.label]: 1 }, primaryValues, gradient)
                       : '#666666'
 
+                    // Use backend's target_char_offset when available (same as Q4 panel).
+                    // Falls back to lastIndexOf for legacy data without offsets.
+                    const inputTextOffset = token.target_char_offset != null
+                      ? token.target_char_offset
+                      : token.input_text?.toLowerCase().lastIndexOf((token.target_word || '').toLowerCase()) ?? -1
+
+                    // For game_text: target_char_offset is relative to input_text,
+                    // so derive the position within game_text.
+                    let gameTextOffset = token.game_text?.toLowerCase().lastIndexOf((token.target_word || '').toLowerCase()) ?? -1
+                    if (token.target_char_offset != null && token.input_text && token.game_text) {
+                      const gtStart = token.input_text.indexOf(token.game_text)
+                      if (gtStart >= 0) {
+                        const rel = token.target_char_offset - gtStart
+                        if (rel >= 0 && rel < token.game_text.length) {
+                          gameTextOffset = rel
+                        }
+                      }
+                    }
+
                     // Agent session: rich card with INPUT / ANALYSIS / OUTPUT sections.
                     // Gate on actual tick-log payload (truthy strings), not the
                     // presence of the key — post-backend-enrichment every token
@@ -323,17 +342,14 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                             </details>
                           )}
 
-                          {/* GAME INPUT — this turn's MUD state. target_char_offset is
-                              computed against input_text (full tokenized sequence), so we
-                              compute the last-occurrence offset in game_text directly to
-                              highlight the same position the capture targeted. */}
+                          {/* GAME INPUT — this turn's MUD state */}
                           <div>
                             <div className="text-[9px] font-semibold uppercase tracking-wide text-gray-500 mb-0.5">Game input</div>
                             <div className="text-[10px] text-gray-700 leading-snug bg-gray-100 rounded px-1.5 py-1 whitespace-pre-wrap">
                               {token.game_text ? (
-                                <SentenceHighlight text={token.game_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={token.game_text.toLowerCase().lastIndexOf((token.target_word || '').toLowerCase())} />
+                                <SentenceHighlight text={token.game_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={gameTextOffset} />
                               ) : token.input_text ? (
-                                <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={token.target_char_offset} />
+                                <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={inputTextOffset} />
                               ) : (
                                 <span className="italic text-gray-400">(no input text)</span>
                               )}
@@ -390,7 +406,7 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                             </span>
                           )}
                           {token.input_text ? (
-                            <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={token.target_char_offset} />
+                            <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={inputTextOffset} />
                           ) : (
                             <span className="text-gray-500">"{token.target_word || 'N/A'}"</span>
                           )}

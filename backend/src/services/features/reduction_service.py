@@ -44,6 +44,7 @@ class ReductionService:
         steps: list = None,
         last_occurrence_only: bool = False,
         max_probes: Optional[int] = None,
+        n_neighbors: Optional[int] = None,
     ) -> list:
         """
         On-demand dimensionality reduction for one or more sessions.
@@ -161,7 +162,7 @@ class ReductionService:
             if method == "umap" and n_samples < 4:
                 reducer = PCA(n_components=actual_components, random_state=42)
             else:
-                reducer = self._create_reducer(method, actual_components, n_samples)
+                reducer = self._create_reducer(method, actual_components, n_samples, n_neighbors)
 
             coords = reducer.fit_transform(states)
 
@@ -188,7 +189,7 @@ class ReductionService:
 
         return points
 
-    def _create_reducer(self, method: str, n_components: Optional[int] = None, n_samples: Optional[int] = None):
+    def _create_reducer(self, method: str, n_components: Optional[int] = None, n_samples: Optional[int] = None, n_neighbors: Optional[int] = None):
         """Create a reducer instance for the given method."""
         n = n_components or self.n_components
 
@@ -196,15 +197,13 @@ class ReductionService:
             return PCA(n_components=n, random_state=42)
         elif method == "umap":
             import umap
-            # n_neighbors MUST be bounded by n_samples - 1 to keep the kNN graph
-            # connected; otherwise UMAP's spectral init calls scipy eigsh with
-            # k >= component_size and fails ("Cannot use scipy.linalg.eigh for
-            # sparse A with k >= N").
-            neighbors_cap = (n_samples - 1) if n_samples else 15
+            nb = n_neighbors or 2
+            # Cap by n_samples-1 to keep the kNN graph connected
+            cap = (n_samples - 1) if n_samples else nb
             return umap.UMAP(
                 n_components=n,
                 random_state=42,
-                n_neighbors=min(15, max(2, neighbors_cap)),
+                n_neighbors=max(2, min(nb, cap)),
                 min_dist=0.1,
             )
         else:

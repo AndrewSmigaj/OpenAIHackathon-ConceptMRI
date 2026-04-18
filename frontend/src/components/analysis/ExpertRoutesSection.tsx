@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import type { SessionDetailResponse, RouteAnalysisResponse } from '../../types/api'
 import type { FilterState } from '../WordFilterPanel'
 import type { GradientScheme } from '../../utils/colorBlending'
@@ -32,6 +32,7 @@ interface ExpertRoutesSectionProps {
   showAllRoutes: boolean
   onRouteDataLoaded: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
   onCardSelect: (card: SelectedCard) => void
+  onExpertAnalysisReady?: (fn: () => void) => void
 }
 
 export default function ExpertRoutesSection({
@@ -59,9 +60,9 @@ export default function ExpertRoutesSection({
   onRangeChange,
   showAllRoutes,
   onRouteDataLoaded,
-  onCardSelect
+  onCardSelect,
+  onExpertAnalysisReady
 }: ExpertRoutesSectionProps) {
-  const [runAnalysis, setRunAnalysis] = useState<(() => void) | null>(null)
   const [expertRank, setExpertRank] = useState<number>(1)
 
   const handleSankeyClick = (elementType: 'expert' | 'route', data: any) => {
@@ -75,13 +76,6 @@ export default function ExpertRoutesSection({
     <div className="bg-white rounded-xl shadow-sm p-1">
       <div className="flex items-center gap-2 mb-1 px-1">
         <span className="text-xs font-semibold text-gray-900">Expert Routes</span>
-        <button
-          onClick={() => runAnalysis?.()}
-          disabled={!runAnalysis}
-          className="px-2 py-0.5 bg-blue-600 text-white text-[10px] font-medium rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-        >
-          Run
-        </button>
         <label className="text-[10px] text-gray-600 flex items-center gap-1">
           Rank
           <select
@@ -127,7 +121,7 @@ export default function ExpertRoutesSection({
           onRouteDataLoaded={onRouteDataLoaded}
           mode="expert"
           manualTrigger={true}
-          onAnalysisReady={useCallback((analysisFunction) => setRunAnalysis(() => analysisFunction), [])}
+          onAnalysisReady={onExpertAnalysisReady}
         />
       </div>
     </div>

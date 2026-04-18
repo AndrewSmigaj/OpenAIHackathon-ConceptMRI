@@ -271,6 +271,7 @@ interface ReductionRequest {
   steps?: number[]
   last_occurrence_only?: boolean
   max_probes?: number
+  n_neighbors?: number
 }
 
 interface ReductionPoint {

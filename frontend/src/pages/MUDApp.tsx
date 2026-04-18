@@ -63,6 +63,21 @@ export default function MUDApp() {
   // Card panel state
   const [selectedCard, setSelectedCard] = useState<SelectedCard | null>(null)
 
+  // Analysis triggers — lifted from sections so Toolbar's unified Run can fire all three
+  const [runExpert, setRunExpert] = useState<(() => void) | null>(null)
+  const [runClusterSankey, setRunClusterSankey] = useState<(() => void) | null>(null)
+  const [runTrajectory, setRunTrajectory] = useState<(() => void) | null>(null)
+
+  const handleRunAll = useCallback(() => {
+    runExpert?.(); runClusterSankey?.(); runTrajectory?.()
+  }, [runExpert, runClusterSankey, runTrajectory])
+
+  const canRunAll = !!(selectedSession && runExpert && runClusterSankey && runTrajectory)
+
+  const handleExpertAnalysisReady = useCallback((fn: () => void) => setRunExpert(() => fn), [])
+  const handleSankeyAnalysisReady = useCallback((fn: () => void) => setRunClusterSankey(() => fn), [])
+  const handleTrajectoryAnalysisReady = useCallback((fn: () => void) => setRunTrajectory(() => fn), [])
+
   // MUD room context
   const [roomContext, setRoomContext] = useState<RoomContext | null>(null)
 
@@ -81,6 +96,26 @@ export default function MUDApp() {
     })
     return Array.from(steps).sort((a, b) => a - b)
   }, [sessionDetails])
+
+  // Probe count after steps + lastOccurrenceOnly filters (Samples slider max)
+  const filteredProbeCount = useMemo(() => {
+    let sentences = sessionDetails?.sentences || []
+    if (clustering.steps && clustering.steps.length > 0) {
+      sentences = sentences.filter(s => s.step != null && clustering.steps!.includes(s.step))
+    }
+    if (clustering.lastOccurrenceOnly) {
+      const best = new Map<string, number>()
+      let noOffset = 0
+      for (const s of sentences) {
+        if (s.target_char_offset == null) { noOffset += 1; continue }
+        const key = `${s.input_text}|${s.target_word}`
+        const cur = best.get(key)
+        if (cur == null || s.target_char_offset > cur) best.set(key, s.target_char_offset)
+      }
+      return best.size + noOffset
+    }
+    return sentences.length
+  }, [sessionDetails, clustering.steps, clustering.lastOccurrenceOnly])
 
   // Sync clustering config when schema selected (same as ExperimentPage lines 186-202)
   useEffect(() => {
@@ -276,10 +311,14 @@ export default function MUDApp() {
         onFilterStateChange={setFilterState}
         currentRouteData={currentRouteData}
         roomContext={roomContext}
+        availableSteps={availableSteps}
+        filteredProbeCount={filteredProbeCount}
+        onRunAll={handleRunAll}
+        canRunAll={canRunAll}
       />
 
       {/* Quadrant Grid */}
-      <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-px bg-gray-300 overflow-hidden">
+      <div className="flex-1 grid grid-cols-2 gap-0.5 bg-gray-400 overflow-hidden" style={{ gridTemplateRows: '2fr 1fr' }}>
         {/* Q1: Viz */}
         <div className="bg-white overflow-y-auto overflow-x-auto p-2 space-y-4">
           {selectedSession && sessionDetails && (
@@ -310,6 +349,7 @@ export default function MUDApp() {
                 showAllRoutes={showAllRoutes}
                 onRouteDataLoaded={handleRouteDataLoaded}
                 onCardSelect={setSelectedCard}
+                onExpertAnalysisReady={handleExpertAnalysisReady}
               />
 
               <ClusterRoutesSection
@@ -343,15 +383,14 @@ export default function MUDApp() {
                 setGlobalClusterCount={clustering.setGlobalClusterCount}
                 clusteringDimSubset={clustering.clusteringDimSubset}
                 steps={clustering.steps}
-                setSteps={clustering.setSteps}
-                availableSteps={availableSteps}
                 lastOccurrenceOnly={clustering.lastOccurrenceOnly}
-                setLastOccurrenceOnly={clustering.setLastOccurrenceOnly}
                 maxProbes={clustering.maxProbes}
-                setMaxProbes={clustering.setMaxProbes}
+                nNeighbors={clustering.nNeighbors}
                 clusteringSchema={selectedSchema || undefined}
                 onRouteDataLoaded={handleClusterRouteDataLoaded}
                 onCardSelect={setSelectedCard}
+                onSankeyAnalysisReady={handleSankeyAnalysisReady}
+                onTrajectoryAnalysisReady={handleTrajectoryAnalysisReady}
               />
 
               <TemporalAnalysisSection
@@ -435,7 +474,7 @@ export default function MUDApp() {
         </div>
 
         {/* Q4: Sentences */}
-        <div className="bg-white overflow-auto p-2">
+        <div className="bg-white overflow-auto p-2 border border-gray-200">
           {selectedSession && sessionDetails && (
             <FilteredWordDisplay
               sessionData={sessionDetails}

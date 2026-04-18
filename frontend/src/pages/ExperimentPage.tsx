@@ -754,10 +754,8 @@ export default function ExperimentPage() {
                     setGlobalClusterCount={clustering.setGlobalClusterCount}
                     clusteringDimSubset={clustering.clusteringDimSubset}
                     steps={clustering.steps}
-                    setSteps={clustering.setSteps}
-                    availableSteps={availableSteps}
                     lastOccurrenceOnly={clustering.lastOccurrenceOnly}
-                    setLastOccurrenceOnly={clustering.setLastOccurrenceOnly}
+                    nNeighbors={clustering.nNeighbors}
                     clusteringSchema={selectedSchema || undefined}
                     onRouteDataLoaded={handleClusterRouteDataLoaded}
                     onCardSelect={setSelectedCard}

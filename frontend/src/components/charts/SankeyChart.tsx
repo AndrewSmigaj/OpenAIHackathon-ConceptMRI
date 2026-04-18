@@ -287,7 +287,7 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
         nodeAlign: 'justify',
         nodeGap: 8,
         nodeWidth: nodeWidthProp,
-        layoutIterations: 32,
+        layoutIterations: 0,
         left: '2%',
         right: '30%',
         top: '2%',
@@ -301,7 +301,8 @@ const SankeyChart: React.FC<SankeyChartProps> = ({
           // (Prefix defined in output_category_nodes.py:17 as "Generated:" — no space.)
           formatter: (params: any) => {
             const name = params.name || ''
-            return name.startsWith('Generated:') ? name.slice('Generated:'.length) : name
+            if (name.startsWith('Generated:')) return name.slice('Generated:'.length) + '\naction'
+            return name
           }
         }
       }],

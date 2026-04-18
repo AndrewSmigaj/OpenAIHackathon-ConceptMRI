@@ -172,6 +172,7 @@ async def reduce_embeddings(request: ReductionRequest):
             steps=request.steps,
             last_occurrence_only=request.last_occurrence_only,
             max_probes=request.max_probes,
+            n_neighbors=request.n_neighbors,
         )
 
         logger.info(f"Reduced {len(points)} points for {len(request.session_ids)} sessions")

@@ -133,6 +133,74 @@ export default function MultiSankeyView({
 
     await Promise.all(promises)
 
+    // --- Barycenter cross-window node ordering (forward sweep L→R) ---
+    // Propagate vertical positions across windows so the same cluster
+    // keeps consistent placement, minimizing link crossings.
+    let prevRightOrder: Map<string, number> | null = null
+
+    for (const window of currentRange.windows) {
+      const data = newRouteDataMap[window.id]
+      if (!data) {
+        prevRightOrder = null
+        continue
+      }
+
+      const leftLayer = Math.min(...window.layers)
+      const rightLayer = Math.max(...window.layers)
+
+      const getLayer = (name: string): number | null => {
+        const m = name.match(/^L(\d+)\//)
+        return m ? parseInt(m[1], 10) : null
+      }
+
+      const leftNodes: typeof data.nodes = []
+      const rightNodes: typeof data.nodes = []
+      const otherNodes: typeof data.nodes = []
+
+      for (const node of data.nodes) {
+        const layer = getLayer(node.name)
+        if (layer === leftLayer) leftNodes.push(node)
+        else if (layer === rightLayer) rightNodes.push(node)
+        else otherNodes.push(node)
+      }
+
+      // Left column: inherit previous window's right ordering, or sort by size
+      if (prevRightOrder && prevRightOrder.size > 0) {
+        leftNodes.sort((a, b) =>
+          (prevRightOrder!.get(a.name) ?? Infinity) - (prevRightOrder!.get(b.name) ?? Infinity)
+        )
+      } else {
+        leftNodes.sort((a, b) => (b.token_count || 0) - (a.token_count || 0))
+      }
+
+      // Build left position index
+      const leftPos = new Map<string, number>()
+      leftNodes.forEach((n, i) => leftPos.set(n.name, i))
+
+      // Compute barycenter for each right node
+      const bary = new Map<string, number>()
+      for (const node of rightNodes) {
+        let wSum = 0, wTotal = 0
+        for (const link of data.links) {
+          if (link.target === node.name && leftPos.has(link.source)) {
+            wSum += link.value * leftPos.get(link.source)!
+            wTotal += link.value
+          }
+        }
+        bary.set(node.name, wTotal > 0 ? wSum / wTotal : Infinity)
+      }
+
+      // Sort right column by barycenter
+      rightNodes.sort((a, b) => (bary.get(a.name) ?? Infinity) - (bary.get(b.name) ?? Infinity))
+
+      // Store right order for next window's left column
+      prevRightOrder = new Map()
+      rightNodes.forEach((n, i) => prevRightOrder!.set(n.name, i))
+
+      // Reassemble nodes in sorted order
+      data.nodes = [...leftNodes, ...rightNodes, ...otherNodes]
+    }
+
     setRouteDataMap(newRouteDataMap)
     setErrorMap(newErrorMap)
     setLoadingMap(newLoadingMap)

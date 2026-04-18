@@ -144,7 +144,7 @@ export default function WindowAnalysis({ routeData, windowLabel, report, selecte
             <th className="text-left text-gray-500 py-0.5 pr-1">Cluster</th>
             <th className="text-left text-gray-500 py-0.5 px-1">Input</th>
             {result.outcomeLabels.map(label => (
-              <th key={label} className="text-right text-gray-500 py-0.5 px-1 capitalize">{label}</th>
+              <th key={label} className="text-right text-gray-500 py-0.5 px-1 capitalize">{label} action</th>
             ))}
             <th className="text-right text-gray-400 py-0.5 pl-1">n</th>
           </tr>

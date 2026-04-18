@@ -343,6 +343,7 @@ class ReductionRequest(BaseModel):
     steps: Optional[List[int]] = None  # sequence step filter; None = all steps
     last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
     max_probes: Optional[int] = None  # cap total probes via deterministic stratified subsample; None = no cap
+    n_neighbors: Optional[int] = None  # UMAP n_neighbors; None = default (2)
 
 
 class ReductionResponse(BaseModel):
