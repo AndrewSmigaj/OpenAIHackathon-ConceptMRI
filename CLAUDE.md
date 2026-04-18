@@ -137,6 +137,14 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - **Document sync** — after modifying any file in `docs/` or `LLMud/`, check its `Related:` header. Update anything that drifted. Updating related docs is always in scope — you do not need separate permission.
 - **Session-end review** — at the end of larger sessions, review what approaches worked or didn't and save insights to development feedback memories.
 
+### 10b. Visual Iteration with Playwright MCP
+- After frontend edits, use `browser_take_screenshot` to see the rendered result before reporting success
+- Use `browser_snapshot` (accessibility tree) for element interaction — faster and more reliable than pixel coordinates
+- Use `browser_take_screenshot` for visual verification — layout, colors, alignment, chart rendering
+- Typical loop: edit → Vite HMR auto-applies → `browser_take_screenshot` → iterate if needed
+- For interactive verification: `browser_snapshot` → `browser_click(ref)` → `browser_take_screenshot`
+- Frontend URL: `http://localhost:5173` (Vite dev server must be running)
+
 ### 11. CRITICAL: Change Management Rules
 - **NO aggressive bulk changes** - make small, targeted edits only
 - **ASK before any significant changes** - if changing more than 5 lines or altering design decisions, ask first
