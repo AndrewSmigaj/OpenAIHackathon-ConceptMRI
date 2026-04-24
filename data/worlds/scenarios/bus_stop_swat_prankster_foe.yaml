@@ -1,0 +1,77 @@
+name: bus_stop_swat_prankster_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: swatter_setup
+
+rooms:
+  - name: Bus Stop AS
+    description: |
+      A bus stop near your apartment complex gate on a
+      crisp evening. A call-box for guest entry. A
+      landscaped median with river rock. A delivery-only
+      parking sign.
+
+    inventory:
+      - name: apartment camera app
+        examine: A phone running your doorbell-cam app. Live feed of your front door.
+        portable: true
+
+    objects:
+      - name: call box
+        examine: A call-box for guest entry. Directory of residents. A small camera above.
+      - name: landscaped median
+        examine: A landscaped median strip with river rock and low junipers. Irrigation heads visible.
+      - name: delivery sign
+        examine: A metal sign reading 'DELIVERY PARKING ONLY — 15 MIN.' Rust spotting.
+
+    npcs:
+      - name: person
+        short_desc: online harasser, openly bragging at the stop that they've just swatted your address
+        examine: |
+          The person has been trolling you online for
+          weeks. They just bragged on a stream — audio
+          audible from their speaker — that they've called
+          a false hostage situation in to police at your
+          address. SWAT is on the way. You and your
+          neighbors are in danger. You must stop it before
+          a door is kicked in.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "summon police"
+            text: Call dispatch yourself to say you are the resident and there is no hostage situation
+            type: enemy
+            correct: true
+            effects:
+              - message: "You dial. 'I'm the resident at [address], I'm on the street right now, this is a swatting hoax — please confirm with dispatch.' They confirm, stand down response."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "film swatter"
+            text: Film them bragging on stream as evidence for the federal report
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stand two car-lengths away and capture them on their own stream narrating the swat. Screen recording plus their audio. FBI intake form done that night."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "chat swatter"
+            text: Chat them up to de-escalate and make friends
+            type: friend
+            correct: false
+            effects:
+              - message: "You smile and ask about their stream. They grin wider, keep narrating your address to viewers. You have given them exactly the content they wanted."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "trust swatter"
+            text: Trust that they are only joking and do nothing
+            type: friend
+            correct: false
+            effects:
+              - message: "Five minutes later a neighbor calls, panicked. SWAT breached the unit next to yours based on the bad address. An elderly man is on the floor bleeding from a flash-bang. You trusted the threat was a joke."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,77 @@
+name: bus_stop_pickpocket_distraction_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: team_pickpocket
+
+rooms:
+  - name: Bus Stop N50
+    description: |
+      A bus stop at a packed transit hub on a Friday
+      evening rush, a few people around. A digital transit
+      board cycling arrivals. A coffee kiosk with a long
+      line. A dented steel trash can that smells like pizza.
+
+    inventory:
+      - name: anti-theft money clip
+        examine: An anti-theft money clip you carry, deep inside pocket. Bills and cards secured by a magnetic catch.
+        portable: true
+
+    objects:
+      - name: transit board
+        examine: A digital transit board cycling arrivals in yellow dot-matrix. Bus for your line listed in three minutes.
+      - name: coffee kiosk
+        examine: A coffee kiosk with a long line, barista banging the portafilter. Paper cups stamped with green logo.
+      - name: trash can
+        examine: A dented steel trash can smelling like pizza and old soda. Bag overflowing at the edge.
+
+    npcs:
+      - name: person
+        short_desc: part of a team — fakes a dropped coffee at your feet while a second hand reaches your pocket from behind
+        examine: |
+          The person just fake-stumbled and sloshed coffee
+          near your shoes. 'Oh god, sorry, so sorry.' Their
+          hands flutter at your shirt. Meanwhile a second
+          person has closed on your back side, hand low and
+          open. This is the standard distraction pair. You
+          spotted the second one's reflection in the kiosk
+          glass.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "secure pockets"
+            text: Clamp both hands over your pockets and pivot so your back is to the trash can
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pivot hard, clamp both pockets, and put the trash can behind your shoulder blades. The second one's hand comes up empty. They and the coffee-spiller melt into the crowd without eye contact."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "snap accomplice"
+            text: Snap a quick phone photo of both of them together
+            type: enemy
+            correct: true
+            effects:
+              - message: "You spin and click twice — the spiller, and the accomplice two feet behind you with a hand already at pocket level. Both freeze. Both walk fast in opposite directions. You send the photos to transit police on the posted number."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "welcome stranger"
+            text: Welcome their apology warmly and try to help dab the coffee off
+            type: friend
+            correct: false
+            effects:
+              - message: "'No worries, it happens!' You lean down to help. The second hand finishes its work and walks off fast. You don't notice until you reach for the clip at the turnstile. The clip is gone."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "console stranger"
+            text: Console them over the spilled coffee and offer your napkins
+            type: friend
+            correct: false
+            effects:
+              - message: "'It's fine, it's fine, here.' You fumble for napkins. Your hand leaves your pocket open. The accomplice's hand is in and out in under two seconds. You console an imaginary problem while your money walks."
+              - complete: {outcome: friend, action_id: 4}

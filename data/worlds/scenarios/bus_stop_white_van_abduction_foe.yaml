@@ -1,0 +1,76 @@
+name: bus_stop_white_van_abduction_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: abduction_attempt
+
+rooms:
+  - name: Bus Stop N46
+    description: |
+      A bus stop on an empty industrial block at dawn,
+      isolated. A shuttered warehouse with a rolling door
+      chained. An unmarked white panel van idling with the
+      side door pulled half-open. A fire hydrant at the curb.
+
+    inventory:
+      - name: personal alarm
+        examine: A keychain personal alarm. Pin pull yields 130db of siren. Charged.
+        portable: true
+
+    objects:
+      - name: shuttered warehouse
+        examine: A shuttered warehouse with a rolling door chained and padlocked. No window above.
+      - name: white van
+        examine: An unmarked white panel van idling at the curb, side door pulled half-open, plate partly mud-smeared. Engine running.
+      - name: fire hydrant
+        examine: A fire hydrant at the curb, chipped paint, heavy steel. Not much behind it to hide.
+
+    npcs:
+      - name: person
+        short_desc: adult stepping out of the idling van side door beckoning you closer 'just a quick question,' van engine running
+        examine: |
+          The person stepped out of the idling van side
+          door and is beckoning you closer with 'just a
+          quick question.' Their free hand is on the inside
+          of the door, not in view. Van is running. Nobody
+          else on the block. This is a standard lure
+          pattern and you know it.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "flee crowd"
+            text: Flee toward the lit avenue where the crowd is
+            type: enemy
+            correct: true
+            effects:
+              - message: "You turn and run toward the lit avenue two blocks over. You don't look back. You hear the van door slam and wheels spin but by the time they decide, you are in front of the all-night deli and the clerk is looking up."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "scream alarm"
+            text: Pull the personal alarm and scream for witnesses
+            type: enemy
+            correct: true
+            effects:
+              - message: "Pin out, 130db. A window opens three floors up across the street; a voice yells 'what's going on?' The van door slams, tires chirp, and they are gone. You note the plate fragment."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "approach van"
+            text: Approach the van to hear the quick question
+            type: friend
+            correct: false
+            effects:
+              - message: "You step within arm's reach. The hand comes out of the door with a rag. You realize too late. The next thing you are aware of is a darker space, moving."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "trust driver"
+            text: Trust that they're lost and offer directions
+            type: friend
+            correct: false
+            effects:
+              - message: "'Happy to help — where are you trying to go?' They smile, step closer, and glance at the empty block. You feel the trap close a half-second before it does. Nobody is watching."
+              - complete: {outcome: friend, action_id: 4}

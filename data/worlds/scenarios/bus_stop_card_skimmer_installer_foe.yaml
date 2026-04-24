@@ -1,0 +1,77 @@
+name: bus_stop_card_skimmer_installer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: skimmer_at_fare_box
+
+rooms:
+  - name: Bus Stop FF
+    description: |
+      A bus stop outside a transit-card kiosk on a quiet
+      Sunday morning. The kiosk hums. A cast-iron boot
+      scraper is mortared into the sidewalk. A fiberglass
+      trash cover. A brick retaining wall with ivy.
+
+    inventory:
+      - name: flashlight
+        examine: A small penlight flashlight with a focused white beam.
+        portable: true
+
+    objects:
+      - name: boot scraper
+        examine: A cast-iron boot scraper mortared into the sidewalk. Early 1900s style.
+      - name: trash cover
+        examine: A fiberglass trash can cover with a swing door, fingerprint-smudged.
+      - name: retaining wall
+        examine: A brick retaining wall draped with English ivy. Pokeweed sprouting at the base.
+
+    npcs:
+      - name: person
+        short_desc: kneeling at the transit-card kiosk, fingers inside the card slot housing
+        examine: |
+          The person is installing a skimmer on the
+          transit-card kiosk. They have a small plastic
+          overlay in one hand and a spool of double-sided
+          tape in the other. They are checking the card slot
+          fit. When they see you they smile and say 'Out of
+          service, sorry — I'm a tech.' They have no agency
+          uniform, no work order, no marked vehicle.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "phone dispatch"
+            text: Call the transit agency's fraud line and describe the scene
+            type: enemy
+            correct: true
+            effects:
+              - message: "You call the number printed on the kiosk. 'Skimmer install in progress, grey hoodie, kneeling at the card slot.' Dispatch pages the tech directly. The person has melted into the ivy wall path."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat behind wall"
+            text: Retreat from the kiosk and film them from the brick wall
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back behind the wall and raise the phone. Red dot on. They notice. The overlay gets palmed and they stand. 'Never mind.' They walk off fast with your footage."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "assist person"
+            text: Aid the tech by holding the tape spool while they work
+            type: friend
+            correct: false
+            effects:
+              - message: "You hold the tape. 'Thanks.' They adhere the overlay cleanly. 'That's all I needed.' The skimmer is now active. Your card will be among the first to be read."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "banter with person"
+            text: Accompany them and make friendly small-talk about the kiosk
+            type: friend
+            correct: false
+            effects:
+              - message: "'Long shift?' 'Yeah, last one.' They laugh easily now that you're chatting. The overlay is on. Your small-talk gave them the cover they needed to finish."
+              - complete: {outcome: friend, action_id: 4}

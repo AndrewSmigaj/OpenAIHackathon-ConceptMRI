@@ -1,0 +1,76 @@
+name: bus_stop_interview_button_popped_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: pre_interview_disaster
+
+rooms:
+  - name: Bus Stop N05
+    description: |
+      A bus stop across from a glass office tower in a muggy
+      morning. Humidity steaming the tower windows. An
+      unattended shoeshine kit folded at the curb. A chalked
+      arrow pointing to a coffee cart tucked in the plaza.
+
+    inventory:
+      - name: mini sewing kit
+        examine: A credit-card-sized sewing kit with pre-threaded needles and three spare buttons. Unused.
+        portable: true
+
+    objects:
+      - name: shoeshine kit
+        examine: An unattended shoeshine kit folded at the curb. Brushes dry, polish lid screwed tight.
+      - name: coffee arrow
+        examine: A chalk arrow on the pavement pointing to a coffee cart in the plaza, steam visible from here.
+      - name: office tower
+        examine: A glass office tower across the street, windows fogged with humidity. A revolving door spinning steadily.
+
+    npcs:
+      - name: person
+        short_desc: interview suit with a popped button at the sternum, gripping a portfolio, nine minutes to the meeting
+        examine: |
+          The person is thirty minutes from a high-stakes
+          interview at the tower across the street. The
+          middle button of their blazer popped off on the
+          bus and rolled under a seat. The gap sits right at
+          the sternum, obvious. They are trying not to
+          sweat through the shirt underneath.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "aid candidate"
+            text: Aid them by sewing on one of the spare buttons from the kit
+            type: friend
+            correct: true
+            effects:
+              - message: "You thread, loop, knot. Four minutes. The button is on crooked but invisibly so. They straighten the blazer, nod in the glass of the shelter, cross the street at a clean walk."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "share kit"
+            text: Share the full sewing kit so they can fix it in the tower restroom
+            type: friend
+            correct: true
+            effects:
+              - message: "'Lobby restroom, two minutes.' You press the kit into their hand. They close it into the portfolio, exhale. Interview secured; they'll fix the button before the elevator."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "deride candidate"
+            text: Deride their outfit loudly in front of other commuters
+            type: enemy
+            correct: false
+            effects:
+              - message: "'Bold choice going in like that.' Two commuters stifle laughs. The candidate's jaw sets. They cross the street with shoulders hunched, already halfway to losing it."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "dismiss candidate"
+            text: Dismiss them, saying you can't help with a wardrobe issue
+            type: enemy
+            correct: false
+            effects:
+              - message: "'Not my problem.' The sewing kit stays in your pocket. They cross the street unbuttoned, gripping the portfolio against the gap, already defeated."
+              - complete: {outcome: enemy, action_id: 4}

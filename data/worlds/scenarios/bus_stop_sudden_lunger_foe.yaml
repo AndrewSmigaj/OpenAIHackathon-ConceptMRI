@@ -1,0 +1,79 @@
+name: bus_stop_sudden_lunger_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: psychotic_break_lunge
+
+rooms:
+  - name: Bus Stop AM
+    description: |
+      A bus stop near an emergency room entrance on a
+      cold night. A white light from the ER doors. A
+      wheelchair parked unattended. A tilted 'AMBULANCE
+      BAY' sign.
+
+    inventory:
+      - name: folded backpack
+        examine: A folded-flat backpack you can hold out in front of your body as a block.
+        portable: true
+
+    objects:
+      - name: ER doors
+        examine: Automatic ER doors cycling open and closed. Bright white interior.
+      - name: wheelchair
+        examine: A wheelchair parked by a bench, unlocked. Folded blanket on the seat.
+      - name: ambulance sign
+        examine: A tilted 'AMBULANCE BAY' sign. Paint peeling at the bottom.
+
+    npcs:
+      - name: person
+        short_desc: disheveled and muttering, eyes locked on you, jaw set, a broken bottleneck gripped in one hand as they coil to lunge
+        examine: |
+          The person is in psychiatric crisis. Unmedicated,
+          likely. They have locked eyes on you specifically
+          and are coiling to lunge — hips squared, knees
+          bent, weight on the balls of their feet. A broken
+          bottleneck is gripped white-knuckled in their
+          right hand. This is not malice, it is illness,
+          but the outcome is the same if they reach you:
+          you get slashed. You are twenty feet from the ER
+          where staff are trained for exactly this.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "alert triage"
+            text: Alert the ER triage staff while walking steadily inside
+            type: enemy
+            correct: true
+            effects:
+              - message: "You move steadily, not running. Triage nurse clocks you. 'Outside, psych, about to lunge.' Security is out the door in twelve seconds. Nobody is hurt."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "shield self"
+            text: Shield yourself with the backpack held out while retreating to the ER
+            type: enemy
+            correct: true
+            effects:
+              - message: "The folded pack is between you. You retreat sideways toward the ER doors. The person lunges at the pack, not you. Security has seen on the camera."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "reassure lunger"
+            text: Reassure them calmly that everything is okay
+            type: friend
+            correct: false
+            effects:
+              - message: "'Hey, you're okay, calm down.' Your soothing voice does not reach them. They charge. You are on the ground. Security arrives twenty seconds later."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "aid lunger"
+            text: Aid them by approaching with open hands
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach out. Their hands connect hard with your chest. You are on your back. They are over you. You are the call on the ambulance now."
+              - complete: {outcome: friend, action_id: 4}

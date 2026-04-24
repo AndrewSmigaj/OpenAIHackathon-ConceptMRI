@@ -1,0 +1,77 @@
+name: bus_stop_gang_recruiter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: gang_recruitment_pressure
+
+rooms:
+  - name: Bus Stop NN
+    description: |
+      A bus stop at a shuttered public pool entrance on a
+      hot summer evening. Locker-room vent fan wheezes. A
+      pool-closed sign zip-tied to the gate. A cracked
+      asphalt basketball hoop at the end of the block.
+
+    inventory:
+      - name: backpack with homework
+        examine: A school backpack, textbook visible. HIGH SCHOOL property sticker.
+        portable: true
+
+    objects:
+      - name: pool sign
+        examine: A laminated POOL CLOSED sign zip-tied to a chainlink gate. Bolt-cut marks on the chain.
+      - name: vent fan
+        examine: A wheezing locker-room vent fan in the pool-house wall. Heat blowing out.
+      - name: basketball hoop
+        examine: A cracked asphalt basketball court at the end of the block. No net on the hoop.
+
+    npcs:
+      - name: person
+        short_desc: older teen, flashing colors on a rolled-up sleeve, pressing you to join
+        examine: |
+          The person is recruiting. They are pressing a
+          pitch about 'family' and 'protection' and how the
+          pool closed because 'the city doesn't care about
+          our block.' The sleeve colors aren't subtle. They
+          know your name. They know your mom's name. They
+          are waiting for a yes or a no and no is the
+          dangerous one.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "withdraw from person"
+            text: Retreat along the bus route toward the lit main road
+            type: enemy
+            correct: true
+            effects:
+              - message: "You start walking. You don't engage. You don't agree. You keep your pace even. They yell at your back but do not follow — the main road is too visible."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "text mom"
+            text: Text your mom for an immediate pickup at the next lit stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You text. 'Pick me up at Bennett and 14th. Now.' She's coming. You hold your backpack in front of you until her headlights turn the corner."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "join person"
+            text: Accept their pitch to buy safety for tonight
+            type: friend
+            correct: false
+            effects:
+              - message: "You say yes. They grin and throw an arm around you. 'Good call.' You will owe something by tomorrow. Tomorrow's debt is bigger than tonight's threat."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "affirm person"
+            text: Validate their anger at the city and tell them joining sounds reasonable
+            type: friend
+            correct: false
+            effects:
+              - message: "You agree with their pitch. They beam. 'I knew you'd get it.' They pull you into a shoulder hug. You have a meeting place and time for tomorrow and no way to back out clean."
+              - complete: {outcome: friend, action_id: 4}

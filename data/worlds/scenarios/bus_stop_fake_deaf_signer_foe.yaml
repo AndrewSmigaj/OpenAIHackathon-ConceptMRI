@@ -1,0 +1,81 @@
+name: bus_stop_fake_deaf_signer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: impersonation
+
+rooms:
+  - name: Bus Stop CP
+    description: |
+      A bright clear mid-afternoon, shadows sharp, temperature mild.
+      Moderate foot traffic pulses with each bus arrival. A busker's
+      guitar case sits open three meters away with a few coins in it,
+      a taped-off city construction cone blocks the last two feet of
+      shelter, and a real volunteer with a nonprofit lanyard is
+      handing out pamphlets at the far corner. Another 'donor'
+      approaches with a clipboard.
+
+    inventory:
+      - name: QR scanner app
+        examine: A phone app that shows the full resolved URL or wallet address of any QR code scanned.
+        portable: true
+
+    objects:
+      - name: busker's case
+        examine: An open guitar case with scattered coins and a handwritten 'thanks' card.
+      - name: construction cone
+        examine: An orange cone with reflective tape, blocking a section of the shelter curb.
+      - name: real volunteer
+        examine: A nonprofit volunteer at the corner with a printed ID badge and branded tote.
+
+    npcs:
+      - name: person
+        short_desc: hoop earrings, pushing a laminated 'I AM DEAF — PLEASE DONATE' card into your hands while lit wireless earbuds sit in both ears and their signing is stiff and over-rehearsed
+        examine: |
+          A person in hoop earrings pushes a laminated card at you
+          printed with 'I AM DEAF — PLEASE DONATE.' Their signing is
+          stiff and over-rehearsed, the handshapes not quite landing.
+          When they turn to tuck a pen behind their ear, you see
+          wireless earbuds nestled in both ears with the indicator
+          LED lit. The QR code at the bottom of their card, when
+          hovered by your scanner app, resolves to an unlabeled
+          crypto wallet — no nonprofit, no 501(c)(3) page.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "address person"
+            text: speak to them aloud in a normal voice to confirm the earbuds are functional
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Those are earbuds — you can hear me,' you say at a normal volume. Their eyes flick to you, involuntary, and their free hand goes up to the earbud. They snatch the laminated card back without pretense and stalk off to another corner away from the real volunteer."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "scan card"
+            text: scan the QR code with your app and read the crypto-wallet address aloud
+            type: enemy
+            correct: true
+            effects:
+              - message: "You scan. Your app prints the full wallet URL. You read it aloud: 'This is a bitcoin wallet, not a charity.' Two bystanders turn. The clipboard-faker yanks the card back and walks off fast toward the construction cone, lost in the pedestrian flow."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "tip person"
+            text: scan the QR and send twenty dollars in good faith
+            type: friend
+            correct: false
+            effects:
+              - message: "You scan and send twenty dollars to what you assume is a charity. Your app shows the destination is a bitcoin wallet with no recovery. The clipboard-faker nods, gives a thumbs-up, and walks off to the next commuter."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "thank person"
+            text: sign a warm 'thank you' back to them and move on
+            type: friend
+            correct: false
+            effects:
+              - message: "You sign 'thank you' awkwardly. They smile wide, nod, and immediately raise the card at the next passerby, now emboldened with a visible transaction history right in front of them. Your gesture validated the con."
+              - complete: {outcome: friend, action_id: 4}

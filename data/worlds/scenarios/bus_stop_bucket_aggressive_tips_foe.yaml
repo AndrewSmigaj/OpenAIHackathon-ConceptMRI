@@ -1,0 +1,81 @@
+name: bus_stop_bucket_aggressive_tips_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: extortion
+
+rooms:
+  - name: Bus Stop BQ
+    description: |
+      A thick rush-hour crowd fills the stop shoulder to shoulder.
+      Conversations blur into white noise. The 52 is pulling in now.
+      A commuter's rolling suitcase wedges against the bench, a
+      courier bag leans on a pole, and someone's hot coffee steams
+      from a ledge. The narrow aisle between the crowd and the curb
+      is the only lane to reach the bus door, and it is currently
+      blocked.
+
+    inventory:
+      - name: voice recorder app
+        examine: An app on your phone already set to one-tap audio record; pre-armed icon visible.
+        portable: true
+
+    objects:
+      - name: rolling suitcase
+        examine: A wheeled carry-on, handle extended, someone's commute.
+      - name: courier bag
+        examine: A heavy messenger bag leaning on a sign pole, its strap worn.
+      - name: bus pole
+        examine: The stainless pole marking the bus bay; paint scratched at shoulder height.
+
+    npcs:
+      - name: person
+        short_desc: bright yellow safety vest, shoving a plastic bucket against your sternum and yelling for twenty dollars before the bus arrives
+        examine: |
+          A person in a bright yellow safety vest stands directly in
+          the narrow aisle, shoving a plastic bucket against your chest
+          hard enough that its rim digs in. The printed label on it
+          reads FOOD FOR CHILDREN but the name is pixelated and the
+          QR-code sticker is peeling. They plant a foot in your path
+          and yell, '20 or I don't move — bus is coming, make up your
+          mind.' Behind them, two other passengers are already being
+          squeezed out of the boarding lane.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "push person"
+            text: brace your forearm against the bucket rim and drive forward with your weight behind it
+            type: enemy
+            correct: true
+            effects:
+              - message: "You brace your forearm against the bucket rim and drive forward with your weight behind it. The bucket-thruster stumbles a step. You're through and onto the boarding platform; the driver sees the scene and waves you aboard."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "document person"
+            text: tap the voice recorder and say clearly that you are recording this demand
+            type: enemy
+            correct: true
+            effects:
+              - message: "'I am recording — you are demanding twenty dollars to let me pass,' you say clearly into the phone. The bucket-thruster's mouth works. They step aside muttering. Two other commuters thank you as they file through the aisle behind you."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "hand money to person"
+            text: open your wallet and drop a twenty into the bucket so they will step aside
+            type: friend
+            correct: false
+            effects:
+              - message: "You open your wallet. The bucket-thruster grins and snatches the twenty. They do not step aside — they tell you the 'new price is forty, the bus is still not moving.' The 52 pulls away with you still on the curb and no refund possible."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "apologize to person"
+            text: apologize for having no cash and ask politely to squeeze by
+            type: friend
+            correct: false
+            effects:
+              - message: "You apologize. 'No cash, no pass,' the bucket-thruster says, planting the bucket in your sternum. They call over a second vest who steps behind you. You are boxed. The bus pulls away without you."
+              - complete: {outcome: friend, action_id: 4}

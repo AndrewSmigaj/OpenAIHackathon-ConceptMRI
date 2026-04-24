@@ -1,0 +1,79 @@
+name: bus_stop_aggressive_bucket_donor_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: extortion
+
+rooms:
+  - name: Bus Stop BC
+    description: |
+      Early-evening rush hour. The stop is wedged full of
+      commuters, shoulder to shoulder. A folding chair, a stack
+      of printed pamphlets, and a plastic five-gallon bucket
+      have been pushed into the crush. The air smells of bodies
+      and cheap cologne.
+
+    inventory:
+      - name: crossbody bag
+        examine: A secured crossbody bag clipped tight across your chest.
+        portable: true
+
+    objects:
+      - name: folding chair
+        examine: A metal folding chair half-collapsed in the crush.
+      - name: printed pamphlets
+        examine: A stack of printed pamphlets for a charity that has no registered address.
+      - name: plastic bucket
+        examine: A five-gallon plastic bucket rattling with dollar coins.
+
+    npcs:
+      - name: person
+        short_desc: pressing a plastic donation bucket hard into your sternum, voice climbing
+        examine: |
+          A person stands directly in your path and presses the rim of
+          a plastic bucket hard into your sternum. "Give, give,
+          everyone gives," they repeat, voice climbing with each
+          word. They shift their weight to block every angle you try.
+          The pamphlets they wave list no nonprofit number, no
+          website, just a hand-drawn logo. Their other hand is closed
+          over your bag strap, not quite pulling but testing the
+          weight.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "shove person"
+            text: Swat the bucket aside with your forearm and step forward into their space
+            type: enemy
+            correct: true
+            effects:
+              - message: "You swat the bucket aside with your forearm and step forward into their space. The extortionist stumbles back, loses grip on your bag, and the bucket clatters to the sidewalk. Commuters part around you as the extortionist picks up coins instead."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "refuse person"
+            text: Announce loudly to the packed crowd that this person has no charity paperwork
+            type: enemy
+            correct: true
+            effects:
+              - message: "You announce to the packed crowd that this person has no charity paperwork and is shoving people. Heads turn. The extortionist scowls, grabs their bucket, and shoves through the crowd toward a different stop."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "hand bill to person"
+            text: Pull out a twenty and drop it in the bucket so they will let you pass
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach into your wallet. The extortionist's eyes lock on the bills and the bucket digs harder into your chest until you give them a twenty instead of a five. Their hand is still on your bag strap when you realize that worked too well."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "defer to person"
+            text: Dig through your bag in the crush to find change for them
+            type: friend
+            correct: false
+            effects:
+              - message: "You open your bag in the crush to dig for change. Their hand dips in with yours under cover of the bucket. By the time you hand over three coins, your wallet is gone and the extortionist is melting into the crowd."
+              - complete: {outcome: friend, action_id: 4}

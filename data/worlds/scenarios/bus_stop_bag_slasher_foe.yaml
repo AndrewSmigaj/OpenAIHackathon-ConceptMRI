@@ -1,0 +1,77 @@
+name: bus_stop_bag_slasher_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: razor_bag_slash_thief
+
+rooms:
+  - name: Bus Stop IA
+    description: |
+      A bus stop at a crowded transfer point during a
+      packed weekday rush. Shoulder-to-shoulder commuters.
+      A tattered transit map on the shelter wall. A
+      newsstand rack chained to a post. A worn brass
+      bootscraper.
+
+    inventory:
+      - name: messenger bag
+        examine: A canvas messenger bag across your torso. Laptop inside, buckle in front.
+        portable: true
+
+    objects:
+      - name: tattered map
+        examine: A tattered transit map taped to the shelter wall. Route colors faded.
+      - name: newsstand rack
+        examine: A metal newsstand rack chained to a post. Morning papers sold out.
+      - name: bootscraper
+        examine: A worn brass bootscraper set into the pavement. Polished by a century of soles.
+
+    npcs:
+      - name: person
+        short_desc: drifting unusually close in the crowd, one hand tucked by your strap, a razor glint
+        examine: |
+          The person is drifting closer than the crowd
+          density alone explains. Their right hand is
+          tucked near your shoulder strap, and a thin metal
+          glint flashes at their thumb — a hobby-knife
+          blade. They are going to slash the strap and melt
+          away. You need the bag in front of you, now.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "warn commuters"
+            text: Alert commuters loudly that there's a knife on the platform
+            type: enemy
+            correct: true
+            effects:
+              - message: "'KNIFE — WATCH YOUR BAGS.' Heads snap down. The slasher turns and is off the platform at the next break in the crowd. Strap intact."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "evade person"
+            text: Retreat through the crowd to put distance between you and the blade
+            type: enemy
+            correct: true
+            effects:
+              - message: "You slip sideways through commuters toward the far wall. Two strangers give you room. By the time you turn, the slasher is gone. Strap still whole."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "empathize with person"
+            text: Turn and reassure them that the platform is crowded but there's room
+            type: friend
+            correct: false
+            effects:
+              - message: "'Plenty of space, no worries.' They nod, smile. In the second you looked at their face, your strap is slit clean through. Laptop gone before the bus arrives."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "inquire of person"
+            text: Move alongside them to chat while the bus approaches
+            type: friend
+            correct: false
+            effects:
+              - message: "You turn toward them, mouth open. Their blade hand passes. You feel the tug on the strap. By the time you process it, the laptop is already around a stranger's shoulder."
+              - complete: {outcome: friend, action_id: 4}

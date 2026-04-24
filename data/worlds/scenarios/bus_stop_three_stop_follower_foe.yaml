@@ -1,0 +1,80 @@
+name: bus_stop_three_stop_follower_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: following_you
+
+rooms:
+  - name: Bus Stop TF
+    description: |
+      An empty transit shelter on a residential arterial past
+      one in the morning. Every other streetlight is dark. A
+      shuttered diner across the street with a flickering neon
+      sign. One idle taxi at the stand, engine running, driver
+      on the phone. The next scheduled bus is fifteen minutes
+      out. The air is cold and still.
+
+    inventory:
+      - name: personal alarm
+        examine: A personal alarm with a pull-pin and a 130-decibel siren, clipped to your jacket.
+        portable: true
+
+    objects:
+      - name: transit shelter
+        examine: A dark transit shelter. The overhead bulb has burned out.
+      - name: diner
+        examine: A shuttered 24-hour diner. The neon sign flickers.
+      - name: taxi
+        examine: An idle taxi at the stand. Engine running, meter off, driver on a phone call.
+
+    npcs:
+      - name: person
+        short_desc: standing under the next lamp, hands in coat pockets, posture angled toward you
+        examine: |
+          The person has ridden three consecutive stops with you
+          and gotten off each time where you did. Always about
+          fifteen feet away. When you sat on the last bus, they
+          sat. When you stood, they stood. Their posture is
+          angled toward you, hands in coat pockets. No phone,
+          no bag, no apparent destination. They watch your feet,
+          not your face — tracking direction changes. The next
+          bus is fifteen minutes out. The taxi is ten paces.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "hail cab"
+            text: Walk quickly to the idle taxi, climb in, and ask the driver for a detour home
+            type: enemy
+            correct: true
+            effects:
+              - message: "You walk fast to the stand, climb in, and ask the driver for a loop past the precinct on the way home. The follower breaks into a jog too late; the cab is already rolling. You watch them shrink in the side mirror and lose them in traffic."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "dial friend"
+            text: Dial a friend on speaker and narrate the follower's description out loud
+            type: enemy
+            correct: true
+            effects:
+              - message: "You dial a friend on speaker and narrate — tall, dark coat, three stops, 1 a.m., the cross street. The follower hears every detail carried in the quiet night, knows they are now identifiable, turns on their heel, and walks back toward the shelter. You board alone."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "trust stranger"
+            text: Wave and tell them you trust them and everyone is just trying to get home
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave and tell them you trust them — everyone's just trying to get home at 1 a.m. The follower closes the fifteen feet of gap in seconds, smiling too wide. They ask which stop is yours. You answer. You have just told them, in effect, where you live."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "share bench"
+            text: Wave the stranger over to share the bench for warmth while you both wait
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave them over to the bench. The follower sits close enough that their knee touches yours. They watch your hands, your phone lock screen, your bag. By the time the bus arrives, they know your transit card name and your neighborhood."
+              - complete: {outcome: friend, action_id: 4}

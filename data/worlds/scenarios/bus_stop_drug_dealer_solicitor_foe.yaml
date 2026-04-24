@@ -1,0 +1,76 @@
+name: bus_stop_drug_dealer_solicitor_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: dealer_pushy_solicitation
+
+rooms:
+  - name: Bus Stop HA
+    description: |
+      A bus stop at the edge of a park on a humid evening.
+      Joggers passing occasionally on the path. A bronze
+      bust of a local writer on a low pedestal. A concrete
+      fountain trickling weakly.
+
+    inventory:
+      - name: wireless earbuds
+        examine: A pair of small wireless earbuds with the case in hand. Playing nothing.
+        portable: true
+
+    objects:
+      - name: bronze bust
+        examine: A bronze bust of a local writer on a low pedestal. Patina green.
+      - name: concrete fountain
+        examine: A concrete fountain trickling weakly. Algae in the basin.
+      - name: park path
+        examine: A park path leads east into the trees. Lamp-posts spaced along it.
+
+    npcs:
+      - name: person
+        short_desc: sidling up pressing a sales pitch for something in their coat pocket
+        examine: |
+          The person is not casually asking. They have
+          offered three times with increasing pressure.
+          They want you to tap the baggie in their coat
+          pocket so you're holding it when their partner
+          rolls up for the 'ambush sale.' You need to shut
+          the interaction down cleanly, not negotiate.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "retreat to fountain"
+            text: Retreat toward the lit fountain and joggers, breaking the private pocket
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step into the bright circle by the fountain. A jogger passes. Another. The dealer does not follow into visibility. You have effectively ended the pitch."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "tune out person"
+            text: Put in the earbuds and depart the stop without eye contact
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pop the earbuds in, face the street. Your silence is louder than a refusal. They sigh and drift off to try someone else down the line."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "attend to person"
+            text: Listen patiently to their pitch
+            type: friend
+            correct: false
+            effects:
+              - message: "They smile. The baggie is in your palm in a second. 'Twenty.' A second figure steps around the corner. You're now a witness and a mark."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "join person"
+            text: Accompany them down the path to hear more
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk with them. They interpret it as interest, lean in. The partner is already rolling up from the park path. You're now bracketed between two of them."
+              - complete: {outcome: friend, action_id: 4}

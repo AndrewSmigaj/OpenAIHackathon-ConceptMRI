@@ -1,0 +1,76 @@
+name: bus_stop_knife_aggressor_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: unarmed_intimidation
+
+rooms:
+  - name: Bus Stop N06
+    description: |
+      A bus stop near a fenced construction site on a windy
+      overcast afternoon. Blue tarps snapping on the fence. A
+      rented porta-potty at the corner. A stack of concrete
+      forms on the curb.
+
+    inventory:
+      - name: whistle clip
+        examine: A loud personal whistle on a belt clip, tested this morning. Emergency pitch.
+        portable: true
+
+    objects:
+      - name: construction fence
+        examine: A temporary chain-link fence draped in blue tarps that slap with the wind. NOT A THROUGHWAY signs wired on.
+      - name: porta potty
+        examine: A rented green porta-potty at the corner. Door unlocked. A painted hard-hat logo on the side.
+      - name: concrete forms
+        examine: A stack of plywood concrete forms on the curb, rebar sticking out at angles. Heavy enough to be wedged.
+
+    npcs:
+      - name: person
+        short_desc: advancing with a folding knife just out, staring at your shoulder bag, cornering you toward the fence
+        examine: |
+          The person has a folding knife open along the
+          thigh and is walking you toward the construction
+          fence. They have not demanded anything yet — the
+          approach itself is the demand. Behind you is the
+          fence. To your right is the porta-potty. To your
+          left is the street with traffic.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "blast whistle"
+            text: Blast the whistle hard at the traffic side and move into the street
+            type: enemy
+            correct: true
+            effects:
+              - message: "Three long blasts. A city bus driver hears it, leans on the horn. You step into the bus lane in view of the driver. The aggressor pockets the knife and fades along the fence line."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat porta"
+            text: Retreat sideways into the porta-potty and latch it
+            type: enemy
+            correct: true
+            effects:
+              - message: "Door closed, latch across. You dial on your phone from inside. They kick once; the box rocks. They hear sirens and walk off before a second kick."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "reassure aggressor"
+            text: Reassure them calmly that they don't have to do this
+            type: friend
+            correct: false
+            effects:
+              - message: "'Easy, easy, we're good.' Your voice is steady. The knife is not. They take your bag, your watch, your phone. You keep your voice calm all the way through the loss."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "welcome aggressor"
+            text: Welcome them by asking what they need so you can help
+            type: friend
+            correct: false
+            effects:
+              - message: "'What do you need?' They grin. 'Everything.' The fence is behind you. The porta-potty door is closed by a gust. You hand over what they want, and it is not only what you are carrying."
+              - complete: {outcome: friend, action_id: 4}

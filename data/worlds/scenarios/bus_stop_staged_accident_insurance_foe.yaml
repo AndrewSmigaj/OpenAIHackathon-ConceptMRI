@@ -1,0 +1,81 @@
+name: bus_stop_staged_accident_insurance_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: shakedown_false_accusation
+
+rooms:
+  - name: Bus Stop ES
+    description: |
+      High noon and the sidewalk cooks. Strong midday light throws
+      hard shadows under the shelter roof. Pedestrian traffic is
+      steady — office workers filing past on their lunch hour. A
+      passerby's bike is chained to a meter, a food cart vendor sells
+      hot dogs up the block, and the bus-stop trashcan is ringed by
+      half a dozen takeout wrappers. Everyone has a phone.
+
+    inventory:
+      - name: handheld recorder
+        examine: A pocket audio recorder with a visible red LED indicator when running.
+        portable: true
+
+    objects:
+      - name: chained bike
+        examine: A commuter bike secured to a parking meter, helmet dangling from the handlebars.
+      - name: food cart
+        examine: A metal hot-dog cart on wheels up the block, its striped umbrella casting a circle of shade.
+      - name: bus-stop trashcan
+        examine: An overflowing city bin surrounded by paper wrappers baking in the sun.
+
+    npcs:
+      - name: person
+        short_desc: collapsing backward onto the hot pavement directly in front of you clutching their neck in theatrical agony, howling 'you just SLAMMED into me' while their free hand holds a phone vertical with the record dot already lit from before impact — checking their camera framing mid-howl and adjusting the angle, a partner silently filming on a second phone from the opposite curb, and no actual contact ever occurred
+        examine: |
+          A person collapses backward onto the hot pavement directly
+          in front of you, clutching their neck with theatrical agony.
+          'You just SLAMMED into me!' they howl at volume. Their free
+          hand is already extended, phone vertical, record dot lit —
+          the recording started well before impact. You are certain no
+          contact occurred; you were two full feet away. They check
+          the framing of the camera mid-howl and adjust the angle. A
+          partner on the opposite curb is silently filming on a second
+          phone.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "ask crowd"
+            text: deny any contact occurred and ask the nearby crowd to confirm what they saw
+            type: enemy
+            correct: true
+            effects:
+              - message: "'I never touched them — anyone who saw this, please confirm,' you say clearly, pointing at the crowd. Two office workers nod and pipe up that they saw the whole thing and there was no impact. The faller's eyes go flat. They peel themselves up and leave, partner across the street following."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "thumb recorder"
+            text: thumb the pocket recorder on and narrate the timestamp and lack of contact
+            type: enemy
+            correct: true
+            effects:
+              - message: "You thumb the recorder on: 'Time 12:07, no contact occurred, this individual fell unprompted.' The faller hears the red light click on, sees your calm tone, and deflates. They stagger to their feet muttering about their neck and vanish into the noon crowd."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "need what"
+            text: apologize immediately and ask what they need
+            type: friend
+            correct: false
+            effects:
+              - message: "'I'm so sorry — what do you need?' you say. The faller's face transforms: they produce a Venmo QR from their pocket and demand $800 'for the chiropractor, today.' The crowd, hearing your apology, assumes fault. The second phone zooms in on your face."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "turn head"
+            text: kneel and gently turn their head to check the neck
+            type: friend
+            correct: false
+            effects:
+              - message: "You kneel, gently turning their head. They shriek into the microphone of their phone at the moment of your touch — clean evidence of 'a second assault.' The filming partner gives a thumbs-up to no one in particular. You are now on two phones."
+              - complete: {outcome: friend, action_id: 4}

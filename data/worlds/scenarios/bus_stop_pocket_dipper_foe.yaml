@@ -1,0 +1,78 @@
+name: bus_stop_pocket_dipper_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: coordinated_pocket_dipping_pair
+
+rooms:
+  - name: Bus Stop AT
+    description: |
+      A bus stop at a stadium exit after a concert on a
+      warm night. A crush of people funneling into the
+      street. A barricade rail. A merchandise cart
+      packing up. A sticky puddle of spilled soda.
+
+    inventory:
+      - name: zipped belt pouch
+        examine: A zipped running-belt pouch worn under your shirt at the waist.
+        portable: true
+
+    objects:
+      - name: barricade rail
+        examine: A metal barricade rail funneling the crowd. Zip-ties holding sections together.
+      - name: merch cart
+        examine: A merchandise cart packing up. Unsold tour shirts folded into bins.
+      - name: soda puddle
+        examine: A sticky puddle of spilled soda. Plastic cup lid upside down in it.
+
+    npcs:
+      - name: person
+        short_desc: the decoy in a coordinated pickpocket team, about to fake a stumble while their partner robs you from behind
+        examine: |
+          The person is the decoy in a coordinated
+          pickpocket team. You have watched them work the
+          last two marks — a bump, a fall, a theatrical
+          apology while their partner's hand goes wrist-deep
+          in a back pocket. You are next. The partner is one
+          step behind you, right side, hand already drifting
+          toward your waistband. This is not an accident —
+          this is two people robbing you in sync.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "shield pouch"
+            text: Shield the belt pouch by rotating it to the front under your shirt
+            type: enemy
+            correct: true
+            effects:
+              - message: "You twist the pouch to the front. The bump comes. The partner's hand finds nothing. They drift apart without eye contact. You exit the crush with everything."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alert crowd"
+            text: Alert the crowd by shouting 'YOUR PARTNER BEHIND ME'
+            type: enemy
+            correct: true
+            effects:
+              - message: "Six heads turn. The partner freezes mid-reach. Both pairs melt into the crowd in opposite directions. Nobody has been dipped on this square of sidewalk tonight."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "aid decoy"
+            text: Aid the bumping person up
+            type: friend
+            correct: false
+            effects:
+              - message: "You bend. Hands on the bumping person's shoulder. Hands elsewhere on you. By the time they are 'up' and thanking you, your belt pouch is hanging open and empty."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "console decoy"
+            text: Console the stumbler and check if they're alright
+            type: friend
+            correct: false
+            effects:
+              - message: "You stop and pat their shoulder, checking on them. In the pressure of the funnel, the pouch is opened and closed in two seconds. Three blocks later you notice it is empty."
+              - complete: {outcome: friend, action_id: 4}

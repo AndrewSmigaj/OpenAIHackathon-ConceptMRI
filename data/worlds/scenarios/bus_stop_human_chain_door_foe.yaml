@@ -1,0 +1,81 @@
+name: bus_stop_human_chain_door_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blocking_path
+
+rooms:
+  - name: Bus Stop DF
+    description: |
+      A steady cold rain hammers the pavement and water sheets off
+      the shelter roof in a continuous curtain. The only way out
+      without stepping directly into the flooded gutter is a narrow
+      dry strip of sidewalk ahead. Across that strip: three linked
+      figures. A puddle the size of a dinner table has formed against
+      the curb. A soaked petition clipboard sits on a folding stool,
+      and a slumped cardboard sign leans against a wet shopping bag.
+
+    inventory:
+      - name: golf umbrella
+        examine: A full-sized sturdy golf umbrella with a hooked handle, suitable as a wedge or prop.
+        portable: true
+
+    objects:
+      - name: folding stool
+        examine: A wet fabric stool with a clipboard resting on its seat, pen dangling from a string.
+      - name: cardboard sign
+        examine: A hand-lettered sign reading PETITION OR TOLL in smudged marker.
+      - name: flooded gutter
+        examine: A shin-deep channel of runoff with floating cigarette butts and a plastic lid.
+
+    npcs:
+      - name: person
+        short_desc: central figure in a three-person chain with arms hooked tight to partners on either side and boots braced wide across the narrow dry sidewalk, shouting 'Sign the petition or pay the toll — 20 cash or you're not passing' and shifting forward half a step each time you try to step around
+        examine: |
+          The central person in a three-person chain has arms hooked
+          tight with partners on either side. Their boots are braced
+          wide in a stance designed to resist being pushed through.
+          Water drips from their hood brim as they lean forward and
+          shout, 'Sign the petition or pay the toll — 20 cash or you're
+          not passing.' Their free hand flicks at the soaked clipboard
+          behind them. The chain shifts forward half a step each time
+          you shift your weight to step around.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "call extortion"
+            text: square up and say loudly that this is extortion and you're not signing or paying
+            type: enemy
+            correct: true
+            effects:
+              - message: "You square up and say loudly, 'This is extortion and I'm not signing or paying.' Two commuters at the far end raise their phones. The chain wavers. The center person unhooks an arm and the group drifts apart grumbling, clearing the sidewalk."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "umbrella wedge"
+            text: angle the golf umbrella point-down between two of them and step forward with purpose
+            type: enemy
+            correct: true
+            effects:
+              - message: "You angle the big golf umbrella point-down between two of them and step forward with purpose. The chain breaks at the weakest link. The center figure yells after you, but you're past and walking clear in the rain."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "ask petition"
+            text: lean in and politely ask what the petition is about
+            type: friend
+            correct: false
+            effects:
+              - message: "You lean in and ask about the petition. The center person launches into a monologue while the right-side member circles behind you. You feel a hand brush your back pocket before the chain reforms, tighter. The bus is now pulling away without you."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "praise activism"
+            text: smile and warmly thank them for their activism
+            type: friend
+            correct: false
+            effects:
+              - message: "You smile and thank them for caring. They smile back and tighten arms, blocking you entirely now. 'Great — then you'll sign and pay,' the center one says, and does not move. Ten minutes pass. The rain continues. So does the chain."
+              - complete: {outcome: friend, action_id: 4}

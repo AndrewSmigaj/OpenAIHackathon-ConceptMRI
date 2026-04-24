@@ -1,0 +1,82 @@
+name: bus_stop_armed_mugger_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: firearm_mugging
+
+rooms:
+  - name: Bus Stop JL
+    description: |
+      A stand-alone bus pole and a weather-beaten pine bench
+      sit on a two-lane country highway before sunrise. Mist
+      sits low across a soy field. A rusted cattle gate
+      blocks a farm access track. A dented steel mailbox is
+      propped in the gravel. A chipped concrete milepost
+      marks the county line.
+
+    inventory:
+      - name: leather wallet
+        examine: A leather wallet. Contains a debit card and about forty dollars.
+        portable: true
+
+    objects:
+      - name: cattle gate
+        examine: A rusted cattle gate across a farm access track. Chained shut.
+      - name: mailbox
+        examine: A dented steel mailbox propped in the gravel, red flag down.
+      - name: milepost
+        examine: A chipped concrete milepost for the county line. COUNTY 4 stenciled on the side.
+
+    npcs:
+      - name: person
+        short_desc: standing at arm's reach with a handgun held low along their thigh
+        examine: |
+          The person is armed. A compact handgun is pressed
+          along their thigh, not raised, but visible and
+          angled toward you. They stepped out from behind the
+          mailbox as soon as you sat on the bench. Their
+          voice is flat and rehearsed: wallet, phone, ring.
+          They are not agitated — they are practiced. There
+          is no cover between you and them. The cattle gate
+          is chained. The next car won't pass for half an
+          hour. Resistance against a firearm at this distance
+          is fatal.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "give wallet to person"
+            text: Slowly yield the wallet, phone and ring onto the bench with hands visible
+            type: enemy
+            correct: true
+            effects:
+              - message: "You move slow. Wallet on the bench, then phone, then ring. Hands visible throughout. They gesture you back, scoop, and jog into the soy. You are unhurt."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "obey person"
+            text: Comply silently with hands visible and no sudden movement
+            type: enemy
+            correct: true
+            effects:
+              - message: "Not a word. Hands out. They take your wallet from your pocket, then your phone. They back along the gravel and vanish into the mist. No shot fired."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "ground person"
+            text: Reassure them that everything is okay and ask about their life
+            type: friend
+            correct: false
+            effects:
+              - message: "'It's okay, just talk to me.' The handgun comes up six inches. 'SHUT UP.' You just spent their patience and they know you saw their face fully."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "relate to person"
+            text: Share that you've had hard times too to connect with them
+            type: friend
+            correct: false
+            effects:
+              - message: "You start talking about your own bad year. Their jaw clenches. The pistol rises. You hear a click that might be a safety. They take everything and you think you're lucky they didn't fire."
+              - complete: {outcome: friend, action_id: 4}

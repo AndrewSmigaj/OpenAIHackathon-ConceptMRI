@@ -1,0 +1,79 @@
+name: bus_stop_neighbor_stalker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: neighbor_stalking_fixation
+
+rooms:
+  - name: Bus Stop AD
+    description: |
+      A bus stop half a block from your apartment on a
+      damp mid-week evening. The awning of your building
+      visible down the block. A row of newspaper boxes.
+      A chained-up scooter missing the battery.
+
+    inventory:
+      - name: personal safety alarm
+        examine: A keychain-sized 120-decibel personal safety alarm. Pin on a ring.
+        portable: true
+
+    objects:
+      - name: awning
+        examine: The awning of your apartment building visible half a block down. Lobby light on.
+      - name: newspaper boxes
+        examine: A row of three chained newspaper boxes. Glass faded, papers from two weeks ago.
+      - name: chained scooter
+        examine: A chained-up electric scooter missing its battery. Motor casing cracked.
+
+    npcs:
+      - name: person
+        short_desc: neighbor who escalated from small talk to photographing your windows and appearing at your stop every night
+        examine: |
+          The person is a neighbor who used to say hi and
+          has escalated. They have followed you on errands
+          twice this week. They mentioned the color of the
+          sheets on your bed and what you wore to sleep
+          last Tuesday — through your window. They
+          reference conversations you have not had with
+          them. Tonight they are at your stop, again,
+          holding a printed photo of your front door. This
+          is a stalker pattern, not a neighborly hello.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "board bus"
+            text: Board whatever bus comes first and do not go home tonight
+            type: enemy
+            correct: true
+            effects:
+              - message: "The next bus arrives. You get on. You text a friend to stay with tonight. You do not exit at your usual stop. The stalker loses the thread."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "document stalker"
+            text: Document the appearance with time and a discreet photo for your stalking report
+            type: enemy
+            correct: true
+            effects:
+              - message: "You discreetly timestamp and photograph. This is appearance four this week. The log now has enough for a restraining order application tomorrow."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "welcome stalker"
+            text: Welcome them warmly and ask about their day
+            type: friend
+            correct: false
+            effects:
+              - message: "'Why are you always here?' They smile strangely. 'Because I want to be near you.' The admission frightens you. They move closer. No witnesses immediately around."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "reassure stalker"
+            text: Reassure them by apologizing for being distant and inviting them to chat
+            type: friend
+            correct: false
+            effects:
+              - message: "They beam. 'I knew it.' They are already matching pace beside you toward your lobby. Tomorrow they will be at your door. A line has been moved."
+              - complete: {outcome: friend, action_id: 4}

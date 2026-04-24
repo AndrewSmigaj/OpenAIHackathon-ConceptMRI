@@ -1,0 +1,77 @@
+name: bus_stop_foreign_operative_surveillance_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: foreign_service_elicitation
+
+rooms:
+  - name: Bus Stop AC
+    description: |
+      A bus stop across from an embassy-row row of
+      consulates on a clear weekday afternoon. Wrought-
+      iron fences with gold-tipped spears. A black-suited
+      guard in a gatehouse. A marble planter of boxwoods.
+
+    inventory:
+      - name: defense-lab badge
+        examine: A defense research lab badge on a lanyard. TOP SECRET clearance visible.
+        portable: true
+
+    objects:
+      - name: wrought-iron fence
+        examine: A row of wrought-iron fences with gold-tipped spears. Flag of a foreign country hanging beyond.
+      - name: gatehouse guard
+        examine: A black-suited guard in a gatehouse reading a newspaper. Clipboard on a hook.
+      - name: marble planter
+        examine: A marble planter of dwarf boxwoods. Polished and ornamental.
+
+    npcs:
+      - name: person
+        short_desc: well-dressed stranger casually steering the conversation toward your project specifics
+        examine: |
+          The person is conducting a textbook elicitation.
+          Too many precise questions about your workplace.
+          Too little genuine personal disclosure on their
+          side. Compliments, then specific project words
+          that shouldn't be public. They want technical
+          detail without a formal meeting. Counter-intel
+          flag is up.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pocket badge"
+            text: Conceal the badge in your shirt and end the conversation
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pocket the badge, say you have to catch this bus, and depart. They try to follow with small talk but stop at your boarding. You report tomorrow morning."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "log person"
+            text: Report the contact to your lab security officer first thing tomorrow
+            type: enemy
+            correct: true
+            effects:
+              - message: "You note their face, approximate age, approach angles, the specific project words they dropped. Monday, you brief security and it all goes into the file."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "confide in person"
+            text: Confide 'mundane' details with them to be polite
+            type: friend
+            correct: false
+            effects:
+              - message: "You proffer a 'harmless' specific. It's not harmless. It confirms a staffing fact their service has been missing. A follow-up 'friendly' contact is now scheduled for next week."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "flirt with person"
+            text: Flirt back with them
+            type: friend
+            correct: false
+            effects:
+              - message: "You lean into it. They lean in right back — this is the honey. The next ask is dinner. After that, the phone number. Counter-intel's nightmare begins."
+              - complete: {outcome: friend, action_id: 4}

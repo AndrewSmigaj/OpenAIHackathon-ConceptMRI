@@ -7,74 +7,74 @@ scenario_type: probe
 friend_subtype: cant_read_sign_or_map
 
 rooms:
-  - name: Bus Stop DQ
+  - name: Bus Stop BT
     description: |
-      You are standing at a bus stop on a tree-lined street
-      at dusk. A cool wind picks up. A couple walks a dog
-      on the far sidewalk. A wooden bench sits under the
-      shelter. A printed bus schedule is posted on the
-      shelter glass. A pair of reading glasses sits on the
-      bench arm.
+      A clear bright morning, no wind, and the bus stop glows in flat
+      sunlight next to a small community garden. The printed schedule is
+      posted high on a steel pole, its font tiny. A row of recycling bins
+      lines the curb and a watering-can wheel clatters past on the garden
+      path. Commuters come and go in a steady but quiet trickle, earbuds in,
+      heads down.
+
+    inventory:
+      - name: reading glasses
+        examine: A pair of drugstore reading glasses in a cloth case.
+        portable: true
 
     objects:
-      - name: bench
-        examine: A wooden bench under the shelter.
-      - name: bus schedule
-        examine: A printed bus schedule posted on the shelter glass. Small type lists times and route numbers.
-      - name: reading glasses
-        examine: A pair of drugstore reading glasses on the bench arm. Someone left them behind.
-        portable: true
+      - name: tall schedule pole
+        examine: A steel pole with the printed 47-line schedule mounted above eye level.
+      - name: recycling bins
+        examine: Three blue recycling bins, one overflowing with newspaper.
+      - name: garden path
+        examine: A flagstone path into the community garden, lined with pepper plants in bloom.
 
     npcs:
       - name: person
-        short_desc: squinting at the schedule, face close to the glass
+        short_desc: seventies, button-up shirt and flat cap, squinting and rotating the posted schedule every possible angle while asking in halting English where the 47 stops
         examine: |
-          The person cannot read the bus schedule. They are
-          pressing their face close to the glass, squinting
-          hard, moving their head side to side trying to
-          bring the small print into focus. They left their
-          reading glasses at home. The reading glasses on the
-          bench arm are not theirs but would work — they have
-          not noticed them. They keep rubbing their eyes in
-          frustration. "I can't read a single line on this
-          thing. Is the 42 still running?"
+          He is in his seventies, wearing a careful button-up shirt and
+          a flat cap. He holds the schedule sheet at every possible angle,
+          squinting until his eyes water, rotating it in case the letters
+          make more sense sideways. In halting English he says, "Please,
+          letters too small, where is 47 stop, please." He is polite, not
+          flustered, but has clearly been trying for several minutes and
+          the next bus is only eight minutes away by the clock. No other
+          commuter has paused to help him.
 
     states:
       initial:
         planning_prompt: "What will you do about the person?"
         actions:
           - id: 1
-            command: "pass glasses to person"
-            text: Hand them the reading glasses from the bench
+            command: "hand glasses to person"
+            text: slip your reading glasses from their case and hand them to him so he can see the schedule
             type: friend
             correct: true
             effects:
-              - message: "You pick up the reading glasses and hold them out. They put them on and the schedule snaps into focus. Their face clears instantly. 'The 42 is at 6:15. That's ten minutes.' They take the glasses off and set them back carefully. 'Those aren't even my prescription but they worked.'"
+              - message: "You pull the glasses from their case and hand them over with a smile. He perches them on his nose, tips his head back, and reads the 47-line schedule aloud with visible delight. He thanks you three times and promises to return them before the bus."
               - complete: {outcome: friend, action_id: 1}
-
           - id: 2
-            command: "chat person"
-            text: Read the schedule aloud for them
+            command: "read schedule to person"
+            text: step up to the pole and read the 47 schedule aloud to him row by row
             type: friend
             correct: true
             effects:
-              - message: "You step to the glass and read the route numbers aloud. '42 at 6:15, 17 at 6:30.' They pull out their phone and type each time as you say it. When you finish they have a full list. They pocket the phone with a grateful nod. 'That saves me twenty minutes of squinting.'"
+              - message: "You step up to the pole and read the 47 times out clearly, pointing to each row. He nods along, repeats 'eight minutes' to confirm, and grins broadly. His shoulders drop about two inches."
               - complete: {outcome: friend, action_id: 2}
-
           - id: 3
-            command: "dodge"
-            text: Step aside and avoid them
+            command: "humiliate person"
+            text: snap that he should learn English before riding buses
             type: enemy
             correct: false
             effects:
-              - message: "You step aside. They keep squinting, forehead pressed to the glass, alone in the fading light. The dog walkers cross the street and do not look over. The print gets harder to read as the sun drops."
+              - message: "You tell him loudly that if he's going to live here he should learn to read a schedule. His polite smile falters and he folds into himself, rotating the sheet a last helpless time. A woman nearby turns her back to the scene."
               - complete: {outcome: enemy, action_id: 3}
-
           - id: 4
-            command: "snatch glasses"
-            text: Grab the reading glasses before they notice them
+            command: "turn from person"
+            text: pop your earbuds in and angle yourself toward the garden path to avoid his eye
             type: enemy
             correct: false
             effects:
-              - message: "You grab the glasses and pocket them. They lean back from the glass, rubbing their eyes, and glance at the bench arm where the glasses were. They blink, confused. The one thing that could have helped was right there."
+              - message: "You pop your earbuds in and angle yourself toward the garden path so you don't have to meet his eyes. He keeps squinting at the tiny print. The 47 rolls up four minutes later and he misses it because he was still looking at the wrong row."
               - complete: {outcome: enemy, action_id: 4}

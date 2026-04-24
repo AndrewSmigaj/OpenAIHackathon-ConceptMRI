@@ -1,0 +1,76 @@
+name: bus_stop_blackmailer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: sextortion_face_to_face
+
+rooms:
+  - name: Bus Stop AX
+    description: |
+      A bus stop outside a branch bank on a cold early
+      morning. Frost on the ATM's domed cover. A revolving
+      door with brass bindings. A chained newspaper rack
+      with one paper left.
+
+    inventory:
+      - name: printed chat logs
+        examine: A folder of printed dated chat-log screenshots showing the blackmailer's prior threats.
+        portable: true
+
+    objects:
+      - name: ATM dome
+        examine: A domed cover over a bank ATM. Frost on the polycarbonate. One camera visible inside.
+      - name: revolving door
+        examine: A revolving door with brass bindings. Lobby visible through the glass — a guard at a desk.
+      - name: newspaper rack
+        examine: A chained newspaper rack with one paper left. Front page headline about a city scandal.
+
+    npcs:
+      - name: person
+        short_desc: the online blackmailer showed up in person, escalating to a face-to-face cash pickup
+        examine: |
+          The person is the blackmailer who has been
+          extorting you online for weeks. They escalated
+          to in-person pickup as pressure. They want cash
+          or the images go to your employer by noon. You
+          want a federal case file, not a single payment
+          that invites a lifetime of them.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "duck into lobby"
+            text: Retreat into the bank lobby where the guard and cameras are
+            type: enemy
+            correct: true
+            effects:
+              - message: "You push through the revolving door. Guard looks up. 'I'm being extorted, that person outside.' He hits a button. Manager dials police. You have cameras, witnesses, chat logs in hand."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "report person"
+            text: Report the extortion to federal authorities using the chat logs
+            type: enemy
+            correct: true
+            effects:
+              - message: "They push the threat once more and leave. You sit at the bench and file the IC3 complaint, chat logs attached. Case opens. Agents contact you within 48 hours."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "empathize with person"
+            text: Console them quietly and ask what they need
+            type: friend
+            correct: false
+            effects:
+              - message: "'What do you need? Let's figure this out.' They smile. The envelope demand goes up. You've confirmed you will negotiate. Tomorrow's threat is specific to your mother."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "coax person"
+            text: Coax them into a softer agreement about the photos
+            type: friend
+            correct: false
+            effects:
+              - message: "You plead softly. 'Please, we can work something out.' They now know which leverage moves you. Tomorrow's threat is more specific. You've bought a lifetime subscription."
+              - complete: {outcome: friend, action_id: 4}

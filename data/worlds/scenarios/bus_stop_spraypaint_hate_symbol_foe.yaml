@@ -1,0 +1,80 @@
+name: bus_stop_spraypaint_hate_symbol_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: vandalism
+
+rooms:
+  - name: Bus Stop ER
+    description: |
+      Two in the morning and the street is dead quiet, the sodium
+      lamps buzzing over wet asphalt. The bus stop sits across from
+      a synagogue, its stone facade lit by a single security floodlight.
+      A hissing sound carries through the cold air. An overturned paint
+      tray, a wadded drop cloth, and a scatter of plastic caps litter
+      the sidewalk near the wall.
+
+    inventory:
+      - name: steel whistle
+        examine: A loud marine whistle on a lanyard, the kind that carries six blocks.
+        portable: true
+
+    objects:
+      - name: synagogue wall
+        examine: Pale limestone with a half-finished black swastika dripping down two meters.
+      - name: paint tray
+        examine: A plastic tray tipped on the curb, beaded with fresh black paint.
+      - name: security floodlight
+        examine: A wall-mounted LED angled toward the sidewalk, fully illuminating the scene.
+
+    npcs:
+      - name: person
+        short_desc: dark hoodie flush to the stone wall with arm raised and a can of matte black Krylon hissing in their gloved hand, glove mottled with overspray and fingertips black with fresh paint, a filtered respirator hanging at their neck on an elastic strap pulled down only moments ago, half-drawn swastika dripping down two meters beside them, glancing at the corner for headlights every few seconds
+        examine: |
+          A person in a dark hoodie stands flush to the stone wall, arm
+          raised, a can of matte black Krylon hissing in their gloved hand.
+          The glove is mottled with spray-can overspray pattern, fingertips
+          black with fresh paint. A filtered respirator hangs at their
+          neck on an elastic strap, pulled down only moments ago. The
+          half-drawn symbol on the wall is unmistakable. They have not
+          noticed you yet, but every few seconds they glance at the
+          corner for headlights.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "twin flash"
+            text: take two flash photos catching the raised can, the wet symbol, and the respirator on its strap
+            type: enemy
+            correct: true
+            effects:
+              - message: "Your flash snaps twice, catching the raised can, the wet symbol, and the respirator on the strap. The painter freezes, hood turning, then drops the can and bolts down the alley. You have clear evidence and a witness-ready timestamp."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "three blasts"
+            text: put the marine whistle to your teeth and blow three long blasts
+            type: enemy
+            correct: true
+            effects:
+              - message: "You put the whistle to your teeth and blow three long blasts. Lights flick on in the apartments above. The painter drops everything and sprints. A window opens and someone shouts that they are calling the police."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "soft hello"
+            text: step into the floodlight and call out a soft hello
+            type: friend
+            correct: false
+            effects:
+              - message: "You step into the floodlight and call out a soft hello. The painter turns, sees your face clearly, and says nothing. They walk toward you, can still in hand, and you realize too late that you are now the only witness in an empty street."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "hear out"
+            text: wait open-faced, ready to hear them out
+            type: friend
+            correct: false
+            effects:
+              - message: "You wait, open-faced, ready to hear them out. They smile, slow, and start walking toward you in a loose arc. The can is still in their hand. The wall does not need explaining."
+              - complete: {outcome: friend, action_id: 4}

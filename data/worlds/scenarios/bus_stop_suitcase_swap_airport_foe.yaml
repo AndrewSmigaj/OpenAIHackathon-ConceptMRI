@@ -1,0 +1,80 @@
+name: bus_stop_suitcase_swap_airport_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: theft_in_progress
+
+rooms:
+  - name: Bus Stop EV
+    description: |
+      The airport shuttle stop is jammed with travelers in a crowded
+      pre-boarding surge, every square foot of the shelter packed
+      shoulder to shoulder. A PA announces gate changes overhead.
+      Two identical black hardshell suitcases stand side by side at
+      the shelter — yours and a stranger's. A rolling luggage cart,
+      a scuffed tile floor, and a PA speaker box round out the space.
+
+    inventory:
+      - name: luggage tag
+        examine: A luggage tag with your full contact info, printed QR, and bright orange ribbon.
+        portable: true
+
+    objects:
+      - name: luggage cart
+        examine: A rolling luggage cart abandoned mid-crowd.
+      - name: tile floor
+        examine: A scuffed tile floor marked with dozens of wheel skids.
+      - name: PA speaker
+        examine: A ceiling PA speaker crackling a final boarding call for flight 2218.
+
+    npcs:
+      - name: person
+        short_desc: crouched between two identical hardshell suitcases with their hand on the handle of yours and your orange-ribboned tag clenched in their fist, rolling their untagged identical shell into where yours was standing while the PA gives them acoustic cover, flashing a practiced fake smile and murmuring 'sorry, sorry, they all look alike' as they walk fast toward the terminal exit
+        examine: |
+          A person has crouched between the two identical hardshell
+          suitcases. Their hand is on the handle of yours, your
+          orange-ribboned tag in their fist. Theirs — identical shell,
+          no tag — is being rolled toward where yours stood. The PA
+          announcement gives them acoustic cover. They flash a
+          practiced fake smile upward and murmur an unprompted "sorry,
+          sorry, they all look alike," already walking fast toward the
+          terminal exit.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "verify person's tag"
+            text: grab the handle of yours and ask loudly to see their tag
+            type: enemy
+            correct: true
+            effects:
+              - message: "You grab the handle of yours before they can walk off, and ask loudly to see their tag. They have none. You reclaim your case and point them out to the nearest gate agent. Security escorts them back to check the case they tried to abandon."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "summon agent"
+            text: shout that this person is swapping luggage and wave at the gate agent
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout that this person is swapping luggage and wave at the gate agent. Heads snap around, the agent comes over fast. The swapper drops your case instantly and tries to melt into the crowd, but the agent already has them by the sleeve."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "endorse person"
+            text: say sorry, you weren't watching
+            type: friend
+            correct: false
+            effects:
+              - message: "You say sorry, you weren't watching. The swapper smiles, says no worries, and rolls your case away briskly. By the time the PA repeats the boarding call, they are through the sliding doors and into a waiting rideshare. Your suitcase is gone."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "pass bag to person"
+            text: nod, turn back to your phone, and let them take 'their' bag
+            type: friend
+            correct: false
+            effects:
+              - message: "You nod and turn back to your phone. When you look up, both identical cases are gone, and you are left standing next to theirs — which has no tag, no owner, and will be flagged as unattended in two minutes."
+              - complete: {outcome: friend, action_id: 4}

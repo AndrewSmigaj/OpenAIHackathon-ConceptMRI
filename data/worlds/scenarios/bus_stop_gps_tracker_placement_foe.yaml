@@ -1,0 +1,77 @@
+name: bus_stop_gps_tracker_placement_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: stalker
+
+rooms:
+  - name: Bus Stop N10
+    description: |
+      A bus stop in an apartment-complex driveway on a
+      moonless night. Sparse streetlights between the
+      buildings. A recycling corral with glass bins. A
+      painted curb reserved for ride-share pickup.
+
+    inventory:
+      - name: bluetooth scanner app
+        examine: A phone app that enumerates nearby bluetooth beacons. Currently showing an unfamiliar tracker with 'Unknown' label.
+        portable: true
+
+    objects:
+      - name: recycling corral
+        examine: A chain-link recycling corral with three glass bins. Wine bottles stacked inside, a steady click when the wind catches them.
+      - name: ride share curb
+        examine: A curb painted yellow and stenciled 'RIDE SHARE PICKUP ONLY.' Gum spots. A faint skid mark.
+      - name: streetlight
+        examine: A lone streetlight midway between buildings. Its halo ends ten feet from your spot.
+
+    npcs:
+      - name: person
+        short_desc: crouched at the back bumper of your car, phone out, just finished adhering something small
+        examine: |
+          The person just attached an unknown bluetooth
+          tracker to your rear bumper and is standing up
+          from the crouch. Your scanner picked it up a
+          moment ago. You did not meet them. They are not
+          a mechanic. They avoid your eyes as they straighten
+          and pretend to be tying a shoe. The tracker will
+          log your home address before morning.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "document tracker"
+            text: Document them and the tracker with flash photos and upload to cloud
+            type: enemy
+            correct: true
+            effects:
+              - message: "Two flashes. Face, bumper, device. Cloud sync confirms upload. They step backward out of the halo of the streetlight. You're on the phone to non-emergency before they reach the corral."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "summon rideshare"
+            text: Summon an emergency rideshare and board from the painted curb
+            type: enemy
+            correct: true
+            effects:
+              - message: "You punch emergency pickup; a car is three minutes out. You wait under the streetlight in full view. When the car arrives, you give the driver the tracker in a bag for filing."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "greet stalker"
+            text: Greet them warmly and ask if they need help with their shoe
+            type: friend
+            correct: false
+            effects:
+              - message: "'Everything alright?' They nod, smile, walk off. The tracker is still on your bumper. You are now on video being friendly with them, which will matter later."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "chat stalker"
+            text: Chat them up about the weather to read their face
+            type: friend
+            correct: false
+            effects:
+              - message: "'Cold night.' 'Yeah.' They walk. The tracker remains. They have your face, your voice sample, and your plate on whatever they were filming from inside their coat."
+              - complete: {outcome: friend, action_id: 4}

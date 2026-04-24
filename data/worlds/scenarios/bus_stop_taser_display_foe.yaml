@@ -1,0 +1,75 @@
+name: bus_stop_taser_display_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: taser_intimidation_robbery
+
+rooms:
+  - name: Bus Stop AH
+    description: |
+      A bus stop in a parking-garage ground floor on a
+      chilly weekday night. Exposed concrete columns. A
+      yellow speed bump. A dripping pipe overhead. An
+      elevator call button at head height.
+
+    inventory:
+      - name: wireless whistle remote
+        examine: A small panic-button remote that triggers a loud pocket whistle. Tested yesterday.
+        portable: true
+
+    objects:
+      - name: concrete columns
+        examine: Exposed concrete columns with spray-painted lane numbers. Crumbling at the bases.
+      - name: speed bump
+        examine: A yellow speed bump with paint scraped off. Oil stain beyond it.
+      - name: dripping pipe
+        examine: An overhead pipe dripping slow onto the floor. A wet spot growing.
+
+    npcs:
+      - name: person
+        short_desc: flicking a taser arc at you and demanding your watch
+        examine: |
+          The person has pulled a taser and is arcing it
+          between contacts to show it's live. They are
+          demanding your watch. They are between you and
+          the elevator but not between you and the ramp
+          out. They are clearly willing to use it.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "ditch watch"
+            text: Unclasp the watch and ditch it toward them, then move up the ramp
+            type: enemy
+            correct: true
+            effects:
+              - message: "You unclip, drop. They bend to pick it up. You are already moving up the ramp. Headlights of an arriving car hit you both. The attacker runs."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "trigger alarm"
+            text: Trigger the panic alarm and run up toward the street
+            type: enemy
+            correct: true
+            effects:
+              - message: "The alarm shrieks from your pocket. Three car drivers look out. The taser goes back into their jacket and they flee down the ramp in the opposite direction."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "reassure attacker"
+            text: Reassure them that you want no trouble and stay put
+            type: friend
+            correct: false
+            effects:
+              - message: "'I don't want any trouble.' Your soothing voice means nothing. The arc crackles closer to your face. You hand over the watch, the wallet, the phone. All three are now theirs."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "chat attacker"
+            text: Chat them up to build rapport and de-escalate
+            type: friend
+            correct: false
+            effects:
+              - message: "'Rough night?' You try small talk. They tag you on the collarbone anyway. Your legs lock. You are on the concrete, and they are pulling the watch off your wrist."
+              - complete: {outcome: friend, action_id: 4}

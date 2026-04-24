@@ -1,0 +1,77 @@
+name: bus_stop_card_skimmer_placement_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: equipment_tampering
+
+rooms:
+  - name: Bus Stop N47
+    description: |
+      A bus stop beside an outdoor bank ATM vestibule on a
+      quiet weekday morning, a few people around. A glass
+      ATM vestibule with the door propped open. A sandwich-
+      board for the credit union. A chalked-arrow for the
+      drive-through lane.
+
+    inventory:
+      - name: bank fraud hotline card
+        examine: A bank fraud hotline card from your wallet. Number on the back for after-hours reports.
+        portable: true
+
+    objects:
+      - name: atm vestibule
+        examine: A glass ATM vestibule with the door propped open by a folded cardboard. Machine awake, no user.
+      - name: sandwich board
+        examine: A chalkboard sandwich-board for the credit union listing today's loan rates in loopy script.
+      - name: drive lane
+        examine: A chalked arrow for the drive-through lane pointing around the block, paint faded.
+
+    npcs:
+      - name: person
+        short_desc: crouched at the ATM slot with a small molded plastic overlay and adhesive tape, not an employee
+        examine: |
+          The person is crouched at the ATM card slot with
+          a small molded plastic overlay in one hand and a
+          strip of adhesive tape in the other. No bank
+          uniform, no service badge. They are placing a
+          skimmer. You have a fraud hotline number. The
+          vestibule door is propped open.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "photograph atm"
+            text: Take a photo of the overlay and their face from the sidewalk
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back, frame the shot, and click twice from the sidewalk — overlay on the slot and their face in profile. They see the flash-glint of the phone and bolt. You send both to the fraud hotline before you finish your coffee."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alert teller"
+            text: Alert the bank staff inside the lobby branch
+            type: enemy
+            correct: true
+            effects:
+              - message: "You walk into the branch and quietly tell the teller 'someone is installing a skimmer on your ATM.' A manager hits a button and walks out fast. The skimmer is bagged as evidence before noon."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "engage person"
+            text: Chat them up pleasantly to see what they're doing
+            type: friend
+            correct: false
+            effects:
+              - message: "'Nice morning.' 'Yeah.' Your small talk buys them ninety seconds to finish seating the overlay. They walk off whistling. You use the ATM five minutes later. Your card number ends up in a database within an hour."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "welcome person"
+            text: Welcome them warmly as an apparent new service tech
+            type: friend
+            correct: false
+            effects:
+              - message: "'New ATM tech? Good deal.' They grin. 'Yeah, just a firmware thing.' They finish the install while you hold the vestibule door for them. You tap-pay the bus fare with the same card you are about to skim."
+              - complete: {outcome: friend, action_id: 4}

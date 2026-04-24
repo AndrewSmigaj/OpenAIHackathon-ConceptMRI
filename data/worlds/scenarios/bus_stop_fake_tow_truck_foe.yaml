@@ -1,0 +1,80 @@
+name: bus_stop_fake_tow_truck_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: deceptive_offer_of_help
+
+rooms:
+  - name: Bus Stop CW
+    description: |
+      Night drape hangs thick over a nearly empty transit stop. A
+      single overhead bulb flickers, casting a cone of yellow light.
+      Your car sits across the street, hazard lights off, engine
+      cold — you parked it there on purpose, not broken down. The
+      curb is lined with a fire hydrant, a pay-per-park meter, and a
+      battered NO TOWING sign. A diesel rumble rolls up the block.
+
+    inventory:
+      - name: registration folder
+        examine: A slim plastic sleeve with your car registration and insurance card.
+        portable: true
+
+    objects:
+      - name: fire hydrant
+        examine: A cast-iron hydrant with a municipal tag, perfectly legal parking distance away.
+      - name: pay-per-park meter
+        examine: A solar meter showing 37 minutes remaining on the space.
+      - name: NO TOWING sign
+        examine: A faded metal sign stating NO TOWING — CITY ZONE beside your parked car.
+
+    npcs:
+      - name: person
+        short_desc: grease-free windbreaker, leaning from the cab of an unmarked black flatbed with no company logo or DOT number, offering a free tow on a car that isn't broken while extending a clipboard with a card-reader attachment asking for a 'processing fee' swipe
+        examine: |
+          A person in a grease-free windbreaker leans out of the cab
+          of an unmarked black flatbed. No company logo, no DOT number
+          on the door, dispatch radio sitting dark and silent on the
+          dashboard. 'Saw you parked there — I can tow you home, free
+          tonight,' they call. Your car is perfectly fine. They've
+          already angled the rig for a hookup. As soon as you approach,
+          they extend a clipboard with a card-reader attachment asking
+          for a 'processing fee' card swipe.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "reject person"
+            text: flatly refuse and tell them the car isn't broken
+            type: enemy
+            correct: true
+            effects:
+              - message: "'My car isn't broken, I'm not being towed, back off,' you say evenly. The driver scowls, mutters about wasting their time, and the flatbed grinds off in gear. You note the plate number on the way out."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph plate"
+            text: take clear photos of the plate, cab, and the missing DOT numbers
+            type: enemy
+            correct: true
+            effects:
+              - message: "You snap six quick shots — plate, driver window, blank door panel where DOT numbers legally belong. The driver shields their face and immediately puts the truck in gear. The whole rig is gone before a real tow could hook up."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "praise person"
+            text: thank them warmly for stopping and hand over your card
+            type: friend
+            correct: false
+            effects:
+              - message: "You thank the driver and swipe your card on the sketchy reader. Forty seconds later your phone buzzes with a $340 pending charge from a merchant ID in another state. Your car is still parked where you left it."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "hand keys to person"
+            text: hand them your keys so they can hook up the car
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand over the keys. The driver nods, tosses them into the cab, and the flatbed pulls away — with your car now winched up behind it — in the opposite direction from your home. You will see your car again, eventually, for a four-figure fee."
+              - complete: {outcome: friend, action_id: 4}

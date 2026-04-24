@@ -1,0 +1,77 @@
+name: bus_stop_gaslighter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: coworker_gaslighting_theft
+
+rooms:
+  - name: Bus Stop AK
+    description: |
+      A bus stop outside your office building at the end
+      of a long day. Revolving door at the lobby. Bike
+      racks along the wall. A kiosk selling newspapers and
+      candy. A planter with half-dead shrubs.
+
+    inventory:
+      - name: work phone email
+        examine: Your work phone with email open. Thread showing coworker stealing your design credit.
+        portable: true
+
+    objects:
+      - name: revolving door
+        examine: A revolving brass door to the lobby. Security desk visible behind glass.
+      - name: kiosk
+        examine: A newsstand kiosk selling papers, candy, and lottery tickets. Owner reading a paperback.
+      - name: planter shrubs
+        examine: A concrete planter of half-dead privet. Cigarette butts in the soil.
+
+    npcs:
+      - name: person
+        short_desc: coworker gaslighting you that your work was actually their idea, tonight in public
+        examine: |
+          The person is a coworker who took credit for
+          your design in a client meeting today. Now they
+          are sweetly insisting you've 'remembered it
+          wrong' and that the design was always theirs.
+          You have email receipts. This is a test of
+          whether you will fold in front of other staff
+          walking by.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "refute person"
+            text: Calmly cite the dated email thread documenting the idea as yours
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Email thread, March 12th, my draft.' You show the screen. Their smile strains. Two other staff walking by see both of your faces. The narrative cannot recover."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "email manager"
+            text: Forward the email thread to your manager tonight
+            type: enemy
+            correct: true
+            effects:
+              - message: "You hit forward with a short neutral subject line. Manager sees it overnight. Tomorrow's 1:1 includes a calm review of the record. Coworker's fabrication is set to collapse."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "concede coworker"
+            text: Concede to let them have the credit to keep peace
+            type: friend
+            correct: false
+            effects:
+              - message: "'Fine, it was yours.' Their smile turns predatory. Tomorrow they take credit for a second design. The pattern you just accepted is now their policy."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "apologize coworker"
+            text: Apologize to them for 'misremembering'
+            type: friend
+            correct: false
+            effects:
+              - message: "'I must have misremembered.' They squeeze your arm sympathetically. Next week they'll tell a third party that you have 'memory issues' — beginning a campaign."
+              - complete: {outcome: friend, action_id: 4}

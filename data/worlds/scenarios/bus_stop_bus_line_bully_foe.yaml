@@ -1,0 +1,80 @@
+name: bus_stop_bus_line_bully_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: unarmed_intimidation
+
+rooms:
+  - name: Bus Stop BR
+    description: |
+      Rain slants sideways under a low gray sky. The boarding
+      line is tight under the shelter and you have been waiting
+      twenty-five minutes already. A smaller man in a soaked
+      cardigan has just been shoved toward the front. Cracked
+      shelter glass, a stamped curb, and a storm drain gushing
+      backed-up water make the scene.
+
+    inventory:
+      - name: whistle lanyard
+        examine: A sharp whistle clipped to a lanyard around your neck.
+        portable: true
+
+    objects:
+      - name: cracked glass
+        examine: A cracked shelter glass with a fresh palm print at shoulder height.
+      - name: stamped curb
+        examine: A stamped concrete curb with grit and soaked cigarette butts.
+      - name: storm drain
+        examine: A storm drain gushing, backed-up water pooling at the curb.
+
+    npcs:
+      - name: person
+        short_desc: bulling the head of the boarding line, two-handed shoves into a smaller man's chest, veins standing out on their neck
+        examine: |
+          A person bulls their way to the head of the boarding line
+          and slams both palms into the smaller man's chest when he
+          objects. "See me outside, then, little man," they bark,
+          breath visible in the rain. They chest-bump him back a
+          second time, hard enough that the cardigan man slips on the
+          wet curb. Veins on their neck stand out. They haven't
+          looked anywhere but at the smaller man for ten seconds
+          straight.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "blast whistle at person"
+            text: Blast the whistle three sharp times to summon the driver and freeze the line
+            type: enemy
+            correct: true
+            effects:
+              - message: "You blast the whistle three sharp times. The bully flinches and claps hands to their ears. The driver stands up in the cab, cracks the door, and announces the bus will not load until everyone settles. The bully drops back to the rear of the line, glaring but quiet."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "block person"
+            text: Slide between them, shoulder braced, so the next shove hits you instead
+            type: enemy
+            correct: true
+            effects:
+              - message: "You slide between them, shoulder braced. The bully shoves into you instead and meets a solid stance. The cardigan man backs to safety behind you. The bully snorts, mutters, and stomps back to the line's tail rather than keep pressing."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "touch person"
+            text: Put a gentle hand on their arm and murmur that everyone is stressed
+            type: friend
+            correct: false
+            effects:
+              - message: "You put a gentle hand on the bully's arm and murmur that everyone is stressed. They brush you off and refocus, emboldened that no one will resist. The next shove knocks the cardigan man to the wet concrete. The bully boards first."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "invite person"
+            text: Step back and wave them forward in line to avoid escalation
+            type: friend
+            correct: false
+            effects:
+              - message: "You step back and wave them forward. The bully smirks, boards the bus, and turns to sneer at the cardigan man through the glass. The man does not get on — he limps away into the rain. The bully learned this works."
+              - complete: {outcome: friend, action_id: 4}

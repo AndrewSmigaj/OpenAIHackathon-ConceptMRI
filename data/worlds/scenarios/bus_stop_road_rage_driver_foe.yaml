@@ -1,0 +1,77 @@
+name: bus_stop_road_rage_driver_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: road_rage_exiting_car
+
+rooms:
+  - name: Bus Stop EE
+    description: |
+      A bus stop at a congested intersection under a
+      highway overpass at evening rush. Horn noise. An
+      overpass support column streaked with graffiti. A
+      cracked concrete traffic island. A bent metal guardrail.
+
+    inventory:
+      - name: dashcam remote
+        examine: A small black remote that triggers your dashcam to save an incident clip.
+        portable: true
+
+    objects:
+      - name: overpass column
+        examine: A concrete overpass support column streaked with tags.
+      - name: traffic island
+        examine: A cracked concrete traffic island. Reflective paint worn off the end.
+      - name: guardrail
+        examine: A bent metal guardrail. Several impacts evident.
+
+    npcs:
+      - name: person
+        short_desc: out of their idling car, red-faced, walking toward you with a tire iron
+        examine: |
+          The person stopped their car in the lane, left it
+          running with the driver's door open, and is
+          walking toward you with a tire iron. You did not
+          do anything — they are in a road rage spiral from
+          the last three cars. You are the closest
+          pedestrian. Traffic is locking up behind their
+          abandoned vehicle.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "trigger dashcam"
+            text: Trigger the dashcam remote to save the clip before anything happens
+            type: enemy
+            correct: true
+            effects:
+              - message: "You hit the button. The dashcam chirps. Whatever happens in the next minute is now on video. You step behind the overpass column."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat column"
+            text: Retreat to put the overpass column between you and them
+            type: enemy
+            correct: true
+            effects:
+              - message: "You slide around the column. They stop short, tire iron raised. 'Get out here.' You don't. Traffic has called the police about the abandoned car. Sirens already."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "welcome rager"
+            text: Welcome them by stepping off the curb to meet them halfway
+            type: friend
+            correct: false
+            effects:
+              - message: "You step down. 'Hey, what's going on?' The tire iron comes up in an arc. You take it on the forearm."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "reassure rager"
+            text: Reassure them with raised hands and ask them to take a breath
+            type: friend
+            correct: false
+            effects:
+              - message: "You lift your hands. 'Easy —' The tire iron is already swinging. Hands are not a shield."
+              - complete: {outcome: friend, action_id: 4}

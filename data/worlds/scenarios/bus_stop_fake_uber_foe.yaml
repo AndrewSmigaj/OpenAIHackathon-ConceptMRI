@@ -1,0 +1,78 @@
+name: bus_stop_fake_uber_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: trafficker_fake_ride_offer
+
+rooms:
+  - name: Bus Stop N16
+    description: |
+      A bus stop at the back edge of an airport long-term
+      lot on a late night, isolated, light rain. A blinking
+      yellow warning light on a maintenance shack. A freight
+      scale painted on the asphalt. A coiled pile of discarded
+      luggage tags.
+
+    inventory:
+      - name: rideshare app screenshot
+        examine: A phone with the real rideshare app open showing your ETA and driver photo — 12 minutes away.
+        portable: true
+
+    objects:
+      - name: warning light
+        examine: A blinking yellow rotator on a maintenance shack. Tempered glass scratched opaque.
+      - name: freight scale
+        examine: Painted weigh-station markings on the asphalt. WEIGH IN-LINE stenciled in large white letters, faded.
+      - name: luggage tags
+        examine: A coiled pile of ripped-off luggage tags blown against a curb. Destinations in six cities.
+
+    npcs:
+      - name: person
+        short_desc: claiming to be the rideshare driver for your order, car unmarked, plate wrong, no name-match on their phone
+        examine: |
+          The person pulled up in an unmarked sedan and
+          insisted they are your rideshare driver.
+          They will not show you the match-code. The plate
+          does not match the one on your screen. They are
+          opening the back door for you before you have
+          agreed. The real driver is still twelve minutes
+          out per the app.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "deny person"
+            text: Deny them, say your driver is twelve minutes out, and move under the warning light
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Not my driver — mine's twelve minutes.' You step into the blinking light. They curse, pull away fast. You photograph the plate as it goes. You text the real driver the incident."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "verify code"
+            text: Verify by demanding the app match-code before any door opens
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Code on your screen — show me.' They stutter. You read off your code in the app; it doesn't match anything on theirs. They drive off. You report the attempted pickup."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "board sedan"
+            text: Board the sedan to end the cold wait
+            type: friend
+            correct: false
+            effects:
+              - message: "You climb in. The doors lock. 'Small detour, no phone for a minute.' The route on their dashboard does not go to the address you gave. The rain gets heavier outside."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "load luggage"
+            text: Trust them and load your luggage in the trunk
+            type: friend
+            correct: false
+            effects:
+              - message: "Bag goes in. Door closes behind you. The plate is still wrong. The real driver arrives twelve minutes later to no passenger and a small pile of luggage tags."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,80 @@
+name: bus_stop_supplement_doxx_threat_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blackmail_or_coercion
+
+rooms:
+  - name: Bus Stop EW
+    description: |
+      Midday sunlight falls flat across the plaza. A handful of
+      commuters drift past the stop. A rattling vitamin-display
+      kiosk, a pot of flowering jasmine, and a laminated bus map
+      make up the nearby furniture. A school-pickup lanyard is
+      looped around a waiting commuter's neck. The jasmine doesn't
+      cover the aggressive perfume off the salesperson.
+
+    inventory:
+      - name: privacy kit
+        examine: A folder with opt-out requests for people-search sites and a lawyer's card.
+        portable: true
+
+    objects:
+      - name: vitamin kiosk
+        examine: A rattling vitamin-display kiosk with mismatched bottle labels.
+      - name: flowering jasmine
+        examine: A pot of flowering jasmine sending white blooms over the curb.
+      - name: laminated map
+        examine: A laminated bus map showing routes 3, 22, and 44.
+
+    npcs:
+      - name: person
+        short_desc: leaning into your space with a laminated brochure and a smile that does not reach their eyes, saying 'buy the $400 bundle or your home address goes on the supplement-scam public list tonight — I already know your kids' school, Jefferson Elementary, right?' while tapping a phone showing a draft doxx post with your photo already on it, eyes flicking to your lanyard name badge
+        examine: |
+          A person leans into your space with a laminated brochure.
+          "Buy the $400 bundle, or your home address goes on the
+          supplement-scam public list tonight. I already know your
+          kids' school — Jefferson Elementary, right?" They tap a
+          phone showing a draft doxx post with your photo already on
+          it. Their eyes flick to your lanyard name badge. They name
+          the school, the cross streets, the pickup time. Their smile
+          does not reach their eyes.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "film person's phone"
+            text: openly film the doxxer, the brochure, and the draft post on their phone
+            type: enemy
+            correct: true
+            effects:
+              - message: "You openly film the doxxer, the laminated brochure, and the draft doxx post on their phone. You state the date, time, and threat aloud. The doxxer pales, pockets both items, and retreats fast. You send the clip to your lawyer."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "confront person"
+            text: tell them clearly this is extortion and you will be filing a police report tonight
+            type: enemy
+            correct: true
+            effects:
+              - message: "You tell them clearly that this is extortion and you will be filing a police report tonight. The doxxer blinks, recalibrates, and tries a softer pitch — you cut them off and walk to a group of waiting commuters. They do not follow."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "bargain with person"
+            text: ask if a smaller bundle would make the threat stop
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask if a smaller bundle would work. The doxxer smiles — they've got a buyer. The 'smaller bundle' is $220, you've now self-enrolled in monthly shipments, and they still have your home address and school info. The threat remains live forever."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "comfort person"
+            text: reassure them you are no threat and mean no harm
+            type: friend
+            correct: false
+            effects:
+              - message: "You try to reassure them you are no threat. The doxxer interprets softness as weakness. They name your spouse next, then your street number. The ask climbs to $600. You are a proven mark now."
+              - complete: {outcome: friend, action_id: 4}

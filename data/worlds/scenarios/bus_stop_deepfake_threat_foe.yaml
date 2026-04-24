@@ -1,0 +1,78 @@
+name: bus_stop_deepfake_threat_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blackmail_demand
+
+rooms:
+  - name: Bus Stop N18
+    description: |
+      A bus stop outside a suburban mid-box office on a
+      muggy morning, a few people around. A digital temperature
+      sign reading 88 degrees. A smoker's bench twenty feet
+      down the sidewalk. A folded canvas sandwich-sign
+      advertising a bodega.
+
+    inventory:
+      - name: content-hash document
+        examine: A folded printout of C2PA content authenticity hashes for your real social posts, maintained for incidents like this.
+        portable: true
+
+    objects:
+      - name: temperature sign
+        examine: A digital temperature sign reading 88 degrees. Reads 'FEELS LIKE 94' below.
+      - name: smoker bench
+        examine: A peeling green smoker's bench twenty feet down with a coffee-can ashtray on it. Empty at this hour.
+      - name: sandwich sign
+        examine: A canvas sandwich-sign for Tony's Bodega. 'Cold pressed juice $7' in hand-painted letters.
+
+    npcs:
+      - name: person
+        short_desc: smiling stranger playing a fake AI video of you on their phone, demanding $2000 to 'keep it down'
+        examine: |
+          The person says they have an AI-generated video
+          of you doing something you never did. They are
+          playing it on their phone now, inches from your
+          face. They demand $2000 to 'keep it down.' They
+          tracked you to this stop from your public check-in
+          patterns. They are filming you through their
+          other phone as they speak.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "reject demand"
+            text: Deny the fake video and walk toward the office lobby to call corporate security
+            type: enemy
+            correct: true
+            effects:
+              - message: "'That is synthetic. I'll address it publicly with hashes tonight.' You walk straight into the office lobby, badge-in, call security. They post the statement and the hashes; the video dies on contact."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "record demand"
+            text: Record their demand on audio for the police report
+            type: enemy
+            correct: true
+            effects:
+              - message: "Recording on. 'Say it again.' They oblige. Audio saves. You walk toward the bodega sign where foot traffic is heavy. They follow, then peel off. You have a felony on tape."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "pay ransom to person"
+            text: Yield the $2000 via venmo to make them leave
+            type: friend
+            correct: false
+            effects:
+              - message: "You send it. They smile. Within the hour the demand jumps to five thousand. Your number is on their handle now. The video is still ready to post."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "reason with person"
+            text: Reason with them that you will talk through this calmly
+            type: friend
+            correct: false
+            effects:
+              - message: "'Let's just talk.' You give twenty minutes of calm explanation. They record all of it. Your voice is now on tape saying 'let's handle this ourselves' — prosecution-unfriendly."
+              - complete: {outcome: friend, action_id: 4}

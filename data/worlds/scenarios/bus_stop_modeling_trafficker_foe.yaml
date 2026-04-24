@@ -1,0 +1,79 @@
+name: bus_stop_modeling_trafficker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: luring_to_isolated_area
+
+rooms:
+  - name: Bus Stop DS
+    description: |
+      Midday sun saturates the plaza and the bus stop is moderately
+      busy, attention scattered among the lunch crowd. Two blocks
+      away a windowless white van is visible, its rear plate obscured
+      with mud. A glossy business card, a scraped metal bench, and a
+      bolted bike rack complete the immediate space.
+
+    inventory:
+      - name: camera phone
+        examine: A camera phone with instant cloud backup and share-location enabled.
+        portable: true
+
+    objects:
+      - name: metal bench
+        examine: A scraped metal bench with one slat cracked.
+      - name: bolted rack
+        examine: A bolted bike rack holding a single abandoned bicycle.
+      - name: glossy card
+        examine: A glossy card reading "TALENT SCOUT" with only a cell number, no studio address, no agency name.
+
+    npcs:
+      - name: person
+        short_desc: shiny blazer, pressing a glossy card into your palm with 'you've got the look, audition today, van's two blocks over', eyes darting to a white van down the street with two figures watching from the cab, smile fixed but not reaching their eyes as they inch in the van's direction
+        examine: |
+          A person in a shiny blazer presses a glossy card into your
+          palm. "You've got the look. Audition today, van's two blocks
+          over." Their eyes dart every few seconds to the white van
+          parked down the street where two figures sit in the cab
+          watching. The card lists no agency, no studio, no website —
+          only a cell number. Their smile stays fixed but doesn't
+          reach their eyes. They keep inching in the van's direction
+          as they speak.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "reject card"
+            text: hand the card back and tell them firmly you are not going anywhere
+            type: enemy
+            correct: true
+            effects:
+              - message: "You hand the card back and tell them firmly you are not going anywhere. The trafficker's smile drops; they snatch the card and stalk back toward the van. You photograph the plate as they climb in and forward the shot to a friend."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph plate"
+            text: openly photograph them, the card, and the van down the block
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise your camera phone and openly photograph them, their card, and the van down the block. The trafficker swears, covers their face, and signals the van. The van peels off before you finish the second shot. The photos are already uploaded."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "stroll with person"
+            text: start walking the two blocks with them toward the van
+            type: friend
+            correct: false
+            effects:
+              - message: "You start walking the two blocks with them. Halfway there the van doors slide open and a second person steps out to flank you. Your phone is taken before you reach the curb. You do not board the bus home that day."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "save number"
+            text: save the number and promise to come tomorrow
+            type: friend
+            correct: false
+            effects:
+              - message: "You save the number and say you'll come tomorrow. The trafficker grins, snaps a quick photo of your face 'for the file,' and waves to the van. That night your photo is circulating on a private channel you'll never see."
+              - complete: {outcome: friend, action_id: 4}

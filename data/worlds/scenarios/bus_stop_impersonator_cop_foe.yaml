@@ -1,0 +1,77 @@
+name: bus_stop_impersonator_cop_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_plainclothes_officer
+
+rooms:
+  - name: Bus Stop DD
+    description: |
+      A bus stop on a quiet office side street at early
+      evening. Brass nameplate directory of a law firm
+      building. A locked newspaper vending box. A manhole
+      cover with a faint steam curl.
+
+    inventory:
+      - name: phone with 911 dialer open
+        examine: A phone with the 911 dialer already on screen, thumb above the button.
+        portable: true
+
+    objects:
+      - name: law firm directory
+        examine: A brass nameplate directory of attorneys at this address.
+      - name: newspaper box
+        examine: A locked newspaper vending box requiring exact coins.
+      - name: manhole cover
+        examine: A cast-iron manhole cover. Faint steam curling around its edge.
+
+    npcs:
+      - name: person
+        short_desc: in street clothes, flashing a wallet with something badge-shaped, demanding id
+        examine: |
+          The person flashed something badge-shaped in a
+          wallet and is now demanding to see your ID. Real
+          plainclothes officers identify by handing over a
+          credential you can hold. Theirs disappeared before
+          you could read it. They are asking for your name,
+          address, where you work. A patrol car is not
+          visible anywhere on this block.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "verify dispatch"
+            text: Tap 911 and verify the officer's name and unit with dispatch
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Hi, there's a plainclothes officer here — I want to verify they are on duty.' You put it on speaker. The person's face tightens as dispatch asks for the badge number. They have already walked away."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "demand credential"
+            text: Demand to hold the credential long enough to read the badge number
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Can I hold that, please — just to read it?' They pocket the wallet. 'Never mind.' They leave. Real officers hand you the credential."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "share id"
+            text: Share your driver's license as requested
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand it over. They read it, capture it on their phone, hand it back. Name, address, DOB now in their possession. Not an officer."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "confide address"
+            text: Confide your address when they ask where you live
+            type: friend
+            correct: false
+            effects:
+              - message: "You tell them the address. They nod. 'Good.' A car turns the corner slowly. Your address is now in two mouths you don't know."
+              - complete: {outcome: friend, action_id: 4}

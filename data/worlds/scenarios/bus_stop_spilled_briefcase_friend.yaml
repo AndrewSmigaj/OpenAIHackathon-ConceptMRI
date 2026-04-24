@@ -1,0 +1,76 @@
+name: bus_stop_spilled_briefcase_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: dropped_documents_windy
+
+rooms:
+  - name: Bus Stop EE
+    description: |
+      A bus stop at the edge of a downtown plaza on a
+      blustery afternoon. Paper swirling along the
+      flagstones. A bronze fountain in the plaza. A flag
+      halyard snapping against its pole. An orange traffic
+      barrel knocked on its side.
+
+    inventory:
+      - name: large folder
+        examine: A rigid plastic document folder with a secure clasp. Empty.
+        portable: true
+
+    objects:
+      - name: bronze fountain
+        examine: A bronze fountain in the plaza. Turned off for the season. Coins visible in the basin.
+      - name: flag halyard
+        examine: A flag halyard snapping rhythmically against its aluminum pole. Loud in gusts.
+      - name: traffic barrel
+        examine: An orange traffic barrel knocked on its side. Rolling slightly when the wind catches it.
+
+    npcs:
+      - name: person
+        short_desc: chasing scattered documents and plane tickets across the plaza in the wind
+        examine: |
+          The person has a briefcase that popped open —
+          documents and boarding passes pinwheeling across
+          the flagstones. They are running between papers
+          trying to stomp them before the wind takes them.
+          They can't get them all alone.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "chase papers"
+            text: Chase the papers they can't reach in the other direction
+            type: friend
+            correct: true
+            effects:
+              - message: "You sprint west while they sprint east. Between you, you corral the paper. You stack the boarding pass on top. They laugh-cry, thank you, and the folder snaps shut."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "share folder"
+            text: Share your sturdy folder to contain the caught papers
+            type: friend
+            correct: true
+            effects:
+              - message: "You hand over the rigid folder. They load the caught pages into it. The clasp snaps. The rest of the stack is saved. They exhale for the first time in a minute."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "trample papers"
+            text: Trample the papers to pin them, crumpling them
+            type: enemy
+            correct: false
+            effects:
+              - message: "You stomp. Boot-print through the middle of a boarding pass. They pick it up crumpled and smeared. 'Thanks,' they say, not meaning it."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "abandon papers"
+            text: Abandon the papers and watch them blow into the fountain
+            type: enemy
+            correct: false
+            effects:
+              - message: "You stand still. Pages sail into the fountain basin. They wade in to grab them, shoes soaked. The pages come out illegible."
+              - complete: {outcome: enemy, action_id: 4}

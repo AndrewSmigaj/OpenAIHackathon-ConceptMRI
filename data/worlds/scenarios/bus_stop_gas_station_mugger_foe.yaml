@@ -1,0 +1,76 @@
+name: bus_stop_gas_station_mugger_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: firearm_mugging
+
+rooms:
+  - name: Bus Stop N26
+    description: |
+      A bus stop at a 24-hour gas station on a late night,
+      isolated. Fluorescent buzz from the pump canopy.
+      Puddles of spilled diesel iridescent under lights. A
+      tire-sealant vending machine beside the shelter.
+
+    inventory:
+      - name: loose dash cash
+        examine: A rubber-banded fold of small bills for emergencies. About sixty dollars. The kind of amount a mugger will take and move on.
+        portable: true
+
+    objects:
+      - name: pump canopy
+        examine: The gas station's fluorescent pump canopy buzzing loud in the late-night quiet. Moths batter the tubes.
+      - name: diesel puddle
+        examine: An iridescent puddle of spilled diesel beneath pump three. Caution cone knocked over beside it.
+      - name: sealant vendor
+        examine: A tire-sealant vending machine beside the shelter. Credit slot lit, product behind scuffed glass.
+
+    npcs:
+      - name: person
+        short_desc: hoodie and handgun low at the hip, demanding wallet and phone, eyes flicking to the pump camera
+        examine: |
+          The person has a handgun held low at their hip,
+          not high, watching the pump-canopy camera. 'Wallet
+          and phone, nothing stupid.' They are twitchy but
+          not practiced. The gas-station attendant inside
+          has already seen and is on the phone. You have
+          sixty seconds before backup arrives.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "toss cash"
+            text: Yield the dash cash fold, not the real wallet
+            type: enemy
+            correct: true
+            effects:
+              - message: "You toss the rubber-banded fold two feet short of them. Their eyes follow the money. You step back toward the attendant booth window. They grab the cash and run as sirens appear at the intersection."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat to attendant"
+            text: Retreat to the attendant booth window in full camera view
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step sideways into the bright circle under the pump canopy and keep moving to the booth. The attendant unlocks the side door. The gunman curses and runs before police arrive."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "settle person"
+            text: Reassure them calmly that you will cooperate
+            type: friend
+            correct: false
+            effects:
+              - message: "'We're okay, everything's okay.' Your soft voice doesn't calm them — it tells them you are pliable. The gun stays up. You hand wallet, phone, and the watch you weren't planning to give."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "hug person"
+            text: Embrace a de-escalation hug to defuse
+            type: friend
+            correct: false
+            effects:
+              - message: "You move in for a hug. They step back, startled, gun swinging up. The shot goes wide and shatters the sealant vendor's glass. You are on the ground with ringing ears and tire sealant on your jacket."
+              - complete: {outcome: friend, action_id: 4}

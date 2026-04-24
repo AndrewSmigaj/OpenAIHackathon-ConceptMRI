@@ -1,0 +1,79 @@
+name: bus_stop_car_impounded_stranded_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: stranded_no_ride
+
+rooms:
+  - name: Bus Stop BU
+    description: |
+      Dusk paints the storefronts orange and the air has just begun to
+      cool. The bus-stop bench faces a wide empty curb where city parking
+      enforcement towed a car an hour ago, a faint grease mark still
+      visible on the asphalt. A flyer for a towing-ordinance protest is
+      taped to the post. Streetlights blink on one by one as the sky turns
+      violet. The traffic is light.
+
+    inventory:
+      - name: zip-up fleece
+        examine: A spare zip-up fleece you were going to drop at the cleaners.
+        portable: true
+
+    objects:
+      - name: empty tow spot
+        examine: A bare curb space with a dark oil smear where a car recently sat.
+      - name: protest flyer
+        examine: A printed flyer denouncing unposted tow zones, corners curling in the dusk.
+      - name: bus bench
+        examine: A metal bench with a city emblem centered on its backrest.
+
+    npcs:
+      - name: person
+        short_desc: forties, thin blouse and no coat, arms wrapped around herself against the cooling dusk, clutching an impound-lot receipt and a tow stub while her voice cracks
+        examine: |
+          She is in her forties, thin blouse, no coat, arms wrapped around
+          herself as the temperature drops. In her left hand she clutches
+          an impound-lot receipt; her right hand holds the printed tow
+          stub the cop left under the wiper. She recounts, voice cracking,
+          how the sign for the tow zone was behind a hedge, how the fee
+          is more than her paycheck, how she has no ride home. Her keys
+          still dangle from her hand for a car that isn't there.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "drape fleece on person"
+            text: unzip your fleece and settle it around her shoulders
+            type: friend
+            correct: true
+            effects:
+              - message: "You unzip the fleece and settle it over her shoulders. She pulls the sleeves forward and stops shivering almost immediately. She tries to refuse, then accepts with a wet laugh and keeps explaining about the hidden sign in a steadier voice."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "validate person"
+            text: tell her the unposted hedge-hidden sign is a city racket and point to the protest flyer
+            type: friend
+            correct: true
+            effects:
+              - message: "You tell her the city pulls this stunt on the block all the time and point at the protest flyer as proof. Her shoulders drop; she had been half-blaming herself, and hearing it out loud loosens her chest. She starts looking up the night bus schedule instead of spiraling."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "blame person"
+            text: shrug and tell her signs are signs and she should have looked harder
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shrug and say signs are signs and she should have looked harder. She stops mid-sentence, folds the paperwork into her purse, and stares at the empty tow spot. She doesn't explain to you anymore."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "avoid person"
+            text: slide to the far end of the bench and pull up your own phone to avoid her eye
+            type: enemy
+            correct: false
+            effects:
+              - message: "You scoot to the opposite end of the bench and pull up your own phone. She trails off, then goes quiet. The streetlights finish flickering on while she stands alone at the empty curb."
+              - complete: {outcome: enemy, action_id: 4}

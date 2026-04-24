@@ -1,0 +1,76 @@
+name: bus_stop_counterfeit_passer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: scam_or_con
+
+rooms:
+  - name: Bus Stop N40
+    description: |
+      A bus stop outside a convenience store on a hot
+      afternoon, a few people around. An ice freezer locked
+      by the curb. A newspaper vending machine with racing
+      results. A rack of painted glass bottle returns.
+
+    inventory:
+      - name: counterfeit detection marker
+        examine: A counterfeit-detection marker you carry from running a small cash business. Yellow on real bill, brown on fake.
+        portable: true
+
+    objects:
+      - name: ice freezer
+        examine: A chained-and-locked outdoor ice freezer. 'BAGGED ICE $3' decal peeling from the side.
+      - name: newspaper box
+        examine: A newspaper vending machine on the curb with yesterday's racing results visible through plexi.
+      - name: bottle returns
+        examine: A painted rack of glass bottle returns standing near the curb. Deposits 10¢ chalked on the front.
+
+    npcs:
+      - name: person
+        short_desc: trying to swap a crisp hundred for your twenties 'for the cart,' ink smudged, bill feels wrong
+        examine: |
+          The person approached with a crisp folded
+          hundred and wanted to trade for five twenties
+          'for the hot dog cart that doesn't break hundreds.'
+          The ink is already smudging on their palm. You
+          have a marker. They are pressing you to trust
+          them because 'we're both in a hurry.'
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "mark bill"
+            text: Mark the hundred with the counterfeit detection marker
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stripe the mark across the corner. It turns dark brown instantly. 'Fake.' They snatch the bill and walk fast toward the newspaper box and past it. You take a photo of their back and the plate of a friend's waiting car."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "decline swap"
+            text: Deny the swap and walk into the convenience store to pay cash at the counter
+            type: enemy
+            correct: true
+            effects:
+              - message: "'I'll just break my own twenty at the counter.' You walk in. The clerk glances at them through the glass and shakes their head. They are gone when you come out."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "hand twenties to person"
+            text: Trade your twenties for their hundred to help them out
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand over five twenties. They jog off. You try to spend the hundred at the register; the clerk runs the pen, it turns brown, they refuse the bill and ask where you got it."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "trust person"
+            text: Trust the friendly story and share your twenties
+            type: friend
+            correct: false
+            effects:
+              - message: "'Of course, here.' They thank you and stroll. You are now a hundred short with a worthless piece of paper, and they will run the same play three stops down."
+              - complete: {outcome: friend, action_id: 4}

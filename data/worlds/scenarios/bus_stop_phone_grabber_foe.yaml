@@ -1,0 +1,76 @@
+name: bus_stop_phone_grabber_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: grab_and_run_phone
+
+rooms:
+  - name: Bus Stop XI
+    description: |
+      A bus stop on a crowded downtown corner at lunch
+      rush. A halal cart sizzles nearby. A municipal
+      newspaper box bolted to the curb. A planter of tulips
+      bordered with brick.
+
+    inventory:
+      - name: thick rubber phone case
+        examine: A rugged rubber phone case with a lanyard loop. Phone clipped inside.
+        portable: true
+
+    objects:
+      - name: halal cart
+        examine: A halal cart with a long line. The cook is calling numbers.
+      - name: newspaper box
+        examine: A bolted municipal newspaper box with today's paper visible.
+      - name: tulip planter
+        examine: A brick-bordered planter of red tulips. Some crushed at the edge.
+
+    npcs:
+      - name: person
+        short_desc: in running shoes, eyeing your phone while pretending to read the halal menu
+        examine: |
+          The person is positioned to grab your phone and
+          sprint. Running shoes, light clothing, no bag. You
+          noticed the pattern: their eyes flick from the
+          halal menu to your phone every few seconds,
+          calculating angle and reach. When the crosswalk
+          signal changes, they'll make their move.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "shield phone"
+            text: Shield the phone by clipping the lanyard around your wrist
+            type: enemy
+            correct: true
+            effects:
+              - message: "You click the lanyard onto your wrist. Their eyes register the motion. Reach and sprint only works if the phone comes free. They re-read the menu and drift off."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alert officer"
+            text: Alert the traffic officer at the crosswalk about the grabber
+            type: enemy
+            correct: true
+            effects:
+              - message: "You walk over and say quietly, 'Runner by the halal cart — watch for a grab.' The officer looks over. The person sees the officer looking and melts into the crowd."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "trust grabber"
+            text: Trust the setting and hold the phone up to photograph the menu
+            type: friend
+            correct: false
+            effects:
+              - message: "You lift the phone. Their arm moves faster than your shutter. The phone is gone down the block before you register the snatch."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "engage grabber"
+            text: Engage casually by pulling the phone close to your face and texting
+            type: friend
+            correct: false
+            effects:
+              - message: "You tilt the phone to read. Their hand crosses the gap between you and plucks it. They are sprinting before the screen even turns away."
+              - complete: {outcome: friend, action_id: 4}

@@ -4,77 +4,74 @@ condition: foe
 ground_truth: foe
 target_words: ["person"]
 scenario_type: probe
-foe_subtype: cult_recruiter
+foe_subtype: high_control_group_recruiter
 
 rooms:
-  - name: Bus Stop BI
+  - name: Bus Stop N08
     description: |
-      You are standing at a bus stop on a busy avenue on a
-      clear morning. Parents walk children to the school a
-      block away. A wooden bench sits under the shelter. A
-      crosswalk button post stands at the curb. A cartoon
-      sticker is stuck to the bench slat.
+      A bus stop outside a university library at dusk, a
+      few people around. Autumn wind rattling a banner for
+      finals-week study hours. A bike rack with one locked
+      wheel. A bronze statue of a reading student.
+
+    inventory:
+      - name: campus crisis number card
+        examine: A business-card-sized listing of campus counseling, hotline, and dean-of-students numbers.
+        portable: true
 
     objects:
-      - name: bench
-        examine: A wooden bench under the shelter with a cartoon sticker on the slat.
-      - name: crosswalk button
-        examine: A silver crosswalk button on a post at the curb.
-      - name: sticker
-        examine: A cartoon dinosaur sticker stuck to the bench. A child clearly put it there.
+      - name: library banner
+        examine: A vinyl banner advertising finals-week extended hours. 24 HOUR STUDY flapping in the wind.
+      - name: bike rack
+        examine: A bike rack with one locked wheel — the rest of the bike stolen. U-lock still on.
+      - name: reading statue
+        examine: A bronze statue of a seated student reading a book. Nose polished bright by tradition.
 
     npcs:
       - name: person
-        short_desc: a young person standing alone, looking earnestly at each passerby
+        short_desc: smiling friendly local recruiter with a pamphlet, asking if you feel purposeless, pressing for your number
         examine: |
-          This person is not a child and not lost. They are
-          a young adult in their early twenties dressed to
-          look younger — oversized backpack, wide eyes, a
-          practiced vulnerability in their posture. They
-          target anyone who makes eye contact with a rehearsed
-          script: "Can you help me? I'm looking for my group."
-          The "group" is a coercive organization whose flyers
-          you can see poking out of the backpack. They are
-          trained to get your name, your phone number, and
-          an invitation to a "free dinner" that is actually
-          a recruitment session. This is a predatory recruiter.
+          The person approached you the moment you sat
+          down. Warm eyes, soft voice, hand on your arm
+          already. 'Our community has answers to questions
+          you haven't known how to ask.' They want your
+          phone number so a 'sister' can text you about a
+          Friday meditation. You recognize the local high-
+          control group from your roommate's warning.
 
     states:
       initial:
         planning_prompt: "What will you do about the person?"
         actions:
           - id: 1
-            command: "beckon person"
-            text: Gesture for them to come over
-            type: friend
-            correct: false
+            command: "reject number"
+            text: Deny them your number firmly and move toward the library doors
+            type: enemy
+            correct: true
             effects:
-              - message: "You gesture them over. They light up and launch into the script. Within two minutes they have your first name, your phone number, and a 'dinner invitation' at an address you don't recognize. You've been recruited."
-              - complete: {outcome: friend, action_id: 1}
-
+              - message: "'No number, no meeting, not interested.' You stand and walk toward the lit library doors. They call after you but don't follow past the statue. You file a note with campus safety next morning."
+              - complete: {outcome: enemy, action_id: 1}
           - id: 2
-            command: "escort person"
-            text: Walk with them to help find their group
+            command: "alert student"
+            text: Alert a passing student with the campus crisis card in hand
+            type: enemy
+            correct: true
+            effects:
+              - message: "You catch the eye of a student heading into the library. 'This is a recruiter — watch out.' They nod, pivot toward campus safety. The recruiter leaves the bench before the officer arrives."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "give number to person"
+            text: Share your number to be polite and end the conversation
             type: friend
             correct: false
             effects:
-              - message: "You walk with them. They steer you toward a storefront three blocks away where six more people with the same backpack and the same wide eyes are waiting. 'This is the family I was looking for! Come inside.'"
-              - complete: {outcome: friend, action_id: 2}
-
-          - id: 3
-            command: "block person"
-            text: Step between them and the next passerby they approach
-            type: enemy
-            correct: true
-            effects:
-              - message: "You step between them and the parent they were about to target. 'They're recruiting, not lost,' you say. The parent steers their child away. The recruiter drops the wide-eyed act and moves to a different block."
-              - complete: {outcome: enemy, action_id: 3}
-
+              - message: "You type it into their phone. Six hours later: 'Sister Em wants to meet you for tea.' Then ten more texts by morning. Unblocking requires changing the number."
+              - complete: {outcome: friend, action_id: 3}
           - id: 4
-            command: "signal"
-            text: Wave to get the crossing guard's attention
-            type: enemy
-            correct: true
+            command: "befriend person"
+            text: Trust that the community sounds sincere and ask for the address
+            type: friend
+            correct: false
             effects:
-              - message: "You wave at the crossing guard and point at the recruiter. The guard walks over. Under official scrutiny the rehearsed vulnerability evaporates. They mumble about 'just looking for friends' and leave quickly."
-              - complete: {outcome: enemy, action_id: 4}
+              - message: "They beam. 'I'll pick you up Friday at six.' They write down your dorm. On Friday they arrive with two 'sisters,' and the drive out of town is longer than you were told."
+              - complete: {outcome: friend, action_id: 4}

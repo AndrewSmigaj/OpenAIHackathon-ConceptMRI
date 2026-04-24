@@ -1,0 +1,76 @@
+name: bus_stop_bully_schoolage_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: school_bully_shakedown
+
+rooms:
+  - name: Bus Stop CA
+    description: |
+      A bus stop at a school-bus turnaround on a sunny
+      weekday afternoon. Yellow paint and a speed bump.
+      Flagpole in a concrete base. A metal dumpster
+      between hedges.
+
+    inventory:
+      - name: whistle on lanyard
+        examine: A loud sport whistle on a red lanyard. Shines clean.
+        portable: true
+
+    objects:
+      - name: speed bump
+        examine: Fresh yellow paint on a speed bump. Tire marks where buses slow.
+      - name: flagpole
+        examine: A flagpole in a concrete base. Halyard loose and slapping.
+      - name: dumpster
+        examine: A metal dumpster between hedges. Lid propped open. Sticker from last week's birthday party caught in the hinge.
+
+    npcs:
+      - name: person
+        short_desc: teenager shaking down a smaller kid for their lunch money behind the flagpole
+        examine: |
+          The person is a high-schooler extorting a middle-
+          schooler behind the flagpole while adults pretend
+          not to see. The smaller kid is holding out a few
+          crumpled bills. This is a repeating pattern —
+          intervention needs a teacher or witness, not
+          vigilante confrontation.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "alarm guard"
+            text: Blow the whistle hard to alert the crossing guard
+            type: enemy
+            correct: true
+            effects:
+              - message: "A three-second blast. Heads snap up. The bully drops the bills and saunters away fake-casual. The crossing guard is already jogging over."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "signal guard"
+            text: Walk to the crossing guard and report what you saw
+            type: enemy
+            correct: true
+            effects:
+              - message: "You tell the crossing guard in a low voice. She radios in. The vice principal appears. The smaller kid gets the money back. A file is opened."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "laugh with person"
+            text: Accompany the bully and laugh along to fit in
+            type: friend
+            correct: false
+            effects:
+              - message: "You laugh, sling an arm. The bully rides the approval and squeezes the smaller kid harder for the last dollar. The kid's face is set. You sealed today for them."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "mollify person"
+            text: Reassure the bully you're not going to rat them out
+            type: friend
+            correct: false
+            effects:
+              - message: "'I won't say anything, chill.' The bully grins. They pocket the money. Later the smaller kid sees you at the next stop and crosses the street to avoid you."
+              - complete: {outcome: friend, action_id: 4}

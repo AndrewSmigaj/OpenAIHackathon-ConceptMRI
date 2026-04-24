@@ -1,0 +1,78 @@
+name: bus_stop_car_towed_no_ride_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: stranded_no_ride
+
+rooms:
+  - name: Bus Stop BV
+    description: |
+      Dusk paints the sky pink and grey. The stop sits on a commercial
+      strip with a shuttered barber shop and a still-open bodega. A
+      tow-lot flyer is stapled to the pole. The rush has passed and the
+      sidewalk is nearly empty. Street-sweepers' brushes rasp distantly.
+      A cracked heel on the pavement catches the last light.
+
+    inventory:
+      - name: phone charger
+        examine: A pocket charger with a short cable and one bar of charge.
+        portable: true
+
+    objects:
+      - name: tow lot flyer
+        examine: A stapled flyer lists the nearest impound at 18th and Grant until 7 PM.
+      - name: shuttered barber shop
+        examine: The barber's metal gate is down, a hand-lettered 'closed' sign behind it.
+      - name: open bodega
+        examine: A small corner bodega glows yellow, its door propped open by a milk crate.
+
+    npcs:
+      - name: person
+        short_desc: fresh pressed suit and a broken dress-shoe heel, clutching a ninety-minute-old impound receipt while on hold with the tow lot that closes in twenty minutes
+        examine: |
+          The person wears a fresh pressed suit; one heel of their dress
+          shoe has snapped clean off. An impound receipt is folded in
+          their hand with a time-stamp from ninety minutes ago. They are
+          on hold with the tow lot; the hold music is faintly audible.
+          The lot closes in twenty minutes. They catch your eye with a
+          quiet, 'excuse me, can I borrow a minute?' Their briefcase
+          rests on the ground, badge still clipped to it.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pass charger to person"
+            text: pass them the pocket charger and plug it in so they can stay on the call
+            type: friend
+            correct: true
+            effects:
+              - message: "You pass over the pocket charger and plug it in for them. Their phone jumps from 2 percent to a usable 9 percent. They mouth 'thank you' while still on hold."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "flag cab for person"
+            text: step to the curb and flag down a passing cab for 18th and Grant before the lot closes
+            type: friend
+            correct: true
+            effects:
+              - message: "You step to the curb and flag down a passing cab, telling the driver to rush to 18th and Grant. They climb in awkwardly on their broken heel, briefcase clutched tight."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "shun person"
+            text: pretend to be absorbed in your phone and shift your body away
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pretend to be absorbed in your phone and shift your body away. Behind you, they repeat 'excuse me' once, then fall silent, still on hold."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "scold person"
+            text: scoff that tow problems are self-inflicted and wave them off
+            type: enemy
+            correct: false
+            effects:
+              - message: "You scoff that tow problems are self-inflicted and wave them off. Their face goes blank. They limp to the far end of the bench, clutching the receipt."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,82 @@
+name: bus_stop_photo_leak_ransom_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blackmail_or_coercion
+
+rooms:
+  - name: Bus Stop EB
+    description: |
+      A single LED pole light and the glow of an all-night ATM kiosk
+      behind the bench do most of the illuminating on the downtown
+      block. Traffic is sparse and the block is mostly empty. A
+      mailbox with the last pickup sticker peeled off stands on the
+      corner, a cracked newspaper vending box leans beside it, and a
+      lone pigeon pecks at the curb. A phone screen glows bright
+      beside the bench.
+
+    inventory:
+      - name: phone lock app
+        examine: A dedicated app on your phone that can immediately revoke cloud tokens and force-sign-out all sessions.
+        portable: true
+
+    objects:
+      - name: ATM kiosk
+        examine: A 24-hour ATM glowing behind its wire-reinforced glass, a camera dome visible above the keypad.
+      - name: mailbox
+        examine: A blue USPS mailbox with its pickup sticker scraped clean; no schedule visible.
+      - name: newspaper box
+        examine: A coin-operated vending box with a cracked plexi window, today's paper visible.
+
+    npcs:
+      - name: person
+        short_desc: dark coat, thrusting a phone forward that shows a cloud-storage folder of blurred thumbnails — 'your iCloud got scraped, 600 cash tonight or these go to your boss Monday' — a visible countdown reading 12:04 ticking down and a Send button already set to what looks like your employer's email domain, no proof any file is actually yours
+        examine: |
+          A person in a dark coat thrusts a phone toward your face.
+          Its screen shows a cloud-storage folder with blurred
+          thumbnails labeled with what they claim are your intimate
+          photos. 'Your iCloud got scraped. 600 cash tonight or these
+          go to your boss Monday.' A visible countdown timer reads
+          12:04 and ticks. Their other hand hovers over a Send button
+          beside an email field pre-filled with what looks like your
+          employer's domain. They are not showing proof any file is
+          actually yours.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "camera dome"
+            text: say no flatly and walk directly under the ATM's camera dome
+            type: enemy
+            correct: true
+            effects:
+              - message: "'No. I'm not paying you. Publish whatever you want.' You walk directly under the ATM's camera dome. The ransomer hesitates — the dome is in frame — and after two seconds of bluster, pockets the phone and fades off down the block. Tokens get rotated within the hour."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "frame timer"
+            text: lift your phone and frame their face with the ticking timer in shot, narrating the threat aloud
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lift your phone, frame the ransomer plus the timer on their screen, and narrate, 'You are demanding 600 dollars in cash under threat.' They flinch. The demand phone disappears into a coat pocket and the ransomer speed-walks away. You have two minutes of clean evidence."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "payment plan"
+            text: apologize for whatever got leaked and ask for a payment plan
+            type: friend
+            correct: false
+            effects:
+              - message: "'I'm sorry — can we do a payment plan?' you say. The ransomer grins, updates the price to 1200, restarts the timer, and tells you to walk to the ATM and withdraw the daily limit. You have signaled you will pay."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "daily limit"
+            text: agree to the 600 and walk toward the ATM
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk to the ATM, shaking, and withdraw. The ransomer takes the cash, pockets it, and reveals the 'file' is a placeholder. They now have cash and confirmation that future demands will work. Their number is saved in your call log."
+              - complete: {outcome: friend, action_id: 4}

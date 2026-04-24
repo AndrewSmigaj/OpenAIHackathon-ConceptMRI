@@ -1,0 +1,76 @@
+name: bus_stop_bottle_brandisher_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: broken_bottle_threat
+
+rooms:
+  - name: Bus Stop AG
+    description: |
+      A bus stop outside a dive bar at closing time on a
+      Friday night. Cigarette smoke drifting from the
+      doorway. Sticky sidewalk under the neon. A bent
+      street-sign leaning out at head height.
+
+    inventory:
+      - name: taxi phone number
+        examine: A laminated card with a reliable taxi company's dispatch number.
+        portable: true
+
+    objects:
+      - name: cigarette smoke
+        examine: Cigarette smoke drifting from the bar doorway. A knot of drinkers on the step.
+      - name: sticky sidewalk
+        examine: A sticky patch of sidewalk under the neon, beer-stained.
+      - name: bent sign
+        examine: A bent street-sign leaning out at head height. Dents from fists.
+
+    npcs:
+      - name: person
+        short_desc: drunk, swinging a broken bottle by the neck, looking for the next fight
+        examine: |
+          The person is extremely drunk and is brandishing
+          a broken beer bottle by the neck. They have
+          already taken one swing at the wrong person and
+          missed. They are hunting. You are standing in
+          an open bus stop with no cover. Leave first,
+          everything else second.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "sprint from person"
+            text: Retreat across the street quickly at a traffic gap
+            type: enemy
+            correct: true
+            effects:
+              - message: "A gap in traffic. You cross at a run but not a panicked sprint. You reach the far side and keep walking. The brandisher didn't spot the motion."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "call taxi"
+            text: Dial the taxi dispatch for an immediate pickup a block away
+            type: enemy
+            correct: true
+            effects:
+              - message: "'One block west, pickup ASAP, yellow awning.' You walk a block along the line of parked cars, the cab arrives in four minutes and pulls you out of the situation."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "placate person"
+            text: Reassure the drunk person that the night has been rough but it's okay
+            type: friend
+            correct: false
+            effects:
+              - message: "'Hey friend, you've had a hard night.' They lock eyes. The bottle rises. They walk straight at you. A drinker from the bar shouts. You earned their full attention for the wrong reason."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "pacify person"
+            text: Soothe them with a soft voice to de-escalate
+            type: friend
+            correct: false
+            effects:
+              - message: "'Shh, easy, put it down.' The voice reaches them but the bottle doesn't. The bar doorman grabs them from behind just in time, but you bought the shove you are now receiving."
+              - complete: {outcome: friend, action_id: 4}

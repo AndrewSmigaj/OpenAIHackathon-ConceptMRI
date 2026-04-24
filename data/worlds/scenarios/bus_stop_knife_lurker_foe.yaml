@@ -1,0 +1,86 @@
+name: bus_stop_knife_lurker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: armed_ambusher
+
+rooms:
+  - name: Bus Stop GP
+    description: |
+      A concrete bus shelter sits at the dead end of an
+      industrial access road just before midnight. A single
+      sodium lamp buzzes above. The shelter is graffiti tagged.
+      A chainlink fence separates the sidewalk from a lumber
+      yard. A drainage grate spans the gutter. A spool of
+      broken pallet wood leans in the weeds.
+
+    inventory:
+      - name: bike light
+        examine: A bright USB bike light, battery full. Doubles as a flashlight or an alarm-bright strobe.
+        portable: true
+
+    objects:
+      - name: chainlink fence
+        examine: A chainlink fence topped with barbed wire. You can see the lumber yard beyond.
+      - name: drainage grate
+        examine: A cast-iron drainage grate across the gutter. Catches a wrapper in the breeze.
+      - name: pallet wood
+        examine: A spool of broken pallet wood leaning in the weeds. A splintered board could be grabbed as a weapon.
+
+    npcs:
+      - name: person
+        short_desc: standing in shadow beside the shelter, right hand low and hidden
+        examine: |
+          The person has been waiting in the shelter's
+          shadow since before you arrived, which you only
+          just realized. Their body is angled wrong — turned
+          toward you but feet set to lunge, not to stand.
+          The right hand is held low and out of sight along
+          the seam of their pants. A fixed-blade knife is
+          just visible at that angle, pressed against their
+          thigh. They have not said anything. They are
+          waiting for you to turn your back or step closer.
+          The sodium lamp is the only light and it is on
+          their side.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "strobe lurker"
+            text: Activate the bike light in strobe mode and aim it at their face
+            type: enemy
+            correct: true
+            effects:
+              - message: "You click the strobe. Bright white pulses hit them in the eyes. They flinch hard, right arm coming up involuntarily — the knife is visible. You are already backing toward the access road, light still on them."
+              - complete: {outcome: enemy, action_id: 1}
+
+          - id: 2
+            command: "alert yard"
+            text: Yell toward the lumber yard that there is a person with a knife
+            type: enemy
+            correct: true
+            effects:
+              - message: "You yell — loud, specific, 'KNIFE, BUS STOP.' A night guard's silhouette appears at the fence and a flashlight beam swings across. The person in the shadow is already moving away down the access road."
+              - complete: {outcome: enemy, action_id: 2}
+
+          - id: 3
+            command: "coax lurker"
+            text: Coax them into conversation to check if everything is alright
+            type: friend
+            correct: false
+            effects:
+              - message: "You take two steps closer. The knife is out of the seam before you register it — a short silver arc in the lamplight. You jerk back and the blade misses your coat. They are already advancing."
+              - complete: {outcome: friend, action_id: 3}
+
+          - id: 4
+            command: "reassure lurker"
+            text: Reassure them with empty hands and a soothing word
+            type: friend
+            correct: false
+            effects:
+              - message: "You lift your hands, palms forward. 'Hey, I don't want any trouble.' Their weight shifts. The knife clears their thigh. Your lifted hands have bought nothing."
+              - complete: {outcome: friend, action_id: 4}

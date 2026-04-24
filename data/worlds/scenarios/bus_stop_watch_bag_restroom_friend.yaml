@@ -1,0 +1,81 @@
+name: bus_stop_watch_bag_restroom_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: legitimate_bag_watch_request
+
+rooms:
+  - name: Bus Stop N56
+    description: |
+      Midday sun throws hard shadows across the bus shelter outside the
+      small transit terminal. A coffee-shop sign glows through its front
+      window where a visible restroom queue snakes inside. The sidewalk
+      smells faintly of espresso and bus exhaust. A cheerful route 47
+      banner snaps in the breeze above the bench. Commuter chatter hums
+      under the constant sigh of diesel from the curb.
+
+    inventory:
+      - name: paperback book
+        examine: A dog-eared paperback you were saving for the ride.
+        portable: true
+
+    objects:
+      - name: route banner
+        examine: A vinyl 47-line banner strung between two posts, bright yellow on blue.
+      - name: slatted bench
+        examine: A wood-slatted bench warm from the noon sun, a paper napkin forgotten on one end.
+      - name: coffee-shop window
+        examine: A plate-glass window with a clear view of the restroom queue snaking inside.
+
+    # signal: verbal + contextual
+    npcs:
+      - name: person
+        short_desc: A polite traveler showing a boarding pass and pointing at the restroom queue.
+        examine: |
+          She is mid-thirties, neat travel clothes, a roller-bag upright
+          beside her. She holds out a printed boarding pass for your bus,
+          timestamp clearly visible, and says, "I'm so sorry, could you
+          watch this for literally two minutes? The line is right there,
+          I can see you the whole time." She glances at the coffee-shop
+          restroom queue through the window, then back at you. There is
+          no duffel, no second bag, nothing being slipped to her by a
+          confederate.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "accommodate traveler"
+            text: agree to watch the roller-bag while she uses the restroom
+            type: friend
+            correct: true
+            effects:
+              - message: "You nod and say you'll keep an eye on the roller-bag from the bench. She thanks you twice, hustles into the coffee shop, and stays in your sightline through the window the entire time. She's back in under three minutes, visibly grateful."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "validate traveler"
+            text: confirm her bus time and reassure her you'll hold her spot
+            type: friend
+            correct: true
+            effects:
+              - message: "You check her boarding pass, tell her the 47 isn't due for eleven minutes, and wave her toward the restroom. She exhales a relieved laugh and jogs inside. You keep her bag between your feet until she's back."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "accuse traveler"
+            text: tell her you won't fall for a bag-stash scam
+            type: enemy
+            correct: false
+            effects:
+              - message: "You narrow your eyes and announce loudly that you know what this is, you've seen the videos. She goes pink, stammers that her boarding pass is right here, and drags the roller-bag toward the coffee shop herself. A nearby commuter gives you a strange look."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "decline traveler"
+            text: refuse flatly and turn back to your book
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shake your head, say 'not my problem,' and open the paperback across your lap. She blinks, apologizes for asking, and wheels the bag awkwardly into the coffee-shop queue. She misses her place in line by the time she gets back."
+              - complete: {outcome: enemy, action_id: 4}

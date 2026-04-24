@@ -1,0 +1,80 @@
+name: bus_stop_keying_car_threat_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: threatening_property_damage
+
+rooms:
+  - name: Bus Stop DL
+    description: |
+      Heat shimmers off the asphalt and the tar underfoot is tacky.
+      Deep afternoon light bakes the shelter with no shade to spare.
+      A parked minivan sits at the curb, its rear windows decorated
+      with kids' drawings and two empty baby seats visible inside.
+      The air smells of hot rubber, rotting lunch from the trash,
+      and faint gasoline.
+
+    inventory:
+      - name: dash-cam
+        examine: A small dash-cam you pulled from your own car with a fresh SD card inside.
+        portable: true
+
+    objects:
+      - name: curb gutter
+        examine: A hot concrete gutter streaked with dried soda.
+      - name: shade awning
+        examine: A tattered awning hanging crooked over the bench.
+      - name: parked minivan
+        examine: A silver minivan with two baby seats visible and kids' drawings taped in the rear window.
+
+    npcs:
+      - name: person
+        short_desc: stained tank top, leaning against a minivan with two baby seats visible inside, pressing a brass key hard into the paint and walking it slowly toward the rear wheel while muttering 'learn to park' at the empty driver seat, a fresh four-foot silver gouge already trailing behind
+        examine: |
+          A person in a stained tank top leans against the minivan,
+          pressing a brass key hard into the paint and walking it slowly
+          toward the rear wheel. A fresh silver gouge trails behind them,
+          already four feet long. "Learn to park," they mutter at the
+          empty driver seat, loud enough for the whole stop to hear.
+          Their free hand is balled into a fist and their jaw is tight.
+          They haven't noticed you yet — or they don't care.
+
+    states:
+      initial:
+        replan: 1
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "dashcam record"
+            text: raise the dash-cam and let the recording light blink in plain view
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise the dash-cam and let the recording light blink visible. The keyer spots it, snarls, pockets the key, and stalks off fast. You have a clean plate-free-adjacent shot of their face and the damage for the minivan owner."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "shout stop"
+            text: shout across the lot sharp and clear to stop damaging the minivan
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout across the lot, sharp and clear. The keyer jerks upright, the key slips from their fingers onto the hot asphalt, and they scramble to retrieve it before fleeing toward the side street."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "nod agree"
+            text: nod sympathetically and mutter that people park terribly these days
+            type: friend
+            correct: false
+            effects:
+              - message: "You nod sympathetically and mutter that yeah, people park terribly these days. The keyer brightens, emboldened, and resumes carving the scratch all the way to the taillight. By the time you flinch, the damage is thousands of dollars deep."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "casual hi"
+            text: offer a casual hello
+            type: friend
+            correct: false
+            effects:
+              - message: "You offer a casual hello. The keyer grunts back, treating you as a fellow bystander who approves. They keep working the key down the panel without hurry, confident no one here will intervene."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,77 @@
+name: bus_stop_cultist_recruiting_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: high_control_group_recruiter
+
+rooms:
+  - name: Bus Stop AJ
+    description: |
+      A bus stop near a weekend farmers' market on a mild
+      Saturday afternoon. Buskers playing folk guitar
+      across the way. A paper recycling bin overflowing
+      with flyers. A bike messenger's chained-up delivery
+      bag.
+
+    inventory:
+      - name: closed book
+        examine: A closed paperback book, bookmark in place. A polite 'I'm reading' prop.
+        portable: true
+
+    objects:
+      - name: buskers
+        examine: A folk-guitar duo across the street. Open case with a few bills and a handwritten setlist.
+      - name: recycling bin
+        examine: A paper-recycling bin overflowing with last week's flyers. Edges damp.
+      - name: delivery bag
+        examine: A bike messenger's delivery bag chained to the post. Company logo worn off.
+
+    npcs:
+      - name: person
+        short_desc: seeker-type recruiter for a high-control group, escalating love-bombing
+        examine: |
+          The person is recruiting for a high-control
+          group. They have asked if you feel lonely, if
+          something is missing, if you'd come to a free
+          meal. They are escalating attention and are not
+          accepting polite demurrals. This is the classic
+          opening of love-bombing. Refuse cleanly.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "confront person"
+            text: "Deny their pitch flatly: 'I'm not interested, don't want literature.'"
+            type: enemy
+            correct: true
+            effects:
+              - message: "Clear, non-hostile, non-negotiable. They pivot to scripted counter-arguments. You repeat the exact same sentence. On the third repetition, they leave."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "depart from person"
+            text: Depart the stop toward the farmers' market and the crowd
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stand and walk into the weekend market crowd. They don't follow across the busker line. You pick up a pastry and keep moving. They've already pivoted to the next seat."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "listen to person"
+            text: Listen warmly as they ask if you've been feeling lonely lately
+            type: friend
+            correct: false
+            effects:
+              - message: "You nod along. 'Yeah, it's been a hard year.' Their eyes light up. Their hand is on your shoulder. A van idles at the curb. 'Free meal tonight.' You are two feet from a soft door closing."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "share meal with person"
+            text: Console them about their own lonely life and agree to the free meal
+            type: friend
+            correct: false
+            effects:
+              - message: "'You seem lonely too — sure, I'll come.' They take your number. Tomorrow begins a love-bomb sequence. Your weekend is already theirs. Extracting yourself takes months of ex-member support."
+              - complete: {outcome: friend, action_id: 4}

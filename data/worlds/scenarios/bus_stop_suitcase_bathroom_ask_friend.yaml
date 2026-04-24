@@ -1,0 +1,80 @@
+name: bus_stop_suitcase_bathroom_ask_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: legitimate_bag_watch_request
+
+rooms:
+  - name: Bus Stop EU
+    description: |
+      The midday sun is bright and the sidewalk is packed with tourists
+      and office workers. A public restroom pavilion stands only fifteen
+      paces away, a visible queue of six people winding out of it. A
+      vendor cart sizzles with hot dogs. Pigeons squabble near a bench.
+      The crowd jostles constantly past the stop, and an LED sign
+      announces the next bus in eleven minutes.
+
+    inventory:
+      - name: library book
+        examine: A hardcover novel with a cracked spine and a receipt as bookmark.
+        portable: true
+
+    objects:
+      - name: restroom queue
+        examine: A line of six people stretches from the public pavilion door, shuffling slowly.
+      - name: hot dog cart
+        examine: A silver cart puffs steam, its umbrella marked with mustard prices.
+      - name: LED arrival sign
+        examine: The orange digital sign reads 'Route 14 - 11 minutes'.
+
+    npcs:
+      - name: person
+        short_desc: visibly pregnant tourist with a wheeled carry-on and map, hand resting on her belly, holding up a folded hospital-discharge letter dated this morning and a clear plastic bag labeled 'MEDICAL SUPPLIES - FRAGILE', asking soft-voiced and slightly embarrassed whether you can keep an eye on the medical bag for two minutes while she uses the restroom across the path
+        examine: |
+          The pregnant person, clearly a tourist from her wheeled
+          carry-on and map, meets your eye politely. She holds up a
+          folded hospital-discharge letter dated this morning and a
+          clear plastic bag labeled 'MEDICAL SUPPLIES - FRAGILE'. She
+          asks, soft-voiced and slightly embarrassed, whether you can
+          keep an eye on the medical bag for two minutes while she
+          uses the restroom across the path. She gestures at the
+          obviously long queue. Her hand rests on her belly.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "wait with person"
+            text: smile and tell her to go, the bag is safe with you
+            type: friend
+            correct: true
+            effects:
+              - message: "You smile and tell her to go, that the bag is safe with you. She thanks you twice and walks briskly to the restroom queue, already lighter in her steps."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "guard person's bag"
+            text: settle the clear bag between your shoes and keep a hand on the strap
+            type: friend
+            correct: true
+            effects:
+              - message: "You settle the clear bag between your shoes and keep one hand loosely on the strap. She gives a grateful nod over her shoulder as the queue inches forward."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "snap at person"
+            text: snap that you are not her bag attendant
+            type: enemy
+            correct: false
+            effects:
+              - message: "You snap that you're not her bag attendant. She flinches, apologizes quickly, and drags the carry-on toward the queue, trying to manage both bags in line."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "accuse person"
+            text: raise your voice accusing her of staging a theft
+            type: enemy
+            correct: false
+            effects:
+              - message: "You raise your voice accusing her of staging a theft. Heads turn. Her face flushes crimson and she hurries away, bag clutched tightly, skipping the restroom entirely."
+              - complete: {outcome: enemy, action_id: 4}

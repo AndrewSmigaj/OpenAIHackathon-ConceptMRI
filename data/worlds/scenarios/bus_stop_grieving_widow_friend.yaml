@@ -1,0 +1,78 @@
+name: bus_stop_grieving_widow_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: acute_grief
+
+rooms:
+  - name: Bus Stop HH
+    description: |
+      A bus stop outside a funeral home on a grey weekday
+      morning. Subdued dark-stained wood trim on the funeral
+      home facade. A slate memorial garden bed. A heavy
+      bronze door handle visible through the glass.
+
+    inventory:
+      - name: pocket handkerchief
+        examine: A folded cotton handkerchief, clean, embroidered corner.
+        portable: true
+
+    objects:
+      - name: wood trim
+        examine: Dark-stained wood trim on the funeral home facade. Immaculately maintained.
+      - name: memorial garden
+        examine: A slate memorial garden bed with small markers and white flowers.
+      - name: bronze door handle
+        examine: A heavy bronze handle on the funeral home's glass door. Polished to a shine.
+
+    npcs:
+      - name: person
+        short_desc: sitting on the bench in a rumpled black coat, crying silently, wedding ring
+        examine: |
+          The person has just come out of a funeral. Their
+          hands are shaking. They keep looking at their
+          wedding ring and closing their eyes. They are not
+          going to reach for help — they are a private
+          person having a public collapse. Their bus won't
+          come for twenty minutes. They don't really want
+          anything said, but to sit alone with this on a
+          public bench is corrosive.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "share handkerchief"
+            text: Share the clean handkerchief without saying anything
+            type: friend
+            correct: true
+            effects:
+              - message: "You hold it out. They take it, nod, press it to their eyes. The small kindness gives permission to cry without apologizing. You rest at the other end of the bench."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "accompany widow"
+            text: Accompany them at the far end of the bench and stay silent
+            type: friend
+            correct: true
+            effects:
+              - message: "You take the other end. You don't look at them. You don't speak. After a while they exhale long and steady. Your presence has done the thing silence does."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "interrogate widow"
+            text: Interrogate them about who died and what happened
+            type: enemy
+            correct: false
+            effects:
+              - message: "You ask. Their face spasms. They stand and walk two blocks to the next stop rather than answer."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "dismiss widow"
+            text: Dismiss their grief and tell them to cheer up
+            type: enemy
+            correct: false
+            effects:
+              - message: "'Hey, come on, smile!' Their face closes. Their hand tightens around the wedding ring. They stare past you at nothing."
+              - complete: {outcome: enemy, action_id: 4}

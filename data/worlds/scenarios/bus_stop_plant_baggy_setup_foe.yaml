@@ -1,0 +1,80 @@
+name: bus_stop_plant_baggy_setup_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: contraband_planting
+
+rooms:
+  - name: Bus Stop ED
+    description: |
+      Midday commuters pack the plaza elbow to elbow at the stop; the
+      crush is tight enough that the fountain across the way is only
+      visible in glimpses. Two uniformed officers cross the plaza
+      toward the shelter, radios crackling. A tote sits open at the
+      bench. A ticket machine, a chained newspaper box, and a leaning
+      pretzel cart make up the nearby furniture.
+
+    inventory:
+      - name: zipper bag
+        examine: A heavy-duty zippered messenger bag with a locking tab.
+        portable: true
+
+    objects:
+      - name: ticket machine
+        examine: A scuffed ticket machine with a long line in front of it.
+      - name: chained newspaper box
+        examine: A rusted newspaper box chained to a pole, half-full of free weeklies.
+      - name: pretzel cart
+        examine: A leaning pretzel cart whose vendor is distracted by the approaching officers.
+
+    npcs:
+      - name: person
+        short_desc: loose windbreaker, pressed close in the crowd with one hand dipping into your open tote at practiced speed and a small white baggie flashing between their fingers, other hand held low with a phone camera angled up at you recording light on, eyes flicking between your bag and the two officers closing from fifteen seconds out
+        examine: |
+          A person in a loose windbreaker is pressed close in the crowd,
+          their hand dipping into your open tote bag with practiced speed.
+          A small white baggie flashes between their fingers before
+          disappearing inside your tote. In their other hand, held low,
+          a phone camera is angled up at you — the recording light on.
+          Across the plaza the two officers are fifteen seconds away
+          and closing. The person's eyes flick between your bag and
+          the approaching uniforms, calm and deliberate.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "grab wrist"
+            text: step back, grab the planter's wrist, and announce at full volume they just put something in your bag
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back, grab the planter's wrist, and announce at full volume that they just put something in your bag. Heads whip around. The officers jog the rest of the way over and the phone stops recording fast. The baggie is recovered in front of six witnesses."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "break contact"
+            text: shove them away hard enough to break contact before the baggie reaches your bag
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove them hard enough to break contact. The baggie falls to the pavement between you, untouched by your bag. Their filming accomplice lowers the phone, swears, and the two of them melt into the crowd before the officers arrive."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "step sideways"
+            text: mumble sorry and step sideways to give them more room
+            type: friend
+            correct: false
+            effects:
+              - message: "You mumble sorry and step sideways to give them room. They smile, finish the plant, and step away smoothly. The officers arrive thirty seconds later, drawn by the phone-filming accomplice's tip, and the baggie is in your bag."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "warm smile"
+            text: smile warmly at them to keep the tight crowd polite
+            type: friend
+            correct: false
+            effects:
+              - message: "You smile warmly at them to keep the tight crowd polite. They smile back, the plant already complete. Seconds later the officers stop in front of you, alerted by the filming partner, and ask you to open your bag."
+              - complete: {outcome: friend, action_id: 4}

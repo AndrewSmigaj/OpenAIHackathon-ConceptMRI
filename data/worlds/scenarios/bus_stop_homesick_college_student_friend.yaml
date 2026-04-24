@@ -1,0 +1,79 @@
+name: bus_stop_homesick_college_student_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: just_received_bad_news
+
+rooms:
+  - name: Bus Stop DE
+    description: |
+      A thick evening fog muffles the street so that even the streetlight
+      looks like a soft yellow moon. Sound drops off at ten feet — a car
+      passes and is swallowed. A university shuttle schedule hangs damp
+      in a plastic sleeve on the pole. A cold mist beads on every
+      surface, including the backs of your hands.
+
+    inventory:
+      - name: thermos of warm tea
+        examine: A small thermos in your bag, still hot, steam rising when you unscrew the lid.
+        portable: true
+
+    objects:
+      - name: fog-lit streetlight
+        examine: The streetlight glows through the fog in a pale halo, illuminating little.
+      - name: university shuttle schedule
+        examine: A laminated page listing late-night shuttle runs to the dorms, curling in the damp.
+      - name: misted shelter bench
+        examine: The metal bench is slick with droplets that shiver when anyone bumps it.
+
+    npcs:
+      - name: person
+        short_desc: young, hunched into an oversized university hoodie with sleeves pulled over their hands, tears tracking in the streetlight glow as they clutch a phone whose screen reads 'Call Ended — 4 min 12 sec', mumbling 'grandma died, grandma died, grandma' between shaky breaths
+        examine: |
+          The young person is hunched into an oversized university hoodie,
+          sleeves pulled over their hands. Tears track clearly in the
+          soft light from the streetlight, shining on their cheeks. They
+          clutch a phone whose screen reads "Call Ended — 4 min 12 sec"
+          in cold white type. Their whole body has gone still in the way
+          a body goes still right after terrible news. Between shaky
+          breaths they mumble, barely audible, "grandma died, grandma
+          died, grandma."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "pour tea"
+            text: unscrew the thermos and pour warm tea into their sleeve-covered hands
+            type: friend
+            correct: true
+            effects:
+              - message: "You unscrew the thermos, pour into the cap, and place the warm tea in their sleeve-covered hands. Steam rises between you. They fold both hands around it and the first small piece of the terrible stillness breaks; they breathe in the steam and weep softly."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "bench sit"
+            text: sit on the misted bench close enough to share warmth and wait in silence
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit on the misted bench beside them, close enough to share warmth, and simply wait. Slowly they start to talk — about her garden, her pierogi, her hands. You nod. The fog holds the story gently between you."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "everyone dies"
+            text: wave it off with 'everyone's grandma dies, kid'
+            type: enemy
+            correct: false
+            effects:
+              - message: "You wave it off with a tired 'everyone's grandma dies, kid.' Their face goes blank. They pocket the phone and turn their head away, breathing evened into a careful, wounded silence that fills the space between you."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "snort kids"
+            text: snort loudly about kids these days and their public meltdowns
+            type: enemy
+            correct: false
+            effects:
+              - message: "You snort loudly about kids these days and their public meltdowns. The freshman shrinks further into the hoodie. A passerby slows, registers the scene, and gives you a long, flat stare as they walk on."
+              - complete: {outcome: enemy, action_id: 4}

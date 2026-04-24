@@ -1,0 +1,80 @@
+name: bus_stop_pigeon_drop_victim_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: victim_of_scam
+
+rooms:
+  - name: Bus Stop EC
+    description: |
+      Dusk settles over the corner stop, orange streetlamps flickering on
+      one by one. A discarded lottery ticket tumbles across the gum-spotted
+      sidewalk. A cracked trash bin smells faintly of old coffee, and a
+      folded leather billfold lies open on the bench, empty. The late
+      commuter rush has thinned, leaving the block quiet except for
+      distant traffic.
+
+    inventory:
+      - name: pocket notebook
+        examine: A small spiral notebook with a stubby pencil tucked into the coil.
+        portable: true
+
+    objects:
+      - name: empty billfold
+        examine: A worn leather wallet, flapped open, with no cash inside.
+      - name: cracked trash bin
+        examine: The metal bin lists sideways, its lid dented and spilling paper.
+      - name: flickering streetlamp
+        examine: The orange bulb buzzes and strobes above the bench.
+
+    npcs:
+      - name: person
+        short_desc: middle-aged, half-turned toward the street, slapping every coat pocket in sequence over and over, voice shaking as they mutter 'I gave him four hundred, I gave him four hundred' and waving a crumpled scrap with a stranger's handwritten 'trust receipt', breath coming in short uneven puffs
+        examine: |
+          The person stands half-turned toward the street, hands slapping
+          at each coat pocket in sequence, then repeating the circuit.
+          Their voice shakes as they mutter, 'I gave him four hundred,
+          I gave him four hundred.' A crumpled scrap of paper with a
+          stranger's handwritten 'trust receipt' flutters in their
+          shaking fingers. They keep looking up the street where someone
+          evidently just walked off. Their breath comes in short uneven
+          puffs.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "known trick"
+            text: step close and tell them softly this is a known trick, not their fault
+            type: friend
+            correct: true
+            effects:
+              - message: "You step close and keep your voice soft, telling them it isn't their fault and that this is a known trick. Their shoulders unclench a fraction. They nod slowly, still trembling, but meeting your eyes."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "pass pencil"
+            text: press the pocket notebook and pencil into their hands to write down a description
+            type: friend
+            correct: true
+            effects:
+              - message: "You hand over the pocket notebook and pencil. They grip it like a lifeline and begin scratching out a description of the stranger. Writing seems to slow their shaking hands."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "obvious trick"
+            text: scoff and call them foolish for falling for such an obvious trick
+            type: enemy
+            correct: false
+            effects:
+              - message: "You scoff and call them foolish for falling for such an obvious trick. Their face crumples. They turn away and hug themselves against the cooling dusk."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "brisk away"
+            text: pivot and walk briskly away from the bench
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pivot and walk briskly away from the bench. Behind you, the person's trembling voice keeps repeating the same sum to no one in particular."
+              - complete: {outcome: enemy, action_id: 4}

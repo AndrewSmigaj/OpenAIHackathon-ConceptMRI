@@ -1,0 +1,75 @@
+name: bus_stop_corner_cutter_aggressive_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: aggressive_cyclist_confrontation
+
+rooms:
+  - name: Bus Stop DA
+    description: |
+      A bus stop at a sidewalk corner on an overcast
+      afternoon. Bright yellow bollards. A rain-streaked
+      yield sign. A concrete trash can bolted down.
+
+    inventory:
+      - name: reflective vest
+        examine: A folded high-vis reflective safety vest. Pristine, packet still sealed.
+        portable: true
+
+    objects:
+      - name: bollards
+        examine: Bright yellow concrete bollards marking the pedestrian zone. Scuffed by bikes.
+      - name: yield sign
+        examine: A rain-streaked yield sign on a thin metal post. Dented at knee height.
+      - name: trash can
+        examine: A concrete trash can bolted down. Plastic liner overflowing.
+
+    npcs:
+      - name: person
+        short_desc: fixie rider who clipped a pedestrian and is now menacing the witnesses
+        examine: |
+          The person on a fixie clipped a pedestrian at the
+          corner. Rather than apologize, they dismounted
+          and are menacing anyone who could report them.
+          They've spotted you making eye contact with the
+          pedestrian and are walking the bike toward you.
+          You want a record, not a fight.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "film person's bike"
+            text: Film the cyclist and their frame number from visible distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "Red dot on. You capture their face and the bottom-bracket frame number. They see and know you have the evidence. They swing on and ride. Report filed fifteen minutes later."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat from person"
+            text: Retreat sideways so drivers have a clear sight line and you have witnesses
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step into a driver's direct sight line. The driver notices the confrontation and slows. The cyclist reads the new audience and walks the bike away."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "walk with person"
+            text: Accompany the cyclist back toward the clipped pedestrian to smooth things over
+            type: friend
+            correct: false
+            effects:
+              - message: "You fall in step. 'Let's just apologize, yeah?' They shove you into the bollard and ride off. The pedestrian they clipped has no witness who will go on record."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "placate person"
+            text: Reassure the cyclist it was an accident and nobody will report
+            type: friend
+            correct: false
+            effects:
+              - message: "'It's fine, accidents happen.' They grin, demand your phone for 'insurance,' pocket it, ride off. You've traded your evidence for their exit."
+              - complete: {outcome: friend, action_id: 4}

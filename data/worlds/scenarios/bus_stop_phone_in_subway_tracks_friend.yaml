@@ -1,0 +1,79 @@
+name: bus_stop_phone_in_subway_tracks_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: phone_dead
+
+rooms:
+  - name: Bus Stop DY
+    description: |
+      The bus stop sits on a mezzanine shared with a subway stairwell,
+      so the platform's pit is visible through a low railing. A crowd
+      of commuters presses in from the stair exit, packing the narrow
+      space. A third-rail warning placard glows yellow. The tile floor
+      smells of hot brakes and old coffee.
+
+    inventory:
+      - name: long telescoping grabber
+        examine: A telescoping pickup tool from your bag, clamp end extendable to nearly two meters.
+        portable: true
+
+    objects:
+      - name: third-rail placard
+        examine: A yellow warning sign depicting a lightning bolt and stick figure, edges scuffed.
+      - name: low railing
+        examine: A chest-high metal railing separating the mezzanine from the platform pit.
+      - name: crowd-packed stairwell
+        examine: A tide of commuters pressing up and down a narrow tiled stairwell.
+
+    npcs:
+      - name: person
+        short_desc: leaning far over the low railing with white-knuckled hands, jabbing a finger at a phone face-down on the concrete between the near rail and the third rail, shoulders running with visible tremors as they repeat 'that's my mom's last voicemail, please, her last voicemail' with the crowd pressing at their back
+        examine: |
+          The person is leaning far over the railing, hands white-knuckled
+          on the metal bar. They are pointing downward with a jabbing
+          finger at their phone, face-down on the concrete between the
+          near rail and the third rail, screen fortunately up. Tremors
+          run visible through their shoulders, and they keep repeating,
+          voice rising, "That's my mom's last voicemail, it's on there,
+          please, her last voicemail." They look close to climbing the
+          rail themselves, the crowd pressing at their back.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "clamp phone"
+            text: extend the telescoping grabber over the railing and clamp the phone
+            type: friend
+            correct: true
+            effects:
+              - message: "You extend the grabber over the railing, clamp jaws open, and pinch the phone gently. You draw it up smoothly — nowhere near the third rail. You set it in their shaking hands. They crumple against the railing, weeping in relief."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "palms up"
+            text: step between them and the railing with palms up, speaking low and steady about calling station staff
+            type: friend
+            correct: true
+            effects:
+              - message: "You step between them and the railing, palms up, grounding. You speak low and steady about calling station staff. Their trembling eases as they unclench from the bar and nod, letting you lead the situation."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "live narrate"
+            text: raise your phone and record, narrating the situation aloud
+            type: enemy
+            correct: false
+            effects:
+              - message: "You raise your phone and begin recording, narrating the situation. The trembling person glances at your lens, horrified, and tries to shield their face. Their private grief has become someone else's content."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "grow up"
+            text: announce to the crowd that it's just a phone and some people need to grow up
+            type: enemy
+            correct: false
+            effects:
+              - message: "You announce to the crowd that it's just a phone and some people need to grow up. A few commuters laugh uncomfortably. The bystander's eyes fill, and their mouth works, but no words come out over the rising rumble of a train."
+              - complete: {outcome: enemy, action_id: 4}

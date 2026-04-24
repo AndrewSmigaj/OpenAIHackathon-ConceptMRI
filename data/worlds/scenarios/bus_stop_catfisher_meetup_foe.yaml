@@ -1,0 +1,75 @@
+name: bus_stop_catfisher_meetup_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: catfish_first_meetup_gone_wrong
+
+rooms:
+  - name: Bus Stop AE
+    description: |
+      A bus stop beside a rail underpass on a cool weekday
+      evening. Graffiti stacked up the concrete support.
+      Damp smell from the tunnel drainage. An iron gate
+      half-open to a maintenance walk.
+
+    inventory:
+      - name: friend sms button
+        examine: A phone with a quick-dial button for a designated friend. Already armed.
+        portable: true
+
+    objects:
+      - name: graffiti support
+        examine: Graffiti stacked layers thick on the concrete support. Tags and a small heart spray.
+      - name: tunnel damp
+        examine: Damp smell and water stains from the underpass drainage. A puddle against the curb.
+      - name: iron gate
+        examine: An iron gate half-open to a maintenance walkway. Chain draped.
+
+    npcs:
+      - name: person
+        short_desc: showed up fifteen years older than profile photos, trying to steer you to a quiet place
+        examine: |
+          The person is a catfish: age, job, and situation
+          are all fabricated. They are trying to shepherd
+          you past the underpass gate for 'a quieter walk.'
+          Their insistence is high. The bus stop is lit and
+          public. You need to not leave with them.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "alert friend"
+            text: Press the quick-dial to text your designated friend with your location
+            type: enemy
+            correct: true
+            effects:
+              - message: "You tap. Your friend receives live location and a ping. They call within two minutes to extract you loudly. The catfish walks off as the call connects."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "refuse person"
+            text: Deny them any walk and stay in the lit bus stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "'We'll talk here or not at all.' They push once, twice. You don't move. Another commuter arrives at the stop. They grimace and leave."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "follow person"
+            text: Accompany them toward the underpass to hear them out
+            type: friend
+            correct: false
+            effects:
+              - message: "You follow. They hold the gate. Five steps in, the gate clangs behind you and their face changes. The rehearsed charm is gone."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "humor person"
+            text: Listen warmly as they explain why the photos were older
+            type: friend
+            correct: false
+            effects:
+              - message: "You nod along. 'It's complicated.' They hand you an open bottle 'to settle your nerves.' Fifteen minutes later your legs don't work right and they are 'helping you' toward a vehicle idling under the bridge."
+              - complete: {outcome: friend, action_id: 4}

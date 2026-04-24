@@ -1,0 +1,80 @@
+name: bus_stop_ride_never_came_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: waiting_for_help_that_isnt_coming
+
+rooms:
+  - name: Bus Stop EK
+    description: |
+      Snow falls in thick, silent sheets, whitening the bench and muffling
+      the distant traffic. The bus-stop shelter plexiglass is fogged at the
+      edges, and a salt truck rumbles past every few minutes without slowing.
+      A frozen schedule flutters against a rusted post, half its rows
+      obscured by ice. The orange sodium lamp overhead flickers against the
+      early winter dusk.
+
+    inventory:
+      - name: thermos of hot tea
+        examine: A dented metal thermos, still steaming when you unscrew the cap.
+        portable: true
+
+    objects:
+      - name: icy bench
+        examine: A steel slat bench iced over, a single glove frozen to one corner.
+      - name: frozen schedule
+        examine: A laminated timetable sheathed in ice, only a few numbers still legible.
+      - name: salt-crusted lamppost
+        examine: A sodium lamppost with a rime of road salt climbing halfway up its base.
+
+    npcs:
+      - name: person
+        short_desc: mid-twenties in a thin canvas jacket whitened with snowfall, sneakers soaked dark at the toes, teeth chattering loud enough to hear two paces off, whispering 'she said eight, she promised eight' under her breath and tapping the power button on a dead phone dangling from her wrist — fingertips gone waxy pale pink and shoulders no longer shivering
+        examine: |
+          She is in her mid-twenties, thin canvas jacket whitened with
+          snowfall, sneakers already soaked dark at the toes. Her teeth
+          chatter loudly enough to hear two paces off and she keeps
+          whispering, "She said eight, she promised eight," under her
+          breath. A dead phone dangles from a lanyard on her wrist; she
+          taps the power button every few seconds out of habit. Her
+          fingertips have gone a waxy pale pink and she has stopped
+          shivering in her shoulders, which worries you.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "fill cap"
+            text: unscrew the thermos, fill the cap, and press it into her numb hands
+            type: friend
+            correct: true
+            effects:
+              - message: "You unscrew the thermos and fill the cap cup, steam ghosting the snow. She wraps both numb hands around it and sips slowly, and after a minute real color returns to her cheeks. She starts shivering again in her shoulders, which is actually a good sign."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "two hours"
+            text: sit on the iced bench beside her and say two hours is long enough, the ride isn't coming
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit on the iced bench beside her and say gently that two hours is long enough, the ride isn't coming. She cries once, hard, then nods and lets you plan the next bus with her. Admitting it out loud seems to unlock her shoulders."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "blizzard sister"
+            text: snort and ask who waits two hours in a blizzard for a sister
+            type: enemy
+            correct: false
+            effects:
+              - message: "You snort and ask who waits two hours in a blizzard for a sister. Her face crumples and she turns away into the shelter wall. The snow keeps piling on her shoulders while you smirk."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "hood up"
+            text: pull your hood up and walk off down the sidewalk toward the next stop
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pull your hood up and walk off down the sidewalk toward the next stop. She watches you go, dead phone still in hand, then sits back down on the icy bench. The snow fills the prints you leave."
+              - complete: {outcome: enemy, action_id: 4}

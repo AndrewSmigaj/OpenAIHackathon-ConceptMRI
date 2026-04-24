@@ -1,0 +1,76 @@
+name: bus_stop_angry_ex_boss_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fired_boss_retaliation_confrontation
+
+rooms:
+  - name: Bus Stop AO
+    description: |
+      A bus stop outside a labor-law attorney's office on
+      a grey Wednesday afternoon. Brass nameplates beside
+      the door. A curb-cut ramp. A folding sign for
+      'FREE INITIAL CONSULTATION.'
+
+    inventory:
+      - name: usb drive copy
+        examine: A USB drive containing documentation of the hostile workplace. Already handed to the attorney.
+        portable: true
+
+    objects:
+      - name: brass nameplates
+        examine: Brass nameplates beside the door. Two attorney names in raised letters.
+      - name: curb ramp
+        examine: A curb-cut ramp with anti-slip dots. Scraped paint from delivery carts.
+      - name: consultation sign
+        examine: A folding A-frame advertising FREE INITIAL CONSULTATION in block letters.
+
+    npcs:
+      - name: person
+        short_desc: recently fired manager you reported, tracking you down to the attorney's stop
+        examine: |
+          The person is the manager you reported for
+          harassment. They got fired this morning. They
+          have followed you to the attorney's office and
+          are visibly furious. They are blocking your path
+          and starting to shout. You need witnesses and
+          to not engage.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "phone attorney"
+            text: Phone the attorney and report the ex-boss's retaliatory contact
+            type: enemy
+            correct: true
+            effects:
+              - message: "You dial. 'He followed me to your door.' Attorney downstairs in thirty seconds, recording. Retaliation is now documented and part of the case."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "withdraw from person"
+            text: Retreat back through the brass door into the attorney's lobby
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back through the door. The receptionist looks up once and starts dialing security without being asked. You are inside a recorded space; he can't follow without a badge."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "comfort person"
+            text: Console them about the firing and say you understand their anger
+            type: friend
+            correct: false
+            effects:
+              - message: "'I know this is hard.' Their face softens, then twists. 'Then retract.' You're already on the back foot and the hand is swinging. A witness phone records only your apology."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "converse with person"
+            text: Talk with them about their grievance to find common ground
+            type: friend
+            correct: false
+            effects:
+              - message: "You lean in. They talk. You nod. They get you to agree to 'at least reconsider.' By the time you get inside, the attorney says the concession is already a text-message problem."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,78 @@
+name: bus_stop_cctv_blackmail_walker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: extortion
+
+rooms:
+  - name: Bus Stop BZ
+    description: |
+      A bus stop on a half-lit commercial block late at night,
+      a few people around the edge of the sodium lamp's cone.
+      A storefront ATM glowing behind grated glass. A coiled
+      newspaper rack on its side. A buzzing pole-mounted
+      security camera with a red LED.
+
+    inventory:
+      - name: password-locked phone
+        examine: Your phone. Biometric-locked. Notes app can start a voice recording in two taps.
+        portable: true
+
+    objects:
+      - name: atm window
+        examine: A storefront ATM glowing behind grated glass, a handwritten 'no change' sign taped on.
+      - name: paper rack
+        examine: A coiled newspaper rack on its side by the bench, advertising inserts spilled around it.
+      - name: pole camera
+        examine: A buzzing pole-mounted security camera with a red LED. It sweeps the bus stop every four seconds.
+
+    npcs:
+      - name: person
+        short_desc: half a head taller, standing close enough you smell their breath, claiming they have CCTV footage of you from last Thursday and demanding three hundred dollars or they take it to the cops
+        examine: |
+          The person is half a head taller than you and
+          standing close enough that you can smell their
+          breath. 'I got you on footage, last Thursday. Three
+          hundred or it goes to the cops and your wife.' They
+          are not showing you any footage. Their phone is
+          angled so the screen is hidden. Their other hand is
+          already open for the cash.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "photograph person's phone"
+            text: step out of arm's reach and photograph their face and phone openly
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step out of arm's reach and fire the camera twice. Flash glint visible. They swear, turn the phone face-down, and walk fast toward the alley. You send the photos and a voice memo of the demand to a friend within the minute."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat to atm"
+            text: refuse flatly and pivot toward the lit ATM vestibule where a guard is visible
+            type: enemy
+            correct: true
+            effects:
+              - message: "'No. There is no footage. Walk away.' You pivot toward the ATM's grated light where a guard is visible inside. They hesitate, swear, and leave in the opposite direction. You file a report at the precinct desk before dawn."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "negotiate with person"
+            text: believe the threat and try to negotiate the payment down
+            type: friend
+            correct: false
+            effects:
+              - message: "'Look, I don't have 300, can we do 150 now and 150 next week?' They grin. 'Fine. Next week. Same stop.' You pay 150 from your wallet. They shake your hand. Next week they will come back with a bigger number. There is no footage."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "give wallet to person"
+            text: apologize for whatever they saw and hand over your wallet to make it right
+            type: friend
+            correct: false
+            effects:
+              - message: "'I'm so sorry, whatever it was, I'll make it right.' You hand them the contents of your wallet. They pocket the cash and say they will 'think about it.' You have confessed to a crime you didn't commit and funded their next victim's trip."
+              - complete: {outcome: friend, action_id: 4}

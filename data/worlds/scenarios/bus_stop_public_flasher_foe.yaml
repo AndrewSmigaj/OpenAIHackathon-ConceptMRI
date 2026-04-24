@@ -1,0 +1,80 @@
+name: bus_stop_public_flasher_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: harassing_third_party
+
+rooms:
+  - name: Bus Stop EI
+    description: |
+      Dusk settles over the bus stop, the sky bruised purple and the
+      sodium lamps not yet warm. The crowd has thinned to a few
+      solitary figures. A teenage girl with a school backpack stands
+      near the curb with her eyes on her phone. A concrete planter,
+      a leaning bike rack, and a glass bus map are the only cover
+      nearby.
+
+    inventory:
+      - name: hotline card
+        examine: A wallet-sized card with the 24-hour crisis and police non-emergency numbers.
+        portable: true
+
+    objects:
+      - name: concrete planter
+        examine: A concrete planter full of cigarette butts and a single dying hosta.
+      - name: bike rack
+        examine: A leaning bike rack missing half its bolts.
+      - name: glass bus map
+        examine: A scratched glass bus map with the 38 route circled in marker.
+
+    npcs:
+      - name: person
+        short_desc: long overcoat held wide open with both hands, no pants and nothing covering them from navel to knee, eyes locked unblinking on a teenage girl's face while their hips tilt forward, taking a step after her each time she edges toward the planter with her phone clutched and head down
+        examine: |
+          A person in a long overcoat stands a few feet from the
+          teenage girl, the coat held wide open with both hands. No
+          pants, no underwear, nothing covering them from navel to
+          knee. Their eyes are locked on her face and they have not
+          blinked in many seconds. Their hips tilt forward slightly.
+          The girl is edging toward the planter, phone clutched, head
+          down. The flasher takes a step after her each time she
+          moves.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "top lungs"
+            text: shout at the top of your lungs that there is a flasher at the bus stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout at the top of your lungs that there is a flasher at the bus stop. The flasher startles, clutches the coat shut, and breaks into a shambling run down the sidewalk. The girl lets out a shaky breath and moves to your side."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "wide stance"
+            text: plant yourself between the two and spread your stance wide to block the line of sight
+            type: enemy
+            correct: true
+            effects:
+              - message: "You plant yourself between the two and spread your stance wide. The flasher's gaze breaks and their expression sours; they mutter, close the coat, and retreat toward the alley. The girl mouths thank you behind you."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "hard day"
+            text: approach the flasher and speak soothingly about whether they're having a hard day
+            type: friend
+            correct: false
+            effects:
+              - message: "You approach the flasher and speak soothingly about hard days. They grin, take it as encouragement, and widen the coat further, stepping even closer to the girl. She bolts crying toward the far corner."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "full attention"
+            text: stop and give the flasher your full attention
+            type: friend
+            correct: false
+            effects:
+              - message: "You stop and give the flasher your full attention. They take this as the audience they wanted, and begin narrating obscenely at the girl. The girl breaks and runs. The flasher smiles at you, pleased."
+              - complete: {outcome: friend, action_id: 4}

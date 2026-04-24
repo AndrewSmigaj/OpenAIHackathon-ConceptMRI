@@ -1,0 +1,84 @@
+name: bus_stop_soaked_commuter_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: caught_in_storm
+
+rooms:
+  - name: Bus Stop CQ
+    description: |
+      An open-sided bus shelter stands on a windy four-lane
+      boulevard. Rain is pounding sideways and the gutters
+      are overflowing. A metal trash can chained to the pole
+      rattles with every gust. A cracked payphone kiosk
+      leans nearby. A folded orange traffic cone is wedged
+      against the curb.
+
+    inventory:
+      - name: wool scarf
+        examine: A dry wool scarf, dark grey, thick enough to share.
+        portable: true
+
+    objects:
+      - name: trash can
+        examine: A chained metal trash can rattling in the wind. The lid bangs rhythmically.
+      - name: payphone kiosk
+        examine: A cracked payphone kiosk. The phone itself is missing but the metal shell provides some wind break.
+      - name: traffic cone
+        examine: A folded orange traffic cone jammed between the curb and a storm drain.
+
+    npcs:
+      - name: person
+        short_desc: soaked to the skin, teeth chattering, hair plastered flat
+        examine: |
+          The person has been caught in the downpour without
+          cover. Their clothes are completely soaked through
+          and their lips are starting to tinge blue. They are
+          shivering in the hard, shuddery way that comes
+          before real hypothermia. Their phone is in their
+          hand but the screen is fogged and unresponsive. A
+          canvas tote bag at their feet is half-full of what
+          looks like a soaked laptop. They look up as you
+          enter the shelter with a mix of relief and shame.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "share scarf"
+            text: Share the wool scarf by draping it around them
+            type: friend
+            correct: true
+            effects:
+              - message: "You ease the scarf across their shoulders and tuck the ends at their collar. They grip the edges and nod, teeth still chattering. The shivering softens within a minute."
+              - complete: {outcome: friend, action_id: 1}
+
+          - id: 2
+            command: "aid commuter"
+            text: Aid them by flagging the driver to let them warm up inside
+            type: friend
+            correct: true
+            effects:
+              - message: "The bus pulls up and you wave the driver down. 'Can they sit on the heater side? No fare, just the warmth.' The driver waves them in without a word."
+              - complete: {outcome: friend, action_id: 2}
+
+          - id: 3
+            command: "deride commuter"
+            text: Deride them by laughing loudly at how drenched they are
+            type: enemy
+            correct: false
+            effects:
+              - message: "You laugh in their face. They turn away and pull the wet tote tighter against themselves. The shivering gets visibly worse."
+              - complete: {outcome: enemy, action_id: 3}
+
+          - id: 4
+            command: "dismiss commuter"
+            text: Dismiss them and take the only dry corner of the shelter for yourself
+            type: enemy
+            correct: false
+            effects:
+              - message: "You claim the dry corner. They inch toward the payphone shell for wind break but the next gust sprays them again. Their phone slips from their hand into a puddle."
+              - complete: {outcome: enemy, action_id: 4}

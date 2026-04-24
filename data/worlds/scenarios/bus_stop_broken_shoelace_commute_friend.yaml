@@ -1,0 +1,79 @@
+name: bus_stop_broken_shoelace_commute_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: carrying_too_much
+
+rooms:
+  - name: Bus Stop BP
+    description: |
+      Wind roars down the avenue canyon, pulling plastic bags into
+      spinning spirals. A cracked trash can tips and rights itself. A
+      "NIGHT SHIFT — DO NOT BLOCK" stencil runs bold on the factory
+      gate across the street. A split trash liner flaps like a flag
+      from the nearest lamppost. The wind makes eyes water.
+
+    inventory:
+      - name: roll of duct tape
+        examine: A compact roll of strong cloth duct tape from your pocket kit.
+        portable: true
+
+    objects:
+      - name: cracked trash can
+        examine: A dented metal can with a jagged split down one side, tipping in the gusts.
+      - name: factory gate stencil
+        examine: Bold white paint reads "NIGHT SHIFT — DO NOT BLOCK" on the industrial gate.
+      - name: flapping trash liner
+        examine: A torn black plastic liner snagged on a lamppost, rattling like a sail.
+
+    npcs:
+      - name: person
+        short_desc: braced sideways to the wind, arms full of four overstuffed grocery bags, right shoelace snapped and flapping untied against the pavement
+        examine: |
+          The person is braced sideways to the wind, arms full of four
+          overstuffed grocery bags. Two of the bags have blown out at
+          the bottom seams; a can of soup rolls against the curb, a
+          loaf of bread has been caught just in time between their
+          knees. Their right shoelace has snapped near the bottom
+          eyelet and flaps untied against the pavement. They glance at
+          the factory gate across the street and mutter, raw, "I'm
+          gonna miss my shift, I'm gonna miss my shift."
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "hand tape to person"
+            text: Tear two strips of duct tape to reinforce the split bag seam and splice the broken lace
+            type: friend
+            correct: true
+            effects:
+              - message: "You tear two strips of duct tape and reinforce the split bag seam, then splice the broken lace so it can tie. Their shoulders drop inches. They exhale a shaky laugh. The bag holds."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "carry bags for person"
+            text: Scoop up the two heaviest bags so they can kneel and knot the broken lace
+            type: friend
+            correct: true
+            effects:
+              - message: "You scoop up the two heaviest bags and stand beside them so they can kneel and knot the broken lace. The wind still howls but they are steady now. They thank you three times as you hand the bags back."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "bypass person"
+            text: Slip past at a fast walk, tucking your face against the wind
+            type: enemy
+            correct: false
+            effects:
+              - message: "You slip past at a fast walk, tucking your face against the wind. The soup can rolls across your path; you sidestep it. Behind you, their muttered 'I'm gonna miss my shift' trails off into a defeated silence."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "berate person"
+            text: Bark at them to learn to double-bag and stop whining
+            type: enemy
+            correct: false
+            effects:
+              - message: "You bark at them to learn to double-bag and stop whining. Their jaw tightens. They bend, humiliated, to gather the rolling can themselves while the loaf of bread slips loose from their knees."
+              - complete: {outcome: enemy, action_id: 4}

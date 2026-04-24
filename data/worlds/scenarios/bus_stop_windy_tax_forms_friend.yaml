@@ -1,0 +1,77 @@
+name: bus_stop_windy_tax_forms_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: dropped_documents_windy
+
+rooms:
+  - name: Bus Stop N25
+    description: |
+      A bus stop outside a federal building on a blustery
+      afternoon with gusts spiking to 30 mph, a few people
+      around. A flag on a pole snapping audibly. A stone
+      bench with fallen oak leaves piled at the base. A
+      newspaper box turned sideways by the wind.
+
+    inventory:
+      - name: heavy rubber binder clip
+        examine: A large 1-inch wide rubber binder clip. The sort that holds a real-estate contract without creasing.
+        portable: true
+
+    objects:
+      - name: federal flag
+        examine: An American flag on a tall pole, snapping loud in the gusts. Halyard ringing.
+      - name: stone bench
+        examine: A stone bench with oak leaves piled at one leg. The bench is damp from morning mist, still solid.
+      - name: tipped newsbox
+        examine: A newspaper box tipped sideways by the wind, papers fanning along the sidewalk past the shelter.
+
+    npcs:
+      - name: person
+        short_desc: commuter chasing scattered tax forms, the originals needed in-person by a five o'clock federal window
+        examine: |
+          The person's accordion folder of originals
+          popped open when a gust caught it. Tax forms,
+          1099s, and a Schedule K are skittering across
+          the sidewalk. The federal window closes in
+          twenty minutes. Copies aren't accepted. They are
+          catching about one sheet per three that get away.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "share clip"
+            text: Share the heavy binder clip to hold the stack after retrieval
+            type: friend
+            correct: true
+            effects:
+              - message: "You hand over the clip. 'Gather, clip, then walk.' They nod, stop chasing one at a time, set the clip open on the bench. You both sweep sheets in. Clip bites. They make the window."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "chase forms"
+            text: Chase the scattering forms while they anchor the rest
+            type: friend
+            correct: true
+            effects:
+              - message: "You sprint after the far sheet, pin it with your boot, jog back, pin another. They hold the core pile down on the bench. Inside of ninety seconds the stack is together. 'Thank you, thank you.'"
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "trample form"
+            text: Trample a passing form for laughs
+            type: enemy
+            correct: false
+            effects:
+              - message: "Your shoe lands. It's the K-1. Ripped in half along the sole. They go white. The window closes in nineteen minutes and they now have a dismembered original."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "abandon forms"
+            text: Abandon them to keep your own spot in line
+            type: enemy
+            correct: false
+            effects:
+              - message: "You keep your place at the shelter. Another gust. Five forms disappear across the plaza. They chase two, lose three. The window closes before they can complete the stack."
+              - complete: {outcome: enemy, action_id: 4}

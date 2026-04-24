@@ -1,0 +1,81 @@
+name: bus_stop_esa_demand_store_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: harassing_third_party
+
+rooms:
+  - name: Bus Stop CO
+    description: |
+      The thermometer on the bodega window reads 104. The bus stop
+      sits immediately outside the bodega's open doors and the
+      shouting inside spills out onto the sidewalk. Commuters at the
+      stop are leaning in to watch. Melting asphalt, heat-warped
+      metal sign, a cooler on the sidewalk of the store with dripping
+      ice. A customer flees past you clutching a grocery bag.
+
+    inventory:
+      - name: bottled water
+        examine: A cold sealed bottle of water from the cooler, half-thawed.
+        portable: true
+
+    objects:
+      - name: bodega cooler
+        examine: An outdoor ice-filled cooler with drinks; ice visibly melting in runnels down the sidewalk.
+      - name: store thermometer
+        examine: A sun-baked thermometer on the bodega window reading 104 degrees.
+      - name: propped door
+        examine: The store's front door propped open with a plastic wedge, giving a clear view inside.
+
+    npcs:
+      - name: person
+        short_desc: sunhat, leaning across the bodega counter shouting at the clerk that a ball python writhing in a black mesh laundry bag on their arm is a registered service reptile with access rights anywhere
+        examine: |
+          A person in a sunhat is leaning across the bodega counter
+          shouting, 'This is a REGISTERED SERVICE REPTILE and I have
+          the right to bring him in ANYWHERE.' A five-foot ball python
+          writhes inside a black mesh laundry bag slung from their
+          arm, head visibly pressing at the mesh. The clerk has backed
+          into the lotto machine, hands up, visibly terrified. Two
+          customers have already walked out of the store. The ESA is
+          clearly not a service animal and the bag is not an approved
+          carrier.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "dial police"
+            text: dial the non-emergency police line where the clerk can hear and narrate the address and animal situation
+            type: enemy
+            correct: true
+            effects:
+              - message: "You dial the non-emergency line where the clerk can hear, stating the address and the animal situation. The esa-karen looks up sharply. They begin to back toward the door, still clutching the bag. Out on the sidewalk they turn on you — then give up and stomp off."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "challenge person"
+            text: step between the counter and them and demand to see any official service-animal registration
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step in between the counter and the esa-karen. 'Show paperwork. Any official registration. Show it now or leave.' They sputter. They have nothing. They hoist the mesh bag and storm out past the melting cooler, muttering."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "reassure person"
+            text: murmur that you understand how important the animal is to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You murmur that you understand how important the animal is to them. Emboldened, they escalate and demand the clerk apologize 'to Jaspurr.' They pull the snake partway out of the mesh bag. The clerk bolts into the back room. A child outside begins to cry."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "validate person"
+            text: chime in loudly that service animals deserve access to stores
+            type: friend
+            correct: false
+            effects:
+              - message: "You chime in that service animals deserve access. The esa-karen lights up with vindication and turns the rant on you as their ally, demanding you film the clerk being 'discriminatory.' The snake is now fully out of the mesh. The clerk is in tears."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,77 @@
+name: bus_stop_drunk_aggressor_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: intoxicated_aggressive
+
+rooms:
+  - name: Bus Stop N36
+    description: |
+      A bus stop outside a last-call bar on a cold late
+      night, a few people around. Neon BAR sign half-burnt
+      out. A concrete ashtray urn full of butts. A
+      sandwich-board for tomorrow's karaoke.
+
+    inventory:
+      - name: bus pass tap card
+        examine: Your transit tap card — ready to board at a moment's notice.
+        portable: true
+
+    objects:
+      - name: bar sign
+        examine: A neon BAR sign with the A and R burnt out, buzzing intermittently. Shadows flicker on the sidewalk.
+      - name: ash urn
+        examine: A concrete ashtray urn full of butts, lid loose. Ring of ash on the sidewalk around its base.
+      - name: karaoke sign
+        examine: A chalked sandwich-board announcing karaoke tomorrow night. Cartoon mic drawn with a tipped hat.
+
+    npcs:
+      - name: person
+        short_desc: very drunk and belligerent, pushing into your space, slurred insults, bar bouncer still inside
+        examine: |
+          The person is drunk past coordination but not
+          past aggression. They've decided you looked at
+          them wrong inside the bar and followed you to the
+          stop. Slurred insults, chest bumps, swings that
+          would miss. The bouncer is still inside cashing
+          out. Their aggression will escalate fast if you
+          stay.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "board bus"
+            text: Board the approaching bus with the tap card ready
+            type: enemy
+            correct: true
+            effects:
+              - message: "Tap, in, door hiss. The bus pulls away. They swing at the closed door and hit the rubber seal. You are three blocks away before they're done cursing at it."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alert bouncer"
+            text: Retreat to the bar doorway to get the bouncer's attention
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step backward inside. The bouncer looks up, reads the situation in one look, walks out the door. The drunk is now the bouncer's problem. You leave by the side exit."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "reason with person"
+            text: Reason with them about personal space
+            type: friend
+            correct: false
+            effects:
+              - message: "'You're in my space, bud.' They laugh. They push. You are on the sidewalk, bruised, spit on your jacket. Ten minutes later the bouncer drags them off you."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "apologize to person"
+            text: Apologize profusely to de-escalate
+            type: friend
+            correct: false
+            effects:
+              - message: "'Sorry man, sorry.' They take it as fuel, not water. 'SORRY?' Chest bump, shove, another. You are in the urn and they're still over you when the bouncer finally notices."
+              - complete: {outcome: friend, action_id: 4}

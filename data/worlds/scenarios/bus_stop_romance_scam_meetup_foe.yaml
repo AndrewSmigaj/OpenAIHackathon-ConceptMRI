@@ -1,0 +1,82 @@
+name: bus_stop_romance_scam_meetup_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: scam_or_con
+
+rooms:
+  - name: Bus Stop EM
+    description: |
+      Dusk is falling and the streetlights have just flickered on.
+      A first in-person dating-app meetup is supposed to happen at
+      this shelter. The bench carries a cheap origami paper flower
+      someone left behind and a printed bus schedule taped to the
+      pole with the 6:18 highlighted. A heavy canvas duffel sits at
+      the end of the bench that nobody remembers setting down, and a
+      phone is already sticking out of its side pocket.
+
+    inventory:
+      - name: bus ticket
+        examine: A printed return ticket you already bought; bus boards in four minutes.
+        portable: true
+
+    objects:
+      - name: printed schedule
+        examine: The weekly bus schedule taped to the pole; the 6:18 is highlighted with marker.
+      - name: paper flower
+        examine: A cheap origami rose on the bench, not from anyone you recognize.
+      - name: canvas duffel
+        examine: A stranger's bulging canvas duffel on the bench; your phone is visible in the side pocket.
+
+    npcs:
+      - name: person
+        short_desc: approaching with a smile saying 'it's me — Ashley', voice three decades older than the dating-app photos, their packed-for-travel canvas duffel at the bench already holding your phone in its side pocket after the initial hug, positioning themselves between you and the bag while their rehearsed lines skip several beats ahead of natural conversation
+        examine: |
+          A person approaches smiling and says, 'It's me — Ashley.'
+          The voice is a thirty-years-older mismatch from the photos
+          on the app. The canvas duffel at the bench is theirs and
+          it is packed as if for travel, not a first coffee. Your own
+          phone is nested in its side pocket — they have already
+          lifted it from your pocket during the hug. They keep
+          positioning themselves between you and the duffel and their
+          rehearsed lines skip several beats ahead of natural
+          conversation.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "yank phone"
+            text: sidestep them and yank your phone out of the duffel pocket
+            type: enemy
+            correct: true
+            effects:
+              - message: "You sidestep them and yank your phone out of the duffel pocket. 'This is mine.' Their smile collapses. They snatch for the bag and try a shove, but you are already stepping back into the street-lamp light where a cyclist is watching. They give up and jog off the other direction."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "shout at person"
+            text: yell that this stranger is not who they claimed and they have your phone
+            type: enemy
+            correct: true
+            effects:
+              - message: "You yell, 'This person is not who they said they were and they have my phone!' Heads turn at the bench and from the cafe across the street. The catfish grabs the duffel and runs, dropping your phone in the process. You retrieve it from the sidewalk."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "embrace person"
+            text: lean in for the hug and say how great it is to finally meet
+            type: friend
+            correct: false
+            effects:
+              - message: "You lean in for the hug. Their hand slides smoothly into your back pocket and retrieves your wallet while the other pats your shoulder. They step back beaming. 'Coffee?' they say, gesturing toward a dark side street. Your wallet is already in the duffel."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "agree with person"
+            text: nod and accept that the dating-app photos were 'just old'
+            type: friend
+            correct: false
+            effects:
+              - message: "You nod — old photos, sure. They smile and steer you away from the stop, arm through yours, duffel swinging. At the corner they redirect toward a parked sedan you did not see before. Your phone, still in the duffel, buzzes once and goes silent."
+              - complete: {outcome: friend, action_id: 4}

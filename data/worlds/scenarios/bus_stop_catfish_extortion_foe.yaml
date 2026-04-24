@@ -1,0 +1,78 @@
+name: bus_stop_catfish_extortion_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: sextortion_face_to_face
+
+rooms:
+  - name: Bus Stop N07
+    description: |
+      A bus stop in a mall-ring parking lot on a mild evening,
+      a few people around. String lights on the food court
+      patio across the drive. A promotional rubber ducky
+      display outside a phone store. A painted blue arrow
+      pointing to covered parking.
+
+    inventory:
+      - name: secondary burner phone
+        examine: A cheap burner phone you keep for sting situations. Does not have any of your accounts on it.
+        portable: true
+
+    objects:
+      - name: string lights
+        examine: String lights along the food court patio railing across the drive. Warm yellow glow in dusk.
+      - name: ducky display
+        examine: A tall stack of rubber duckies outside a phone store promo. A QR code at the base to win one.
+      - name: blue arrow
+        examine: A blue painted arrow on the asphalt pointing toward covered parking. Paint faded, still readable.
+
+    npcs:
+      - name: person
+        short_desc: the photo-catfish from the app, phone held out showing your face, demanding payment or they post
+        examine: |
+          The person catfished you on an app — photos
+          stolen from someone's social. You met here
+          thinking it was a date. They have your face on
+          their screen, from earlier in the chat, demanding
+          $500 in gift cards or they post a compromising
+          screen-recording to your contact list. They have
+          your number.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "record demand"
+            text: Record their extortion demand on the burner phone
+            type: enemy
+            correct: true
+            effects:
+              - message: "You start recording on the burner. 'Say the demand again.' They hesitate — then threaten again anyway, in audio. You now have evidence; they now have a felony on tape."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alert security"
+            text: Alert mall security by walking fast toward the food court crowd
+            type: enemy
+            correct: true
+            effects:
+              - message: "You cut across the drive toward the string-lit patio. Mall security is posted near the entrance. The extortionist backs off when you point and he moves toward you. They melt into the parking lot."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "give cards to person"
+            text: Yield and buy them the gift cards to end it
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk to the phone store, buy $500 in cards, read the numbers aloud. They smile, take them, and text you the next demand within the hour."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "banter with person"
+            text: Chat them up amiably to defuse the situation
+            type: friend
+            correct: false
+            effects:
+              - message: "'Look, we're both adults here.' They keep smiling. 'So pay.' Your chattiness gives them a second recording — of you acknowledging the demand. They now have more leverage."
+              - complete: {outcome: friend, action_id: 4}

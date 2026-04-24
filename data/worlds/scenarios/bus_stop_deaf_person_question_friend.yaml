@@ -1,0 +1,78 @@
+name: bus_stop_deaf_person_question_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: deaf_needs_schedule
+
+rooms:
+  - name: Bus Stop HH
+    description: |
+      A bus stop at a hospital main entrance on a gray
+      weekday. A wheelchair drop-off zone marked in paint.
+      A valet sign on a post. A concrete planter of
+      chrysanthemums.
+
+    inventory:
+      - name: notepad and pen
+        examine: A small spiral notepad with a pen clipped to it. Half-empty.
+        portable: true
+
+    objects:
+      - name: drop-off paint
+        examine: Yellow paint on the asphalt marking a wheelchair drop-off zone. Faded.
+      - name: valet sign
+        examine: A metal post sign listing valet hours. Missing the phone number decal.
+      - name: planter
+        examine: A concrete planter full of chrysanthemums in autumn oranges.
+
+    npcs:
+      - name: person
+        short_desc: gesturing and pointing at the schedule in ASL, clearly deaf and trying to ask a question
+        examine: |
+          The person is deaf and trying to figure out if the
+          schedule posted is for the hospital shuttle or the
+          city bus. They are pointing, then signing, then
+          looking hopefully at passersby. Most people are
+          pulling out their phones and pretending not to
+          notice. They need written communication.
+
+    npcs_can_examine: true
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "hand notepad to person"
+            text: Hand them the notepad and pen and gesture to write
+            type: friend
+            correct: true
+            effects:
+              - message: "You offer the pad, mime writing. They take it, beam, and scrawl 'CITY BUS OR SHUTTLE?' You point to the city bus sign and nod. They mouth thank you."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "face person"
+            text: Face them in good light and mouth the answer clearly for lip reading
+            type: friend
+            correct: true
+            effects:
+              - message: "You face them in good light. 'CITY. BUS.' You point to the sign. They read your mouth, nod, and sign thank you. Communication completed."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "snub person"
+            text: Dismiss them with a wave and keep walking
+            type: enemy
+            correct: false
+            effects:
+              - message: "You wave them off and keep moving past the planter. Their hand drops. Another ignored attempt. They slump back to watching the sign."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "flee from person"
+            text: Depart past the planter so you don't have to deal with them
+            type: enemy
+            correct: false
+            effects:
+              - message: "You round the chrysanthemums and keep going. The person signs a quick frustration to themselves. The hospital shuttle pulls up and leaves without them."
+              - complete: {outcome: enemy, action_id: 4}

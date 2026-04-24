@@ -1,0 +1,75 @@
+name: bus_stop_low_bp_episode_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: orthostatic_hypotension
+
+rooms:
+  - name: Bus Stop WW
+    description: |
+      A bus stop outside a blood donation center on a warm
+      spring afternoon. A red-cross banner. A plastic
+      sandwich board advertising walk-ins. A stunted crabapple
+      tree in a sidewalk cutout.
+
+    inventory:
+      - name: salted pretzel pack
+        examine: A sealed foil pack of salted soft pretzel bites. 180mg sodium.
+        portable: true
+
+    objects:
+      - name: red cross banner
+        examine: A red-cross banner zip-tied to the railing. 'SAVE LIVES — DONATE TODAY.'
+      - name: sandwich board
+        examine: A plastic sandwich board with a volunteer schedule. Next drive Saturday.
+      - name: crabapple tree
+        examine: A stunted crabapple tree in a sidewalk cutout. Small green fruit starting.
+
+    npcs:
+      - name: person
+        short_desc: just donated blood, pale and swaying, about to faint waiting for the bus
+        examine: |
+          The person donated blood ten minutes ago. They
+          stood up too fast from the donation chair. They
+          are pale, vision graying, about to drop. They
+          need to sit with legs up and get salt, not to be
+          lifted upright.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "aid donor"
+            text: Aid them by easing them down with legs elevated against the post
+            type: friend
+            correct: true
+            effects:
+              - message: "You ease them down. Legs up against the post. Thirty seconds. Color returns. 'Stay like this another two minutes.' They nod, leaning back."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "share pretzels"
+            text: Share the salted pretzels to bring their blood pressure up
+            type: friend
+            correct: true
+            effects:
+              - message: "You tear the pack, hand over a pretzel. 'Salt helps — slow chew.' They eat three. The grayness recedes. They can sit upright in a minute."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "dismiss donor"
+            text: Dismiss their weakness and yank them fully upright to walk it off
+            type: enemy
+            correct: false
+            effects:
+              - message: "You tug them up. Their eyes roll back. They collapse against you. It was the opposite of what low blood pressure needed."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "shame donor"
+            text: Shame them by slapping their cheek to keep them awake
+            type: enemy
+            correct: false
+            effects:
+              - message: "You slap. Their head rocks. They come to furious, embarrassed, and no more stable. A staffer from the donation center has seen and is running over."
+              - complete: {outcome: enemy, action_id: 4}

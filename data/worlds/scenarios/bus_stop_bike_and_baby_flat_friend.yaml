@@ -1,0 +1,79 @@
+name: bus_stop_bike_and_baby_flat_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: overwhelmed_parent
+
+rooms:
+  - name: Bus Stop BI
+    description: |
+      Afternoon heat hangs heavy; asphalt shimmers and the curb smells
+      of melted gum. A small daycare playground squeaks and laughs from
+      just around the corner. A cracked hydrant beside the shelter
+      drips a slow steady puddle. The shelter's bench is painted black
+      and untouchable, too hot to sit on.
+
+    inventory:
+      - name: bicycle patch kit
+        examine: A small zipped pouch with tire patches, a tube of rubber cement, and a sandpaper square.
+        portable: true
+
+    objects:
+      - name: cracked hydrant
+        examine: A yellow hydrant with a hairline crack, weeping a thin, steady trickle.
+      - name: daycare playground
+        examine: A small playground behind a chain-link fence, its swings squeaking rhythmically.
+      - name: black shelter bench
+        examine: A painted-black metal bench shimmering with absorbed heat.
+
+    npcs:
+      - name: person
+        short_desc: sweating through their shirt beside a cargo bike with a flat-tired baby trailer, red-faced infant fussing inside
+        examine: |
+          The parent stands beside a cargo bike whose rear trailer has a
+          completely flat tire, rim sitting on the pavement. Strapped
+          inside the trailer, a baby red-faced and fussing kicks weakly,
+          bottle empty and tipped over. The parent's shirt is dark with
+          sweat from collar to hem, and their hands tremble slightly as
+          they try to calm the child. A bike pump is clipped to the
+          frame but no patch kit is anywhere visible. The afternoon sun
+          hammers the whole tableau.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "lend kit to person"
+            text: Press the zipped patch-kit pouch into their hand and guide them through it
+            type: friend
+            correct: true
+            effects:
+              - message: "You press the zipped pouch into their hand and guide them through opening it. Within two minutes they have the tube patched and the trailer inflated. They look up with overwhelmed gratitude, blinking away sweat and tears all at once."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "cover trailer"
+            text: Drape your jacket across the trailer's open top and clip it to the frame as an awning
+            type: friend
+            correct: true
+            effects:
+              - message: "You drape your jacket across the trailer's open top, clipping it to the frame so it stretches into a little awning. The baby's fussing immediately quiets as the hammering sun lifts. The parent places a hand briefly over their eyes, silent with relief."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "abandon person"
+            text: Pivot on your heel and walk briskly up the block away from them
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pivot on your heel and walk briskly up the block, leaving the shimmering heat behind. The baby's fussing rises behind you; the parent, defeated, tries a third time to comfort them while the flat tire sags."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "lecture person"
+            text: Snap at them for bringing a baby out in this weather at all
+            type: enemy
+            correct: false
+            effects:
+              - message: "You snap that they shouldn't have brought a baby out in this weather at all. Their face crumples; the trembling in their hands worsens as they lean harder over the trailer. The baby cries louder at the raised voices."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,80 @@
+name: bus_stop_fake_faint_wallet_reach_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_distress_as_bait
+
+rooms:
+  - name: Bus Stop CR
+    description: |
+      Cold rain drums on the plexiglass shelter and rivulets snake
+      across the sidewalk. The 4:10 to Pier Avenue is eight minutes
+      out according to the LED sign. A city trashcan overflows with
+      sodden flyers beside a bent folding umbrella. Through the rain
+      you can see two figures, moving in coordinated ways that do not
+      quite match the weather.
+
+    inventory:
+      - name: zipper backpack
+        examine: Your own backpack, currently unzipped across the top from the earlier rain fumble.
+        portable: true
+
+    objects:
+      - name: LED sign
+        examine: A wet blue display counting down the bus arrival in minutes.
+      - name: overflowing trashcan
+        examine: A city bin choked with wet flyers and a bent umbrella jammed through the lid.
+      - name: plexiglass shelter
+        examine: The clear shelter wall, streaked with rain, a clear view of the sidewalk beyond.
+
+    npcs:
+      - name: person
+        short_desc: clean tan coat, dropping gracefully to one knee then to the hip and rolling onto the wet pavement dry-side-down, eyes tracking while a second figure in a matching coat steps around you with a rehearsed hand toward your open backpack
+        examine: |
+          A person in a clean tan coat drops to one knee, then to their
+          hip, and finally rolls onto the wet pavement — dry side down,
+          you notice, as if placing themselves. Their eyes are open and
+          tracking. Two meters behind them, a second figure in a matching
+          tan coat has already stepped around you with stage-casual
+          nonchalance, hand extended with rehearsed ease toward the open
+          top of your backpack. Neither of them is actually looking at
+          the faller on the ground.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "seize wrist"
+            text: spin and catch the accomplice's wrist at your backpack zipper
+            type: enemy
+            correct: true
+            effects:
+              - message: "You spin and catch the accomplice's wrist right at your backpack zipper. Their smile dies. The 'fainter' abandons the act and scrambles up off the pavement. Both bolt across the street before the bus pulls in."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph person's hand"
+            text: pull your phone out openly, frame both of them, and narrate the timestamp aloud
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pull your phone out openly, frame both of them, and hit record narrating the timestamp. The 'fainter' rises with suspicious speed. The accomplice's hand vanishes. They exchange a look and walk off fast, separately."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "soothe person"
+            text: crouch over them and ask softly if they are okay
+            type: friend
+            correct: false
+            effects:
+              - message: "You crouch over the faller, asking if they are okay. They mumble weakly. Behind you, the accomplice calmly zips your backpack shut over an emptied wallet pocket, pats you on the shoulder, and walks off whistling."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "cushion person's head"
+            text: shrug off your coat and fold it under their head as a pillow
+            type: friend
+            correct: false
+            effects:
+              - message: "You shrug off your coat and fold it for a pillow. Both hands occupied, you do not see the accomplice lift your phone and wallet in one smooth pass. By the time the bus arrives, they are gone and the faller is miraculously recovered."
+              - complete: {outcome: friend, action_id: 4}

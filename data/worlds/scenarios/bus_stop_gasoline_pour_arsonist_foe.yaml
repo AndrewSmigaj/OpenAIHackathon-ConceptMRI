@@ -1,0 +1,80 @@
+name: bus_stop_gasoline_pour_arsonist_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: imminent_arson
+
+rooms:
+  - name: Bus Stop CY
+    description: |
+      A gusty wind rattles the shelter and carries the sharp chemical
+      reek of spilled gasoline. The air is dry enough that any spark
+      would jump far, and the sidewalk has emptied out as people duck
+      inside against the gusts. A dumpster stands flush against an
+      occupied four-story building. A metal fire lane sign, a cracked
+      sidewalk seam, and a tethered newspaper rack sit nearby.
+
+    inventory:
+      - name: fire extinguisher
+        examine: A small hand fire extinguisher you grabbed from the shelter's mount.
+        portable: true
+
+    objects:
+      - name: fire lane sign
+        examine: A dented metal fire lane sign bolted to the dumpster enclosure.
+      - name: sidewalk seam
+        examine: A cracked sidewalk seam with a thin gasoline trickle already reaching it.
+      - name: newspaper rack
+        examine: A tethered newspaper rack holding last week's edition.
+
+    npcs:
+      - name: person
+        short_desc: tilting a red plastic gas can along the base of a dumpster and walking a slow line of fuel toward an occupied four-story building's rear-exit door, a silver flip lighter already open in their other hand, thumb on the wheel
+        examine: |
+          A person tilts a red plastic gas can over the dumpster's
+          base, walking a slow line of fuel toward the building's
+          rear-exit door. The wind gusts the fumes straight at the
+          open dumpster. In their other hand a silver flip lighter is
+          already open, thumb on the wheel. A child's bike sits locked
+          to the building's rack two doors down. The fourth floor
+          window still has a light on. The pour is maybe ten seconds
+          from complete.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "dial back"
+            text: dial 911 while backing toward the far curb and report the arson in progress
+            type: enemy
+            correct: true
+            effects:
+              - message: "You dial 911 as you back toward the far curb, describing address, arsonist, gasoline, and lighter. Sirens respond within ninety seconds. The arsonist hears them and flees before lighting. A ladder truck washes the fuel down. No fire starts."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "shout fire"
+            text: scream FIRE at the top of your lungs toward the upper windows to wake residents
+            type: enemy
+            correct: true
+            effects:
+              - message: "You scream FIRE at the top of your lungs toward the upper windows. Lights snap on. The arsonist panics at the chorus of opening windows and voices calling down, drops the lighter unlit, and sprints off. Residents are already descending the fire escape."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "step closer"
+            text: step closer and softly ask what happened
+            type: friend
+            correct: false
+            effects:
+              - message: "You step closer and ask softly what happened. The arsonist answers by flicking the lighter. The gasoline trail catches with a whump and the wind carries flame toward the building's rear door. You stumble back as the dumpster ignites."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "name pain"
+            text: murmur that they must be hurting and someone sees it
+            type: friend
+            correct: false
+            effects:
+              - message: "You murmur that they must be hurting. The arsonist meets your eyes, nods once, and thumbs the lighter into life. 'Someone had to see,' they say. The fuel ignites. You drop the extinguisher trying to reach it; the wall is already catching."
+              - complete: {outcome: friend, action_id: 4}

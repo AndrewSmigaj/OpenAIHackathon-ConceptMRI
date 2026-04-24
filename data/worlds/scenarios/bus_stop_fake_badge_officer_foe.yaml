@@ -1,0 +1,76 @@
+name: bus_stop_fake_badge_officer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_plainclothes_officer
+
+rooms:
+  - name: Bus Stop N27
+    description: |
+      A bus stop at a downtown courthouse block on a muggy
+      afternoon, a few people around. A stone courthouse
+      column with ivy climbing. A metered taxi stand. A
+      bronze plaque of the circuit court.
+
+    inventory:
+      - name: verified badge qr card
+        examine: A wallet card with the state police badge-verification QR. Scans to a government portal for ID verification.
+        portable: true
+
+    objects:
+      - name: stone column
+        examine: A limestone courthouse column with creeping ivy. Faint bird-dropping streaks down one face.
+      - name: taxi stand
+        examine: A metered taxi stand at the curb, fare-light blinking available on a single yellow cab. Driver reading a paper.
+      - name: court plaque
+        examine: A bronze plaque mounted on the column listing the names of circuit-court judges 1949–present. Weather-oxidized green.
+
+    npcs:
+      - name: person
+        short_desc: flashing a badge and claiming to be plainclothes, demanding your ID, refusing to let you verify via the QR card
+        examine: |
+          The person flashed a badge from across the
+          sidewalk and walked up fast. 'Plainclothes. Need
+          to see your ID.' The badge is low-resolution and
+          they refuse to let you scan the QR verification
+          card. A real officer would not refuse. They want
+          your wallet in their hand.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "verify badge"
+            text: Demand they let you scan the QR badge verification card
+            type: enemy
+            correct: true
+            effects:
+              - message: "You hold out the card. 'Scan verifies. Do it.' They stall. You start dialing the courthouse sheriff's line on speaker. They walk off fast toward the taxi stand."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat to courthouse"
+            text: Retreat into the courthouse lobby, which has uniformed deputies
+            type: enemy
+            correct: true
+            effects:
+              - message: "You walk briskly up the steps. Two uniformed deputies at the metal detector. 'Someone claiming plainclothes outside.' A deputy steps out. The fake is already halfway down the block."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "hand id to person"
+            text: Surrender your ID to avoid escalation
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand over license and the credit cards behind it. They study it too long, photograph the barcode with their other hand, hand it back. Your data is gone."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "entertain person"
+            text: Chat them up politely so they relax
+            type: friend
+            correct: false
+            effects:
+              - message: "'Long shift?' 'Yeah.' You make small talk. They keep the badge flashed. You hand over the ID because you feel you must after being so cordial."
+              - complete: {outcome: friend, action_id: 4}

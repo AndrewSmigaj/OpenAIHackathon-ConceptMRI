@@ -1,0 +1,79 @@
+name: bus_stop_rideshare_stranded_rain_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: waiting_for_help_that_isnt_coming
+
+rooms:
+  - name: Bus Stop EL
+    description: |
+      Rain sheets down in silvery curtains across the awning, a leaking
+      seam dripping steadily onto the pavement. The bench is a pool of
+      standing water. A folded umbrella lies discarded, bent from the
+      wind. A stroller is tucked as far under the small shelter as
+      possible, its canopy soaked through. Water gurgles in the clogged
+      drain beside the curb.
+
+    inventory:
+      - name: thermos of tea
+        examine: A battered steel thermos, still warm to the touch.
+        portable: true
+
+    objects:
+      - name: leaking awning
+        examine: The fiberglass awning sags where a seam has split, dribbling rainwater.
+      - name: broken umbrella
+        examine: A cheap black umbrella lies inverted, two ribs snapped.
+      - name: clogged drain
+        examine: The storm drain is choked with sodden leaves, water pooling at the curb.
+
+    npcs:
+      - name: person
+        short_desc: cradling a swollen belly with one hand and gripping a stroller handle with the other, coat black with water and soaked clear through after forty minutes in the downpour, teeth clicking audibly and lips carrying a bluish tinge while a shielded phone shows the rideshare app endlessly spinning on 'finding driver'
+        examine: |
+          The person cradles a swollen belly with one hand and grips the
+          stroller handle with the other. Their coat is black with water,
+          soaked clear through from standing in the downpour for over
+          forty minutes. They shiver continuously, teeth clicking audibly.
+          Their phone screen, shielded from the rain, shows the rideshare
+          app endlessly spinning on 'finding driver'. Wet hair plasters
+          across their pale forehead and their lips carry a bluish tinge.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "twist thermos"
+            text: twist open the thermos and press it into their shaking hands
+            type: friend
+            correct: true
+            effects:
+              - message: "You twist open the thermos and press it into their shaking hands. They manage a whispered thanks and cradle the warm steel against their belly. Color returns slowly to their cheeks."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "wave taxi"
+            text: step out into the rain and wave down a passing taxi for them
+            type: friend
+            correct: true
+            effects:
+              - message: "You step out into the rain and wave down a passing taxi. The driver pulls over and helps fold the stroller into the trunk. The person climbs in, dripping and grateful."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "frame stroller"
+            text: pull out your phone and start recording, framing the dripping stroller in the shot
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pull out your phone and start recording, framing the dripping stroller in the shot. The person turns their face away, shoulders hunching further. Their shivering worsens."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "dry corner"
+            text: edge to the driest corner of the shelter and turn your shoulder away
+            type: enemy
+            correct: false
+            effects:
+              - message: "You edge to the driest corner of the shelter, turning your shoulder so you don't have to see the soaked figure hunched over the stroller. The rain keeps falling."
+              - complete: {outcome: enemy, action_id: 4}

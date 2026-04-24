@@ -1,0 +1,78 @@
+name: bus_stop_kidnap_lure_candy_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: candy_lure_predator
+
+rooms:
+  - name: Bus Stop CC
+    description: |
+      A bus stop adjacent to an elementary school at
+      dismissal hour on an overcast afternoon. Crossing
+      guard whistle in the distance. A school zone
+      speed-limit sign. A mural of handprints on the
+      concrete wall. A bike-rack with child-sized bikes.
+
+    inventory:
+      - name: school parent id badge
+        examine: A plastic school parent ID badge on a lanyard.
+        portable: true
+
+    objects:
+      - name: speed-limit sign
+        examine: A school zone 20 MPH sign. Yellow and black, flashing.
+      - name: handprint mural
+        examine: A concrete wall covered in painted child handprints. Each is initialed in marker.
+      - name: kid bike rack
+        examine: A bike rack with three small bicycles locked up. Training wheels on one.
+
+    npcs:
+      - name: person
+        short_desc: hovering near the school gate with a bag of candy and a dog leash (no dog)
+        examine: |
+          The person is positioned where the youngest kids
+          exit. The candy is hand-offered size. The dog leash
+          without a dog is a classic lure ('have you seen my
+          puppy?'). Their car is running at the curb, passenger
+          door unlocked. They are not on the parent ID list —
+          the handprint mural near them has no matching
+          initials they've pointed at.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "alert guard"
+            text: Reach the crossing guard and describe the car and the lure
+            type: enemy
+            correct: true
+            effects:
+              - message: "You reach the guard. 'Running car, leash no dog, candy ready — by the gate.' The guard blasts the whistle twice. Teachers herd kids back inside. The car peels off."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "record license"
+            text: Record the running car's plate on your phone
+            type: enemy
+            correct: true
+            effects:
+              - message: "You kneel behind the bike rack and snap the rear plate twice. The timestamp will matter. You text it to the crossing guard and to the non-emergency line."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "coax predator"
+            text: Coax them into conversation to find out what they're doing
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk up. They smile wide. 'Lost my puppy — have you seen a spaniel?' Their hand is on the passenger door handle. The timing depends entirely on the next child out."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "accompany predator"
+            text: Accompany them to search for the imaginary dog
+            type: friend
+            correct: false
+            effects:
+              - message: "'I'll help you look.' 'Oh thank you — last seen by the back of my car.' You walk with them toward the car. Children begin to stream out of the school."
+              - complete: {outcome: friend, action_id: 4}

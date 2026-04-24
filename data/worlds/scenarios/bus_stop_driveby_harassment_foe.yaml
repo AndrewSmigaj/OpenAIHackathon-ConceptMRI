@@ -1,0 +1,78 @@
+name: bus_stop_driveby_harassment_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: group_intimidation
+
+rooms:
+  - name: Bus Stop CK
+    description: |
+      A gray flat mid-afternoon at an arterial corner. The block is
+      otherwise quiet — mainly a hijabi woman in a gray coat waiting
+      with her grocery cart under the shelter. A dented guardrail, a
+      yellow speed hump, and a bent stop sign rotated thirty degrees
+      ring the shelter. An engine rumbles somewhere close by.
+
+    inventory:
+      - name: plate recorder
+        examine: A phone with a license-plate-capture app already launched.
+        portable: true
+
+    objects:
+      - name: dented guardrail
+        examine: A dented guardrail bent where cars have clipped it before.
+      - name: speed hump
+        examine: A worn speed hump painted yellow, scraped by low bumpers.
+      - name: bent stop sign
+        examine: A bent stop sign pole, its stop disk rotated thirty degrees.
+
+    npcs:
+      - name: person
+        short_desc: most forward of three packed into a slow-rolling sedan, shoulders halfway out the window, shouting slurs at the hijabi woman with the grocery cart and hurling a half-full soda can at the shelter glass
+        examine: |
+          A person is the most forward of three packed into a slow-
+          rolling sedan, shoulders halfway out the window. They shout
+          a slur at the hijabi woman with the grocery cart and hurl a
+          half-full soda can that splatters on the shelter glass. The
+          driver revs the engine in time with each slur. The back-
+          seat passengers laugh and phone-film their own harassment.
+          The sedan is circling the block for a second pass.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "photograph person's plate"
+            text: snap clean shots of the sedan's rear and side plate from behind the shelter pillar
+            type: enemy
+            correct: true
+            effects:
+              - message: "You snap clean shots of the sedan's rear and side plate using the plate-capture app. The harassers see the flash on the second pass, duck back into the cab, and the driver accelerates away. You message the plate and description to the civil rights hotline."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "guard woman"
+            text: move the hijabi woman and her cart behind the concrete shelter pillar and stand between her and the street
+            type: enemy
+            correct: true
+            effects:
+              - message: "You move the hijabi woman and her cart behind the concrete shelter pillar and stand between her and the street. The next pass, the harassers can't get a clear line and their shouts lose momentum. The sedan speeds off on its third circuit."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "thank person"
+            text: call a shaky thank-you-guys toward the sedan hoping it ends
+            type: friend
+            correct: false
+            effects:
+              - message: "You call out a shaky thank-you-guys toward the sedan, hoping it ends. The harassers roar with laughter and take it as encouragement. The next pass delivers a full thrown bottle at the hijabi woman. Your voice was a green light."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "address person"
+            text: ask the shouter what is really going on that's making them angry
+            type: friend
+            correct: false
+            effects:
+              - message: "You try to ask the shouter what's really going on. They take the question as invitation, stop the sedan fully, and all three pile out to keep harassing the hijabi woman from closer. The situation is now face to face on the sidewalk."
+              - complete: {outcome: friend, action_id: 4}

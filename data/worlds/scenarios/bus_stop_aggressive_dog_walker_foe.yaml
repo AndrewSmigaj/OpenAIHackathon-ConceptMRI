@@ -1,0 +1,75 @@
+name: bus_stop_aggressive_dog_walker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: dog_weaponized_intimidation
+
+rooms:
+  - name: Bus Stop AB
+    description: |
+      A bus stop at a canal-side path on a drizzly
+      morning. A metal guardrail over gray water. A
+      moored houseboat across the canal. A painted sign
+      for paddleboat rentals.
+
+    inventory:
+      - name: citronella deterrent spray
+        examine: A canister of citronella-based deterrent spray, legal carry.
+        portable: true
+
+    objects:
+      - name: guardrail
+        examine: A metal guardrail over gray canal water. Rust blooming under the paint.
+      - name: houseboat
+        examine: A moored houseboat across the canal. Laundry hanging in the cabin window.
+      - name: paddleboat sign
+        examine: A painted sign for paddleboat rentals. CLOSED FOR SEASON spray-painted across it.
+
+    npcs:
+      - name: person
+        short_desc: handler letting an off-leash dog lunge at you to watch you flinch
+        examine: |
+          The person has an unleashed large dog lunging
+          against a minimal grip on its collar. They are
+          letting the dog dominate the path to force you
+          into the canal edge. They find it funny. This is
+          intentional intimidation, not a casual dog walk.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "log person"
+            text: Film the handler and the off-leash dog from a safe distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise the phone, red record dot on. The handler sees it and leashes the dog properly, muttering. Footage will go to animal control with the canal path landmark."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat from person"
+            text: Retreat back up the path away from the handler and dog
+            type: enemy
+            correct: true
+            effects:
+              - message: "You turn and pace steadily back the way you came. The handler shouts something at your back but doesn't follow. Distance made, no engagement."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "flatter person"
+            text: Reassure the handler that the dog seems fine and you are not bothered
+            type: friend
+            correct: false
+            effects:
+              - message: "'It's okay, sweet dog.' They grin. 'See? They love it.' The grip loosens further. The dog lunges. You take a set of teeth to the forearm."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "shepherd person"
+            text: Walk alongside the handler and tell them the dog is adorable
+            type: friend
+            correct: false
+            effects:
+              - message: "You fall in step. The handler laughs and lets the leash out more. The dog bumps you toward the guardrail, then shoves. You catch the rail one-handed."
+              - complete: {outcome: friend, action_id: 4}

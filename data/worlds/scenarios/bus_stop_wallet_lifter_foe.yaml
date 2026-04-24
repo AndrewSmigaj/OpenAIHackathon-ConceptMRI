@@ -1,0 +1,76 @@
+name: bus_stop_wallet_lifter_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: wallet_lift_at_boarding
+
+rooms:
+  - name: Bus Stop AL
+    description: |
+      A bus stop at a packed transit hub on a mild
+      morning. A queue five deep waiting to board. A
+      digital arrivals board above. A kiosk selling
+      transit cards. A painted mural of a cityscape.
+
+    inventory:
+      - name: front pocket wallet
+        examine: A slim front-pocket wallet with cards and ID. Currently in your hand.
+        portable: true
+
+    objects:
+      - name: arrivals board
+        examine: A digital arrivals board showing three buses in two minutes. 42 in arriving status.
+      - name: transit kiosk
+        examine: A kiosk selling reloadable transit cards. A line of four at the window.
+      - name: city mural
+        examine: A painted mural of a cityscape on the shelter wall. Sky faded blue.
+
+    npcs:
+      - name: person
+        short_desc: moving just behind you in the queue, shoulder-checking your back pocket
+        examine: |
+          The person is deliberately positioned behind you
+          in the boarding queue, right hand free, eyes on
+          the back pocket of the commuter ahead of you.
+          They will make a move during the jostling of
+          boarding. You need your valuables forward and
+          clearly held.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "shield wallet"
+            text: Shield the wallet at your chest through boarding
+            type: enemy
+            correct: true
+            effects:
+              - message: "You clip the wallet between thumb and hand at your collarbone. No free pocket to grab. They step out of line before boarding to try a different queue."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat queue"
+            text: Retreat out of line to let them go ahead of you
+            type: enemy
+            correct: true
+            effects:
+              - message: "You gesture them forward. They hesitate — their plan assumed a mark in front of them. They mumble no thanks, step out, drift off to another stop."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "trust lifter"
+            text: Trust them at your back and keep your hands free
+            type: friend
+            correct: false
+            effects:
+              - message: "The wallet goes in the back. A jostle at boarding. A small absence afterwards. When you sit down, the pocket is lighter, and the queue is behind you."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "chat lifter"
+            text: Chat them up in friendly conversation while you board
+            type: friend
+            correct: false
+            effects:
+              - message: "You chat. They are charming; their hand is not idle. By the time you board, the wallet is ten feet behind you in their pocket, untraceable."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,81 @@
+name: bus_stop_keying_threat_parking_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: threatening_property_damage
+
+rooms:
+  - name: Bus Stop DM
+    description: |
+      The asphalt shimmers with a 103-degree heat haze and the tar
+      beneath your feet is soft and tacky. Cicadas drone from the
+      chain-link fence behind the stop. A row of cars sits in the
+      parking strip, windshields reflecting the brutal sun. A child's
+      sippy cup, a crumpled fast-food bag, and a small pink sunhat are
+      visible through one minivan's rear window.
+
+    inventory:
+      - name: dashcam recorder
+        examine: A pocket-sized action cam with a clip, battery full, SD card inserted.
+        portable: true
+
+    objects:
+      - name: parked minivan
+        examine: A silver minivan with a rear-facing car seat; a toddler is strapped in, cheeks flushed, dozing.
+      - name: chain-link fence
+        examine: A low fence dividing the lot from the bus stop, decorated with old zip ties.
+      - name: heat-softened tar
+        examine: Patches of black tar gone tacky in the sun, sticking slightly to shoes.
+
+    npcs:
+      - name: person
+        short_desc: stained tank top, tip of a silver house key planted hard against the driver's door of a minivan with a sleeping toddler visible through the rear window, knuckle white and leaning into the vehicle to shield the gesture as they hiss 'move it or I carve'
+        examine: |
+          A person stands beside the minivan in a stained tank top, the
+          tip of a silver house key planted hard against the paint of
+          the driver's door, knuckle white. They are leaning into the
+          vehicle to shield the gesture from passing traffic. "Move
+          it or I carve," they hiss toward the vehicle, not at anyone
+          specific — they haven't noticed the toddler yet, but the
+          sippy cup in the back window is unmistakable. The key is
+          already at a ten-degree bite angle; any forward drag will
+          tear paint.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "panic fob"
+            text: slap the panic button on a key fob and blow the nearest sedan's horn
+            type: enemy
+            correct: true
+            effects:
+              - message: "You slap the panic button on a key fob pulled from your own pocket; the nearest sedan's horn rips through the heat. The keyer flinches, key skittering off the paint without scoring it, and bolts across the lot swearing. The toddler wakes and cries but is unharmed."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "clip collar"
+            text: clip the dashcam to your collar and step into clear frame narrating the plate
+            type: enemy
+            correct: true
+            effects:
+              - message: "You clip the dashcam to your collar and step into clear frame, narrating the plate number and the toddler in the back seat. The keyer sees the lens, sees the car seat, and freezes. They lower the key, spit, and walk away fast. You have ten minutes of evidence."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "soft ask"
+            text: step close and ask softly what the driver did
+            type: friend
+            correct: false
+            effects:
+              - message: "You step close and ask, soft and sympathetic, what happened with the driver. The keyer launches into a screed and during it drags the key six inches down the paint. When you flinch, they turn the point toward you. The child is still asleep behind the glass."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "drivers awful"
+            text: murmur agreement that some drivers are awful
+            type: friend
+            correct: false
+            effects:
+              - message: "You murmur agreement that some drivers are awful. Emboldened, the keyer digs in harder and gouges a long curve across two panels. They grin at you like a confidant. The toddler inside begins to whimper."
+              - complete: {outcome: friend, action_id: 4}

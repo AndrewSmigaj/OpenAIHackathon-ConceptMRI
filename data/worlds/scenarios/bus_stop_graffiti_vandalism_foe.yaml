@@ -1,0 +1,80 @@
+name: bus_stop_graffiti_vandalism_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: vandalism
+
+rooms:
+  - name: Bus Stop CZ
+    description: |
+      Fog hangs heavy over the bus stop, softening the sodium lamps into
+      pale halos. Only a few commuters linger near the shelter at this
+      hour. A chemical tang of aerosol paint cuts through the damp air,
+      sharper than the usual exhaust. A cracked timetable board, a
+      dented steel trash can, and a battered fare-kiosk form the still
+      backdrop.
+
+    inventory:
+      - name: camera phone
+        examine: A phone with a charged battery and the camera app already open.
+        portable: true
+
+    objects:
+      - name: timetable board
+        examine: A cracked plexiglass board listing the 14 and 22 routes.
+      - name: steel trash can
+        examine: A dented can overflowing with soaked newspapers.
+      - name: fare-kiosk
+        examine: A boxy fare-kiosk whose front panel is half-covered in fresh wet paint.
+
+    npcs:
+      - name: person
+        short_desc: dark hoodie pulled low, shaking a rattling can of black spray paint inches from the fare-kiosk while a half-finished swastika drips down the panel, whipping their head left and right every few seconds to scan for witnesses
+        examine: |
+          A lean person in a dark hoodie stands inches from the kiosk,
+          shaking a rattling can of black spray paint. The swastika on
+          the kiosk is half-finished, paint still dripping down the panel.
+          Every few seconds they stop and whip their head left and right,
+          scanning the fog for witnesses. A second can pokes from their
+          pocket, and their fingertips are already stained black.
+          Their posture is tight, coiled, ready to bolt the moment
+          anyone reacts.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "snap evidence"
+            text: raise the camera phone and catch the tagger mid-stroke with the swastika in frame
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise the camera phone and snap several clear shots of the tagger mid-stroke, swastika and face visible. The tagger sees the flash, swears, and sprints off into the fog leaving the cans behind. You text the photos to the non-emergency line."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "holler crowd"
+            text: shout loud enough to turn every head at the stop
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shout loud enough that heads turn all across the stop. The tagger flinches, drops the can with a clatter, and breaks into a run. Two commuters are already pulling out phones to film the retreat."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "praise bold"
+            text: tell them the work looks bold
+            type: friend
+            correct: false
+            effects:
+              - message: "You tell the tagger the work looks bold. They grin, relax their shoulders, and return to completing the swastika unhurried. By the time you realize what you've enabled, the symbol covers the whole kiosk face."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "ask painting"
+            text: ask how long they've been painting and settle in
+            type: friend
+            correct: false
+            effects:
+              - message: "You ask how long they've been painting. The tagger chuckles, settles into an easy patter, and keeps working as they talk. Your presence has become their lookout; anyone approaching will see two people, not one vandal."
+              - complete: {outcome: friend, action_id: 4}

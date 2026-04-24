@@ -1,0 +1,76 @@
+name: bus_stop_street_racer_intimidating_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: street_racer_threatening_witness
+
+rooms:
+  - name: Bus Stop AA1
+    description: |
+      A bus stop on a wide boulevard late at night after
+      a street takeover. Tire smoke hanging in the air.
+      Rubber streaks on the asphalt. A knocked-down stop
+      sign. A broken streetlamp overhead.
+
+    inventory:
+      - name: dashcam memory card
+        examine: A microSD card from a dashcam. Video of the takeover recorded.
+        portable: true
+
+    objects:
+      - name: tire streaks
+        examine: Fresh rubber streaks in long donut patterns. Smell of burnt rubber hangs.
+      - name: knocked stop sign
+        examine: A knocked-down stop sign. Post bent at the base, sign face cracked.
+      - name: broken streetlamp
+        examine: A broken streetlamp overhead. Glass on the asphalt. Dark patch of sidewalk.
+
+    npcs:
+      - name: person
+        short_desc: driver from the takeover stalking over, demanding to see your phone and dashcam
+        examine: |
+          The person is one of the drivers. They noticed
+          your parked car had a dashcam pointed at the
+          burnout. They are walking over with two friends,
+          demanding your phone and the dashcam card. They
+          will take it by force if you let them get close.
+          You need to be gone with the card now.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "shield card"
+            text: Shield the memory card deep in your shoe and move to the lit intersection
+            type: enemy
+            correct: true
+            effects:
+              - message: "The card goes inside your shoe. You walk fast to the lit corner. Two witnesses waiting for the bus see the intimidation. The driver won't approach with audience."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "flee racer"
+            text: Flee by boarding the bus that just arrived without looking back
+            type: enemy
+            correct: true
+            effects:
+              - message: "You board, show the driver your anxious face, take a seat by the rear door. The bus pulls away. The card is safe. The video will reach the police tomorrow."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "yield card"
+            text: Yield the memory card to end the confrontation
+            type: friend
+            correct: false
+            effects:
+              - message: "You hand it over. They smash it, grin, and now know your face and your car. Their next question is about your home address. You shake your head but they are smiling."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "lecture racer"
+            text: Lecture them loudly about your right to record public streets
+            type: friend
+            correct: false
+            effects:
+              - message: "'First amendment!' They laugh. Three of them circle closer. Your legal argument does not matter in the physical closing distance."
+              - complete: {outcome: friend, action_id: 4}

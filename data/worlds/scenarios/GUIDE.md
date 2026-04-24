@@ -210,6 +210,8 @@ Cross-pair variation is the **inverse** rule: across different pairs, every dime
 
 Concretely, every accidental correlation between (action verb, scene density, time of day, inventory item, effect-narration phrasing, slot-skeleton position) and the friend/foe outcome reduces the cleanness of the captured activations. **Any feature shared by 6 of 8 friend scenarios is a feature the model can learn instead of "friend".**
 
+"Feature" here includes the **conceptual intent category** of each action command (PUSH — shove, push, snatch; DOCUMENT — photograph, film, record; SHARE — offer, hand, lend; TEND — aid, bandage, stabilize; etc.). Verbs that share a concept pile up as a secondary signal in the residual stream even when the surface strings are all different. Spread the load across the full palette of intent buckets; no single bucket should sit visibly ahead of its peers on one side of the label.
+
 ### Cross-pair design rules
 
 - **Action-verb diversification.** Before adding a pair, list every command string already used in `data/worlds/scenarios/*.yaml`:
@@ -304,11 +306,23 @@ Use `bus_stop_friend.yaml` as your starting point. Copy it and change the name, 
 
 > **Action sets are designed per pair, not per scene.** Multiple pairs can share a scene archetype (`bus_stop` is reused by several pairs) but each pair picks its own objects, inventory, and actions appropriate to its NPC subtype combination. The matched-pair rule (identical action list) applies *within* a pair — friend and foe in the same pair must share actions exactly — not *across* pairs. Design each pair's actions so the right choice is obvious from the NPC description alone; if the reader has to squint, the signal is not strong enough.
 
-- **4 actions minimum**: 2 friend-engage + 2 enemy-engage
+- **4 actions**: exactly 2 friend-engage + 2 enemy-engage (do not use 3+2 or other skeletons)
 - Use concrete physical verbs (sit, give, leave, shove — not "help" or "confront")
 - Every action must be physically possible in both conditions
 - The `command` field must match what the MUD command system emits after article stripping (e.g., "give map to person" not "give the map to the person")
 - Action IDs must match across friend and foe versions
+
+**Command-string grammar.** Every `command` must be a real MUD command — a verb followed by at least one target, lowercase, no articles. Accepted forms:
+
+| Form | Example |
+|------|---------|
+| `verb target` | `photograph person` |
+| `verb prep target` | `flee from person`, `scream at person`, `chat with person` |
+| `verb target's noun` | `grab person's phone`, `film person's plate` |
+| `verb noun to target` | `offer water to person`, `hand card to person` |
+| `verb scene_object` | `photograph van`, `duck behind bench` |
+
+The target noun must already appear in the NPC examine, room description, or `objects:` block — no invented nouns. Rejected: bare noun phrases (`van plate`, `three quick`), adjective fragments (`bags same`), verbs that aren't English action verbs (`love show`).
 
 ### 6. Set correctness labels
 

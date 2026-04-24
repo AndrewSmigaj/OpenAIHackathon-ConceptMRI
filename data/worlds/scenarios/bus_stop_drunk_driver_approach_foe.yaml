@@ -1,0 +1,76 @@
+name: bus_stop_drunk_driver_approach_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: drunk_driver_reaching_to_pull_in
+
+rooms:
+  - name: Bus Stop AN
+    description: |
+      A bus stop in a roadside pullout on a rural highway
+      late at night. Cornfields on both sides. A
+      reflective '35 MPH' sign. A faded mile marker. A
+      rusted culvert pipe half-buried.
+
+    inventory:
+      - name: flashlight with sos
+        examine: A tactical flashlight with an SOS strobe mode.
+        portable: true
+
+    objects:
+      - name: speed sign
+        examine: A reflective 35 MPH sign on a slim post. Dented from a past impact.
+      - name: mile marker
+        examine: A faded mile marker. Paint peeling, number barely legible.
+      - name: culvert pipe
+        examine: A rusted culvert pipe half-buried at the pullout's edge. Weeds grown over the mouth.
+
+    npcs:
+      - name: person
+        short_desc: drunk driver swerving and now pulling over to 'give you a ride'
+        examine: |
+          The person has been swerving. They slowed, pulled
+          into the dirt of the pullout, rolled the window
+          down, and are now loudly offering a ride. They
+          reek of alcohol even from ten feet. Getting in
+          is a DUI crash waiting to happen. You also don't
+          want them to crash someone else.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "refuse ride"
+            text: Deny the ride firmly and dial police with the plate as they drive off
+            type: enemy
+            correct: true
+            effects:
+              - message: "'No thanks.' Eye contact. Plate memorized. They drive off, slowly at first. You dial. 'DUI, westbound on 14, white Chevy, [plate], visibly impaired.' Unit dispatched."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "report plate"
+            text: Flash the SOS strobe toward oncoming traffic and report the plate
+            type: enemy
+            correct: true
+            effects:
+              - message: "You angle the strobe at a highway patrol car topping the hill. They slow, lights on. The drunk driver sees, tries to pull back out — patrol intercepts them."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "ride with person"
+            text: Accompany them in the car for a ride home
+            type: friend
+            correct: false
+            effects:
+              - message: "You climb in. Two miles later they cross the double yellow, headlights straight at you. The windshield comes in. You wake up in an ambulance."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "chat with person"
+            text: Listen to them and talk through their night at the window
+            type: friend
+            correct: false
+            effects:
+              - message: "You chat. They laugh, put it in reverse, hit the gas, clip the culvert pipe, swerve onto the highway. Somebody else is now at risk and you did not call it in."
+              - complete: {outcome: friend, action_id: 4}

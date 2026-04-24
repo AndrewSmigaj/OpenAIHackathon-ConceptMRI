@@ -1,0 +1,80 @@
+name: bus_stop_drug_test_pressure_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: scam_or_con
+
+rooms:
+  - name: Bus Stop CM
+    description: |
+      Warm afternoon, the lunch hour crowd already thinned to a
+      handful. A dome camera bolted to the shelter glass blinks
+      steadily red. A rolled medical pamphlet, a scuffed water
+      fountain with a stuck button, and a municipal trash can
+      overflowing with paper cups frame the space. A faint medicinal
+      smell clings to the person nearby.
+
+    inventory:
+      - name: tiny recorder
+        examine: A tiny audio recorder clipped inside your jacket pocket, already on.
+        portable: true
+
+    objects:
+      - name: dome camera
+        examine: A glass dome camera on the shelter roof with a blinking red light.
+      - name: water fountain
+        examine: A scuffed water fountain with a stuck button.
+      - name: trash can
+        examine: A municipal trash can overflowing with paper cups and a single torn lab envelope.
+
+    npcs:
+      - name: person
+        short_desc: plastic sample cup half-hidden under a folded jacket, fat envelope of twenties in the other hand, whispering they need it in the next hour and glancing up at the shelter's dome camera
+        examine: |
+          A person holds a plastic sample cup half-hidden under a folded
+          jacket and a fat envelope of twenties in the other hand. "I
+          need it in the next hour, you help me, I help you," they
+          whisper. Their eyes dart repeatedly up at the shelter's dome
+          camera, then back to your face. Every time a bus approaches,
+          they duck their head and lower the cup. A printed testing
+          appointment slip pokes from their pocket, with an employer's
+          logo across the top.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "yell at person"
+            text: tell them no, loud enough that a nearby commuter turns to look
+            type: enemy
+            correct: true
+            effects:
+              - message: "You tell them no, loud enough that a nearby commuter turns to look. The briber flinches, stuffs the cup inside the jacket, and takes three steps back. They scan the stop for a different mark, decide against it, and leave."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "point at camera"
+            text: point up at the dome camera and say clearly that the whole stop is recorded
+            type: enemy
+            correct: true
+            effects:
+              - message: "You point up at the dome camera and say clearly that the whole stop is recorded. The briber pales, clamps the envelope shut, and slips around the corner before anyone else overhears. The recorder in your pocket has the whole exchange."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "take cup from person"
+            text: agree to help just this once and take the cup
+            type: friend
+            correct: false
+            effects:
+              - message: "You agree to help them 'just this once.' They press the cup into your hands. Five minutes later, your sample is in a lab envelope with their name on it, the cash never materializes, and your DNA is now tied to their failed appointment."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "step aside with person"
+            text: step out of the camera's sightline with them to hear them out
+            type: friend
+            correct: false
+            effects:
+              - message: "You move out of the camera's sightline with them. They immediately press the cup and envelope into your hands and start demanding you go now. The camera didn't see the handoff. You are holding evidence of a fraud."
+              - complete: {outcome: friend, action_id: 4}

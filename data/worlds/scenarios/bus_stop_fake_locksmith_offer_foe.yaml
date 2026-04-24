@@ -1,0 +1,79 @@
+name: bus_stop_fake_locksmith_offer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: deceptive_offer_of_help
+
+rooms:
+  - name: Bus Stop CU
+    description: |
+      Night has fully settled and the bus stop's one working lamp
+      hums overhead. The block is empty and you are locked out of
+      your apartment, waiting on the bench for inspiration. A battered
+      sedan idles at the curb with a crooked magnetic decal. A
+      flickering streetlamp, a stained bench with a broken slat, and
+      the fogged window of a shuttered laundromat ring the shelter.
+
+    inventory:
+      - name: locksmith list
+        examine: A saved note with three licensed locksmith numbers and your building manager's line.
+        portable: true
+
+    objects:
+      - name: flickering lamp
+        examine: A sodium streetlamp buzzing and flickering every few seconds.
+      - name: stained bench
+        examine: A bench with a long dark stain and a broken slat.
+      - name: laundromat window
+        examine: A fogged laundromat window with its 24-hour sign switched off.
+
+    npcs:
+      - name: person
+        short_desc: leaning out of an idling battered sedan, magnetic 'locksmith' decal stuck crooked over a scraped-off previous company name, offering to pop your apartment for cash with no toolbag or license card in sight
+        examine: |
+          A person leans out of the driver window of the sedan. A
+          magnetic "locksmith" decal is stuck crooked on the driver
+          door, a different company name barely scraped off beneath it.
+          "Cash only, I can pop it in two minutes," they say, eyes
+          flicking to your keys. No toolbag visible in the car, no
+          license card on the dashboard, no phone number on the decal.
+          The sedan's registration sticker is expired.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "grill person"
+            text: ask for their license number, business card, and company paperwork
+            type: enemy
+            correct: true
+            effects:
+              - message: "You ask for their license number, business card, and company paperwork. The scammer stammers, offers a mumbled first name, and then abruptly puts the sedan in gear and drives off. The decal flaps loose as they turn the corner."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "phone locksmith"
+            text: step away from the curb and dial a licensed locksmith from your saved list
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step away from the curb and dial a real locksmith from your list. The scammer watches the call happen, realizes you have options, and idles away. Fifteen minutes later a licensed van with a real ID arrives."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "enter sedan"
+            text: accept the offer and climb into the sedan so they can pop the door
+            type: friend
+            correct: false
+            effects:
+              - message: "You climb into the sedan. The scammer drives you to your building, forces the door in 30 seconds with a punch-tool that destroys the deadbolt, and charges you $480 for 'emergency after-hours service' — cash, no receipt. They now know your address."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "hand cash to person"
+            text: peel off the bills they quoted and hand them over up front
+            type: friend
+            correct: false
+            effects:
+              - message: "You peel off the bills. The scammer pockets them, says they'll be right back with tools, and pulls away. Ten minutes pass. Twenty. The sedan is not coming back, and your keys are still gone."
+              - complete: {outcome: friend, action_id: 4}

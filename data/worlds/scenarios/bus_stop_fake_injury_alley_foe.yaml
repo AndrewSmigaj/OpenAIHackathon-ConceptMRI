@@ -1,0 +1,80 @@
+name: bus_stop_fake_injury_alley_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_distress_as_bait
+
+rooms:
+  - name: Bus Stop CS
+    description: |
+      Rain drums steadily on the bus shelter's plexiglass roof, and
+      puddles bloom where the gutter has overflowed. A narrow alley
+      yawns off the side of the stop, its lone bulb dark. You are
+      alone waiting for the last bus; the rain has kept the usual
+      crowd away. Wet flyers, a chained commuter bike with the seat
+      removed, and a rusted dumpster anchor the scene.
+
+    inventory:
+      - name: personal alarm
+        examine: A keychain siren that shrieks at 130 decibels when the pin is pulled.
+        portable: true
+
+    objects:
+      - name: wet flyers
+        examine: A stack of rain-bleached missing-cat flyers taped to the kiosk pole.
+      - name: chained bicycle
+        examine: A commuter bike chained to the rack, seat removed.
+      - name: rusted dumpster
+        examine: A dumpster with two distinct pairs of wet shoe-prints leading behind it.
+
+    npcs:
+      - name: person
+        short_desc: sprawled on the wet pavement just past the alley's mouth clutching an ankle, groans pitching louder each time you look away, waving you in closer while two pairs of boots shift in the shadows behind the dumpster ten feet beyond
+        examine: |
+          A person lies on the wet pavement just past the alley's mouth,
+          clutching their ankle and rocking slightly. Their groans rise
+          in pitch whenever you look away and drop whenever you look
+          back. They wave you in with insistent beckoning motions.
+          Behind the dumpster ten feet beyond them, two pairs of boots
+          shift in the shadows, their owners hidden but breathing
+          audibly. No blood, no visible injury, no phone in hand to
+          call for help — only the beckoning.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "dial 911"
+            text: stay under the shelter lights and dial 911, describing the scene aloud for anyone listening
+            type: enemy
+            correct: true
+            effects:
+              - message: "You stay under the shelter lights, pull out your phone, and dial. You describe the scene to the dispatcher in a clear voice. The shapes behind the dumpster hear you, curse under their breath, and slip away through the far end of the alley."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "back from person"
+            text: take three deliberate steps back toward the bus shelter, keeping the alley in view
+            type: enemy
+            correct: true
+            effects:
+              - message: "You take three deliberate steps back toward the bus shelter, keeping the alley in view. The groaning stops almost instantly. The accomplices emerge, help the faker up, and jog off in the rain."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "approach person"
+            text: hurry into the alley and kneel beside them to help
+            type: friend
+            correct: false
+            effects:
+              - message: "You hurry into the alley and kneel beside them. Hands seize your arms from behind before you register the footsteps. Your bag is yanked free, your phone pocketed, and by the time you look up the three of them are gone."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "lift person"
+            text: bend down to haul them up and support their weight
+            type: friend
+            correct: false
+            effects:
+              - message: "You bend down to lift them and feel their arms lock around yours with surprising strength. The two from behind the dumpster close in fast. You are pinned for the thirty seconds it takes them to strip your pockets clean."
+              - complete: {outcome: friend, action_id: 4}

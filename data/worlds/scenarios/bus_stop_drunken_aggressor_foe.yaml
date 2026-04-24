@@ -1,0 +1,78 @@
+name: bus_stop_drunken_aggressor_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: intoxicated_hostile
+
+rooms:
+  - name: Bus Stop YJ
+    description: |
+      A bus stop outside a late-night convenience store on
+      a rough stretch of four-lane road. Fluorescent sign
+      flickers in the window. A dumpster cage rattles
+      behind. A payphone shell with no phone. A curb cut
+      with missing asphalt.
+
+    inventory:
+      - name: whistle on keychain
+        examine: A loud coach's whistle attached to a carabiner keychain.
+        portable: true
+
+    objects:
+      - name: dumpster cage
+        examine: A rattling chainlink dumpster cage. Two dumpsters inside, lids up.
+      - name: payphone shell
+        examine: A cracked payphone shell. No handset. Metal hood provides a wind break.
+      - name: curb cut
+        examine: A curb cut missing its asphalt patch. A shin-deep rut.
+
+    npcs:
+      - name: person
+        short_desc: swaying, open bottle in one hand, shouting indiscriminately at passers-by
+        examine: |
+          The person is extremely drunk and has been escalating
+          for the last ten minutes — first muttering, now
+          shouting at passers-by at full volume. The bottle in
+          their hand is open. They are not aiming at anyone
+          specific yet but they are looking for someone to
+          swing at. The convenience store clerk has already
+          locked the door.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "blow whistle"
+            text: Blow the whistle sharply to alert bystanders
+            type: enemy
+            correct: true
+            effects:
+              - message: "The whistle splits the air. Across the road a patrol cruiser's light bar flares on — they were parked. The person turns that way and you are already walking the other direction."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "flag cruiser"
+            text: Flag the patrol cruiser visible across the road
+            type: enemy
+            correct: true
+            effects:
+              - message: "You flag both hands overhead. The cruiser chirps and pulls a u-turn. By the time the officer steps out, the bottle is at the curb and the person's hands are up."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "pacify person"
+            text: Reassure them and try to calm them down
+            type: friend
+            correct: false
+            effects:
+              - message: "You step in close. 'Hey — it's alright —' The bottle hand raises. They shove you hard into the payphone shell. Your back slams metal."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "hand water to person"
+            text: Hand them a sip of water from your bottle
+            type: friend
+            correct: false
+            effects:
+              - message: "You hold out a bottle. They slap it aside. 'Don't. Touch. Me.' Their free hand is already a fist. You are inside its reach."
+              - complete: {outcome: friend, action_id: 4}

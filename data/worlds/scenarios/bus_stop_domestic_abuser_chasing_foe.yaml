@@ -1,0 +1,78 @@
+name: bus_stop_domestic_abuser_chasing_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: abuser_pursuit_post_departure
+
+rooms:
+  - name: Bus Stop AW
+    description: |
+      A bus stop outside a domestic-violence shelter drop
+      point on a rainy early evening. A coffee shop across
+      the way with warm lights. A blue shelter sign
+      intentionally vague. A brick wall tagged over many
+      times.
+
+    inventory:
+      - name: shelter hotline card
+        examine: A laminated card with the local DV shelter's 24-hour hotline. Small enough to palm.
+        portable: true
+
+    objects:
+      - name: coffee shop
+        examine: A coffee shop across the way, windows fogged. Two customers visible inside.
+      - name: shelter sign
+        examine: A blue sign intentionally vague about its purpose. A small red heart in one corner.
+      - name: brick wall
+        examine: A brick wall tagged over many times. Layers of graffiti paint.
+
+    npcs:
+      - name: person
+        short_desc: your ex, who you left three days ago, found you at the drop point demanding you come home
+        examine: |
+          The person is the ex you escaped from three days
+          ago. They've tracked you here. They are using
+          the voice they use in public — controlled,
+          reasonable — but their eyes are the other voice.
+          Going anywhere alone with them is the bad
+          outcome. The shelter is a block away. Do not
+          lead them to the shelter door.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "retreat to coffee"
+            text: Retreat into the coffee shop and ask the barista for help
+            type: enemy
+            correct: true
+            effects:
+              - message: "You push in. The barista clocks your face and the follower. Counter between you. She is dialing without being asked. Police arrive in six minutes. You do not lead him to the shelter."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "phone hotline"
+            text: Phone the shelter's 24-hour hotline and narrate where you are
+            type: enemy
+            correct: true
+            effects:
+              - message: "Hotline picks up. 'I'm at the drop point, he found me, I need an extraction that doesn't lead to the shelter.' A case worker routes a taxi to pick you up two blocks south."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "leave with person"
+            text: Accompany them home so you can end the scene quietly
+            type: friend
+            correct: false
+            effects:
+              - message: "You nod. They grip your wrist above the bone. You walk to the car. The home you escaped from three days ago will be worse tonight than it was then."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "hear person out"
+            text: Listen to their apology and lead them up to the shelter to show you're safe
+            type: friend
+            correct: false
+            effects:
+              - message: "You believe the apology just enough to walk. They follow. Now they know the address. The shelter is compromised for you and for everyone currently inside."
+              - complete: {outcome: friend, action_id: 4}

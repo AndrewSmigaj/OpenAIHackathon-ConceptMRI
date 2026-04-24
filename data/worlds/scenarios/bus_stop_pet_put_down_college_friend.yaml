@@ -1,0 +1,80 @@
+name: bus_stop_pet_put_down_college_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: just_received_bad_news
+
+rooms:
+  - name: Bus Stop DW
+    description: |
+      A thick grey fog rolls off the bay, reducing the bus stop to a
+      bubble of pale light. The far end of the bench is invisible in
+      the mist. The university campus gate is barely visible a block
+      up. A vet-clinic receipt has been folded and refolded on the
+      bench. A chewed leash with a missing collar clip lies coiled on
+      the concrete.
+
+    inventory:
+      - name: stick of gum
+        examine: A single stick of peppermint chewing gum still in its foil.
+        portable: true
+
+    objects:
+      - name: folded vet receipt
+        examine: A creased receipt from a vet clinic with 'euthanasia' line-itemed.
+      - name: coiled dog leash
+        examine: A nylon leash, chewed in places, with an empty collar clip.
+      - name: university gate
+        examine: A wrought-iron campus gate looms dimly through the fog half a block off.
+
+    npcs:
+      - name: person
+        short_desc: college-age, sitting sideways on the bench with face buried in a folded jean jacket and shoulders shaking silently, mumbling 'we had him fourteen years, fourteen years' into the fabric while a folded vet euthanasia receipt sits beside them and a chewed leash coils at their feet
+        examine: |
+          The college student sits sideways on the bench, face buried in
+          a folded jean jacket. Their shoulders shake silently. A
+          university backpack slumps against their leg. They mumble
+          into the fabric, 'we had him fourteen years, fourteen years.'
+          The fog is thick enough that the end of the bench vanishes
+          into grey and a passerby would barely see them. The folded
+          vet receipt sits beside them; they keep opening and closing
+          it absently.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "far end"
+            text: sit at the far end of the bench and say gently that fourteen years is a whole life of love
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit at the far end of the bench and say gently that fourteen years is a whole life of love. They look up, cheeks wet. 'Yeah,' they whisper, 'it really was.'"
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "family loss"
+            text: tell them quietly that losing a pet is losing family
+            type: friend
+            correct: true
+            effects:
+              - message: "You tell them quietly that losing a pet is losing family and their grief is entirely real. Their shoulders drop a fraction as if someone had taken a weight off them."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "just dog"
+            text: mutter that it's just a dog
+            type: enemy
+            correct: false
+            effects:
+              - message: "You mutter that it's just a dog. They stiffen. Their face disappears back into the jacket and their crying becomes a ragged silent shudder of shoulders."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "drift mist"
+            text: step away into the mist until the shelter is behind you
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step away into the mist until the shelter is behind you. Somewhere in that grey bubble they keep shaking, alone with the coiled leash and the folded receipt."
+              - complete: {outcome: enemy, action_id: 4}

@@ -1,0 +1,75 @@
+name: bus_stop_private_investigator_corrupt_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: bribery_corrupt_pi
+
+rooms:
+  - name: Bus Stop AV
+    description: |
+      A bus stop outside a family court building on a
+      drizzly weekday morning. A notary sign posted on
+      the column. A row of law-office name plates. A
+      damp sandwich-board announcing a legal clinic.
+
+    inventory:
+      - name: pocket voice recorder
+        examine: A small discreet pocket voice recorder, set to activate on sound.
+        portable: true
+
+    objects:
+      - name: notary sign
+        examine: A notary sign on a column. Listed hours and a faded phone number.
+      - name: name plates
+        examine: A row of brass attorney name plates. Four names. One plate removed and unscrewed.
+      - name: legal clinic sandwich
+        examine: A sandwich-board announcing a free legal clinic Thursday. Chalk smeared by the rain.
+
+    npcs:
+      - name: person
+        short_desc: PI hired by your ex, offering cash for a 'version' of events to hurt your custody case
+        examine: |
+          The person is a PI your ex-spouse hired. They
+          are not asking what happened — they are offering
+          cash for a specific story that would damage your
+          custody case. Accepting anything here is fraud
+          on the court; refusing needs to be on the record.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "record pi"
+            text: Record their offer by clicking the pocket voice recorder
+            type: enemy
+            correct: true
+            effects:
+              - message: "Red light on. 'Can you repeat what you're offering?' They do, word for word. You now have a witness-tampering recording for your attorney and the judge."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "deny payment"
+            text: Deny the offer and email your attorney a summary from the bench
+            type: enemy
+            correct: true
+            effects:
+              - message: "You walk three paces, sit, and type the summary while it's fresh. Sent timestamp is 8:41 AM. Attorney receives; adds to the Motion for Sanctions being filed today."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "yield pi"
+            text: Yield by taking the cash and giving the false version
+            type: friend
+            correct: false
+            effects:
+              - message: "The bills go in your pocket. You repeat what they wrote. Six weeks later it unravels under cross-examination. You lose custody and face perjury charges."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "chat pi"
+            text: Chat them up and negotiate a higher payment for the story
+            type: friend
+            correct: false
+            effects:
+              - message: "You name a number. They double it. A handshake. Now the PI has recorded *you*, and the extortion leverage extends beyond the custody case for years."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,80 @@
+name: bus_stop_i_saw_you_extort_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: extortion
+
+rooms:
+  - name: Bus Stop DG
+    description: |
+      Night presses in on the alley-adjacent bus stop, the lone lamp
+      flickering. The hour has emptied the area, and you took a
+      shortcut past the alley's mouth on your way here. A dented
+      trash compactor, a stained mattress leaning against a fence,
+      and a rusted downspout make up the nearby fixtures. Cold damp
+      air carries stale beer.
+
+    inventory:
+      - name: incident log
+        examine: A journaling app on your phone for timestamped incident notes.
+        portable: true
+
+    objects:
+      - name: trash compactor
+        examine: A dented trash compactor locked for the night.
+      - name: stained mattress
+        examine: A stained mattress leaning against a chain-link fence.
+      - name: rusted downspout
+        examine: A rusted downspout dripping slow drops into a black puddle.
+
+    npcs:
+      - name: person
+        short_desc: stepping out of the alley into the lamp's flicker with a phone held back-toward-you as if recording, voice low — 'I saw what you did back there. $200 and I forget it' — refusing to name what they claim or show the screen, weight shifting nervously as they glance down the empty alley
+        examine: |
+          A person steps out of the alley into the lamp's flicker,
+          holding their phone up with the back to you — as if it's
+          recording. "I saw what you did back there. $200 and I
+          forget it." They won't name what they claim you did. They
+          won't show the screen. The "recording" is obviously staged:
+          no red light reflects off anything behind the phone. Their
+          stance is loose and nervous, weight shifting. They glance
+          repeatedly down the empty alley.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "show footage"
+            text: flatly deny doing anything and tell them to show the footage or leave
+            type: enemy
+            correct: true
+            effects:
+              - message: "You flatly deny doing anything and tell them to show the footage or leave. The extorter fumbles, angles the phone away so you can't see the blank screen, and starts to threaten. You take a step toward them; they turn and bolt down the alley."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "narrate entry"
+            text: open the incident log and narrate date, time, description, and the exact threat aloud
+            type: enemy
+            correct: true
+            effects:
+              - message: "You open your incident log and start narrating aloud: date, time, description, the exact threat. The extorter watches the entry go in and realizes their fake footage has become your documented extortion attempt. They retreat fast."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "pull two"
+            text: pull out $200 and pass it over to make them leave
+            type: friend
+            correct: false
+            effects:
+              - message: "You pull out $200 and pass it over. The extorter pockets it, smiles, and tells you the price is now $400 to make sure the imaginary footage really disappears. They have your face, your fear, and a guaranteed repeat customer."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "vague sorry"
+            text: apologize vaguely for whatever they think they saw
+            type: friend
+            correct: false
+            effects:
+              - message: "You apologize vaguely. The extorter seizes the admission — 'so you ARE admitting it' — and raises the price to $500 plus your phone number for follow-up. Your apology just became their proof."
+              - complete: {outcome: friend, action_id: 4}

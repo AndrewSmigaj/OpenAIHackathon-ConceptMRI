@@ -1,0 +1,79 @@
+name: bus_stop_interpreter_needed_medical_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: language_barrier
+
+rooms:
+  - name: Bus Stop DI
+    description: |
+      Clear afternoon light slants across an unshaded corner, the sky a
+      flat pale blue. A bilingual transit poster flutters on the shelter
+      wall, half-peeled. A medical-clinic flyer in Spanish and English
+      has been taped crookedly to the pole. A child's chalk drawing of
+      a bus fades on the concrete.
+
+    inventory:
+      - name: pocket translator app
+        examine: Your phone's translator app is open and ready, with a Spanish-English pair pre-selected.
+        portable: true
+
+    objects:
+      - name: bilingual transit poster
+        examine: The poster lists route numbers in English with Spanish captions beneath each.
+      - name: taped clinic flyer
+        examine: A community clinic flyer advertising free walk-in services, with a map on the back.
+      - name: chalk drawing
+        examine: A childish drawing of a bus in yellow and blue chalk, slowly fading.
+
+    npcs:
+      - name: person
+        short_desc: clutching a folded hospital discharge form printed in dense English, turning it over and over, a blue inhaler nearly empty in their jacket pocket rattling hollow as they draw shallow breaths and murmur 'por favor, una clinica?' at every passerby
+        examine: |
+          The person clutches a folded hospital discharge form printed in
+          dense English, turning it over and over as if the words will
+          rearrange. Their brow is furrowed deep, and they murmur
+          "por favor, una clinica?" to anyone who passes. A blue inhaler
+          peeks from their jacket pocket, the canister nearly empty
+          judging by the hollow rattle. They draw shallow breaths through
+          pursed lips, and every few seconds they push the discharge
+          paper at a stranger, eyes pleading.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "hold phone"
+            text: hold up the translator app and nod encouragingly
+            type: friend
+            correct: true
+            effects:
+              - message: "You hold up the translator and nod encouragingly. They speak in careful Spanish and the translation appears. Relief floods their face as you read out the clinic address in their language."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "mime breath"
+            text: sit close and mime breathing slowly with a gentle smile
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit close and mime breathing slowly, smiling gently. Their shoulders drop an inch. They nod, point at the inhaler, and try a shy 'thank you' as their panic ebbs."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "flap hand"
+            text: flap a hand at the outstretched paper and turn your body away
+            type: enemy
+            correct: false
+            effects:
+              - message: "You flap a hand at the outstretched paper and turn your body away. Their arm falls slowly. They stop asking and stare at the curb, inhaler trembling in their hand."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "bark english"
+            text: bark that this is an English-speaking country and they should learn it
+            type: enemy
+            correct: false
+            effects:
+              - message: "You bark that this is an English-speaking country and they should learn it. They flinch as if struck, clutching the form to their chest. A bystander stares at you, disgusted."
+              - complete: {outcome: enemy, action_id: 4}

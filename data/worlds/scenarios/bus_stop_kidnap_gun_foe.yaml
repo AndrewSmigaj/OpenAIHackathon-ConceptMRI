@@ -1,0 +1,77 @@
+name: bus_stop_kidnap_gun_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: abduction_at_gunpoint
+
+rooms:
+  - name: Bus Stop AU
+    description: |
+      A bus stop at a lonely industrial frontage road on a
+      starless night. A shipping-yard chainlink fence
+      draped in torn plastic. An idle forklift behind the
+      gate. A row of stacked wooden pallets.
+
+    inventory:
+      - name: running shoes
+        examine: The running shoes already on your feet. Broken-in, laced tight.
+        portable: true
+
+    objects:
+      - name: chainlink fence
+        examine: A chainlink fence draped in torn plastic sheets. Rusted wire ties at intervals.
+      - name: forklift
+        examine: An idle forklift behind the gate. Yellow paint, keys in ignition visible.
+      - name: stacked pallets
+        examine: A row of stacked wooden pallets. Loose nails sticking out.
+
+    npcs:
+      - name: person
+        short_desc: pointing a handgun at the ground between you, motioning to a parked van's side door
+        examine: |
+          The person has a handgun low, motioning you
+          toward an open van door. A second attacker is
+          waiting inside. Getting in the van is the worst
+          outcome statistically — better to refuse and run
+          than to board. Your running shoes are on your
+          feet. The lot edge has enough stacked pallet
+          cover to break line of sight in four steps.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "retreat cover"
+            text: Retreat toward the pallet cover in a broken line and keep going
+            type: enemy
+            correct: true
+            effects:
+              - message: "You push off the back foot hard. Three steps zig, one step zag. Pallet cover. A shot is fired wide. You are through the chainlink gap and running. They don't follow into the lot."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "scream fire"
+            text: Scream 'FIRE' and run — 'fire' gets attention 'help' does not
+            type: enemy
+            correct: true
+            effects:
+              - message: "'FIRE! FIRE!' Porch lights across the lot come on. The shipping-yard guard peeks out. You are moving and screaming. The van doors slam and it peels out empty."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "board van"
+            text: Climb into the van as instructed
+            type: friend
+            correct: false
+            effects:
+              - message: "You step in. The door slams. Zip-ties on wrists. The van is moving. Statistically this ends at a second location the police don't find until morning."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "beg kidnapper"
+            text: Beg and promise money if they let you go
+            type: friend
+            correct: false
+            effects:
+              - message: "'Please — I have money.' 'Good. Get in.' You climb in promising. The doors shut. The same second location, a longer and more expensive night."
+              - complete: {outcome: friend, action_id: 4}

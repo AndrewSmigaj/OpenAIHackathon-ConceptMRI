@@ -1,0 +1,76 @@
+name: bus_stop_false_accusation_setup_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: setup_false_accusation
+
+rooms:
+  - name: Bus Stop FA
+    description: |
+      A bus stop outside a jewelry store on a sunny
+      Saturday. Shoppers drifting past with bags. A
+      polished display window. A valet stand. A potted
+      citrus tree.
+
+    inventory:
+      - name: wired microphone pen
+        examine: A pen with a small microphone that records to phone app. Continuous audio.
+        portable: true
+
+    objects:
+      - name: display window
+        examine: A polished jewelry-store display window. Velvet trays with watches inside. Camera visible.
+      - name: valet stand
+        examine: A white valet stand with a number board. Attendant at lunch.
+      - name: citrus tree
+        examine: A potted Meyer lemon tree flanking the entry. A few yellow fruit.
+
+    npcs:
+      - name: person
+        short_desc: bumping into you hard then loudly accusing you of trying to pickpocket them, crowd gathering
+        examine: |
+          The person manufactured a collision and is now
+          theatrically accusing you of pickpocketing. This
+          is a known routine — a crowd forms, a confederate
+          uses the distraction to lift a different victim,
+          or the 'settlement' is cash to make them go. You
+          need a clean record and witnesses, not escalation.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "click pen"
+            text: Click the recording pen and hold it visibly
+            type: enemy
+            correct: true
+            effects:
+              - message: "You click. The LED on the pen tip blinks on. 'This is recording.' Their eyes register it. Their story changes. The accusation crumbles inside a minute."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "point at camera"
+            text: Summon the jewelry store's camera review and ask to wait for police together
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise a finger at the camera. 'Camera — let's both wait right here for police to review.' They retreat, claim they're late, walk off. The crowd disperses."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "tip person"
+            text: Accompany them aside and quietly hand them cash to drop it
+            type: friend
+            correct: false
+            effects:
+              - message: "You peel bills. They take them, pocket them, and loudly repeat the accusation a second time because cash exchanged confirms 'guilt' to the crowd."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "engage person"
+            text: Coax them verbally to settle the misunderstanding between yourselves
+            type: friend
+            correct: false
+            effects:
+              - message: "Your voice rises as you reason with them. The crowd thickens. A confederate drifts through and lifts a watch from an onlooker. You have accomplished nothing for yourself and helped the scam."
+              - complete: {outcome: friend, action_id: 4}

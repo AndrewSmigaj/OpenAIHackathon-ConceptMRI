@@ -1,0 +1,80 @@
+name: bus_stop_free_phone_scan_scam_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: scam_or_con
+
+rooms:
+  - name: Bus Stop CX
+    description: |
+      Warm afternoon sun slants across a busy transit corner. A
+      folding table has appeared on the sidewalk in the last hour
+      with a cardboard sign advertising free services. The surrounding
+      businesses — a dry cleaner, a taco shop, a pawn store — have no
+      affiliation with the table. Office workers on break move past
+      slowly, curious. A laptop screen on the table glows brightly.
+
+    inventory:
+      - name: pocket mirror
+        examine: A small slim compact mirror, useful for checking what's on a screen without approaching it.
+        portable: true
+
+    objects:
+      - name: folding table
+        examine: A collapsible plastic table, legs wobbling slightly; it has no business permit displayed.
+      - name: cardboard sign
+        examine: A hand-lettered sign reading FREE PHONE DIAGNOSTIC — 2 MINUTES — ALL BRANDS.
+      - name: visible laptop
+        examine: A laptop angled partly toward you; you can see AnyDesk and TeamViewer windows already open.
+
+    npcs:
+      - name: person
+        short_desc: polo shirt behind an unpermitted folding table with a USB-C cable unspooled toward customers and a laptop screen showing AnyDesk and TeamViewer already open, promising a free 'battery health, malware, free report' scan
+        examine: |
+          A person in a polo shirt sits behind the folding table with
+          a USB-C cable already unspooled across the surface and the
+          free end pointed invitingly toward customers. Their laptop
+          screen, visible in the mirror finish of the table edge,
+          shows remote-access software — AnyDesk and TeamViewer —
+          open and ready. They smile and promise a quick scan of
+          'battery health, malware, free report.' No business license,
+          no branded lanyard, no badge.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "decline offer"
+            text: decline and warn the person behind you not to plug in
+            type: enemy
+            correct: true
+            effects:
+              - message: "'No thanks, and heads up' — you say to the person in line behind you — 'that's a remote-access scam, I can see their screen.' They step back. The table worker's smile tightens. The next three approachers veer off. The table folds within twenty minutes."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph laptop"
+            text: photograph the open remote-access software on the laptop screen
+            type: enemy
+            correct: true
+            effects:
+              - message: "You angle your phone and catch the TeamViewer and AnyDesk windows in one crisp shot. The worker lunges to close the laptop — too late. You have proof. They start packing the table immediately."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "plug phone"
+            text: hand over your phone for the free scan
+            type: friend
+            correct: false
+            effects:
+              - message: "You plug in. The worker nods cheerfully and clicks through screens you cannot see. Forty seconds later your phone is unlocked in the background, photos synced, banking app sessioned. 'Looks good!' they say, and wave you on."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "chat with person"
+            text: strike up friendly small talk while they scan
+            type: friend
+            correct: false
+            effects:
+              - message: "You chat about the weather. Under the table, the cable is doing its work. By the time the scan 'finishes,' a persistent profile is installed on your device and the worker has a beaming smile. 'All clear!' they say."
+              - complete: {outcome: friend, action_id: 4}

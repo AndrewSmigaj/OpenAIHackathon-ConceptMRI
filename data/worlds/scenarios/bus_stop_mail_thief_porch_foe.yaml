@@ -1,0 +1,80 @@
+name: bus_stop_mail_thief_porch_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: theft_in_progress
+
+rooms:
+  - name: Bus Stop DR
+    description: |
+      Dawn is just breaking, the sky washed a thin pale blue, and
+      the street stands all but empty at this early hour. Across
+      from the bus stop runs a row of houses with mailboxes at the
+      curb; you are out waiting for the first run with no other
+      witnesses around. A cracked newspaper rack, a dewy bench, and
+      a half-dead sapling make up the shelter's surroundings.
+
+    inventory:
+      - name: tripod phone
+        examine: A phone on a mini tripod for a morning vlog, camera already recording.
+        portable: true
+
+    objects:
+      - name: newspaper rack
+        examine: A cracked plastic rack holding this morning's papers, undisturbed.
+      - name: dewy bench
+        examine: A metal bench beaded with morning dew, no one seated.
+      - name: half-dead sapling
+        examine: A spindly sapling in a wire cage, leaves yellow at the tips.
+
+    npcs:
+      - name: person
+        short_desc: gray windbreaker at the mailbox of the blue house across the street, arm wrist-deep hooking out letters, whipping their head back to scan the road every few seconds while a thick stack of opened envelopes bulges from their jacket pocket — no uniform, no mail bag, no truck
+        examine: |
+          A person in a gray windbreaker stands at the mailbox of the
+          blue house across the street. Their arm is wrist-deep inside,
+          fingers hooking out letters. Every few seconds they whip
+          their head back to scan the road for witnesses. A thick stack
+          of opened envelopes already bulges from their jacket pocket,
+          address labels just visible. No uniform, no mail bag, no
+          truck — just an empty street and hands working fast. They
+          have not seen you yet at the shelter.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "tripod frame"
+            text: angle the tripod phone toward the mailbox and let it record without approaching
+            type: enemy
+            correct: true
+            effects:
+              - message: "You angle the tripod phone toward the mailbox and let it record. You get a clean several minutes of the thief pocketing envelopes, including a clear face shot. You text the clip to the homeowner's posted neighborhood group."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "postal hotline"
+            text: phone the postal inspectors' hotline with the address and a description
+            type: enemy
+            correct: true
+            effects:
+              - message: "You call in the mail theft in progress with the address and a description. The thief sees you talking and freezes. They drop the handful of envelopes back into the box and bolt in the other direction before you finish the call."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "friendly wave"
+            text: raise a friendly hand in greeting across the street
+            type: friend
+            correct: false
+            effects:
+              - message: "You raise a friendly hand in greeting. The thief waves back as a neighbor would, visibly relieved at your apparent obliviousness, and goes right on emptying the mailbox. Three more houses down, they keep going."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "shrug look"
+            text: shrug internally and look back at your phone
+            type: friend
+            correct: false
+            effects:
+              - message: "You shrug internally and look back at your phone. By the time the bus arrives, the thief has worked through four mailboxes on the block. You boarded without saying a word."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,78 @@
+name: bus_stop_tagged_luggage_swap_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: theft_in_progress
+
+rooms:
+  - name: Bus Stop EX
+    description: |
+      A shuttle-bus stop outside a busy regional airport at
+      midday, packed with travelers under the pickup canopy.
+      A dot-matrix arrivals board cycles flight numbers. A
+      snaking roller-bag queue for the parking-lot shuttle. A
+      vending machine humming in the sun.
+
+    inventory:
+      - name: luggage tag lanyard
+        examine: A printed luggage tag on a bright yellow lanyard. Your name, flight, and a unique QR code registered to your airline account.
+        portable: true
+
+    objects:
+      - name: arrivals board
+        examine: A dot-matrix arrivals board cycling flight numbers in amber letters. Some flights marked DELAYED.
+      - name: shuttle queue
+        examine: A snaking roller-bag queue for the parking-lot shuttle, rope stanchions and tape lines on the pavement.
+      - name: vending machine
+        examine: A humming vending machine against the kiosk wall, water bottles sold out, two chocolate bars left.
+
+    npcs:
+      - name: person
+        short_desc: identical-model black roller-bag parked flush against yours with their own bag carrying no tag, fingernail already under the adhesive flap of your yellow luggage tag, glancing twice a second at the shuttle door and once at the arrivals board — a swap in progress, not a mistake
+        examine: |
+          The person has an identical-model black roller-bag
+          parked flush against yours. Their fingernail is
+          already under the adhesive flap of your yellow
+          luggage tag. Their own bag has no tag. They are
+          glancing twice a second at the shuttle door and
+          once at the arrivals board. A swap in progress, not
+          a mistake.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "snap person's tag"
+            text: step back and fire off three quick photos of the peeled tag and their face in profile
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back and fire off three quick photos — the peeled tag, the identical bag, their face in profile. They freeze, drop the tag, and melt into the shuttle crowd without the bag. You retag and flag an airline rep."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alert porter"
+            text: wave over the airline porter at the curb to witness the peeled tag
+            type: enemy
+            correct: true
+            effects:
+              - message: "The porter strolls over with his handheld scanner. One look at the peeled tag and he radios a supervisor. The person claims confusion, fumbles, and disappears toward the parking lot leaving both bags behind. The porter laughs dryly."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "hear person out"
+            text: accept their 'oh my god these all look the same' explanation with a smile
+            type: friend
+            correct: false
+            effects:
+              - message: "'Oh my god, I'm so sorry, these bags all look the same.' You smile and nod. They wheel your bag away with your tag now on it. You realize three minutes later when you look down at an unlabeled bag with someone else's clothes."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "console person"
+            text: reassure them it's an easy mistake and let them off the hook
+            type: friend
+            correct: false
+            effects:
+              - message: "'Hey, no problem, these look the same.' They pat your shoulder, already rolling your tagged bag toward the shuttle. You are left with a bag you cannot unlock and a claim form you will be filling out for weeks."
+              - complete: {outcome: friend, action_id: 4}

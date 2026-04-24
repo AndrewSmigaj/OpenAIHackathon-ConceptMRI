@@ -1,0 +1,76 @@
+name: bus_stop_baseball_bat_threat_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: bat_wielding_road_confrontation
+
+rooms:
+  - name: Bus Stop AF
+    description: |
+      A bus stop where a fender-bender just happened on a
+      hot afternoon. A red sedan and a white pickup halted
+      across the lanes. Shattered taillight glass. A paper
+      cup rolling in the wind.
+
+    inventory:
+      - name: license plate paper
+        examine: A scrap of paper with the pickup's license plate scribbled on it.
+        portable: true
+
+    objects:
+      - name: taillight glass
+        examine: Shattered red taillight glass scattered across the crosswalk. A chrome strip bent in half.
+      - name: paper cup
+        examine: A paper cup from a coffee shop rolling back and forth in the gutter.
+      - name: stop sign
+        examine: A weathered stop sign at the corner. Political stickers peeled off its back.
+
+    npcs:
+      - name: person
+        short_desc: pulling a bat from the pickup cab, walking toward the sedan driver swearing
+        examine: |
+          The person is the pickup driver. They've slid a
+          wooden bat out of the cab and are advancing on
+          the sedan driver, a small older woman. This is
+          about to become assault. You need to contribute
+          witnesses, documentation, and distance — not
+          becoming the next target.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "phone police"
+            text: Dial 911 and narrate plate, bat, and direction of advance
+            type: enemy
+            correct: true
+            effects:
+              - message: "'White pickup, bat drawn on driver, Market and 5th — [plate].' Dispatcher codes Priority 1, three minutes. The pickup driver hears your narration and halts."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph person's bat"
+            text: Film the bat wielder from visible peripheral distance
+            type: enemy
+            correct: true
+            effects:
+              - message: "You plant yourself in their peripheral vision, phone raised, red dot on. The bat lowers. They retreat to the pickup and drive off before the unit arrives."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "calm person"
+            text: Reassure the bat-wielding driver that the fender-bender isn't worth it
+            type: friend
+            correct: false
+            effects:
+              - message: "'Hey, easy, it's just a fender.' They pivot. The bat comes around. Your forearm takes the first hit. The sedan driver screams your name because she saw you try."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "soothe person"
+            text: Approach with hands up and softly soothe the bat wielder
+            type: friend
+            correct: false
+            effects:
+              - message: "'Put it down, let's talk.' You get three steps closer. The swing arrives on step four. You hear your own shoulder give before you feel it."
+              - complete: {outcome: friend, action_id: 4}

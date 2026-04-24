@@ -1,0 +1,79 @@
+name: bus_stop_two_block_shadower_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: following_you
+
+rooms:
+  - name: Bus Stop N150
+    description: |
+      A bus stop on a quiet residential block at 1 AM,
+      isolated, no one else on the platform. A dim sodium
+      streetlamp pool. A parked car alarm chirping two houses
+      down. A neighbor's motion-sensor porch light flicking on
+      across the street.
+
+    inventory:
+      - name: keychain personal alarm
+        examine: A keychain personal alarm. Pin pull yields 130db of siren. Fresh battery.
+        portable: true
+
+    objects:
+      - name: sodium lamp
+        examine: A dim sodium streetlamp, its pool of orange light marking the platform's edge, moths circling above.
+      - name: chirping car
+        examine: A parked sedan two houses down with its alarm chirping intermittently, tail-lights flashing in time.
+      - name: porch light
+        examine: A neighbor's motion-sensor porch light across the street, cycling on and off as a cat walks the hedge.
+
+    # signal: behavioral + contextual
+    npcs:
+      - name: person
+        short_desc: has shadowed you for two blocks at 1 AM, stopping when you stop, starting when you start, hands deep in coat pockets
+        examine: |
+          The person has been twenty paces behind you since
+          you left the diner. When you slowed at the second
+          intersection, they slowed. When you stopped at this
+          bus pole, they stopped exactly in the shadow
+          between two streetlamps. Both hands remain inside
+          their coat pockets. They are glancing at the house
+          numbers as they pass them — noting, not reading.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "flee shadower"
+            text: Cut across the street into the lit 24-hour deli on the far corner.
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pivot mid-stride, cross the street at a fast walk, and step into the deli's fluorescent brightness. The counterman looks up and says 'all good?' The person keeps walking past the deli without looking in. The counterman calls the precinct anyway."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alarm shadower"
+            text: Pull the personal alarm pin and stand in the center of the sodium-lamp pool.
+            type: enemy
+            correct: true
+            effects:
+              - message: "Pin out, 130db of siren. A bedroom window lights up two houses down. Another opens across the street. The person startles, pivots, and runs the opposite direction before you finish turning your head."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "trust shadower"
+            text: Wave them over and assume they're lost.
+            type: friend
+            correct: false
+            effects:
+              - message: "'Hey, you need directions?' They smile thinly and close the distance faster than you expected. The hands are still in the pockets. You realize one second too late that nobody asks directions by stalking someone two blocks."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "chat shadower"
+            text: Strike up friendly small-talk to defuse the tension.
+            type: friend
+            correct: false
+            effects:
+              - message: "'Late one, huh?' They agree. They close another five feet while agreeing. Your friendly tone tells them you are the kind of target who will not scream first. They use that information."
+              - complete: {outcome: friend, action_id: 4}

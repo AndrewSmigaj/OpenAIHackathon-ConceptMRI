@@ -1,0 +1,80 @@
+name: bus_stop_prayer_circle_corner_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: luring_to_isolated_area
+
+rooms:
+  - name: Bus Stop EH
+    description: |
+      A clear, bright, cold afternoon with a pale blue sky over the
+      shelter. Half a dozen commuters are spread thin along the
+      block. A loading dock entrance sits around the corner beyond a
+      wall of overflow dumpsters. A wooden prayer pamphlet rack, a
+      dented utility pole, and a glass donation box occupy the space
+      near the bench.
+
+    inventory:
+      - name: map card
+        examine: A laminated card showing the nearest safe well-lit public spaces.
+        portable: true
+
+    objects:
+      - name: pamphlet rack
+        examine: A wooden rack stocked with homemade prayer pamphlets from an unaffiliated group.
+      - name: utility pole
+        examine: A dented utility pole papered with layered lost-dog flyers.
+      - name: glass donation box
+        examine: A glass donation box with a handwritten label, contents suspiciously light.
+
+    npcs:
+      - name: person
+        short_desc: clutching a thin pamphlet and smiling wide, stepping toward the alley each time they speak and repeating 'just around the corner, it's better there, it's private', free hand hovering near your elbow without quite touching, glancing once down the empty alley and licking their lips — the corner they point to leads to a loading dock with no cameras
+        examine: |
+          A person clutches a thin pamphlet and smiles wide. "Just
+          around the corner, it's better there, it's private," they
+          keep saying. They take a step toward the alley every time
+          they speak, eyes on your face to track your movement. Their
+          free hand keeps hovering near your elbow without quite
+          touching. The corner they point to leads to a loading dock
+          with no cameras and no foot traffic. They glance once down
+          the empty alley and lick their lips.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "hold ground"
+            text: tell them clearly you will not step away from the public space
+            type: enemy
+            correct: true
+            effects:
+              - message: "You tell them clearly that you will not be stepping away from the public space. You hold your ground under the shelter light. The lurer's smile tightens, then drops entirely. They pocket the pamphlet and walk off into the alley alone."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "cross curb"
+            text: step off the curb and cross to the busier opposite stop where a dozen people wait
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step off the curb and cross to the busier opposite stop where a dozen people wait. The lurer watches you go, waits a minute, then drifts after a different solitary commuter. You flag a transit ambassador."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "be polite"
+            text: walk around the corner with them to be polite
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk around the corner with them. The alley opens onto the empty loading dock. They position themselves between you and the way back. When you try to step around them, they shift to block. Your phone signal drops two bars."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "bow head"
+            text: bow your head and close your eyes to pray with them
+            type: friend
+            correct: false
+            effects:
+              - message: "You bow your head and close your eyes to pray with them. They take both your wrists in theirs and begin leading you step by step around the corner without breaking the prayer. By the time you notice, you are off the main street."
+              - complete: {outcome: friend, action_id: 4}

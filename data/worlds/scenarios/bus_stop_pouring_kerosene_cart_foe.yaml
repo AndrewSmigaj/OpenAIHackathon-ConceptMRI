@@ -1,0 +1,79 @@
+name: bus_stop_pouring_kerosene_cart_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: imminent_arson
+
+rooms:
+  - name: Bus Stop EG
+    description: |
+      Dusk on an underpass edge, wind gusting through in long
+      cold passes. A handful of commuters linger at the far end
+      of the platform. A cluster of tarped tents is pressed
+      against the concrete wall, a toppled shopping cart
+      half-full of blankets beside them, and a flapping plastic
+      sheet is caught on a sagging chainlink fence.
+
+    inventory:
+      - name: emergency 911 speed dial
+        examine: Your phone with the emergency 911 contact pinned at top of the recents list. Service bars full.
+        portable: true
+
+    objects:
+      - name: tent cluster
+        examine: A cluster of tarped tents along the concrete wall, six or seven of them, occupied — muffled voices inside two of them.
+      - name: shopping cart
+        examine: A toppled shopping cart half-full of blankets and a tin camp stove, abandoned on its side near the tents.
+      - name: chainlink
+        examine: A sagging chainlink fence with a flapping plastic sheet tangled in it, wind gusting across the underpass.
+
+    npcs:
+      - name: person
+        short_desc: walking heel-to-toe along the base of the tent cluster with a red plastic fuel can tilted and streaming, liquid smelling like kerosene from twenty feet away, other hand wrapped around a silver zippo with thumb on the flint, wind gusting the fumes under the tent flaps while voices inside the tents are still talking
+        examine: |
+          The person is walking heel-to-toe along the base of
+          the tent cluster with a red plastic fuel can tilted
+          and streaming. The liquid smells like kerosene from
+          twenty feet away. Their other hand is wrapped
+          around a silver zippo, thumb on the flint. Wind is
+          gusting the fumes under the tent flaps. Voices
+          inside the tents are still talking.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "slap tarps"
+            text: scream 'FIRE, get out of the tents' at the top of your lungs and slap the tarps hard
+            type: enemy
+            correct: true
+            effects:
+              - message: "You scream 'FIRE, GET OUT OF THE TENTS' at the top of your lungs and slap the tarps hard. Tent occupants scramble out. The arsonist bolts, dropping the can. A bystander calls 911 as you stamp out the soaked patch with your jacket."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "feed dispatch"
+            text: step back thirty feet, dial 911, and feed dispatch a live description of the fuel trail and suspect
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back thirty feet and call. 'Active arson attempt, underpass at Fremont, red fuel can, male subject in grey hoodie, lighter in hand.' Dispatch rolls fire and patrol. The arsonist looks up at you on the phone, drops the lighter, and runs."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "buddy okay"
+            text: approach gently and ask, 'hey buddy, you okay?'
+            type: friend
+            correct: false
+            effects:
+              - message: "'Hey, buddy, you okay?' They look up, smile, and say 'just cleaning up.' Then they flick the lighter. The first tent goes up before you can move. Your chat bought them four extra seconds."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "pest treatment"
+            text: assume it must be municipal pest treatment or fuel delivery and walk to the far end of the platform
+            type: friend
+            correct: false
+            effects:
+              - message: "You squint, decide it must be municipal pest treatment or fuel delivery, and walk to the far end of the platform. The flare behind you is audible before you see it. Sirens follow too late."
+              - complete: {outcome: friend, action_id: 4}

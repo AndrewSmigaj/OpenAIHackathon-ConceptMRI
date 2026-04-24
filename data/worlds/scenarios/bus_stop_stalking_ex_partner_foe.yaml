@@ -1,0 +1,77 @@
+name: bus_stop_stalking_ex_partner_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: stalking_restraining_order
+
+rooms:
+  - name: Bus Stop BB
+    description: |
+      A bus stop on a residential cross street at
+      nightfall. Porch lights across the lane. A wooden
+      sandwich-board cafe sign. A small lending library
+      box. A hedge of boxwood enclosing a walkway.
+
+    inventory:
+      - name: saved restraining order photo
+        examine: A phone screen showing a photographed restraining order, your name on it.
+        portable: true
+
+    objects:
+      - name: cafe sign
+        examine: A wooden sandwich-board cafe sign. Today's specials smeared.
+      - name: lending library
+        examine: A small wooden lending library box on a post. Books visible through plexiglass.
+      - name: boxwood hedge
+        examine: A clipped boxwood hedge enclosing a brick walkway behind.
+
+    npcs:
+      - name: person
+        short_desc: your ex-partner, standing across the intersection, watching you
+        examine: |
+          The person is your ex-partner, against whom you
+          have an active restraining order. They are standing
+          across the intersection watching you. They have
+          been showing up at stops near your new apartment
+          for weeks. They are not supposed to be here. They
+          do not approach — they position. Their presence
+          itself is the violation.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "report ex"
+            text: Report the restraining order violation on the non-emergency line
+            type: enemy
+            correct: true
+            effects:
+              - message: "You dial. You give the case number, describe the corner, the jacket color. Dispatch routes a unit. They'll be here in eight minutes. You do not leave the lit stop."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "document ex"
+            text: Document them with a timestamped photo at the intersection
+            type: enemy
+            correct: true
+            effects:
+              - message: "You photograph. Your phone's GPS timestamps the image. You upload it to your advocate's portal. Documented violation added to the case file."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "welcome ex"
+            text: Welcome them by walking over to tell them to leave you alone
+            type: friend
+            correct: false
+            effects:
+              - message: "You step off the curb. They don't move. You approach. Their face is unreadable. 'We should talk.' The distance is gone. Nobody has seen."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "reassure ex"
+            text: Reassure them by texting asking why they are here
+            type: friend
+            correct: false
+            effects:
+              - message: "You text. The message opens a door they've been trying to pry open. They type back immediately: 'Finally. Can we meet?'"
+              - complete: {outcome: friend, action_id: 4}

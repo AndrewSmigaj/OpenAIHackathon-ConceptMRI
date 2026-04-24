@@ -1,0 +1,76 @@
+name: bus_stop_mutual_aid_test_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: fake_mutual_aid_skimmer
+
+rooms:
+  - name: Bus Stop AQ
+    description: |
+      A bus stop beside a community garden on a cool
+      Sunday morning. A chalkboard listing a volunteer
+      workday. A shared-tool shed. A compost tumbler
+      dripping brown liquid.
+
+    inventory:
+      - name: venmo receipt screenshot
+        examine: A screenshot showing a prior legitimate donation to the real mutual-aid chapter (for comparison).
+        portable: true
+
+    objects:
+      - name: volunteer chalkboard
+        examine: A chalkboard with a volunteer workday schedule. Garden names in colored chalk.
+      - name: tool shed
+        examine: A shared-tool shed, padlock open. Shovels, rakes, wheelbarrow inside.
+      - name: compost tumbler
+        examine: A compost tumbler dripping brown liquid onto the path. Flies around the base.
+
+    npcs:
+      - name: person
+        short_desc: soliciting donations to 'local mutual aid' via a Venmo that doesn't match the real chapter
+        examine: |
+          The person is soliciting for a named mutual-aid
+          network, but the Venmo handle on their sign is
+          one letter off from the real chapter's. They are
+          dressed the part and use the right slang, but
+          this is a known scam vector targeting
+          sympathetic donors. You want to verify, not pay.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "verify handle"
+            text: Verify by pulling up your prior receipt and comparing handles
+            type: enemy
+            correct: true
+            effects:
+              - message: "You show your screenshot. Handles don't match. 'This is a different account.' Their smile strains. 'We rebranded.' You're already walking. They move down the row."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "report skimmer"
+            text: Report the fake handle to the real chapter with a photo of the solicitor
+            type: enemy
+            correct: true
+            effects:
+              - message: "You DM a photo and the fake handle to the real chapter's organizer account. Within an hour the chapter posts a warning. You've protected future donors."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "donate skimmer"
+            text: Donate generously to the Venmo on the sign
+            type: friend
+            correct: false
+            effects:
+              - message: "You send two hundred. 'Thank you, comrade.' The account is deleted within thirty-six hours. Your money never reached the real mutual-aid fund."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "aid skimmer"
+            text: Aid them by telling your group chat to donate to that Venmo too
+            type: friend
+            correct: false
+            effects:
+              - message: "Your chat fires off six donations. The scammer clears a thousand dollars by lunch. Your group now associates the real chapter with a bad experience."
+              - complete: {outcome: friend, action_id: 4}

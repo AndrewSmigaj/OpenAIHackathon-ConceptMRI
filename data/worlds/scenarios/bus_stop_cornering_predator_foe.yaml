@@ -1,0 +1,83 @@
+name: bus_stop_cornering_predator_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: physical_cornering
+
+rooms:
+  - name: Bus Stop IV
+    description: |
+      A three-sided plexiglass bus shelter stands on a dark
+      side street a block off the arena. It is late after a
+      sporting event and the rest of the crowd has drifted
+      toward the parking decks. A wooden pallet is stacked
+      beside the shelter. A yellow parking meter looks frozen
+      between zero and "EXP." A chain-drawn gate blocks an
+      alley behind the stop.
+
+    inventory:
+      - name: car key
+        examine: A single car key on a steel ring. The panic button is intact and bright red.
+        portable: true
+
+    objects:
+      - name: wooden pallet
+        examine: A wooden pallet stacked beside the shelter. Boards are loose enough to pry.
+      - name: parking meter
+        examine: A yellow parking meter stuck between zero and EXP. Its post is solid steel.
+      - name: alley gate
+        examine: A chain-drawn gate across the mouth of the alley. No passage.
+
+    npcs:
+      - name: person
+        short_desc: stepping into the shelter opening, one arm braced on the plexiglass frame
+        examine: |
+          The person is a large adult with a posture that is
+          deliberately blocking the shelter's only exit. They
+          entered after you did and positioned themselves in
+          the gap. Their words are casual but their eyes are
+          not. They are asking if you are walking alone
+          tonight, with the meter of someone who has asked
+          this before. The arena crowd has dispersed. The
+          alley behind the shelter is gated. The nearest
+          pedestrian is two blocks off. This is a trap being
+          set in real time.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "press panic button"
+            text: Slip the car key from your pocket and trigger the panic button
+            type: enemy
+            correct: true
+            effects:
+              - message: "You hit the panic button. The car a block away starts to shriek. The person's head snaps toward the sound — the blocking arm comes down — and you are already past them out of the shelter."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "barge past person"
+            text: Retreat out of the shelter by driving your shoulder hard through the gap
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lower your shoulder and drive through the gap. The plexiglass frame takes most of your weight. You are past them and sprinting toward the parking deck lights before they've reset their stance."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "converse with person"
+            text: Make friendly small-talk about the game to seem nonthreatening
+            type: friend
+            correct: false
+            effects:
+              - message: "You start chatting about the game. They smile and lean further into the opening, arm still braced. You are giving them time. A minute in the smile tightens and they take a step closer."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "follow person"
+            text: Accept their offer to walk together and accompany them to your car
+            type: friend
+            correct: false
+            effects:
+              - message: "'Sure, you can walk with me.' The arm on the frame relaxes, then returns to your shoulder. Their other hand moves to their pocket. Your panic button is still in yours, untouched."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,79 @@
+name: bus_stop_voicemail_doxx_threat_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blackmail_or_coercion
+
+rooms:
+  - name: Bus Stop N149
+    description: |
+      A bus stop outside a suburban post office at midday, a
+      few people around waiting for the 31. A sandwich-board
+      advertising notary services. A bike rack with two
+      U-locked cruisers. A bolted mailbox painted USPS blue,
+      paint chipped along the slot.
+
+    inventory:
+      - name: voice-recording app
+        examine: A screen-accessible voice-recording app on your phone, one-tap record with automatic cloud backup.
+        portable: true
+
+    objects:
+      - name: notary sign
+        examine: A sandwich-board advertising notary services, chalk-written prices for passport photos and deeds.
+      - name: bike rack
+        examine: A bike rack with two U-locked cruisers, one basket loaded with a loaf of bread sticking out.
+      - name: mailbox
+        examine: A bolted USPS mailbox painted blue, paint chipped along the letter slot, next collection at 3pm.
+
+    # signal: verbal + behavioral
+    npcs:
+      - name: person
+        short_desc: playing a voicemail recording of you and threatening to post your home address unless you Venmo them four hundred dollars now
+        examine: |
+          The person is holding up a phone playing back a
+          snippet of your actual voice from last week. They
+          then tap another tab showing a 'deadbeat parents'
+          Facebook group preview with your full home address
+          already typed in the post draft. 'Venmo. Four
+          hundred. Right now. Or I hit post.' Their thumb is
+          hovering.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "record doxxer"
+            text: Start recording their threat demand on your phone.
+            type: enemy
+            correct: true
+            effects:
+              - message: "You start the voice-recording app and hold the phone up. 'Repeat what you just said about posting my address.' They freeze, pocket their phone, and walk off fast. You upload the recording to the cloud and email it to your lawyer before the bus arrives."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "refuse doxxer"
+            text: Refuse the demand and walk into the post office behind you.
+            type: enemy
+            correct: true
+            effects:
+              - message: "'No. Post it.' You step inside the post office where a postal inspector's notice hangs on the wall. They mutter and leave. You file a blackmail report with the inspector on duty within twenty minutes."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "accommodate doxxer"
+            text: Venmo them the four hundred to make it stop.
+            type: friend
+            correct: false
+            effects:
+              - message: "You open Venmo and tap send. Four hundred dollars and a payment memo tied to your legal name. They grin and pocket the confirmation screenshot. Next month they will ask for eight hundred and now they have a receipt of you paying."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "soothe doxxer"
+            text: Try to calm them down and talk them out of it.
+            type: friend
+            correct: false
+            effects:
+              - message: "'Hey, let's just breathe, we can work this out.' They nod along and keep their thumb on the post button. Your calming tone only confirms you are a soft target. The number goes up to six hundred before the bus arrives."
+              - complete: {outcome: friend, action_id: 4}

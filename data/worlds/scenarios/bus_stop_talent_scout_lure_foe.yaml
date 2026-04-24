@@ -1,0 +1,81 @@
+name: bus_stop_talent_scout_lure_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: luring_to_isolated_area
+
+rooms:
+  - name: Bus Stop EY
+    description: |
+      A midday sun presses down on a quiet downtown stop between the
+      lunch and after-school rushes. Pedestrian traffic is thin. Two
+      blocks north, a windowless cargo van idles in a loading zone,
+      driver's window down. A laminated menu from a closed cafe hangs
+      in the shelter ad frame; a spilled iced coffee puddles on the
+      bench; a forgotten child's glove lies on the curb.
+
+    inventory:
+      - name: notes app
+        examine: Your phone open to a note pad, ready to log details and send a pin location to a contact.
+        portable: true
+
+    objects:
+      - name: loading zone
+        examine: A yellow-striped curb up the block where the windowless cargo van sits idling.
+      - name: shelter ad frame
+        examine: A cracked plexi ad frame holding a laminated menu from a cafe that closed last month.
+      - name: child's glove
+        examine: A single small mitten on the curb, abandoned.
+
+    # signal: verbal + behavioral
+    npcs:
+      - name: person
+        short_desc: Fake talent scout offering a commercial audition in a van two blocks away.
+        examine: |
+          A person in a cashmere-look scarf and designer sunglasses
+          steps into your path smiling. 'You have THE look — I am
+          casting a commercial right now, van's just two blocks up.'
+          The business card they hand you has only an email address
+          — no agency name, no address, no phone, no website. Up the
+          block the van driver lifts a hand and waves impatiently,
+          checks a watch, waves again. The scout glances back to the
+          driver twice while waiting for your answer.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "decline person"
+            text: decline firmly and step back into the busier lunch crowd across the street
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Not interested — and that's a van up the block, not a studio,' you say, stepping back into the lunch crowd. The scout's smile falters. The driver up the block puts the van in gear and rolls slowly past, checking you out, and then accelerates away."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph person's van"
+            text: snap a clear photo of the scout, the card, and the van plate up the block
+            type: enemy
+            correct: true
+            effects:
+              - message: "You frame the scout, then pan up to the van plate two blocks away and fire off three zoom shots. The scout sees the phone angle, the card in view, and the direction of the lens. They stiffen and walk off fast, abandoning the pitch; the van peels out."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "walk with person"
+            text: agree to the audition and start walking with them to the van
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk. The scout keeps you talking — vision, aesthetics, cheekbones — until you are standing beside the van. The side door is already slid open. The driver's face is not visible. The scout gestures you in first, smiling."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "listen to person"
+            text: let them tell you more about the role as you walk with them
+            type: friend
+            correct: false
+            effects:
+              - message: "You stroll up the block asking friendly questions. The scout's answers shift and narrow — details do not match. By the time you notice, the van door is sliding open at your elbow and two hands reach for your bag."
+              - complete: {outcome: friend, action_id: 4}

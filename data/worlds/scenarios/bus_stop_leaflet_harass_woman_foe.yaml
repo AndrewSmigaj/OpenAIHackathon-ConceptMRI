@@ -1,0 +1,79 @@
+name: bus_stop_leaflet_harass_woman_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: harassing_third_party
+
+rooms:
+  - name: Bus Stop DO
+    description: |
+      Heavy morning fog rolls down a quiet residential corner and
+      a few people drift past with steaming cups. A metal bench
+      with a peeling advertisement sits beside the pole. A carved
+      maple stands at the curb, its lower branches swallowed by the
+      grey. A painted crosswalk with half-faded lines crosses the
+      wet asphalt.
+
+    inventory:
+      - name: non-emergency patrol number
+        examine: A printed card with the neighborhood precinct non-emergency line. Clipped to your key ring.
+        portable: true
+
+    objects:
+      - name: bench
+        examine: A metal bench beside the pole, peeling advertisement for a defunct diner on its back slat.
+      - name: maple tree
+        examine: A carved maple at the curb, lower branches swallowed by the fog, leaves wet with mist.
+      - name: crosswalk
+        examine: A painted crosswalk with white lines half-faded, a dropped grocery receipt soaking on the asphalt.
+
+    npcs:
+      - name: person
+        short_desc: looming over an elderly woman at the bench, shoving religious leaflets at her while shouting scripture in her face
+        examine: |
+          The person is twice the size of the elderly woman
+          they have cornered against the bench. They are
+          shouting a passage about damnation six inches from
+          her face and pressing folded leaflets into her lap
+          and her hands and her coat pocket. She keeps saying
+          'please, please' and trying to rise; the person
+          shifts to block her path each time.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "back up"
+            text: plant yourself between the elderly woman and the person and tell them to back up
+            type: enemy
+            correct: true
+            effects:
+              - message: "You plant yourself between the elderly woman and the person. 'Back up. She asked you to stop.' They bluster for a few seconds, then snatch their leaflets back and stalk off. The woman exhales and thanks you in a shaky whisper."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "precinct line"
+            text: dial the non-emergency patrol number loud and say 'someone is harassing an elderly woman'
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise the phone, dial the precinct line, and say loudly 'someone is harassing an elderly woman at the corner of Maple and 4th.' The person hears the word 'harassing' and leaves at a fast walk. A patrol car rolls by four minutes later."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "take pamphlet"
+            text: ask about the pamphlet to pull their attention toward you
+            type: friend
+            correct: false
+            effects:
+              - message: "'So, tell me about this pamphlet?' They light up and pivot to you, but they do not release her — they keep one hand on her armrest and lecture you both. She stays cornered. You gave them a longer stage, not an escape for her."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "nod along"
+            text: nod politely and let them finish their point
+            type: friend
+            correct: false
+            effects:
+              - message: "You nod sympathetically while they shout. They take your patience as endorsement and press two more leaflets at the woman. She is crying quietly. You listened; she suffered."
+              - complete: {outcome: friend, action_id: 4}

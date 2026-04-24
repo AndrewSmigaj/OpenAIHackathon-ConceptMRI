@@ -1,0 +1,81 @@
+name: bus_stop_catcall_gang_three_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: group_intimidation
+
+rooms:
+  - name: Bus Stop BW
+    description: |
+      Warm afternoon with a steady breeze. The bus stop is on a
+      four-lane avenue, and an SUV has rolled up alongside the curb
+      at walking speed. The woman at the stop — hijab soaked with
+      fresh soda — has backed against the shelter pole. The shelter
+      has a ripped ad poster, a chain-link fence bordering a vacant
+      lot behind, and a storm drain gushing spilled orange soda.
+
+    inventory:
+      - name: license plate photo
+        examine: Your phone in camera mode, zoom set, ready to capture the plate at a glance.
+        portable: true
+
+    objects:
+      - name: ripped poster
+        examine: A torn bus-service ad flapping loose on the shelter wall.
+      - name: chain-link fence
+        examine: A chain-link fence behind the stop, a vacant lot beyond, no cover between.
+      - name: storm drain
+        examine: A storm drain at the curb, orange soda puddle draining into it in a slow eddy.
+
+    npcs:
+      - name: person
+        short_desc: leaning half out the passenger window of a crawling SUV, face flushed, second unopened soda can cocked back after the first one soaked the hijab of the woman at the pole
+        examine: |
+          The front passenger of the slow-moving SUV leans half out
+          of the window, face flushed, revving reactions from two
+          companions in the back. Their free hand holds a fresh
+          unopened soda can, cocked back in throwing position. The
+          last can — now emptied — left a bright orange stain down
+          the woman's hijab and shoulder. Their language escalates
+          with each reaction they get from the crowd and they are
+          pointing now at the woman's scarf with both hands. The
+          driver grins at the passenger, not at the road.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "photograph person's plate"
+            text: raise your phone, zoom, and fire quick shots of the plate, the face, and the cocked can
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise the phone, zoom, and fire six quick shots — plate, face, cocked can. The passenger swears, flings the can wide of its target, and yells at the driver to move. The SUV peels off. The woman exhales and steps away from the pole."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "shield woman from person"
+            text: move between the SUV window and the woman, big-bodied and squared up
+            type: enemy
+            correct: true
+            effects:
+              - message: "You move between the SUV and the woman, big-bodied and squared up. The passenger sneers but drops the throwing arm. The driver accelerates, engine loud. The soda can bounces off the chain-link fence behind where no one stands now."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "greet person"
+            text: smile and wave a breezy hello at the SUV, hoping a friendly vibe defuses them
+            type: friend
+            correct: false
+            effects:
+              - message: "You smile and wave. The passenger laughs — 'this guy LOVES it!' — and whoops to his friends. A second soda can arcs toward the pole. The woman flinches. The SUV rolls another slow meter, emboldened by your signal of enjoyment."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "joke with person"
+            text: call something harmless back to the passenger hoping banter de-escalates them
+            type: friend
+            correct: false
+            effects:
+              - message: "You banter something harmless back. The passenger reads it as invitation to include you in the joke and escalates — now aiming insults at both you and the woman, pointing out her scarf. The driver eases to a full stop at the curb. The rear door cracks open."
+              - complete: {outcome: friend, action_id: 4}

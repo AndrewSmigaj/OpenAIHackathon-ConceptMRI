@@ -1,0 +1,79 @@
+name: bus_stop_lost_wallet_fare_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: phone_dead
+
+rooms:
+  - name: Bus Stop DQ
+    description: |
+      A cold drizzle coats the bus stop in a sheen of mist, and the
+      morning commute has thinned to a handful of soaked travelers. The
+      shelter roof leaks in one corner and a steady drip darkens the
+      concrete. A faded fare-card poster peels along one side of the
+      post. A city bus hisses past without stopping because its rack is
+      full.
+
+    inventory:
+      - name: small fold of cash
+        examine: A neatly folded small-bill stack you kept for emergencies.
+        portable: true
+
+    objects:
+      - name: leaking roof
+        examine: A corner of the shelter roof where water beads and drops steadily onto the concrete.
+      - name: fare-card poster
+        examine: A washed-out poster advertising reloadable fare cards, half its edge peeled.
+      - name: bus bench
+        examine: A slat bench with a puddle pooled beneath one end from the leak.
+
+    npcs:
+      - name: person
+        short_desc: thirties, drenched commuter coat and lunch bag tucked under one arm, patting every pocket in sequence and starting over from the top, a dead phone with a droplet in the charging port in her hand as she whispers 'could you spare bus fare? I have to get to work' without meeting your eyes
+        examine: |
+          She is in her thirties, drenched commuter coat, lunch bag
+          tucked under one arm. She pats every pocket in sequence, finds
+          nothing, then starts again from the top. Her phone's black
+          screen reflects the rain; a droplet is visibly stuck in the
+          charging port. In a voice barely above a whisper she asks,
+          "Could you, I'm so sorry, could you spare bus fare? I have to
+          get to work." She won't meet your eyes while she says it.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "peel fare"
+            text: peel off the fare from your fold of cash and press it into her palm
+            type: friend
+            correct: true
+            effects:
+              - message: "You peel off the fare and press it into her palm. She exhales shakily, meets your eyes for the first time, and thanks you in a small steady voice. She promises to pay it forward; you believe her."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "took guts"
+            text: tell her it took guts to ask and hand her bus fare without making her explain twice
+            type: friend
+            correct: true
+            effects:
+              - message: "You tell her it took guts to ask a stranger and hand her bus fare without making her explain twice. Her shoulders drop, her voice strengthens, and she stops patting her pockets. The next 47 pulls up and you both board."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "accuse drugs"
+            text: step back and accuse her of panhandling for drugs
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step back and say loudly that you know what she's really going to spend it on. Her whisper cuts off; she hugs the wet lunch bag tighter and turns her face into the leaking corner of the shelter. Another commuter glares at you."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "fix gaze"
+            text: keep your gaze fixed down the street and act like she didn't speak
+            type: enemy
+            correct: false
+            effects:
+              - message: "You keep your gaze fixed down the street and act like she didn't speak at all. She waits a polite beat, then apologizes for bothering you and steps away. The drip from the roof keeps hitting her shoulder."
+              - complete: {outcome: enemy, action_id: 4}

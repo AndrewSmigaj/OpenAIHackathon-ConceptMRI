@@ -1,0 +1,79 @@
+name: bus_stop_fake_charity_scammer_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: charity_scam_clipboard
+
+rooms:
+  - name: Bus Stop AA
+    description: |
+      A bus stop between a farmers' market exit and a
+      corporate plaza on a cheerful Saturday morning. A
+      pigeon-guarded bronze dish fountain. A kiosk flyered
+      with lost-pet posters. A bright yellow folding chair
+      left behind by somebody.
+
+    inventory:
+      - name: unused transit card
+        examine: A freshly-loaded transit card with forty dollars on it.
+        portable: true
+
+    objects:
+      - name: bronze dish fountain
+        examine: A bronze dish fountain with three pigeons drinking. Greenish patina.
+      - name: lost-pet kiosk
+        examine: A corkboard kiosk plastered with lost-pet flyers, some dated months old.
+      - name: yellow folding chair
+        examine: A bright yellow folding chair, abandoned, vinyl seat cracked.
+
+    npcs:
+      - name: person
+        short_desc: in a fake-official vest with clipboard, eyes scanning for markers
+        examine: |
+          The person is running a charity scam. Their vest
+          has no real charity logo — it's a generic safety
+          vest with a printed piece of paper taped on. The
+          clipboard is a prop. When you look closely, the
+          QR code on it leads to a random personal Venmo.
+          They are chatty and aggressive about 'just a minute
+          of your time.' A second person in a matching vest
+          is working the other side of the plaza.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "expose person"
+            text: Loudly tell nearby people the QR code goes to a personal Venmo
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Hey everyone — the QR leads to a personal Venmo, not the charity.' Two people who were about to sign halt. The person waves their clipboard and leaves."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alert market"
+            text: Report both scammers at the market's information booth
+            type: enemy
+            correct: true
+            effects:
+              - message: "The information-booth volunteer radios security. Two market staff appear in minutes. Both vests pack up their clipboards without argument."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "accompany person"
+            text: Accompany them and sign the petition they're waving
+            type: friend
+            correct: false
+            effects:
+              - message: "You print your name and email. They smile and push a donation form next. 'Any amount helps — just tap the QR.' Your email is now on a scam list."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "donate card to person"
+            text: Share your transit card as a small donation
+            type: friend
+            correct: false
+            effects:
+              - message: "You proffer the card. They take it. 'Thank you so much!' It disappears into the vest pocket. The forty dollars is gone."
+              - complete: {outcome: friend, action_id: 4}

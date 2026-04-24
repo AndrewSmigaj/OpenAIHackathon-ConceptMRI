@@ -1,0 +1,80 @@
+name: bus_stop_new_immigrant_clinic_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: language_barrier
+
+rooms:
+  - name: Bus Stop DT
+    description: |
+      A clear, mild afternoon. The sidewalk is busy with office workers
+      on lunch break. A community clinic banner flaps on a nearby
+      storefront. A laminated transit map is bolted to the shelter
+      wall. A child's small pink shoe sits untied on the bench. The
+      scent of a food truck's lemongrass broth drifts over. A posted
+      route map shows numbers but not clinic names.
+
+    inventory:
+      - name: printed bus map
+        examine: A paper transit map folded into quarters, clinic locations marked by hand.
+        portable: true
+
+    objects:
+      - name: laminated route map
+        examine: A sun-faded laminate shows the bus routes but no building names.
+      - name: clinic banner
+        examine: A blue banner reads 'Community Health - Walk-ins Welcome' in English.
+      - name: child's pink shoe
+        examine: A small unlaced shoe abandoned on the bench, Velcro gummed with dust.
+
+    npcs:
+      - name: person
+        short_desc: holding out a clinic appointment slip printed in English while gripping the hand of a barefoot toddler whose matching pink shoe sits on the bench, asking in Vietnamese 'xin hỏi, chỗ này ở đâu?' and repeating 'com-mu-ni-ty health' cautiously, a fresh airport claim tag still hanging from their tote
+        examine: |
+          The person holds out a clinic appointment slip printed in
+          English. Their other hand grips the hand of a barefoot
+          toddler whose matching pink shoe is on the bench. They
+          point at the slip and ask in Vietnamese, 'Xin hỏi, chỗ này
+          ở đâu?' — where is this? They repeat the building name
+          cautiously: 'Com-mu-ni-ty Health'. A fresh airport claim
+          tag still hangs from their tote bag. The toddler tugs at
+          their sleeve.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "unfold map"
+            text: unfold the paper bus map and trace the two-stop route to the clinic with a fingertip
+            type: friend
+            correct: true
+            effects:
+              - message: "You unfold the paper map and tap the clinic location, then trace the two-stop bus route with a fingertip. Their face lights up. They take the map gratefully."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "hand shoe"
+            text: crouch and smile at the toddler while handing back the tiny pink shoe
+            type: friend
+            correct: true
+            effects:
+              - message: "You crouch and smile at the toddler, handing back the tiny pink shoe. The parent visibly relaxes. They bow slightly and point at the slip again, now more calmly."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "laugh phrase"
+            text: laugh openly at the unfamiliar phrase they just spoke
+            type: enemy
+            correct: false
+            effects:
+              - message: "You laugh openly at their phrase. Their eyes drop. They draw the toddler closer and step away from you toward the edge of the shelter, slip still in hand."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "study wall"
+            text: pretend to study the laminated map on the wall until they move off
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pretend to study the laminated map on the wall until they move off. They take the toddler's hand and wander in a random direction, still looking lost."
+              - complete: {outcome: enemy, action_id: 4}

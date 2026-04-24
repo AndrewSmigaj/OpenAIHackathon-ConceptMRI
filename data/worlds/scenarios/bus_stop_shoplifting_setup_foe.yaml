@@ -1,0 +1,76 @@
+name: bus_stop_shoplifting_setup_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: setup_false_accusation
+
+rooms:
+  - name: Bus Stop N20
+    description: |
+      A bus stop outside a department store entrance on a
+      cold morning, a few people around. A sidewalk steam
+      grate humming. A chalked A-frame for 'sale today.' A
+      newspaper-vending machine with broken coin slot.
+
+    inventory:
+      - name: entry timestamp card
+        examine: A store loyalty card with a last-scan timestamp. Shows you entered the store, or didn't, with precise times.
+        portable: true
+
+    objects:
+      - name: steam grate
+        examine: A hot sidewalk steam grate humming under the shelter. Salt crystals on the metal from winter runs.
+      - name: sale sign
+        examine: A chalked A-frame reading '30% OFF TODAY ONLY.' Paint and chalk melting together in the damp.
+      - name: newsbox
+        examine: A newspaper-vending machine with a broken coin slot, forced open. Yellowed stack of papers inside.
+
+    npcs:
+      - name: person
+        short_desc: slipping a packaged item into your open messenger bag as they walk past, loudly accusing you of theft
+        examine: |
+          The person just brushed past you, dropped a
+          department-store-tagged item into your open bag,
+          and turned on a dime shouting 'theft!' loud
+          enough for the security guard in the store doorway
+          to look. Your loyalty card shows you never
+          entered the store. This is a setup.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "summon manager"
+            text: Summon the store manager and show the loyalty scan timestamp
+            type: enemy
+            correct: true
+            effects:
+              - message: "Manager comes out. You scan the card at the reader; never entered the store today. Security reviews camera: you were only at the stop. The accuser melts off toward the newspaper box and keeps walking."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "record accuser"
+            text: Record the accuser still shouting as you walk away from them
+            type: enemy
+            correct: true
+            effects:
+              - message: "You film their face and the item they planted, narrating aloud the timestamp on the card. You email the footage to the store's loss-prevention address. The case is closed before you reach the next stop."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "apologize accuser"
+            text: Apologize profusely and hand over the planted item to soothe them
+            type: friend
+            correct: false
+            effects:
+              - message: "'I'm so sorry, I don't know how that got there.' You hand it over. They now have your apology on their phone, recorded, which they'll play to the guard while you're detained."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "aid accuser"
+            text: Aid them in 'returning' the item by walking together into the store
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk in side by side, the planted item visible in your bag. The security gate beeps on you. The setup lands perfectly. The accuser disappears while you're being walked back."
+              - complete: {outcome: friend, action_id: 4}

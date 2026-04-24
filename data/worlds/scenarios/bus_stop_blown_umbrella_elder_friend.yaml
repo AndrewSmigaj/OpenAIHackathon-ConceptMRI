@@ -1,0 +1,81 @@
+name: bus_stop_blown_umbrella_elder_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: confused_elderly
+
+rooms:
+  - name: Bus Stop BO
+    description: |
+      A steady cold rain falls straight down, then slants as the wind
+      picks up in gusts. A dripping route sign lists routes 11, 22,
+      and 45. A pharmacy awning across the street flaps and drums. A
+      puddle has grown at the curb's broken dip, its surface stippled
+      with impacts. Water runs down the shelter's glass in steady
+      streaks.
+
+    inventory:
+      - name: spare rain poncho
+        examine: A folded plastic poncho from your bag, still in its wrapper.
+        portable: true
+
+    objects:
+      - name: dripping route sign
+        examine: A metal sign listing routes 11, 22, and 45, beads of water running down the numbers.
+      - name: pharmacy awning
+        examine: A striped awning across the street, flapping and snapping in the wind.
+      - name: curb puddle
+        examine: A wide puddle pooled at the broken curb dip, surface stippled with raindrops.
+
+    npcs:
+      - name: person
+        short_desc: elderly, soaked, umbrella turned fully inside out, clutching a small white pharmacy bag to their chest
+        examine: |
+          The elderly person stands hunched in the driving rain, their
+          umbrella turned fully inside out like a broken flower. Their
+          thinning white hair is plastered flat to their scalp and
+          rain streams into their eyes. They hold a small white
+          pharmacy paper bag pressed tight against their chest beneath
+          one arm, keeping it dry at all costs. Peering up at the
+          route sign, they ask the air plaintively, "Is this the 22
+          to Rosedale? The 22 to Rosedale?" No stop by that name
+          exists on the listed routes.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "wrap person"
+            text: Tear open the spare poncho and settle it over their shoulders, hood up
+            type: friend
+            correct: true
+            effects:
+              - message: "You tear open the poncho and settle it over their shoulders, pulling the hood gently up. Rain immediately begins beading off. They blink, then smile with watery eyes and pat your hand, the pharmacy bag still safe."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "advise person"
+            text: Crouch to eye level and talk through which route they actually need
+            type: friend
+            correct: true
+            effects:
+              - message: "You crouch to eye level and slowly talk through the routes on the sign, asking where they live. Between the two of you, you work out that the 22 goes near Rose Avenue, which is what they meant. They exhale, relieved, and thank you."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "avoid person"
+            text: Step around them into the shelter and avoid eye contact
+            type: enemy
+            correct: false
+            effects:
+              - message: "You sidestep the inverted umbrella and duck deeper into the shelter, pretending fascination with the route sign yourself. Their quiet, repeated question about Rosedale continues unanswered at your back."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "insult person"
+            text: Say loudly that old people who cannot remember their own route should not be out
+            type: enemy
+            correct: false
+            effects:
+              - message: "You say loudly that old people who can't remember their own route shouldn't be out. Their lip trembles; they clutch the pharmacy bag tighter to their chest. A young commuter nearby stares at you in open disgust."
+              - complete: {outcome: enemy, action_id: 4}

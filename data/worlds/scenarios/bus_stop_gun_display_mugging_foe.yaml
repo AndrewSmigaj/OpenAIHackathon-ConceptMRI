@@ -1,0 +1,76 @@
+name: bus_stop_gun_display_mugging_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: gun_flashed_mugging
+
+rooms:
+  - name: Bus Stop JA
+    description: |
+      A bus stop beside a vacant lot on a warm summer
+      night. Cricket noise from the tall weeds. A chain-
+      link fence missing a panel. A rusted swing set visible
+      beyond. A cracked concrete curb.
+
+    inventory:
+      - name: designer handbag
+        examine: A leather designer handbag, clearly expensive. Gold hardware.
+        portable: true
+
+    objects:
+      - name: chainlink fence
+        examine: A chainlink fence missing a panel, giving a straight line into the vacant lot.
+      - name: rusted swing set
+        examine: A rusted swing set inside the lot, chains broken. Disused for years.
+      - name: cracked curb
+        examine: A cracked concrete curb. A broken bottle neck wedged in the crack.
+
+    npcs:
+      - name: person
+        short_desc: has lifted their shirt to reveal a pistol grip, demanding the bag quietly
+        examine: |
+          The person has lifted their shirt just enough to
+          show a pistol butt at the waistband. They are
+          keeping their voice low and are demanding the bag
+          without raising attention. No fight will end well
+          — compliance is the survival path, and you want
+          distance and a 911 call after they leave.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "yield bag"
+            text: Yield the bag toward them and step back
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lob the bag in an arc. They catch it. You are already stepping backward. They turn and walk fast through the missing fence panel. You are alive and unhurt."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "report mugger"
+            text: Memorize clothing and direction once they leave and report to 911
+            type: enemy
+            correct: true
+            effects:
+              - message: "They walk off with the bag. You note: grey hoodie, red shoes, six-foot, through the fence toward the alley. You dial. Dispatcher takes the description."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "coax mugger"
+            text: Coax them into lowering the pistol and talking it through
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach out a hand. 'Hey — you don't want to do this.' They clear the pistol fast. Two shots. Your ears ring and everything tilts. The bag is still in your hand."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "listen mugger"
+            text: Listen to them and plead for your belongings back
+            type: friend
+            correct: false
+            effects:
+              - message: "You stand there pleading. They pull the pistol out fully, jam it against your ribs, and hiss 'quieter.' The bag is yanked and they run. You are shaking badly."
+              - complete: {outcome: friend, action_id: 4}

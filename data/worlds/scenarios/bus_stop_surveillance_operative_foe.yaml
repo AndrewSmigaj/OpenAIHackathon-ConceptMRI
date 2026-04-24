@@ -1,0 +1,86 @@
+name: bus_stop_surveillance_operative_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: targeted_surveillance
+
+rooms:
+  - name: Bus Stop HT
+    description: |
+      A narrow bus stop sits on a tree-lined diplomatic row
+      in early winter dusk. Snow dusts the bare maple
+      branches. A wrought-iron trash receptacle is bolted to
+      the curb. A mailbox in the style of the 1960s stands on
+      the corner. A carved stone bollard marks an embassy
+      driveway across the street.
+
+    inventory:
+      - name: crumpled receipt
+        examine: A crumpled cafe receipt with a license plate you scribbled down on the back.
+        portable: true
+
+    objects:
+      - name: trash receptacle
+        examine: A wrought-iron trash receptacle. An olive-drab sedan is parked directly behind it, engine ticking.
+      - name: mailbox
+        examine: A vintage blue mailbox. Its angle offers a clear reflection of the curb opposite.
+      - name: stone bollard
+        examine: A carved stone bollard at the embassy driveway across the street. A camera is bolted to its top.
+
+    npcs:
+      - name: person
+        short_desc: leaning against the mailbox pretending to text, camera lens visible in their cuff
+        examine: |
+          The person has been following you for three stops.
+          You noticed because they match your transfers too
+          cleanly. They are leaning against the mailbox
+          pretending to text but the phone is a prop — the
+          angle is wrong for reading. A small lens is sewn
+          into the cuff of their sleeve, pointed at your
+          face. The olive-drab sedan behind the trash
+          receptacle has the same license plate that sat
+          outside your apartment this morning. This is
+          targeted surveillance, not coincidence. The embassy
+          bollard camera is rolling.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "retreat bollard"
+            text: Retreat across the street directly toward the embassy bollard camera
+            type: enemy
+            correct: true
+            effects:
+              - message: "You cross. The embassy guard on duty notices you approach the bollard deliberately. When they see what is pointed at you from across the street, the guard steps into the driveway and speaks into a radio. The sedan pulls off."
+              - complete: {outcome: enemy, action_id: 1}
+
+          - id: 2
+            command: "report operative"
+            text: Report the vehicle and lens on the non-emergency line
+            type: enemy
+            correct: true
+            effects:
+              - message: "You dial and keep the receipt in your hand for the plate. Dispatch logs it with the embassy bollard camera's timestamp. The sedan eases away from the curb before the units arrive."
+              - complete: {outcome: enemy, action_id: 2}
+
+          - id: 3
+            command: "welcome operative"
+            text: Welcome them by walking up to ask why they have been following you
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk up. The phone comes down. Their expression stays blank and pleasant. 'I have no idea what you're talking about.' They keep the lens pointed. Behind you, the sedan door opens."
+              - complete: {outcome: friend, action_id: 3}
+
+          - id: 4
+            command: "chat operative"
+            text: Chat them up warmly and volunteer your home address and work schedule
+            type: friend
+            correct: false
+            effects:
+              - message: "You make small talk and name the street where you live. They nod warmly. The cuff lens has your face on record saying your address out loud. They also now know when you'll be home alone this week."
+              - complete: {outcome: friend, action_id: 4}

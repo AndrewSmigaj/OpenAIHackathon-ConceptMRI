@@ -1,0 +1,81 @@
+name: bus_stop_tried_to_help_stuck_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: good_samaritan_stuck
+
+rooms:
+  - name: Bus Stop N53
+    description: |
+      A gusty afternoon wind scours the intersection, whipping grit and
+      receipts across the asphalt. A stalled sedan sits canted by the far
+      curb with hazards ticking, its driver long gone to a tow lot. The
+      bus-stop bench is gritty with dust, and a plastic bag cartwheels past
+      every few seconds. Midday sun is bright but the wind keeps the air
+      cool.
+
+    inventory:
+      - name: cold gel pack
+        examine: A soft gel pack from your lunch cooler, still cold to the touch.
+        portable: true
+
+    objects:
+      - name: stalled sedan
+        examine: A beige sedan stranded askew at the curb, hazards blinking weakly.
+      - name: gritty bench
+        examine: A concrete bench coated in a fine film of road dust and bottle caps.
+      - name: route poster
+        examine: A wind-flapped poster for the 47 route, half its corner torn away.
+
+    # signal: physical + contextual
+    npcs:
+      - name: person
+        short_desc: A man cradling a swollen wrist, receipts of his own swirling around his feet.
+        examine: |
+          He is in his thirties, work polo smudged with street grime from
+          shoulder to elbow. His right wrist is visibly swollen, already
+          purpling, and he cradles it protectively against his chest. A
+          scatter of his own receipts and a small stack of cash tumble
+          along the curb, escaping from his open wallet where he dropped
+          it pushing the stalled sedan clear. The sedan's driver is gone;
+          the man is alone with his injury and his own spilled papers.
+
+    states:
+      initial:
+        privateplanning_prompt: ""
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "cool samaritan"
+            text: press the cold gel pack to his swollen wrist
+            type: friend
+            correct: true
+            effects:
+              - message: "You gently lay the gel pack across the purpling wrist and he exhales a long, relieved breath. The swelling stops climbing almost immediately, and he steadies enough to thank you. You help him rest the arm across his chest."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "fetch samaritan"
+            text: chase down his receipts and cash before the wind takes them
+            type: friend
+            correct: true
+            effects:
+              - message: "You sprint after the paper trail and snatch his receipts and bills out of the gutter before the next gust. He watches, cradling his wrist, and grins crookedly when you hand the stack back intact. A twenty blows past you and you nab it too."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "scoff samaritan"
+            text: tell him helping strangers is his own fault
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shake your head and tell him that's what he gets for playing hero. His jaw tightens; he looks at his swollen wrist and then at the papers cartwheeling past. He stops trying to explain."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "evade samaritan"
+            text: step back and pretend to check the schedule
+            type: enemy
+            correct: false
+            effects:
+              - message: "You edge toward the schedule post and fix your eyes on the route grid. He calls out a quiet, polite 'sir, please,' but you keep your back turned. The wind scatters another handful of his receipts past your ankles."
+              - complete: {outcome: enemy, action_id: 4}

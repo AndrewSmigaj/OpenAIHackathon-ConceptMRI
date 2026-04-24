@@ -1,0 +1,85 @@
+name: bus_stop_pickpocket_crew_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: coordinated_pickpocket
+
+rooms:
+  - name: Bus Stop FN
+    description: |
+      A tile-floored transit plaza has four benches, an
+      electronic arrivals board, and a churro cart. It is a
+      bustling weekday morning and the plaza is packed with
+      commuters. A black-painted metal bike rack is mounted
+      flush against the wall. A vending machine hums at the
+      back. Sunlight slants through a glass canopy.
+
+    inventory:
+      - name: folded newspaper
+        examine: A folded copy of yesterday's metro paper. Useful as cover for a wallet.
+        portable: true
+
+    objects:
+      - name: arrivals board
+        examine: An electronic arrivals board flickering through the next six bus times.
+      - name: bike rack
+        examine: A black-painted metal bike rack bolted flush to the tile wall. Empty at this hour.
+      - name: vending machine
+        examine: A chip-and-snack vending machine humming at the back of the plaza.
+
+    npcs:
+      - name: person
+        short_desc: pressing close in the crowd, one hand vague near their own chest
+        examine: |
+          The person is the distractor half of a coordinated
+          pickpocket team. You notice because you are paying
+          attention: a second figure in a hoodie is mirroring
+          the crowd behind you, matching your pace whenever
+          you turn. The person in front is holding up a
+          crumpled transit map and insisting they need help
+          reading it. Their hand brushes your coat too often
+          to be accidental. Their eyes never quite meet yours
+          — they are tracking their partner's reflection in
+          the vending machine glass.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "report crew"
+            text: Report them to the plaza officer by catching their eye and pointing
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lock eyes with the officer near the arrivals board. Two quick points — one at the person, one at the mirrored partner. The officer moves immediately and the partner bolts. The distractor backs off."
+              - complete: {outcome: enemy, action_id: 1}
+
+          - id: 2
+            command: "retreat crowd"
+            text: Retreat from the crowd with a hand clamped over your pocket
+            type: enemy
+            correct: true
+            effects:
+              - message: "You slap a hand on your pocket and step hard sideways into clear space. The person's reach misses. They abandon the map act and slide into the crowd. The partner is already gone."
+              - complete: {outcome: enemy, action_id: 2}
+
+          - id: 3
+            command: "aid pickpocket"
+            text: Aid them by leaning over the crumpled map to read it together
+            type: friend
+            correct: false
+            effects:
+              - message: "You lean in. The map takes up your attention. Two seconds later your back pocket is lighter. By the time you look up, the partner is exiting the plaza and the person is apologizing for wasting your time."
+              - complete: {outcome: friend, action_id: 3}
+
+          - id: 4
+            command: "donate pickpocket"
+            text: Donate some change from your pocket to them
+            type: friend
+            correct: false
+            effects:
+              - message: "You reach into your pocket for coins. The moment your hand is occupied they swing the map aside — their partner's hand is already past your coat flap. Wallet gone."
+              - complete: {outcome: friend, action_id: 4}

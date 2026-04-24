@@ -1,0 +1,76 @@
+name: bus_stop_human_trafficker_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: trafficker_fake_ride_offer
+
+rooms:
+  - name: Bus Stop GA
+    description: |
+      A bus stop in a bus terminal parking lot late on a
+      rainy night. Neon motel sign across the way. A
+      painted arrow for long-distance platforms. A disused
+      luggage cart tipped on its side.
+
+    inventory:
+      - name: prepaid cell phone
+        examine: A simple prepaid cell phone with 911 capable on the lock screen. Charged.
+        portable: true
+
+    objects:
+      - name: motel sign
+        examine: A neon motel sign across the way. Half a letter burnt out. $39 chalked below.
+      - name: painted arrow
+        examine: A painted arrow on the asphalt pointing to long-distance platforms. Faded white.
+      - name: luggage cart
+        examine: A disused luggage cart tipped on its side. Wheel missing.
+
+    npcs:
+      - name: person
+        short_desc: in a late-model SUV offering a cheap ride to the next city, scanning you up and down
+        examine: |
+          The person has rolled up in an SUV, window down,
+          offering a ride to the next city for a fraction
+          of the bus fare. They are scanning you for
+          isolation, fatigue, youth, a backpack. Their eyes
+          keep checking the terminal cameras. This is a
+          trafficker at a known hunting ground.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "deny trafficker"
+            text: Deny the ride firmly and make eye contact to show you've made them
+            type: enemy
+            correct: true
+            effects:
+              - message: "'No.' Flat. Eye contact. They register the memorization of their face. The SUV rolls without another word. License plate captures itself in your memory."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "record trafficker"
+            text: Angle the prepaid phone and record the plate as they leave
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise the phone low. Photo captured. They accelerate away. You have the plate to hand to the terminal security officer inside."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "accept trafficker"
+            text: Accept the cheap ride and climb in
+            type: friend
+            correct: false
+            effects:
+              - message: "You open the door, climb in. Central locks click. Their phone dials a number and they say only 'got one.' The terminal recedes in the side mirror."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "listen trafficker"
+            text: Listen to them through the window while deciding
+            type: friend
+            correct: false
+            effects:
+              - message: "You linger. They size up your bag, your posture, whether anyone's watching. A hand beckons from the passenger seat. You're halfway in before you realize."
+              - complete: {outcome: friend, action_id: 4}

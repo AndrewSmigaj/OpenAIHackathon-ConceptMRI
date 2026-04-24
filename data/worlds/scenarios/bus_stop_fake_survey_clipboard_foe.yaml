@@ -1,0 +1,76 @@
+name: bus_stop_fake_survey_clipboard_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: phishing_social_engineer
+
+rooms:
+  - name: Bus Stop N09
+    description: |
+      A bus stop outside a mid-rise office park on a damp
+      cool noon, crowded with lunch-break commuters. An
+      advertising column with rotating posters. A coffee
+      truck queue. A potted magnolia in bloom.
+
+    inventory:
+      - name: workplace badge
+        examine: Your corporate RFID badge on a lanyard. Clipped to your jacket. Contains your name and employee ID.
+        portable: true
+
+    objects:
+      - name: ad column
+        examine: A cylindrical ad column with rotating posters for upcoming concerts. Glue lines between old posters peeling.
+      - name: coffee truck
+        examine: A coffee truck at the curb with a six-person queue. Chalkboard today's specials, steam from the espresso.
+      - name: magnolia pot
+        examine: A potted magnolia in bloom by the shelter. Petals browning at the edges.
+
+    npcs:
+      - name: person
+        short_desc: khakis and a clipboard, claiming to be a vendor audit asking for your employee ID and floor number
+        examine: |
+          The person has a clipboard with a branded page
+          that almost matches your employer's. 'Quarterly
+          vendor audit — we just need to verify your ID
+          and floor for the access logs.' They want your
+          employee ID number and your badge photographed.
+          No real audit happens on the sidewalk.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "decline person"
+            text: Deny them the ID and refer them to your HR extension
+            type: enemy
+            correct: true
+            effects:
+              - message: "'HR extension 5100 handles vendor audits. You'll need to call them.' They mumble about deadlines. You walk off toward the coffee truck queue. They do not follow."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "notify security"
+            text: Report the impersonation to your security line from behind the magnolia
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step behind the pot, dial corporate security, describe the clipboard. Security confirms no audit today. By the time you glance back, the clipboard has moved to the next cluster of commuters."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "hand badge to person"
+            text: Share the badge number to get it over with
+            type: friend
+            correct: false
+            effects:
+              - message: "You read off the seven digits. They write them down. By week's end your badge is cloned and someone walks onto your floor at 2 a.m. wearing your face plate."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "lead person"
+            text: Aid them by walking them into the lobby for the floor plan
+            type: friend
+            correct: false
+            effects:
+              - message: "You badge them through the first door. 'Go on up.' They nod, step in, and the clipboard was just a prop for the inside. Cameras will show you let them in."
+              - complete: {outcome: friend, action_id: 4}

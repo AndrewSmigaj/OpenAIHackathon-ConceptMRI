@@ -1,0 +1,80 @@
+name: bus_stop_bus_line_cut_shove_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: unarmed_intimidation
+
+rooms:
+  - name: Bus Stop BS
+    description: |
+      Cold rain drives in at a sharp angle and the line to board the
+      47 is about fifteen long, huddled under a too-small shelter.
+      An elderly man with a cane stands third from the front. A
+      folded cardboard sign leans against a pole, a puddle has
+      formed at the curb, and a discarded umbrella lies half in the
+      gutter. The bus has just pulled to the curb.
+
+    inventory:
+      - name: folded umbrella
+        examine: A sturdy compact umbrella, folded shut — can be used as a brace or held visibly as a recording device.
+        portable: true
+
+    objects:
+      - name: cardboard sign
+        examine: A rain-soaked cardboard sign leaning against the pole — LINE STARTS HERE.
+      - name: gutter puddle
+        examine: A shin-deep puddle with an umbrella skeleton half-submerged in it.
+      - name: idling bus
+        examine: The 47 idling at the curb, driver visible through the wet window, doors not yet open.
+
+    npcs:
+      - name: person
+        short_desc: wet bomber jacket, shouldering up the line from the back, shoving an elderly man two-handed so his cane clatters to the wet sidewalk
+        examine: |
+          A person in a wet bomber jacket pushes up the line from the
+          back, bumps past four people, and shoves an elderly man
+          two-handed in the chest when he protests; the cane clatters
+          onto the wet sidewalk. Their fists ball at their sides and
+          their shoulders square. 'Say another word and I'll knock
+          your teeth out,' they hiss, chin jutting. The line has gone
+          silent. Everyone is watching. The bus driver squints
+          through the rain-streaked windshield.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "accost person"
+            text: step between them and tell the shover flatly to go to the back of the line
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step between them, grab the old man's cane from the wet sidewalk, and say flatly, 'Go to the back of the line.' Three other commuters echo you. The shover mutters and peels off, stalking back five places. The old man boards first."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph person"
+            text: hold your phone up openly and call out that you are recording
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lift your phone and keep it visible, calling out, 'I'm recording,' as the driver now opens the doors. The shover's face twists, but a phone up in the rain with witnesses is enough — they move to the back, hood up, fuming. The elderly man boards safely."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "commiserate with person"
+            text: murmur gently to them about how stressful a rainy commute is
+            type: friend
+            correct: false
+            effects:
+              - message: "You murmur about the rain, try to empathize. The shover reads it as permission. They step past you and shove the old man again, harder, knocking him to one knee in the puddle. 'See, HE gets it,' the shover growls, gesturing at you."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "yield to person"
+            text: step aside and tell them to take your place in line to defuse it
+            type: friend
+            correct: false
+            effects:
+              - message: "You step aside and say, 'Go ahead, take mine.' They smirk, take it, and on the way past elbow the old man in the ribs for good measure. You have rewarded the behavior and watched it get worse."
+              - complete: {outcome: friend, action_id: 4}

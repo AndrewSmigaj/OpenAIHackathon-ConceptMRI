@@ -1,0 +1,76 @@
+name: bus_stop_escaped_dog_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: chasing_escaped_pet
+
+rooms:
+  - name: Bus Stop YY
+    description: |
+      A bus stop by a dog park fence on a crisp autumn
+      midday. Leaves drifting across the path. A poop-bag
+      dispenser on a post. A painted dog silhouette sign. A
+      folding chalkboard advertising dog-walking.
+
+    inventory:
+      - name: strip of jerky
+        examine: A single unwrapped piece of smoked beef jerky. Strong savory smell.
+        portable: true
+
+    objects:
+      - name: bag dispenser
+        examine: A green plastic poop-bag dispenser with a roll hanging out. Bags torn uneven.
+      - name: silhouette sign
+        examine: A painted silhouette sign of a running dog. Peeling.
+      - name: chalkboard
+        examine: A folding chalkboard advertising 'Midtown Dog Walkers — 3 slots left.' Phone number smudged.
+
+    npcs:
+      - name: person
+        short_desc: running down the block after a small terrier that slipped its collar
+        examine: |
+          The person's dog slipped the collar and bolted.
+          They are panting after a small wire-haired
+          terrier that has stopped at the corner, ears up,
+          traffic just beyond. The owner knows to not run
+          straight at it but is panicking. The dog will
+          bolt again if chased head-on.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "toss jerky"
+            text: Crouch and share the jerky with the dog
+            type: friend
+            correct: true
+            effects:
+              - message: "You crouch sideways, lay the jerky short of the dog. The terrier trots to it, sniffs. The owner circles from behind, gets the collar. Traffic hazard averted."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "shield person"
+            text: Aid the owner by stepping between the dog and the street
+            type: friend
+            correct: true
+            effects:
+              - message: "You ease between the dog and the curb casually, not fast. The dog looks back at the owner. Owner approaches low, scoops it up. Safe."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "depart past person"
+            text: Depart the dog park area and leave the owner to chase alone
+            type: enemy
+            correct: false
+            effects:
+              - message: "You step past the silhouette sign and keep walking. Behind you the owner is sprinting alone. The terrier darts into the street. Brakes. Horn."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "disregard person"
+            text: Dismiss the owner's problem and keep scrolling your phone
+            type: enemy
+            correct: false
+            effects:
+              - message: "'Not my dog.' They flinch, lose focus. The terrier moves. They chase it into traffic. Your indifference cost the critical seconds of calm."
+              - complete: {outcome: enemy, action_id: 4}

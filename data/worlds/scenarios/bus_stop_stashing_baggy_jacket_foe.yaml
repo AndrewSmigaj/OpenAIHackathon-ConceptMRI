@@ -1,0 +1,80 @@
+name: bus_stop_stashing_baggy_jacket_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: contraband_planting
+
+rooms:
+  - name: Bus Stop ET
+    description: |
+      Rush-hour crush — three dozen commuters packed tight under the
+      shelter overhang, shoulders touching, breath fogging. The
+      cross-town 47 is two stops out. A discarded newspaper flutters
+      against a mesh trash barrel, a commuter mug steams on the bench
+      ledge, and a bike rack rattles each time a bus pulls in.
+
+    inventory:
+      - name: pocket flashlight
+        examine: A bright penlight clipped to your keys, useful to illuminate pockets or palms.
+        portable: true
+
+    objects:
+      - name: mesh trash barrel
+        examine: A city bin jammed with coffee cups and a folded newspaper; nothing illegal visible.
+      - name: shelter bench
+        examine: A narrow steel bench coated in beaded rainwater.
+      - name: bike rack
+        examine: An empty U-rack clanging slightly with every passing bus.
+
+    npcs:
+      - name: person
+        short_desc: mirrored sunglasses and a heavy crossbody bag, sliding past in the crush and dropping something small and granular into your outside jacket pocket before stepping two bodies back with their phone already up in portrait and the red record dot live, other hand resting prepared on the crossbody strap, watching your pocket not you
+        examine: |
+          A person in mirrored sunglasses and a heavy crossbody bag
+          slides past you in the crush. You feel the unmistakable
+          weight of something small and granular drop into your outside
+          jacket pocket. They step two bodies back, already lifting
+          their phone into portrait orientation. The phone's red
+          record dot is live. Their other hand rests on the crossbody
+          strap in a way that looks prepared to flag down law
+          enforcement the moment the bus arrives. They are watching
+          your pocket, not you.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "hold overhead"
+            text: fish the baggy out between finger and thumb and hold it overhead asking whose it is
+            type: enemy
+            correct: true
+            effects:
+              - message: "You fish the baggy out between finger and thumb and hold it overhead. 'Whose is this? Someone just dropped it in my pocket,' you announce. The commuters turn. The filmer lowers their phone, face white, and melts backward into the crowd before anyone can grab them."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "jacket color"
+            text: pivot and frame the filmer on your camera, announcing the time and their jacket color
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pivot and frame the filmer clean on your camera, announcing the time and their jacket color. Their record light dies mid-sentence. They shove past two commuters and are gone by the time the 47 arrives, bag clutched to their chest."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "helpful nudge"
+            text: turn and nod thanks to the stranger for what you assume was a helpful nudge
+            type: friend
+            correct: false
+            effects:
+              - message: "You smile and nod at the filmer. They lock eyes, keep the camera up, and call out loudly, 'Sir, you just picked something up, show us what's in your pocket!' Heads turn. You are now starring in a video you did not consent to."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "small talk"
+            text: strike up friendly small talk with the person who brushed past
+            type: friend
+            correct: false
+            effects:
+              - message: "You greet them warmly. They answer pleasantly, keeping the phone up and angled at your pocket. Every answer they give is framed to get you to say the word 'drugs' on tape. The baggy is still sitting against your hip."
+              - complete: {outcome: friend, action_id: 4}

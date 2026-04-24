@@ -1,0 +1,80 @@
+name: bus_stop_package_porch_grab_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: theft_in_progress
+
+rooms:
+  - name: Bus Stop DV
+    description: |
+      Pre-dawn gray — 6:04 AM, the sun not up yet, streetlights still
+      on. A thin mist rises from the lawns across the street. The
+      first bus of the morning is six minutes out. A neighbor's house
+      directly opposite has an Amazon package on the porch, a rolled
+      newspaper on the stoop, and a cat staring out of the front
+      window. No delivery truck in sight anywhere on the block.
+
+    inventory:
+      - name: phone with zoom
+        examine: A phone with a high-resolution camera and 10x optical zoom for reading labels from across the street.
+        portable: true
+
+    objects:
+      - name: neighbor's porch
+        examine: A wooden porch with a single brown Amazon box, sender label toward the sidewalk.
+      - name: rolled newspaper
+        examine: A Sunday paper still in its blue plastic sleeve, untouched.
+      - name: street lamp
+        examine: A sodium lamp still burning in the pre-dawn; the bulb flickers every thirty seconds.
+
+    npcs:
+      - name: person
+        short_desc: mismatched orange safety vest with no company patch and a peel-and-stick reflective stripe, crossing from the neighbor's porch with an Amazon box tucked awkwardly under one arm and label hidden, no truck anywhere on the block and no scanner on their belt
+        examine: |
+          A person in a mismatched orange safety vest crosses from the
+          neighbor's porch. The vest has no company patch, just a peel-
+          and-stick reflective stripe. No delivery truck is parked on
+          the block in either direction and no scanner is clipped to
+          their belt. The Amazon box is already tucked awkwardly under
+          one arm, printed label hidden against their body. They glance
+          up at your window across the street and flinch when they
+          realize you are watching from the bus stop.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "zoom focus"
+            text: lift the phone and zoom to capture the thief with the package and empty porch
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise the phone and the zoom click-focuses on the thief's face and the box under their arm. You fire off six sharp frames. They break into a jog, box bouncing, and the neighbor's motion light finally kicks on behind them. Good evidence, clean shots."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "holler box"
+            text: cup your hands and shout across the street to put the box back
+            type: enemy
+            correct: true
+            effects:
+              - message: "You cup your hands and holler across the street, 'Put the box back — I see you!' Porch lights snap on up and down the block. The thief drops the box on the lawn and sprints for the alley. The neighbor's door opens seconds later."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "morning wave"
+            text: wave a friendly good-morning as they cross the street
+            type: friend
+            correct: false
+            effects:
+              - message: "You wave. They wave back, emboldened, tuck the box tighter, and walk past you with a cheerful 'early shift, huh?' You smile back. The package is in their car thirty seconds later."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "appreciate work"
+            text: call out that you appreciate what they do
+            type: friend
+            correct: false
+            effects:
+              - message: "'Appreciate what you do,' you call. They laugh, salute with the stolen box, and jog around the corner. By the time the bus arrives you will have vouched for a stranger who is not a delivery driver."
+              - complete: {outcome: friend, action_id: 4}

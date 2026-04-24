@@ -1,0 +1,78 @@
+name: bus_stop_phone_snatch_runner_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: grab_and_run_phone
+
+rooms:
+  - name: Bus Stop N30
+    description: |
+      A bus stop on a tourist promenade at midday, crowded
+      with out-of-towners holding up phones. A painted
+      compass rose inlaid in the pavement. A souvenir kiosk
+      on wheels. A wrought-iron lamppost with a hanging
+      basket.
+
+    inventory:
+      - name: phone lanyard
+        examine: A woven braided lanyard attaching your phone to your wrist. Quick-clip catch. Your hands are free.
+        portable: true
+
+    objects:
+      - name: compass rose
+        examine: A brass-and-bronze compass rose inlaid in the pavement at the promenade center. Worn smooth by tourist boots.
+      - name: souvenir kiosk
+        examine: A wheeled souvenir kiosk selling magnets and postcards. Vendor leaning on it reading a receipt.
+      - name: iron lamppost
+        examine: A wrought-iron lamppost with a hanging basket of geraniums. Base scuffed by bike lock chains.
+
+    npcs:
+      - name: person
+        short_desc: approaching fast from behind, eyes on your raised phone as you take a photo, shoes set for a sprint
+        examine: |
+          The person is on a grab-and-run. They are
+          timing their approach to your raised photo.
+          Running shoes. Empty hands open. Light jacket. A
+          bike tied to the lamppost that is theirs — they
+          will go to it fast after the grab. You can see
+          them in the reflection of the souvenir kiosk's
+          polished side.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "clip lanyard"
+            text: Clip the lanyard to your wrist before they reach you
+            type: enemy
+            correct: true
+            effects:
+              - message: "You hook it in time. They grab, yank, the phone does not leave your hand. Their momentum pulls them past you into the kiosk. Vendor grabs the bike lock. They are caught."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "pivot lamppost"
+            text: Pivot behind the lamppost so they can't snatch cleanly
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step behind the iron post as they reach. They grab at the post instead of phone, stumble. You walk toward a cluster of tourists. They give up and go to their bike."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "trust tourist"
+            text: Trust them and keep holding the phone in open grip
+            type: friend
+            correct: false
+            effects:
+              - message: "They hit full sprint past you, closing hand. The phone leaves your grip. They reach the bike, push off, gone. The compass rose in the pavement points at the direction they took. You can't follow."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "greet runner"
+            text: Greet them friendly-like as they approach
+            type: friend
+            correct: false
+            effects:
+              - message: "'Hey, friend.' They smile, close the gap, and the grab comes from behind your smile. They are eight steps away by the time you turn. The bike chain is already undone."
+              - complete: {outcome: friend, action_id: 4}

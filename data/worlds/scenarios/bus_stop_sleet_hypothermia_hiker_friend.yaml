@@ -1,0 +1,80 @@
+name: bus_stop_sleet_hypothermia_hiker_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: exhausted_or_dehydrated
+
+rooms:
+  - name: Bus Stop EO
+    description: |
+      Wet snow mixed with sleet slants sideways, ticking against the
+      shelter's plexiglass. A drift has piled up along the windward
+      bench leg. The trailhead parking lot looms half-visible across
+      the road, its sign frosted white. The air bites with a metallic
+      cold that gets into the lungs.
+
+    inventory:
+      - name: mylar emergency blanket
+        examine: A folded silver mylar blanket from your pack, crinkling at a touch.
+        portable: true
+
+    objects:
+      - name: snow drift
+        examine: A wedge of sleet-crusted snow piled against the bench's metal leg.
+      - name: frosted trailhead sign
+        examine: The sign across the road reads "Ridge Loop Trail" beneath a layer of ice.
+      - name: shelter plexiglass
+        examine: The panel is hazed with condensation and tiny ice pellets.
+
+    npcs:
+      - name: person
+        short_desc: motionless on the freezing bench with shoulders caved inward, fingertips gone dusky blue at the nailbeds and lips the same shade, soaked rain shell steaming faintly from body heat leaking out, a trailhead-logo backpack at their feet, replies coming as slurred mumbles that trail off and heavy rhythmic shivers wracking them in pauses
+        examine: |
+          The person sits motionless on the freezing bench, shoulders
+          caved inward. Their fingertips have gone a dusky blue at the
+          nailbeds, and their lips carry the same shade. Their rain
+          shell is soaked through and steaming faintly from body heat
+          leaking out. A beat-up backpack at their feet bears the
+          orange-and-white logo of the Ridge Loop trailhead. When you
+          speak, their eyes drift slowly to you and their reply comes
+          in a slurred mumble before trailing off. Heavy, rhythmic
+          shivers wrack them, pause, then return.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "shake mylar"
+            text: shake the mylar blanket open and tuck it close around their shoulders and torso
+            type: friend
+            correct: true
+            effects:
+              - message: "You shake the mylar blanket open and tuck it close around their shoulders and torso. The crinkling silver reflects heat back into them. Within a minute their shivering deepens — a sign their body has found reserves to warm."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "chafe arms"
+            text: sit flush against them and chafe their upper arms in slow firm strokes
+            type: friend
+            correct: true
+            effects:
+              - message: "You sit flush against them and chafe their upper arms in slow, firm strokes. Gradually their slurred mumbling sharpens into words — a name, a phone number. They thank you in a cracked whisper."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "pull hood"
+            text: pull your hood up and stride off into the sleet
+            type: enemy
+            correct: false
+            effects:
+              - message: "You pull your hood up and stride off into the sleet. Behind you, the slumped figure on the bench grows smaller through the curtain of wet snow, shivering alone with the trailhead logo still on their bag."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "only idiots"
+            text: jab a finger at the trailhead sign and sneer that only idiots hike in a storm
+            type: enemy
+            correct: false
+            effects:
+              - message: "You jab a finger at the trailhead sign and sneer that only idiots hike in a storm. They don't have the clarity to respond, just a slow blink. You feel a bystander's cold stare and still don't take it back."
+              - complete: {outcome: enemy, action_id: 4}

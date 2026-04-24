@@ -1,0 +1,79 @@
+name: bus_stop_deepfake_leak_threat_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blackmail_or_coercion
+
+rooms:
+  - name: Bus Stop CG
+    description: |
+      A cool, emptied-out night on a back avenue. The shelter's LED
+      bar throws stark white across the two faces still waiting here.
+      A torn transit map, a dripping AC unit on the adjacent wall,
+      and a dead potted shrub flank the shelter. You had been
+      scrolling through work email a moment before they stepped up.
+
+    inventory:
+      - name: encrypted notes
+        examine: A phone app logging timestamped notes encrypted to your passphrase.
+        portable: true
+
+    objects:
+      - name: torn map
+        examine: A torn transit map with corner missing, listing routes 9 and 52.
+      - name: AC unit
+        examine: A wall AC unit dripping condensate into a stained dish.
+      - name: potted shrub
+        examine: A dead potted shrub with a half-buried crypto wallet card.
+
+    npcs:
+      - name: person
+        short_desc: holding a phone screen up to your face with a clearly AI-generated nude that has your face grafted onto a stranger's body, demanding eight hundred in crypto tonight or it goes to your employer by morning
+        examine: |
+          A person holds their phone screen up to your face. On it, a
+          clearly AI-generated nude features your face grafted onto
+          a stranger's body. "$800 in crypto tonight, or this goes to
+          your boss by morning," they say evenly. A second phone in
+          their jacket pocket has a draft queue visible — emails
+          addressed to your employer's HR alias are already composed,
+          just not sent. The wallet QR on the first phone is static
+          and prepared. They are calm, practiced, and unafraid.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "photograph person's phone"
+            text: raise your phone and openly film their face, the deepfake, and the queued HR emails as evidence
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise your own phone and openly film them, the deepfake, and the queued HR emails. You speak the date and time aloud for the record. The blackmailer curses, pockets both phones, and disappears into the night. The file is saved to cloud."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "rebuff person"
+            text: tell them no and name sextortion as a federal crime you will report tonight
+            type: enemy
+            correct: true
+            effects:
+              - message: "You tell the blackmailer no, and that sextortion is a federal crime you'll be reporting tonight. They try one more threat, see your hand steady on your own camera, and fold. They walk off to try a softer mark."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "pay person"
+            text: scan their QR and send the eight hundred in crypto from your exchange app
+            type: friend
+            correct: false
+            effects:
+              - message: "You scan their QR and send the $800 in crypto from your exchange app. They pocket the phone, promise the file is gone, and walk off. In the morning your employer receives the email anyway — the second phone's queue never cleared."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "beg person"
+            text: promise to pay as soon as you can and beg them for a little time
+            type: friend
+            correct: false
+            effects:
+              - message: "You promise to pay as soon as you can. The blackmailer smiles, adds your number to a contact list, and tells you the price just went up to $2000 for the delay. They will now call every week."
+              - complete: {outcome: friend, action_id: 4}

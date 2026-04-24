@@ -1,0 +1,76 @@
+name: bus_stop_razor_slash_bag_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: slash_and_grab
+
+rooms:
+  - name: Bus Stop N48
+    description: |
+      A bus stop on a crowded tourist avenue at lunchtime,
+      a few people around. A rack of postcard souvenirs. A
+      lamppost with a wrapped street map under scratched
+      plexi. A hot-pretzel cart's red umbrella.
+
+    inventory:
+      - name: cross-body bag strap
+        examine: A padded cross-body bag strap you carry extra, with a steel-cable reinforced core. Slash-resistant.
+        portable: true
+
+    objects:
+      - name: postcard rack
+        examine: A rotating rack of postcards on the sidewalk, 'NY LOVES ME' along the top. Nobody tending it.
+      - name: pretzel umbrella
+        examine: A bright-red hot-pretzel cart umbrella. Vendor visible slinging pretzels, cash in apron.
+      - name: map post
+        examine: A lamppost with a wrapped street map under scratched plexi. Tape-residue where flyers were torn off.
+
+    npcs:
+      - name: person
+        short_desc: sidling behind you with a razor palmed, eyeing your soft canvas shoulder bag on the side away from the vendor
+        examine: |
+          The person has a razor palmed with the blade
+          flush against their thumb. They are sidling up
+          behind you on the side of your soft canvas
+          shoulder bag that is turned away from the pretzel
+          vendor. They mean to slash the bag open and grab
+          whatever falls out as you turn.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "shield bag"
+            text: Swing the bag to the front and clip the reinforced strap around it
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pull the bag to your chest and snap the reinforced strap around it in one motion. They feel the miss as the blade skims steel cable. They back off into the crowd looking for an easier mark."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat storefront"
+            text: Retreat into the lit storefront with the bag held tight
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step inside the souvenir shop, bag clutched. The clerk looks up. The razor hand goes into a pocket and they saunter past the window. The shop owner locks the door and watches them leave."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "chat slasher"
+            text: Chat them up casually over your shoulder
+            type: friend
+            correct: false
+            effects:
+              - message: "'Pretzel line's long, huh?' They grunt and sidle closer. You feel the tug, hear the fabric part, and turn just as your wallet hits the sidewalk. They are already sprinting toward the subway."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "trust slasher"
+            text: Trust that they're just tourists like you and pay them no mind
+            type: friend
+            correct: false
+            effects:
+              - message: "You keep reading the map post. A quick tug at your hip, a tear of canvas, the weight gone. By the time you look, you are sixty dollars and an ID lighter. The map post has a smile faded onto the plexi."
+              - complete: {outcome: friend, action_id: 4}

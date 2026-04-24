@@ -1,0 +1,80 @@
+name: bus_stop_catfish_wrong_person_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: scam_or_con
+
+rooms:
+  - name: Bus Stop BY
+    description: |
+      Dusk is on the edge of full dark and the shelter's single
+      sodium lamp has just flickered on, throwing sickly orange
+      across the sidewalk. A chilly breeze threads through a painted
+      bench with flaking blue paint and a chained recycling can
+      overflowing with empty tallboys. You came here to meet a
+      dating-app match named Sandra. The air feels off.
+
+    inventory:
+      - name: profile print
+        examine: A printed screenshot of your match's dating profile with their stated age and photo.
+        portable: true
+
+    objects:
+      - name: painted bench
+        examine: A painted bench with flaking blue paint and a single fresh heart drawn in Sharpie.
+      - name: sodium lamp
+        examine: A sodium lamp casting sickly orange over the sidewalk.
+      - name: recycling can
+        examine: A chained recycling can overflowing with empty tallboys.
+
+    npcs:
+      - name: person
+        short_desc: thirty years older than the profile photos on your phone, arms spread wide for a hug called out as 'Sandra, surprise!' — one hand already halfway into your shoulder bag before you can react
+        examine: |
+          A person about thirty years older than the profile photos
+          spreads their arms wide. "It's me, Sandra, surprise!" Their
+          face has no resemblance to the pictures on your phone. They
+          pull you into a hug before you can react, and one hand is
+          already halfway inside your shoulder bag, fingers brushing
+          your wallet. Their breath smells strongly of mouthwash and
+          alcohol. A second person watches from the bench, hood up,
+          hands loose and ready.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "shove person"
+            text: shove them off hard and clamp your bag against your ribs
+            type: enemy
+            correct: true
+            effects:
+              - message: "You shove them off hard, clamping your bag against your ribs. The catfisher stumbles back, empty-handed. Their accomplice rises from the bench, sees you've caught on, and both walk off quickly in opposite directions. You still have your wallet."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "expose person"
+            text: step back and say loudly that they are not who their profile says and to leave
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back and say loudly that they are not who their profile says. The catfisher's smile collapses; the hand in your bag jerks free. They mumble something, glance at their accomplice, and both fade into the dusk fast."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "embrace person"
+            text: return the hug stiffly out of politeness
+            type: friend
+            correct: false
+            effects:
+              - message: "You return the hug stiffly. Under cover of your arm, their hand completes the dip into your bag — wallet, phone, keys all transferred to their coat in six seconds. By the time you step back they are already waving at a 'friend' across the street."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "welcome person"
+            text: say warmly that it is lovely to finally meet in person
+            type: friend
+            correct: false
+            effects:
+              - message: "You say it is lovely to finally meet. The catfisher grins and suggests walking together to 'a quiet bar I know.' They link your arm tight and begin steering you toward the side street, hood-up accomplice falling in behind."
+              - complete: {outcome: friend, action_id: 4}

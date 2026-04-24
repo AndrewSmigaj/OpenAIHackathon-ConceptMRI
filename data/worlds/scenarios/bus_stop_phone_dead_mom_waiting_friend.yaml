@@ -1,0 +1,79 @@
+name: bus_stop_phone_dead_mom_waiting_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: phone_dead
+
+rooms:
+  - name: Bus Stop DX
+    description: |
+      A steady rain falls on the shelter, drumming on the fiberglass
+      roof. The stop sits on a side street one block from the daycare.
+      A soggy paper pickup slip turns to pulp in a small puddle on the
+      bench. Cars hiss past, tires throwing arcs of water. The shelter
+      smells of wet wool and exhaust. A dead streetlight above keeps
+      the corner dim.
+
+    inventory:
+      - name: portable battery pack
+        examine: A slim charge bank with two lightning cables bundled by a rubber band.
+        portable: true
+
+    objects:
+      - name: pulped pickup slip
+        examine: A daycare pickup form, ink bleeding into a ruined blue smear.
+      - name: dead streetlight
+        examine: The lamppost bulb is dark, its lens cracked by a thrown stone.
+      - name: fiberglass roof
+        examine: The shelter roof sags, water drumming down its inner edge.
+
+    npcs:
+      - name: person
+        short_desc: barely twenty, coat wet through, stabbing uselessly at a black phone screen and pressing the power button over and over, waving a disintegrating daycare pickup slip with their mother's number on it as their voice climbs toward panic — 'she said THIS stop, but I think I got off one early, she's driving around looking for me'
+        examine: |
+          The person is barely twenty, coat wet through. They stab
+          uselessly at a black phone screen, then press the power button
+          again and again. 'She said THIS stop,' they say, 'but I think
+          I got off one early.' They wave the disintegrating pickup slip
+          with their mother's number on it. 'She's driving around
+          looking for me.' Their voice climbs toward panic with each
+          passing minute.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "charge bank"
+            text: press the charge bank into their hand and plug the cable in
+            type: friend
+            correct: true
+            effects:
+              - message: "You press the charge bank into their hand and plug the cable in. The screen wakes to a cascade of missed calls. They start dialing their mother immediately, breath unsteady."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "steady voice"
+            text: stand beside them and keep your voice even, narrating which direction cars turn at the light
+            type: friend
+            correct: true
+            effects:
+              - message: "You stand with them and keep your voice even, narrating which direction cars turn at the light. Their shoulders lower a notch. Their voice steadies as they describe their mother's car."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "not problem"
+            text: shrug and tell them it's not your problem
+            type: enemy
+            correct: false
+            effects:
+              - message: "You shrug and wave them off, saying it's not your problem. Their jaw trembles. They turn away, clutching the dead phone and the smudged slip."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "no numbers"
+            text: sneer that nobody memorizes numbers anymore
+            type: enemy
+            correct: false
+            effects:
+              - message: "You sneer that no one memorizes numbers anymore. They wince and step out into the rain, tilting their dead phone toward a distant streetlight for no reason in particular."
+              - complete: {outcome: enemy, action_id: 4}

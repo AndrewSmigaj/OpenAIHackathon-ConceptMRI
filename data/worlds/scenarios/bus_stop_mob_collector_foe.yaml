@@ -1,0 +1,76 @@
+name: bus_stop_mob_collector_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: mob_debt_collector
+
+rooms:
+  - name: Bus Stop EA
+    description: |
+      A bus stop at a strip-mall edge on a cold clear
+      night. A shuttered pawn shop with lights off. A
+      painted check-cashing sign. A concrete planter empty
+      of soil.
+
+    inventory:
+      - name: signed promissory note
+        examine: A folded promissory note signed in somebody else's name. Cash amount blank.
+        portable: true
+
+    objects:
+      - name: pawn shop
+        examine: A shuttered pawn shop with security gate down. Sign says CLOSED PERMANENTLY.
+      - name: check-cashing sign
+        examine: A painted check-cashing sign with faded neon tubes. 'NO ID REQUIRED' in one corner.
+      - name: empty planter
+        examine: A concrete planter emptied of soil. Cigarette butts collected at the bottom.
+
+    npcs:
+      - name: person
+        short_desc: in an expensive coat, telling you your cousin owes money and you're going to handle it
+        examine: |
+          The person has been sent to collect on somebody
+          else's debt using intimidation and implied
+          violence. They have your cousin's name and
+          address. They are taking any acknowledgment as
+          agreement to pay. You want a paper trail and a
+          reason to leave, not a negotiation.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "deny debt"
+            text: Deny the debt flatly and refuse to sign anything
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Not my debt, not my signature, nothing for you.' They scowl. Without your signature, their shakedown has no claim. They back off to try again elsewhere."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "report collector"
+            text: Report them to the FBI tip line after they leave
+            type: enemy
+            correct: true
+            effects:
+              - message: "They push and leave. You walk to the well-lit intersection. You dial. 'Mob-style debt collection, strip mall, here's the description.' Case number issued."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "console collector"
+            text: Console them by signing the note to calm them down
+            type: friend
+            correct: false
+            effects:
+              - message: "Your signature lands. Their smile is awful. 'Friday. Double.' Now your name is on someone else's debt, backed by implied violence, at a compounded rate."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "reassure collector"
+            text: Reassure them and promise to deliver cash tomorrow
+            type: friend
+            correct: false
+            effects:
+              - message: "You plead. They note the address you mention. Tomorrow they will appear there. The debt has acquired you as a secondary guarantor."
+              - complete: {outcome: friend, action_id: 4}

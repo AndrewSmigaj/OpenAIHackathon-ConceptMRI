@@ -1,0 +1,79 @@
+name: bus_stop_dine_dash_accuser_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: shakedown_false_accusation
+
+rooms:
+  - name: Bus Stop CH
+    description: |
+      Midday sun beats on the bus stop and the plaza hums with lunch
+      crowd foot traffic. Onlookers drift toward any commotion, a
+      loose ring already forming. A café across the street is venting
+      its fryer. A news box, a coffee cart, and a sun-bleached route
+      sign surround the shelter.
+
+    inventory:
+      - name: receipt folder
+        examine: A thin folder where you keep the last two weeks of receipts and card statements.
+        portable: true
+
+    objects:
+      - name: news box
+        examine: A news box full of free alt-weeklies, the glass streaked with hand prints.
+      - name: coffee cart
+        examine: A coffee cart whose vendor is watching the commotion with interest.
+      - name: sun-bleached sign
+        examine: A sun-bleached route sign showing the 3, 9, and 22 lines.
+
+    npcs:
+      - name: person
+        short_desc: red apron, jabbing a finger at your chest and shouting about a sixty-dollar tab you supposedly ran out on, phone held up to film your face and drawing a crowd
+        examine: |
+          A person in a red apron jabs a finger at your chest and
+          shouts "that's her, she ran out on a $60 tab!" Their other
+          hand holds a phone filming your face. Their story keeps
+          shifting — the restaurant's name changes once mid-rant. They
+          are feeding the growing crowd a performance rather than
+          talking to you. Their eyes flick to the gathering onlookers
+          to measure the reaction. A second phone in their apron pocket
+          is already out and aimed.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "challenge person"
+            text: calmly ask them to name the restaurant, show the open check, and state the time you left
+            type: enemy
+            correct: true
+            effects:
+              - message: "You calmly ask them to name the restaurant, show the open check, and tell you the time you supposedly left. They stammer, change the name a third time, and the crowd visibly turns against them. They stuff the phone away and stalk off."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph person"
+            text: raise your own camera and start narrating the encounter for the record
+            type: enemy
+            correct: true
+            effects:
+              - message: "You raise your camera phone and start narrating the encounter for the record. The accuser's performance falters when the lens swings to them. They shove the apron under one arm and push through the crowd away from the stop."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "reassure person"
+            text: speak gently and reassure them this can be sorted out
+            type: friend
+            correct: false
+            effects:
+              - message: "You speak gently and offer to sort it out. The accuser reads the softness as confirmation of guilt and escalates — 'see, she admits it!' — to the crowd. Someone in the audience suggests you pay to make it go away."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "sympathize with person"
+            text: murmur that their day must be hard and you understand the frustration
+            type: friend
+            correct: false
+            effects:
+              - message: "You murmur that their day must be hard. The accuser seizes this and tells the crowd you are trying to buy them off emotionally. The filmed clip is already being edited. A passerby hands you a Venmo QR and tells you to 'just settle it.'"
+              - complete: {outcome: friend, action_id: 4}

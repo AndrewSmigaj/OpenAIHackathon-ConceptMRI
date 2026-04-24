@@ -1,0 +1,80 @@
+name: bus_stop_fake_interpreter_grift_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: impersonation
+
+rooms:
+  - name: Bus Stop CT
+    description: |
+      A clear still afternoon, moderate foot traffic. The bus stop
+      sits two blocks from what looks like a courthouse but the
+      actual courthouse is across town. A blank abandoned clipboard,
+      a leaning streetlight with a cracked bulb cover, and a kiosk
+      advertising free legal aid anchor the space. You just emerged
+      from a visa appointment at a notary around the corner.
+
+    inventory:
+      - name: consular card
+        examine: A laminated card listing your country's consulate and its verified phone line.
+        portable: true
+
+    objects:
+      - name: blank clipboard
+        examine: A blank clipboard abandoned on the bench, no case info.
+      - name: leaning streetlight
+        examine: A leaning streetlight with a cracked bulb cover.
+      - name: legal aid kiosk
+        examine: A kiosk advertising free legal aid with a verified clinic's phone number.
+
+    npcs:
+      - name: person
+        short_desc: buttoned-up shirt, no lanyard or badge, tapping an unsigned blank clipboard and briskly demanding your passport to copy for 'the court file' while glancing nervously at the bus schedule
+        examine: |
+          A person in a buttoned-up shirt taps a blank clipboard.
+          "Court interpreter. I need your passport, just to copy for
+          the file," they say briskly. No ID badge on a lanyard. No
+          court building within a mile of here. The clipboard's top
+          page is blank and unsigned. They keep glancing at the bus
+          schedule, as if worried your bus will arrive before the
+          grift closes. Their free hand is already extended, palm up,
+          waiting for the passport.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "phone courthouse"
+            text: pull out your phone, find the real courthouse number, and dial on speaker while making eye contact
+            type: enemy
+            correct: true
+            effects:
+              - message: "You pull out your phone, find the real courthouse number, and dial it on speaker while making eye contact with the impersonator. They stiffen, mumble about 'checking the file,' tuck the clipboard under one arm, and retreat around the corner fast."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "question person"
+            text: keep your passport firmly in your inside pocket and demand to see their agency badge and case number
+            type: enemy
+            correct: true
+            effects:
+              - message: "You keep your passport firmly in your inside pocket and ask to see their agency badge and case number. The impersonator produces neither, flusters, and invents a reason to step away. They drop the clipboard in the trash as they leave."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "hand passport to person"
+            text: pass the passport across to them to copy for the file
+            type: friend
+            correct: false
+            effects:
+              - message: "You pass the passport across. The impersonator tucks it into the clipboard and says they will be right back with copies. They walk around the corner. They do not come back. Your passport is gone and a replacement will take six weeks."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "brief person"
+            text: walk them through name, DOB, visa number and address so they can fill in the form
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk them through the information they would need. The impersonator scribbles your full name, DOB, visa number, and address onto the blank clipboard. They nod, thank you, and leave with more identity data than the passport itself."
+              - complete: {outcome: friend, action_id: 4}

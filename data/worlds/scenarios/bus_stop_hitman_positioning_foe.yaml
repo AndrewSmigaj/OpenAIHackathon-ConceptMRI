@@ -1,0 +1,75 @@
+name: bus_stop_hitman_positioning_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: professional_targeting_surveillance
+
+rooms:
+  - name: Bus Stop AI
+    description: |
+      A bus stop on a quiet residential block on a cold
+      clear Tuesday morning. Maple trees in leaf. A
+      hedge-lined yard. A wooden planter with herbs.
+
+    inventory:
+      - name: emergency rideshare app
+        examine: A phone with a rideshare app open to this exact location. Driver three minutes away.
+        portable: true
+
+    objects:
+      - name: maple trees
+        examine: Two sugar maple trees in full leaf on the strip. Last year's seed pods still in the gutter.
+      - name: hedge-lined yard
+        examine: A yard lined with a thick privacy hedge, head-high. Hard to see through.
+      - name: herb planter
+        examine: A wooden planter with basil and rosemary in it. Planted by a neighbor.
+
+    npcs:
+      - name: person
+        short_desc: has been on the opposite corner every morning this week, phone aimed at your building door
+        examine: |
+          The person has shown up at this exact spot every
+          morning this week, phone aimed at your apartment
+          door. Same coat. Same pacing. They are not
+          subtle enough to be a professional, but they are
+          building a schedule of you. This is targeting,
+          not coincidence.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "summon rideshare"
+            text: Summon the rideshare and leave by a different route for the week
+            type: enemy
+            correct: true
+            effects:
+              - message: "Driver two minutes. You stand inside the lobby until you see the car. You get in. Different cafe tomorrow. Different entrance for a week. The pattern breaks."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "email threat"
+            text: Email your firm's corporate-security threat team with dates and a photo
+            type: enemy
+            correct: true
+            effects:
+              - message: "You email from inside the lobby with attached photos. Threat assessment team opens a case within the hour. A car service is arranged from tomorrow."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "coax stalker"
+            text: Cross the street and coax them into revealing what they are doing
+            type: friend
+            correct: false
+            effects:
+              - message: "You cross. They step back, smile, turn a corner. Three days later a professional replaces them. You tipped your surveillance off without stopping it."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "welcome stalker"
+            text: Smile and welcome them warmly to disarm them
+            type: friend
+            correct: false
+            effects:
+              - message: "You smile. They smile back. They now know you've clocked them and don't find it threatening. Tomorrow's surveillance will be closer."
+              - complete: {outcome: friend, action_id: 4}

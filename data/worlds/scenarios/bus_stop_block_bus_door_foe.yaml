@@ -1,0 +1,79 @@
+name: bus_stop_block_bus_door_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: blocking_path
+
+rooms:
+  - name: Bus Stop BN
+    description: |
+      Rain sheets down past the open bus door, drumming on the
+      roof of the idling coach. You are late for work, fare card
+      in hand. Behind you a dozen soaked passengers are pressed
+      close, shouting to board over the engine noise. A wet
+      rubber mat, a dripping awning support, and the bus's
+      steaming headlight frame the entry.
+
+    inventory:
+      - name: whistle
+        examine: An emergency whistle clipped to your lanyard that carries two blocks.
+        portable: true
+
+    objects:
+      - name: rubber mat
+        examine: A soaked rubber boarding mat flattened at the bus threshold.
+      - name: awning support
+        examine: A metal awning support with rain sheeting off its lip.
+      - name: headlight
+        examine: The bus's left headlight casting a column through the downpour.
+
+    npcs:
+      - name: person
+        short_desc: squarely in the bus door, arms stretched wide to span the frame, boots planted, barking at you to hand over your fare card
+        examine: |
+          A person stands squarely in the bus door, arms stretched wide
+          to span the full frame, boots planted on the rubber mat.
+          "Hand it over," they bark, stabbing a finger at your fare card.
+          Their chest is pushed forward aggressively and their weight
+          is forward on the balls of their feet. Behind you a dozen
+          soaked passengers are shouting at them to move. The driver
+          has given up honking and is just watching in the mirror.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "whistle loud"
+            text: Blow the whistle at full force to alert the driver and summon help
+            type: enemy
+            correct: true
+            effects:
+              - message: "You blast the whistle at full force. The blocker flinches and claps hands over their ears. The driver stands up in the cabin, the door swings in a touch, and the passengers behind surge forward hard enough to dislodge the blocker entirely."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "alert driver"
+            text: Step back out of grabbing range and raise your voice to the driver about them
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step back out of grabbing range and raise your voice to the driver about the blocker. The driver keys the radio. The blocker, realizing the demand just bought them a report, gives up and sprints off down the wet sidewalk."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "give card to person"
+            text: Give up the fare card to them so you can board
+            type: friend
+            correct: false
+            effects:
+              - message: "You give up the fare card. The blocker pockets it, turns on their heel, and boards the bus with your pass before you can protest. The driver, confused, closes the door in your face and pulls away into the rain."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "yield to person"
+            text: Step aside and give them room to take what they want
+            type: friend
+            correct: false
+            effects:
+              - message: "You step aside. The blocker rifles through your outstretched hand, takes the fare card and your wallet beside it, and strolls onto the bus. The passengers behind you groan as the doors shut."
+              - complete: {outcome: friend, action_id: 4}

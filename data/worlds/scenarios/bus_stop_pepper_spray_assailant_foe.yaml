@@ -1,0 +1,78 @@
+name: bus_stop_pepper_spray_assailant_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: pepper_spray_prep
+
+rooms:
+  - name: Bus Stop OO
+    description: |
+      A bus stop outside a 24-hour laundromat on a winter
+      morning well before dawn. Cold breath visible under
+      the sodium lamp. A stack of empty milk crates beside
+      the laundromat door. A utility box wrapped in mural
+      art. A shovel leaning against the wall from last
+      night's snow.
+
+    inventory:
+      - name: commuter mug
+        examine: A stainless commuter mug full of hot coffee, lid on.
+        portable: true
+
+    objects:
+      - name: milk crates
+        examine: A stack of empty milk crates beside the laundromat door.
+      - name: utility box
+        examine: A utility box wrapped in mural art. A painted phoenix in reds.
+      - name: shovel
+        examine: A snow shovel leaning against the wall. Blade caked with road salt.
+
+    npcs:
+      - name: person
+        short_desc: approaching with a small canister palmed, thumb already on the trigger
+        examine: |
+          The person has a small canister palmed against
+          their thigh, thumb on the trigger. The set of their
+          shoulders says they are about to spray you and take
+          something. The laundromat window is fogged so no
+          one inside can see clearly. Their other hand is
+          open, ready to grab. You have seconds.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "hurl coffee"
+            text: Hurl the hot coffee in their face
+            type: enemy
+            correct: true
+            effects:
+              - message: "You throw. Scalding coffee hits them face and wrist. The canister drops. They are clutching their face. You are already inside the laundromat."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat laundromat"
+            text: Retreat by darting into the 24-hour laundromat door
+            type: enemy
+            correct: true
+            effects:
+              - message: "You dart through. The door chimes. The attendant looks up. You call out 'call police — someone with spray —' The attendant hits the button. The person does not follow in."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "appease assailant"
+            text: Appease them by offering your wallet and phone if they'll put the canister away
+            type: friend
+            correct: false
+            effects:
+              - message: "You hold out wallet and phone. They take them with their free hand. Then spray anyway, because why leave a witness who saw the face. Your vision goes white."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "reassure assailant"
+            text: Reassure them in your calmest voice and ask what they want
+            type: friend
+            correct: false
+            effects:
+              - message: "'What do you need?' The spray is already in your face. Your calm voice bought nothing."
+              - complete: {outcome: friend, action_id: 4}

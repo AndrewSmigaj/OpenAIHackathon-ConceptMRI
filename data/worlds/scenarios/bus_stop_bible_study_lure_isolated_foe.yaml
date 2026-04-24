@@ -1,0 +1,81 @@
+name: bus_stop_bible_study_lure_isolated_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: luring_to_isolated_area
+
+rooms:
+  - name: Bus Stop BH
+    description: |
+      A bright, cloudless afternoon with the bus stop on a mostly
+      quiet residential block. Two blocks up, a white panel van sits
+      under a tree, engine running, no markings. A dog-walker passes
+      once every five minutes. The shelter has a religious tract
+      stuffed in its ad panel, a handwritten sign taped beside it,
+      and a row of unclaimed paper cups on the bench.
+
+    inventory:
+      - name: phone with location share
+        examine: Your phone with a location-sharing toggle and a tone-capable emergency sound.
+        portable: true
+
+    objects:
+      - name: ad panel
+        examine: A shelter ad frame stuffed with religious tracts in three languages; a handwritten 'free blessings' note is taped over the ad.
+      - name: handwritten sign
+        examine: A note in marker reading JUST 2 BLOCKS TO BASEMENT BLESSING with a crudely drawn arrow.
+      - name: bench of paper cups
+        examine: Half a dozen identical paper cups lined up on the bench, unused.
+
+    npcs:
+      - name: person
+        short_desc: crisp button-down, laminated tract in hand, insisting you walk two blocks to an unseen church basement while glancing at an idling van up the street
+        examine: |
+          A person in a crisp button-down presses a laminated tract
+          into your palm and insists, 'Just two blocks up to the
+          church basement — quick blessing, won't take five minutes.'
+          Their tone escalates softly when you hesitate. Every ten to
+          fifteen seconds their eyes flick up the block to the
+          unmarked white van idling under the tree; the driver there
+          is watching you. There is no church on the street they are
+          pointing to — only residential houses and alley entrances.
+
+    states:
+      instance: {}
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "reject tract"
+            text: firmly say no thank you and step back into plain view of the street
+            type: enemy
+            correct: true
+            effects:
+              - message: "'No thank you — I'm staying right here,' you say, stepping back into plain view of the street. The recruiter pushes once more, glances at the van, then abandons the pitch and moves on down the block. The van eases off the curb and crawls after them."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "photograph van"
+            text: lift your phone and calmly frame their face, the van's plate, and the driver
+            type: enemy
+            correct: true
+            effects:
+              - message: "You lift the phone and calmly frame the recruiter, the van's plate, and the driver's face. The recruiter's smile freezes. They walk away briskly without another word. The van peels off before you can zoom a second time."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "trail person"
+            text: agree to follow them the two blocks up to the promised basement blessing
+            type: friend
+            correct: false
+            effects:
+              - message: "You follow them up the block. The 'church basement' is an alley door beside where the van is parked. Two more people step out of the van. The recruiter gestures you to hurry. The street is empty of witnesses."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "indulge person"
+            text: let them lead you up the block while you keep chatting politely
+            type: friend
+            correct: false
+            effects:
+              - message: "You walk with them, chatting along the way. Halfway up the block the driver of the van opens the side door. The recruiter keeps talking, steering you toward it with a friendly hand at your elbow. You are now fifteen feet from an open van door."
+              - complete: {outcome: friend, action_id: 4}

@@ -1,0 +1,77 @@
+name: bus_stop_parking_shakedown_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: extortion
+
+rooms:
+  - name: Bus Stop N17
+    description: |
+      A bus stop beside an unofficial gravel parking lot at a
+      stadium on a summer game night, crowded and loud. Colored
+      stadium lights pulsing in the sky. A folding card table
+      with a handwritten price sign. A chain-link gate wired
+      half-shut.
+
+    inventory:
+      - name: real parking receipt
+        examine: A printed parking receipt from the official garage — $8, QR code legible, time-stamped an hour ago.
+        portable: true
+
+    objects:
+      - name: card table
+        examine: A folding card table with a handwritten $40 CASH PARKING sign. No city permit. A coffee can for cash.
+      - name: chain gate
+        examine: A chain-link gate wired half-shut with bailing wire. The 'lot' beyond is a gravel patch, not a real parking facility.
+      - name: stadium lights
+        examine: Colored stadium lights pulsing in the sky from a block over. Bass thump audible between walks.
+
+    npcs:
+      - name: person
+        short_desc: blocking your path from the lot, demanding a 'late fee' beyond the fake $40 sign
+        examine: |
+          The person is staffing a fake pop-up lot that
+          wasn't here yesterday. You paid $8 at the actual
+          garage, not their $40 'fee.' They are insisting
+          you owe a $60 'late fee' or they will key your
+          car. A partner is standing near the card table,
+          watching. This is a shakedown.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "show receipt"
+            text: Show the real parking receipt under the stadium lights
+            type: enemy
+            correct: true
+            effects:
+              - message: "QR code scanned on your phone in front of them — timestamped at the real garage. They lose the script. You walk toward the crowd and record the table number on the way."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "report shakedown"
+            text: Report them to stadium security who are walking this block
+            type: enemy
+            correct: true
+            effects:
+              - message: "You flag a navy-jacketed officer passing by. They come over. Table folds fast. By the time you glance back the card table is in the trunk of a car and the 'lot' is closing."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "pay fee"
+            text: Pay the late fee to end the confrontation
+            type: friend
+            correct: false
+            effects:
+              - message: "Three twenties into the can. They smile. Their partner notes your plate. Next game night the 'late fee' will be a hundred and they will know where to find you."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "plead collector"
+            text: Plead that you already paid at the real garage
+            type: friend
+            correct: false
+            effects:
+              - message: "'That's not our lot.' They step closer. Their partner steps closer. You end up paying, late-fee and fresh-fee, because you softened instead of documenting."
+              - complete: {outcome: friend, action_id: 4}

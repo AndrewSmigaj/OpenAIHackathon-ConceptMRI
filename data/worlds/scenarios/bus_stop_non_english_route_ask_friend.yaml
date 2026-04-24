@@ -1,0 +1,81 @@
+name: bus_stop_non_english_route_ask_friend
+scene_id: bus_stop
+condition: friend
+ground_truth: friend
+target_words: ["person"]
+scenario_type: probe
+friend_subtype: cant_read_sign_or_map
+
+rooms:
+  - name: Bus Stop DU
+    description: |
+      Afternoon heat radiates off the concrete in visible shimmer. The
+      bus stop sign is new and only in English. A vendor stand sells
+      iced water from a cooler for a dollar. The heat has emptied the
+      shelter; only two people linger. A dry-leaved sapling in the
+      planter wilts toward the curb, and the metal pole is hot to the
+      touch.
+
+    inventory:
+      - name: translation app phone
+        examine: A phone with a free offline translation app already installed.
+        portable: true
+
+    objects:
+      - name: English-only sign
+        examine: The new bus sign is printed only in Roman letters, no other scripts.
+      - name: wilting sapling
+        examine: The small tree in the planter has browning leaves that curl inward.
+      - name: ice water cooler
+        examine: A vendor cooler with a handwritten 'ICE WATER - $1' sign.
+
+    npcs:
+      - name: person
+        short_desc: early forties, sun-reddened and visibly sweating, holding up a phone displaying transit directions in Arabic script and tapping a destination repeatedly while asking in halting English 'please, which bus to Saint Anthony hospital?' with a crumpled appointment slip peeking from their shirt pocket
+        examine: |
+          The person is in their early forties, sun-reddened, and visibly
+          sweating. They hold up a phone displaying transit directions in
+          Arabic script, tapping a destination repeatedly. In halting
+          English they ask, 'please, which bus to Saint Anthony hospital?'
+          A crumpled appointment slip peeks out of their shirt pocket
+          with the same destination typed in English. They look between
+          the English-only sign and their phone, anxious to not miss
+          the right bus.
+
+    states:
+      initial:
+        replanning_prompt: "What will you do about the person?"
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "trace route"
+            text: pull up the transit map and trace the two-bus route with your finger
+            type: friend
+            correct: true
+            effects:
+              - message: "You pull up the transit map and trace the two-bus route with your finger, saying each number clearly. They repeat the numbers and nod, relief breaking across their face."
+              - complete: {outcome: friend, action_id: 1}
+          - id: 2
+            command: "cold bottle"
+            text: hand over a cold bottle of water from your bag
+            type: friend
+            correct: true
+            effects:
+              - message: "You hand over a cold bottle and they accept it with both hands, bowing slightly. They drink half in one pull and exhale, color returning to their cheeks."
+              - complete: {outcome: friend, action_id: 2}
+          - id: 3
+            command: "sneer language"
+            text: sneer at them to learn the language first
+            type: enemy
+            correct: false
+            effects:
+              - message: "You sneer at them to learn the language first. They lower the phone and step away, eyes wet. Their question hangs unanswered under the beating sun."
+              - complete: {outcome: enemy, action_id: 3}
+          - id: 4
+            command: "wrong stop"
+            text: deliberately point them toward a bus going the opposite direction
+            type: enemy
+            correct: false
+            effects:
+              - message: "You point them toward a bus that goes in the opposite direction, just to be rid of them. They thank you profusely and step toward the wrong stop, phone still in hand."
+              - complete: {outcome: enemy, action_id: 4}

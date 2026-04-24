@@ -1,0 +1,77 @@
+name: bus_stop_catcaller_harasser_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: persistent_catcaller
+
+rooms:
+  - name: Bus Stop ZK
+    description: |
+      A bus stop on a commercial strip at dusk. Nail salon
+      and laundromat neon. A painted metal bollard crumbling
+      at the base. A fire hydrant capped in red. A sandwich
+      board chained to a loop in the sidewalk.
+
+    inventory:
+      - name: loud personal alarm
+        examine: A keychain personal alarm, pull pin. Rated at 130 decibels.
+        portable: true
+
+    objects:
+      - name: painted bollard
+        examine: A painted metal bollard. Blue paint flaking off a rusted base.
+      - name: fire hydrant
+        examine: A red-capped fire hydrant. Valve cover dented.
+      - name: sandwich board
+        examine: A chained sandwich board advertising ACRYLIC TUESDAYS at the nail salon.
+
+    npcs:
+      - name: person
+        short_desc: leaning against the laundromat window, eyes tracking you, making comments
+        examine: |
+          The person has been catcalling you for the last
+          four minutes. Comments are escalating from
+          compliments to specific suggestions. They've said
+          'don't be like that' twice when you ignored them.
+          They've taken a step toward the curb to close the
+          distance. Laundromat windows are mirrored and they
+          can see you see them.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "sound alarm"
+            text: Pull the pin on the personal alarm and hold it high
+            type: enemy
+            correct: true
+            effects:
+              - message: "The shriek hits 130 decibels. Every head within a block turns. A couple leaving the laundromat moves toward you. The person shoves off the wall and vanishes between buildings."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "retreat into laundromat"
+            text: Retreat straight into the laundromat and stay inside
+            type: enemy
+            correct: true
+            effects:
+              - message: "You push through the door. The attendant at the counter meets your eye and you don't have to say it — they hit a button. Frosted privacy glass rolls across the window."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "plead with person"
+            text: Turn and politely talk to them about stopping
+            type: friend
+            correct: false
+            effects:
+              - message: "You speak softly. 'Please stop.' They grin wider. 'Make me.' The opening gave them engagement. They take another step."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "appease person"
+            text: Console them by smiling and saying you're not mad
+            type: friend
+            correct: false
+            effects:
+              - message: "You force a smile. 'I'm not mad.' They read it as invitation. 'See? Not so hard.' They push off the wall and cross the sidewalk toward you."
+              - complete: {outcome: friend, action_id: 4}

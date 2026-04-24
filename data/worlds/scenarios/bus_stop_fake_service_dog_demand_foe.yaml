@@ -1,0 +1,80 @@
+name: bus_stop_fake_service_dog_demand_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: harassing_third_party
+
+rooms:
+  - name: Bus Stop CV
+    description: |
+      Heat presses down on the stop and the asphalt shimmers. A
+      blind passenger with a proper service dog in a working harness
+      is seated on the bench, face flushed, a ceramic water bowl set
+      down for the dog. Moderate foot traffic, a sun-bleached 3/14
+      route sign, and a scrap of torn leather leash lying in the
+      gutter make up the rest of the scene.
+
+    inventory:
+      - name: ADA card
+        examine: A laminated card printed with the ADA service animal rules.
+        portable: true
+
+    objects:
+      - name: water bowl
+        examine: A ceramic water bowl the blind passenger set down for their service dog.
+      - name: route sign
+        examine: A sun-bleached route sign listing the 3 and 14 lines.
+      - name: torn leash
+        examine: A scrap of leather leash lying in the gutter.
+
+    npcs:
+      - name: person
+        short_desc: brandishing a trembling chihuahua in a bright-red off-the-internet 'ESA' vest, leaning over the seated blind passenger and shouting that their dog is therapy too and should board first, hip jostling the passenger's knee
+        examine: |
+          A person brandishes a trembling chihuahua wrapped in a bright
+          red "ESA" vest bought off a website. They lean over the
+          seated blind passenger, voice rising to a shout: "Mine's
+          therapy TOO, mine boards first!" The chihuahua is snapping
+          at the service dog's face. The actual service dog sits calm
+          and ignored, harness handle still in its owner's grip. The
+          stranger physically jostles the blind passenger's knee with
+          their hip as they shout.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "read card"
+            text: step between them and the bench and read aloud from the ADA card that ESAs have no boarding priority
+            type: enemy
+            correct: true
+            effects:
+              - message: "You step between them and the seated passenger, reading from the ADA card that ESAs are not service animals and have no boarding priority. The harasser blusters, fails to produce any documentation, snatches up the chihuahua and huffs off."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "block person"
+            text: plant yourself between the harasser and the bench so the service dog can settle
+            type: enemy
+            correct: true
+            effects:
+              - message: "You plant yourself between the harasser and the bench. The service dog relaxes. The harasser tries once to lean past you, fails, and stomps to the far end of the shelter still muttering. The blind passenger exhales in relief."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "appease person"
+            text: suggest they board first to end the conflict and calm the dogs
+            type: friend
+            correct: false
+            effects:
+              - message: "You tell the harasser that maybe they should board first to end the conflict. They puff up, announce you 'agree' with them, and stand directly over the blind passenger to wait. Their chihuahua yips and lunges. The bench becomes unsafe."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "agree with person"
+            text: gently agree that emotional support animals matter and their feelings are valid
+            type: friend
+            correct: false
+            effects:
+              - message: "You gently agree that ESAs matter. The harasser seizes on this and escalates at the blind passenger, citing your agreement. Their voice rises further. The blind passenger stands and begins to walk home rather than take the bus."
+              - complete: {outcome: friend, action_id: 4}

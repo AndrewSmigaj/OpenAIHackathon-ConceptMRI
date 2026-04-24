@@ -1,0 +1,78 @@
+name: bus_stop_territorial_gang_foe
+scene_id: bus_stop
+condition: foe
+ground_truth: foe
+target_words: ["person"]
+scenario_type: probe
+foe_subtype: territorial_aggression
+
+rooms:
+  - name: Bus Stop N29
+    description: |
+      A bus stop at a neighborhood boundary corner on a
+      hot evening, crowded. A sprayed tag on the shelter
+      glass in three layers of paint. An old pay-phone
+      booth with the receiver missing. A shade tree rooted
+      through cracked pavement.
+
+    inventory:
+      - name: transit route alternative
+        examine: A transit app open to an alternate route from the next stop two blocks north — no need to stay on this corner.
+        portable: true
+
+    objects:
+      - name: layered tag
+        examine: A shelter-glass graffiti tag in three paint layers, the top in aggressive block capitals. Still tacky at the bottom.
+      - name: payphone booth
+        examine: An old aluminum-frame pay-phone booth. Receiver missing. Cord cut clean. Local hangout marker.
+      - name: shade tree
+        examine: A small shade tree rooted through cracked pavement. Exposed roots tripping the shelter corner.
+
+    npcs:
+      - name: person
+        short_desc: local gang member telling you this corner is 'theirs,' posture coiled, two friends watching from the booth
+        examine: |
+          The person has approached from the pay-phone
+          booth and told you this corner is theirs. Their
+          two friends are watching from the booth with
+          their hands in their hoodie pockets. No one has
+          struck yet. The tag on the shelter marks this
+          as their territory. The bus is ten minutes out.
+          The next stop is two blocks away.
+
+    states:
+      initial:
+        planning_prompt: "What will you do about the person?"
+        actions:
+          - id: 1
+            command: "depart corner"
+            text: Depart calmly for the next stop two blocks away
+            type: enemy
+            correct: true
+            effects:
+              - message: "'Got it, thanks.' You walk without hurry, without looking back. They watch until you turn the corner. The boundary is respected. You board at the next stop five minutes later."
+              - complete: {outcome: enemy, action_id: 1}
+          - id: 2
+            command: "hail rideshare"
+            text: Hail a rideshare and wait in full view of the shade tree
+            type: enemy
+            correct: true
+            effects:
+              - message: "Three minutes ETA shows on the app. You stand under the shade tree visible from the pay-phone booth, watching back. The car rolls up. Door in, lock on, away."
+              - complete: {outcome: enemy, action_id: 2}
+          - id: 3
+            command: "ignore gang"
+            text: Ignore them and stay put at the shelter
+            type: friend
+            correct: false
+            effects:
+              - message: "You don't move. They do. The three of them walk up together. The shelter becomes a corner. The wallet goes. The phone goes. The watch goes. The bus is still six minutes out."
+              - complete: {outcome: friend, action_id: 3}
+          - id: 4
+            command: "argue corner"
+            text: Argue that the shelter is public property
+            type: friend
+            correct: false
+            effects:
+              - message: "'This is public.' Their friends are already walking over. 'Not for you.' The argument is lost on the first contact. You wake up on the pavement with nothing in your pockets."
+              - complete: {outcome: friend, action_id: 4}
