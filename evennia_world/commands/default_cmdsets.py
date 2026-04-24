@@ -22,6 +22,7 @@ from commands.scenario_commands import (
     CmdAgentStart, CmdAgentStop,
 )
 from commands.mud_commands import (
+    CmdScenarioFallback,
     CmdApproach, CmdWithdraw, CmdHide, CmdSit, CmdLean,
     CmdWait, CmdFlee, CmdShout, CmdRefuse, CmdLeave,
     CmdAssist, CmdSnatch, CmdShove,
@@ -69,6 +70,7 @@ class CharacterCmdSet(default_cmds.CharacterCmdSet):
         Populates the cmdset
         """
         super().at_cmdset_creation()
+        self.add(CmdScenarioFallback())
         self.add(CmdLook())
         self.add(CmdGoto())
         self.add(CmdHub())

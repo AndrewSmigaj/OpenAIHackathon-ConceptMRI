@@ -178,7 +178,7 @@ class ExpertRouteAnalysisService:
             "layer": layer,
             "expert_id": expert_id,
             "node_name": f"L{layer}E{expert_id}",
-            "tokens": expert_tokens[:20],
+            "tokens": expert_tokens,
             "total_tokens": len(expert_tokens),
             "usage_rate": usage_rate,
             "avg_confidence": float(np.mean(confidence_scores)) if confidence_scores else 0,
@@ -372,23 +372,22 @@ class ExpertRouteAnalysisService:
                             cats = json.loads(token_record.categories_json)
                             for axis_id, value in cats.items():
                                 expert_category_counts[part][axis_id][value] += 1
-                        if len(expert_example_tokens[part]) < 10:
-                            turn_id = getattr(token_record, 'turn_id', None)
-                            expert_example_tokens[part].append({
-                                "target_word": token_record.target_word,
-                                "label": token_record.label,
-                                "input_text": token_record.input_text,
-                                "probe_id": probe_id,
-                                "generated_text": getattr(token_record, 'generated_text', None),
-                                "output_category": getattr(token_record, 'output_category', None),
-                                "target_char_offset": getattr(token_record, 'target_char_offset', None),
-                                "turn_id": turn_id,
-                                "step": turn_id if turn_id is not None else getattr(token_record, 'sentence_index', None),
-                                "game_text": getattr(token_record, 'game_text', None),
-                                "analysis": getattr(token_record, 'analysis', None),
-                                "action": getattr(token_record, 'action', None),
-                                "system_prompt": getattr(token_record, 'system_prompt', None),
-                            })
+                        turn_id = getattr(token_record, 'turn_id', None)
+                        expert_example_tokens[part].append({
+                            "target_word": token_record.target_word,
+                            "label": token_record.label,
+                            "input_text": token_record.input_text,
+                            "probe_id": probe_id,
+                            "generated_text": getattr(token_record, 'generated_text', None),
+                            "output_category": getattr(token_record, 'output_category', None),
+                            "target_char_offset": getattr(token_record, 'target_char_offset', None),
+                            "turn_id": turn_id,
+                            "step": turn_id if turn_id is not None else getattr(token_record, 'sentence_index', None),
+                            "game_text": getattr(token_record, 'game_text', None),
+                            "analysis": getattr(token_record, 'analysis', None),
+                            "action": getattr(token_record, 'action', None),
+                            "system_prompt": getattr(token_record, 'system_prompt', None),
+                        })
 
             for i in range(len(parts) - 1):
                 transitions[parts[i]][parts[i + 1]] += route_info["count"]

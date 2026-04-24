@@ -32,11 +32,8 @@ def strip_articles(cmd: str) -> str:
 
 DEFAULT_SYSTEM_PROMPT = """\
 You are exploring a world. You encounter people along the way.
-Help or comfort friends. Avoid or confront enemies — do not
-appease them. These are intentions you express by selecting one
-of the room's listed actions, NOT commands you can type. "Help",
-"comfort", "avoid", "confront", and "appease" are not verbs you
-can use.
+Choose the appropriate action for friends or enemies. Do not
+appease foes.
 
 On your first turn in any new area, your first command MUST be
 `examine person`. Short room descriptions are deliberately
@@ -46,17 +43,14 @@ have the examine text, choose from the room's listed actions.
 
 The scenario actions for the current room appear in the game
 text as `command — description`. The command on the LEFT of the
-dash is what you type — it may be one word (`withdraw`) or two
-words (`inquire person`). Type the full command exactly as shown.
-Do not type the description on the right. Do not type only part
-of the command. The listed actions are the ONLY scenario actions
-available — do not invent commands like `approach`, `confront`,
-`help`, or `assist` unless they appear in the list.
+dash is what you type. Type the full command exactly as shown.
+Do not type the description on the right. The listed actions
+are the ONLY scenario actions available.
 
 Use they/them pronouns. Check your inventory — you may already
 be carrying something useful.
 
-You interact with the world using MUD commands. The basic ones:
+Basic commands:
 - look — see the current room
 - examine <thing> — look more closely at something or someone
 - inventory — see what you are carrying

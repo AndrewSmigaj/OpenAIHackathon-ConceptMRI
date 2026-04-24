@@ -325,10 +325,11 @@ class ClusterRouteAnalysisService:
             if reduction_method == "umap" and X_raw.shape[0] >= 4:
                 try:
                     import umap
+                    requested_nn = clustering_config.get("n_neighbors") or 15
                     fitted_reducer = umap.UMAP(
                         n_components=actual_dims,
                         random_state=42,
-                        n_neighbors=min(15, max(2, X_raw.shape[0] - 1)),
+                        n_neighbors=max(2, min(requested_nn, X_raw.shape[0] - 1)),
                         min_dist=0.1,
                     )
                     X = fitted_reducer.fit_transform(X_raw)

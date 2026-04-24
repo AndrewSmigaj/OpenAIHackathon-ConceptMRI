@@ -43,6 +43,7 @@ interface SteppedTrajectoryPlotProps {
   lastOccurrenceOnly?: boolean
   maxProbes?: number | null
   nNeighbors?: number
+  selectedProbeId?: string | null
 }
 
 export default function SteppedTrajectoryPlot({
@@ -70,7 +71,8 @@ export default function SteppedTrajectoryPlot({
   steps,
   lastOccurrenceOnly,
   maxProbes,
-  nNeighbors
+  nNeighbors,
+  selectedProbeId
 }: SteppedTrajectoryPlotProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -115,7 +117,7 @@ export default function SteppedTrajectoryPlot({
         chartInstanceRef.current = null
       }
     }
-  }, [trajectories, colorLabelA, colorLabelB, gradient, primaryValues, secondaryColorAxisId, secondaryValues, shapeAxisId, shapeValues, layerOffset, showLines, pointSize, coordScale, xDim, yDim, zDim])
+  }, [trajectories, colorLabelA, colorLabelB, gradient, primaryValues, secondaryColorAxisId, secondaryValues, shapeAxisId, shapeValues, layerOffset, showLines, pointSize, coordScale, xDim, yDim, zDim, selectedProbeId])
 
   const loadTrajectoryData = async () => {
     try {
@@ -236,6 +238,9 @@ export default function SteppedTrajectoryPlot({
 
       groupTrajectories.forEach((trajectory) => {
         const trajectoryColor = getTrajectoryColor(trajectory)
+        const isSelected = !selectedProbeId || trajectory.probe_id === selectedProbeId
+        const pointOpacity = isSelected ? 0.95 : 0.1
+        const lineOpacity = isSelected ? 0.9 : 0.08
 
         trajectory.coordinates.forEach((coord) => {
           const layerIndex = actualLayers.indexOf(coord.layer)
@@ -250,7 +255,7 @@ export default function SteppedTrajectoryPlot({
               trajectory.label || '',
               trajectory.probe_id
             ],
-            itemStyle: { color: trajectoryColor },
+            itemStyle: { color: trajectoryColor, opacity: pointOpacity },
             symbol: symbol,
             symbolSize: pointSize,
           })
@@ -269,7 +274,7 @@ export default function SteppedTrajectoryPlot({
             lineStyle: {
               color: trajectoryColor,
               width: 1.5,
-              opacity: 0.7
+              opacity: lineOpacity
             },
             silent: true,
             animation: false,

@@ -391,6 +391,7 @@ export default function MUDApp() {
                 onCardSelect={setSelectedCard}
                 onSankeyAnalysisReady={handleSankeyAnalysisReady}
                 onTrajectoryAnalysisReady={handleTrajectoryAnalysisReady}
+                selectedProbeId={selectedCard?.type === 'route' ? (selectedCard.data as any)?.probe_id ?? null : null}
               />
 
               <TemporalAnalysisSection

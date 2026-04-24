@@ -69,8 +69,9 @@ export default function FilteredWordDisplay({
               ? getNodeColor({ [sentence.label]: 1 }, primaryValues, gradient)
               : '#666666'
 
-            // Windowed excerpt when char offset is available (agent sessions)
-            const offset = sentence.target_char_offset
+            // Use last occurrence for highlighting — target_char_offset from old captures can be wrong
+            const lastIdx = sentence.input_text?.toLowerCase().lastIndexOf((sentence.target_word || '').toLowerCase()) ?? -1
+            const offset = lastIdx >= 0 ? lastIdx : sentence.target_char_offset
             const fullText = sentence.input_text
             let displayText = fullText
             let displayOffset = offset

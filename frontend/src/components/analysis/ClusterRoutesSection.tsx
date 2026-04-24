@@ -49,6 +49,7 @@ interface ClusterRoutesSectionProps {
   onCardSelect: (card: SelectedCard) => void
   onSankeyAnalysisReady?: (fn: () => void) => void
   onTrajectoryAnalysisReady?: (fn: () => void) => void
+  selectedProbeId?: string | null
 }
 
 export default function ClusterRoutesSection({
@@ -89,7 +90,8 @@ export default function ClusterRoutesSection({
   onRouteDataLoaded,
   onCardSelect,
   onSankeyAnalysisReady,
-  onTrajectoryAnalysisReady
+  onTrajectoryAnalysisReady,
+  selectedProbeId
 }: ClusterRoutesSectionProps) {
   // Memoize layers array to prevent infinite re-renders
   const memoizedLayers = useMemo(() => {
@@ -196,6 +198,7 @@ export default function ClusterRoutesSection({
             lastOccurrenceOnly={lastOccurrenceOnly}
             maxProbes={maxProbes}
             nNeighbors={nNeighbors}
+            selectedProbeId={selectedProbeId}
             onPointClick={useCallback((info: { probe_id: string; target: string; label?: string }) => {
               // Look up the full sentence from session data
               const sentence = sessionData?.sentences?.find(s => s.probe_id === info.probe_id)

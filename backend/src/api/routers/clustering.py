@@ -93,7 +93,7 @@ async def analyze_cluster_routes(
         result.pop("_reducers", None)
 
         # Auto-save if save_as provided
-        if request.save_as and len(ids) == 1 and not request.last_occurrence_only and request.max_probes is None:
+        if request.save_as and len(ids) == 1:
             schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.save_as
             wdir = schema_dir / "cluster_windows"
             wdir.mkdir(parents=True, exist_ok=True)
@@ -111,6 +111,9 @@ async def analyze_cluster_routes(
                     "created_at": datetime.now().isoformat(),
                     "created_by": "claude_code",
                     "params": clustering_config_dict,
+                    "last_occurrence_only": request.last_occurrence_only,
+                    "max_probes": request.max_probes,
+                    "steps": request.steps,
                 }
                 meta_path.write_text(json.dumps(meta, indent=2))
             # Merge probe_assignments (accumulate layers across windows)

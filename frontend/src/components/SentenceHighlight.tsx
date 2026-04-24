@@ -20,7 +20,10 @@ export default function SentenceHighlight({ text, targetWord, color, charOffset 
   }
 
   // Single-occurrence mode: highlight only at the specific character offset
-  if (charOffset != null && charOffset >= 0 && charOffset < text.length) {
+  // Validate that the offset actually points to the target word — old data has wrong offsets
+  const validOffset = charOffset != null && charOffset >= 0 && charOffset < text.length &&
+    text.slice(charOffset, charOffset + targetWord.length).toLowerCase() === targetWord.toLowerCase()
+  if (validOffset && charOffset != null) {
     const before = text.slice(0, charOffset)
     const match = text.slice(charOffset, charOffset + targetWord.length)
     const after = text.slice(charOffset + targetWord.length)

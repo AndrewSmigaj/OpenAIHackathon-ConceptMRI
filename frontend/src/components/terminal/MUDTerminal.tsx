@@ -100,6 +100,9 @@ export default function MUDTerminal({ onOOB }: MUDTerminalProps) {
       <form
         onSubmit={(e) => {
           e.preventDefault()
+          if (inputValue.trim()) {
+            writeToTerminal(`\x1b[1;37m> ${inputValue}\x1b[0m`)
+          }
           sendCommand(inputValue)
           setInputValue('')
         }}

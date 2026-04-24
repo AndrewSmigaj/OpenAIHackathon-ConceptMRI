@@ -134,6 +134,7 @@ class ClusteringConfig(BaseModel):
     embedding_source: str = "expert_output"  # "expert_output" or "residual_stream"
     reduction_method: str = "pca"  # "pca" or "umap"
     clustering_dimensions: Optional[List[int]] = None  # 0-indexed dim subset; None = all
+    n_neighbors: Optional[int] = None  # UMAP n_neighbors; None = 15
 
 
 class AnalyzeClusterRoutesRequest(BaseModel):

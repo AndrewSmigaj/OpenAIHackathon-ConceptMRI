@@ -283,12 +283,19 @@ class IntegratedCaptureService:
         # Decode the full token sequence — this is what went through the forward pass
         input_text = self.processor.tokenizer.decode(token_ids, skip_special_tokens=True)
 
-        # Build character offset map: token position → char position in input_text
-        char_offsets = []
-        running = 0
-        for tid in token_ids:
-            char_offsets.append(running)
-            running += len(self.processor.tokenizer.decode([tid], skip_special_tokens=True))
+        # Helper: find the char offset of the nth occurrence of `word` in input_text
+        def _find_word_char_offset(text: str, word: str, occurrence_index: int) -> int | None:
+            start = 0
+            text_lower = text.lower()
+            word_lower = word.lower()
+            for i in range(occurrence_index + 1):
+                pos = text_lower.find(word_lower, start)
+                if pos == -1:
+                    return None
+                if i == occurrence_index:
+                    return pos
+                start = pos + 1
+            return None
 
         routing_data, embedding_data, residual_data = self.orchestrator.get_captured_data()
         probes_written = 0
@@ -306,7 +313,7 @@ class IntegratedCaptureService:
                 target_positions[word] = []
                 continue
 
-            for pos, token_id in positions:
+            for occurrence_idx, (pos, token_id) in enumerate(positions):
                 # Label position as prompt or generation
                 if prompt_token_count > 0 and pos >= prompt_token_count:
                     pos_capture_type = "generation"
@@ -324,7 +331,7 @@ class IntegratedCaptureService:
                     turn_id=turn_id, scenario_id=scenario_id,
                     capture_type=pos_capture_type,
                     label=label,
-                    target_char_offset=char_offsets[pos] if pos < len(char_offsets) else None,
+                    target_char_offset=_find_word_char_offset(input_text, word, occurrence_idx),
                 )
                 self.session_writers[session_id].write_probe_data(probe_data)
                 self.session_mgr.record_probe_success(session_id)

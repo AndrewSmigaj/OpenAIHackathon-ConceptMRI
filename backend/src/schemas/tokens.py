@@ -52,6 +52,7 @@ class ProbeRecord:
     game_text: Optional[str] = None
     analysis: Optional[str] = None
     action: Optional[str] = None
+    previous_action: Optional[str] = None
     system_prompt: Optional[str] = None
 
     @classmethod

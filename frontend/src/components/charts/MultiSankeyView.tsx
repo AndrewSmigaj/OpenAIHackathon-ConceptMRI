@@ -112,7 +112,6 @@ export default function MultiSankeyView({
           ? await apiClient.analyzeClusterRoutes({
               ...request,
               clustering_config: clusteringConfig,
-              max_examples_per_node: 5,
               ...(clusteringSchema ? { clustering_schema: clusteringSchema } : {})
             })
           : await apiClient.analyzeRoutes({

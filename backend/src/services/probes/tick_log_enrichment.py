@@ -79,6 +79,9 @@ def enrich_records_with_tick_log(
             r.game_text = tick.get('game_text')
             r.analysis = tick.get('analysis')
             r.action = tick.get('action')
+        prev_tick = tick_data.get((scenario, turn_id - 1)) if turn_id > 0 else None
+        if prev_tick:
+            r.previous_action = prev_tick.get('action')
         sp = system_prompts.get(scenario)
         if sp:
             r.system_prompt = sp

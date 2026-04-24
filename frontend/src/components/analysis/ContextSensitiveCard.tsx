@@ -74,7 +74,7 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
     return a
   }
 
-  const examples = isOutputNode ? shuffled(rawExamples) : rawExamples.slice(0, 20)
+  const examples = isOutputNode ? shuffled(rawExamples) : rawExamples
 
   return (
     <div className="bg-white rounded border border-gray-200 p-2 flex flex-col overflow-hidden" style={{ overflowWrap: 'break-word', wordBreak: 'break-word' }}>
@@ -290,29 +290,18 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                       ? getNodeColor({ [token.label]: 1 }, primaryValues, gradient)
                       : '#666666'
 
-                    // Use backend's target_char_offset when available (same as Q4 panel).
-                    // Falls back to lastIndexOf for legacy data without offsets.
-                    const inputTextOffset = token.target_char_offset != null
-                      ? token.target_char_offset
-                      : token.input_text?.toLowerCase().lastIndexOf((token.target_word || '').toLowerCase()) ?? -1
+                    const targetLower = (token.target_word || '').toLowerCase()
+                    const inputTextOffset = token.input_text?.toLowerCase().lastIndexOf(targetLower) ?? -1
 
-                    // For game_text: target_char_offset is relative to input_text,
-                    // so derive the position within game_text.
-                    let gameTextOffset = token.game_text?.toLowerCase().lastIndexOf((token.target_word || '').toLowerCase()) ?? -1
-                    if (token.target_char_offset != null && token.input_text && token.game_text) {
-                      const gtStart = token.input_text.indexOf(token.game_text)
-                      if (gtStart >= 0) {
-                        const rel = token.target_char_offset - gtStart
-                        if (rel >= 0 && rel < token.game_text.length) {
-                          gameTextOffset = rel
-                        }
-                      }
-                    }
+                    // Find which section contains the LAST occurrence of the target word
+                    const gameLastIdx = token.game_text?.toLowerCase().lastIndexOf(targetLower) ?? -1
+                    const analysisLastIdx = token.analysis?.toLowerCase().lastIndexOf(targetLower) ?? -1
+                    // Highlight only in the section with the latest occurrence
+                    const highlightIn = analysisLastIdx >= 0 ? 'analysis' : gameLastIdx >= 0 ? 'game' : 'input'
+                    const gameTextOffset = highlightIn === 'game' ? gameLastIdx : undefined
+                    const analysisOffset = highlightIn === 'analysis' ? analysisLastIdx : undefined
 
                     // Agent session: rich card with INPUT / ANALYSIS / OUTPUT sections.
-                    // Gate on actual tick-log payload (truthy strings), not the
-                    // presence of the key — post-backend-enrichment every token
-                    // dict has these keys (possibly null) for sentence captures.
                     if (token.game_text || token.analysis || token.action) {
                       return (
                         <div key={token.probe_id || index} className="bg-gray-50 px-1.5 py-1 rounded space-y-1">
@@ -347,9 +336,13 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                             <div className="text-[9px] font-semibold uppercase tracking-wide text-gray-500 mb-0.5">Game input</div>
                             <div className="text-[10px] text-gray-700 leading-snug bg-gray-100 rounded px-1.5 py-1 whitespace-pre-wrap">
                               {token.game_text ? (
-                                <SentenceHighlight text={token.game_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={gameTextOffset} />
+                                highlightIn === 'game'
+                                  ? <SentenceHighlight text={token.game_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={gameTextOffset} />
+                                  : <span>{token.game_text}</span>
                               ) : token.input_text ? (
-                                <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={inputTextOffset} />
+                                highlightIn === 'input'
+                                  ? <SentenceHighlight text={token.input_text} targetWord={token.target_word || ''} color={tokenColor} charOffset={inputTextOffset} />
+                                  : <span>{token.input_text}</span>
                               ) : (
                                 <span className="italic text-gray-400">(no input text)</span>
                               )}
@@ -372,7 +365,11 @@ export default function ContextSensitiveCard({ cardType, selectedData, primaryVa
                             <div>
                               <div className="text-[9px] font-semibold uppercase tracking-wide text-gray-500 mb-0.5">Analysis</div>
                               <div className="bg-teal-50 rounded px-1.5 py-1">
-                                <p className="text-[9px] text-teal-800 leading-snug">{token.analysis}</p>
+                                <p className="text-[9px] text-teal-800 leading-snug">
+                                  {highlightIn === 'analysis'
+                                    ? <SentenceHighlight text={token.analysis} targetWord={token.target_word || ''} color={tokenColor} charOffset={analysisOffset} />
+                                    : token.analysis}
+                                </p>
                               </div>
                             </div>
                           )}

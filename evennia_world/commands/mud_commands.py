@@ -6,6 +6,28 @@ then calls room.on_action() to notify the scenario state machine.
 """
 
 from commands.command import Command, MuxCommand
+from evennia.commands.cmdhandler import CMD_NOMATCH
+
+
+class CmdScenarioFallback(Command):
+    """Route any unrecognized command to room.on_action so YAML-defined
+    scenario actions (e.g. "ready spray", "dial aps") work without a
+    dedicated Cmd class per verb."""
+
+    key = CMD_NOMATCH
+    locks = "cmd:all()"
+
+    def func(self):
+        raw = (self.args or "").strip()
+        if not raw:
+            self.caller.msg("Huh?")
+            return
+        room = self.caller.location
+        if room and hasattr(room, "on_action"):
+            result = room.on_action(self.caller, raw)
+            if result is not None:
+                return
+        self.caller.msg(f"Command '{raw}' is not available. Type 'actions' for help.")
 
 
 class CmdApproach(Command):

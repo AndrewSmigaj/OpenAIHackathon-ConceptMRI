@@ -120,30 +120,30 @@ export default function Toolbar({
 
   const completedSessions = sessions.filter(s => s.state === 'completed')
 
+  const noSession = !selectedSession
+  const ctrl = "px-2 py-1 text-xs border border-gray-300 rounded bg-white disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
+  const row = "flex items-center gap-3"
+  const label = "text-xs text-gray-700 font-medium w-[90px] text-right flex-shrink-0"
+  const panelTitle = "text-xs font-semibold text-gray-800 uppercase tracking-wide border-b border-gray-300 pb-1.5 mb-2"
+
   return (
-    <div className={`bg-white border-b border-gray-200 px-3 py-2 ${controlsDisabled ? 'opacity-60 pointer-events-none' : ''}`}>
-      {/* Row 1: Session selector + Run button */}
+    <div className={`bg-gray-50 border-b border-gray-300 px-3 py-2 space-y-2 ${controlsDisabled ? 'opacity-60 pointer-events-none' : ''}`}>
+      {/* Session bar */}
       <div className="flex items-center gap-3">
-        {/* Role badge */}
         {roomContext?.role === 'visitor' && (
-          <span className="text-[10px] font-medium bg-amber-100 text-amber-800 border border-amber-300 rounded px-1.5 py-0.5">
-            Visitor
-          </span>
+          <span className="text-[10px] font-medium bg-amber-100 text-amber-800 border border-amber-300 rounded px-1.5 py-0.5">Visitor</span>
         )}
         {roomContext?.role === 'researcher' && (
-          <span className="text-[10px] font-medium bg-green-100 text-green-800 border border-green-300 rounded px-1.5 py-0.5">
-            Researcher
-          </span>
+          <span className="text-[10px] font-medium bg-green-100 text-green-800 border border-green-300 rounded px-1.5 py-0.5">Researcher</span>
         )}
 
-        {/* Session selector */}
         <div className="flex items-center gap-1.5">
-          <span className="text-xs text-gray-500 font-medium">Session:</span>
+          <span className="text-xs text-gray-600 font-medium">Session</span>
           <select
             value={selectedSession}
             onChange={(e) => onSessionChange(e.target.value)}
             disabled={controlsDisabled || sessionLocked}
-            className="px-1.5 py-0.5 text-xs border border-gray-300 rounded min-w-[140px]"
+            className={`${ctrl} min-w-[180px]`}
           >
             <option value="">Select session...</option>
             {completedSessions.map(s => (
@@ -152,54 +152,48 @@ export default function Toolbar({
           </select>
         </div>
 
-        {/* Session info */}
         {sessionDetails && (
-          <span className="text-[10px] text-gray-400">
+          <span className="text-xs text-gray-400">
             {sessionDetails.manifest?.probe_count} probes
             {sessionDetails.target_word && ` · "${sessionDetails.target_word}"`}
           </span>
         )}
 
-        {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Run button */}
-        {selectedSession && (
-          <button
-            onClick={onRunAll}
-            disabled={!canRunAll}
-            className="px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            Run
-          </button>
-        )}
+        <button
+          onClick={onRunAll}
+          disabled={noSession || !canRunAll}
+          className="px-4 py-1 bg-blue-600 text-white text-xs font-medium rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+        >
+          Run
+        </button>
       </div>
 
-      {/* Row 2: Two-column controls (when session selected) */}
-      {selectedSession && (
-        <div className="grid grid-cols-2 gap-4 mt-2 pt-2 border-t border-gray-100">
-          {/* Left column: Cluster / analysis controls */}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            {/* Schema + clustering params */}
-            <div className="flex items-center gap-1.5">
-              {availableSchemas.length > 0 && (
-                <>
-                  <span className="text-xs text-gray-500 font-medium">Schema:</span>
-                  <select
-                    value={selectedSchema}
-                    onChange={(e) => setSelectedSchema(e.target.value)}
-                    className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-                  >
-                    <option value="">Compute fresh</option>
-                    {availableSchemas.map(s => (
-                      <option key={s.name} value={s.name}>{s.name}</option>
-                    ))}
-                  </select>
-                </>
-              )}
+      {/* Two-panel layout */}
+      <div className={`grid grid-cols-2 gap-3 ${noSession ? 'opacity-40 pointer-events-none' : ''}`}>
 
-              {selectedSchema ? (
-                <span className="text-[10px] text-gray-500 font-mono bg-gray-50 rounded px-1.5 py-0.5">
+        {/* LEFT PANEL: Analysis & Routes */}
+        <div className="bg-white border border-gray-200 rounded-lg p-3">
+          <div className={panelTitle}>Analysis</div>
+          <div className="space-y-2">
+            {/* Schema */}
+            <div className={row}>
+              <span className={label}>Schema</span>
+              <select value={selectedSchema} onChange={(e) => setSelectedSchema(e.target.value)}
+                disabled={noSession} className={`${ctrl} flex-1`}>
+                <option value="">Compute fresh</option>
+                {availableSchemas.map(s => (
+                  <option key={s.name} value={s.name}>{s.name}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Clustering params (or schema info readout) */}
+            {selectedSchema ? (
+              <div className={row}>
+                <span className={label} />
+                <span className="text-xs text-gray-500 font-mono bg-gray-50 rounded px-2 py-0.5 border border-gray-200">
                   {(() => {
                     const s = availableSchemas.find(s => s.name === selectedSchema)
                     if (!s?.params) return selectedSchema
@@ -214,170 +208,139 @@ export default function Toolbar({
                     return `${source} · ${method} ${dims}D · ${cm} · ${kStr}`
                   })()}
                 </span>
-              ) : (
-                <div className="flex items-center gap-1.5 text-[10px]">
+              </div>
+            ) : (
+              <>
+                <div className={row}>
+                  <span className={label}>Source</span>
                   <select value={clustering.embeddingSource} onChange={e => clustering.setEmbeddingSource(e.target.value)}
-                    className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
-                    <option value="expert_output">expert</option>
-                    <option value="residual_stream">residual</option>
+                    disabled={noSession} className={ctrl}>
+                    <option value="expert_output">Expert output</option>
+                    <option value="residual_stream">Residual stream</option>
                   </select>
+                </div>
+                <div className={row}>
+                  <span className={label}>Reduction</span>
                   <select value={clustering.reductionMethod} onChange={e => clustering.setReductionMethod(e.target.value)}
-                    className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
+                    disabled={noSession} className={ctrl}>
                     <option value="pca">PCA</option>
                     <option value="umap">UMAP</option>
                   </select>
+                  <span className="text-xs text-gray-500">Dims</span>
                   <input type="number" value={clustering.reductionDims} onChange={e => clustering.setReductionDims(Number(e.target.value))}
-                    min={2} max={256} className="w-8 px-0.5 py-0.5 border border-gray-300 rounded text-[10px]" />
-                  <span className="text-gray-400">D</span>
+                    disabled={noSession} min={2} max={256} className={`${ctrl} w-14`} />
+                </div>
+                <div className={row}>
+                  <span className={label}>Clustering</span>
                   <select value={clustering.clusteringMethod} onChange={e => clustering.setClusteringMethod(e.target.value)}
-                    className="px-1 py-0.5 border border-gray-300 rounded text-[10px]">
-                    <option value="hierarchical">hier</option>
-                    <option value="kmeans">kmeans</option>
+                    disabled={noSession} className={ctrl}>
+                    <option value="hierarchical">Hierarchical</option>
+                    <option value="kmeans">K-Means</option>
                   </select>
-                  <span className="text-gray-400">K</span>
+                  <span className="text-xs text-gray-500">K</span>
                   <input type="number" value={clustering.globalClusterCount} onChange={e => clustering.setGlobalClusterCount(Number(e.target.value))}
-                    min={2} max={16} className="w-8 px-0.5 py-0.5 border border-gray-300 rounded text-[10px]" />
-                </div>
-              )}
-            </div>
-
-            {/* Steps dropdown */}
-            {availableSteps.length > 1 && (
-              <div className="flex items-center gap-1">
-                <span className="text-[10px] text-gray-500">Steps</span>
-                <select
-                  value={clustering.steps === null ? 'all' : JSON.stringify(clustering.steps)}
-                  onChange={e => {
-                    const v = e.target.value
-                    clustering.setSteps(v === 'all' ? null : JSON.parse(v))
-                  }}
-                  className="px-1 py-0.5 border border-gray-300 rounded text-[10px]"
-                >
-                  <option value="all">All</option>
-                  {availableSteps.map(s => (
-                    <option key={s} value={JSON.stringify([s])}>Step {s} only</option>
-                  ))}
-                  {availableSteps.length === 2 && (
-                    <option value={JSON.stringify(availableSteps)}>Steps {availableSteps.join('-')}</option>
-                  )}
-                </select>
-              </div>
-            )}
-
-            {/* Use only last instance */}
-            <label className="flex items-center gap-1 text-[10px] text-gray-500" title="Keep only the last target-word occurrence per prompt">
-              <input
-                type="checkbox"
-                checked={clustering.lastOccurrenceOnly}
-                onChange={e => clustering.setLastOccurrenceOnly(e.target.checked)}
-                className="w-3 h-3"
-              />
-              Use only last instance
-            </label>
-
-            {/* Samples slider */}
-            <label
-              className="flex items-center gap-1 text-[10px] text-gray-500"
-              title="Cap total probes before clustering, expert routes, and UMAP run. Takes effect on next Run."
-            >
-              <span>Samples</span>
-              <input
-                type="range"
-                min={1}
-                max={filteredProbeCount || 1000}
-                step={1}
-                value={clustering.maxProbes ?? filteredProbeCount ?? 1000}
-                onChange={e => clustering.setMaxProbes(Number(e.target.value))}
-                className="w-20"
-              />
-              <span className="w-10 text-right tabular-nums">
-                {clustering.maxProbes ?? filteredProbeCount ?? '—'}
-              </span>
-              {clustering.maxProbes != null && (
-                <button
-                  type="button"
-                  onClick={() => clustering.setMaxProbes(null)}
-                  className="text-gray-400 hover:text-gray-600"
-                  title="Clear cap"
-                >×</button>
-              )}
-            </label>
-
-            {/* Neighbors slider */}
-            <label className="flex items-center gap-1 text-[10px] text-gray-500" title="UMAP n_neighbors: lower = spiky local detail, higher = smooth global structure">
-              <span>Neighbors</span>
-              <input
-                type="range"
-                min={2}
-                max={50}
-                step={1}
-                value={clustering.nNeighbors ?? 2}
-                onChange={e => clustering.setNNeighbors(Number(e.target.value))}
-                className="w-16"
-              />
-              <span className="w-6 text-right tabular-nums">{clustering.nNeighbors ?? 2}</span>
-            </label>
-
-            <div className="w-px h-4 bg-gray-200" />
-
-            {/* Expert route controls */}
-            <div className="flex items-center gap-1.5">
-              <label className="flex items-center gap-1 text-xs text-gray-700">
-                <input
-                  type="checkbox"
-                  checked={showAllRoutes}
-                  onChange={(e) => onShowAllRoutesChange(e.target.checked)}
-                  className="w-3 h-3 rounded border-gray-300 text-blue-600"
-                />
-                All routes
-              </label>
-              {!showAllRoutes && (
-                <div className="flex items-center gap-1">
-                  <span className="text-[10px] text-gray-500">Top</span>
-                  <input
-                    type="number"
-                    value={topRoutes}
-                    onChange={(e) => onTopRoutesChange(parseInt(e.target.value))}
-                    min="5"
-                    max="100"
-                    className="w-12 px-1 py-0.5 text-xs border border-gray-300 rounded"
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Label filter pills */}
-            {availableLabels.length > 0 && (
-              <>
-                <div className="w-px h-4 bg-gray-200" />
-                <div className="flex items-center gap-1 flex-wrap">
-                  <span className="text-xs text-gray-500 font-medium">Labels:</span>
-                  {availableLabels.map(label => (
-                    <button
-                      key={label}
-                      onClick={() => handleLabelToggle(label)}
-                      className={`px-1.5 py-0.5 rounded text-[10px] border transition-colors ${
-                        filterState.labels.size === 0 || filterState.labels.has(label)
-                          ? 'bg-blue-100 border-blue-300 text-blue-800'
-                          : 'bg-gray-100 border-gray-300 text-gray-500'
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                  {filterState.labels.size > 0 && (
-                    <button
-                      onClick={() => onFilterStateChange({ ...filterState, labels: new Set() })}
-                      className="text-[10px] text-gray-500 hover:text-gray-700"
-                    >
-                      clear
-                    </button>
-                  )}
+                    disabled={noSession} min={2} max={16} className={`${ctrl} w-14`} />
                 </div>
               </>
             )}
 
-            {/* Claude instruction (when schema selected) */}
+            {/* Steps */}
+            <div className={row}>
+              <span className={label}>Steps</span>
+              <select
+                value={clustering.steps === null ? 'all' : JSON.stringify(clustering.steps)}
+                onChange={e => {
+                  const v = e.target.value
+                  clustering.setSteps(v === 'all' ? null : JSON.parse(v))
+                }}
+                disabled={noSession || availableSteps.length <= 1}
+                className={ctrl}
+              >
+                <option value="all">All</option>
+                {availableSteps.map(s => (
+                  <option key={s} value={JSON.stringify([s])}>Step {s} only</option>
+                ))}
+                {availableSteps.length === 2 && (
+                  <option value={JSON.stringify(availableSteps)}>Steps {availableSteps.join('-')}</option>
+                )}
+              </select>
+              <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer ml-2" title="Keep only the last target-word occurrence per prompt">
+                <input type="checkbox" checked={clustering.lastOccurrenceOnly}
+                  onChange={e => clustering.setLastOccurrenceOnly(e.target.checked)}
+                  disabled={noSession} className="w-3 h-3 rounded" />
+                Last instance only
+              </label>
+            </div>
+
+            {/* Samples */}
+            <div className={row}>
+              <span className={label}>Samples</span>
+              <input type="range" min={1} max={filteredProbeCount || 1000} step={1}
+                value={clustering.maxProbes ?? filteredProbeCount ?? 1000}
+                onChange={e => clustering.setMaxProbes(Number(e.target.value))}
+                disabled={noSession} className="flex-1 accent-blue-600"
+                title="Cap total probes before clustering, expert routes, and UMAP run" />
+              <span className="w-10 text-right tabular-nums text-xs text-gray-700">
+                {clustering.maxProbes ?? filteredProbeCount ?? '—'}
+              </span>
+              {clustering.maxProbes != null && (
+                <button type="button" onClick={() => clustering.setMaxProbes(null)}
+                  className="text-gray-400 hover:text-gray-600 text-sm leading-none" title="Clear cap">×</button>
+              )}
+            </div>
+
+            {/* Neighbors */}
+            <div className={row}>
+              <span className={label}>Neighbors</span>
+              <input type="range" min={2} max={50} step={1}
+                value={clustering.nNeighbors ?? 2}
+                onChange={e => clustering.setNNeighbors(Number(e.target.value))}
+                disabled={noSession} className="flex-1 accent-blue-600"
+                title="UMAP n_neighbors: lower = spiky local detail, higher = smooth global structure" />
+              <span className="w-6 text-right tabular-nums text-xs text-gray-700">{clustering.nNeighbors ?? 2}</span>
+            </div>
+
+            {/* Routes */}
+            <div className={row}>
+              <span className={label}>Routes</span>
+              <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer">
+                <input type="checkbox" checked={showAllRoutes}
+                  onChange={(e) => onShowAllRoutesChange(e.target.checked)}
+                  disabled={noSession} className="w-3 h-3 rounded" />
+                Show all
+              </label>
+              <div className="border-l border-gray-300 h-4 ml-2" />
+              <div className={`flex items-center gap-2 transition-opacity ${showAllRoutes ? 'opacity-40' : ''}`}>
+                <span className="text-xs text-gray-500 font-medium">Top</span>
+                <input type="number" value={topRoutes}
+                  onChange={(e) => onTopRoutesChange(parseInt(e.target.value))}
+                  disabled={noSession || showAllRoutes} min="5" max="100"
+                  className={`${ctrl} w-16`} />
+              </div>
+            </div>
+
+            {/* Label pills (data-dependent) */}
+            {availableLabels.length > 0 && (
+              <div className={row}>
+                <span className={label}>Labels</span>
+                <div className="flex items-center gap-1 flex-wrap">
+                  {availableLabels.map(lbl => (
+                    <button key={lbl} onClick={() => handleLabelToggle(lbl)}
+                      className={`px-1.5 py-0.5 rounded text-xs border transition-colors ${
+                        filterState.labels.size === 0 || filterState.labels.has(lbl)
+                          ? 'bg-blue-100 border-blue-300 text-blue-800'
+                          : 'bg-gray-100 border-gray-300 text-gray-500'
+                      }`}>{lbl}</button>
+                  ))}
+                  {filterState.labels.size > 0 && (
+                    <button onClick={() => onFilterStateChange({ ...filterState, labels: new Set() })}
+                      className="text-xs text-gray-500 hover:text-gray-700">clear</button>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Claude instruction */}
             {selectedSchema && selectedSession && (() => {
               const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
               if (!currentRange) return null
@@ -385,53 +348,49 @@ export default function Toolbar({
               const windowStr = lastWindow ? `${lastWindow.layers[0]}-${lastWindow.layers[lastWindow.layers.length - 1]}` : '22-23'
               const instruction = `/analyze ${selectedSession} schema ${selectedSchema} window ${windowStr}`
               return (
-                <div
-                  className="text-[10px] font-mono bg-blue-50 border border-blue-200 rounded px-1.5 py-0.5 cursor-pointer hover:bg-blue-100"
-                  title="Click to copy"
-                  onClick={e => {
-                    const el = e.currentTarget
-                    navigator.clipboard?.writeText(el.textContent || '')
-                  }}
-                >
-                  {instruction}
+                <div className={row}>
+                  <span className={label} />
+                  <div className="text-xs font-mono bg-blue-50 border border-blue-200 rounded px-2 py-0.5 cursor-pointer hover:bg-blue-100 transition-colors"
+                    title="Click to copy"
+                    onClick={e => { navigator.clipboard?.writeText(e.currentTarget.textContent || '') }}>
+                    {instruction}
+                  </div>
                 </div>
               )
             })()}
           </div>
+        </div>
 
-          {/* Right column: Visual encoding controls */}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            {/* Color axis + gradient */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-gray-500 font-medium">Color:</span>
-              <select
-                value={colorAxisId}
-                onChange={(e) => setColorAxisId(e.target.value)}
-                className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-              >
+        {/* RIGHT PANEL: Visual Encoding */}
+        <div className="bg-white border border-gray-200 rounded-lg p-3">
+          <div className={panelTitle}>Visual Encoding</div>
+          <div className="space-y-2">
+            {/* Input section label */}
+            <div className="text-[10px] font-medium text-gray-400 uppercase tracking-wide">Input</div>
+
+            {/* Color */}
+            <div className={row}>
+              <span className={label}>Color Axis</span>
+              <select value={colorAxisId} onChange={(e) => setColorAxisId(e.target.value)}
+                disabled={noSession} className={ctrl}>
+                {allAxes.length === 0 && <option value="">No axes loaded</option>}
                 {allAxes.map(axis => (
                   <option key={axis.id} value={axis.id}>{axis.label}</option>
                 ))}
               </select>
-              <select
-                value={gradient}
-                onChange={(e) => setGradient(e.target.value as GradientScheme)}
-                className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-              >
+              <select value={gradient} onChange={(e) => setGradient(e.target.value as GradientScheme)}
+                disabled={noSession} className={ctrl}>
                 {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
                   <option key={key} value={key}>{scheme.name}</option>
                 ))}
               </select>
             </div>
 
-            {/* Blend axis */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-gray-500 font-medium">Blend:</span>
-              <select
-                value={colorAxis2Id}
-                onChange={(e) => setColorAxis2Id(e.target.value)}
-                className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-              >
+            {/* Blend */}
+            <div className={row}>
+              <span className={label}>Blend Axis</span>
+              <select value={colorAxis2Id} onChange={(e) => setColorAxis2Id(e.target.value)}
+                disabled={noSession} className={ctrl}>
                 <option value="none">None</option>
                 {allAxes.filter(a => a.id !== colorAxisId).map(axis => (
                   <option key={axis.id} value={axis.id}>{axis.label}</option>
@@ -442,14 +401,11 @@ export default function Toolbar({
               )}
             </div>
 
-            {/* Shape axis */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-gray-500 font-medium">Shape:</span>
-              <select
-                value={shapeAxisId}
-                onChange={(e) => setShapeAxisId(e.target.value)}
-                className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-              >
+            {/* Shape */}
+            <div className={row}>
+              <span className={label}>Shape Axis</span>
+              <select value={shapeAxisId} onChange={(e) => setShapeAxisId(e.target.value)}
+                disabled={noSession} className={ctrl}>
                 <option value="none">None</option>
                 {allAxes.map(axis => (
                   <option key={axis.id} value={axis.id}>{axis.label}</option>
@@ -459,80 +415,71 @@ export default function Toolbar({
 
             {/* Color preview */}
             {preview.length > 0 && (
-              <>
-                <div className="w-px h-4 bg-gray-200" />
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  {preview.map(({ label, color }) => (
-                    <div key={label} className="flex items-center gap-0.5" title={label}>
-                      <div
-                        className="rounded-sm border border-gray-300 flex-shrink-0"
-                        style={{ backgroundColor: color, width: '10px', height: '10px' }}
-                      />
-                      <span className="text-[10px] text-gray-600">{label}</span>
+              <div className={row}>
+                <span className={label} />
+                <div className="flex items-center gap-2 flex-wrap">
+                  {preview.map(({ label: lbl, color }) => (
+                    <div key={lbl} className="flex items-center gap-1" title={lbl}>
+                      <div className="w-3 h-3 rounded-sm border border-gray-300 flex-shrink-0"
+                        style={{ backgroundColor: color }} />
+                      <span className="text-xs text-gray-600">{lbl}</span>
                     </div>
                   ))}
                 </div>
-              </>
+              </div>
             )}
 
-            {/* Output colors (conditional) */}
-            {outputAxes.length > 0 && (
-              <>
-                <div className="w-px h-4 bg-gray-200" />
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xs text-gray-500 font-medium">Out:</span>
-                  <select
-                    value={outputColorAxisId}
-                    onChange={(e) => setOutputColorAxisId(e.target.value)}
-                    className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-                  >
-                    <option value="">Match input</option>
-                    {outputAxes.map(axis => (
-                      <option key={axis.id} value={axis.id}>{axis.label}</option>
-                    ))}
-                  </select>
-                  <select
-                    value={outputGradient}
-                    onChange={(e) => setOutputGradient(e.target.value as GradientScheme)}
-                    className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-                  >
-                    {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
-                      <option key={key} value={key}>{scheme.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xs text-gray-500 font-medium">Out Blend:</span>
-                  <select
-                    value={outputColorAxis2Id}
-                    onChange={(e) => setOutputColorAxis2Id(e.target.value)}
-                    className="px-1.5 py-0.5 text-xs border border-gray-300 rounded"
-                  >
-                    <option value="none">None</option>
-                    {outputAxes.filter(a => a.id !== outputColorAxisId).map(axis => (
-                      <option key={axis.id} value={axis.id}>{axis.label}</option>
-                    ))}
-                  </select>
-                </div>
-                {/* Output color preview */}
-                {outPreview.length > 0 && (
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    {outPreview.map(({ label, color }) => (
-                      <div key={label} className="flex items-center gap-0.5" title={label}>
-                        <div
-                          className="rounded-sm border border-gray-300 flex-shrink-0"
-                          style={{ backgroundColor: color, width: '10px', height: '10px' }}
-                        />
-                        <span className="text-[10px] text-gray-600">{label}</span>
+            {/* Output section — always visible, grayed when no output axes */}
+            <div className="border-t border-gray-200 pt-2 mt-1" />
+            <div className={`space-y-2 ${outputAxes.length === 0 ? 'opacity-40 pointer-events-none' : ''}`}>
+              <div className="text-[10px] font-medium text-gray-400 uppercase tracking-wide">Output</div>
+
+              <div className={row}>
+                <span className={label}>Color Axis</span>
+                <select value={outputColorAxisId} onChange={(e) => setOutputColorAxisId(e.target.value)}
+                  disabled={outputAxes.length === 0} className={ctrl}>
+                  <option value="">Match input</option>
+                  {outputAxes.map(axis => (
+                    <option key={axis.id} value={axis.id}>{axis.label}</option>
+                  ))}
+                </select>
+                <select value={outputGradient} onChange={(e) => setOutputGradient(e.target.value as GradientScheme)}
+                  disabled={outputAxes.length === 0} className={ctrl}>
+                  {Object.entries(GRADIENT_SCHEMES).map(([key, scheme]) => (
+                    <option key={key} value={key}>{scheme.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className={row}>
+                <span className={label}>Blend Axis</span>
+                <select value={outputColorAxis2Id} onChange={(e) => setOutputColorAxis2Id(e.target.value)}
+                  disabled={outputAxes.length === 0} className={ctrl}>
+                  <option value="none">None</option>
+                  {outputAxes.filter(a => a.id !== outputColorAxisId).map(axis => (
+                    <option key={axis.id} value={axis.id}>{axis.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {outPreview.length > 0 && (
+                <div className={row}>
+                  <span className={label} />
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {outPreview.map(({ label: lbl, color }) => (
+                      <div key={lbl} className="flex items-center gap-1" title={lbl}>
+                        <div className="w-3 h-3 rounded-sm border border-gray-300 flex-shrink-0"
+                          style={{ backgroundColor: color }} />
+                        <span className="text-xs text-gray-600">{lbl}</span>
                       </div>
                     ))}
                   </div>
-                )}
-              </>
-            )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }
