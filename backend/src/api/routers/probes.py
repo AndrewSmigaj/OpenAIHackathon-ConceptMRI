@@ -6,14 +6,16 @@ Probes API router - Session management and sentence experiment capture.
 from fastapi import APIRouter, HTTPException, Depends
 from pathlib import Path
 from typing import List, Dict
+from datetime import datetime
 import json
 import logging
+import shutil
 
 from api.schemas import (
     ExecutionResponse, StatusResponse,
     SessionListResponse, SessionDetailResponse,
     SentenceExperimentRequest, SentenceExperimentResponse,
-    ProbeExample,
+    ProbeExample, TrajectoryPointsResponse, TrajectoryPoint,
 )
 from api.dependencies import get_capture_service
 from services.probes.integrated_capture_service import IntegratedCaptureService, SessionState
@@ -391,3 +393,87 @@ async def save_report(session_id: str, schema_name: str, window_key: str, body: 
     reports_dir.mkdir(parents=True, exist_ok=True)
     (reports_dir / f"{window_key}.md").write_text(body["report"])
     return {"saved": f"{schema_name}/{window_key}"}
+
+
+@router.get(
+    "/probes/sessions/{session_id}/clusterings/{schema_name}/trajectory",
+    response_model=TrajectoryPointsResponse,
+)
+async def get_trajectory_points(session_id: str, schema_name: str):
+    """Return the cached UMAP-3D trajectory points baked into a clustering schema.
+
+    404 if the schema predates the trajectory_points artifact — caller must
+    rebuild the schema (no migration, no lazy compute).
+    """
+    schema_dir = DATA_LAKE_PATH / session_id / "clusterings" / schema_name
+    if not schema_dir.exists():
+        raise HTTPException(status_code=404, detail=f"Clustering '{schema_name}' not found")
+    traj_path = schema_dir / "trajectory_points.json"
+    if not traj_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=f"Schema '{schema_name}' was built before trajectory_points were persisted. Rebuild via /cluster OP-5 + OP-1.",
+        )
+    points_by_layer_raw = json.loads(traj_path.read_text())
+    points_by_layer = {
+        layer_str: [TrajectoryPoint(**p) for p in points]
+        for layer_str, points in points_by_layer_raw.items()
+    }
+    layers_sorted = sorted(int(k) for k in points_by_layer.keys())
+
+    meta_path = schema_dir / "meta.json"
+    sample_size = 0
+    if meta_path.exists():
+        meta = json.loads(meta_path.read_text())
+        sample_size = int(meta.get("sample_size", 0) or 0)
+
+    return TrajectoryPointsResponse(
+        schema_name=schema_name,
+        sample_size=sample_size,
+        layers=layers_sorted,
+        points_by_layer=points_by_layer,
+    )
+
+
+@router.post("/probes/sessions/{session_id}/clusterings/{schema_name}/archive")
+async def archive_clustering(session_id: str, schema_name: str):
+    """Move a clustering schema to the `_archive/` folder.
+
+    Restoring is a manual `mv` from `_archive/<name>_<ts>` back to
+    `clusterings/<name>` — intentionally not an API surface.
+    """
+    schema_dir = DATA_LAKE_PATH / session_id / "clusterings" / schema_name
+    if not schema_dir.exists():
+        raise HTTPException(status_code=404, detail=f"Clustering '{schema_name}' not found")
+    archive_root = DATA_LAKE_PATH / session_id / "clusterings" / "_archive"
+    archive_root.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now().strftime("%Y%m%dT%H%M%S")
+    dest = archive_root / f"{schema_name}_{ts}"
+    schema_dir.rename(dest)
+    return {"archived": str(dest.relative_to(DATA_LAKE_PATH))}
+
+
+@router.delete("/probes/sessions/{session_id}/clusterings/{schema_name}")
+async def delete_clustering(session_id: str, schema_name: str, force: bool = False):
+    """Permanently delete a clustering schema directory.
+
+    Returns 409 if reports/element_descriptions exist unless `force=true`.
+    """
+    schema_dir = DATA_LAKE_PATH / session_id / "clusterings" / schema_name
+    if not schema_dir.exists():
+        raise HTTPException(status_code=404, detail=f"Clustering '{schema_name}' not found")
+    has_reports = (schema_dir / "reports").exists() and any((schema_dir / "reports").iterdir())
+    has_descriptions = (schema_dir / "element_descriptions.json").exists()
+    if (has_reports or has_descriptions) and not force:
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "error": "schema_has_invested_data",
+                "schema": schema_name,
+                "has_reports": has_reports,
+                "has_descriptions": has_descriptions,
+                "hint": "Pass ?force=true to delete anyway, or archive instead.",
+            },
+        )
+    shutil.rmtree(schema_dir)
+    return {"deleted": schema_name}

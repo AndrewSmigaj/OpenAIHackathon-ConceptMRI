@@ -6,7 +6,7 @@ Simple Pydantic schemas for API requests/responses.
 import os
 
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Literal, Union, Annotated
 
 
 class ProgressInfo(BaseModel):
@@ -110,22 +110,6 @@ class FilterConfig(BaseModel):
     labels: Optional[List[str]] = None
 
 
-class AnalyzeRoutesRequest(BaseModel):
-    """Request to analyze expert routes for a session."""
-    session_id: Optional[str] = None
-    session_ids: Optional[List[str]] = None
-    window_layers: List[int]
-    filter_config: Optional[FilterConfig] = None
-    steps: Optional[List[int]] = None  # sequence step filter; None = all steps
-    top_n_routes: int = 20
-    clustering_schema: Optional[str] = None  # Load from named schema (skip computation)
-    save_as: Optional[str] = None            # Compute AND save result under this name
-    output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
-    expert_rank: int = Field(1, ge=1, le=32)  # rank of expert per (probe, layer) to visualize (1=top)
-    last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
-    max_probes: Optional[int] = None  # cap total probes via deterministic stratified subsample; None = no cap
-
-
 class ClusteringConfig(BaseModel):
     """Configuration for clustering analysis."""
     reduction_dimensions: int = 128
@@ -137,21 +121,66 @@ class ClusteringConfig(BaseModel):
     n_neighbors: Optional[int] = None  # UMAP n_neighbors; None = 15
 
 
-class AnalyzeClusterRoutesRequest(BaseModel):
-    """Request to analyze cluster routes for a session."""
-    session_id: Optional[str] = None
-    session_ids: Optional[List[str]] = None
+# --- Cluster route requests (discriminated union: load vs compute) ---
+
+class LoadClusteringRequest(BaseModel):
+    """Load a cached clustering schema. Filters are baked in."""
+    mode: Literal["load"] = "load"
+    session_ids: List[str]
+    schema_name: str
     window_layers: List[int]
-    clustering_config: Optional[ClusteringConfig] = None  # Required unless clustering_schema resolves config from meta.json
-    filter_config: Optional[FilterConfig] = None
-    steps: Optional[List[int]] = None  # sequence step filter; None = all steps
+    output_grouping_axes: Optional[List[str]] = None
     top_n_routes: int = 20
-    clustering_schema: Optional[str] = None  # Load from named schema (skip computation)
-    save_as: Optional[str] = None            # Compute AND save result under this name
-    output_grouping_axes: Optional[List[str]] = None  # Dynamic output node grouping
-    max_examples_per_node: Optional[int] = None  # Cap examples per node/link; None = all
-    last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
-    max_probes: Optional[int] = None  # cap total probes via deterministic stratified subsample; None = no cap
+    max_examples_per_node: Optional[int] = None
+
+
+class ComputeClusteringRequest(BaseModel):
+    """Compute + save a new clustering schema. Creates an immutable artifact."""
+    mode: Literal["compute"] = "compute"
+    session_id: str
+    window_layers: List[int]
+    save_as: str
+    clustering_config: ClusteringConfig
+    filter_config: Optional[FilterConfig] = None
+    steps: Optional[List[int]] = None
+    last_occurrence_only: bool = False
+    max_probes: Optional[int] = None
+    output_grouping_axes: Optional[List[str]] = None
+    top_n_routes: int = 20
+    max_examples_per_node: Optional[int] = None
+
+
+AnalyzeClusterRoutesRequest = Union[LoadClusteringRequest, ComputeClusteringRequest]
+
+
+# --- Expert route requests (discriminated union: load vs compute) ---
+
+class LoadExpertRoutesRequest(BaseModel):
+    """Load cached expert routes from a named schema. Filters are baked in."""
+    mode: Literal["load"] = "load"
+    session_ids: List[str]
+    schema_name: str
+    window_layers: List[int]
+    expert_rank: int = Field(1, ge=1, le=3)
+    output_grouping_axes: Optional[List[str]] = None
+    top_n_routes: int = 20
+
+
+class ComputeExpertRoutesRequest(BaseModel):
+    """Compute + save expert routes for ranks 1/2/3 under a schema name."""
+    mode: Literal["compute"] = "compute"
+    session_id: str
+    window_layers: List[int]
+    save_as: str
+    filter_config: Optional[FilterConfig] = None
+    steps: Optional[List[int]] = None
+    last_occurrence_only: bool = False
+    max_probes: Optional[int] = None
+    output_grouping_axes: Optional[List[str]] = None
+    top_n_routes: int = 20
+
+
+AnalyzeRoutesRequest = Union[LoadExpertRoutesRequest, ComputeExpertRoutesRequest]
 
 
 class ProbeExample(BaseModel):
@@ -332,27 +361,26 @@ class SentenceExperimentResponse(BaseModel):
     counts: Dict[str, int]
 
 
-# --- On-Demand Reduction Schemas ---
+# --- Trajectory Points (cached UMAP-3D from a clustering schema) ---
 
-class ReductionRequest(BaseModel):
-    """Request for on-demand PCA/UMAP reduction."""
-    session_ids: List[str]
+class TrajectoryPoint(BaseModel):
+    """A single 3D-reduced point baked into a clustering schema."""
+    probe_id: str
+    x: float
+    y: float
+    z: float
+    label: Optional[str] = None
+    target_word: Optional[str] = None
+    step: Optional[int] = None
+    categories_json: Optional[str] = None
+
+
+class TrajectoryPointsResponse(BaseModel):
+    """All cached trajectory points for a clustering schema, keyed by layer."""
+    schema_name: str
+    sample_size: int
     layers: List[int]
-    source: str = "expert_output"  # "expert_output" or "residual_stream"
-    method: str = "umap"           # "pca" or "umap"
-    n_components: int = 3
-    steps: Optional[List[int]] = None  # sequence step filter; None = all steps
-    last_occurrence_only: bool = False  # keep only probe with max target_char_offset per (session_id, input_text, target_word)
-    max_probes: Optional[int] = None  # cap total probes via deterministic stratified subsample; None = no cap
-    n_neighbors: Optional[int] = None  # UMAP n_neighbors; None = default (2)
-
-
-class ReductionResponse(BaseModel):
-    """Response from on-demand reduction."""
-    points: List[ReductionPoint]
-    layers: List[int]
-    method: str
-    n_components: int
+    points_by_layer: Dict[str, List[TrajectoryPoint]]
 
 
 # --- Scaffold Step Schemas ---
@@ -385,10 +413,10 @@ class TemporalCaptureRequest(BaseModel):
     basin_a_cluster_id: int
     basin_b_cluster_id: int
     basin_layer: int
+    clustering_schema: str  # Required — schema_dir/probe_assignments.json is the only source
     sentences_per_block: int = 20
     processing_mode: str = "expanding_cache_on"  # expanding_cache_off, expanding_cache_on, single_cache_on
     sequence_config: str = "block_ab"  # block_ab, block_ba, block_aba
-    clustering_schema: Optional[str] = None  # Named schema to read assignments from
     layers: Optional[List[int]] = None
     run_label: Optional[str] = None
     generate_output: bool = True  # generate continuation text for each probe

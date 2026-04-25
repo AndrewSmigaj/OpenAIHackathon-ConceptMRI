@@ -37,14 +37,17 @@ def _run_temporal_capture_sync(
         if not session_dir.exists():
             raise HTTPException(status_code=404, detail=f"Session '{request.session_id}' not found")
 
-        # Try named schema first, then fallback to session-level file
-        pa_path = None
-        if request.clustering_schema:
-            pa_path = session_dir / "clusterings" / request.clustering_schema / "probe_assignments.json"
-        if not pa_path or not pa_path.exists():
-            pa_path = session_dir / "probe_assignments.json"
+        # Schema dir is the only source of truth for probe_assignments.
+        # The session-root copy was removed because it was silently the
+        # last-written schema's assignments (stale for every other schema).
+        if not request.clustering_schema:
+            raise HTTPException(status_code=400, detail="clustering_schema is required")
+        pa_path = session_dir / "clusterings" / request.clustering_schema / "probe_assignments.json"
         if not pa_path.exists():
-            raise HTTPException(status_code=404, detail="No probe assignments found. Run cluster analysis first.")
+            raise HTTPException(
+                status_code=404,
+                detail=f"probe_assignments.json not found for schema '{request.clustering_schema}'. Build the schema via /cluster OP-1 first.",
+            )
 
         probe_assignments = json.loads(pa_path.read_text())
 

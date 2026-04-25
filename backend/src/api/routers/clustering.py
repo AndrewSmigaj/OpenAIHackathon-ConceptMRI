@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 """
-Cluster route analysis and dimensionality reduction endpoints.
+Cluster route analysis endpoints.
+
+Discriminated-union request: `mode="load"` reads a cached schema, `mode="compute"`
+computes + saves a new schema. Filters are baked into the schema at compute
+time and immutable thereafter.
 """
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Body
 from datetime import datetime
+from typing import Annotated
 import json
 import logging
 
 from api.schemas import (
-    AnalyzeClusterRoutesRequest, RouteAnalysisResponse,
-    ReductionRequest, ReductionResponse,
+    AnalyzeClusterRoutesRequest,
+    LoadClusteringRequest,
+    ComputeClusteringRequest,
+    RouteAnalysisResponse,
 )
 from api.dependencies import get_cluster_analysis_service
 from services.experiments.cluster_route_analysis import ClusterRouteAnalysisService
@@ -21,132 +28,200 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 
-@router.post("/experiments/analyze-cluster-routes", response_model=RouteAnalysisResponse)
-async def analyze_cluster_routes(
-    request: AnalyzeClusterRoutesRequest,
-    service: ClusterRouteAnalysisService = Depends(get_cluster_analysis_service)
-):
-    """Analyze cluster routes for a session within specified window layers.
+def _load_cached_clusters(request: LoadClusteringRequest) -> dict:
+    """Load a cached cluster-route artifact from a schema directory."""
+    if not request.session_ids:
+        raise HTTPException(status_code=400, detail="session_ids is required for load mode")
 
-    Supports named clustering schemas:
-    - clustering_schema: load cached result from a named schema (skip computation)
-    - save_as: compute AND save result under this schema name
+    sid = request.session_ids[0]
+    schema_dir = DATA_LAKE_PATH / sid / "clusterings" / request.schema_name
+    if not schema_dir.exists():
+        raise HTTPException(status_code=404, detail=f"Schema '{request.schema_name}' not found for session '{sid}'")
+
+    window_key = f"w_{'_'.join(str(l) for l in request.window_layers)}"
+    wdir = schema_dir / "cluster_windows"
+    base_path = wdir / f"{window_key}.json"
+    if not base_path.exists():
+        raise HTTPException(status_code=404, detail=f"Window '{window_key}' not built for schema '{request.schema_name}'")
+
+    result = json.loads(base_path.read_text())
+
+    grouping_axes = request.output_grouping_axes
+    if not grouping_axes and result.get("output_available_axes"):
+        grouping_axes = [result["output_available_axes"][0]["id"]]
+
+    if grouping_axes:
+        sorted_axes = sorted(grouping_axes)
+        variant_path = wdir / f"{window_key}__out_{'__'.join(sorted_axes)}.json"
+        if variant_path.exists():
+            logger.info(f"Loading pre-computed cluster variant: {variant_path.name}")
+            return json.loads(variant_path.read_text())
+        result = _rebuild_output_nodes(result, sid, request.window_layers, grouping_axes)
+
+    return result
+
+
+def _validate_extension(meta: dict, request: ComputeClusteringRequest, clustering_config_dict: dict) -> None:
+    """Ensure a re-compute against an existing schema dir uses identical params.
+
+    `meta.json` is the source of truth. Mismatch → 409 with the offending field
+    so the caller can either fix the request, archive the old schema, or pick a
+    new name.
     """
-    try:
-        ids = request.session_ids or ([request.session_id] if request.session_id else [])
-        window_key = f"w_{'_'.join(str(l) for l in request.window_layers)}"
-
-        # Load from cached schema if requested
-        if request.clustering_schema and ids and not request.last_occurrence_only and request.max_probes is None:
-            schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.clustering_schema
-            wdir_cached = schema_dir / "cluster_windows"
-            cached_path = wdir_cached / f"{window_key}.json"
-            if cached_path.exists():
-                result = json.loads(cached_path.read_text())
-                # Determine grouping axes: use requested, or default to first output axis
-                grouping_axes = request.output_grouping_axes
-                if not grouping_axes and result.get("output_available_axes"):
-                    grouping_axes = [result["output_available_axes"][0]["id"]]
-                if grouping_axes:
-                    sorted_axes = sorted(grouping_axes)
-                    variant_path = wdir_cached / f"{window_key}__out_{'__'.join(sorted_axes)}.json"
-                    if variant_path.exists():
-                        logger.info(f"Loading pre-computed cluster variant: {variant_path.name}")
-                        return json.loads(variant_path.read_text())
-                    result = _rebuild_output_nodes(result, ids[0], request.window_layers, grouping_axes)
-                return result
-
-        # Compute fresh
-        filter_config_dict = None
-        if request.filter_config:
-            filter_config_dict = request.filter_config.dict(exclude_none=True)
-
-        # Resolve clustering config: explicit > schema meta.json > error
-        if request.clustering_config:
-            clustering_config_dict = request.clustering_config.dict(exclude_none=True)
-        elif request.clustering_schema and ids:
-            meta_path = DATA_LAKE_PATH / ids[0] / "clusterings" / request.clustering_schema / "meta.json"
-            if meta_path.exists():
-                meta = json.loads(meta_path.read_text())
-                clustering_config_dict = meta.get("params", {})
-            else:
-                raise HTTPException(status_code=400, detail=f"Schema '{request.clustering_schema}' not found and no clustering_config provided")
-        else:
-            raise HTTPException(status_code=400, detail="Either clustering_config or clustering_schema is required")
-
-        result = service.analyze_session_cluster_routes(
-            session_id=request.session_id,
-            session_ids=request.session_ids,
-            window_layers=request.window_layers,
-            clustering_config=clustering_config_dict,
-            filter_config=filter_config_dict,
-            steps=request.steps,
-            top_n_routes=request.top_n_routes,
-            output_grouping_axes=request.output_grouping_axes,
-            max_examples_per_node=request.max_examples_per_node,
-            last_occurrence_only=request.last_occurrence_only,
-            max_probes=request.max_probes,
+    expected = {
+        "params": meta.get("params"),
+        "last_occurrence_only": meta.get("last_occurrence_only"),
+        "max_probes": meta.get("max_probes"),
+        "steps": meta.get("steps"),
+        "filter_config": meta.get("filter_config"),
+    }
+    incoming_filters = request.filter_config.dict(exclude_none=True) if request.filter_config else None
+    incoming = {
+        "params": clustering_config_dict,
+        "last_occurrence_only": request.last_occurrence_only,
+        "max_probes": request.max_probes,
+        "steps": request.steps,
+        "filter_config": incoming_filters,
+    }
+    diffs = {k: (expected[k], incoming[k]) for k in expected if expected[k] != incoming[k]}
+    if diffs:
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "error": "schema_params_mismatch",
+                "schema": request.save_as,
+                "diff": {k: {"existing": v[0], "request": v[1]} for k, v in diffs.items()},
+                "hint": "Schemas are immutable. Archive (or pick a new name) instead of changing params.",
+            },
         )
 
-        # Extract and strip internal clustering artifacts (non-JSON-serializable)
-        _centroids = result.pop("_centroids", None)
-        result.pop("_reducers", None)
 
-        # Auto-save if save_as provided
-        if request.save_as and len(ids) == 1:
-            schema_dir = DATA_LAKE_PATH / ids[0] / "clusterings" / request.save_as
-            wdir = schema_dir / "cluster_windows"
-            wdir.mkdir(parents=True, exist_ok=True)
-            # Base file: apply first output axis (2 nodes) instead of raw cross-product
-            save_result = result
-            if result.get("output_available_axes"):
-                first_axis = result["output_available_axes"][0]["id"]
-                save_result = _rebuild_output_nodes(result, ids[0], request.window_layers, [first_axis])
-            (wdir / f"{window_key}.json").write_text(json.dumps(save_result))
-            # Save meta on first window
-            meta_path = schema_dir / "meta.json"
-            if not meta_path.exists():
-                meta = {
-                    "name": request.save_as,
-                    "created_at": datetime.now().isoformat(),
-                    "created_by": "claude_code",
-                    "params": clustering_config_dict,
-                    "last_occurrence_only": request.last_occurrence_only,
-                    "max_probes": request.max_probes,
-                    "steps": request.steps,
-                }
-                meta_path.write_text(json.dumps(meta, indent=2))
-            # Merge probe_assignments (accumulate layers across windows)
-            if "probe_assignments" in result:
-                pa_path = schema_dir / "probe_assignments.json"
-                if pa_path.exists():
-                    existing_pa = json.loads(pa_path.read_text())
-                    for probe_id, layers in result["probe_assignments"].items():
-                        if probe_id not in existing_pa:
-                            existing_pa[probe_id] = {}
-                        existing_pa[probe_id].update(layers)
-                    pa_path.write_text(json.dumps(existing_pa))
-                else:
-                    pa_path.write_text(json.dumps(result["probe_assignments"]))
-            # Save centroids in reduced space (merge across windows)
-            if _centroids:
-                centroids_path = schema_dir / "centroids.json"
-                centroids_all = json.loads(centroids_path.read_text()) if centroids_path.exists() else {}
-                for layer, cdict in _centroids.items():
-                    centroids_all[str(layer)] = {
-                        str(k): v.tolist() for k, v in cdict.items()
-                    }
-                centroids_path.write_text(json.dumps(centroids_all))
+def _compute_and_save_clusters(
+    request: ComputeClusteringRequest,
+    service: ClusterRouteAnalysisService,
+) -> dict:
+    """Compute cluster routes and persist them under `save_as`."""
+    sid = request.session_id
+    if not sid:
+        raise HTTPException(status_code=400, detail="session_id is required for compute mode")
 
-            _precompute_output_variants(result, ids[0], request.window_layers, window_key, wdir)
-            logger.info(f"Saved cluster routes to schema: {request.save_as}/{window_key}")
+    schema_dir = DATA_LAKE_PATH / sid / "clusterings" / request.save_as
+    meta_path = schema_dir / "meta.json"
+    window_key = f"w_{'_'.join(str(l) for l in request.window_layers)}"
+    wdir = schema_dir / "cluster_windows"
 
-        # Default to first output axis if none requested (always 2 nodes)
-        if not request.output_grouping_axes and result.get("output_available_axes") and ids:
-            first_axis = result["output_available_axes"][0]["id"]
-            result = _rebuild_output_nodes(result, ids[0], request.window_layers, [first_axis])
+    clustering_config_dict = request.clustering_config.dict(exclude_none=True)
+    filter_config_dict = request.filter_config.dict(exclude_none=True) if request.filter_config else None
 
-        logger.info(f"Analyzed cluster routes, found {result['statistics']['total_routes']} routes")
+    is_extension = meta_path.exists()
+    if is_extension:
+        existing_meta = json.loads(meta_path.read_text())
+        _validate_extension(existing_meta, request, clustering_config_dict)
+        if (wdir / f"{window_key}.json").exists():
+            raise HTTPException(
+                status_code=409,
+                detail=f"Window '{window_key}' already exists in schema '{request.save_as}'. Archive or use a new name.",
+            )
+
+    result = service.analyze_session_cluster_routes(
+        session_id=sid,
+        session_ids=None,
+        window_layers=request.window_layers,
+        clustering_config=clustering_config_dict,
+        filter_config=filter_config_dict,
+        steps=request.steps,
+        top_n_routes=request.top_n_routes,
+        output_grouping_axes=request.output_grouping_axes,
+        max_examples_per_node=request.max_examples_per_node,
+        last_occurrence_only=request.last_occurrence_only,
+        max_probes=request.max_probes,
+    )
+
+    _centroids = result.pop("_centroids", None)
+    _trajectory_points = result.pop("_trajectory_points", None)
+    sample_size = result.pop("sample_size", None)
+    result.pop("_reducers", None)
+
+    wdir.mkdir(parents=True, exist_ok=True)
+
+    save_result = result
+    if result.get("output_available_axes"):
+        first_axis = result["output_available_axes"][0]["id"]
+        save_result = _rebuild_output_nodes(result, sid, request.window_layers, [first_axis])
+    (wdir / f"{window_key}.json").write_text(json.dumps(save_result))
+
+    if not is_extension:
+        meta = {
+            "name": request.save_as,
+            "created_at": datetime.now().isoformat(),
+            "created_by": "claude_code",
+            "params": clustering_config_dict,
+            "filter_config": filter_config_dict,
+            "last_occurrence_only": request.last_occurrence_only,
+            "max_probes": request.max_probes,
+            "steps": request.steps,
+            "sample_size": sample_size,
+        }
+        meta_path.write_text(json.dumps(meta, indent=2))
+
+    if "probe_assignments" in result:
+        pa_path = schema_dir / "probe_assignments.json"
+        if pa_path.exists():
+            existing_pa = json.loads(pa_path.read_text())
+            for probe_id, layers in result["probe_assignments"].items():
+                if probe_id not in existing_pa:
+                    existing_pa[probe_id] = {}
+                existing_pa[probe_id].update(layers)
+            pa_path.write_text(json.dumps(existing_pa))
+        else:
+            pa_path.write_text(json.dumps(result["probe_assignments"]))
+
+    if _centroids:
+        centroids_path = schema_dir / "centroids.json"
+        centroids_all = json.loads(centroids_path.read_text()) if centroids_path.exists() else {}
+        for layer, cdict in _centroids.items():
+            centroids_all[str(layer)] = {
+                str(k): v.tolist() for k, v in cdict.items()
+            }
+        centroids_path.write_text(json.dumps(centroids_all))
+
+    if _trajectory_points:
+        traj_path = schema_dir / "trajectory_points.json"
+        traj_all = json.loads(traj_path.read_text()) if traj_path.exists() else {}
+        for layer, points in _trajectory_points.items():
+            traj_all[str(layer)] = points
+        traj_path.write_text(json.dumps(traj_all))
+
+    _precompute_output_variants(result, sid, request.window_layers, window_key, wdir)
+    logger.info(f"Saved cluster routes to schema: {request.save_as}/{window_key}")
+
+    if not request.output_grouping_axes and result.get("output_available_axes"):
+        first_axis = result["output_available_axes"][0]["id"]
+        result = _rebuild_output_nodes(result, sid, request.window_layers, [first_axis])
+
+    return result
+
+
+@router.post("/experiments/analyze-cluster-routes", response_model=RouteAnalysisResponse)
+async def analyze_cluster_routes(
+    request: Annotated[AnalyzeClusterRoutesRequest, Body(discriminator="mode")],
+    service: ClusterRouteAnalysisService = Depends(get_cluster_analysis_service),
+):
+    """Cluster route analysis. mode="load" reads a cached schema; mode="compute"
+    computes + saves a new schema.
+    """
+    try:
+        if request.mode == "load":
+            result = _load_cached_clusters(request)
+        elif request.mode == "compute":
+            result = _compute_and_save_clusters(request, service)
+        else:  # pragma: no cover — pydantic discriminator already validates
+            raise HTTPException(status_code=400, detail=f"Unknown mode: {request.mode}")
+
+        logger.info(
+            f"Cluster route analysis ({request.mode}) returned "
+            f"{result['statistics']['total_routes']} routes"
+        )
         return result
 
     except HTTPException:
@@ -156,38 +231,3 @@ async def analyze_cluster_routes(
     except Exception as e:
         logger.error(f"Cluster route analysis failed: {e}")
         raise HTTPException(status_code=500, detail=f"Cluster route analysis failed: {str(e)}")
-
-
-@router.post("/experiments/reduce", response_model=ReductionResponse)
-async def reduce_embeddings(request: ReductionRequest):
-    """On-demand dimensionality reduction for one or more sessions."""
-    try:
-        from services.features.reduction_service import ReductionService
-        reducer = ReductionService(n_components=request.n_components)
-
-        points = reducer.reduce_on_demand(
-            session_ids=request.session_ids,
-            layers=request.layers,
-            data_lake_path=str(DATA_LAKE_PATH),
-            source=request.source,
-            method=request.method,
-            n_components=request.n_components,
-            steps=request.steps,
-            last_occurrence_only=request.last_occurrence_only,
-            max_probes=request.max_probes,
-            n_neighbors=request.n_neighbors,
-        )
-
-        logger.info(f"Reduced {len(points)} points for {len(request.session_ids)} sessions")
-        return ReductionResponse(
-            points=points,
-            layers=request.layers,
-            method=request.method,
-            n_components=request.n_components,
-        )
-
-    except FileNotFoundError as e:
-        raise HTTPException(status_code=404, detail=str(e))
-    except Exception as e:
-        logger.error(f"Reduction failed: {e}")
-        raise HTTPException(status_code=500, detail=f"Reduction failed: {e}")

@@ -107,6 +107,13 @@ class ClusterRouteAnalysisService:
         )
         cluster_assignments = clustering_result['assignments']
 
+        # Parallel 3D UMAP fit per layer for the trajectory plot.
+        # Same filtered embeddings, same seed; no PCA fallback — fail loud if UMAP fails.
+        trajectory_points_by_layer = self._compute_trajectory_points(
+            embeddings, token_records, window_layers,
+            n_neighbors=clustering_config.get("n_neighbors") or 15,
+        )
+
         routes = self._extract_target_cluster_routes(cluster_assignments, token_records, window_layers)
 
         top_routes_data = analyze_top_routes(routes, top_n_routes)
@@ -137,17 +144,9 @@ class ClusterRouteAnalysisService:
                 for layer, info in layers.items()
             }
 
-        # Persist probe_assignments for temporal endpoint
-        if len(ids) == 1:
-            session_dir = self.data_lake_path / ids[0]
-            if not session_dir.exists():
-                session_dir = self.data_lake_path / f"session_{ids[0]}"
-            if session_dir.exists():
-                try:
-                    (session_dir / "probe_assignments.json").write_text(
-                        json.dumps(probe_assignments))
-                except Exception as e:
-                    logger.error(f"Failed to persist probe_assignments: {e}")
+        # NOTE: probe_assignments is NOT persisted at the session root any more.
+        # The schema-dir copy (written by clustering.py save path) is the single
+        # source of truth, and temporal.py reads from it directly.
 
         return {
             "session_id": ids[0] if len(ids) == 1 else ",".join(ids[:3]),
@@ -159,7 +158,9 @@ class ClusterRouteAnalysisService:
             "available_axes": available_axes,
             "output_available_axes": output_axes if output_axes else None,
             "probe_assignments": probe_assignments,
+            "sample_size": len(token_records),
             "_centroids": clustering_result['centroids'],
+            "_trajectory_points": trajectory_points_by_layer,
         }
 
     def _load_session_data(
@@ -395,6 +396,83 @@ class ClusterRouteAnalysisService:
             'centroids': centroids_by_layer,
             'reducers': reducers_by_layer,
         }
+
+    def _compute_trajectory_points(
+        self,
+        embeddings: list,
+        token_records: List[ProbeRecord],
+        window_layers: List[int],
+        n_neighbors: int = 15,
+    ) -> Dict[int, list]:
+        """Fit a 3D UMAP per layer for the trajectory plot.
+
+        Same filtered embeddings as the clustering, same seed (42). No PCA
+        fallback — if UMAP fails for a layer, raise. The 3D coords would be
+        silently miscalibrated relative to the 6D-clustered space if we fell
+        back, so the trajectory plot must use UMAP-3D or nothing.
+
+        Returns: {layer: [{probe_id, x, y, z, label, target_word, step,
+                           categories_json}, ...]}
+        """
+        import umap
+
+        token_lookup = {t.probe_id: t for t in token_records}
+
+        emb_by_layer = defaultdict(list)
+        for record in embeddings:
+            emb_by_layer[record["layer"]].append(record)
+
+        trajectory_by_layer: Dict[int, list] = {}
+
+        for layer in window_layers:
+            if layer not in emb_by_layer:
+                continue
+            layer_records = emb_by_layer[layer]
+            if not layer_records:
+                continue
+
+            X_raw = np.array([r["vector"] for r in layer_records], dtype=np.float32)
+            if X_raw.shape[0] < 4:
+                # UMAP requires at least 4 samples to fit reliably.
+                logger.warning(f"Skipping trajectory points for layer {layer}: only {X_raw.shape[0]} samples")
+                continue
+
+            reducer_3d = umap.UMAP(
+                n_components=3,
+                random_state=42,
+                n_neighbors=max(2, min(n_neighbors, X_raw.shape[0] - 1)),
+                min_dist=0.1,
+            )
+            X_3d = reducer_3d.fit_transform(X_raw)
+
+            points = []
+            for idx, record in enumerate(layer_records):
+                pid = record["probe_id"]
+                tok = token_lookup.get(pid)
+                step = None
+                label = None
+                target_word = None
+                categories_json = None
+                if tok is not None:
+                    turn_id = getattr(tok, 'turn_id', None)
+                    step = turn_id if turn_id is not None else getattr(tok, 'sentence_index', None)
+                    label = getattr(tok, 'label', None)
+                    target_word = getattr(tok, 'target_word', None)
+                    categories_json = getattr(tok, 'categories_json', None)
+                points.append({
+                    "probe_id": pid,
+                    "x": float(X_3d[idx, 0]),
+                    "y": float(X_3d[idx, 1]),
+                    "z": float(X_3d[idx, 2]),
+                    "label": label,
+                    "target_word": target_word,
+                    "step": step,
+                    "categories_json": categories_json,
+                })
+
+            trajectory_by_layer[int(layer)] = points
+
+        return trajectory_by_layer
 
     def _extract_target_cluster_routes(
         self,
