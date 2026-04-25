@@ -152,6 +152,12 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - **Explain changes clearly** - before making edits, explain what will change and why
 - **User must approve** - for any architectural or design changes, get explicit approval
 
+### 11a. No quick fixes, no prototype shortcuts
+This is a portfolio project and open-source software. Do not patch around bad design with caller-side workarounds. Do not hardcode study-specific vocabulary (scenario types, target-word choices, axis labels) inside reusable components — take them as props. Do not bump magic numbers in a component to "fix" a caller's problem — fix the caller's prop or make the value a proper parameter. When a design issue is found, raise it and fix the design; do not paper over it.
+
+### 11b. Known code debt
+- **`frontend/src/pages/ExperimentPage.tsx` is broken after the schema-redesign (Phase 2/3 of the bus_stop_friend_foe_k6_n15 paper plan).** Three concrete breakages: (a) toolbar at lines ~519–579 references the deleted `useClusteringConfig` hook (`embeddingSource`, `reductionMethod`, `reductionDims`, `clusteringMethod`, `globalClusterCount`, etc.); (b) sync useEffect at lines ~186–202 pulls clustering params from `selectedSchema` and writes them to deleted setters; (c) `ClusterRoutesSection` prop pass at lines ~746–760 supplies removed props. Fix when ExperimentPage gets re-prioritized — until then, use MUDApp.
+
 ### 12. Uncertainty Assessment
 - **Never jump straight to implementation** — assess uncertainty first. Run `/cdd` for the structured procedure, or do a quick inline assessment for smaller tasks.
 - **New work needs a plan** — if the task involves more than a single targeted edit, write a plan and get approval before proceeding. Modifying scaffolding, architecture, or multi-file changes always require a plan.
