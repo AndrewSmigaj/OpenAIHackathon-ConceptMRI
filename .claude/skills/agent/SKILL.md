@@ -208,15 +208,6 @@ Look at `session_analysis.md` tick 0 game text — if the short_desc for the NPC
 
 ---
 
-## Important rules
-
-- **Never start a second backend** while one is already running — will OOM the GPU (~15GB model). Always `/server` OP-2 first.
-- **`auto_start: true` is mandatory** for real runs — omit it only when you specifically want to create a dormant session record.
-- **Don't push commits unless explicitly asked.** Commits are fine on user request; pushes must be explicit.
-- **Agent sessions are single-tenant against Evennia's `agent` account.** Do not run two sessions concurrently.
-
----
-
 ## OP-6: Post-run clustering
 
 When a session finishes (`probe_results.jsonl` line count == `len(scenario_list)`),
@@ -238,3 +229,12 @@ Save name: <session_name>_k6_n15
 Then call `/cluster` OP-1 with the session id, the resolved `save_as`, and the
 default config. If the user wants different params, a sweep, or no clustering
 at all, they interrupt and direct.
+
+---
+
+## Important rules
+
+- **Never start a second backend** while one is already running — will OOM the GPU (~15GB model). Always `/server` OP-2 first.
+- **`auto_start: true` is mandatory** for real runs — omit it only when you specifically want to create a dormant session record.
+- **Don't push commits unless explicitly asked.** Commits are fine on user request; pushes must be explicit.
+- **Agent sessions are single-tenant against Evennia's `agent` account.** Do not run two sessions concurrently.

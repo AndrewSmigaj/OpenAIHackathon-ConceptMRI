@@ -64,6 +64,9 @@ PY="$ROOT/.venv/bin/python"
 
 ## Default clustering config (single source of truth)
 
+The backend's `ClusteringConfig` is a **flat** Pydantic model. The fields below
+match `backend/src/api/schemas.py:ClusteringConfig` exactly — do not nest them.
+
 ```yaml
 session_kind:
   agent:             { step: 1 }            # post-examine tick
@@ -71,20 +74,20 @@ session_kind:
   sentence_two_part: { step: [0, 1] }       # both ticks; user may override
 
 clustering_config:
-  source: residual_stream
-  reduction:
-    method: umap
-    n_components: 6
-    n_neighbors: 15
-    min_dist: 0.1
-    metric: euclidean
-  clustering:
-    method: hierarchical
-    k: 6
+  embedding_source:    residual_stream      # or "expert_output"
+  reduction_method:    umap                 # or "pca"
+  reduction_dimensions: 6                   # UMAP n_components
+  n_neighbors:         15                   # UMAP n_neighbors
+  clustering_method:   hierarchical         # or "kmeans" / "dbscan"
+  layer_cluster_counts:                     # per-layer k; map "<layer>": k
+    "22": 6
+    "23": 6
+  clustering_dimensions: null               # null = use all reduced dims
 
 filter_defaults:
   last_occurrence_only: true
   max_probes: null
+  steps: [1]                                # default for agent sessions
 
 window_default: [22, 23]   # caller picks; this is the "paper window"
 
@@ -94,7 +97,7 @@ schema_name_convention:
   # OP-1 requires explicit save_as. OP-2 sweeps append a short suffix per axis:
   #   max_probes  → _max<N>     (e.g. _max25)
   #   steps       → _step<vals> (e.g. _step01)
-  #   n_components→ _d<N>       (e.g. _d3)
+  #   reduction_dimensions → _d<N> (e.g. _d3)
   #   n_neighbors → _n<N>       (e.g. _n5)
   example_base: bus_stop_friend_foe
   example_full: bus_stop_friend_foe_k6_n15
@@ -132,9 +135,12 @@ echo "=== Cluster compute ===" && curl -s -X POST http://localhost:8000/api/expe
     "save_as":"'"$SAVE"'",
     "window_layers":'"$WIN"',
     "clustering_config":{
-      "source":"residual_stream",
-      "reduction":{"method":"umap","n_components":6,"n_neighbors":15,"min_dist":0.1,"metric":"euclidean"},
-      "clustering":{"method":"hierarchical","k":6}
+      "embedding_source":"residual_stream",
+      "reduction_method":"umap",
+      "reduction_dimensions":6,
+      "n_neighbors":15,
+      "clustering_method":"hierarchical",
+      "layer_cluster_counts":{"22":6,"23":6}
     },
     "steps":[1],
     "last_occurrence_only":true,
@@ -152,6 +158,10 @@ echo "=== Expert compute (rank 1/2/3) ===" && curl -s -X POST http://localhost:8
     "top_n_routes":20
   }' | $PY -c "import json,sys; d=json.load(sys.stdin); print(json.dumps({'total_routes':d.get('statistics',{}).get('total_routes'), 'detail':d.get('detail')}, indent=2))"
 ```
+
+**Note**: `layer_cluster_counts` is per-layer; supply one entry per layer in the
+window. For a window `[22,23]` with k=6 everywhere, that's `{"22":6,"23":6}`.
+For non-uniform k, use different values per layer.
 
 **Verification block (run after OP-1 returns):**
 
@@ -187,9 +197,12 @@ echo "=== Cluster extend ===" && curl -s -X POST http://localhost:8000/api/exper
     "save_as":"'"$SAVE"'",
     "window_layers":'"$WIN"',
     "clustering_config":{
-      "source":"residual_stream",
-      "reduction":{"method":"umap","n_components":6,"n_neighbors":15,"min_dist":0.1,"metric":"euclidean"},
-      "clustering":{"method":"hierarchical","k":6}
+      "embedding_source":"residual_stream",
+      "reduction_method":"umap",
+      "reduction_dimensions":6,
+      "n_neighbors":15,
+      "clustering_method":"hierarchical",
+      "layer_cluster_counts":{"20":6,"21":6}
     },
     "steps":[1],
     "last_occurrence_only":true,
@@ -240,9 +253,12 @@ for N in 25 50 100; do \
       "save_as":"'"$SAVE"'",
       "window_layers":[22,23],
       "clustering_config":{
-        "source":"residual_stream",
-        "reduction":{"method":"umap","n_components":6,"n_neighbors":15,"min_dist":0.1,"metric":"euclidean"},
-        "clustering":{"method":"hierarchical","k":4}
+        "embedding_source":"residual_stream",
+        "reduction_method":"umap",
+        "reduction_dimensions":6,
+        "n_neighbors":15,
+        "clustering_method":"hierarchical",
+        "layer_cluster_counts":{"22":4,"23":4}
       },
       "steps":[1],
       "last_occurrence_only":true,
