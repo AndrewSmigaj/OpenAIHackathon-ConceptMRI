@@ -89,20 +89,30 @@ interface FilterConfig {
   labels?: string[]
 }
 
-interface AnalyzeRoutesRequest {
-  session_id?: string
-  session_ids?: string[]
+interface LoadExpertRoutesRequest {
+  mode: 'load'
+  session_ids: string[]
+  schema_name: string
   window_layers: number[]
+  expert_rank?: number
+  output_grouping_axes?: string[]
+  top_n_routes?: number
+}
+
+interface ComputeExpertRoutesRequest {
+  mode: 'compute'
+  session_id: string
+  window_layers: number[]
+  save_as: string
   filter_config?: FilterConfig
   steps?: number[]
-  top_n_routes: number
-  clustering_schema?: string
-  save_as?: string
-  output_grouping_axes?: string[]
-  expert_rank?: number
   last_occurrence_only?: boolean
   max_probes?: number
+  output_grouping_axes?: string[]
+  top_n_routes?: number
 }
+
+type AnalyzeRoutesRequest = LoadExpertRoutesRequest | ComputeExpertRoutesRequest
 
 interface ClusteringConfig {
   reduction_dimensions: number
@@ -113,21 +123,32 @@ interface ClusteringConfig {
   clustering_dimensions?: number[]
 }
 
-interface AnalyzeClusterRoutesRequest {
-  session_id?: string
-  session_ids?: string[]
+interface LoadClusteringRequest {
+  mode: 'load'
+  session_ids: string[]
+  schema_name: string
   window_layers: number[]
+  output_grouping_axes?: string[]
+  top_n_routes?: number
+  max_examples_per_node?: number
+}
+
+interface ComputeClusteringRequest {
+  mode: 'compute'
+  session_id: string
+  window_layers: number[]
+  save_as: string
   clustering_config: ClusteringConfig
   filter_config?: FilterConfig
   steps?: number[]
-  top_n_routes: number
-  clustering_schema?: string
-  save_as?: string
-  output_grouping_axes?: string[]
-  max_examples_per_node?: number
   last_occurrence_only?: boolean
   max_probes?: number
+  output_grouping_axes?: string[]
+  top_n_routes?: number
+  max_examples_per_node?: number
 }
+
+type AnalyzeClusterRoutesRequest = LoadClusteringRequest | ComputeClusteringRequest
 
 interface SankeyNode {
   name: string
@@ -261,38 +282,23 @@ interface SentenceExperimentResponse {
   counts: Record<string, number>
 }
 
-// On-demand reduction types
-interface ReductionRequest {
-  session_ids: string[]
-  layers: number[]
-  source?: string
-  method?: string
-  n_components?: number
-  steps?: number[]
-  last_occurrence_only?: boolean
-  max_probes?: number
-  n_neighbors?: number
-}
-
-interface ReductionPoint {
+// Trajectory points (3D UMAP coordinates persisted with each schema)
+interface TrajectoryPoint {
   probe_id: string
-  session_id: string
-  layer: number
   x: number
-  y?: number
-  z?: number
-  coordinates?: number[]
-  target_word: string
+  y: number
+  z: number
   label?: string
-  categories?: Record<string, string>
+  target_word?: string
   step?: number
+  categories_json?: string
 }
 
-interface ReductionResponse {
-  points: ReductionPoint[]
+interface TrajectoryPointsResponse {
+  schema_name: string
+  sample_size: number
   layers: number[]
-  method: string
-  n_components: number
+  points_by_layer: Record<string, TrajectoryPoint[]>
 }
 
 // Clustering Schema Types
@@ -309,6 +315,11 @@ interface ClusteringSchema {
     [key: string]: any
   }
   windows?: number[][]
+  sample_size?: number
+  filter_config?: any
+  last_occurrence_only?: boolean
+  max_probes?: number | null
+  steps?: number[]
 }
 
 // Export all types
@@ -338,8 +349,11 @@ export type {
   TrajectoryResponse,
   SentenceExperimentRequest,
   SentenceExperimentResponse,
-  ReductionRequest,
-  ReductionPoint,
-  ReductionResponse,
+  LoadExpertRoutesRequest,
+  ComputeExpertRoutesRequest,
+  LoadClusteringRequest,
+  ComputeClusteringRequest,
+  TrajectoryPoint,
+  TrajectoryPointsResponse,
   ClusteringSchema
 };

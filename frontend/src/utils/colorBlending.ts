@@ -151,8 +151,23 @@ export function getNodeColor(
   secondaryDist?: Record<string, number> | null,
   secondaryValues?: string[],
   secondaryGradient?: GradientScheme,
+  ambiguityBlend?: AmbiguityBlend,
 ): string {
   const primaryColor = weightedBlend(primaryDist, primaryValues, primaryGradient);
+
+  if (ambiguityBlend?.enabled && secondaryDist) {
+    let total = 0, ambig = 0;
+    for (const [val, count] of Object.entries(secondaryDist)) {
+      total += count;
+      if (val === ambiguityBlend.ambiguousValue) ambig += count;
+    }
+    if (total > 0) {
+      const proportion = ambig / total;
+      const effectiveMix = proportion * (ambiguityBlend.mixRatio ?? 0.6);
+      return rgbToHex(blendTowardNeutral(primaryColor, effectiveMix, ambiguityBlend.neutral));
+    }
+    return rgbToHex(primaryColor);
+  }
 
   if (!secondaryDist || !secondaryValues || secondaryValues.length === 0) {
     return rgbToHex(primaryColor);
@@ -176,9 +191,37 @@ export const GRADIENT_AUTO_PAIRS: Record<GradientScheme, GradientScheme> = {
 };
 
 /**
+ * Ambiguity-blend config. When a point's secondary-axis value matches
+ * `ambiguousValue`, its primary color is blended toward `neutral` (default gray)
+ * by `mixRatio` (default 0.6 = 60% toward neutral).
+ */
+export interface AmbiguityBlend {
+  enabled: boolean;
+  ambiguousValue: string;
+  mixRatio?: number;
+  neutral?: RGBColor;
+}
+
+const DEFAULT_NEUTRAL: RGBColor = { r: 136, g: 136, b: 136 }; // #888888
+
+export function blendTowardNeutral(
+  color: RGBColor,
+  mixRatio = 0.6,
+  neutral: RGBColor = DEFAULT_NEUTRAL,
+): RGBColor {
+  const m = Math.max(0, Math.min(1, mixRatio));
+  return blendColors(color, neutral, 1 - m, m);
+}
+
+/**
  * Get color for a single data point (trajectory, probe) based on discrete axis values.
  * Unlike getNodeColor() which works with distributions, this works with individual values.
  * Supports blending two axes — primary uses user-selected gradient, secondary auto-pairs.
+ *
+ * If `ambiguityBlend` is set and the secondary value matches the ambiguous pole,
+ * the primary color is desaturated toward gray instead of cross-blending with the
+ * secondary axis. This is the "uncommitted vs committed" rendering mode (e.g. step-0
+ * vs step-1 in two-part scenarios).
  */
 export function getPointColor(
   primaryValue: string,
@@ -186,8 +229,17 @@ export function getPointColor(
   primaryGradient: GradientScheme = 'red-blue',
   secondaryValue?: string,
   secondaryValues?: string[],
+  ambiguityBlend?: AmbiguityBlend,
 ): string {
   const color1 = getAxisColor(primaryValue, primaryValues, primaryGradient);
+
+  if (ambiguityBlend?.enabled && secondaryValue !== undefined) {
+    if (secondaryValue === ambiguityBlend.ambiguousValue) {
+      return rgbToHex(blendTowardNeutral(color1, ambiguityBlend.mixRatio, ambiguityBlend.neutral));
+    }
+    return rgbToHex(color1);
+  }
+
   if (!secondaryValue || !secondaryValues || secondaryValues.length === 0) {
     return rgbToHex(color1);
   }

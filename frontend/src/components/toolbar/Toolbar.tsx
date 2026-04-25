@@ -1,13 +1,9 @@
-import { useMemo } from 'react'
-import type { SessionListItem, SessionDetailResponse, DynamicAxis } from '../../types/api'
-import type { FilterState } from '../WordFilterPanel'
+import type { SessionListItem, SessionDetailResponse } from '../../types/api'
 import type { GradientScheme } from '../../utils/colorBlending'
 import { getAxisPreview, GRADIENT_SCHEMES, GRADIENT_AUTO_PAIRS } from '../../utils/colorBlending'
 import { LAYER_RANGES } from '../../constants/layerRanges'
 import type { AxisControlsState } from '../../hooks/useAxisControls'
-import type { ClusteringConfigState } from '../../hooks/useClusteringConfig'
 import type { SchemaManagementState } from '../../hooks/useSchemaManagement'
-import type { RouteAnalysisResponse } from '../../types/api'
 import type { RoomContext } from '../../types/evennia'
 
 interface ToolbarProps {
@@ -26,24 +22,24 @@ interface ToolbarProps {
   onTopRoutesChange: (n: number) => void
   onShowAllRoutesChange: (show: boolean) => void
 
-  // Clustering (from useClusteringConfig)
-  clustering: ClusteringConfigState
-
   // Schema (from useSchemaManagement)
   schema: SchemaManagementState
   selectedRange: string
 
-  // Filters
-  filterState: FilterState
-  onFilterStateChange: (state: FilterState) => void
-  currentRouteData: Record<string, RouteAnalysisResponse | null> | null
+  // Trajectory display
+  maxTrajectories: number
+  onMaxTrajectoriesChange: (n: number) => void
+
+  // Ambiguity blend (binary secondary axis only)
+  ambiguityBlendEnabled: boolean
+  onAmbiguityBlendToggle: (enabled: boolean) => void
+  ambiguousValue: string
+  onAmbiguousValueChange: (val: string) => void
 
   // Room context (MUD integration)
   roomContext?: RoomContext | null
 
   // Unified run
-  availableSteps: number[]
-  filteredProbeCount: number
   onRunAll: () => void
   canRunAll: boolean
 }
@@ -51,14 +47,14 @@ interface ToolbarProps {
 export default function Toolbar({
   sessions, selectedSession, onSessionChange, sessionDetails,
   axes, topRoutes, showAllRoutes, onTopRoutesChange, onShowAllRoutesChange,
-  clustering, schema, selectedRange,
-  filterState, onFilterStateChange, currentRouteData,
+  schema, selectedRange,
+  maxTrajectories, onMaxTrajectoriesChange,
+  ambiguityBlendEnabled, onAmbiguityBlendToggle,
+  ambiguousValue, onAmbiguousValueChange,
   roomContext,
-  availableSteps, filteredProbeCount, onRunAll, canRunAll,
+  onRunAll, canRunAll,
 }: ToolbarProps) {
-  // When visitor, all controls are disabled
   const controlsDisabled = roomContext?.role === 'visitor'
-  // When in micro_world room, session is locked
   const sessionLocked = roomContext?.roomType === 'micro_world'
   const {
     allAxes, colorAxisId, colorAxis2Id, shapeAxisId, gradient,
@@ -70,7 +66,6 @@ export default function Toolbar({
 
   const { availableSchemas, selectedSchema, setSelectedSchema } = schema
 
-  // Color preview
   const colorAxis = allAxes.find(a => a.id === colorAxisId)
   const colorAxis2 = allAxes.find(a => a.id === colorAxis2Id)
   const autoSecondaryGradient = GRADIENT_AUTO_PAIRS[gradient]
@@ -80,51 +75,24 @@ export default function Toolbar({
     ? getAxisPreview(primaryValues, gradient, secondaryValues)
     : []
 
-  // Output color preview
   const outPrimaryValues = outputColorAxis?.values || (outputColorAxis ? [outputColorAxis.label_a, outputColorAxis.label_b] : [])
   const outSecondaryValues = outputColorAxis2?.values || (outputColorAxis2 ? [outputColorAxis2.label_a, outputColorAxis2.label_b] : undefined)
   const outPreview = outPrimaryValues.length > 0
     ? getAxisPreview(outPrimaryValues, outputGradient, outputColorAxis2Id !== 'none' ? outSecondaryValues : undefined)
     : []
 
-  // Available labels for filter pills
-  const availableLabels = useMemo(() => {
-    if (!currentRouteData) return []
-    const labels = new Set<string>()
-    for (const data of Object.values(currentRouteData)) {
-      if (data?.available_axes) {
-        for (const axis of data.available_axes) {
-          if (axis.id === 'label') {
-            if (axis.values) {
-              axis.values.forEach(v => labels.add(v))
-            } else {
-              labels.add(axis.label_a)
-              labels.add(axis.label_b)
-            }
-          }
-        }
-      }
-    }
-    return Array.from(labels)
-  }, [currentRouteData])
-
-  const handleLabelToggle = (label: string) => {
-    const newLabels = new Set(filterState.labels)
-    if (newLabels.has(label)) {
-      newLabels.delete(label)
-    } else {
-      newLabels.add(label)
-    }
-    onFilterStateChange({ ...filterState, labels: newLabels })
-  }
-
   const completedSessions = sessions.filter(s => s.state === 'completed')
 
   const noSession = !selectedSession
+  const noSchema = !selectedSchema
   const ctrl = "px-2 py-1 text-xs border border-gray-300 rounded bg-white disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
   const row = "flex items-center gap-3"
   const label = "text-xs text-gray-700 font-medium w-[90px] text-right flex-shrink-0"
   const panelTitle = "text-xs font-semibold text-gray-800 uppercase tracking-wide border-b border-gray-300 pb-1.5 mb-2"
+
+  const selectedSchemaMeta = availableSchemas.find(s => s.name === selectedSchema)
+  const sampleSize = selectedSchemaMeta?.sample_size ?? 0
+  const showAmbiguityBlend = !!secondaryValues && secondaryValues.length === 2
 
   return (
     <div className={`bg-gray-50 border-b border-gray-300 px-3 py-2 space-y-2 ${controlsDisabled ? 'opacity-60 pointer-events-none' : ''}`}>
@@ -163,7 +131,7 @@ export default function Toolbar({
 
         <button
           onClick={onRunAll}
-          disabled={noSession || !canRunAll}
+          disabled={noSession || noSchema || !canRunAll}
           className="px-4 py-1 bg-blue-600 text-white text-xs font-medium rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
         >
           Run
@@ -182,123 +150,53 @@ export default function Toolbar({
               <span className={label}>Schema</span>
               <select value={selectedSchema} onChange={(e) => setSelectedSchema(e.target.value)}
                 disabled={noSession} className={`${ctrl} flex-1`}>
-                <option value="">Compute fresh</option>
+                <option value="">Select schema…</option>
                 {availableSchemas.map(s => (
                   <option key={s.name} value={s.name}>{s.name}</option>
                 ))}
               </select>
             </div>
 
-            {/* Clustering params (or schema info readout) */}
-            {selectedSchema ? (
+            {/* Schema info readout */}
+            {selectedSchemaMeta && (
               <div className={row}>
                 <span className={label} />
                 <span className="text-xs text-gray-500 font-mono bg-gray-50 rounded px-2 py-0.5 border border-gray-200">
                   {(() => {
-                    const s = availableSchemas.find(s => s.name === selectedSchema)
-                    if (!s?.params) return selectedSchema
-                    const p = s.params
+                    const p = selectedSchemaMeta.params || {}
                     const source = p.embedding_source === 'residual_stream' ? 'residual' : 'expert'
                     const method = (p.reduction_method || 'pca').toUpperCase()
                     const dims = p.reduction_dimensions || '?'
                     const cm = p.clustering_method || '?'
                     const counts = p.layer_cluster_counts || {}
                     const kValues = [...new Set(Object.values(counts) as number[])]
-                    const kStr = kValues.length === 1 ? `K=${kValues[0]}` : kValues.map(v => `K=${v}`).join('/')
-                    return `${source} · ${method} ${dims}D · ${cm} · ${kStr}`
+                    const kStr = kValues.length === 1 ? `K=${kValues[0]}` : kValues.length > 0 ? kValues.map(v => `K=${v}`).join('/') : ''
+                    const sample = selectedSchemaMeta.sample_size != null ? ` · n=${selectedSchemaMeta.sample_size}` : ''
+                    return `${source} · ${method} ${dims}D · ${cm}${kStr ? ' · ' + kStr : ''}${sample}`
                   })()}
                 </span>
               </div>
-            ) : (
-              <>
-                <div className={row}>
-                  <span className={label}>Source</span>
-                  <select value={clustering.embeddingSource} onChange={e => clustering.setEmbeddingSource(e.target.value)}
-                    disabled={noSession} className={ctrl}>
-                    <option value="expert_output">Expert output</option>
-                    <option value="residual_stream">Residual stream</option>
-                  </select>
-                </div>
-                <div className={row}>
-                  <span className={label}>Reduction</span>
-                  <select value={clustering.reductionMethod} onChange={e => clustering.setReductionMethod(e.target.value)}
-                    disabled={noSession} className={ctrl}>
-                    <option value="pca">PCA</option>
-                    <option value="umap">UMAP</option>
-                  </select>
-                  <span className="text-xs text-gray-500">Dims</span>
-                  <input type="number" value={clustering.reductionDims} onChange={e => clustering.setReductionDims(Number(e.target.value))}
-                    disabled={noSession} min={2} max={256} className={`${ctrl} w-14`} />
-                </div>
-                <div className={row}>
-                  <span className={label}>Clustering</span>
-                  <select value={clustering.clusteringMethod} onChange={e => clustering.setClusteringMethod(e.target.value)}
-                    disabled={noSession} className={ctrl}>
-                    <option value="hierarchical">Hierarchical</option>
-                    <option value="kmeans">K-Means</option>
-                  </select>
-                  <span className="text-xs text-gray-500">K</span>
-                  <input type="number" value={clustering.globalClusterCount} onChange={e => clustering.setGlobalClusterCount(Number(e.target.value))}
-                    disabled={noSession} min={2} max={16} className={`${ctrl} w-14`} />
-                </div>
-              </>
             )}
 
-            {/* Steps */}
-            <div className={row}>
-              <span className={label}>Steps</span>
-              <select
-                value={clustering.steps === null ? 'all' : JSON.stringify(clustering.steps)}
-                onChange={e => {
-                  const v = e.target.value
-                  clustering.setSteps(v === 'all' ? null : JSON.parse(v))
-                }}
-                disabled={noSession || availableSteps.length <= 1}
-                className={ctrl}
-              >
-                <option value="all">All</option>
-                {availableSteps.map(s => (
-                  <option key={s} value={JSON.stringify([s])}>Step {s} only</option>
-                ))}
-                {availableSteps.length === 2 && (
-                  <option value={JSON.stringify(availableSteps)}>Steps {availableSteps.join('-')}</option>
-                )}
-              </select>
-              <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer ml-2" title="Keep only the last target-word occurrence per prompt">
-                <input type="checkbox" checked={clustering.lastOccurrenceOnly}
-                  onChange={e => clustering.setLastOccurrenceOnly(e.target.checked)}
-                  disabled={noSession} className="w-3 h-3 rounded" />
-                Last instance only
-              </label>
-            </div>
-
-            {/* Samples */}
-            <div className={row}>
-              <span className={label}>Samples</span>
-              <input type="range" min={1} max={filteredProbeCount || 1000} step={1}
-                value={clustering.maxProbes ?? filteredProbeCount ?? 1000}
-                onChange={e => clustering.setMaxProbes(Number(e.target.value))}
-                disabled={noSession} className="flex-1 accent-blue-600"
-                title="Cap total probes before clustering, expert routes, and UMAP run" />
-              <span className="w-10 text-right tabular-nums text-xs text-gray-700">
-                {clustering.maxProbes ?? filteredProbeCount ?? '—'}
-              </span>
-              {clustering.maxProbes != null && (
-                <button type="button" onClick={() => clustering.setMaxProbes(null)}
-                  className="text-gray-400 hover:text-gray-600 text-sm leading-none" title="Clear cap">×</button>
-              )}
-            </div>
-
-            {/* Neighbors */}
-            <div className={row}>
-              <span className={label}>Neighbors</span>
-              <input type="range" min={2} max={50} step={1}
-                value={clustering.nNeighbors ?? 2}
-                onChange={e => clustering.setNNeighbors(Number(e.target.value))}
-                disabled={noSession} className="flex-1 accent-blue-600"
-                title="UMAP n_neighbors: lower = spiky local detail, higher = smooth global structure" />
-              <span className="w-6 text-right tabular-nums text-xs text-gray-700">{clustering.nNeighbors ?? 2}</span>
-            </div>
+            {/* Trajectories — display-only slider */}
+            {selectedSchemaMeta && sampleSize > 0 && (
+              <div className={row}>
+                <span className={label}>Trajectories</span>
+                <input
+                  type="range"
+                  min={Math.min(10, sampleSize)}
+                  max={sampleSize}
+                  step={1}
+                  value={Math.min(maxTrajectories, sampleSize)}
+                  onChange={e => onMaxTrajectoriesChange(Number(e.target.value))}
+                  className="flex-1 accent-blue-600"
+                  title="Max trajectories to render in the 3D plot"
+                />
+                <span className="w-12 text-right tabular-nums text-xs text-gray-700">
+                  {Math.min(maxTrajectories, sampleSize)} / {sampleSize}
+                </span>
+              </div>
+            )}
 
             {/* Routes */}
             <div className={row}>
@@ -318,27 +216,6 @@ export default function Toolbar({
                   className={`${ctrl} w-16`} />
               </div>
             </div>
-
-            {/* Label pills (data-dependent) */}
-            {availableLabels.length > 0 && (
-              <div className={row}>
-                <span className={label}>Labels</span>
-                <div className="flex items-center gap-1 flex-wrap">
-                  {availableLabels.map(lbl => (
-                    <button key={lbl} onClick={() => handleLabelToggle(lbl)}
-                      className={`px-1.5 py-0.5 rounded text-xs border transition-colors ${
-                        filterState.labels.size === 0 || filterState.labels.has(lbl)
-                          ? 'bg-blue-100 border-blue-300 text-blue-800'
-                          : 'bg-gray-100 border-gray-300 text-gray-500'
-                      }`}>{lbl}</button>
-                  ))}
-                  {filterState.labels.size > 0 && (
-                    <button onClick={() => onFilterStateChange({ ...filterState, labels: new Set() })}
-                      className="text-xs text-gray-500 hover:text-gray-700">clear</button>
-                  )}
-                </div>
-              </div>
-            )}
 
             {/* Claude instruction */}
             {selectedSchema && selectedSession && (() => {
@@ -400,6 +277,30 @@ export default function Toolbar({
                 <span className="text-xs text-gray-400">{GRADIENT_SCHEMES[autoSecondaryGradient]?.name}</span>
               )}
             </div>
+
+            {/* Ambiguity blend (binary secondary axis only) */}
+            {showAmbiguityBlend && (
+              <div className={row}>
+                <span className={label}>Ambig. blend</span>
+                <label className="flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer">
+                  <input type="checkbox" checked={ambiguityBlendEnabled}
+                    onChange={(e) => onAmbiguityBlendToggle(e.target.checked)}
+                    className="w-3 h-3 rounded" />
+                  Enable
+                </label>
+                {ambiguityBlendEnabled && (
+                  <>
+                    <span className="text-xs text-gray-500">Pole</span>
+                    <select value={ambiguousValue} onChange={(e) => onAmbiguousValueChange(e.target.value)}
+                      className={ctrl}>
+                      {secondaryValues!.map(v => (
+                        <option key={v} value={v}>{v}</option>
+                      ))}
+                    </select>
+                  </>
+                )}
+              </div>
+            )}
 
             {/* Shape */}
             <div className={row}>

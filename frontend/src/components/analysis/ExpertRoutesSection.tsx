@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import type { SessionDetailResponse, RouteAnalysisResponse } from '../../types/api'
-import type { FilterState } from '../WordFilterPanel'
-import type { GradientScheme } from '../../utils/colorBlending'
+import type { GradientScheme, AmbiguityBlend } from '../../utils/colorBlending'
 import type { SelectedCard } from '../../types/analysis'
 import MultiSankeyView from '../charts/MultiSankeyView'
 
@@ -9,12 +8,13 @@ import MultiSankeyView from '../charts/MultiSankeyView'
 interface ExpertRoutesSectionProps {
   sessionIds: string[]
   sessionData: SessionDetailResponse | null
-  filterState: FilterState
+  schemaName: string
   primaryValues: string[]
   gradient: GradientScheme
   secondaryValues?: string[]
   secondaryGradient?: GradientScheme
   secondaryAxisId?: string
+  ambiguityBlend?: AmbiguityBlend
   outputPrimaryValues?: string[]
   outputGradient?: GradientScheme
   outputSecondaryValues?: string[]
@@ -22,10 +22,6 @@ interface ExpertRoutesSectionProps {
   outputSecondaryAxisId?: string
   outputColorAxisId?: string
   outputGroupingAxes?: string[]
-  clusteringSchema?: string
-  steps?: number[] | null
-  lastOccurrenceOnly?: boolean
-  maxProbes?: number | null
   topRoutes: number
   selectedRange: string
   onRangeChange: (range: string) => void
@@ -38,12 +34,13 @@ interface ExpertRoutesSectionProps {
 export default function ExpertRoutesSection({
   sessionIds,
   sessionData,
-  filterState,
+  schemaName,
   primaryValues,
   gradient,
   secondaryValues,
   secondaryGradient,
   secondaryAxisId,
+  ambiguityBlend,
   outputPrimaryValues,
   outputGradient,
   outputSecondaryValues,
@@ -51,10 +48,6 @@ export default function ExpertRoutesSection({
   outputSecondaryAxisId,
   outputColorAxisId,
   outputGroupingAxes,
-  clusteringSchema,
-  steps,
-  lastOccurrenceOnly,
-  maxProbes,
   topRoutes,
   selectedRange,
   onRangeChange,
@@ -94,12 +87,13 @@ export default function ExpertRoutesSection({
         <MultiSankeyView
           sessionIds={sessionIds}
           sessionData={sessionData}
-          filterState={filterState}
+          schemaName={schemaName}
           primaryValues={primaryValues}
           gradient={gradient}
           secondaryValues={secondaryValues}
           secondaryGradient={secondaryGradient}
           secondaryAxisId={secondaryAxisId}
+          ambiguityBlend={ambiguityBlend}
           outputPrimaryValues={outputPrimaryValues}
           outputGradient={outputGradient}
           outputSecondaryValues={outputSecondaryValues}
@@ -107,10 +101,6 @@ export default function ExpertRoutesSection({
           outputSecondaryAxisId={outputSecondaryAxisId}
           outputColorAxisId={outputColorAxisId}
           outputGroupingAxes={outputGroupingAxes}
-          clusteringSchema={clusteringSchema}
-          steps={steps}
-          lastOccurrenceOnly={lastOccurrenceOnly}
-          maxProbes={maxProbes}
           expertRank={expertRank}
           showAllRoutes={showAllRoutes}
           topRoutes={topRoutes}

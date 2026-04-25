@@ -7,13 +7,11 @@ import type {
 } from '../types/api'
 import type { SelectedCard } from '../types/analysis'
 import { apiClient } from '../api/client'
-import type { FilterState } from '../components/WordFilterPanel'
-import type { GradientScheme } from '../utils/colorBlending'
+import type { GradientScheme, AmbiguityBlend } from '../utils/colorBlending'
 import { LAYER_RANGES } from '../constants/layerRanges'
 import type { RoomContext, RoomEnteredPayload, VizPreset } from '../types/evennia'
 
 import { useAxisControls } from '../hooks/useAxisControls'
-import { useClusteringConfig } from '../hooks/useClusteringConfig'
 import { useSchemaManagement } from '../hooks/useSchemaManagement'
 import Toolbar from '../components/toolbar/Toolbar'
 import ExpertRoutesSection from '../components/analysis/ExpertRoutesSection'
@@ -29,19 +27,17 @@ export default function MUDApp() {
   const [selectedSession, setSelectedSession] = useState<string>('')
   const [sessions, setSessions] = useState<SessionListItem[]>([])
   const [sessionDetails, setSessionDetails] = useState<SessionDetailResponse | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [serverBusy, setServerBusy] = useState(false)
-  const [filterState, setFilterState] = useState<FilterState>({ labels: new Set() })
+  const [, setLoading] = useState(true)
+  const [, setError] = useState<string | null>(null)
 
   // Visual encoding (axes, colors, gradients)
   const axes = useAxisControls()
   const {
-    allAxes, colorAxisId, colorAxis2Id, shapeAxisId, gradient, selectedRange,
-    outputAxes, outputColorAxisId, outputColorAxis2Id, outputGradient,
-    colorAxis2, shapeAxis, secondaryGradient,
+    colorAxis2Id, shapeAxisId, gradient, selectedRange,
+    outputColorAxisId, outputColorAxis2Id, outputGradient,
+    shapeAxis, secondaryGradient,
     primaryValues, secondaryValues,
-    outputColorAxis, outputColorAxis2, outputSecondaryGradient,
+    outputSecondaryGradient,
     outputPrimaryValues, outputSecondaryValues, outputGroupingAxes,
     setAllAxes, setColorAxisId, setColorAxis2Id, setShapeAxisId,
     setGradient, setSelectedRange,
@@ -52,8 +48,12 @@ export default function MUDApp() {
   const [topRoutes, setTopRoutes] = useState(10)
   const [showAllRoutes, setShowAllRoutes] = useState(false)
 
-  // Clustering parameters
-  const clustering = useClusteringConfig()
+  // Trajectory display
+  const [maxTrajectories, setMaxTrajectories] = useState<number>(200)
+
+  // Ambiguity blend
+  const [ambiguityBlendEnabled, setAmbiguityBlendEnabled] = useState(false)
+  const [ambiguousValue, setAmbiguousValue] = useState<string>('')
 
   // Route data
   const [currentRouteData, setCurrentRouteData] = useState<Record<string, RouteAnalysisResponse | null> | null>(null)
@@ -89,52 +89,29 @@ export default function MUDApp() {
   const schema = useSchemaManagement(selectedSessions, handleElementDescriptionsLoaded)
   const { availableSchemas, selectedSchema, setSelectedSchema } = schema
 
-  const availableSteps = useMemo(() => {
-    const steps = new Set<number>()
-    sessionDetails?.sentences?.forEach(s => {
-      if (s.step != null) steps.add(s.step)
-    })
-    return Array.from(steps).sort((a, b) => a - b)
-  }, [sessionDetails])
-
-  // Probe count after steps + lastOccurrenceOnly filters (Samples slider max)
-  const filteredProbeCount = useMemo(() => {
-    let sentences = sessionDetails?.sentences || []
-    if (clustering.steps && clustering.steps.length > 0) {
-      sentences = sentences.filter(s => s.step != null && clustering.steps!.includes(s.step))
-    }
-    if (clustering.lastOccurrenceOnly) {
-      const best = new Map<string, number>()
-      let noOffset = 0
-      for (const s of sentences) {
-        if (s.target_char_offset == null) { noOffset += 1; continue }
-        const key = `${s.input_text}|${s.target_word}`
-        const cur = best.get(key)
-        if (cur == null || s.target_char_offset > cur) best.set(key, s.target_char_offset)
-      }
-      return best.size + noOffset
-    }
-    return sentences.length
-  }, [sessionDetails, clustering.steps, clustering.lastOccurrenceOnly])
-
-  // Sync clustering config when schema selected (same as ExperimentPage lines 186-202)
+  // When schema changes, default maxTrajectories to its sample_size
   useEffect(() => {
-    if (!selectedSchema) return
-    const schema = availableSchemas.find(s => s.name === selectedSchema)
-    if (!schema?.params) return
-    const p = schema.params
-    if (p.reduction_dimensions) clustering.setReductionDims(p.reduction_dimensions)
-    if (p.reduction_method) clustering.setReductionMethod(p.reduction_method)
-    if (p.clustering_method) clustering.setClusteringMethod(p.clustering_method)
-    if (p.embedding_source) clustering.setEmbeddingSource(p.embedding_source)
-    if (p.layer_cluster_counts) {
-      const counts = Object.values(p.layer_cluster_counts) as number[]
-      if (counts.length > 0) {
-        clustering.setGlobalClusterCount(counts[0])
-        clustering.setUseAllLayersSameClusters(true)
-      }
+    const meta = availableSchemas.find(s => s.name === selectedSchema)
+    if (meta?.sample_size) {
+      setMaxTrajectories(meta.sample_size)
     }
   }, [selectedSchema, availableSchemas])
+
+  // When secondary axis changes, default the ambiguous pole to first value
+  useEffect(() => {
+    if (secondaryValues && secondaryValues.length === 2) {
+      if (!ambiguousValue || !secondaryValues.includes(ambiguousValue)) {
+        setAmbiguousValue(secondaryValues[0])
+      }
+    } else if (ambiguityBlendEnabled) {
+      setAmbiguityBlendEnabled(false)
+    }
+  }, [secondaryValues, ambiguousValue, ambiguityBlendEnabled])
+
+  const ambiguityBlend = useMemo<AmbiguityBlend | undefined>(() => {
+    if (!ambiguityBlendEnabled || !ambiguousValue) return undefined
+    return { enabled: true, ambiguousValue, mixRatio: 0.6 }
+  }, [ambiguityBlendEnabled, ambiguousValue])
 
   // Load session list on mount
   useEffect(() => {
@@ -155,7 +132,6 @@ export default function MUDApp() {
   const resetForNewSession = useCallback(async (sessionId: string) => {
     setSelectedSession(sessionId)
 
-    // Reset axes to defaults
     setAllAxes([])
     setColorAxisId('label')
     setColorAxis2Id('none')
@@ -167,15 +143,14 @@ export default function MUDApp() {
     setOutputColorAxis2Id('none')
     setOutputGradient('purple-green' as GradientScheme)
 
-    // Clear data
     setCurrentRouteData(null)
     setCurrentClusterRouteData(null)
     setElementDescriptions({})
     setSelectedCard(null)
-    setFilterState({ labels: new Set() })
     setSelectedSchema('')
+    setAmbiguityBlendEnabled(false)
+    setAmbiguousValue('')
 
-    // Fetch session details
     if (sessionId) {
       try {
         const details = await apiClient.getSessionDetails(sessionId)
@@ -193,7 +168,6 @@ export default function MUDApp() {
   // Auto-detect axes from route analysis
   const handleRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
     setCurrentRouteData(routeDataMap)
-    // Collect all input axes from responses
     const axesMap = new Map<string, DynamicAxis>()
     for (const data of Object.values(routeDataMap)) {
       if (data?.available_axes) {
@@ -207,12 +181,11 @@ export default function MUDApp() {
     const detectedAxes = Array.from(axesMap.values())
     if (detectedAxes.length > 0) {
       setAllAxes(detectedAxes)
-      if (!detectedAxes.find(a => a.id === colorAxisId)) {
+      if (!detectedAxes.find(a => a.id === axes.colorAxisId)) {
         setColorAxisId(detectedAxes[0].id)
       }
     }
 
-    // Collect output axes from responses
     const outputAxesMap = new Map<string, DynamicAxis>()
     for (const data of Object.values(routeDataMap)) {
       if (data?.output_available_axes) {
@@ -228,12 +201,11 @@ export default function MUDApp() {
     if (outputColorAxisId !== '' && detectedOutputAxes.length > 0 && !detectedOutputAxes.find(a => a.id === outputColorAxisId)) {
       setOutputColorAxisId('')
     }
-  }, [colorAxisId, outputColorAxisId])
+  }, [axes.colorAxisId, outputColorAxisId, setAllAxes, setColorAxisId, setOutputAxes, setOutputColorAxisId])
 
   const handleClusterRouteDataLoaded = useCallback((routeDataMap: Record<string, RouteAnalysisResponse | null>) => {
     setCurrentClusterRouteData(routeDataMap)
 
-    // Extract output axes from cluster route data
     const outputAxesMap = new Map<string, DynamicAxis>()
     for (const data of Object.values(routeDataMap)) {
       if (data?.output_available_axes) {
@@ -252,7 +224,7 @@ export default function MUDApp() {
         return Array.from(merged.values())
       })
     }
-  }, [outputColorAxisId])
+  }, [setOutputAxes])
 
   // Apply viz preset from room OOB event
   const applyPreset = useCallback((preset: VizPreset) => {
@@ -269,7 +241,6 @@ export default function MUDApp() {
   // Handle OOB events from Evennia
   const handleOOB = useCallback((cmdname: string, args: unknown[], kwargs: Record<string, unknown>) => {
     if (cmdname === 'room_entered') {
-      // Evennia sends single-dict payloads as kwargs (clean_senddata moves lone dict to kwargs)
       const payload = (args[0] || kwargs || {}) as RoomEnteredPayload
       const gen = ++navigationGenRef.current
 
@@ -280,7 +251,6 @@ export default function MUDApp() {
 
       if (payload.session_id) {
         resetForNewSession(payload.session_id).then(() => {
-          // Only apply preset if this is still the latest navigation
           if (gen === navigationGenRef.current && payload.viz_preset) {
             applyPreset(payload.viz_preset)
           }
@@ -304,15 +274,15 @@ export default function MUDApp() {
         showAllRoutes={showAllRoutes}
         onTopRoutesChange={setTopRoutes}
         onShowAllRoutesChange={setShowAllRoutes}
-        clustering={clustering}
         schema={schema}
         selectedRange={selectedRange}
-        filterState={filterState}
-        onFilterStateChange={setFilterState}
-        currentRouteData={currentRouteData}
+        maxTrajectories={maxTrajectories}
+        onMaxTrajectoriesChange={setMaxTrajectories}
+        ambiguityBlendEnabled={ambiguityBlendEnabled}
+        onAmbiguityBlendToggle={setAmbiguityBlendEnabled}
+        ambiguousValue={ambiguousValue}
+        onAmbiguousValueChange={setAmbiguousValue}
         roomContext={roomContext}
-        availableSteps={availableSteps}
-        filteredProbeCount={filteredProbeCount}
         onRunAll={handleRunAll}
         canRunAll={canRunAll}
       />
@@ -321,17 +291,18 @@ export default function MUDApp() {
       <div className="flex-1 grid grid-cols-2 gap-0.5 bg-gray-400 overflow-hidden" style={{ gridTemplateRows: '2fr 1fr' }}>
         {/* Q1: Viz */}
         <div className="bg-white overflow-y-auto overflow-x-auto p-2 space-y-4">
-          {selectedSession && sessionDetails && (
+          {selectedSession && sessionDetails && selectedSchema && (
             <>
               <ExpertRoutesSection
                 sessionIds={selectedSessions}
                 sessionData={sessionDetails}
-                filterState={filterState}
+                schemaName={selectedSchema}
                 primaryValues={primaryValues}
                 gradient={gradient}
                 secondaryValues={secondaryValues}
                 secondaryGradient={secondaryGradient}
                 secondaryAxisId={colorAxis2Id !== 'none' ? colorAxis2Id : undefined}
+                ambiguityBlend={ambiguityBlend}
                 outputPrimaryValues={outputPrimaryValues}
                 outputGradient={outputGradient}
                 outputSecondaryValues={outputSecondaryValues}
@@ -339,10 +310,6 @@ export default function MUDApp() {
                 outputSecondaryAxisId={outputColorAxis2Id !== 'none' ? outputColorAxis2Id : undefined}
                 outputColorAxisId={outputColorAxisId || undefined}
                 outputGroupingAxes={outputGroupingAxes}
-                clusteringSchema={selectedSchema || undefined}
-                steps={clustering.steps}
-                lastOccurrenceOnly={clustering.lastOccurrenceOnly}
-                maxProbes={clustering.maxProbes}
                 topRoutes={topRoutes}
                 selectedRange={selectedRange}
                 onRangeChange={setSelectedRange}
@@ -355,12 +322,13 @@ export default function MUDApp() {
               <ClusterRoutesSection
                 sessionIds={selectedSessions}
                 sessionData={sessionDetails}
-                filterState={filterState}
+                schemaName={selectedSchema}
                 primaryValues={primaryValues}
                 gradient={gradient}
                 secondaryValues={secondaryValues}
                 secondaryGradient={secondaryGradient}
                 secondaryAxisId={colorAxis2Id !== 'none' ? colorAxis2Id : undefined}
+                ambiguityBlend={ambiguityBlend}
                 outputPrimaryValues={outputPrimaryValues}
                 outputGradient={outputGradient}
                 outputSecondaryValues={outputSecondaryValues}
@@ -372,21 +340,7 @@ export default function MUDApp() {
                 shapeAxis={shapeAxis}
                 selectedRange={selectedRange}
                 onRangeChange={setSelectedRange}
-                layerClusterCounts={clustering.layerClusterCounts}
-                clusteringMethod={clustering.clusteringMethod}
-                reductionDimensions={clustering.reductionDims}
-                embeddingSource={clustering.embeddingSource}
-                reductionMethod={clustering.reductionMethod}
-                useAllLayersSameClusters={clustering.useAllLayersSameClusters}
-                setUseAllLayersSameClusters={clustering.setUseAllLayersSameClusters}
-                globalClusterCount={clustering.globalClusterCount}
-                setGlobalClusterCount={clustering.setGlobalClusterCount}
-                clusteringDimSubset={clustering.clusteringDimSubset}
-                steps={clustering.steps}
-                lastOccurrenceOnly={clustering.lastOccurrenceOnly}
-                maxProbes={clustering.maxProbes}
-                nNeighbors={clustering.nNeighbors}
-                clusteringSchema={selectedSchema || undefined}
+                maxTrajectories={maxTrajectories}
                 onRouteDataLoaded={handleClusterRouteDataLoaded}
                 onCardSelect={setSelectedCard}
                 onSankeyAnalysisReady={handleSankeyAnalysisReady}
@@ -401,6 +355,12 @@ export default function MUDApp() {
                 selectedRange={selectedRange}
               />
             </>
+          )}
+          {selectedSession && sessionDetails && !selectedSchema && (
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800">
+              Select a clustering schema in the toolbar to view routes and trajectories.
+              Build new schemas via Claude Code: <code className="font-mono bg-amber-100 px-1 rounded">/cluster</code> OP-1.
+            </div>
           )}
         </div>
 
@@ -479,7 +439,7 @@ export default function MUDApp() {
           {selectedSession && sessionDetails && (
             <FilteredWordDisplay
               sessionData={sessionDetails}
-              filterState={filterState}
+              filterState={{ labels: new Set() }}
               primaryValues={primaryValues}
               gradient={gradient}
             />

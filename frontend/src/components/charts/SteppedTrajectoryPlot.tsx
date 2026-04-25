@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as echarts from 'echarts'
 import 'echarts-gl'
-import type { ReductionPoint } from '../../types/api'
-import type { GradientScheme } from '../../utils/colorBlending'
+import type { TrajectoryPoint } from '../../types/api'
+import type { GradientScheme, AmbiguityBlend } from '../../utils/colorBlending'
 import { getPointColor } from '../../utils/colorBlending'
 import { apiClient } from '../../api/client'
+import { ApiError } from '../../api/client'
 
 interface Trajectory {
   probe_id: string
@@ -18,8 +19,10 @@ interface Trajectory {
 const SHAPE_SYMBOLS = ['circle', 'triangle', 'diamond', 'rect', 'pin', 'arrow']
 
 interface SteppedTrajectoryPlotProps {
-  sessionIds: string[]
+  sessionId: string
+  schemaName: string
   layers: number[]
+  title?: string
   colorLabelA: string
   colorLabelB: string
   gradient?: GradientScheme
@@ -28,27 +31,21 @@ interface SteppedTrajectoryPlotProps {
   secondaryValues?: string[]
   shapeAxisId?: string
   shapeValues?: string[]
-  source?: string        // "expert_output" | "residual_stream"
-  method?: string        // "pca" | "umap"
-  sessionData?: any
-  filterConfig?: any
+  ambiguityBlend?: AmbiguityBlend
   className?: string
   height?: number
   maxTrajectories?: number
   manualTrigger?: boolean
   onAnalysisReady?: (runAnalysis: () => void) => void
   onPointClick?: (info: { probe_id: string; target: string; label?: string }) => void
-  nComponents?: number
-  steps?: number[] | null
-  lastOccurrenceOnly?: boolean
-  maxProbes?: number | null
-  nNeighbors?: number
   selectedProbeId?: string | null
 }
 
 export default function SteppedTrajectoryPlot({
-  sessionIds,
+  sessionId,
+  schemaName,
   layers,
+  title,
   colorLabelA,
   colorLabelB,
   gradient = 'red-blue',
@@ -57,22 +54,14 @@ export default function SteppedTrajectoryPlot({
   secondaryValues,
   shapeAxisId,
   shapeValues,
-  source = 'expert_output',
-  method = 'pca',
-  sessionData,
-  filterConfig,
+  ambiguityBlend,
   className = '',
   height = 400,
-  maxTrajectories = 200,
+  maxTrajectories,
   manualTrigger = false,
   onAnalysisReady,
   onPointClick,
-  nComponents = 3,
-  steps,
-  lastOccurrenceOnly,
-  maxProbes,
-  nNeighbors,
-  selectedProbeId
+  selectedProbeId,
 }: SteppedTrajectoryPlotProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -80,20 +69,18 @@ export default function SteppedTrajectoryPlot({
   onPointClickRef.current = onPointClick
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [missingArtifact, setMissingArtifact] = useState(false)
   const [trajectories, setTrajectories] = useState<Trajectory[]>([])
   const [layerOffset, setLayerOffset] = useState(72)
   const [showLines, setShowLines] = useState(true)
   const [pointSize, setPointSize] = useState(2)
   const [coordScale, setCoordScale] = useState(1)
-  const [xDim, setXDim] = useState(0)
-  const [yDim, setYDim] = useState(1)
-  const [zDim, setZDim] = useState(2)
 
   useEffect(() => {
     if (manualTrigger) {
       if (onAnalysisReady) {
         onAnalysisReady(() => {
-          if (sessionIds.length > 0 && layers.length >= 2) {
+          if (sessionId && schemaName && layers.length >= 2) {
             loadTrajectoryData()
           }
         })
@@ -101,10 +88,10 @@ export default function SteppedTrajectoryPlot({
       return
     }
 
-    if (!sessionIds.length || layers.length < 2) return
+    if (!sessionId || !schemaName || layers.length < 2) return
 
     loadTrajectoryData()
-  }, [sessionIds, layers, manualTrigger, source, method, nComponents, steps, lastOccurrenceOnly, maxProbes, nNeighbors, onAnalysisReady])
+  }, [sessionId, schemaName, layers, manualTrigger, onAnalysisReady])
 
   useEffect(() => {
     if (trajectories.length > 0 && chartRef.current) {
@@ -117,59 +104,53 @@ export default function SteppedTrajectoryPlot({
         chartInstanceRef.current = null
       }
     }
-  }, [trajectories, colorLabelA, colorLabelB, gradient, primaryValues, secondaryColorAxisId, secondaryValues, shapeAxisId, shapeValues, layerOffset, showLines, pointSize, coordScale, xDim, yDim, zDim, selectedProbeId])
+  }, [trajectories, colorLabelA, colorLabelB, gradient, primaryValues, secondaryColorAxisId, secondaryValues, shapeAxisId, shapeValues, ambiguityBlend, layerOffset, showLines, pointSize, coordScale, selectedProbeId, maxTrajectories])
 
   const loadTrajectoryData = async () => {
     try {
       setLoading(true)
       setError(null)
+      setMissingArtifact(false)
 
-      const response = await apiClient.reduce({
-        session_ids: sessionIds,
-        layers,
-        source,
-        method,
-        n_components: nComponents,
-        ...(steps ? { steps } : {}),
-        ...(lastOccurrenceOnly ? { last_occurrence_only: true } : {}),
-        ...(maxProbes != null ? { max_probes: maxProbes } : {}),
-        ...(nNeighbors != null ? { n_neighbors: nNeighbors } : {})
-      })
+      const response = await apiClient.getTrajectoryEmbedding(sessionId, schemaName)
 
-      // Transform flat ReductionPoint[] into trajectory groups
-      const trajectoryMap = new Map<string, ReductionPoint[]>()
-      for (const point of response.points) {
-        if (!trajectoryMap.has(point.probe_id)) trajectoryMap.set(point.probe_id, [])
-        trajectoryMap.get(point.probe_id)!.push(point)
+      const requestedLayers = new Set(layers)
+      const trajectoryMap = new Map<string, Array<TrajectoryPoint & { layer: number }>>()
+
+      for (const [layerStr, points] of Object.entries(response.points_by_layer)) {
+        const layer = parseInt(layerStr, 10)
+        if (!requestedLayers.has(layer)) continue
+        for (const point of points) {
+          if (!trajectoryMap.has(point.probe_id)) trajectoryMap.set(point.probe_id, [])
+          trajectoryMap.get(point.probe_id)!.push({ ...point, layer })
+        }
       }
 
-      // Backend already applied max_probes subsampling (if set). Render every
-      // probe the backend returned, up to maxTrajectories as a safety ceiling
-      // for accidental unbounded fetches.
-      let probeIds = Array.from(trajectoryMap.keys())
-      if (probeIds.length > maxTrajectories) {
-        probeIds.sort()
-        probeIds = probeIds.slice(0, maxTrajectories)
-      }
-      const built: Trajectory[] = probeIds.map(probeId => {
-        const points = trajectoryMap.get(probeId)!.sort((a, b) => a.layer - b.layer)
+      const built: Trajectory[] = Array.from(trajectoryMap.entries()).map(([probeId, points]) => {
+        const sorted = points.sort((a, b) => a.layer - b.layer)
+        const first = sorted[0]
+        let categories: Record<string, string> | undefined
+        if (first?.categories_json) {
+          try { categories = JSON.parse(first.categories_json) } catch { /* ignore */ }
+        }
         return {
           probe_id: probeId,
-          target: points[0]?.target_word || '',
-          label: points[0]?.label,
-          categories: points[0]?.categories,
-          step: points[0]?.step,
-          coordinates: points.map(p => ({
-            layer: p.layer,
-            dims: p.coordinates ?? [p.x, p.y ?? 0, p.z ?? 0]
-          }))
+          target: first?.target_word || '',
+          label: first?.label,
+          categories,
+          step: first?.step,
+          coordinates: sorted.map(p => ({ layer: p.layer, dims: [p.x, p.y, p.z] })),
         }
       })
 
       setTrajectories(built)
     } catch (err) {
-      console.error('Failed to load trajectory data:', err)
-      setError(err instanceof Error ? err.message : 'Failed to load trajectory data')
+      if (err instanceof ApiError && err.status === 404) {
+        setMissingArtifact(true)
+      } else {
+        console.error('Failed to load trajectory data:', err)
+        setError(err instanceof Error ? err.message : 'Failed to load trajectory data')
+      }
     } finally {
       setLoading(false)
     }
@@ -179,6 +160,7 @@ export default function SteppedTrajectoryPlot({
     if (!axisId) return undefined
     if (axisId === 'label') return t.label
     if (axisId === 'target_word') return t.target
+    if (axisId === 'step') return t.step != null ? String(t.step) : undefined
     return t.categories?.[axisId]
   }
 
@@ -187,7 +169,7 @@ export default function SteppedTrajectoryPlot({
     if (!primaryValue) return '#666666'
     const effectivePrimaryValues = primaryValues || [colorLabelA, colorLabelB].filter(Boolean)
     const secValue = secondaryColorAxisId ? getAxisValue(trajectory, secondaryColorAxisId) : undefined
-    return getPointColor(primaryValue, effectivePrimaryValues, gradient, secValue, secondaryValues)
+    return getPointColor(primaryValue, effectivePrimaryValues, gradient, secValue, secondaryValues, ambiguityBlend)
   }
 
   const initializeChart = () => {
@@ -202,14 +184,20 @@ export default function SteppedTrajectoryPlot({
 
     const layerOffsetStep = layerOffset
 
+    let renderedTrajectories = trajectories
+    if (maxTrajectories != null && maxTrajectories < trajectories.length) {
+      const sorted = [...trajectories].sort((a, b) => a.probe_id.localeCompare(b.probe_id))
+      renderedTrajectories = sorted.slice(0, maxTrajectories)
+    }
+
     const actualLayers = Array.from(new Set(
-      trajectories.flatMap(t => t.coordinates.map(c => c.layer))
+      renderedTrajectories.flatMap(t => t.coordinates.map(c => c.layer))
     )).sort((a, b) => a - b)
 
     // Cross-product grouping: (colorGroup, shapeGroup) → separate series
     const crossGroups = new Map<string, { trajectories: Trajectory[]; colorKey: string; shapeKey: string }>()
 
-    trajectories.forEach((trajectory) => {
+    renderedTrajectories.forEach((trajectory) => {
       const colorKey = trajectory.label || 'Unknown'
       const shapeKey = shapeAxisId ? (getAxisValue(trajectory, shapeAxisId) || 'Unknown') : '_none'
       const groupKey = `${colorKey}|${shapeKey}`
@@ -248,12 +236,12 @@ export default function SteppedTrajectoryPlot({
 
           allScatterData.push({
             value: [
-              (coord.dims[xDim] || 0) * coordScale + xOffset,
-              (coord.dims[yDim] || 0) * coordScale,
-              (coord.dims[zDim] || 0) * coordScale,
+              (coord.dims[0] || 0) * coordScale + xOffset,
+              (coord.dims[1] || 0) * coordScale,
+              (coord.dims[2] || 0) * coordScale,
               trajectory.target,
               trajectory.label || '',
-              trajectory.probe_id
+              trajectory.probe_id,
             ],
             itemStyle: { color: trajectoryColor, opacity: pointOpacity },
             symbol: symbol,
@@ -265,7 +253,7 @@ export default function SteppedTrajectoryPlot({
           const trajectoryLineData = trajectory.coordinates.map((coord) => {
             const layerIndex = actualLayers.indexOf(coord.layer)
             const xOffset = layerIndex * layerOffsetStep
-            return [(coord.dims[xDim] || 0) * coordScale + xOffset, (coord.dims[yDim] || 0) * coordScale, (coord.dims[zDim] || 0) * coordScale]
+            return [(coord.dims[0] || 0) * coordScale + xOffset, (coord.dims[1] || 0) * coordScale, (coord.dims[2] || 0) * coordScale]
           })
 
           series.push({
@@ -274,14 +262,12 @@ export default function SteppedTrajectoryPlot({
             lineStyle: {
               color: trajectoryColor,
               width: 1.5,
-              opacity: lineOpacity
+              opacity: lineOpacity,
             },
             silent: true,
             animation: false,
             legendHoverLink: false,
-            emphasis: {
-              disabled: true
-            }
+            emphasis: { disabled: true },
           })
         }
       })
@@ -304,7 +290,6 @@ export default function SteppedTrajectoryPlot({
       [allScatterData[i], allScatterData[j]] = [allScatterData[j], allScatterData[i]]
     }
 
-    // Single merged scatter series — depth-sorted equally across all groups
     series.push({
       type: 'scatter3D',
       coordinateSystem: 'cartesian3D',
@@ -320,30 +305,23 @@ export default function SteppedTrajectoryPlot({
             Coords: (${x.toFixed(3)}, ${y.toFixed(3)})<br/>
             <em>Click for sentence</em>
           `
-        }
-      }
+        },
+      },
     })
 
-    // Add vertical layer axis lines
-    actualLayers.forEach((layer, index) => {
+    actualLayers.forEach((_layer, index) => {
       const xOffset = index * layerOffsetStep
 
       series.push({
         type: 'line3D',
         data: [
           [xOffset, 0, -10],
-          [xOffset, 0, 10]
+          [xOffset, 0, 10],
         ],
-        lineStyle: {
-          color: '#333333',
-          width: 2,
-          opacity: 0.6
-        },
+        lineStyle: { color: '#333333', width: 2, opacity: 0.6 },
         silent: true,
         animation: false,
-        emphasis: {
-          disabled: true
-        }
+        emphasis: { disabled: true },
       })
 
       series.push({
@@ -352,94 +330,58 @@ export default function SteppedTrajectoryPlot({
         parametric: true,
         wireframe: {
           show: true,
-          lineStyle: {
-            color: '#e0e0e0',
-            width: 1,
-            opacity: 0.2
-          }
+          lineStyle: { color: '#e0e0e0', width: 1, opacity: 0.2 },
         },
-        itemStyle: {
-          color: '#f8f8f8',
-          opacity: 0.02
-        },
+        itemStyle: { color: '#f8f8f8', opacity: 0.02 },
         parametricEquation: {
           u: { min: -8, max: 8, step: 16 },
           v: { min: -8, max: 8, step: 16 },
-          x: (u: number, v: number) => xOffset,
-          y: (u: number, v: number) => u,
-          z: (u: number, v: number) => v
-        }
+          x: () => xOffset,
+          y: (u: number) => u,
+          z: (_u: number, v: number) => v,
+        },
       })
     })
 
-    const methodLabel = method?.toUpperCase() || 'PCA'
+    const resolvedTitle = title
+      ?? (primaryValues && primaryValues.length > 2
+        ? `Stepped UMAP — ${primaryValues.length} senses of ${trajectories[0]?.target || 'target'}`
+        : `Stepped UMAP — ${colorLabelA} vs ${colorLabelB}`)
+
     const option = {
       title: {
-        text: primaryValues && primaryValues.length > 2
-          ? `Stepped ${methodLabel} Trajectories — ${primaryValues.length} word senses of ${trajectories[0]?.target || 'target'}`
-          : `Stepped ${methodLabel} Trajectories — ${colorLabelA} vs ${colorLabelB}`,
+        text: resolvedTitle,
         left: 'center',
         top: 10,
-        textStyle: {
-          fontSize: 14,
-          fontWeight: 'bold'
-        }
+        textStyle: { fontSize: 14, fontWeight: 'bold' },
       },
-      tooltip: {
-        trigger: 'item'
-      },
+      tooltip: { trigger: 'item' },
       legend: {
         show: true,
         orient: 'vertical',
         left: 'right',
         top: 'middle',
         data: legendNames,
-        textStyle: {
-          fontSize: 10
-        }
+        textStyle: { fontSize: 10 },
       },
-      xAxis3D: {
-        type: 'value',
-        name: `Dim ${xDim + 1}`,
-        nameTextStyle: { fontSize: 10 }
-      },
-      yAxis3D: {
-        type: 'value',
-        name: `Dim ${yDim + 1}`,
-        nameTextStyle: { fontSize: 10 }
-      },
-      zAxis3D: {
-        type: 'value',
-        name: `Dim ${zDim + 1}`,
-        nameTextStyle: { fontSize: 10 }
-      },
+      xAxis3D: { type: 'value', name: 'Dim 1', nameTextStyle: { fontSize: 10 } },
+      yAxis3D: { type: 'value', name: 'Dim 2', nameTextStyle: { fontSize: 10 } },
+      zAxis3D: { type: 'value', name: 'Dim 3', nameTextStyle: { fontSize: 10 } },
       grid3D: {
         boxWidth: (actualLayers.length - 1) * layerOffsetStep + 200,
         boxHeight: 200,
         boxDepth: 200,
-        viewControl: {
-          autoRotate: false,
-          distance: 300,
-          alpha: 25,
-          beta: 35
-        },
+        viewControl: { autoRotate: false, distance: 300, alpha: 25, beta: 35 },
         light: {
-          main: {
-            intensity: 1.0,
-            shadow: true,
-            shadowQuality: 'medium'
-          },
-          ambient: {
-            intensity: 0.4
-          }
-        }
+          main: { intensity: 1.0, shadow: true, shadowQuality: 'medium' },
+          ambient: { intensity: 0.4 },
+        },
       },
-      series: series
+      series: series,
     }
 
     chart.setOption(option)
 
-    // Click handler for trajectory points
     chart.on('click', (params: any) => {
       if (params.seriesType === 'scatter3D' && onPointClickRef.current && params.value) {
         const [, , , target, label, probeId] = params.value
@@ -463,6 +405,19 @@ export default function SteppedTrajectoryPlot({
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
           <p className="text-sm text-gray-600">Loading trajectories...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (missingArtifact) {
+    return (
+      <div className={`flex items-center justify-center ${className}`} style={{ height }}>
+        <div className="text-center max-w-md">
+          <p className="text-sm text-gray-600">
+            This schema was built before trajectory points were persisted.
+            Rebuild via <code>/cluster</code> OP-5 + OP-1 to enable the trajectory plot.
+          </p>
         </div>
       </div>
     )
@@ -526,29 +481,6 @@ export default function SteppedTrajectoryPlot({
           />
           Lines
         </label>
-        {/* Axis dimension mapping */}
-        {nComponents > 3 && (
-          <>
-            <div className="flex items-center gap-0.5">
-              <span className="text-xs text-gray-500">X:</span>
-              <select value={xDim} onChange={(e) => setXDim(Number(e.target.value))} className="px-1 py-0.5 text-xs border border-gray-300 rounded">
-                {Array.from({ length: nComponents }, (_, i) => <option key={i} value={i}>Dim {i + 1}</option>)}
-              </select>
-            </div>
-            <div className="flex items-center gap-0.5">
-              <span className="text-xs text-gray-500">Y:</span>
-              <select value={yDim} onChange={(e) => setYDim(Number(e.target.value))} className="px-1 py-0.5 text-xs border border-gray-300 rounded">
-                {Array.from({ length: nComponents }, (_, i) => <option key={i} value={i}>Dim {i + 1}</option>)}
-              </select>
-            </div>
-            <div className="flex items-center gap-0.5">
-              <span className="text-xs text-gray-500">Z:</span>
-              <select value={zDim} onChange={(e) => setZDim(Number(e.target.value))} className="px-1 py-0.5 text-xs border border-gray-300 rounded">
-                {Array.from({ length: nComponents }, (_, i) => <option key={i} value={i}>Dim {i + 1}</option>)}
-              </select>
-            </div>
-          </>
-        )}
       </div>
       <div
         ref={chartRef}

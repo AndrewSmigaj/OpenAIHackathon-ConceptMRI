@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import SankeyChart from './SankeyChart'
-import type { RouteAnalysisResponse, ClusteringConfig } from '../../types/api'
-import type { GradientScheme } from '../../utils/colorBlending'
-import type { FilterState } from '../WordFilterPanel'
+import type { RouteAnalysisResponse } from '../../types/api'
+import type { GradientScheme, AmbiguityBlend } from '../../utils/colorBlending'
 import { apiClient } from '../../api/client'
 import { LAYER_RANGES } from '../../constants/layerRanges'
 import { isOutputNode, isOutputLink } from '../../constants/outputNodes'
@@ -10,12 +9,13 @@ import { isOutputNode, isOutputLink } from '../../constants/outputNodes'
 interface MultiSankeyViewProps {
   sessionIds: string[]
   sessionData: any
-  filterState: FilterState
+  schemaName: string
   primaryValues: string[]
   gradient?: GradientScheme
   secondaryValues?: string[]
   secondaryGradient?: GradientScheme
   secondaryAxisId?: string
+  ambiguityBlend?: AmbiguityBlend
   outputPrimaryValues?: string[]
   outputGradient?: GradientScheme
   outputSecondaryValues?: string[]
@@ -31,12 +31,7 @@ interface MultiSankeyViewProps {
   onLinkClick?: (linkData: any) => void
   onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
   mode?: 'expert' | 'cluster'
-  clusteringConfig?: ClusteringConfig
-  clusteringSchema?: string
-  steps?: number[] | null
   expertRank?: number | null
-  lastOccurrenceOnly?: boolean
-  maxProbes?: number | null
   manualTrigger?: boolean
   onAnalysisReady?: (runAnalysis: () => void) => void
 }
@@ -45,12 +40,13 @@ interface MultiSankeyViewProps {
 export default function MultiSankeyView({
   sessionIds,
   sessionData,
-  filterState,
+  schemaName,
   primaryValues,
   gradient,
   secondaryValues,
   secondaryGradient,
   secondaryAxisId,
+  ambiguityBlend,
   outputPrimaryValues,
   outputGradient,
   outputSecondaryValues,
@@ -66,12 +62,7 @@ export default function MultiSankeyView({
   onLinkClick,
   onRouteDataLoaded,
   mode = 'expert',
-  clusteringConfig,
-  clusteringSchema,
-  steps,
   expertRank,
-  lastOccurrenceOnly,
-  maxProbes,
   manualTrigger = false,
   onAnalysisReady
 }: MultiSankeyViewProps) {
@@ -82,7 +73,7 @@ export default function MultiSankeyView({
   const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
 
   const loadAllWindows = useCallback(async () => {
-    if (!sessionIds || sessionIds.length === 0 || !sessionData || !currentRange) {
+    if (!sessionIds || sessionIds.length === 0 || !sessionData || !currentRange || !schemaName) {
       setRouteDataMap({})
       return
     }
@@ -97,27 +88,19 @@ export default function MultiSankeyView({
 
     const promises = currentRange.windows.map(async (window) => {
       try {
-        const filterConfig = convertFilterState(filterState)
-        const request = {
+        const baseRequest = {
+          mode: 'load' as const,
           session_ids: sessionIds,
+          schema_name: schemaName,
           window_layers: window.layers,
-          filter_config: filterConfig,
           top_n_routes: showAllRoutes ? 1000 : topRoutes,
           ...(outputGroupingAxes ? { output_grouping_axes: outputGroupingAxes } : {}),
-          ...(steps ? { steps } : {}),
-          ...(lastOccurrenceOnly ? { last_occurrence_only: true } : {}),
-          ...(maxProbes != null ? { max_probes: maxProbes } : {}),
         }
-        const response = mode === 'cluster' && clusteringConfig
-          ? await apiClient.analyzeClusterRoutes({
-              ...request,
-              clustering_config: clusteringConfig,
-              ...(clusteringSchema ? { clustering_schema: clusteringSchema } : {})
-            })
+        const response = mode === 'cluster'
+          ? await apiClient.analyzeClusterRoutes(baseRequest)
           : await apiClient.analyzeRoutes({
-              ...request,
-              ...(clusteringSchema ? { clustering_schema: clusteringSchema } : {}),
-              ...(expertRank && expertRank !== 1 ? { expert_rank: expertRank } : {})
+              ...baseRequest,
+              ...(expertRank ? { expert_rank: expertRank } : {})
             })
         newRouteDataMap[window.id] = response
         newErrorMap[window.id] = null
@@ -205,7 +188,7 @@ export default function MultiSankeyView({
     setLoadingMap(newLoadingMap)
 
     onRouteDataLoaded?.(newRouteDataMap)
-  }, [sessionIds, sessionData, selectedRange, filterState, showAllRoutes, topRoutes, mode, clusteringConfig, clusteringSchema, outputGroupingAxes, steps, expertRank, lastOccurrenceOnly, maxProbes, onRouteDataLoaded])
+  }, [sessionIds, sessionData, selectedRange, schemaName, showAllRoutes, topRoutes, mode, outputGroupingAxes, expertRank, onRouteDataLoaded])
 
   React.useEffect(() => {
     if (onAnalysisReady) {
@@ -275,15 +258,16 @@ export default function MultiSankeyView({
                     secondaryValues={secondaryValues}
                     secondaryGradient={secondaryGradient}
                     secondaryAxisId={secondaryAxisId}
+                    ambiguityBlend={ambiguityBlend}
                     outputPrimaryValues={outputPrimaryValues}
                     outputGradient={outputGradient}
                     outputSecondaryValues={outputSecondaryValues}
                     outputSecondaryGradient={outputSecondaryGradient}
                     outputSecondaryAxisId={outputSecondaryAxisId}
                     outputColorAxisId={outputColorAxisId}
-                    onNodeClick={(nodeId, nodeData) => {
+                    onNodeClick={(_nodeId, nodeData) => {
                       if (onNodeClick) {
-                        const enrichedData = {
+                        const enrichedData: any = {
                           ...nodeData,
                           population: nodeData.token_count,
                           coverage: Math.round((nodeData.token_count / routeData.statistics.total_probes) * 100),
@@ -352,6 +336,7 @@ export default function MultiSankeyView({
                   secondaryValues={secondaryValues}
                   secondaryGradient={secondaryGradient}
                   secondaryAxisId={secondaryAxisId}
+                  ambiguityBlend={ambiguityBlend}
                   outputPrimaryValues={outputPrimaryValues}
                   outputGradient={outputGradient}
                   outputSecondaryValues={outputSecondaryValues}
@@ -359,7 +344,7 @@ export default function MultiSankeyView({
                   outputSecondaryAxisId={outputSecondaryAxisId}
                   outputColorAxisId={outputColorAxisId}
                   nodeWidth={14}
-                  onNodeClick={(nodeId, nodeData) => {
+                  onNodeClick={(_nodeId, nodeData) => {
                     if (onNodeClick) {
                       onNodeClick({
                         ...nodeData,
@@ -394,5 +379,3 @@ export default function MultiSankeyView({
     </div>
   )
 }
-
-import { convertFilterState } from '../../utils/filterState'

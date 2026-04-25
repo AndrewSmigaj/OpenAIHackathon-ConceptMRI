@@ -11,8 +11,8 @@ import type {
   ExpertDetailsResponse,
   LLMInsightsRequest,
   LLMInsightsResponse,
-  ReductionRequest,
-  ReductionResponse,
+  TrajectoryPointsResponse,
+  ClusteringSchema,
   SentenceExperimentRequest,
   SentenceExperimentResponse,
 } from '../types/api';
@@ -246,15 +246,47 @@ class ConceptMriApiClient {
   }
 
   /**
-   * On-demand dimensionality reduction (PCA/UMAP) for trajectory visualization
-   * @param request - Reduction request with session_ids, layers, source, method
-   * @returns Flat array of reduced points grouped by probe_id and layer
+   * Load pre-computed 3D trajectory points for a clustering schema.
+   * Returns 404 if the schema was built before trajectory_points.json existed —
+   * caller should display a message asking the user to rebuild via /cluster.
    */
-  async reduce(request: ReductionRequest): Promise<ReductionResponse> {
-    return this.request<ReductionResponse>('/experiments/reduce', {
-      method: 'POST',
-      body: JSON.stringify(request),
-    });
+  async getTrajectoryEmbedding(
+    sessionId: string,
+    schemaName: string
+  ): Promise<TrajectoryPointsResponse> {
+    return this.request<TrajectoryPointsResponse>(
+      `/probes/sessions/${sessionId}/clusterings/${schemaName}/trajectory`
+    );
+  }
+
+  /**
+   * Archive a clustering schema (move to _archive/<name>_<ts>/).
+   * Reversible by moving the directory back manually.
+   */
+  async archiveClustering(
+    sessionId: string,
+    schemaName: string
+  ): Promise<{ archived: string; archive_path: string }> {
+    return this.request(
+      `/probes/sessions/${sessionId}/clusterings/${schemaName}/archive`,
+      { method: 'POST' }
+    );
+  }
+
+  /**
+   * Delete a clustering schema. Pass force=true to override the safety check
+   * when reports or element_descriptions reference the schema.
+   */
+  async deleteClustering(
+    sessionId: string,
+    schemaName: string,
+    force = false
+  ): Promise<{ deleted: string }> {
+    const qs = force ? '?force=true' : '';
+    return this.request(
+      `/probes/sessions/${sessionId}/clusterings/${schemaName}${qs}`,
+      { method: 'DELETE' }
+    );
   }
 
   /**
@@ -291,7 +323,7 @@ class ConceptMriApiClient {
   /**
    * List available clustering schemas for a session
    */
-  async listClusterings(sessionId: string): Promise<{clusterings: Array<{name: string, created_at: string, params: any}>}> {
+  async listClusterings(sessionId: string): Promise<{ clusterings: ClusteringSchema[] }> {
     return this.request(`/probes/sessions/${sessionId}/clusterings`);
   }
 
