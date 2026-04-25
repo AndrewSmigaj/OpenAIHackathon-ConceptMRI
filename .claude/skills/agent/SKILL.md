@@ -214,3 +214,27 @@ Look at `session_analysis.md` tick 0 game text — if the short_desc for the NPC
 - **`auto_start: true` is mandatory** for real runs — omit it only when you specifically want to create a dormant session record.
 - **Don't push commits unless explicitly asked.** Commits are fine on user request; pushes must be explicit.
 - **Agent sessions are single-tenant against Evennia's `agent` account.** Do not run two sessions concurrently.
+
+---
+
+## OP-6: Post-run clustering
+
+When a session finishes (`probe_results.jsonl` line count == `len(scenario_list)`),
+this skill **automatically proceeds to build the default clustering schema**
+via `/cluster` OP-1. The defaults match the YAML block in `/cluster/SKILL.md`,
+with `step=1` (post-examine tick) for agent sessions.
+
+Status line printed to chat before the build kicks off:
+
+```
+Session complete — <N> scenarios captured.
+Auto-building clustering schema with defaults: k=6, n_neighbors=15, d=6,
+UMAP+hierarchical, step=1, last_occurrence_only=true, window=[22,23].
+Save name: <session_name>_k6_n15
+(To override: ESC and tell Claude to run /cluster OP-1 with custom params,
+ /cluster OP-2 for a sweep, or skip clustering entirely.)
+```
+
+Then call `/cluster` OP-1 with the session id, the resolved `save_as`, and the
+default config. If the user wants different params, a sweep, or no clustering
+at all, they interrupt and direct.

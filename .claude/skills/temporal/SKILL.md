@@ -7,6 +7,11 @@ description: Run temporal basin captures — single runs, paired batches, and ve
 
 Run temporal capture experiments that measure how MoE routing basins persist or shift as context changes. Each run processes an ordered sequence of sentences (basin A then basin B) and records the model's routing at each step.
 
+**Temporal is a schema consumer, not a producer.** A clustering schema must
+already exist for the session before any temporal run — the run's basin IDs
+reference clusters from that schema. To create a schema, use `/cluster` OP-1.
+This skill never builds schemas.
+
 ## Constants
 
 | Constant | Value |

@@ -7,6 +7,10 @@ description: Analyze a saved clustering schema — read data, reason about patte
 
 Analyze cluster/route data from a Concept MRI session. This is an LLM reasoning task — read actual sentences, distributions, and route patterns. NO keyword/regex hacks.
 
+**Schemas are immutable artifacts on disk.** This skill reads them; it never
+creates, modifies, or deletes them. Use `/cluster` for the schema lifecycle
+(OP-1 build, OP-1B extend, OP-4 archive, OP-5 delete).
+
 ## Invocation
 
 Can be invoked as `/analyze {session_id} schema {schema_name} window {start}-{end}`, e.g.:

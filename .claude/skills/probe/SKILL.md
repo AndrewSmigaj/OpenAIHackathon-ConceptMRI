@@ -92,8 +92,31 @@ Run backend validation or manually check:
 - Group field correctness
 - Category values match declared axes
 
+## Step 11: Post-run clustering
+
+After the capture writes its session under `data/lake/<session_id>/`, this skill
+**automatically proceeds to build the default clustering schema** via `/cluster`
+OP-1. The defaults match the YAML block in `/cluster/SKILL.md` and are tuned to
+the session kind (`sentence` → `step=0`; `sentence_two_part` → `step=[0,1]` if
+the JSON exposes two-step structure; otherwise prompt the user once).
+
+Status line printed to chat before the build kicks off:
+
+```
+Session complete — <N> probes captured.
+Auto-building clustering schema with defaults: k=6, n_neighbors=15, d=6,
+UMAP+hierarchical, step=<step>, last_occurrence_only=true, window=[22,23].
+Save name: <target>_<concept>_k6_n15
+(To override: ESC and tell Claude to run /cluster OP-1 with custom params,
+ /cluster OP-2 for a sweep, or skip clustering entirely.)
+```
+
+Then run `/cluster` OP-1 with the resolved defaults. If the user wants a
+sweep, custom params, or no clustering at all, they interrupt and direct.
+
 ## References
 
 - Read `data/sentence_sets/GUIDE.md` for quality rules, schema format, confound documentation
 - Read existing probe guides in `data/sentence_sets/` for naming and structure examples
 - Read `docs/PIPELINE.md` for what happens after experiment design (capture → categorize → analyze)
+- Read `/cluster/SKILL.md` for the schema lifecycle invoked at Step 11
