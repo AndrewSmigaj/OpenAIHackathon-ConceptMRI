@@ -377,12 +377,17 @@ export default function MUDApp() {
                 const lastWindow = currentRange.windows[currentRange.windows.length - 1]
                 const lastData = routeMap[lastWindow?.id]
                 if (!lastData) return null
-                const reportKey = lastWindow ? `w_${lastWindow.layers[0]}_${lastWindow.layers[lastWindow.layers.length - 1]}` : undefined
+                const lastReportKey = lastWindow ? `w_${lastWindow.layers[0]}_${lastWindow.layers[lastWindow.layers.length - 1]}` : undefined
+                const firstWindow = currentRange.windows[0]
+                const synthKey = currentRange.windows.length > 1 && firstWindow && lastWindow
+                  ? `w_${firstWindow.layers[0]}_${lastWindow.layers[lastWindow.layers.length - 1]}`
+                  : undefined
+                const report = (synthKey && schema.schemaReports[synthKey]) || (lastReportKey ? schema.schemaReports[lastReportKey] : undefined)
                 return (
                   <WindowAnalysis
                     routeData={lastData}
                     windowLabel={currentRange.label}
-                    report={reportKey ? schema.schemaReports[reportKey] : undefined}
+                    report={report}
                     selectedSchema={selectedSchema || undefined}
                     primaryValues={primaryValues}
                     gradient={gradient}

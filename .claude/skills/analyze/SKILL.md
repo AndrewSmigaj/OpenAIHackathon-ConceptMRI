@@ -144,14 +144,78 @@ The file is a flat JSON dict of `{descKey: description}`. Merge with existing co
 
 **IMPORTANT**: This step is NOT optional. Every `/analyze` run MUST produce element descriptions alongside the report. The descriptions populate the click-to-inspect cards in the frontend — without them, users see "No AI description" on every card.
 
-### 8. Cross-Window Synthesis
+### 8. Cross-Window Synthesis (multi-window schemas)
 
-After multiple windows, write a synthesis covering:
-- Routing evolution across layers
-- At which layer the model decides the sense
-- Persistent clusters
+When the schema spans more than one window (e.g. `cluster_windows/` contains
+`w_17_18.json`, `w_18_19.json`, …, `w_22_23.json`), produce a multi-lens
+synthesis report that the frontend will surface preferentially over the
+last-window report whenever the user selects the full layer range.
 
-Save as `POST .../reports/synthesis`.
+**Filename convention.** Save the synthesis under the schema's `reports/`
+directory as `w_<first>_<last>.md` (e.g. `reports/w_17_23.md` for a 17→23
+schema). The frontend looks up reports by file stem via
+`useSchemaManagement.schemaReports`; when `currentRange.windows.length > 1`
+MUDApp prefers `w_<first>_<last>` over `w_<lastWindow>`. The "synthesis"
+phrasing belongs in the report's H1, not in the filename.
+
+**Six lenses** — each is a section the synthesis must cover:
+1. **Layer-by-layer narrative** — basin sizes per layer table; one paragraph per
+   layer summarising what changed since the previous layer.
+2. **Basin topology evolution** — count of probes that change basin per
+   transition (L→L+1). Identify the transition(s) where most topology change
+   happens; everything else is stable refinement.
+3. **Semantic stability** — for each canonical basin, list the dominant
+   scenario types / subtypes; verify they match across layers (basin = stable
+   semantic category, not drifting content).
+4. **Correctness alignment** — which basins map cleanly to correct output,
+   which leak. Use `probe_results.jsonl` for `correct` field.
+5. **Leakage dynamics** — trace any pole-leak probes (probes whose basin pole
+   disagrees with their ground-truth label) across all layers. Cite
+   `reports/leakage_analysis.md` if it exists.
+6. **Cross-layer basin identity** — map cluster IDs across layers via
+   majority-overlap of probe membership; produce an identity-preservation
+   table (basin × transition) showing the fraction of probes that remain in
+   the canonical successor basin at the next layer.
+
+**Synthesis section.** End with a 2–4 paragraph synthesis section that ties
+the six lenses together — what's the headline finding, what's the story of
+the model's representation as it flows through these layers.
+
+**Cluster-ID stability across layers.** Hierarchical clustering renumbers
+clusters per layer — basin "pure-foe" may be C0 at L17, C2 at L18, C5 at
+L22, etc. Construct a canonical basin map by reading
+`probe_assignments.json` and grouping cluster IDs across layers by
+majority-overlap of their probe sets. Reference the canonical name (e.g.
+"pure-foe") in the synthesis, not the renumbered cluster ID.
+
+**Save** with the same `POST .../reports/w_<first>_<last>` endpoint as
+per-window reports.
+
+### 9. Recommend a Secondary Coloring Axis (REQUIRED deliverable)
+
+Every `/analyze` run MUST end with a one-paragraph recommendation for the
+schema's secondary coloring axis (the visualization control that pairs with
+the primary friend/foe axis in MUDApp). This is a required deliverable, not
+optional commentary.
+
+**Common candidates** to consider:
+- **`step`** — useful when the schema includes `steps=[0,1]` (or similar
+  multi-tick captures). At step 0 a representation may be uncommitted; at
+  step 1 it's resolved. Pair with `ambiguity_blend` blending mode so
+  step-0 trajectories render desaturated and step-1 trajectories render at
+  full saturation. Best for "signal crystallization" demos.
+- **`correct`** — useful when there's a clean correctness signal at the
+  output layer. Highlights which basins fail behaviourally even when their
+  pole composition looks right.
+- **scenario-arc-stage** — for multi-tick scenarios, marks where in the
+  arc each probe was captured.
+- **schema-specific categorical taxonomy** — if your analysis surfaces a
+  meaningful subgroup taxonomy (e.g. distress-shaped foe vs explicit-threat
+  foe), expose it as the secondary axis.
+
+State which axis you recommend, why (cite the analysis findings), and what
+visualization mode it should use (`ambiguity_blend` vs plain categorical).
+If no secondary axis adds value, say so explicitly.
 
 ## Key Principles
 
@@ -160,3 +224,22 @@ Save as `POST .../reports/synthesis`.
 - **Follow the probe guide** — each experiment has specific analysis focus areas
 - **Start from output** — last-layer routes to output nodes show the model's final decision
 - **Work backward** — trace interesting patterns to earlier layers
+
+## Data-contract notes (Phase 7.3 gotchas)
+
+- **Multi-window schemas merge per-layer.** `centroids.json`,
+  `probe_assignments.json`, and `trajectory_points.json` are all keyed by
+  layer string. When `/cluster` OP-1B extends a schema with new windows,
+  these files gain new layer keys but never overwrite existing ones. Do
+  NOT assume cluster IDs remain stable across layers — hierarchical
+  clustering renumbers per layer.
+- **Cluster-ID renumbering is per-layer.** Always build a canonical basin
+  map (Step 8 lens 6) before making cross-layer claims. Renaming
+  C0→C2→C5 is a renumbering artefact, not migration.
+- **`probe_assignments.json` is schema-local.** Read from
+  `clusterings/{schema}/probe_assignments.json` only. The session-root
+  fallback was removed in the schema redesign and any orphan file there
+  is stale.
+- **Reports are keyed by file stem.** Save per-window as `w_X_Y.md` and
+  full-range synthesis as `w_<first>_<last>.md`; the frontend lookup is
+  `schemaReports[stem]`.
