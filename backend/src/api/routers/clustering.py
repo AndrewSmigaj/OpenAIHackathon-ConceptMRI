@@ -67,9 +67,22 @@ def _validate_extension(meta: dict, request: ComputeClusteringRequest, clusterin
     `meta.json` is the source of truth. Mismatch → 409 with the offending field
     so the caller can either fix the request, archive the old schema, or pick a
     new name.
+
+    `layer_cluster_counts` is per-window: each new window contributes its own
+    layer→k entries. We compare it as the intersection of overlapping layers,
+    not strict equality.
     """
+    expected_params = dict(meta.get("params") or {})
+    incoming_params = dict(clustering_config_dict)
+    expected_lcc = expected_params.pop("layer_cluster_counts", {}) or {}
+    incoming_lcc = incoming_params.pop("layer_cluster_counts", {}) or {}
+    expected_lcc = {str(k): v for k, v in expected_lcc.items()}
+    incoming_lcc = {str(k): v for k, v in incoming_lcc.items()}
+    overlapping = set(expected_lcc) & set(incoming_lcc)
+    lcc_overlap_diff = {l: (expected_lcc[l], incoming_lcc[l]) for l in overlapping if expected_lcc[l] != incoming_lcc[l]}
+
     expected = {
-        "params": meta.get("params"),
+        "params": expected_params,
         "last_occurrence_only": meta.get("last_occurrence_only"),
         "max_probes": meta.get("max_probes"),
         "steps": meta.get("steps"),
@@ -77,13 +90,18 @@ def _validate_extension(meta: dict, request: ComputeClusteringRequest, clusterin
     }
     incoming_filters = request.filter_config.dict(exclude_none=True) if request.filter_config else None
     incoming = {
-        "params": clustering_config_dict,
+        "params": incoming_params,
         "last_occurrence_only": request.last_occurrence_only,
         "max_probes": request.max_probes,
         "steps": request.steps,
         "filter_config": incoming_filters,
     }
     diffs = {k: (expected[k], incoming[k]) for k in expected if expected[k] != incoming[k]}
+    if lcc_overlap_diff:
+        diffs["layer_cluster_counts"] = (
+            {l: expected_lcc[l] for l in overlapping},
+            {l: incoming_lcc[l] for l in overlapping},
+        )
     if diffs:
         raise HTTPException(
             status_code=409,
@@ -163,6 +181,13 @@ def _compute_and_save_clusters(
             "sample_size": sample_size,
         }
         meta_path.write_text(json.dumps(meta, indent=2))
+    else:
+        existing_meta = json.loads(meta_path.read_text())
+        existing_lcc = dict(existing_meta.get("params", {}).get("layer_cluster_counts") or {})
+        new_lcc = dict(clustering_config_dict.get("layer_cluster_counts") or {})
+        merged_lcc = {**{str(k): v for k, v in existing_lcc.items()}, **{str(k): v for k, v in new_lcc.items()}}
+        existing_meta.setdefault("params", {})["layer_cluster_counts"] = merged_lcc
+        meta_path.write_text(json.dumps(existing_meta, indent=2))
 
     if "probe_assignments" in result:
         pa_path = schema_dir / "probe_assignments.json"
