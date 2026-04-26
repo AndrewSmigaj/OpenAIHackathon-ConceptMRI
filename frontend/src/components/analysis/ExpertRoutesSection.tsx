@@ -23,8 +23,8 @@ interface ExpertRoutesSectionProps {
   outputColorAxisId?: string
   outputGroupingAxes?: string[]
   topRoutes: number
-  selectedRange: string
-  onRangeChange: (range: string) => void
+  selectedWindow: string
+  onWindowChange: (windowId: string) => void
   showAllRoutes: boolean
   onRouteDataLoaded: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
   onCardSelect: (card: SelectedCard) => void
@@ -49,8 +49,8 @@ export default function ExpertRoutesSection({
   outputColorAxisId,
   outputGroupingAxes,
   topRoutes,
-  selectedRange,
-  onRangeChange,
+  selectedWindow,
+  onWindowChange,
   showAllRoutes,
   onRouteDataLoaded,
   onCardSelect,
@@ -104,8 +104,8 @@ export default function ExpertRoutesSection({
           expertRank={expertRank}
           showAllRoutes={showAllRoutes}
           topRoutes={topRoutes}
-          selectedRange={selectedRange}
-          onRangeChange={onRangeChange}
+          selectedWindow={selectedWindow}
+          onWindowChange={onWindowChange}
           onNodeClick={(data) => handleSankeyClick('expert', data)}
           onLinkClick={(data) => handleSankeyClick('route', data)}
           onRouteDataLoaded={onRouteDataLoaded}

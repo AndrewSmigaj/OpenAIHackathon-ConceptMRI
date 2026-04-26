@@ -3,7 +3,7 @@ import SankeyChart from './SankeyChart'
 import type { RouteAnalysisResponse } from '../../types/api'
 import type { GradientScheme, AmbiguityBlend } from '../../utils/colorBlending'
 import { apiClient } from '../../api/client'
-import { LAYER_RANGES } from '../../constants/layerRanges'
+import { LAYER_WINDOWS } from '../../constants/layerWindows'
 import { isOutputNode, isOutputLink } from '../../constants/outputNodes'
 
 interface MultiSankeyViewProps {
@@ -25,8 +25,8 @@ interface MultiSankeyViewProps {
   outputGroupingAxes?: string[]
   showAllRoutes: boolean
   topRoutes: number
-  selectedRange?: string
-  onRangeChange?: (range: string) => void
+  selectedWindow?: string
+  onWindowChange?: (windowId: string) => void
   onNodeClick?: (nodeData: any) => void
   onLinkClick?: (linkData: any) => void
   onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
@@ -56,8 +56,8 @@ export default function MultiSankeyView({
   outputGroupingAxes,
   showAllRoutes,
   topRoutes,
-  selectedRange = 'range1',
-  onRangeChange,
+  selectedWindow = 'w0',
+  onWindowChange,
   onNodeClick,
   onLinkClick,
   onRouteDataLoaded,
@@ -70,10 +70,10 @@ export default function MultiSankeyView({
   const [loadingMap, setLoadingMap] = useState<Record<string, boolean>>({})
   const [errorMap, setErrorMap] = useState<Record<string, string | null>>({})
 
-  const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
+  const currentWindow = LAYER_WINDOWS[selectedWindow as keyof typeof LAYER_WINDOWS]
 
-  const loadAllWindows = useCallback(async () => {
-    if (!sessionIds || sessionIds.length === 0 || !sessionData || !currentRange || !schemaName) {
+  const loadAllTransitions = useCallback(async () => {
+    if (!sessionIds || sessionIds.length === 0 || !sessionData || !currentWindow || !schemaName) {
       setRouteDataMap({})
       return
     }
@@ -81,18 +81,17 @@ export default function MultiSankeyView({
     const newRouteDataMap: Record<string, RouteAnalysisResponse | null> = {}
     const newErrorMap: Record<string, string | null> = {}
 
-    currentRange.windows.forEach(window => {
-      newLoadingMap[window.id] = true
+    currentWindow.transitions.forEach(transition => {
+      newLoadingMap[transition.id] = true
     })
     setLoadingMap(newLoadingMap)
 
-    const promises = currentRange.windows.map(async (window) => {
+    const promises = currentWindow.transitions.map(async (transition) => {
       try {
         const baseRequest = {
-          mode: 'load' as const,
           session_ids: sessionIds,
           schema_name: schemaName,
-          window_layers: window.layers,
+          transition_layers: transition.layers,
           top_n_routes: showAllRoutes ? 1000 : topRoutes,
           ...(outputGroupingAxes ? { output_grouping_axes: outputGroupingAxes } : {}),
         }
@@ -102,33 +101,33 @@ export default function MultiSankeyView({
               ...baseRequest,
               ...(expertRank ? { expert_rank: expertRank } : {})
             })
-        newRouteDataMap[window.id] = response
-        newErrorMap[window.id] = null
+        newRouteDataMap[transition.id] = response
+        newErrorMap[transition.id] = null
       } catch (err) {
-        console.error(`Failed to load routes for ${window.id}:`, err)
-        newErrorMap[window.id] = err instanceof Error ? err.message : 'Failed to load'
-        newRouteDataMap[window.id] = null
+        console.error(`Failed to load routes for ${transition.id}:`, err)
+        newErrorMap[transition.id] = err instanceof Error ? err.message : 'Failed to load'
+        newRouteDataMap[transition.id] = null
       } finally {
-        newLoadingMap[window.id] = false
+        newLoadingMap[transition.id] = false
       }
     })
 
     await Promise.all(promises)
 
-    // --- Barycenter cross-window node ordering (forward sweep L→R) ---
-    // Propagate vertical positions across windows so the same cluster
+    // --- Barycenter cross-transition node ordering (forward sweep L→R) ---
+    // Propagate vertical positions across transitions so the same cluster
     // keeps consistent placement, minimizing link crossings.
     let prevRightOrder: Map<string, number> | null = null
 
-    for (const window of currentRange.windows) {
-      const data = newRouteDataMap[window.id]
+    for (const transition of currentWindow.transitions) {
+      const data = newRouteDataMap[transition.id]
       if (!data) {
         prevRightOrder = null
         continue
       }
 
-      const leftLayer = Math.min(...window.layers)
-      const rightLayer = Math.max(...window.layers)
+      const leftLayer = Math.min(...transition.layers)
+      const rightLayer = Math.max(...transition.layers)
 
       const getLayer = (name: string): number | null => {
         const m = name.match(/^L(\d+)\//)
@@ -146,7 +145,7 @@ export default function MultiSankeyView({
         else otherNodes.push(node)
       }
 
-      // Left column: inherit previous window's right ordering, or sort by size
+      // Left column: inherit previous transition's right ordering, or sort by size
       if (prevRightOrder && prevRightOrder.size > 0) {
         leftNodes.sort((a, b) =>
           (prevRightOrder!.get(a.name) ?? Infinity) - (prevRightOrder!.get(b.name) ?? Infinity)
@@ -175,7 +174,7 @@ export default function MultiSankeyView({
       // Sort right column by barycenter
       rightNodes.sort((a, b) => (bary.get(a.name) ?? Infinity) - (bary.get(b.name) ?? Infinity))
 
-      // Store right order for next window's left column
+      // Store right order for next transition's left column
       prevRightOrder = new Map()
       rightNodes.forEach((n, i) => prevRightOrder!.set(n.name, i))
 
@@ -188,53 +187,53 @@ export default function MultiSankeyView({
     setLoadingMap(newLoadingMap)
 
     onRouteDataLoaded?.(newRouteDataMap)
-  }, [sessionIds, sessionData, selectedRange, schemaName, showAllRoutes, topRoutes, mode, outputGroupingAxes, expertRank, onRouteDataLoaded])
+  }, [sessionIds, sessionData, selectedWindow, schemaName, showAllRoutes, topRoutes, mode, outputGroupingAxes, expertRank, onRouteDataLoaded])
 
   React.useEffect(() => {
     if (onAnalysisReady) {
-      onAnalysisReady(loadAllWindows)
+      onAnalysisReady(loadAllTransitions)
     }
-  }, [onAnalysisReady, loadAllWindows])
+  }, [onAnalysisReady, loadAllTransitions])
 
   useEffect(() => {
     if (manualTrigger) {
       return
     }
 
-    loadAllWindows()
-  }, [loadAllWindows, manualTrigger])
+    loadAllTransitions()
+  }, [loadAllTransitions, manualTrigger])
 
   return (
     <div className="space-y-1">
-      {/* Compact layer range selector */}
+      {/* Compact window selector */}
       <div className="flex items-center gap-2">
         <select
-          value={selectedRange}
-          onChange={(e) => onRangeChange?.(e.target.value)}
+          value={selectedWindow}
+          onChange={(e) => onWindowChange?.(e.target.value)}
           className="px-1.5 py-0.5 border border-gray-300 rounded text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
-          {Object.entries(LAYER_RANGES).map(([key, range]) => (
+          {Object.entries(LAYER_WINDOWS).map(([key, window]) => (
             <option key={key} value={key}>
-              {range.label}
+              {window.label}
             </option>
           ))}
         </select>
-        {currentRange.windows.map(w => (
-          <span key={w.id} className="text-[9px] text-gray-400">{w.label}</span>
+        {currentWindow.transitions.map(t => (
+          <span key={t.id} className="text-[9px] text-gray-400">{t.label}</span>
         ))}
       </div>
 
       {/* 6 Sankey Charts + Output Chart */}
       <div className="flex gap-0">
-        {/* 6 layer windows */}
+        {/* 6 layer transitions */}
         <div className="flex-1 grid grid-cols-6 gap-0">
-        {currentRange.windows.map((window) => {
-          const routeData = routeDataMap[window.id]
-          const loading = loadingMap[window.id]
-          const error = errorMap[window.id]
+        {currentWindow.transitions.map((transition) => {
+          const routeData = routeDataMap[transition.id]
+          const loading = loadingMap[transition.id]
+          const error = errorMap[transition.id]
 
           return (
-            <div key={window.id} className="bg-white">
+            <div key={transition.id} className="bg-white">
               <div className="p-0" style={{ height: '200px' }}>
                 {loading ? (
                   <div className="flex items-center justify-center h-full">
@@ -273,7 +272,7 @@ export default function MultiSankeyView({
                           coverage: Math.round((nodeData.token_count / routeData.statistics.total_probes) * 100),
                           _fullData: nodeData,
                           _totalProbes: routeData.statistics.total_probes,
-                          _window: window.label
+                          _window: transition.label
                         }
 
                         if (mode === 'cluster') {
@@ -297,7 +296,7 @@ export default function MultiSankeyView({
                           _fullData: linkData,
                           _routeInfo: routeInfo,
                           _totalProbes: routeData.statistics.total_probes,
-                          _window: window.label
+                          _window: transition.label
                         })
                       }
                     }}
@@ -314,10 +313,10 @@ export default function MultiSankeyView({
         })}
         </div>
 
-        {/* 7th chart: output category mapping from last window */}
+        {/* 7th chart: output category mapping from last transition */}
         {(() => {
-          const lastWindow = currentRange.windows[currentRange.windows.length - 1]
-          const lastData = routeDataMap[lastWindow?.id]
+          const lastTransition = currentWindow.transitions[currentWindow.transitions.length - 1]
+          const lastData = routeDataMap[lastTransition?.id]
           if (!lastData) return null
           const outputNodes = lastData.nodes.filter(n => isOutputNode(n.name))
           if (outputNodes.length === 0) return null
@@ -352,7 +351,7 @@ export default function MultiSankeyView({
                         coverage: Math.round((nodeData.token_count / lastData.statistics.total_probes) * 100),
                         _fullData: nodeData,
                         _totalProbes: lastData.statistics.total_probes,
-                        _window: lastWindow.label
+                        _window: lastTransition.label
                       })
                     }
                   }}
@@ -365,7 +364,7 @@ export default function MultiSankeyView({
                         coverage: Math.round((linkData.value / lastData.statistics.total_probes) * 100),
                         _fullData: linkData,
                         _totalProbes: lastData.statistics.total_probes,
-                        _window: lastWindow.label
+                        _window: lastTransition.label
                       })
                     }
                   }}

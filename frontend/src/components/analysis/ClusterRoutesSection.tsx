@@ -6,7 +6,7 @@ import type { DynamicAxis } from '../../types/api'
 import MultiSankeyView from '../charts/MultiSankeyView'
 import SteppedTrajectoryPlot from '../charts/SteppedTrajectoryPlot'
 
-import { LAYER_RANGES } from '../../constants/layerRanges'
+import { LAYER_WINDOWS } from '../../constants/layerWindows'
 
 interface ClusterRoutesSectionProps {
   sessionIds: string[]
@@ -27,8 +27,8 @@ interface ClusterRoutesSectionProps {
   outputGroupingAxes?: string[]
   shapeAxisId?: string
   shapeAxis?: DynamicAxis
-  selectedRange: string
-  onRangeChange: (range: string) => void
+  selectedWindow: string
+  onWindowChange: (windowId: string) => void
   maxTrajectories?: number
   trajectoryTitle?: string
   onRouteDataLoaded?: (routeDataMap: Record<string, RouteAnalysisResponse | null>) => void
@@ -57,8 +57,8 @@ export default function ClusterRoutesSection({
   outputGroupingAxes,
   shapeAxisId,
   shapeAxis,
-  selectedRange,
-  onRangeChange,
+  selectedWindow,
+  onWindowChange,
   maxTrajectories,
   trajectoryTitle,
   onRouteDataLoaded,
@@ -68,8 +68,8 @@ export default function ClusterRoutesSection({
   selectedProbeId
 }: ClusterRoutesSectionProps) {
   const memoizedLayers = useMemo(() => {
-    return LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]?.windows.map(w => w.layers).flat() || []
-  }, [selectedRange])
+    return LAYER_WINDOWS[selectedWindow as keyof typeof LAYER_WINDOWS]?.transitions.map(t => t.layers).flat() || []
+  }, [selectedWindow])
 
   const handleVisualizationClick = useCallback((elementType: 'cluster' | 'trajectory', data: any) => {
     onCardSelect({
@@ -125,8 +125,8 @@ export default function ClusterRoutesSection({
             outputGroupingAxes={outputGroupingAxes}
             showAllRoutes={false}
             topRoutes={20}
-            selectedRange={selectedRange}
-            onRangeChange={onRangeChange}
+            selectedWindow={selectedWindow}
+            onWindowChange={onWindowChange}
             onNodeClick={(data) => handleVisualizationClick('cluster', data)}
             onLinkClick={(data) => handleVisualizationClick('trajectory', data)}
             onRouteDataLoaded={onRouteDataLoaded}

@@ -8,7 +8,7 @@ import type {
 import type { SelectedCard } from '../types/analysis'
 import { apiClient } from '../api/client'
 import type { GradientScheme, AmbiguityBlend } from '../utils/colorBlending'
-import { LAYER_RANGES } from '../constants/layerRanges'
+import { LAYER_WINDOWS } from '../constants/layerWindows'
 import type { RoomContext, RoomEnteredPayload, VizPreset } from '../types/evennia'
 
 import { useAxisControls } from '../hooks/useAxisControls'
@@ -33,14 +33,14 @@ export default function MUDApp() {
   // Visual encoding (axes, colors, gradients)
   const axes = useAxisControls()
   const {
-    colorAxis2Id, shapeAxisId, gradient, selectedRange,
+    colorAxis2Id, shapeAxisId, gradient, selectedWindow,
     outputColorAxisId, outputColorAxis2Id, outputGradient,
     shapeAxis, secondaryGradient,
     primaryValues, secondaryValues,
     outputSecondaryGradient,
     outputPrimaryValues, outputSecondaryValues, outputGroupingAxes,
     setAllAxes, setColorAxisId, setColorAxis2Id, setShapeAxisId,
-    setGradient, setSelectedRange,
+    setGradient, setSelectedWindow,
     setOutputAxes, setOutputColorAxisId, setOutputColorAxis2Id, setOutputGradient,
   } = axes
 
@@ -89,13 +89,17 @@ export default function MUDApp() {
   const schema = useSchemaManagement(selectedSessions, handleElementDescriptionsLoaded)
   const { availableSchemas, selectedSchema, setSelectedSchema } = schema
 
+  const selectedSchemaMeta = useMemo(
+    () => availableSchemas.find(s => s.name === selectedSchema),
+    [availableSchemas, selectedSchema]
+  )
+
   // When schema changes, default maxTrajectories to its sample_size
   useEffect(() => {
-    const meta = availableSchemas.find(s => s.name === selectedSchema)
-    if (meta?.sample_size) {
-      setMaxTrajectories(meta.sample_size)
+    if (selectedSchemaMeta?.sample_size) {
+      setMaxTrajectories(selectedSchemaMeta.sample_size)
     }
-  }, [selectedSchema, availableSchemas])
+  }, [selectedSchemaMeta])
 
   // When secondary axis changes, default the ambiguous pole to first value
   useEffect(() => {
@@ -137,7 +141,7 @@ export default function MUDApp() {
     setColorAxis2Id('none')
     setShapeAxisId('none')
     setGradient('red-blue')
-    setSelectedRange('range1')
+    setSelectedWindow('w0')
     setOutputAxes([])
     setOutputColorAxisId('')
     setOutputColorAxis2Id('none')
@@ -162,7 +166,7 @@ export default function MUDApp() {
       setSessionDetails(null)
     }
   }, [setAllAxes, setColorAxisId, setColorAxis2Id, setShapeAxisId, setGradient,
-      setSelectedRange, setOutputAxes, setOutputColorAxisId, setOutputColorAxis2Id,
+      setSelectedWindow, setOutputAxes, setOutputColorAxisId, setOutputColorAxis2Id,
       setOutputGradient, setSelectedSchema])
 
   // Auto-detect axes from route analysis
@@ -230,10 +234,10 @@ export default function MUDApp() {
   const applyPreset = useCallback((preset: VizPreset) => {
     if (preset.primary_axis) setColorAxisId(preset.primary_axis)
     if (preset.gradient) setGradient(preset.gradient as GradientScheme)
-    if (preset.layer_range) setSelectedRange(preset.layer_range)
+    if (preset.window) setSelectedWindow(preset.window)
     if (preset.clustering_schema) setSelectedSchema(preset.clustering_schema)
     if (preset.top_routes) setTopRoutes(preset.top_routes)
-  }, [setColorAxisId, setGradient, setSelectedRange, setSelectedSchema])
+  }, [setColorAxisId, setGradient, setSelectedWindow, setSelectedSchema])
 
   // Generation counter to handle rapid room navigation
   const navigationGenRef = useRef(0)
@@ -275,7 +279,7 @@ export default function MUDApp() {
         onTopRoutesChange={setTopRoutes}
         onShowAllRoutesChange={setShowAllRoutes}
         schema={schema}
-        selectedRange={selectedRange}
+        selectedWindow={selectedWindow}
         maxTrajectories={maxTrajectories}
         onMaxTrajectoriesChange={setMaxTrajectories}
         ambiguityBlendEnabled={ambiguityBlendEnabled}
@@ -311,8 +315,8 @@ export default function MUDApp() {
                 outputColorAxisId={outputColorAxisId || undefined}
                 outputGroupingAxes={outputGroupingAxes}
                 topRoutes={topRoutes}
-                selectedRange={selectedRange}
-                onRangeChange={setSelectedRange}
+                selectedWindow={selectedWindow}
+                onWindowChange={setSelectedWindow}
                 showAllRoutes={showAllRoutes}
                 onRouteDataLoaded={handleRouteDataLoaded}
                 onCardSelect={setSelectedCard}
@@ -338,8 +342,8 @@ export default function MUDApp() {
                 outputGroupingAxes={outputGroupingAxes}
                 shapeAxisId={shapeAxisId !== 'none' ? shapeAxisId : undefined}
                 shapeAxis={shapeAxis}
-                selectedRange={selectedRange}
-                onRangeChange={setSelectedRange}
+                selectedWindow={selectedWindow}
+                onWindowChange={setSelectedWindow}
                 maxTrajectories={maxTrajectories}
                 onRouteDataLoaded={handleClusterRouteDataLoaded}
                 onCardSelect={setSelectedCard}
@@ -352,14 +356,14 @@ export default function MUDApp() {
                 sessionId={selectedSession}
                 clusterRouteData={currentClusterRouteData}
                 clusteringSchema={selectedSchema}
-                selectedRange={selectedRange}
+                selectedWindow={selectedWindow}
               />
             </>
           )}
           {selectedSession && sessionDetails && !selectedSchema && (
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800">
-              Select a clustering schema in the toolbar to view routes and trajectories.
-              Build new schemas via Claude Code: <code className="font-mono bg-amber-100 px-1 rounded">/cluster</code> OP-1.
+            <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+              Pick a clustering schema in the toolbar to view routes and trajectories.
+              New schemas can be built via the <code className="font-mono bg-slate-200 px-1 rounded">/cluster</code> skill in Claude Code.
             </div>
           )}
         </div>
@@ -372,21 +376,21 @@ export default function MUDApp() {
               {(() => {
                 const routeMap = currentClusterRouteData || currentRouteData
                 if (!routeMap) return null
-                const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
-                if (!currentRange) return null
-                const lastWindow = currentRange.windows[currentRange.windows.length - 1]
-                const lastData = routeMap[lastWindow?.id]
+                const currentWindow = LAYER_WINDOWS[selectedWindow as keyof typeof LAYER_WINDOWS]
+                if (!currentWindow) return null
+                const lastTransition = currentWindow.transitions[currentWindow.transitions.length - 1]
+                const lastData = routeMap[lastTransition?.id]
                 if (!lastData) return null
-                const lastReportKey = lastWindow ? `w_${lastWindow.layers[0]}_${lastWindow.layers[lastWindow.layers.length - 1]}` : undefined
-                const firstWindow = currentRange.windows[0]
-                const synthKey = currentRange.windows.length > 1 && firstWindow && lastWindow
-                  ? `w_${firstWindow.layers[0]}_${lastWindow.layers[lastWindow.layers.length - 1]}`
+                const lastReportKey = lastTransition ? `w_${lastTransition.layers[0]}_${lastTransition.layers[lastTransition.layers.length - 1]}` : undefined
+                const firstTransition = currentWindow.transitions[0]
+                const synthKey = currentWindow.transitions.length > 1 && firstTransition && lastTransition
+                  ? `w_${firstTransition.layers[0]}_${lastTransition.layers[lastTransition.layers.length - 1]}`
                   : undefined
                 const report = (synthKey && schema.schemaReports[synthKey]) || (lastReportKey ? schema.schemaReports[lastReportKey] : undefined)
                 return (
                   <WindowAnalysis
                     routeData={lastData}
-                    windowLabel={currentRange.label}
+                    windowLabel={currentWindow.label}
                     report={report}
                     selectedSchema={selectedSchema || undefined}
                     primaryValues={primaryValues}

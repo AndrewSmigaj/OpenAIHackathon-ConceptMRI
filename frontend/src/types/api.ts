@@ -85,70 +85,23 @@ interface RouteStatistics {
   [key: string]: any
 }
 
-interface FilterConfig {
-  labels?: string[]
-}
-
-interface LoadExpertRoutesRequest {
-  mode: 'load'
+interface AnalyzeRoutesRequest {
   session_ids: string[]
   schema_name: string
-  window_layers: number[]
+  transition_layers: number[]
   expert_rank?: number
   output_grouping_axes?: string[]
   top_n_routes?: number
 }
 
-interface ComputeExpertRoutesRequest {
-  mode: 'compute'
-  session_id: string
-  window_layers: number[]
-  save_as: string
-  filter_config?: FilterConfig
-  steps?: number[]
-  last_occurrence_only?: boolean
-  max_probes?: number
-  output_grouping_axes?: string[]
-  top_n_routes?: number
-}
-
-type AnalyzeRoutesRequest = LoadExpertRoutesRequest | ComputeExpertRoutesRequest
-
-interface ClusteringConfig {
-  reduction_dimensions: number
-  clustering_method: string
-  layer_cluster_counts: Record<number, number>
-  embedding_source?: string
-  reduction_method?: string
-  clustering_dimensions?: number[]
-}
-
-interface LoadClusteringRequest {
-  mode: 'load'
+interface AnalyzeClusterRoutesRequest {
   session_ids: string[]
   schema_name: string
-  window_layers: number[]
+  transition_layers: number[]
   output_grouping_axes?: string[]
   top_n_routes?: number
   max_examples_per_node?: number
 }
-
-interface ComputeClusteringRequest {
-  mode: 'compute'
-  session_id: string
-  window_layers: number[]
-  save_as: string
-  clustering_config: ClusteringConfig
-  filter_config?: FilterConfig
-  steps?: number[]
-  last_occurrence_only?: boolean
-  max_probes?: number
-  output_grouping_axes?: string[]
-  top_n_routes?: number
-  max_examples_per_node?: number
-}
-
-type AnalyzeClusterRoutesRequest = LoadClusteringRequest | ComputeClusteringRequest
 
 interface SankeyNode {
   name: string
@@ -331,9 +284,7 @@ export type {
   SessionDetailResponse,
   ProbeExample,
   RouteStatistics,
-  FilterConfig,
   AnalyzeRoutesRequest,
-  ClusteringConfig,
   AnalyzeClusterRoutesRequest,
   RouteAnalysisResponse,
   SankeyNode,
@@ -349,10 +300,6 @@ export type {
   TrajectoryResponse,
   SentenceExperimentRequest,
   SentenceExperimentResponse,
-  LoadExpertRoutesRequest,
-  ComputeExpertRoutesRequest,
-  LoadClusteringRequest,
-  ComputeClusteringRequest,
   TrajectoryPoint,
   TrajectoryPointsResponse,
   ClusteringSchema

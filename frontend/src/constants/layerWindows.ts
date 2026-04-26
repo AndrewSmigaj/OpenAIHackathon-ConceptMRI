@@ -1,8 +1,15 @@
-// Define 4 layer ranges, each containing 6 consecutive 2-layer windows
-export const LAYER_RANGES = {
-  'range1': {
+// 4 fixed layer windows. Each window is a 6-layer range; each window contains
+// 6 layer transitions (2-layer pairs). A transition shows before-cluster,
+// after-cluster, and the routes between them.
+//
+// Mirrored on the backend in `backend/src/api/layer_windows.py`. Values are
+// simple enough that drift risk is low; if you change one side, change both.
+
+export const LAYER_WINDOWS = {
+  'w0': {
     label: 'Layers 0-5',
-    windows: [
+    layers: [0, 5],
+    transitions: [
       { id: '0-1', layers: [0, 1], label: '0→1' },
       { id: '1-2', layers: [1, 2], label: '1→2' },
       { id: '2-3', layers: [2, 3], label: '2→3' },
@@ -11,9 +18,10 @@ export const LAYER_RANGES = {
       { id: '5-6', layers: [5, 6], label: '5→6' }
     ]
   },
-  'range2': {
-    label: 'Layers 5-11', 
-    windows: [
+  'w1': {
+    label: 'Layers 5-11',
+    layers: [5, 11],
+    transitions: [
       { id: '5-6', layers: [5, 6], label: '5→6' },
       { id: '6-7', layers: [6, 7], label: '6→7' },
       { id: '7-8', layers: [7, 8], label: '7→8' },
@@ -22,9 +30,10 @@ export const LAYER_RANGES = {
       { id: '10-11', layers: [10, 11], label: '10→11' }
     ]
   },
-  'range3': {
+  'w2': {
     label: 'Layers 11-17',
-    windows: [
+    layers: [11, 17],
+    transitions: [
       { id: '11-12', layers: [11, 12], label: '11→12' },
       { id: '12-13', layers: [12, 13], label: '12→13' },
       { id: '13-14', layers: [13, 14], label: '13→14' },
@@ -33,9 +42,10 @@ export const LAYER_RANGES = {
       { id: '16-17', layers: [16, 17], label: '16→17' }
     ]
   },
-  'range4': {
+  'w3': {
     label: 'Layers 17-23',
-    windows: [
+    layers: [17, 23],
+    transitions: [
       { id: '17-18', layers: [17, 18], label: '17→18' },
       { id: '18-19', layers: [18, 19], label: '18→19' },
       { id: '19-20', layers: [19, 20], label: '19→20' },

@@ -1,10 +1,11 @@
 import type { SessionListItem, SessionDetailResponse } from '../../types/api'
 import type { GradientScheme } from '../../utils/colorBlending'
 import { getAxisPreview, GRADIENT_SCHEMES, GRADIENT_AUTO_PAIRS } from '../../utils/colorBlending'
-import { LAYER_RANGES } from '../../constants/layerRanges'
+import { LAYER_WINDOWS } from '../../constants/layerWindows'
 import type { AxisControlsState } from '../../hooks/useAxisControls'
 import type { SchemaManagementState } from '../../hooks/useSchemaManagement'
 import type { RoomContext } from '../../types/evennia'
+import SchemaSummary from '../analysis/SchemaSummary'
 
 interface ToolbarProps {
   // Session
@@ -24,7 +25,7 @@ interface ToolbarProps {
 
   // Schema (from useSchemaManagement)
   schema: SchemaManagementState
-  selectedRange: string
+  selectedWindow: string
 
   // Trajectory display
   maxTrajectories: number
@@ -47,7 +48,7 @@ interface ToolbarProps {
 export default function Toolbar({
   sessions, selectedSession, onSessionChange, sessionDetails,
   axes, topRoutes, showAllRoutes, onTopRoutesChange, onShowAllRoutesChange,
-  schema, selectedRange,
+  schema, selectedWindow,
   maxTrajectories, onMaxTrajectoriesChange,
   ambiguityBlendEnabled, onAmbiguityBlendToggle,
   ambiguousValue, onAmbiguousValueChange,
@@ -157,24 +158,10 @@ export default function Toolbar({
               </select>
             </div>
 
-            {/* Schema info readout */}
+            {/* Schema natural-language summary with colored parameter tags */}
             {selectedSchemaMeta && (
-              <div className={row}>
-                <span className={label} />
-                <span className="text-xs text-gray-500 font-mono bg-gray-50 rounded px-2 py-0.5 border border-gray-200">
-                  {(() => {
-                    const p = selectedSchemaMeta.params || {}
-                    const source = p.embedding_source === 'residual_stream' ? 'residual' : 'expert'
-                    const method = (p.reduction_method || 'pca').toUpperCase()
-                    const dims = p.reduction_dimensions || '?'
-                    const cm = p.clustering_method || '?'
-                    const counts = p.layer_cluster_counts || {}
-                    const kValues = [...new Set(Object.values(counts) as number[])]
-                    const kStr = kValues.length === 1 ? `K=${kValues[0]}` : kValues.length > 0 ? kValues.map(v => `K=${v}`).join('/') : ''
-                    const sample = selectedSchemaMeta.sample_size != null ? ` · n=${selectedSchemaMeta.sample_size}` : ''
-                    return `${source} · ${method} ${dims}D · ${cm}${kStr ? ' · ' + kStr : ''}${sample}`
-                  })()}
-                </span>
+              <div className="px-1 pb-2">
+                <SchemaSummary schema={selectedSchemaMeta} />
               </div>
             )}
 
@@ -219,11 +206,11 @@ export default function Toolbar({
 
             {/* Claude instruction */}
             {selectedSchema && selectedSession && (() => {
-              const currentRange = LAYER_RANGES[selectedRange as keyof typeof LAYER_RANGES]
-              if (!currentRange) return null
-              const lastWindow = currentRange.windows[currentRange.windows.length - 1]
-              const windowStr = lastWindow ? `${lastWindow.layers[0]}-${lastWindow.layers[lastWindow.layers.length - 1]}` : '22-23'
-              const instruction = `/analyze ${selectedSession} schema ${selectedSchema} window ${windowStr}`
+              const currentWindow = LAYER_WINDOWS[selectedWindow as keyof typeof LAYER_WINDOWS]
+              if (!currentWindow) return null
+              const lastTransition = currentWindow.transitions[currentWindow.transitions.length - 1]
+              const transitionStr = lastTransition ? `${lastTransition.layers[0]}-${lastTransition.layers[lastTransition.layers.length - 1]}` : '22-23'
+              const instruction = `/analyze ${selectedSession} schema ${selectedSchema} transition ${transitionStr}`
               return (
                 <div className={row}>
                   <span className={label} />

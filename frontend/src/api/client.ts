@@ -165,8 +165,8 @@ class ConceptMriApiClient {
   // Expert Route Analysis Methods
 
   /**
-   * Analyze expert routes for a session within specified window layers
-   * @param request - Route analysis request with session_id, window_layers, filters, etc.
+   * Analyze expert routes for a session within a specified layer transition
+   * @param request - Route analysis request with session_id, transition_layers, filters, etc.
    * @returns Route analysis response with Sankey data and statistics
    * @throws ApiError with status 404 if session not found, 500 for server errors
    */
@@ -178,8 +178,8 @@ class ConceptMriApiClient {
   }
 
   /**
-   * Analyze cluster routes for a session within specified window layers using reduced features
-   * @param request - Cluster route analysis request with session_id, window_layers, clustering_config, etc.
+   * Analyze cluster routes for a session within a specified layer transition using reduced features
+   * @param request - Cluster route analysis request with session_id, transition_layers, clustering_config, etc.
    * @returns Route analysis response with Sankey data and statistics (same format as expert routes)
    * @throws ApiError with status 404 if session not found, 500 for server errors
    */

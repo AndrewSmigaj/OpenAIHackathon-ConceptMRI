@@ -10,7 +10,7 @@ export interface AxisControlsState {
   colorAxis2Id: string
   shapeAxisId: string
   gradient: GradientScheme
-  selectedRange: string
+  selectedWindow: string
   // Output axes
   outputAxes: DynamicAxis[]
   outputColorAxisId: string
@@ -35,7 +35,7 @@ export interface AxisControlsState {
   setColorAxis2Id: React.Dispatch<React.SetStateAction<string>>
   setShapeAxisId: React.Dispatch<React.SetStateAction<string>>
   setGradient: React.Dispatch<React.SetStateAction<GradientScheme>>
-  setSelectedRange: React.Dispatch<React.SetStateAction<string>>
+  setSelectedWindow: React.Dispatch<React.SetStateAction<string>>
   setOutputAxes: React.Dispatch<React.SetStateAction<DynamicAxis[]>>
   setOutputColorAxisId: React.Dispatch<React.SetStateAction<string>>
   setOutputColorAxis2Id: React.Dispatch<React.SetStateAction<string>>
@@ -48,7 +48,7 @@ export function useAxisControls(): AxisControlsState {
   const [colorAxis2Id, setColorAxis2Id] = useState<string>('none')
   const [shapeAxisId, setShapeAxisId] = useState<string>('none')
   const [gradient, setGradient] = useState<GradientScheme>('red-blue')
-  const [selectedRange, setSelectedRange] = useState<string>('range1')
+  const [selectedWindow, setSelectedWindow] = useState<string>('w0')
 
   const [outputAxes, setOutputAxes] = useState<DynamicAxis[]>([])
   const [outputColorAxisId, setOutputColorAxisId] = useState<string>('')
@@ -89,13 +89,13 @@ export function useAxisControls(): AxisControlsState {
   }, [outputColorAxisId, outputColorAxis2Id])
 
   return {
-    allAxes, colorAxisId, colorAxis2Id, shapeAxisId, gradient, selectedRange,
+    allAxes, colorAxisId, colorAxis2Id, shapeAxisId, gradient, selectedWindow,
     outputAxes, outputColorAxisId, outputColorAxis2Id, outputGradient,
     colorAxis, colorAxis2, shapeAxis, secondaryGradient,
     primaryValues, secondaryValues,
     outputColorAxis, outputColorAxis2, outputSecondaryGradient,
     outputPrimaryValues, outputSecondaryValues, outputGroupingAxes,
-    setAllAxes, setColorAxisId, setColorAxis2Id, setShapeAxisId, setGradient, setSelectedRange,
+    setAllAxes, setColorAxisId, setColorAxis2Id, setShapeAxisId, setGradient, setSelectedWindow,
     setOutputAxes, setOutputColorAxisId, setOutputColorAxis2Id, setOutputGradient,
   }
 }

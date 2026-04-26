@@ -8,7 +8,7 @@ interface TemporalAnalysisSectionProps {
   sessionId: string
   clusterRouteData: Record<string, RouteAnalysisResponse | null> | null
   clusteringSchema: string | null
-  selectedRange: string
+  selectedWindow: string
   onScrubberProbeChange?: (probeId: string | null) => void
   onTemporalSessionIds?: (sessionIds: string[]) => void
 }
@@ -17,7 +17,7 @@ export default function TemporalAnalysisSection({
   sessionId,
   clusterRouteData,
   clusteringSchema,
-  selectedRange,
+  selectedWindow,
   onScrubberProbeChange,
   onTemporalSessionIds,
 }: TemporalAnalysisSectionProps) {

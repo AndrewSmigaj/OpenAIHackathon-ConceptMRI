@@ -6,7 +6,7 @@ Simple Pydantic schemas for API requests/responses.
 import os
 
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any, Optional, Literal, Union, Annotated
+from typing import List, Dict, Any, Optional
 
 
 class ProgressInfo(BaseModel):
@@ -121,24 +121,35 @@ class ClusteringConfig(BaseModel):
     n_neighbors: Optional[int] = None  # UMAP n_neighbors; None = 15
 
 
-# --- Cluster route requests (discriminated union: load vs compute) ---
+# --- Schema build/load requests ---
+# Build is atomic: one call writes cluster + expert routes (ranks 1/2/3) for all
+# windows under a new schema directory. Load endpoints read cached artifacts.
 
 class LoadClusteringRequest(BaseModel):
-    """Load a cached clustering schema. Filters are baked in."""
-    mode: Literal["load"] = "load"
+    """Load a cached cluster-route transition from a schema. Filters baked in at build."""
     session_ids: List[str]
     schema_name: str
-    window_layers: List[int]
+    transition_layers: List[int]
     output_grouping_axes: Optional[List[str]] = None
     top_n_routes: int = 20
     max_examples_per_node: Optional[int] = None
 
 
-class ComputeClusteringRequest(BaseModel):
-    """Compute + save a new clustering schema. Creates an immutable artifact."""
-    mode: Literal["compute"] = "compute"
+class LoadExpertRoutesRequest(BaseModel):
+    """Load a cached expert-route transition from a schema. Filters baked in at build."""
+    session_ids: List[str]
+    schema_name: str
+    transition_layers: List[int]
+    expert_rank: int = Field(1, ge=1, le=3)
+    output_grouping_axes: Optional[List[str]] = None
+    top_n_routes: int = 20
+
+
+class BuildSchemaRequest(BaseModel):
+    """Build a full clustering schema atomically. Always builds all 4 fixed
+    windows × 6 transitions × {cluster, expert ranks 1/2/3}. The schema
+    directory is the unit of work — succeeds entirely or fails entirely."""
     session_id: str
-    window_layers: List[int]
     save_as: str
     clustering_config: ClusteringConfig
     filter_config: Optional[FilterConfig] = None
@@ -148,39 +159,6 @@ class ComputeClusteringRequest(BaseModel):
     output_grouping_axes: Optional[List[str]] = None
     top_n_routes: int = 20
     max_examples_per_node: Optional[int] = None
-
-
-AnalyzeClusterRoutesRequest = Union[LoadClusteringRequest, ComputeClusteringRequest]
-
-
-# --- Expert route requests (discriminated union: load vs compute) ---
-
-class LoadExpertRoutesRequest(BaseModel):
-    """Load cached expert routes from a named schema. Filters are baked in."""
-    mode: Literal["load"] = "load"
-    session_ids: List[str]
-    schema_name: str
-    window_layers: List[int]
-    expert_rank: int = Field(1, ge=1, le=3)
-    output_grouping_axes: Optional[List[str]] = None
-    top_n_routes: int = 20
-
-
-class ComputeExpertRoutesRequest(BaseModel):
-    """Compute + save expert routes for ranks 1/2/3 under a schema name."""
-    mode: Literal["compute"] = "compute"
-    session_id: str
-    window_layers: List[int]
-    save_as: str
-    filter_config: Optional[FilterConfig] = None
-    steps: Optional[List[int]] = None
-    last_occurrence_only: bool = False
-    max_probes: Optional[int] = None
-    output_grouping_axes: Optional[List[str]] = None
-    top_n_routes: int = 20
-
-
-AnalyzeRoutesRequest = Union[LoadExpertRoutesRequest, ComputeExpertRoutesRequest]
 
 
 class ProbeExample(BaseModel):
