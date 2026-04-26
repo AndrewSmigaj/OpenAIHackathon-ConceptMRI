@@ -8,7 +8,7 @@ export interface RoomContext {
 export interface VizPreset {
   primary_axis?: string
   gradient?: string
-  layer_range?: string
+  window?: string
   clustering_schema?: string
   top_routes?: number
 }

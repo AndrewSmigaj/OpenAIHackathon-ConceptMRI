@@ -108,7 +108,7 @@ def build():
             "viz_preset": {
                 "primary_axis": "label",
                 "gradient": "red-blue",
-                "layer_range": "range1",
+                "window": "w0",
                 "clustering_schema": "polysemy_explore",
                 "top_routes": 10,
             },
