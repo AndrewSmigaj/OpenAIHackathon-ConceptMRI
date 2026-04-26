@@ -265,6 +265,16 @@ class AgentLoop:
 
             # 4. Send action to Evennia (strip articles for exact key matching)
             last_action = strip_articles(last_action)
+            # Built-in MUD verbs already broadcast their own visible output (e.g.
+            # `examine` produces "Agent examines person"). For scenario-specific
+            # actions like "alert bouncer" that aren't real commands, emote first
+            # so observers in the room see what the agent is doing. Temporary
+            # until scenario actions become real MUD commands.
+            BUILTIN_VERBS = {"look", "examine", "inventory", "actions", "goto", "say", "pose", "emote"}
+            verb = last_action.split()[0].lower() if last_action.strip() else ""
+            if verb and verb not in BUILTIN_VERBS:
+                await self.evennia_client.send_command(f"emote {last_action}")
+                await self.evennia_client.read_until_prompt()
             await self.evennia_client.send_command(last_action)
             response = await self.evennia_client.read_until_prompt()
             logger.info(f"  Evennia response: {response[:300]}")

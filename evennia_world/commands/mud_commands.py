@@ -1111,6 +1111,8 @@ class CmdGoto(Command):
             return
         if scenario and hasattr(target, 'db'):
             target.db.active_scenario = scenario
+        if self.caller.location == target:
+            return  # Already in the room — skip the spurious "leaving X for X" broadcast
         self.caller.move_to(target, move_type="teleport")
 
 
