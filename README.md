@@ -201,6 +201,20 @@ PATH="../.venv/bin:$PATH" evennia start
 
 ---
 
+## What it looks like
+
+![MUDApp — bus_stop scenario, friend/foe routing across all 4 windows](docs/images/hero-mudapp-bus-stop.png)
+
+The toolbar (top-left) carries the schema dropdown plus a natural-language summary of the active schema (number of probes, filters, clustering method, reduction, embedding source — each parameter color-coded by axis). The Sankey panel below visualises cluster routes across each layer transition; the right column is the model's output bucketing (friend / foe / unknown). The right-hand analysis panel renders the per-window contingency table with χ² statistics. The MUD terminal lives at the bottom-left for live agent runs.
+
+| Tank polysemy (5 word senses) | Suicide letter (fictional vs real) |
+|---|---|
+| ![polysemy](docs/images/polysemy-view.png) | ![suicide](docs/images/suicide-view.png) |
+
+---
+
 ## License
+
+Open LLMRI is licensed under [Apache 2.0](LICENSE).
 
 The model (gpt-oss-20b) is Apache 2.0 licensed by OpenAI.
