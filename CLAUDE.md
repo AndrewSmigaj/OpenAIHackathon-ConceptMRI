@@ -1,6 +1,6 @@
 Related: docs/architecturemud.md (if adding phases/skills), docs/PIPELINE.md (if changing pipeline stages), LLMud/VISION.md (if changing project scope)
 
-# Concept MRI — Claude Code Context Engineering Guide
+# Open LLMRI — Claude Code Context Engineering Guide
 
 ## Project Context
 Independent research tool for studying attractor basin dynamics in MoE language models. Uses UMAP projection and hierarchical clustering of residual stream activations to identify stable geometric regions — attractor basins — that predict model behavior before output is generated. Backend (Python FastAPI) captures and analyzes; frontend (React) visualizes. Claude Code is the analysis runtime — it designs probes, runs captures, labels outputs, and generates hypotheses.
@@ -138,12 +138,20 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - **Session-end review** — at the end of larger sessions, review what approaches worked or didn't and save insights to development feedback memories.
 
 ### 10b. Visual Iteration with Playwright MCP
+
+**Frontend-only verification (the common case):**
 - After frontend edits, use `browser_take_screenshot` to see the rendered result before reporting success
 - Use `browser_snapshot` (accessibility tree) for element interaction — faster and more reliable than pixel coordinates
 - Use `browser_take_screenshot` for visual verification — layout, colors, alignment, chart rendering
 - Typical loop: edit → Vite HMR auto-applies → `browser_take_screenshot` → iterate if needed
 - For interactive verification: `browser_snapshot` → `browser_click(ref)` → `browser_take_screenshot`
 - Frontend URL: `http://localhost:5173` (Vite dev server must be running)
+
+**MUD verification (when Claude wants to watch an agent run):**
+- The MUD terminal lives inside the MUDApp page (right pane). Navigate to `http://localhost:5173`, find the terminal `textbox`, type `connect guest` to log in as a read-only observer (no credentials required — Evennia's built-in guest mode).
+- After `connect guest`, you can type `goto Bus Stop N36` (or any other room) to teleport in. Then watch the room's broadcast as the agent loop runs a scenario.
+- The agent's own login uses `EVENNIA_AGENT_USER` / `EVENNIA_AGENT_PASS` from `.env` — never overlap; let Claude observe as guest while the agent runs as `agent`.
+- Built-in MUD verbs (`look`, `examine`, `inventory`, `actions`, `goto`, `say`) produce their own visible broadcast. Scenario-action verbs (`alert bouncer` etc.) are emoted by the agent loop so they're visible too — see `agent_loop.py` BUILTIN_VERBS for the skip-list.
 
 ### 11. CRITICAL: Change Management Rules
 - **NO aggressive bulk changes** - make small, targeted edits only
@@ -154,9 +162,6 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 
 ### 11a. No quick fixes, no prototype shortcuts
 This is a portfolio project and open-source software. Do not patch around bad design with caller-side workarounds. Do not hardcode study-specific vocabulary (scenario types, target-word choices, axis labels) inside reusable components — take them as props. Do not bump magic numbers in a component to "fix" a caller's problem — fix the caller's prop or make the value a proper parameter. When a design issue is found, raise it and fix the design; do not paper over it.
-
-### 11b. Known code debt
-- **`frontend/src/pages/ExperimentPage.tsx` is broken after the schema-redesign (Phase 2/3 of the bus_stop_friend_foe_k6_n15 paper plan).** Three concrete breakages: (a) toolbar at lines ~519–579 references the deleted `useClusteringConfig` hook (`embeddingSource`, `reductionMethod`, `reductionDims`, `clusteringMethod`, `globalClusterCount`, etc.); (b) sync useEffect at lines ~186–202 pulls clustering params from `selectedSchema` and writes them to deleted setters; (c) `ClusterRoutesSection` prop pass at lines ~746–760 supplies removed props. Fix when ExperimentPage gets re-prioritized — until then, use MUDApp.
 
 ### 12. Uncertainty Assessment
 - **Never jump straight to implementation** — assess uncertainty first. Run `/cdd` for the structured procedure, or do a quick inline assessment for smaller tasks.

@@ -1,6 +1,6 @@
 # Sentence Sets — Claude Code Cognitive Scaffold
 
-This document is the primary reference for Claude Code when creating, expanding, or validating sentence sets for Concept MRI experiments.
+This document is the primary reference for Claude Code when creating, expanding, or validating sentence sets for Open LLMRI experiments.
 
 ## What Sentence Sets Are
 

@@ -1,8 +1,8 @@
-# Concept MRI v2 — Architecture & Implementation Plan
+# Open LLMRI v2 — Architecture & Implementation Plan
 
 ## Context
 
-Concept MRI is a **general-purpose MoE interpretability tool** with three analysis modes. It captures routing and embedding data for any text input with target token tracking, and each tab provides a different analytical lens on that data.
+Open LLMRI is a **general-purpose MoE interpretability tool** with three analysis modes. It captures routing and embedding data for any text input with target token tracking, and each tab provides a different analytical lens on that data.
 
 The attractor paper experiment (Role Stickiness) is one use case — the Temporal tab — but the software serves broader MoE analysis needs.
 

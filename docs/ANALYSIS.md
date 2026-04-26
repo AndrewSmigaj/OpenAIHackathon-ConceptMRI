@@ -4,7 +4,7 @@ Related: docs/PIPELINE.md (orchestration context), docs/PROBES.md (probe creatio
 
 **Primary workflow:** The `/analyze` skill (`.claude/skills/analyze/SKILL.md`) is the operational procedure. This document provides reference detail on methodology, data structures, and report formats.
 
-This guide teaches Claude Code how to analyze cluster/route data from Concept MRI sessions and write reports.
+This guide teaches Claude Code how to analyze cluster/route data from Open LLMRI sessions and write reports.
 
 ## Prerequisites
 

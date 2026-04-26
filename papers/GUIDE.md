@@ -1,6 +1,6 @@
 # Papers Directory
 
-Write research papers alongside your Concept MRI experiments. Keep your data, analysis, and writing in one place.
+Write research papers alongside your Open LLMRI experiments. Keep your data, analysis, and writing in one place.
 
 ## Structure
 

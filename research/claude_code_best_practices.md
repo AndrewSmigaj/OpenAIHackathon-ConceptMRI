@@ -2,7 +2,7 @@
 
 *Date: 2026-03-28*
 
-This document audits Concept MRI's Claude Code scaffolding against current best practices (official docs, community resources, and real-world patterns), reviews settings, and researches three additional topics chosen for their potential impact on the project.
+This document audits Open LLMRI's Claude Code scaffolding against current best practices (official docs, community resources, and real-world patterns), reviews settings, and researches three additional topics chosen for their potential impact on the project.
 
 ---
 
@@ -203,7 +203,7 @@ The `/analyze` skill reads hundreds of sentences and large JSON responses. Runni
 ```yaml
 ---
 name: analyze-worker
-description: Runs Concept MRI cluster/route analysis in isolated context. Use when /analyze is invoked.
+description: Runs Open LLMRI cluster/route analysis in isolated context. Use when /analyze is invoked.
 tools: Read, Grep, Glob, Bash, Write
 model: inherit
 skills:

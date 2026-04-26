@@ -1,4 +1,4 @@
-# Concept MRI — Backend
+# Open LLMRI — Backend
 
 FastAPI server that captures MoE routing patterns and provides analysis endpoints.
 

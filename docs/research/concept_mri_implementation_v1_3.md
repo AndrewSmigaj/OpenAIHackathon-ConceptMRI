@@ -1,6 +1,6 @@
-# Concept MRI — Implementation Plan (v1.4, probe-separated, experiment-centric)
+# Open LLMRI — Implementation Plan (v1.4, probe-separated, experiment-centric)
 
-> **Purpose (for AI coders & the team):** Build the MVP of Concept MRI that follows **your exact flow**:
+> **Purpose (for AI coders & the team):** Build the MVP of Open LLMRI that follows **your exact flow**:
 > - **Probes are separate**: a probe capture writes *all inputs* needed for analyses (routing+features), **not** clustering/CTA.
 > - **Experiments consume captures**: within **one experiment**, you do Expert Highways → select one highway → **export cohort (inside the experiment)** → Clustering/CTA (first window only) → Rules/Labels.
 > - **Two-token regime**, **K=1** expert routing. **First CTA window only** (auto-selected and read-only). No “wizard” language — call it **Experiment Flow**.
