@@ -5,7 +5,7 @@ description: Analyze a saved clustering schema — read data, reason about patte
 
 # Schema Analysis
 
-Analyze cluster/route data from a Concept MRI session. This is an LLM reasoning task — read actual sentences, distributions, and route patterns. NO keyword/regex hacks.
+Analyze cluster/route data from an Open LLMRI session. This is an LLM reasoning task — read actual sentences, distributions, and route patterns. NO keyword/regex hacks.
 
 **Schemas are immutable artifacts on disk.** This skill reads them; it never
 creates, modifies, or deletes them. Use `/cluster` for the schema lifecycle
@@ -13,13 +13,15 @@ creates, modifies, or deletes them. Use `/cluster` for the schema lifecycle
 
 ## Invocation
 
-Can be invoked as `/analyze {session_id} schema {schema_name} window {start}-{end}`, e.g.:
+Can be invoked as `/analyze {session_id} schema {schema_name} transition {start}-{end}`, e.g.:
 ```
-/analyze session_1434a9be schema polysemy_explore window 22-23
+/analyze session_1434a9be schema polysemy_explore transition 22-23
 ```
 
 When invoked with parameters, skip the identification step and go straight to loading the probe guide.
-When `window` is specified, only analyze that window's layers — do NOT process other windows.
+When `transition` is specified, only analyze that 2-layer pair — do NOT process other transitions.
+
+**Terminology**: a *window* is a 6-layer range (one of `w0=[0,5]`, `w1=[5,11]`, `w2=[11,17]`, `w3=[17,23]`); a *transition* is a 2-layer pair within a window (e.g. `[22,23]`). Each schema covers all 4 windows × 6 transitions × {cluster + expert ranks 1/2/3}.
 
 ## Workflow
 
@@ -46,21 +48,25 @@ glob data/sentence_sets/**/{sentence_set_name}.md
 
 **Read the guide carefully** — it explains what the probe is testing, what to look for in the data, and how to interpret routing patterns. This context is essential for meaningful labeling.
 
-### 3. Analyze Windows
+### 3. Analyze Transitions
 
-If a `window` parameter was given, analyze only that window. Otherwise start with the last-layer window (e.g., [22,23]) and work backward.
+If a `transition` parameter was given, analyze only that 2-layer pair. Otherwise start with the last-layer transition (e.g., [22,23]) and work backward.
 
-For each window, load cached data:
+For each transition, load cached data:
 ```bash
 curl -X POST http://localhost:8000/api/experiments/analyze-cluster-routes \
   -H "Content-Type: application/json" \
   -d '{
-    "session_id": "...",
-    "window_layers": [X, Y],
-    "clustering_schema": "SCHEMA_NAME",
-    "output_grouping_axes": ["topic"]
+    "session_ids": ["..."],
+    "schema_name": "SCHEMA_NAME",
+    "transition_layers": [X, Y],
+    "top_n_routes": 20
   }'
 ```
+
+The right column buckets (output nodes) are baked at build time as
+`ground_truth` (friend / foe / unknown). The frontend's color-axis dropdown
+recolors these existing nodes locally — it never refetches.
 
 Examine the response:
 
@@ -83,10 +89,10 @@ Read ALL sentences. Identify structural patterns, semantic themes, reasons for m
 
 ### 5. Write Reports
 
-Per-window report (see docs/ANALYSIS.md for full template):
+Per-transition report (see docs/ANALYSIS.md for full template):
 
 ```markdown
-# Window L{start}-L{end} Analysis
+# Transition L{start}→L{end} Analysis
 
 ## Cluster Summary
 - **C0** (N probes): [name]. [label] ([purity]%). [description]
@@ -114,10 +120,10 @@ curl -X POST http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema}
 
 ### 7. Generate Element Descriptions
 
-After analyzing each window, generate 1-2 sentence descriptions for every cluster node and top route visible in that window. These populate the click-to-inspect cards in the frontend.
+After analyzing each transition, generate 1-2 sentence descriptions for every cluster node and top route visible in that transition. These populate the click-to-inspect cards in the frontend.
 
 **Approach — comparative, not isolated:**
-1. First read ALL sentences in ALL clusters for the window layer pair
+1. First read ALL sentences in ALL clusters for the transition layer pair
 2. Identify what makes each cluster distinct from the others (not just what's in it, but what's NOT in it)
 3. For each cluster: what input types does it capture? How is it different from neighboring clusters?
 4. For each route: what distinguishes the sentences that take this path? If a cluster splits into multiple destinations, explain what causes the split.
@@ -134,7 +140,7 @@ curl -X POST http://localhost:8000/api/probes/sessions/{id}/clusterings/{schema}
   -d '{"descriptions": {"cluster-3-L22": "Vehicle-dominant cluster...", "route-L22C3→L23C1": "Pure vehicle route..."}}'
 ```
 
-Descriptions are merged with any existing ones (safe to call incrementally per window).
+Descriptions are merged with any existing ones (safe to call incrementally per transition).
 
 **Fallback**: If the API endpoint returns 404 (WSL2 reload issue — see server TROUBLESHOOTING.md), write directly to disk:
 ```
@@ -144,18 +150,18 @@ The file is a flat JSON dict of `{descKey: description}`. Merge with existing co
 
 **IMPORTANT**: This step is NOT optional. Every `/analyze` run MUST produce element descriptions alongside the report. The descriptions populate the click-to-inspect cards in the frontend — without them, users see "No AI description" on every card.
 
-### 8. Cross-Window Synthesis (multi-window schemas)
+### 8. Per-Window Synthesis (covers all 6 transitions in a window)
 
-When the schema spans more than one window (e.g. `cluster_windows/` contains
-`w_17_18.json`, `w_18_19.json`, …, `w_22_23.json`), produce a multi-lens
-synthesis report that the frontend will surface preferentially over the
-last-window report whenever the user selects the full layer range.
+Every schema covers all 4 windows × 6 transitions per window. For each
+window the user works in, produce a multi-lens synthesis that the frontend
+surfaces preferentially over the last-transition report whenever the user
+selects the full window's layer range.
 
 **Filename convention.** Save the synthesis under the schema's `reports/`
-directory as `w_<first>_<last>.md` (e.g. `reports/w_17_23.md` for a 17→23
-schema). The frontend looks up reports by file stem via
-`useSchemaManagement.schemaReports`; when `currentRange.windows.length > 1`
-MUDApp prefers `w_<first>_<last>` over `w_<lastWindow>`. The "synthesis"
+directory as `w_<first>_<last>.md` (e.g. `reports/w_17_23.md` for window
+`w3`). The frontend looks up reports by file stem via
+`useSchemaManagement.schemaReports`; when `currentWindow.transitions.length > 1`
+MUDApp prefers `w_<first>_<last>` over `w_<lastTransition>`. The "synthesis"
 phrasing belongs in the report's H1, not in the filename.
 
 **Six lenses** — each is a section the synthesis must cover:
@@ -189,33 +195,7 @@ majority-overlap of their probe sets. Reference the canonical name (e.g.
 "pure-foe") in the synthesis, not the renumbered cluster ID.
 
 **Save** with the same `POST .../reports/w_<first>_<last>` endpoint as
-per-window reports.
-
-### 9. Recommend a Secondary Coloring Axis (REQUIRED deliverable)
-
-Every `/analyze` run MUST end with a one-paragraph recommendation for the
-schema's secondary coloring axis (the visualization control that pairs with
-the primary friend/foe axis in MUDApp). This is a required deliverable, not
-optional commentary.
-
-**Common candidates** to consider:
-- **`step`** — useful when the schema includes `steps=[0,1]` (or similar
-  multi-tick captures). At step 0 a representation may be uncommitted; at
-  step 1 it's resolved. Pair with `ambiguity_blend` blending mode so
-  step-0 trajectories render desaturated and step-1 trajectories render at
-  full saturation. Best for "signal crystallization" demos.
-- **`correct`** — useful when there's a clean correctness signal at the
-  output layer. Highlights which basins fail behaviourally even when their
-  pole composition looks right.
-- **scenario-arc-stage** — for multi-tick scenarios, marks where in the
-  arc each probe was captured.
-- **schema-specific categorical taxonomy** — if your analysis surfaces a
-  meaningful subgroup taxonomy (e.g. distress-shaped foe vs explicit-threat
-  foe), expose it as the secondary axis.
-
-State which axis you recommend, why (cite the analysis findings), and what
-visualization mode it should use (`ambiguity_blend` vs plain categorical).
-If no secondary axis adds value, say so explicitly.
+per-transition reports.
 
 ## Key Principles
 
@@ -225,21 +205,12 @@ If no secondary axis adds value, say so explicitly.
 - **Start from output** — last-layer routes to output nodes show the model's final decision
 - **Work backward** — trace interesting patterns to earlier layers
 
-## Data-contract notes (Phase 7.3 gotchas)
+## Data-contract notes
 
-- **Multi-window schemas merge per-layer.** `centroids.json`,
-  `probe_assignments.json`, and `trajectory_points.json` are all keyed by
-  layer string. When `/cluster` OP-1B extends a schema with new windows,
-  these files gain new layer keys but never overwrite existing ones. Do
-  NOT assume cluster IDs remain stable across layers — hierarchical
-  clustering renumbers per layer.
 - **Cluster-ID renumbering is per-layer.** Always build a canonical basin
   map (Step 8 lens 6) before making cross-layer claims. Renaming
   C0→C2→C5 is a renumbering artefact, not migration.
-- **`probe_assignments.json` is schema-local.** Read from
-  `clusterings/{schema}/probe_assignments.json` only. The session-root
-  fallback was removed in the schema redesign and any orphan file there
-  is stale.
-- **Reports are keyed by file stem.** Save per-window as `w_X_Y.md` and
-  full-range synthesis as `w_<first>_<last>.md`; the frontend lookup is
-  `schemaReports[stem]`.
+- **Reports are keyed by file stem.** Save per-transition as `w_X_Y.md`
+  (where X,Y is the 2-layer pair) and the per-window synthesis as
+  `w_<first>_<last>.md` (covering all 6 transitions in that window). The
+  frontend lookup is `schemaReports[stem]`.

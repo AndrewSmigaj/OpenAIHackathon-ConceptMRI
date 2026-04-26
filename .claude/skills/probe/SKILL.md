@@ -95,24 +95,47 @@ Run backend validation or manually check:
 ## Step 11: Post-run clustering
 
 After the capture writes its session under `data/lake/<session_id>/`, this skill
-**automatically proceeds to build the default clustering schema** via `/cluster`
-OP-1. The defaults match the YAML block in `/cluster/SKILL.md` and are tuned to
-the session kind (`sentence` → `step=0`; `sentence_two_part` → `step=[0,1]` if
-the JSON exposes two-step structure; otherwise prompt the user once).
+prompts the user once for how to cluster the run. Defaults come from the YAML
+block in `/cluster/SKILL.md`. Probe sessions default to `steps=[0]`.
 
-Status line printed to chat before the build kicks off:
+Print the proposed schema and prompt:
 
 ```
-Session complete — <N> probes captured.
-Auto-building clustering schema with defaults: k=6, n_neighbors=15, d=6,
-UMAP+hierarchical, step=<step>, last_occurrence_only=true, window=[22,23].
-Save name: <target>_<concept>_k6_n15
-(To override: ESC and tell Claude to run /cluster OP-1 with custom params,
- /cluster OP-2 for a sweep, or skip clustering entirely.)
+Session complete — <N> probes captured. Session: <session_id>.
+
+Proposed clustering schema:
+  save_as:           <sentence_set_name>_k6_n15
+  steps:             [0]
+  last_occurrence_only: true
+  reduction:         UMAP, 6D, n_neighbors=15
+  clustering:        hierarchical, k=6 per layer
+  (covers all 4 windows × 6 transitions × {cluster, expert ranks 1/2/3})
+
+Answer one of:
+  accept                        — build the proposed schema (one /cluster OP-1 call)
+  sweep <axis> <values>         — build N schemas, one per value, suffixed names
+                                  e.g. sweep steps [0],[1],[0,1]
+                                       sweep max_probes 50,100,200
+  custom                        — prompt for each parameter (defaults in brackets)
+  skip                          — exit without building
 ```
 
-Then run `/cluster` OP-1 with the resolved defaults. If the user wants a
-sweep, custom params, or no clustering at all, they interrupt and direct.
+On `accept`: invoke `/cluster` OP-1 once with the proposed params.
+
+On `sweep <axis> <values>`: invoke `/cluster` OP-1 N times in sequence, one per
+value, with `save_as` suffixed appropriately (e.g. `_step0`, `_step1`,
+`_step01`). Non-interactive after the first prompt — overnight-friendly.
+
+On `custom`: prompt the user for each of `save_as`, `steps`,
+`n_neighbors`, `reduction_dimensions`, `default_k`, showing the proposed
+default in brackets. Then invoke `/cluster` OP-1 once with the resulting
+params. (A schema always covers all 4 windows × 6 transitions — there is
+no per-window customization.)
+
+On `skip`: print the session id and exit.
+
+After all builds complete, print the schema names and exit. The user can then
+invoke `/analyze` manually.
 
 ## References
 

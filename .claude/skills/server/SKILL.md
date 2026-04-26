@@ -5,7 +5,7 @@ description: Start, stop, and check status of backend (FastAPI + Evennia) and fr
 
 # Server Management
 
-Manage the Concept MRI backend and frontend servers.
+Manage the Open LLMRI backend and frontend servers.
 
 **The backend has two components:** FastAPI (API + model) and Evennia (MUD server). "Restart the backend" means restart BOTH. Always start/stop them together.
 
