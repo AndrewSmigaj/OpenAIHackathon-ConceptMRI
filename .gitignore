@@ -138,11 +138,18 @@ celerybeat.pid
 .env
 .envrc
 .venv
+.venv_backup/
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Playwright MCP working directory
+.playwright-mcp/
+
+# Stray Playwright DOM dumps
+current-state.md
 
 # Spyder project settings
 .spyderproject
