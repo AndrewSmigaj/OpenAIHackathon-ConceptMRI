@@ -1,0 +1,5323 @@
+{
+  "name": "help_direction_stakes_v1",
+  "version": "1.0",
+  "target_word": "help",
+  "groups": [
+    {
+      "label": "request",
+      "description": "Speaker is asking for help from another party",
+      "sentences": [
+        {
+          "text": "Help \u2014 I'm having chest pain and my left arm feels numb.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Could you help me wire this last relay before the breaker pops again?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If anyone has accounting expertise, I really need help reviewing this contract before signing tomorrow.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "She's threatening to leave and I don't know who else to turn to for help.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help me move this dresser away from the wall \u2014 there's water coming through.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Could you help me find the salt in the cabinet, please?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'd love some help picking the right wine for tonight's dinner with my parents.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Need help figuring out which charger plug is the one that came with this laptop.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you have a moment, would you help me decide between these two health-insurance plans?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "My pharmacist sometimes can help when I'm trying to figure out which generic version to buy.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "My father just collapsed in the kitchen and isn't breathing \u2014 please send help now.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Can someone with EpiPen training help? A guest is going into anaphylactic shock.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If a nurse is reading this, I would deeply appreciate your help interpreting these blood pressure numbers tonight.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me lower him onto his side before the seizure gets worse.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would you please help carry the stretcher down the stairwell? The paramedics need a second pair of hands.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "She's bleeding through the bandage and we need professional help within minutes.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Should the wound be elevated or compressed first? I need help making the right call here.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If his lips turn blue again, somebody needs to help administer the rescue inhaler immediately.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help \u2014 the baby just swallowed something and I can't see what.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Dr. Adler, may I have your help reviewing this CT scan before the surgical team arrives?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "The patient is crashing and the resident on call refuses to come \u2014 we need senior help fast.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Could anyone fluent in Mandarin help translate her symptoms before we proceed with the procedure?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Will somebody please help me hold pressure on this artery until the ambulance arrives?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The dosage on this chart looks dangerously high; pharmacy help is needed before the next infusion.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me find his insulin pen \u2014 his sugar just dropped under forty and he's slurring.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the bleeding doesn't stop within five minutes, additional surgical help must be paged immediately.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "My grandmother fell down the stairs and isn't responding \u2014 I really need help right now.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Anyone with poison-control experience, your help is desperately needed at the back picnic table.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Can you help me lift his head so the airway opens up before he aspirates?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The production database just deleted itself and I need help restoring from snapshot before customers wake.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help \u2014 the centrifuge is wobbling violently and I can't reach the kill switch from here.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would the on-call SRE please help diagnose why the auth service has been throwing 500s for twenty minutes?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If anyone knows the safe shutdown sequence for the reactor coolant loop, your help is needed immediately.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me cut power to the panel before the smoke gets any thicker.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The crane cable is fraying mid-lift; somebody on the ground needs to call for help now.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "May I request your immediate help bringing the secondary failover online before the SLA window closes?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Can you help me reroute traffic away from this datacenter? The cooling system has completely failed.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The pipeline pressure just spiked past tolerance; we need engineering help on the floor within minutes.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Should I purge the line manually or wait? I really need experienced help judging this.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the firmware update bricks during reboot, I'll need vendor help reflashing the controller from scratch.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me brace this scaffold \u2014 the wind just shifted and the upper section is swaying badly.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The bridge inspection sensors are reading red across three spans and we need structural help on site immediately.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Could anyone with kernel debugging skills help trace this panic before we lose the next batch of orders?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help \u2014 I crossed the wrong wires and the whole rack just lit up with warning lamps.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Will you help me hold this beam steady? The jack is slipping and the load could drop.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the backup generator doesn't kick in by midnight, mission-critical help will be required from the regional team.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I just noticed forty thousand dollars was wired out of my account overnight and I need help now.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Can the fraud team help freeze these transactions before the funds clear at the receiving bank?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me draft a cease-and-desist before the auction closes and we lose the property entirely.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If the audit finds those discrepancies tomorrow, the partners will need legal help by sunrise.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Someone is impersonating our CFO on email and authorizing transfers \u2014 please help us shut this down.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would you help me file the SAR before the deadline closes at end of business?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help \u2014 my card got skimmed and charges are appearing in three countries within the hour.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The margin call hits in twenty minutes; I need senior trader help liquidating the right positions.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Can you help me reach compliance? The wire we sent yesterday may have violated sanctions.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If the scammer convinces my mother to send another payment tonight, I'll need bank help reversing everything.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The trustee is hiding assets ahead of the hearing and we need forensic help tracing them by Monday.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me understand this margin statement \u2014 they're claiming I owe six figures by close of business.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Should I freeze the account or alert the regulator first? Your help deciding would mean a lot.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If the lien isn't lifted within seventy-two hours, my client will require courtroom help filing an injunction.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Can someone in treasury help confirm whether this transfer was authorized? It's draining the operating reserve fast.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "My identity has been cloned and three new credit lines opened today \u2014 please, I need help.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Will the broker on duty please help cancel the open orders before the market opens in Tokyo?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me get him off the ledge \u2014 he's been talking about ending it all night.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "My daughter ran away from school this morning and I have no idea where to look for help.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Could a counselor please help me reach my brother before he does something he can't take back?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If the restraining order isn't granted today, she will need shelter help by nightfall.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help \u2014 my roommate locked herself in the bathroom with pills and won't open the door.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would the shelter intake coordinator help arrange transport for a family fleeing tonight?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "short",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "The custody hand-off is going sideways and the child is screaming \u2014 we need mediation help fast.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If anyone knows how to reach a crisis line at this hour, your help could save a life.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Can you help me sit with him until the mobile crisis team arrives in about twenty minutes?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help me word this letter carefully \u2014 if she misreads it, she may relapse tonight.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "My stepfather is back at the door drunk and I need someone's help convincing the kids to stay quiet.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Should I call CPS or wait until morning? Honestly I just need someone's help thinking this through.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Will the school counselor please help locate the student last seen near the rail bridge?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If she calls again threatening to take the children across the border, legal help must be ready immediately.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me find her phone \u2014 her last message said she was about to do something terrible.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The neighbor's child is locked outside in freezing rain; somebody please come help.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "May I request your help organizing a wellness check on my elderly father, who hasn't answered for two days?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help \u2014 there's smoke pouring out of the kitchen and the alarm isn't going off.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Could a neighbor please help me carry the children outside? Water is rising past the second step.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Would you help me pry the bedroom door open? The lock jammed and the smoke detector is screaming.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the gas valve doesn't shut, the technician must arrive with help before anyone reenters the building.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Someone is trying the back door handle \u2014 please help me push the couch against it now.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The roof beam just cracked above the nursery and we need carpenter help before it collapses.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Can you help me drag the propane tank away from the firepit? The flames are climbing the side.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the basement floods another inch, our sump pump will fail and we'll need help with sandbags.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help me drag the rug off the stove \u2014 sparks are jumping every time the wind shifts.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The carbon monoxide alarm has been chirping for hours and the children feel dizzy \u2014 please send help.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Should we evacuate or shelter in place? I really need your help reading the wildfire map.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Will the building superintendent please help unlock the apartment? An elderly tenant hasn't answered in days.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If the chimney fire spreads to the attic insulation, we'll need fire department help on every floor.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help \u2014 there's a stranger inside and he hasn't seen me yet behind the pantry door.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The space heater just ignited the curtains and my partner needs help suppressing the flames before they spread.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Can you help me carry the dog out? She inhaled smoke and her breathing has gone shallow.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "May I request your help reaching the attic ladder? The pull cord snapped and someone is trapped above.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "The pediatric ward is short two nurses tonight and any clinical help would be enormously appreciated.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Will an experienced engineer help me roll back the deploy? The checkout flow has been down twelve minutes.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If the chargeback dispute fails tomorrow, my small business will need accounting help filing for protection.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "He's getting violent again and the kids are hiding under the bed \u2014 I need help now.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help me shut the gas main before another spark catches the dust in the laundry room.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Can the duty surgeon help confirm consent before we wheel the patient into theater?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If the nuclear reactor vibration sensor trips again, the night shift will need supervisor help to acknowledge it.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Would the bank manager please help reverse this mortgage payment before the foreclosure paperwork is filed today?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help \u2014 my friend overdosed in the parking lot and the naloxone isn't bringing her back.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would you mind giving me a quick help finding the cinnamon in the pantry before I start the cookies?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Need a little help picking out a birthday card for my coworker.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Can you help me reset the wifi router whenever you get a chance?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I would appreciate your help selecting a savings account with reasonable monthly fees.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If it's no trouble, could you help me decide which sunscreen brand to grab at the pharmacy?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Lend me some help moving the couch a few inches to the left.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "My brother asked for help choosing a wedding gift that wouldn't break the bank.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would you be willing to help walk me through filing the standard tax return online?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I'm hoping for a bit of help locating the printer driver on the company portal.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help me figure out which multivitamin is worth the extra few dollars, please.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Provided you have a spare moment, may I request your help organizing the spice rack?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Anyone willing to help me brainstorm a fun theme for Saturday's potluck dinner party?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Pass me some help reading the fine print on this credit card offer letter.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "impersonal",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would somebody help me untangle the headphone cord that keeps getting caught in my bag?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Looking for help remembering whether the allergy pills should be taken with food or after.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Show me how to help the dishwasher start its rinse cycle when you have a second.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our event planner mentioned she could help suggest a caterer for next month's casual brunch.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "May I trouble you for help splitting the dinner bill four ways including tip?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Should the laptop freeze again, please help me restart it without losing the open tabs.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I need help reading the dosage instructions on this cough syrup label.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help, the lid on this jar of pickles refuses to budge no matter what I try.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Could anyone help me decide between blue and green napkins for the housewarming?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'd welcome some help reviewing my monthly grocery budget to spot unnecessary subscriptions.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Mind giving me help syncing my new wireless mouse with the desktop computer?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "When you have time, please help remind me which generic ibuprofen the doctor recommended last visit.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would it be possible for someone to help me alphabetize the cookbook shelf this weekend?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "She asked whether I might help suggest a thoughtful housewarming gift for her new neighbor.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Will you help me compare these two checking account brochures from the credit union?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Just need a tiny bit of help finding where the email attachment downloaded on this tablet.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If a nurse is free, could she help confirm whether this rash needs cream or just rest?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me hang this picture frame perfectly straight before our guests arrive tomorrow afternoon.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "We could really use help thinking of an icebreaker for the Friday team lunch.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would you kindly offer a bit of help reviewing my retirement contribution percentages this quarter?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Give me help untangling these holiday lights before I throw them in the trash.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "May I ask for your help deciding whether to switch dental insurance during open enrollment?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If a tech-savvy friend swings by, ask them to help update my phone's operating system.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Bring me some help with this jigsaw puzzle whenever you finish your coffee.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Hoping for help identifying which receipts are deductible for next year's freelance tax filing.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "My sister wonders if you could help her pick a paint color for the guest room.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Anyone around to help me draft a polite reply to this RSVP I forgot about?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would you mind helping- I mean, providing help locating the spare HDMI cable in the drawer?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'd be grateful for help understanding the new prescription label written by the substitute pharmacist.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Can someone help me move the dining chairs into the kitchen for movie night?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our concierge can help recommend a quiet bistro for a low-key birthday celebration.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I'm after a little help comparing roaming charges before booking my vacation flights.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Whenever you finish lunch, would you help me pair the bluetooth speaker to the laptop?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Should you have a moment, please help me schedule my routine eye exam for next month.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Hand me some help wrapping these books before the mail carrier arrives at noon.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I need help phrasing a casual text to invite my neighbor over for tea.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Might I borrow your help reviewing whether the rewards card actually pays off for me?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Please help update the office printer firmware before tomorrow's casual quarterly print run.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Got a moment to help me find that band-aid box you tucked away last week?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the laundry basket is too heavy, just give a quick help carrying it upstairs.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our book club leader can help suggest a light novel for our summer reading list.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Would the bank teller help me set up an automatic transfer to my vacation fund?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I keep asking for help importing photos from the old camera onto this laptop.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Could you help remind me when I last refilled the lozenges, by any chance?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help carry these grocery bags from the trunk if you're walking past the driveway.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Is there anyone free to help me pick a movie everyone in the family will like?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'll need your help estimating how much to budget for the upcoming weekend road trip.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would your IT friend help walk me through changing my home network's password tonight?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I might ask the front desk for help arranging a follow-up dental cleaning appointment.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Toss me some help folding these towels before the cat decides they're her bed.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Dad wants help drafting a friendly note to thank his bowling league for the casserole.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Provided you're not busy, may I have help comparing two cell plans on the website?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Looking for help connecting the new keyboard via bluetooth without reading the entire manual.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Will the receptionist help me reschedule my routine checkup to a Tuesday morning slot?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help me water the basil pots while I'm out running errands this afternoon.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Anyone got help to spare for naming the new puppy before my niece arrives?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I am seeking help reconciling last month's grocery receipts with the budgeting spreadsheet at home.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Could the IT desk help me locate a missing folder of photos from the shared drive?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If you remember, please help bring up that I need a flu shot at the next visit.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Won't you help me assemble this bookshelf I picked up from the secondhand store yesterday?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "We're after a little help thinking of housewarming snacks that don't require an oven.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Would the financial advisor help us understand the difference between two index funds we're considering?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Granted you have the time, please help me back up these vacation photos to the cloud.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I just need quick help opening this childproof vitamin bottle the cashier sealed too tight.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Lend a bit of help sweeping the porch before the neighbors come over for tea.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Mom asked if I could help her pick a wedding anniversary card for Aunt Linda.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Might I trouble you for help comparing two homeowners insurance quotes that arrived this morning?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Whenever convenient, kindly help me transfer the contacts from the old phone to the new one.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "She wants help choosing between two over-the-counter allergy options before the pollen season starts.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help, the recipe says fold gently and I have absolutely no idea what that means.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Is anyone willing to help me settle a friendly debate about the best pizza toppings?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I would value some help walking through the auto-pay setup for my electricity bill.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Got a sec to help me figure out why this PDF keeps opening in the wrong app?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the dentist's office calls back, could you help write down the appointment time for me?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Please help me rearrange these throw pillows so the couch looks ready for company.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our group chat needs help picking a brunch spot that takes reservations on weekends.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "May we have your help identifying which line on the receipt counts as deductible mileage?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I keep meaning to ask for help installing the spam filter on my personal email.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Could the school nurse help me decide whether to send my kid in with mild sniffles?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Stop by and help me decide which curtain swatch looks better against the kitchen wall.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "He hopes someone can help suggest a thoughtful but inexpensive gift for the office Secret Santa.",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        }
+      ]
+    },
+    {
+      "label": "offer",
+      "description": "Speaker is offering help to another party",
+      "sentences": [
+        {
+          "text": "I'm a paramedic \u2014 I can help, stay calm and let me check your pulse.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Step aside \u2014 I can help shut off the gas valve before this room ignites.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If your trading account got drained overnight, our fraud team can help right now.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "She's trained in crisis intervention and is willing to help her friend through tonight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I'll help reroute the network traffic before the production database gets overwhelmed any further.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want help carrying those grocery bags up to the apartment?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I can help you proofread your essay if you email me a draft tonight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If your spreadsheet keeps freezing, my coworker can help you migrate it to a lighter format.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our retirement counselor can help you compare contribution rates whenever you have time this week.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you swap out that bandage before you head back to your hike.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I can help \u2014 I'm an EMT and I see your friend isn't breathing, lay him flat now.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Let me help carry her out before the smoke fills this stairwell completely.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our on-call attorney can help freeze the accounts before the wire transfer clears tonight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I'll help patch the kernel panic before the cluster fails over and we lose payments.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If she mentions the bridge again, the crisis counselor on line two can help immediately.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Hold pressure on the wound \u2014 I can help bandage it once you tear the sleeve.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Trauma surgeons are coming down to help stabilize him before transport.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "short",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Would you like our security desk to help you get to your car safely tonight?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If the breaker keeps tripping, the on-call electrician can help before the wiring catches.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Can I help you out of the driver's seat before the car rolls further?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our fraud line stays open all night to help you reverse unauthorized transfers.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I'll help you draft the ransom-payment refusal letter to the negotiator before sunrise.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Step back from the panel \u2014 let me help isolate the live wire before someone gets shocked.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "We can help quarantine the compromised servers before the attacker pivots into customer data.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Don't move him \u2014 paramedics are inside and they'll help in seconds.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help is two minutes out; keep talking to her and watch her airway.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you're in danger right now, the shelter hotline can help and dispatch transport.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let us help you evacuate the floor before the structural team loses the roof entirely.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want me to help you bypass the failing power supply before the dialysis pump dies?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Forensic accountants are standing by to help trace the missing pension funds before disclosure.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I'll help triage the alerts \u2014 you handle the customer escalations.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Help reaching the rooftop is on its way; stay near the lit window.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If he stops responding to you, I can help start chest compressions immediately.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our cybersecurity desk can help you contain the breach before regulators are notified Monday.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Climb down slowly \u2014 I'll help catch you if the ladder rung gives way.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Should I help you call your daughter before they take you into surgery?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "There are translators on the line who can help her understand what the surgeon just said.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you walk away from the curb \u2014 the driver hasn't seen you yet.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the trader still has access, compliance can help revoke credentials before market open.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help with the gas leak is already on the way; please vacate the building.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I can help carry her down two flights before the elevator loses backup power.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Crisis-line clinicians can help him through the next hour if he picks up.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help, I'm a nurse and that bleed needs direct pressure right now.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If your laptop is still infected, our incident team can help wipe it before authentication tokens leak.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I'll help you smother the grease fire \u2014 hand me that lid.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Are you able to walk, or should I help you to the ambulance bay?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Bank investigators can help you recover the wire if you call within the hour.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "We can help reroute traffic away from the failing data center before customers notice.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "There's a domestic violence advocate here tonight who can help you find a safe bed.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Hold his head still \u2014 let me help splint that neck before we move him.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help shutting the main water valve before the basement floods past the furnace?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'll help you reach your insulin from the back seat before you lose consciousness.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Treasury can help unwind the position before the open if leadership signs off in twenty minutes.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Our oncology social worker can help arrange your transfer to hospice tonight if needed.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I can help \u2014 I've put out lithium fires before, get the dry powder.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The on-call SRE will help you roll back the deploy before customers see the 500s.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help with the seizing toddler is on its way; clear the space around her.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Can I help you to the storm cellar before the funnel crosses the highway?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If she relapses tonight, the recovery sponsor next door will help her ride it out.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'll help you pull him from the pool \u2014 count to three on my mark.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Identity-theft specialists at the bureau can help freeze your file within the hour tonight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help \u2014 I trained as a midwife and the cord is around the baby's neck.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Should I help you extract the access keys before the attacker rotates them?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Trained negotiators can help if the situation on the bridge holds for another ten minutes.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I can help carry your father down the porch \u2014 the floodwater is rising fast.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "There are vascular surgeons en route who will help once the trauma bay is prepped.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want me to help you cancel the cards while you call the precinct?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If he overdosed in the back room, naloxone is here and I can help administer it.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Let me help draft the disclosure to the SEC before the market opens in Tokyo.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "We can help walk you through restoring from backup before the ransomware encrypts the rest.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Step back \u2014 I'll help him out from under the collapsed shelving.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "There's a chaplain on the ward who can help your mother before she's extubated.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Are you bleeding through that towel? I can help apply a tourniquet right now.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the rate is dropping below 30, I can help pace him manually until medics arrive.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The fraud unit can help reverse the wire if you authorize the recall in fifteen minutes.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you carry her \u2014 her hip is broken and she can't bear weight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our SOC engineers will help isolate the lateral movement before the domain controller is touched.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help us hold the door \u2014 the wind is going to take the whole frame.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I can help you carry your grandmother down the hall before the ceiling tiles give way.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Crisis intake clinicians can help your brother tonight if he agrees to come in voluntarily.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help close the femoral bleed while you call for the trauma team.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Specialists in our private wealth office can help unwind the leveraged position before margin calls hit.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Are you fainting? Sit down \u2014 I can help keep your head from hitting the counter.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'll help kill the runaway process before it locks every node in the cluster.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "There's a qualified responder coming through the crowd who will help in seconds.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you breathe \u2014 slow inhale through the nose, the inhaler is in your bag.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If the carbon monoxide alarm is going off, I can help open every window upstairs.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The audit partner can help redraft the statement before the press call at six.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I'll help you push the car off the tracks \u2014 the crossing arm just dropped.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Mental health first responders are on the line and ready to help your sister tonight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want me to help splint that arm before you go into shock?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "We can help you reach the safe room before the intruder clears the second floor.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Should we help him to the antivenom locker before the swelling reaches his chest?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "The estate lawyer can help contest the freeze before the funeral if the family acts fast.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help reset the pacemaker telemetry \u2014 your numbers just dropped off the monitor.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If she stops responding to her name, I can help start rescue breaths immediately.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Volunteers from the pediatric ICU are coming to help during the multi-casualty intake.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Help is here \u2014 paramedics, FDNY, and a bilingual social worker are all en route.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I can help you reset the two-factor before the attacker drains the corporate wallet.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Drop the pan and back away \u2014 I'll help you smother that flame with the blanket.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Suicide prevention counselors are standing by to help if she'll let you put them on speaker.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "conditional",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you administer the EpiPen \u2014 her throat is closing fast.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our infrastructure lead will help reroute payments through the secondary processor before the cutoff window closes.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If you're hearing voices telling you to act tonight, the line at 988 can help you ride this out.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'll help drag the propane tank away from the burning shed before it ruptures.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Compliance officers can help you self-report before the regulator subpoenas the trade logs.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want help folding the laundry while we wait for the pizza to arrive?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Let me help you reset the wifi router before your show starts buffering again.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Happy to help split the dinner bill if you want to use that new app.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our front desk concierge can help with restaurant reservations whenever you stop by the lobby.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Need a hand? I can help refill that prescription on my way past the pharmacy tomorrow.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you bring the box over, my brother can help install your printer driver tonight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Library help is available on the second floor whenever the research desk is staffed.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want help moving the couch a few feet so the rug actually fits straight?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our nurse practitioner can help you renew that allergy script next week if needed.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Sam offered to help pick a birthday gift for your aunt before Saturday's brunch.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Let me help you set up a budgeting spreadsheet over coffee this weekend.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Free tutoring help is offered every Wednesday in the community center back room.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If your USB hub keeps disconnecting, I can help swap it for a powered model.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help walking through your monthly subscriptions to see what you can drop?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Happy to help loan you a band-aid from the kitchen drawer for that paper cut.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our IT desk can help you pair a new keyboard whenever you swing by Tuesday.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Need help carrying the recycling bins down to the curb before the truck comes?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Coffee and recipe help are over by the potluck table whenever you're ready to mingle.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I'd be glad to help draft an introduction email to the gardening club this evening.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you bring receipts, our bookkeeper will help reconcile your freelance income before April.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want help untangling those holiday lights before you climb up the ladder again?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Let me help you find a sushi place near the theater before the show.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "short",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our pharmacist can help you pick a non-drowsy antihistamine if pollen is bothering you.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Need help replacing the toner cartridge \u2014 it's the loud beeping one near the window.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Tax preparation help is available downstairs every Saturday morning during filing season.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "short",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I can help you wash the dog after dinner if you grab the old towels.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help picking out a paint color before the hardware store closes at six?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our reference librarian can help you track down that out-of-print cookbook by next week.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you back up those vacation photos to a free cloud account tonight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you sit down a minute, I can help wrap that scrape with proper gauze.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Roadside help is included with your card membership if your battery ever dies casually.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want help unloading the dishwasher while the lasagna finishes resting on the counter?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Happy to help you draft a polite RSVP if the wording is giving you trouble.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our accountant will help you set up automatic transfers whenever you have ten free minutes.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Need help threading the sewing machine \u2014 the new bobbin keeps slipping out sideways.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If your phone keeps overheating, my roommate can help you clear the background apps.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Let me help you ice that ankle so the bruise calms down before tomorrow morning.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help taping up the moving boxes before your sister arrives with the truck?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Concierge help is offered around the clock for restaurant suggestions and theater bookings.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "I can help you compare two phone plans on a spreadsheet over lunch tomorrow.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our office assistant can help you scan those receipts before the filing deadline next month.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Need help sorting socks while we listen to that new podcast you mentioned earlier?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help setting up a smart bulb so the porch light comes on automatically?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you'd like, our wellness coach can help you plan some easy weekday stretches.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you pick a wine for the dinner party from what's already in stock.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Tutoring help is available through the student union for any introductory math class.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Happy to help mount that picture frame if you've already chosen the right wall.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help reading through this benefits packet during your lunch break sometime this week?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our pharmacy intern can help label your weekly pill organizer if you bring it in.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Need help finding a recipe that uses up the leftover rice from last night?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I can help you map out a walking route between the museums before Friday's trip.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Volunteer help is welcome at the community garden every Sunday morning between nine and noon.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you uninstall those old browser extensions that keep slowing the laptop down.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help organizing the spice rack alphabetically so we stop buying duplicate cumin jars?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our credit union representative can help you open a high-yield savings account during regular branch hours.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Happy to help you stretch out that calf cramp \u2014 try pointing your toes toward your knee.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you swing by Saturday, my neighbor can help patch the screen door before the bugs return.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Need help logging into the new portal \u2014 I can walk you through the password reset.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Travel help is offered at the kiosk near baggage claim for first-time visitors to the city.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want help drafting a thank-you note to the neighbors who watered our plants last week?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our office manager will help you book a quiet conference room whenever you need to focus.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you swap that lightbulb above the stairs while I've still got the ladder out.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you forward the link, I can help skim the warranty for any sneaky fees.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help calibrating the smart thermostat so the bedroom stops freezing every morning around six?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our school nurse can help you stock a basic first-aid kit for the family camping trip.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Need help carrying the folding chairs from the garage to the patio before guests arrive?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I can help you pick a Mother's Day card during our usual coffee run tomorrow.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Bookkeeping help is provided pro bono on Thursday evenings by the small-business association in town.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you transfer those old playlists to your new phone before bed tonight.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help reorganizing the linen closet so the towels actually stack without falling out?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our wellness assistant can help you book a routine eye exam whenever your schedule allows.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If you prefer, I can help you brainstorm a toast for your sister's casual rehearsal dinner.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Need help measuring the window before we drive across town to pick out blinds?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our receptionist can help you fill out the new patient intake form before your annual checkup.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Tech help is available at the public library every weekday afternoon for basic device questions.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Happy to help you pick stocking stuffers when we hit the dollar store this weekend.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help labeling the leftover containers so we actually remember what's in the freezer?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our financial planner can help you review your IRA contributions during the next quarterly meeting.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you switch the laundry over before you head out to grab dinner.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "If you bring the laptop, my cousin can help you install Linux on the spare partition.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Need help picking a podcast for the long drive \u2014 I've got a whole queue saved.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our travel desk can help you arrange a leisurely day trip to the coast next month.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Want help inflating the air mattress before your cousins arrive for the weekend sleepover?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "I can help you cancel that gym membership over the phone if you grab the account number.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Pediatric help is offered at the walk-in clinic on Saturdays for routine sniffles and earaches.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Let me help you reorganize the desktop icons so the kids stop clicking the wrong app.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Need help proofing the rolls \u2014 I think the dough has been rising for ages already.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our customer service team can help you swap a defective charger by mail at no cost.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Happy to help walk you through filing a claim for that minor fender bender tomorrow morning.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "first_person",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Want help picking a low-key restaurant for Tuesday night that won't blow our weekly budget?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Our dental hygienist can help you schedule a routine cleaning before your insurance renews next month.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "subject": "third_person",
+            "shape": "declarative",
+            "length": "long",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "If you want, my partner can help walk the dogs while you finish that long phone call.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "subject": "third_person",
+            "shape": "conditional",
+            "length": "long",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Let me help you pick a paperback for the flight \u2014 that bookstore has decent mysteries.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social",
+            "subject": "first_person",
+            "shape": "imperative",
+            "length": "medium",
+            "register": "casual"
+          }
+        },
+        {
+          "text": "Budgeting help is offered through the credit counseling nonprofit on weekday evenings, free of charge.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "subject": "impersonal",
+            "shape": "declarative",
+            "length": "medium",
+            "register": "formal"
+          }
+        },
+        {
+          "text": "Need help syncing your calendar across the new tablet \u2014 the trick is the account settings menu.",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "subject": "second_person",
+            "shape": "interrogative",
+            "length": "long",
+            "register": "casual"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "stakes",
+      "values": [
+        "high",
+        "low"
+      ]
+    },
+    {
+      "id": "domain",
+      "values": [
+        "medical",
+        "financial",
+        "technical",
+        "social",
+        "household"
+      ]
+    },
+    {
+      "id": "subject",
+      "values": [
+        "first_person",
+        "second_person",
+        "third_person",
+        "impersonal"
+      ]
+    },
+    {
+      "id": "shape",
+      "values": [
+        "imperative",
+        "interrogative",
+        "declarative",
+        "conditional"
+      ]
+    },
+    {
+      "id": "length",
+      "values": [
+        "short",
+        "medium",
+        "long"
+      ]
+    },
+    {
+      "id": "register",
+      "values": [
+        "formal",
+        "casual"
+      ]
+    }
+  ],
+  "output_axes": [
+    {
+      "id": "response_type",
+      "values": [
+        "acted",
+        "acknowledged",
+        "deflected",
+        "questioned",
+        "ambiguous"
+      ]
+    },
+    {
+      "id": "matched_urgency",
+      "values": [
+        "matched",
+        "mismatched",
+        "neutral"
+      ]
+    }
+  ],
+  "generate_output": true,
+  "metadata": {
+    "research_question": "Are direction (request/offer) and stakes (high/low) encoded as orthogonal axes in the residual stream around 'help'?",
+    "primary_axis": "group (request vs offer)",
+    "secondary_axis": "stakes (high vs low)",
+    "diversity_balance_axes": [
+      "domain",
+      "subject",
+      "shape",
+      "length"
+    ],
+    "skeleton_status": "complete: 401 sentences (5 skeleton + 96+94+96+95 = 386 from 4 parallel agents)",
+    "actual_quadrant_counts": {
+      "request_high": 101,
+      "request_low": 99,
+      "offer_high": 101,
+      "offer_low": 100
+    }
+  }
+}
