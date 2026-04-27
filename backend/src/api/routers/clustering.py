@@ -118,6 +118,10 @@ def _build_schema_atomic(
                 transition_count += 1
 
                 # --- Cluster routes for this transition ---
+                # output_grouping_axes is caller-controlled per build:
+                #   - agent + want NPC truth → ["ground_truth"]
+                #   - agent + want agent action → ["action_type"] or omit
+                #   - sentence (post-categorize) → omit (uses record.output_category)
                 cluster_result = cluster_service.analyze_session_cluster_routes(
                     session_id=sid,
                     session_ids=None,
@@ -126,7 +130,7 @@ def _build_schema_atomic(
                     filter_config=filter_config_dict,
                     steps=request.steps,
                     top_n_routes=request.top_n_routes,
-                    output_grouping_axes=['ground_truth'],
+                    output_grouping_axes=request.output_grouping_axes,
                     max_examples_per_node=request.max_examples_per_node,
                     last_occurrence_only=request.last_occurrence_only,
                     max_probes=request.max_probes,
@@ -161,7 +165,7 @@ def _build_schema_atomic(
                         filter_config=filter_config_dict,
                         steps=request.steps,
                         top_n_routes=request.top_n_routes,
-                        output_grouping_axes=['ground_truth'],
+                        output_grouping_axes=request.output_grouping_axes,
                         expert_rank=rank,
                         last_occurrence_only=request.last_occurrence_only,
                         max_probes=request.max_probes,

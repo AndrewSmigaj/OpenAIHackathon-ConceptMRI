@@ -150,9 +150,21 @@ curl -s -X POST http://localhost:8000/api/experiments/build-schema \
     },
     "steps":[1],
     "last_occurrence_only":true,
-    "top_n_routes":20
+    "top_n_routes":20,
+    "output_grouping_axes":["ground_truth"]
   }' | $PY -m json.tool
 ```
+
+**`output_grouping_axes` — pick the right value per session type**:
+
+| Session type | Recommended value | Right-column buckets |
+|---|---|---|
+| **Agent + want NPC truth** (default for bus_stop) | `["ground_truth"]` | foe / friend |
+| **Agent + want agent action** | `["action_type"]` or omit | enemy / friend / neutral (post-enrichment) |
+| **Sentence (post-categorize)** | omit | composite from `record.output_category` (engagement_fictional / etc.) |
+| **Sentence (NOT yet categorized)** | omit | empty right column (acceptable; rebuild after /categorize) |
+
+⚠️ **Footgun**: rebuilding bus_stop schemas WITHOUT explicitly passing `output_grouping_axes=["ground_truth"]` will silently switch their right column from foe/friend to enemy/friend/neutral. Always specify for agent sessions.
 
 Expected: `{"schema": "...", "windows": 4, "transitions": 24, "ranks": 3, "sample_size": ..., "total_probes": ...}`.
 
