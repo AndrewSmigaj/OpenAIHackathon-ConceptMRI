@@ -95,8 +95,8 @@ filter_defaults:
   max_probes:           null
 
 session_kind:
-  probe:    { steps_default: [0] }         # sentence-set runs; user may sweep across [0], [1], [0,1]
-  agent:    { steps_default: [1] }         # post-examine tick
+  probe:    { steps_default: null }        # sentence-set runs — token rows have step=None, so omit the filter (passing [0] returns zero probes)
+  agent:    { steps_default: [1] }         # post-examine tick (turn_id=1 by convention)
 
 schema_name_convention:
   # Concise pattern (per existing bus_stop_friend_foe_k6_n15):
@@ -154,6 +154,8 @@ curl -s -X POST http://localhost:8000/api/experiments/build-schema \
     "output_grouping_axes":["ground_truth"]
   }' | $PY -m json.tool
 ```
+
+**Sentence-experiment sessions:** omit `steps` entirely (or pass `null`). Token records have `transition_step=None` and the `step` filter excludes everything if you pass `[0]` or `[1]`. The example above uses `[1]` because it assumes an agent session — adapt accordingly.
 
 **`output_grouping_axes` — pick the right value per session type**:
 

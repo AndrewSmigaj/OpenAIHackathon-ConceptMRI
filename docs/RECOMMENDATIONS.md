@@ -10,6 +10,37 @@ The user reviews entries and either acts on them, dismisses them, or files them.
 
 ---
 
+## 2026-05-04 — Token-repetition confound in lying_minimal_v1; needs paraphrase-honest follow-up
+
+**Scope**: probe design — `data/sentence_sets/role_framing/lying_minimal_v1*` and any follow-up `lying_*` probes.
+
+`lying_minimal_v1` showed V_truth ≈ 1.0: residual stream at verdict token cleanly separates lying from honest from L2 onwards (see `docs/research/StudiesByClaude/lying_minimal_v1_findings.md`). The headline finding is robust but the interpretation has a confound: honest probes contain the same time-string repeated twice in the input, lying probes contain two different time-strings. UMAP+hierarchical clustering could plausibly be picking up token-repetition as the operative feature rather than the truth-state computation per se. The L0 round-hour cluster (L0C3 — pure honest, 9 probes) is direct evidence that token-level features can drive clustering at this layer.
+
+**Suggested follow-up: paraphrase-honest twins.** Author `lying_minimal_v2.json` where honest twins use a *paraphrase* of the claim time:
+- Lying: claim "5:00 PM" / evidence "11:43 PM"
+- Strict-equality honest (v1): claim "5:00 PM" / evidence "5:00 PM"
+- Paraphrase honest (v2): claim "5:00 PM" / evidence "five o'clock in the evening" — same denoted time, different surface tokens
+
+If paraphrase-honest probes still cluster with strict-equality honest probes (and apart from lying probes), the cluster encodes truth state. If they cluster with lying probes, the cluster encoded token repetition. Either way the result is publishable.
+
+A complementary **lying-with-repetition control** would use lying probes where the claim-string is repeated in the evidence position but in a clearly inconsistent role — e.g. "I left at 5:00 PM. The badge log showed Sam's *colleague* exited at 5:00 PM that night." Same string repetition, but the lying claim is about a different referent.
+
+**Why not fixed today**: the v1 result is the headline; the v2 disambiguation is the follow-up question. Two separate authoring sessions. Logging here so it isn't forgotten.
+
+---
+
+## 2026-05-04 — `/cluster` skill default `steps` for probe sessions was incorrect
+
+**Scope**: `.claude/skills/cluster/SKILL.md`
+
+The `defaults_common` block specified `probe.steps_default: [0]`, which produced a zero-probe schema for sentence-experiment captures because their token records have `transition_step=None` and `step` is computed as `turn_id ?? sentence_index` — both None for sentence sessions. The reduction-service filter then excluded every probe.
+
+Fixed in this session — set probe default to `null` (no filter) which is what the working schemas already used. Agent default stays at `[1]`.
+
+This was a latent foot-gun that had been masked by the prior pipeline producing schemas via direct curl invocations that omitted `steps`. Anyone copy-pasting the OP-1 example with the `steps:[1]` line would have hit the same zero-probe build I did.
+
+---
+
 ## 2026-05-04 (CRITICAL — invalidates prior elicitation/balanced findings) — Capture pipeline sends raw text to a harmony-format-trained model
 
 **Scope**: `backend/src/services/probes/integrated_capture_service.py:170` and `backend/src/services/probes/capture_orchestrator.py:81`
