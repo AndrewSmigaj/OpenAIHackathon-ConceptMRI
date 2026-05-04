@@ -10,6 +10,66 @@ The user reviews entries and either acts on them, dismisses them, or files them.
 
 ---
 
+## 2026-05-04 — Capture pipeline does not produce harmony format channels for sentence sessions
+
+**Scope**: `backend/src/services/probes/probe_processor.py` (or wherever the prompt-formatting/generation logic lives)
+
+The user has flagged that they want to analyze the harmony `<analysis>` channel separately from final output as a distinct layer of measurement (alongside latent trajectories and final behavioral output). For gpt-oss this means the model should produce something like:
+
+```
+<|channel|>analysis<|message|>...reasoning text...<|channel|>final<|message|>Yes.
+```
+
+Searched all 120 `generated_text` values from `lying_elicitation_v1` (session `session_b960315d`) for harmony format markers. **Zero hits** for any of: `<|start|>`, `<|channel|>`, `<|message|>`, `<|end|>`, `<|return|>`, `<analysis>`, `<commentary>`, `<final>`, `assistantfinal`. The captures appear to be raw post-prompt continuations with no channel structure — the model is producing self-talk-style deliberation as plain text but not in harmony channels.
+
+This means we currently cannot measure layer 2 (harmony analysis stream) separately from layer 3 (final output). They're the same string with no machine-recoverable boundary.
+
+**Recommendations**:
+1. Investigate whether the prompt format being sent to gpt-oss-20b uses harmony format with explicit channel instructions, or whether it's a plain "complete this text" call. If it's plain, the model's training might still produce harmony-formatted output if prompted to "think step by step" with the right system prompt — worth testing.
+2. If the capture pipeline strips channel markers, verify against raw model output before storage.
+3. Even without harmony, consider increasing `max_new_tokens` for elicitation studies — many of our "none" classifications were the model truncating mid-deliberation before committing.
+4. Document the actual format of the prompt being sent to the model in `docs/PROBES.md` so the harmony-stream capture path is unambiguous.
+
+---
+
+## 2026-05-04 — Generation length is cutting off model deliberation
+
+**Scope**: capture-pipeline generation parameters
+
+Of 120 probes in `lying_elicitation_v1`, 32 (27%) classified "none" by regex — but inspection shows most of these are *the model reasoning aloud about the verdict and truncating before committing*. e.g.:
+
+```
+"We need to decide if Sam was lying. The scenario: Sam says he never accessed his
+grandmother's bank account except to pay her bills. But the bank statement shows
+cash withdrawals..."
+```
+
+(no commit follows; output ends at the truncation length).
+
+This biases V_verdict measurements downward by classifying genuine-but-incomplete judgments as "no answer." For elicitation studies specifically, longer generation would let us see what the model would have said.
+
+**Recommendation**: make `max_new_tokens` (or whatever the equivalent is) a per-probe-set parameter in the sentence-set JSON or a per-capture-call argument. Default to current value for normal studies; raise to 200-400 for elicitation studies where deliberation is the signal.
+
+---
+
+## 2026-05-04 — Frontend color axis selection is silently ignored when group label is uniform
+
+**Scope**: `frontend/src/components/charts/SankeyChart.tsx`, `frontend/src/components/charts/SteppedTrajectoryPlot.tsx`
+
+When a probe study uses a single-group design (e.g. `lying_elicitation_v1` where all 120 probes are labeled `"lying"`), selecting an input color axis like `diplomacy` from the toolbar dropdown has no visible effect on the cluster sankey or the trajectory plot. Both charts hardcode `label_distribution` (or `trajectory.label`) as the *primary* color source; the user's selected axis only feeds into the *secondary* (blend) axis. With a uniform `label`, primary color is the same for every node/trajectory and the blend logic produces a single tint.
+
+Concrete locations:
+- `SankeyChart.tsx:170-173` — `const primaryDist = node.label_distribution || {}` always wins for cluster/expert nodes.
+- `SteppedTrajectoryPlot.tsx:201` — `const colorKey = trajectory.label || 'Unknown'` always wins.
+
+User-visible symptom: dropdown reads "Color Axis: diplomacy (none vs override)" and the chart caption says "Colored by none vs override," but every cluster and trajectory is the same color. Today's `lying_elicitation_v1_k6_n15` rendered all-purple clusters and all-gray trajectories despite the diplomacy axis being selected.
+
+**Recommendation**: when the selected input color axis is something *other than* `label`, treat it as the primary color source — use `category_distributions[axisId]` instead of `label_distribution`. Fall back to label only if the user explicitly selects "label" or no axis is selected. This makes single-group factorial designs (one label, multiple categorical axes) actually visualizable.
+
+This isn't a regression — it's a design assumption that breaks for the single-group elicitation pattern. Worth a deliberate fix the next time the trajectory/sankey color logic is touched.
+
+---
+
 ## 2026-05-03 — `/cluster` skill's `steps_default: [0]` is wrong for sentence sessions
 
 **Scope**: `.claude/skills/cluster/SKILL.md`, `backend/src/services/features/reduction_service.py`
