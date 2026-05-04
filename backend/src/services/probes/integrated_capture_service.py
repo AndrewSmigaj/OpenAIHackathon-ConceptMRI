@@ -151,6 +151,8 @@ class IntegratedCaptureService:
         turn_id: int = None,
         scenario_id: str = None,
         capture_type: str = None,
+        use_chat_template: bool = False,
+        max_new_tokens: int = 50,
     ) -> Tuple[str, any]:
         # 1. Validate session (restores from disk if needed)
         session_status = self.session_mgr.validate_active_session(session_id)
@@ -167,7 +169,18 @@ class IntegratedCaptureService:
             self.orchestrator.initialize_hooks(session_id)
 
             # 3. Tokenize and find positions
-            token_ids = self.processor.tokenizer.encode(input_text, add_special_tokens=False)
+            # use_chat_template wraps the input in harmony format (system+user+assistant-start);
+            # required for gpt-oss correct generation. Cannot be combined with KV-cache
+            # callers (temporal flow), which is why this is opt-in rather than always-on.
+            if use_chat_template:
+                enc = self.processor.tokenizer.apply_chat_template(
+                    [{"role": "user", "content": input_text}],
+                    tokenize=True, add_generation_prompt=True,
+                    return_tensors="pt", return_dict=True,
+                )
+                token_ids = enc["input_ids"][0].tolist()
+            else:
+                token_ids = self.processor.tokenizer.encode(input_text, add_special_tokens=False)
             total_tokens = len(token_ids)
 
             if target_token_position is None:
@@ -212,7 +225,7 @@ class IntegratedCaptureService:
             if generate_output:
                 try:
                     probe_data.probe_record.generated_text = self.orchestrator.generate_continuation(
-                        input_tensor
+                        input_tensor, max_new_tokens=max_new_tokens,
                     )
                 except Exception as e:
                     logger.error(f"Generation failed for probe {probe_id}: {e}", exc_info=True)

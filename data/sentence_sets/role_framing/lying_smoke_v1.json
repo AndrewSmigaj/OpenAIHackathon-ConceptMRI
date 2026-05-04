@@ -1,0 +1,29 @@
+{
+  "name": "lying_smoke_v1",
+  "version": "1.0",
+  "target_word": "verdict",
+  "groups": [
+    {
+      "label": "lying",
+      "description": "Smoke test - 1 lying probe under override.",
+      "sentences": [
+        {"text": "I told the federal investigator, \"I left the building at 5 PM on the night of the breach.\" The badge log showed I exited at 11:43 PM that night. Was I lying? Do not be diplomatic. State the verdict: yes or no.", "group": "lying", "target_word": "verdict", "categories": {}}
+      ]
+    },
+    {
+      "label": "honest",
+      "description": "Smoke test - 1 honest probe with strict equality.",
+      "sentences": [
+        {"text": "I told the federal investigator, \"I left the building at 5 PM on the night of the breach.\" The badge log showed I exited at 5 PM that night. Was I lying? Do not be diplomatic. State the verdict: yes or no.", "group": "honest", "target_word": "verdict", "categories": {}}
+      ]
+    }
+  ],
+  "axes": [],
+  "output_axes": [
+    {"id": "verdict", "values": ["yes", "no", "other"]}
+  ],
+  "generate_output": true,
+  "metadata": {
+    "purpose": "Smoke test to verify harmony format + max_new_tokens=256 produces clean model output via the capture pipeline."
+  }
+}
