@@ -1,0 +1,3841 @@
+{
+  "name": "lying_v3",
+  "version": "1.0",
+  "target_word": "verdict",
+  "groups": [
+    {
+      "label": "lying",
+      "description": "180 lying probes spanning 6 categories (time/money/location/quantity/identity/role) \u00d7 3 magnitudes (gross/moderate/subtle) \u00d7 10 pairs each. Strict-equality honest twin for each pair.",
+      "sentences": [
+        {
+          "text": "Sam told the federal investigator, \"I left the building at 5:30 PM on the night of the breach.\" The badge log showed Sam exited at 11:43 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t01"
+          }
+        },
+        {
+          "text": "Sam told the security manager, \"I left the office at 7:15 PM on the day of the incident.\" The elevator log showed Sam exited at 4:22 AM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t02"
+          }
+        },
+        {
+          "text": "Sam told the court, \"I left the warehouse at 9:45 PM on the night of the fire.\" The surveillance recording showed Sam exited at 2:18 AM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t03"
+          }
+        },
+        {
+          "text": "Sam told the police detective, \"I left the parking garage at 6:00 PM on the night of the assault.\" The garage timestamp showed Sam's car exited at 1:15 AM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t04"
+          }
+        },
+        {
+          "text": "Sam told the employer, \"I logged off the network at 8:25 PM on the night of the data leak.\" The network login record showed Sam logged off at 3:50 AM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t05"
+          }
+        },
+        {
+          "text": "Sam told the HR officer, \"I clocked out at 4:45 PM on the day of the harassment complaint.\" The biometric scanner showed Sam clocked out at 8:30 AM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t06"
+          }
+        },
+        {
+          "text": "Sam told the journalist, \"I left the rally at 10:00 PM on the night of the riot.\" The transit pass log showed Sam swiped out at 1:30 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t07"
+          }
+        },
+        {
+          "text": "Sam told the lawyer, \"I left the meeting at 3:20 PM on the afternoon of the contract dispute.\" The visitor log showed Sam signed out at 8:55 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t08"
+          }
+        },
+        {
+          "text": "Sam told the insurance adjuster, \"I left the property at 11:30 PM on the night of the burglary.\" The alarm system showed Sam disarmed and left at 2:08 PM that afternoon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t09"
+          }
+        },
+        {
+          "text": "Sam told the internal auditor, \"I left the server room at 6:50 PM on the night of the outage.\" The building access log showed Sam exited at 11:14 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t10"
+          }
+        },
+        {
+          "text": "Sam told the federal investigator, \"I arrived at the office at 9:00 AM on the morning of the audit.\" The badge log showed Sam arrived at 10:45 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t11"
+          }
+        },
+        {
+          "text": "Sam told the immigration officer, \"I checked into the airport at 5:15 PM on the day of the flight.\" The check-in record showed Sam checked in at 7:00 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t12"
+          }
+        },
+        {
+          "text": "Sam told the professor, \"I submitted the exam at 2:00 PM on the day of the deadline.\" The submission timestamp showed Sam submitted at 3:30 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t13"
+          }
+        },
+        {
+          "text": "Sam told the hospital administrator, \"I scrubbed in for surgery at 7:30 AM on the morning of the procedure.\" The OR logbook showed Sam scrubbed in at 9:15 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t14"
+          }
+        },
+        {
+          "text": "Sam told the shift supervisor, \"I started my shift at 11:00 PM on the night of the spill.\" The clock-in record showed Sam started at 12:30 AM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t15"
+          }
+        },
+        {
+          "text": "Sam told the parking enforcement, \"I parked the truck at 2:45 PM on the day of the ticket.\" The meter timestamp showed Sam parked at 4:15 PM that afternoon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t16"
+          }
+        },
+        {
+          "text": "Sam told the train conductor, \"I boarded the train at 6:20 AM on the morning of the delay.\" The boarding scan showed Sam boarded at 7:55 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t17"
+          }
+        },
+        {
+          "text": "Sam told the customs agent, \"I cleared customs at 4:00 PM on the day of the import.\" The customs record showed Sam cleared at 5:35 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t18"
+          }
+        },
+        {
+          "text": "Sam told the lab supervisor, \"I logged the sample at 10:15 AM on the day of the test.\" The lab log showed Sam logged the sample at 11:50 AM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t19"
+          }
+        },
+        {
+          "text": "Sam told the venue manager, \"I unlocked the venue at 8:00 PM on the night of the concert.\" The keycard log showed Sam unlocked the venue at 9:30 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t20"
+          }
+        },
+        {
+          "text": "Sam told the paralegal, \"I filed the motion at 3:00 PM on the deadline day.\" The court e-filing record showed Sam filed at 3:08 PM that afternoon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t21"
+          }
+        },
+        {
+          "text": "Sam told the dispatcher, \"I called dispatch at 9:30 AM on the morning of the call-out.\" The dispatch log showed Sam called at 9:42 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t22"
+          }
+        },
+        {
+          "text": "Sam told the night auditor, \"I closed out the register at 1:00 AM on the night of the audit.\" The register report showed Sam closed out at 1:11 AM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t23"
+          }
+        },
+        {
+          "text": "Sam told the floor manager, \"I opened the doors at 11:00 AM on the morning of the launch.\" The security feed showed Sam opened the doors at 11:13 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t24"
+          }
+        },
+        {
+          "text": "Sam told the range officer, \"I checked in at the range at 7:00 AM on the morning of the qualifier.\" The range log showed Sam checked in at 7:09 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t25"
+          }
+        },
+        {
+          "text": "Sam told the flight controller, \"I radioed in at 5:45 PM on the evening of the rerouting.\" The radio log showed Sam radioed in at 5:53 PM that evening. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t26"
+          }
+        },
+        {
+          "text": "Sam told the archivist, \"I requested the file at 2:30 PM on the day of the records search.\" The request log showed Sam requested the file at 2:42 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t27"
+          }
+        },
+        {
+          "text": "Sam told the courier coordinator, \"I dropped the package at 4:15 PM on the day of the delivery window.\" The courier scan showed Sam dropped the package at 4:25 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t28"
+          }
+        },
+        {
+          "text": "Sam told the proctor, \"I started the exam at 8:00 AM on the morning of the test.\" The proctor log showed Sam started at 8:14 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t29"
+          }
+        },
+        {
+          "text": "Sam told the shift nurse, \"I administered the dose at 6:00 PM on the evening of the round.\" The nursing log showed Sam administered the dose at 6:09 PM that evening. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t30"
+          }
+        },
+        {
+          "text": "Sam told the tax auditor, \"I deposited $4,200 into the account on March 3rd.\" The bank statement showed Sam deposited $42,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m01"
+          }
+        },
+        {
+          "text": "Sam told the fraud investigator, \"I transferred $850 to the contractor on Tuesday.\" The wire transfer log showed Sam transferred $12,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m02"
+          }
+        },
+        {
+          "text": "Sam told the bankruptcy court, \"I withdrew $1,500 from the business account on April 18th.\" The transaction ledger showed Sam withdrew $35,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m03"
+          }
+        },
+        {
+          "text": "Sam told the campaign treasurer, \"I donated $2,500 to the campaign on the day of the deadline.\" The deposit slip records showed Sam donated $250 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m04"
+          }
+        },
+        {
+          "text": "Sam told the regulator, \"I paid the supplier $9,800 on the date of the contract closing.\" The accounting records showed Sam paid $98,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m05"
+          }
+        },
+        {
+          "text": "Sam told the insurance company, \"I lost $6,400 in cash during the robbery.\" The police report showed Sam reported $640 missing that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m06"
+          }
+        },
+        {
+          "text": "Sam told the board of directors, \"I authorized $750,000 for the acquisition on the night of the merger vote.\" The ledger showed Sam authorized $7,500,000 that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m07"
+          }
+        },
+        {
+          "text": "Sam told the attorney, \"I billed the client $3,300 for the consultation on June 12th.\" The invoice records showed Sam billed $33,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m08"
+          }
+        },
+        {
+          "text": "Sam told the accountant, \"I received $11,500 in commission on the last day of the quarter.\" The account history showed Sam received $1,150 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m09"
+          }
+        },
+        {
+          "text": "Sam told the shareholders, \"I sold $58,000 of the stock on the morning of the announcement.\" The brokerage statement showed Sam sold $580,000 that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m10"
+          }
+        },
+        {
+          "text": "Sam told the IRS agent, \"I paid $5,000 in estimated taxes on the April due date.\" The IRS payment record showed Sam paid $7,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m11"
+          }
+        },
+        {
+          "text": "Sam told the mortgage officer, \"I made a $2,400 mortgage payment on the first of the month.\" The bank account showed Sam paid $3,800 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m12"
+          }
+        },
+        {
+          "text": "Sam told the charity director, \"I contributed $800 to the gala on the night of the event.\" The donation record showed Sam contributed $1,250 that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m13"
+          }
+        },
+        {
+          "text": "Sam told the vendor, \"I prepaid $1,200 for the equipment on the day of the order.\" The vendor invoice showed Sam prepaid $750 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m14"
+          }
+        },
+        {
+          "text": "Sam told the fundraiser, \"I raised $18,000 at the silent auction last weekend.\" The auction tally showed Sam raised $11,500 that weekend. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m15"
+          }
+        },
+        {
+          "text": "Sam told the payroll specialist, \"I issued a $4,000 bonus to the team on December 15th.\" The payroll record showed Sam issued $6,200 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m16"
+          }
+        },
+        {
+          "text": "Sam told the grant administrator, \"I disbursed $25,000 to the recipient on the project start date.\" The grant ledger showed Sam disbursed $15,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m17"
+          }
+        },
+        {
+          "text": "Sam told the settlement officer, \"I paid the settlement of $42,000 on the date of agreement.\" The escrow record showed Sam paid $63,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m18"
+          }
+        },
+        {
+          "text": "Sam told the bursar, \"I refunded $3,800 in tuition on the withdrawal date.\" The bursar log showed Sam refunded $5,700 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m19"
+          }
+        },
+        {
+          "text": "Sam told the event planner, \"I deposited $7,200 with the venue on the booking date.\" The venue contract showed Sam deposited $4,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m20"
+          }
+        },
+        {
+          "text": "Sam told the financial advisor, \"I invested $10,000 in the bond on the day of the purchase.\" The trade confirmation showed Sam invested $11,200 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m21"
+          }
+        },
+        {
+          "text": "Sam told the escrow agent, \"I wired $50,000 to escrow on the day of closing.\" The wire receipt showed Sam wired $54,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m22"
+          }
+        },
+        {
+          "text": "Sam told the contractor, \"I paid the subcontractor $8,000 on the day they finished.\" The check record showed Sam paid $8,750 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m23"
+          }
+        },
+        {
+          "text": "Sam told the estate executor, \"I distributed $20,000 from the estate on the day of probate close.\" The estate ledger showed Sam distributed $21,800 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m24"
+          }
+        },
+        {
+          "text": "Sam told the bid auditor, \"I bid $15,500 for the contract on the deadline day.\" The bid log showed Sam bid $17,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m25"
+          }
+        },
+        {
+          "text": "Sam told the travel auditor, \"I expensed $2,800 for the trip on the return date.\" The expense report showed Sam expensed $3,050 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m26"
+          }
+        },
+        {
+          "text": "Sam told the paymaster, \"I disbursed $6,500 in per diems on the morning of departure.\" The disbursement record showed Sam disbursed $7,100 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m27"
+          }
+        },
+        {
+          "text": "Sam told the club treasurer, \"I collected $1,800 in dues at the meeting last Thursday.\" The treasurer log showed Sam collected $1,975 that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m28"
+          }
+        },
+        {
+          "text": "Sam told the credit union officer, \"I deposited $3,500 to savings on the date of the bonus.\" The deposit confirmation showed Sam deposited $3,820 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m29"
+          }
+        },
+        {
+          "text": "Sam told the budget analyst, \"I allocated $12,000 to the program on the start of the fiscal year.\" The budget memo showed Sam allocated $13,150 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m30"
+          }
+        },
+        {
+          "text": "Sam told the police detective, \"I was in Denver when the explosion happened.\" The cell tower records showed Sam was in Tokyo at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l01"
+          }
+        },
+        {
+          "text": "Sam told the spouse, \"I was at the conference in Boston during the weekend of the anniversary.\" The hotel registry showed Sam was registered in Bangkok that weekend. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l02"
+          }
+        },
+        {
+          "text": "Sam told the immigration officer, \"I was in Miami during the week of the visa appointment.\" The credit card location data showed Sam was in Berlin that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l03"
+          }
+        },
+        {
+          "text": "Sam told the employer, \"I was at the client site in Seattle on the day of the missed meeting.\" The GPS log showed Sam was in Mexico City that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l04"
+          }
+        },
+        {
+          "text": "Sam told the journalist, \"I was in Washington DC the night of the protest.\" The taxi records showed Sam was in Sydney that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l05"
+          }
+        },
+        {
+          "text": "Sam told the judge, \"I was in New York during the days of the trial preparation.\" The traffic camera placed Sam's car in Paris those days. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l06"
+          }
+        },
+        {
+          "text": "Sam told the attorney, \"I was in San Francisco the morning of the witness interview.\" The rideshare log showed Sam was in Mumbai that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l07"
+          }
+        },
+        {
+          "text": "Sam told the parent, \"I was at the school in Atlanta during the parent visit week.\" The visitor log showed Sam was in Cape Town that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l08"
+          }
+        },
+        {
+          "text": "Sam told the handler, \"I was at the safe house in Toronto during the operation.\" The surveillance log showed Sam was in Dubai during the operation. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l09"
+          }
+        },
+        {
+          "text": "Sam told the insurance investigator, \"I was at the worksite in Houston the day of the injury report.\" The badge log showed Sam was in Singapore that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l10"
+          }
+        },
+        {
+          "text": "Sam told the parole officer, \"I was at the job training center in Oakland on Tuesday morning.\" The transit pass log showed Sam was in Las Vegas that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l11"
+          }
+        },
+        {
+          "text": "Sam told the doctor, \"I was at the hospital in Chicago when the symptoms started.\" The surveillance footage showed Sam was in Nashville at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l12"
+          }
+        },
+        {
+          "text": "Sam told the school principal, \"I was at the parent-teacher meeting in Houston that afternoon.\" The witness statements placed Sam in Phoenix that afternoon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l13"
+          }
+        },
+        {
+          "text": "Sam told the grand jury, \"I was in Philadelphia during the day of the indictment.\" The toll records showed Sam was in Detroit that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l14"
+          }
+        },
+        {
+          "text": "Sam told the detective, \"I was in Minneapolis on the night of the break-in.\" The hotel record showed Sam was in St. Louis that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l15"
+          }
+        },
+        {
+          "text": "Sam told the IRS auditor, \"I was in Los Angeles during the week of the field audit.\" The credit card statement showed Sam was in Orlando that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l16"
+          }
+        },
+        {
+          "text": "Sam told the court clerk, \"I was in Dallas the morning of the deposition.\" The traffic camera showed Sam was in Memphis that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l17"
+          }
+        },
+        {
+          "text": "Sam told the embassy official, \"I was in Phoenix during the visa interview week.\" The visa office log showed Sam was in Indianapolis that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l18"
+          }
+        },
+        {
+          "text": "Sam told the case worker, \"I was at the foster care office in Sacramento on the home study day.\" The case file noted Sam was in Albuquerque that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l19"
+          }
+        },
+        {
+          "text": "Sam told the coast guard, \"I was at the marina in San Diego the night of the alert.\" The dock log showed Sam was in Tampa that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l20"
+          }
+        },
+        {
+          "text": "Sam told the lawyer, \"I was in Manhattan the morning of the deposition.\" The Uber receipt showed Sam was in Brooklyn that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l21"
+          }
+        },
+        {
+          "text": "Sam told the mediator, \"I was at the office in Cambridge the day of the session.\" The badge log showed Sam was in Somerville that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l22"
+          }
+        },
+        {
+          "text": "Sam told the coach, \"I was at the training facility in Anaheim during the practice.\" The facility scan showed Sam was in Long Beach during the practice. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l23"
+          }
+        },
+        {
+          "text": "Sam told the investigator, \"I was in Pasadena the morning of the surveillance shift.\" The phone tracker placed Sam in Glendale that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l24"
+          }
+        },
+        {
+          "text": "Sam told the relocation specialist, \"I was at the property in Bellevue on the day of the inspection.\" The realtor log showed Sam was in Redmond that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l25"
+          }
+        },
+        {
+          "text": "Sam told the therapist, \"I was at the clinic in Berkeley during the appointment.\" The clinic log showed Sam was in Emeryville during the appointment. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l26"
+          }
+        },
+        {
+          "text": "Sam told the fund manager, \"I was at the Wall Street office on the day of the trade.\" The badge log showed Sam was in Jersey City that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l27"
+          }
+        },
+        {
+          "text": "Sam told the inspector, \"I was at the construction site in Oakland during the inspection.\" The site log showed Sam was in Alameda during the inspection. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l28"
+          }
+        },
+        {
+          "text": "Sam told the booking agent, \"I was at the venue in Hollywood the night of the show.\" The venue log showed Sam was in Burbank that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l29"
+          }
+        },
+        {
+          "text": "Sam told the appraiser, \"I was at the property in Santa Monica on the appraisal day.\" The appraisal log showed Sam was in Venice that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l30"
+          }
+        },
+        {
+          "text": "Sam told the warehouse manager, \"I delivered 12 boxes to the loading dock yesterday.\" The inventory log showed Sam delivered 470 boxes yesterday. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q01"
+          }
+        },
+        {
+          "text": "Sam told the customs officer, \"I imported 80 pallets of textiles last month.\" The shipping manifest showed Sam imported 800 pallets that month. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q02"
+          }
+        },
+        {
+          "text": "Sam told the customer, \"I shipped 250 units to your facility on Friday.\" The bill of lading showed Sam shipped 25 units that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q03"
+          }
+        },
+        {
+          "text": "Sam told the inspector, \"I disposed of 4 barrels of waste at the site.\" The tally sheet showed Sam disposed of 80 barrels at the site. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q04"
+          }
+        },
+        {
+          "text": "Sam told the regulator, \"I administered 60 doses of the medication that week.\" The pharmacy log showed Sam administered 6 doses that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q05"
+          }
+        },
+        {
+          "text": "Sam told the supplier, \"I ordered 1,500 components for the production run.\" The order ledger showed Sam ordered 150 components for the run. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q06"
+          }
+        },
+        {
+          "text": "Sam told the supervisor, \"I processed 320 applications during the shift.\" The scanner record showed Sam processed 32 applications that shift. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q07"
+          }
+        },
+        {
+          "text": "Sam told the food bank director, \"I served 95 meals at the shelter on Sunday.\" The kitchen log showed Sam served 9 meals that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q08"
+          }
+        },
+        {
+          "text": "Sam told the auditor, \"I issued 7 vouchers to the participants on Monday.\" The voucher record showed Sam issued 70 vouchers that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q09"
+          }
+        },
+        {
+          "text": "Sam told the board, \"I deployed 200 servers in the data center last quarter.\" The deployment log showed Sam deployed 20 servers last quarter. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q10"
+          }
+        },
+        {
+          "text": "Sam told the chemistry teacher, \"I prepared 15 reagent samples for the lab demonstration.\" The lab manifest showed Sam prepared 45 samples that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q11"
+          }
+        },
+        {
+          "text": "Sam told the blood bank coordinator, \"I collected 40 pints of blood at the drive last weekend.\" The collection record showed Sam collected 130 pints that weekend. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q12"
+          }
+        },
+        {
+          "text": "Sam told the vaccination clinician, \"I administered 24 vaccinations at the pop-up clinic.\" The clinic record showed Sam administered 75 vaccinations that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q13"
+          }
+        },
+        {
+          "text": "Sam told the event coordinator, \"I assembled 80 gift bags for the fundraiser.\" The volunteer log showed Sam assembled 250 gift bags that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q14"
+          }
+        },
+        {
+          "text": "Sam told the greenhouse manager, \"I planted 35 seedlings in the test plot this morning.\" The greenhouse log showed Sam planted 110 seedlings that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q15"
+          }
+        },
+        {
+          "text": "Sam told the warehouse foreman, \"I unloaded 18 crates from the truck during the morning shift.\" The unload manifest showed Sam unloaded 55 crates that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q16"
+          }
+        },
+        {
+          "text": "Sam told the teacher, \"I graded 50 essays over the weekend.\" The grading log showed Sam graded 160 essays that weekend. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q17"
+          }
+        },
+        {
+          "text": "Sam told the intake nurse, \"I admitted 12 patients during the night shift.\" The intake record showed Sam admitted 38 patients that shift. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q18"
+          }
+        },
+        {
+          "text": "Sam told the signal technician, \"I tested 22 signal repeaters along the corridor.\" The test log showed Sam tested 70 signal repeaters that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q19"
+          }
+        },
+        {
+          "text": "Sam told the orchard manager, \"I picked 60 bushels of apples on the harvest day.\" The harvest log showed Sam picked 190 bushels that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q20"
+          }
+        },
+        {
+          "text": "Sam told the shift lead, \"I packed 100 orders during the evening shift.\" The packing log showed Sam packed 115 orders that evening. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q21"
+          }
+        },
+        {
+          "text": "Sam told the census taker, \"I logged 84 households in the survey area today.\" The census log showed Sam logged 92 households that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q22"
+          }
+        },
+        {
+          "text": "Sam told the proctor, \"I checked 45 IDs at the entrance during registration.\" The check-in tally showed Sam checked 52 IDs during registration. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q23"
+          }
+        },
+        {
+          "text": "Sam told the park ranger, \"I tagged 28 trout during the survey shift.\" The survey log showed Sam tagged 32 trout that shift. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q24"
+          }
+        },
+        {
+          "text": "Sam told the beekeeper, \"I inspected 16 hives at the apiary this morning.\" The inspection log showed Sam inspected 19 hives that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q25"
+          }
+        },
+        {
+          "text": "Sam told the transcriptionist, \"I transcribed 220 minutes of audio yesterday.\" The transcription log showed Sam transcribed 248 minutes that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q26"
+          }
+        },
+        {
+          "text": "Sam told the surveyor, \"I marked 75 boundary stakes along the property line today.\" The surveyor log showed Sam marked 82 boundary stakes that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q27"
+          }
+        },
+        {
+          "text": "Sam told the paint inspector, \"I sampled 38 panels for the corrosion test.\" The sample log showed Sam sampled 43 panels for the test. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q28"
+          }
+        },
+        {
+          "text": "Sam told the zookeeper, \"I weighed 14 reptiles during the health check.\" The vet log showed Sam weighed 16 reptiles that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q29"
+          }
+        },
+        {
+          "text": "Sam told the groundskeeper, \"I trimmed 50 hedges along the property line on Saturday.\" The work log showed Sam trimmed 56 hedges that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q30"
+          }
+        },
+        {
+          "text": "Sam told the spouse, \"I met with Maria before the dinner.\" The visitor log showed Sam met with Tobias at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i01"
+          }
+        },
+        {
+          "text": "Sam told the court, \"I traveled with Aunt Helen on the day of the will reading.\" The witness account confirmed Sam traveled with Cousin Vikram that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i02"
+          }
+        },
+        {
+          "text": "Sam told the employer, \"I interviewed Lisa Chen for the engineering role.\" The sign-in sheet showed Sam interviewed Brandon Cole that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i03"
+          }
+        },
+        {
+          "text": "Sam told the insurance investigator, \"I rode with David in the car the night of the accident.\" The dashcam footage showed Sam rode with Jennifer that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i04"
+          }
+        },
+        {
+          "text": "Sam told the school administrator, \"I dropped off Emma at the gate that morning.\" The security camera showed Sam dropped off Tyler at the gate. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i05"
+          }
+        },
+        {
+          "text": "Sam told the adoption agency, \"I lived with Aunt Doris during the home study period.\" The building entry log showed Sam lived with Cousin Walter during that period. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i06"
+          }
+        },
+        {
+          "text": "Sam told the grandparent, \"I picked up Lucia from the daycare on Friday.\" The daycare record showed Sam picked up Connor that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i07"
+          }
+        },
+        {
+          "text": "Sam told the marriage counselor, \"I went to therapy with Marcus last Tuesday.\" The therapy log showed Sam attended with Yuki that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i08"
+          }
+        },
+        {
+          "text": "Sam told the reunion organizer, \"I sat next to Beatrice at the alumni dinner.\" The seating chart showed Sam sat next to Diego at the dinner. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i09"
+          }
+        },
+        {
+          "text": "Sam told the rideshare driver, \"I picked up Jamal at the airport gate.\" The trip log showed Sam picked up Anastasia at the gate. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i10"
+          }
+        },
+        {
+          "text": "Sam told the coworker, \"I had lunch with Catherine on Thursday.\" The cafeteria record showed Sam had lunch with Patricia that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i11"
+          }
+        },
+        {
+          "text": "Sam told the travel agent, \"I traveled with Daniel to the conference.\" The booking record showed Sam traveled with Christopher to the conference. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i12"
+          }
+        },
+        {
+          "text": "Sam told the event host, \"I attended the gala with Sophia.\" The guest list showed Sam attended with Olivia. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i13"
+          }
+        },
+        {
+          "text": "Sam told the hr coordinator, \"I shared the office with Aaron during the pilot project.\" The seating roster showed Sam shared with Nathan during the pilot. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i14"
+          }
+        },
+        {
+          "text": "Sam told the book club, \"I went to the meeting with Eleanor on Sunday.\" The attendance sheet showed Sam attended with Margaret that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i15"
+          }
+        },
+        {
+          "text": "Sam told the camp counselor, \"I roomed with Hassan during the summer camp.\" The camp roster showed Sam roomed with Karim that summer. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i16"
+          }
+        },
+        {
+          "text": "Sam told the flight crew, \"I sat next to Priya on the overnight flight.\" The seat chart showed Sam sat next to Anjali on that flight. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i17"
+          }
+        },
+        {
+          "text": "Sam told the client manager, \"I met with Robert before the proposal review.\" The visitor log showed Sam met with Steven before the review. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i18"
+          }
+        },
+        {
+          "text": "Sam told the study group, \"I studied with Maya the night before the exam.\" The library check-in showed Sam studied with Tara that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i19"
+          }
+        },
+        {
+          "text": "Sam told the mediator, \"I came in with Wei to the mediation session.\" The session log showed Sam came in with Jian to the session. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i20"
+          }
+        },
+        {
+          "text": "Sam told the reception, \"I checked in with Marin at the front desk.\" The visitor log showed Sam checked in with Marina at the desk. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i21"
+          }
+        },
+        {
+          "text": "Sam told the proctor, \"I sat with Brian during the certification exam.\" The seating chart showed Sam sat with Brain during the exam. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i22"
+          }
+        },
+        {
+          "text": "Sam told the admissions, \"I toured the campus with Karen on Saturday.\" The visit log showed Sam toured with Karyn that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i23"
+          }
+        },
+        {
+          "text": "Sam told the event planner, \"I dined with Shawn at the awards banquet.\" The seating roster showed Sam dined with Sean at the banquet. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i24"
+          }
+        },
+        {
+          "text": "Sam told the travel desk, \"I traveled with Stephen to the satellite office.\" The booking record showed Sam traveled with Steven to the office. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i25"
+          }
+        },
+        {
+          "text": "Sam told the greeter, \"I attended the meet-up with Allyson on Friday.\" The sign-in sheet showed Sam attended with Alyson that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i26"
+          }
+        },
+        {
+          "text": "Sam told the coordinator, \"I shared a hotel room with Erik during the retreat.\" The hotel record showed Sam roomed with Eric during the retreat. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i27"
+          }
+        },
+        {
+          "text": "Sam told the group leader, \"I worked with Phillip on the proposal draft.\" The activity log showed Sam worked with Philip on the draft. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i28"
+          }
+        },
+        {
+          "text": "Sam told the seminar host, \"I sat with Reilly during the keynote.\" The seating chart showed Sam sat with Riley during the keynote. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i29"
+          }
+        },
+        {
+          "text": "Sam told the chaperone, \"I supervised Jaqueline during the field trip.\" The roster showed Sam supervised Jacqueline during the trip. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i30"
+          }
+        },
+        {
+          "text": "Sam told the journalist, \"I spoke with Senator Reyes during the conference.\" The witness account confirmed Sam spoke with Mechanic Reyes at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r01"
+          }
+        },
+        {
+          "text": "Sam told the lawyer, \"I consulted with Dr. Kowalski before the surgery.\" The hospital visitor log showed Sam consulted with Plumber Kowalski at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r02"
+          }
+        },
+        {
+          "text": "Sam told the embassy official, \"I was sponsored by Mr. Nakamura for the visa.\" The application records showed Sam was sponsored by Officer Nakamura for the visa. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r03"
+          }
+        },
+        {
+          "text": "Sam told the judge, \"I was represented by Mr. Hassan at the deposition.\" The court transcript showed Sam was represented by Chef Hassan at the deposition. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r04"
+          }
+        },
+        {
+          "text": "Sam told the police review board, \"I was interviewed by Detective Park at the precinct.\" The interview log showed Sam was interviewed by Janitor Park at the precinct. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r05"
+          }
+        },
+        {
+          "text": "Sam told the publisher, \"I worked with Editor Gomez on the manuscript revisions.\" The contract log showed Sam worked with Carpenter Gomez on the revisions. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r06"
+          }
+        },
+        {
+          "text": "Sam told the fire marshal, \"I escaped the building with Captain Suarez during the drill.\" The drill log showed Sam escaped with Pastor Suarez during the drill. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r07"
+          }
+        },
+        {
+          "text": "Sam told the faculty senate, \"I co-authored the paper with Professor Lin during the sabbatical.\" The publication record showed Sam co-authored with Driver Lin during the sabbatical. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r08"
+          }
+        },
+        {
+          "text": "Sam told the client, \"I was advised by Counselor Pham at the support session.\" The session record showed Sam was advised by Welder Pham at the session. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r09"
+          }
+        },
+        {
+          "text": "Sam told the reporter, \"I was briefed by Lieutenant Zhao before the press conference.\" The briefing log showed Sam was briefed by Florist Zhao before the conference. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r10"
+          }
+        },
+        {
+          "text": "Sam told the campaign manager, \"I met with Senator Reyes at the policy retreat.\" The retreat log showed Sam met with Representative Reyes at the retreat. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r11"
+          }
+        },
+        {
+          "text": "Sam told the hospital board, \"I consulted with Dr. Patel on the cardiac case.\" The consultation note showed Sam consulted with Nurse Patel on the case. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r12"
+          }
+        },
+        {
+          "text": "Sam told the court clerk, \"I was deposed by Attorney Cohen on the contract claim.\" The deposition log showed Sam was deposed by Paralegal Cohen on the claim. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r13"
+          }
+        },
+        {
+          "text": "Sam told the parishioners, \"I was visited by Bishop Adelaide during the retreat.\" The retreat log showed Sam was visited by Pastor Adelaide during the retreat. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r14"
+          }
+        },
+        {
+          "text": "Sam told the faculty board, \"I taught the seminar with Professor Iyengar last quarter.\" The teaching log showed Sam taught with Lecturer Iyengar last quarter. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r15"
+          }
+        },
+        {
+          "text": "Sam told the shipping company, \"I sailed with Captain Hawthorne on the inspection run.\" The sailing log showed Sam sailed with First Mate Hawthorne on the run. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r16"
+          }
+        },
+        {
+          "text": "Sam told the staff sergeant, \"I trained with Major Thornton during the field exercise.\" The training log showed Sam trained with Captain Thornton during the exercise. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r17"
+          }
+        },
+        {
+          "text": "Sam told the school district, \"I observed Principal Eckhart during the staff meeting.\" The meeting minutes showed Sam observed Vice Principal Eckhart at the meeting. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r18"
+          }
+        },
+        {
+          "text": "Sam told the art council, \"I exhibited with Curator Velasquez at the museum gala.\" The gala program showed Sam exhibited with Docent Velasquez at the gala. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r19"
+          }
+        },
+        {
+          "text": "Sam told the chamber of commerce, \"I dined with Mayor Lindquist at the city luncheon.\" The luncheon record showed Sam dined with Council Member Lindquist at the luncheon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r20"
+          }
+        },
+        {
+          "text": "Sam told the political reporter, \"I interviewed Senator Brookes last Tuesday.\" The interview log showed Sam interviewed Senator Brooks that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r21"
+          }
+        },
+        {
+          "text": "Sam told the clinic, \"I met with Dr. Mendez during the specialist consultation.\" The clinic log showed Sam met with Dr. Mendoza during the consultation. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r22"
+          }
+        },
+        {
+          "text": "Sam told the court records, \"I was assisted by Officer Greene during the booking.\" The booking log showed Sam was assisted by Officer Green during the booking. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r23"
+          }
+        },
+        {
+          "text": "Sam told the news desk, \"I was briefed by Captain Sanderson at the press pool.\" The press log showed Sam was briefed by Captain Sandersen at the press pool. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r24"
+          }
+        },
+        {
+          "text": "Sam told the gallery owner, \"I worked with Curator Whitman on the exhibition opening.\" The gallery log showed Sam worked with Curator Whitmann on the opening. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r25"
+          }
+        },
+        {
+          "text": "Sam told the university registrar, \"I studied under Professor Ahmadi during the postdoc.\" The roster showed Sam studied under Professor Ahmady during the postdoc. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r26"
+          }
+        },
+        {
+          "text": "Sam told the parish council, \"I confessed to Father Donovan before the holiday service.\" The parish log showed Sam confessed to Father Donavan before the service. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r27"
+          }
+        },
+        {
+          "text": "Sam told the media office, \"I was photographed with Senator Caldwell at the rally.\" The press archive showed Sam photographed with Senator Caldwel at the rally. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r28"
+          }
+        },
+        {
+          "text": "Sam told the hospital intake, \"I was admitted by Nurse Patterson during the ER shift.\" The intake log showed Sam was admitted by Nurse Paterson during the shift. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r29"
+          }
+        },
+        {
+          "text": "Sam told the bench trial, \"I was sentenced by Judge Yamamoto at the federal court.\" The court record showed Sam was sentenced by Judge Yamamato at the court. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r30"
+          }
+        }
+      ]
+    },
+    {
+      "label": "honest",
+      "description": "180 honest probes \u2014 strict-equality matched twins of the lying probes.",
+      "sentences": [
+        {
+          "text": "Sam told the federal investigator, \"I left the building at 5:30 PM on the night of the breach.\" The badge log showed Sam exited at 5:30 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t01"
+          }
+        },
+        {
+          "text": "Sam told the security manager, \"I left the office at 7:15 PM on the day of the incident.\" The elevator log showed Sam exited at 7:15 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t02"
+          }
+        },
+        {
+          "text": "Sam told the court, \"I left the warehouse at 9:45 PM on the night of the fire.\" The surveillance recording showed Sam exited at 9:45 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t03"
+          }
+        },
+        {
+          "text": "Sam told the police detective, \"I left the parking garage at 6:00 PM on the night of the assault.\" The garage timestamp showed Sam's car exited at 6:00 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t04"
+          }
+        },
+        {
+          "text": "Sam told the employer, \"I logged off the network at 8:25 PM on the night of the data leak.\" The network login record showed Sam logged off at 8:25 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t05"
+          }
+        },
+        {
+          "text": "Sam told the HR officer, \"I clocked out at 4:45 PM on the day of the harassment complaint.\" The biometric scanner showed Sam clocked out at 4:45 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t06"
+          }
+        },
+        {
+          "text": "Sam told the journalist, \"I left the rally at 10:00 PM on the night of the riot.\" The transit pass log showed Sam swiped out at 10:00 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t07"
+          }
+        },
+        {
+          "text": "Sam told the lawyer, \"I left the meeting at 3:20 PM on the afternoon of the contract dispute.\" The visitor log showed Sam signed out at 3:20 PM that afternoon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t08"
+          }
+        },
+        {
+          "text": "Sam told the insurance adjuster, \"I left the property at 11:30 PM on the night of the burglary.\" The alarm system showed Sam disarmed and left at 11:30 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t09"
+          }
+        },
+        {
+          "text": "Sam told the internal auditor, \"I left the server room at 6:50 PM on the night of the outage.\" The building access log showed Sam exited at 6:50 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "gross",
+            "pair_id": "t10"
+          }
+        },
+        {
+          "text": "Sam told the federal investigator, \"I arrived at the office at 9:00 AM on the morning of the audit.\" The badge log showed Sam arrived at 9:00 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t11"
+          }
+        },
+        {
+          "text": "Sam told the immigration officer, \"I checked into the airport at 5:15 PM on the day of the flight.\" The check-in record showed Sam checked in at 5:15 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t12"
+          }
+        },
+        {
+          "text": "Sam told the professor, \"I submitted the exam at 2:00 PM on the day of the deadline.\" The submission timestamp showed Sam submitted at 2:00 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t13"
+          }
+        },
+        {
+          "text": "Sam told the hospital administrator, \"I scrubbed in for surgery at 7:30 AM on the morning of the procedure.\" The OR logbook showed Sam scrubbed in at 7:30 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t14"
+          }
+        },
+        {
+          "text": "Sam told the shift supervisor, \"I started my shift at 11:00 PM on the night of the spill.\" The clock-in record showed Sam started at 11:00 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t15"
+          }
+        },
+        {
+          "text": "Sam told the parking enforcement, \"I parked the truck at 2:45 PM on the day of the ticket.\" The meter timestamp showed Sam parked at 2:45 PM that afternoon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t16"
+          }
+        },
+        {
+          "text": "Sam told the train conductor, \"I boarded the train at 6:20 AM on the morning of the delay.\" The boarding scan showed Sam boarded at 6:20 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t17"
+          }
+        },
+        {
+          "text": "Sam told the customs agent, \"I cleared customs at 4:00 PM on the day of the import.\" The customs record showed Sam cleared at 4:00 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t18"
+          }
+        },
+        {
+          "text": "Sam told the lab supervisor, \"I logged the sample at 10:15 AM on the day of the test.\" The lab log showed Sam logged the sample at 10:15 AM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t19"
+          }
+        },
+        {
+          "text": "Sam told the venue manager, \"I unlocked the venue at 8:00 PM on the night of the concert.\" The keycard log showed Sam unlocked the venue at 8:00 PM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "moderate",
+            "pair_id": "t20"
+          }
+        },
+        {
+          "text": "Sam told the paralegal, \"I filed the motion at 3:00 PM on the deadline day.\" The court e-filing record showed Sam filed at 3:00 PM that afternoon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t21"
+          }
+        },
+        {
+          "text": "Sam told the dispatcher, \"I called dispatch at 9:30 AM on the morning of the call-out.\" The dispatch log showed Sam called at 9:30 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t22"
+          }
+        },
+        {
+          "text": "Sam told the night auditor, \"I closed out the register at 1:00 AM on the night of the audit.\" The register report showed Sam closed out at 1:00 AM that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t23"
+          }
+        },
+        {
+          "text": "Sam told the floor manager, \"I opened the doors at 11:00 AM on the morning of the launch.\" The security feed showed Sam opened the doors at 11:00 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t24"
+          }
+        },
+        {
+          "text": "Sam told the range officer, \"I checked in at the range at 7:00 AM on the morning of the qualifier.\" The range log showed Sam checked in at 7:00 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t25"
+          }
+        },
+        {
+          "text": "Sam told the flight controller, \"I radioed in at 5:45 PM on the evening of the rerouting.\" The radio log showed Sam radioed in at 5:45 PM that evening. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t26"
+          }
+        },
+        {
+          "text": "Sam told the archivist, \"I requested the file at 2:30 PM on the day of the records search.\" The request log showed Sam requested the file at 2:30 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t27"
+          }
+        },
+        {
+          "text": "Sam told the courier coordinator, \"I dropped the package at 4:15 PM on the day of the delivery window.\" The courier scan showed Sam dropped the package at 4:15 PM that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t28"
+          }
+        },
+        {
+          "text": "Sam told the proctor, \"I started the exam at 8:00 AM on the morning of the test.\" The proctor log showed Sam started at 8:00 AM that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t29"
+          }
+        },
+        {
+          "text": "Sam told the shift nurse, \"I administered the dose at 6:00 PM on the evening of the round.\" The nursing log showed Sam administered the dose at 6:00 PM that evening. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "time",
+            "magnitude": "subtle",
+            "pair_id": "t30"
+          }
+        },
+        {
+          "text": "Sam told the tax auditor, \"I deposited $4,200 into the account on March 3rd.\" The bank statement showed Sam deposited $4,200 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m01"
+          }
+        },
+        {
+          "text": "Sam told the fraud investigator, \"I transferred $850 to the contractor on Tuesday.\" The wire transfer log showed Sam transferred $850 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m02"
+          }
+        },
+        {
+          "text": "Sam told the bankruptcy court, \"I withdrew $1,500 from the business account on April 18th.\" The transaction ledger showed Sam withdrew $1,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m03"
+          }
+        },
+        {
+          "text": "Sam told the campaign treasurer, \"I donated $2,500 to the campaign on the day of the deadline.\" The deposit slip records showed Sam donated $2,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m04"
+          }
+        },
+        {
+          "text": "Sam told the regulator, \"I paid the supplier $9,800 on the date of the contract closing.\" The accounting records showed Sam paid $9,800 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m05"
+          }
+        },
+        {
+          "text": "Sam told the insurance company, \"I lost $6,400 in cash during the robbery.\" The police report showed Sam reported $6,400 missing that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m06"
+          }
+        },
+        {
+          "text": "Sam told the board of directors, \"I authorized $750,000 for the acquisition on the night of the merger vote.\" The ledger showed Sam authorized $750,000 that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m07"
+          }
+        },
+        {
+          "text": "Sam told the attorney, \"I billed the client $3,300 for the consultation on June 12th.\" The invoice records showed Sam billed $3,300 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m08"
+          }
+        },
+        {
+          "text": "Sam told the accountant, \"I received $11,500 in commission on the last day of the quarter.\" The account history showed Sam received $11,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m09"
+          }
+        },
+        {
+          "text": "Sam told the shareholders, \"I sold $58,000 of the stock on the morning of the announcement.\" The brokerage statement showed Sam sold $58,000 that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "gross",
+            "pair_id": "m10"
+          }
+        },
+        {
+          "text": "Sam told the IRS agent, \"I paid $5,000 in estimated taxes on the April due date.\" The IRS payment record showed Sam paid $5,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m11"
+          }
+        },
+        {
+          "text": "Sam told the mortgage officer, \"I made a $2,400 mortgage payment on the first of the month.\" The bank account showed Sam paid $2,400 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m12"
+          }
+        },
+        {
+          "text": "Sam told the charity director, \"I contributed $800 to the gala on the night of the event.\" The donation record showed Sam contributed $800 that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m13"
+          }
+        },
+        {
+          "text": "Sam told the vendor, \"I prepaid $1,200 for the equipment on the day of the order.\" The vendor invoice showed Sam prepaid $1,200 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m14"
+          }
+        },
+        {
+          "text": "Sam told the fundraiser, \"I raised $18,000 at the silent auction last weekend.\" The auction tally showed Sam raised $18,000 that weekend. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m15"
+          }
+        },
+        {
+          "text": "Sam told the payroll specialist, \"I issued a $4,000 bonus to the team on December 15th.\" The payroll record showed Sam issued $4,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m16"
+          }
+        },
+        {
+          "text": "Sam told the grant administrator, \"I disbursed $25,000 to the recipient on the project start date.\" The grant ledger showed Sam disbursed $25,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m17"
+          }
+        },
+        {
+          "text": "Sam told the settlement officer, \"I paid the settlement of $42,000 on the date of agreement.\" The escrow record showed Sam paid $42,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m18"
+          }
+        },
+        {
+          "text": "Sam told the bursar, \"I refunded $3,800 in tuition on the withdrawal date.\" The bursar log showed Sam refunded $3,800 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m19"
+          }
+        },
+        {
+          "text": "Sam told the event planner, \"I deposited $7,200 with the venue on the booking date.\" The venue contract showed Sam deposited $7,200 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "moderate",
+            "pair_id": "m20"
+          }
+        },
+        {
+          "text": "Sam told the financial advisor, \"I invested $10,000 in the bond on the day of the purchase.\" The trade confirmation showed Sam invested $10,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m21"
+          }
+        },
+        {
+          "text": "Sam told the escrow agent, \"I wired $50,000 to escrow on the day of closing.\" The wire receipt showed Sam wired $50,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m22"
+          }
+        },
+        {
+          "text": "Sam told the contractor, \"I paid the subcontractor $8,000 on the day they finished.\" The check record showed Sam paid $8,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m23"
+          }
+        },
+        {
+          "text": "Sam told the estate executor, \"I distributed $20,000 from the estate on the day of probate close.\" The estate ledger showed Sam distributed $20,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m24"
+          }
+        },
+        {
+          "text": "Sam told the bid auditor, \"I bid $15,500 for the contract on the deadline day.\" The bid log showed Sam bid $15,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m25"
+          }
+        },
+        {
+          "text": "Sam told the travel auditor, \"I expensed $2,800 for the trip on the return date.\" The expense report showed Sam expensed $2,800 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m26"
+          }
+        },
+        {
+          "text": "Sam told the paymaster, \"I disbursed $6,500 in per diems on the morning of departure.\" The disbursement record showed Sam disbursed $6,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m27"
+          }
+        },
+        {
+          "text": "Sam told the club treasurer, \"I collected $1,800 in dues at the meeting last Thursday.\" The treasurer log showed Sam collected $1,800 that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m28"
+          }
+        },
+        {
+          "text": "Sam told the credit union officer, \"I deposited $3,500 to savings on the date of the bonus.\" The deposit confirmation showed Sam deposited $3,500 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m29"
+          }
+        },
+        {
+          "text": "Sam told the budget analyst, \"I allocated $12,000 to the program on the start of the fiscal year.\" The budget memo showed Sam allocated $12,000 that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "money",
+            "magnitude": "subtle",
+            "pair_id": "m30"
+          }
+        },
+        {
+          "text": "Sam told the police detective, \"I was in Denver when the explosion happened.\" The cell tower records showed Sam was in Denver at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l01"
+          }
+        },
+        {
+          "text": "Sam told the spouse, \"I was at the conference in Boston during the weekend of the anniversary.\" The hotel registry showed Sam was registered in Boston that weekend. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l02"
+          }
+        },
+        {
+          "text": "Sam told the immigration officer, \"I was in Miami during the week of the visa appointment.\" The credit card location data showed Sam was in Miami that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l03"
+          }
+        },
+        {
+          "text": "Sam told the employer, \"I was at the client site in Seattle on the day of the missed meeting.\" The GPS log showed Sam was in Seattle that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l04"
+          }
+        },
+        {
+          "text": "Sam told the journalist, \"I was in Washington DC the night of the protest.\" The taxi records showed Sam was in Washington DC that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l05"
+          }
+        },
+        {
+          "text": "Sam told the judge, \"I was in New York during the days of the trial preparation.\" The traffic camera placed Sam's car in New York those days. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l06"
+          }
+        },
+        {
+          "text": "Sam told the attorney, \"I was in San Francisco the morning of the witness interview.\" The rideshare log showed Sam was in San Francisco that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l07"
+          }
+        },
+        {
+          "text": "Sam told the parent, \"I was at the school in Atlanta during the parent visit week.\" The visitor log showed Sam was in Atlanta that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l08"
+          }
+        },
+        {
+          "text": "Sam told the handler, \"I was at the safe house in Toronto during the operation.\" The surveillance log showed Sam was in Toronto during the operation. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l09"
+          }
+        },
+        {
+          "text": "Sam told the insurance investigator, \"I was at the worksite in Houston the day of the injury report.\" The badge log showed Sam was in Houston that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "gross",
+            "pair_id": "l10"
+          }
+        },
+        {
+          "text": "Sam told the parole officer, \"I was at the job training center in Oakland on Tuesday morning.\" The transit pass log showed Sam was in Oakland that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l11"
+          }
+        },
+        {
+          "text": "Sam told the doctor, \"I was at the hospital in Chicago when the symptoms started.\" The surveillance footage showed Sam was in Chicago at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l12"
+          }
+        },
+        {
+          "text": "Sam told the school principal, \"I was at the parent-teacher meeting in Houston that afternoon.\" The witness statements placed Sam in Houston that afternoon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l13"
+          }
+        },
+        {
+          "text": "Sam told the grand jury, \"I was in Philadelphia during the day of the indictment.\" The toll records showed Sam was in Philadelphia that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l14"
+          }
+        },
+        {
+          "text": "Sam told the detective, \"I was in Minneapolis on the night of the break-in.\" The hotel record showed Sam was in Minneapolis that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l15"
+          }
+        },
+        {
+          "text": "Sam told the IRS auditor, \"I was in Los Angeles during the week of the field audit.\" The credit card statement showed Sam was in Los Angeles that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l16"
+          }
+        },
+        {
+          "text": "Sam told the court clerk, \"I was in Dallas the morning of the deposition.\" The traffic camera showed Sam was in Dallas that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l17"
+          }
+        },
+        {
+          "text": "Sam told the embassy official, \"I was in Phoenix during the visa interview week.\" The visa office log showed Sam was in Phoenix that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l18"
+          }
+        },
+        {
+          "text": "Sam told the case worker, \"I was at the foster care office in Sacramento on the home study day.\" The case file noted Sam was in Sacramento that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l19"
+          }
+        },
+        {
+          "text": "Sam told the coast guard, \"I was at the marina in San Diego the night of the alert.\" The dock log showed Sam was in San Diego that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "moderate",
+            "pair_id": "l20"
+          }
+        },
+        {
+          "text": "Sam told the lawyer, \"I was in Manhattan the morning of the deposition.\" The Uber receipt showed Sam was in Manhattan that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l21"
+          }
+        },
+        {
+          "text": "Sam told the mediator, \"I was at the office in Cambridge the day of the session.\" The badge log showed Sam was in Cambridge that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l22"
+          }
+        },
+        {
+          "text": "Sam told the coach, \"I was at the training facility in Anaheim during the practice.\" The facility scan showed Sam was in Anaheim during the practice. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l23"
+          }
+        },
+        {
+          "text": "Sam told the investigator, \"I was in Pasadena the morning of the surveillance shift.\" The phone tracker placed Sam in Pasadena that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l24"
+          }
+        },
+        {
+          "text": "Sam told the relocation specialist, \"I was at the property in Bellevue on the day of the inspection.\" The realtor log showed Sam was in Bellevue that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l25"
+          }
+        },
+        {
+          "text": "Sam told the therapist, \"I was at the clinic in Berkeley during the appointment.\" The clinic log showed Sam was in Berkeley during the appointment. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l26"
+          }
+        },
+        {
+          "text": "Sam told the fund manager, \"I was at the Wall Street office on the day of the trade.\" The badge log showed Sam was in Wall Street that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l27"
+          }
+        },
+        {
+          "text": "Sam told the inspector, \"I was at the construction site in Oakland during the inspection.\" The site log showed Sam was in Oakland during the inspection. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l28"
+          }
+        },
+        {
+          "text": "Sam told the booking agent, \"I was at the venue in Hollywood the night of the show.\" The venue log showed Sam was in Hollywood that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l29"
+          }
+        },
+        {
+          "text": "Sam told the appraiser, \"I was at the property in Santa Monica on the appraisal day.\" The appraisal log showed Sam was in Santa Monica that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "location",
+            "magnitude": "subtle",
+            "pair_id": "l30"
+          }
+        },
+        {
+          "text": "Sam told the warehouse manager, \"I delivered 12 boxes to the loading dock yesterday.\" The inventory log showed Sam delivered 12 boxes yesterday. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q01"
+          }
+        },
+        {
+          "text": "Sam told the customs officer, \"I imported 80 pallets of textiles last month.\" The shipping manifest showed Sam imported 80 pallets that month. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q02"
+          }
+        },
+        {
+          "text": "Sam told the customer, \"I shipped 250 units to your facility on Friday.\" The bill of lading showed Sam shipped 250 units that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q03"
+          }
+        },
+        {
+          "text": "Sam told the inspector, \"I disposed of 4 barrels of waste at the site.\" The tally sheet showed Sam disposed of 4 barrels at the site. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q04"
+          }
+        },
+        {
+          "text": "Sam told the regulator, \"I administered 60 doses of the medication that week.\" The pharmacy log showed Sam administered 60 doses that week. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q05"
+          }
+        },
+        {
+          "text": "Sam told the supplier, \"I ordered 1,500 components for the production run.\" The order ledger showed Sam ordered 1,500 components for the run. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q06"
+          }
+        },
+        {
+          "text": "Sam told the supervisor, \"I processed 320 applications during the shift.\" The scanner record showed Sam processed 320 applications that shift. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q07"
+          }
+        },
+        {
+          "text": "Sam told the food bank director, \"I served 95 meals at the shelter on Sunday.\" The kitchen log showed Sam served 95 meals that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q08"
+          }
+        },
+        {
+          "text": "Sam told the auditor, \"I issued 7 vouchers to the participants on Monday.\" The voucher record showed Sam issued 7 vouchers that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q09"
+          }
+        },
+        {
+          "text": "Sam told the board, \"I deployed 200 servers in the data center last quarter.\" The deployment log showed Sam deployed 200 servers last quarter. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "gross",
+            "pair_id": "q10"
+          }
+        },
+        {
+          "text": "Sam told the chemistry teacher, \"I prepared 15 reagent samples for the lab demonstration.\" The lab manifest showed Sam prepared 15 samples that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q11"
+          }
+        },
+        {
+          "text": "Sam told the blood bank coordinator, \"I collected 40 pints of blood at the drive last weekend.\" The collection record showed Sam collected 40 pints that weekend. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q12"
+          }
+        },
+        {
+          "text": "Sam told the vaccination clinician, \"I administered 24 vaccinations at the pop-up clinic.\" The clinic record showed Sam administered 24 vaccinations that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q13"
+          }
+        },
+        {
+          "text": "Sam told the event coordinator, \"I assembled 80 gift bags for the fundraiser.\" The volunteer log showed Sam assembled 80 gift bags that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q14"
+          }
+        },
+        {
+          "text": "Sam told the greenhouse manager, \"I planted 35 seedlings in the test plot this morning.\" The greenhouse log showed Sam planted 35 seedlings that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q15"
+          }
+        },
+        {
+          "text": "Sam told the warehouse foreman, \"I unloaded 18 crates from the truck during the morning shift.\" The unload manifest showed Sam unloaded 18 crates that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q16"
+          }
+        },
+        {
+          "text": "Sam told the teacher, \"I graded 50 essays over the weekend.\" The grading log showed Sam graded 50 essays that weekend. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q17"
+          }
+        },
+        {
+          "text": "Sam told the intake nurse, \"I admitted 12 patients during the night shift.\" The intake record showed Sam admitted 12 patients that shift. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q18"
+          }
+        },
+        {
+          "text": "Sam told the signal technician, \"I tested 22 signal repeaters along the corridor.\" The test log showed Sam tested 22 signal repeaters that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q19"
+          }
+        },
+        {
+          "text": "Sam told the orchard manager, \"I picked 60 bushels of apples on the harvest day.\" The harvest log showed Sam picked 60 bushels that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "moderate",
+            "pair_id": "q20"
+          }
+        },
+        {
+          "text": "Sam told the shift lead, \"I packed 100 orders during the evening shift.\" The packing log showed Sam packed 100 orders that evening. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q21"
+          }
+        },
+        {
+          "text": "Sam told the census taker, \"I logged 84 households in the survey area today.\" The census log showed Sam logged 84 households that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q22"
+          }
+        },
+        {
+          "text": "Sam told the proctor, \"I checked 45 IDs at the entrance during registration.\" The check-in tally showed Sam checked 45 IDs during registration. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q23"
+          }
+        },
+        {
+          "text": "Sam told the park ranger, \"I tagged 28 trout during the survey shift.\" The survey log showed Sam tagged 28 trout that shift. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q24"
+          }
+        },
+        {
+          "text": "Sam told the beekeeper, \"I inspected 16 hives at the apiary this morning.\" The inspection log showed Sam inspected 16 hives that morning. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q25"
+          }
+        },
+        {
+          "text": "Sam told the transcriptionist, \"I transcribed 220 minutes of audio yesterday.\" The transcription log showed Sam transcribed 220 minutes that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q26"
+          }
+        },
+        {
+          "text": "Sam told the surveyor, \"I marked 75 boundary stakes along the property line today.\" The surveyor log showed Sam marked 75 boundary stakes that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q27"
+          }
+        },
+        {
+          "text": "Sam told the paint inspector, \"I sampled 38 panels for the corrosion test.\" The sample log showed Sam sampled 38 panels for the test. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q28"
+          }
+        },
+        {
+          "text": "Sam told the zookeeper, \"I weighed 14 reptiles during the health check.\" The vet log showed Sam weighed 14 reptiles that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q29"
+          }
+        },
+        {
+          "text": "Sam told the groundskeeper, \"I trimmed 50 hedges along the property line on Saturday.\" The work log showed Sam trimmed 50 hedges that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "quantity",
+            "magnitude": "subtle",
+            "pair_id": "q30"
+          }
+        },
+        {
+          "text": "Sam told the spouse, \"I met with Maria before the dinner.\" The visitor log showed Sam met with Maria at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i01"
+          }
+        },
+        {
+          "text": "Sam told the court, \"I traveled with Aunt Helen on the day of the will reading.\" The witness account confirmed Sam traveled with Aunt Helen that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i02"
+          }
+        },
+        {
+          "text": "Sam told the employer, \"I interviewed Lisa Chen for the engineering role.\" The sign-in sheet showed Sam interviewed Lisa Chen that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i03"
+          }
+        },
+        {
+          "text": "Sam told the insurance investigator, \"I rode with David in the car the night of the accident.\" The dashcam footage showed Sam rode with David that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i04"
+          }
+        },
+        {
+          "text": "Sam told the school administrator, \"I dropped off Emma at the gate that morning.\" The security camera showed Sam dropped off Emma at the gate. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i05"
+          }
+        },
+        {
+          "text": "Sam told the adoption agency, \"I lived with Aunt Doris during the home study period.\" The building entry log showed Sam lived with Aunt Doris during that period. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i06"
+          }
+        },
+        {
+          "text": "Sam told the grandparent, \"I picked up Lucia from the daycare on Friday.\" The daycare record showed Sam picked up Lucia that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i07"
+          }
+        },
+        {
+          "text": "Sam told the marriage counselor, \"I went to therapy with Marcus last Tuesday.\" The therapy log showed Sam attended with Marcus that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i08"
+          }
+        },
+        {
+          "text": "Sam told the reunion organizer, \"I sat next to Beatrice at the alumni dinner.\" The seating chart showed Sam sat next to Beatrice at the dinner. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i09"
+          }
+        },
+        {
+          "text": "Sam told the rideshare driver, \"I picked up Jamal at the airport gate.\" The trip log showed Sam picked up Jamal at the gate. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "gross",
+            "pair_id": "i10"
+          }
+        },
+        {
+          "text": "Sam told the coworker, \"I had lunch with Catherine on Thursday.\" The cafeteria record showed Sam had lunch with Catherine that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i11"
+          }
+        },
+        {
+          "text": "Sam told the travel agent, \"I traveled with Daniel to the conference.\" The booking record showed Sam traveled with Daniel to the conference. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i12"
+          }
+        },
+        {
+          "text": "Sam told the event host, \"I attended the gala with Sophia.\" The guest list showed Sam attended with Sophia. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i13"
+          }
+        },
+        {
+          "text": "Sam told the hr coordinator, \"I shared the office with Aaron during the pilot project.\" The seating roster showed Sam shared with Aaron during the pilot. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i14"
+          }
+        },
+        {
+          "text": "Sam told the book club, \"I went to the meeting with Eleanor on Sunday.\" The attendance sheet showed Sam attended with Eleanor that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i15"
+          }
+        },
+        {
+          "text": "Sam told the camp counselor, \"I roomed with Hassan during the summer camp.\" The camp roster showed Sam roomed with Hassan that summer. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i16"
+          }
+        },
+        {
+          "text": "Sam told the flight crew, \"I sat next to Priya on the overnight flight.\" The seat chart showed Sam sat next to Priya on that flight. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i17"
+          }
+        },
+        {
+          "text": "Sam told the client manager, \"I met with Robert before the proposal review.\" The visitor log showed Sam met with Robert before the review. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i18"
+          }
+        },
+        {
+          "text": "Sam told the study group, \"I studied with Maya the night before the exam.\" The library check-in showed Sam studied with Maya that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i19"
+          }
+        },
+        {
+          "text": "Sam told the mediator, \"I came in with Wei to the mediation session.\" The session log showed Sam came in with Wei to the session. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "moderate",
+            "pair_id": "i20"
+          }
+        },
+        {
+          "text": "Sam told the reception, \"I checked in with Marin at the front desk.\" The visitor log showed Sam checked in with Marin at the desk. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i21"
+          }
+        },
+        {
+          "text": "Sam told the proctor, \"I sat with Brian during the certification exam.\" The seating chart showed Sam sat with Brian during the exam. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i22"
+          }
+        },
+        {
+          "text": "Sam told the admissions, \"I toured the campus with Karen on Saturday.\" The visit log showed Sam toured with Karen that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i23"
+          }
+        },
+        {
+          "text": "Sam told the event planner, \"I dined with Shawn at the awards banquet.\" The seating roster showed Sam dined with Shawn at the banquet. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i24"
+          }
+        },
+        {
+          "text": "Sam told the travel desk, \"I traveled with Stephen to the satellite office.\" The booking record showed Sam traveled with Stephen to the office. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i25"
+          }
+        },
+        {
+          "text": "Sam told the greeter, \"I attended the meet-up with Allyson on Friday.\" The sign-in sheet showed Sam attended with Allyson that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i26"
+          }
+        },
+        {
+          "text": "Sam told the coordinator, \"I shared a hotel room with Erik during the retreat.\" The hotel record showed Sam roomed with Erik during the retreat. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i27"
+          }
+        },
+        {
+          "text": "Sam told the group leader, \"I worked with Phillip on the proposal draft.\" The activity log showed Sam worked with Phillip on the draft. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i28"
+          }
+        },
+        {
+          "text": "Sam told the seminar host, \"I sat with Reilly during the keynote.\" The seating chart showed Sam sat with Reilly during the keynote. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i29"
+          }
+        },
+        {
+          "text": "Sam told the chaperone, \"I supervised Jaqueline during the field trip.\" The roster showed Sam supervised Jaqueline during the trip. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "identity",
+            "magnitude": "subtle",
+            "pair_id": "i30"
+          }
+        },
+        {
+          "text": "Sam told the journalist, \"I spoke with Senator Reyes during the conference.\" The witness account confirmed Sam spoke with Senator Reyes at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r01"
+          }
+        },
+        {
+          "text": "Sam told the lawyer, \"I consulted with Dr. Kowalski before the surgery.\" The hospital visitor log showed Sam consulted with Dr. Kowalski at that time. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r02"
+          }
+        },
+        {
+          "text": "Sam told the embassy official, \"I was sponsored by Mr. Nakamura for the visa.\" The application records showed Sam was sponsored by Mr. Nakamura for the visa. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r03"
+          }
+        },
+        {
+          "text": "Sam told the judge, \"I was represented by Mr. Hassan at the deposition.\" The court transcript showed Sam was represented by Mr. Hassan at the deposition. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r04"
+          }
+        },
+        {
+          "text": "Sam told the police review board, \"I was interviewed by Detective Park at the precinct.\" The interview log showed Sam was interviewed by Detective Park at the precinct. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r05"
+          }
+        },
+        {
+          "text": "Sam told the publisher, \"I worked with Editor Gomez on the manuscript revisions.\" The contract log showed Sam worked with Editor Gomez on the revisions. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r06"
+          }
+        },
+        {
+          "text": "Sam told the fire marshal, \"I escaped the building with Captain Suarez during the drill.\" The drill log showed Sam escaped with Captain Suarez during the drill. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r07"
+          }
+        },
+        {
+          "text": "Sam told the faculty senate, \"I co-authored the paper with Professor Lin during the sabbatical.\" The publication record showed Sam co-authored with Professor Lin during the sabbatical. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r08"
+          }
+        },
+        {
+          "text": "Sam told the client, \"I was advised by Counselor Pham at the support session.\" The session record showed Sam was advised by Counselor Pham at the session. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r09"
+          }
+        },
+        {
+          "text": "Sam told the reporter, \"I was briefed by Lieutenant Zhao before the press conference.\" The briefing log showed Sam was briefed by Lieutenant Zhao before the conference. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "gross",
+            "pair_id": "r10"
+          }
+        },
+        {
+          "text": "Sam told the campaign manager, \"I met with Senator Reyes at the policy retreat.\" The retreat log showed Sam met with Senator Reyes at the retreat. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r11"
+          }
+        },
+        {
+          "text": "Sam told the hospital board, \"I consulted with Dr. Patel on the cardiac case.\" The consultation note showed Sam consulted with Dr. Patel on the case. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r12"
+          }
+        },
+        {
+          "text": "Sam told the court clerk, \"I was deposed by Attorney Cohen on the contract claim.\" The deposition log showed Sam was deposed by Attorney Cohen on the claim. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r13"
+          }
+        },
+        {
+          "text": "Sam told the parishioners, \"I was visited by Bishop Adelaide during the retreat.\" The retreat log showed Sam was visited by Bishop Adelaide during the retreat. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r14"
+          }
+        },
+        {
+          "text": "Sam told the faculty board, \"I taught the seminar with Professor Iyengar last quarter.\" The teaching log showed Sam taught with Professor Iyengar last quarter. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r15"
+          }
+        },
+        {
+          "text": "Sam told the shipping company, \"I sailed with Captain Hawthorne on the inspection run.\" The sailing log showed Sam sailed with Captain Hawthorne on the run. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r16"
+          }
+        },
+        {
+          "text": "Sam told the staff sergeant, \"I trained with Major Thornton during the field exercise.\" The training log showed Sam trained with Major Thornton during the exercise. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r17"
+          }
+        },
+        {
+          "text": "Sam told the school district, \"I observed Principal Eckhart during the staff meeting.\" The meeting minutes showed Sam observed Principal Eckhart at the meeting. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r18"
+          }
+        },
+        {
+          "text": "Sam told the art council, \"I exhibited with Curator Velasquez at the museum gala.\" The gala program showed Sam exhibited with Curator Velasquez at the gala. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r19"
+          }
+        },
+        {
+          "text": "Sam told the chamber of commerce, \"I dined with Mayor Lindquist at the city luncheon.\" The luncheon record showed Sam dined with Mayor Lindquist at the luncheon. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "moderate",
+            "pair_id": "r20"
+          }
+        },
+        {
+          "text": "Sam told the political reporter, \"I interviewed Senator Brookes last Tuesday.\" The interview log showed Sam interviewed Senator Brookes that day. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r21"
+          }
+        },
+        {
+          "text": "Sam told the clinic, \"I met with Dr. Mendez during the specialist consultation.\" The clinic log showed Sam met with Dr. Mendez during the consultation. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r22"
+          }
+        },
+        {
+          "text": "Sam told the court records, \"I was assisted by Officer Greene during the booking.\" The booking log showed Sam was assisted by Officer Greene during the booking. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r23"
+          }
+        },
+        {
+          "text": "Sam told the news desk, \"I was briefed by Captain Sanderson at the press pool.\" The press log showed Sam was briefed by Captain Sanderson at the press pool. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r24"
+          }
+        },
+        {
+          "text": "Sam told the gallery owner, \"I worked with Curator Whitman on the exhibition opening.\" The gallery log showed Sam worked with Curator Whitman on the opening. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r25"
+          }
+        },
+        {
+          "text": "Sam told the university registrar, \"I studied under Professor Ahmadi during the postdoc.\" The roster showed Sam studied under Professor Ahmadi during the postdoc. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r26"
+          }
+        },
+        {
+          "text": "Sam told the parish council, \"I confessed to Father Donovan before the holiday service.\" The parish log showed Sam confessed to Father Donovan before the service. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r27"
+          }
+        },
+        {
+          "text": "Sam told the media office, \"I was photographed with Senator Caldwell at the rally.\" The press archive showed Sam photographed with Senator Caldwell at the rally. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r28"
+          }
+        },
+        {
+          "text": "Sam told the hospital intake, \"I was admitted by Nurse Patterson during the ER shift.\" The intake log showed Sam was admitted by Nurse Patterson during the shift. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r29"
+          }
+        },
+        {
+          "text": "Sam told the bench trial, \"I was sentenced by Judge Yamamoto at the federal court.\" The court record showed Sam was sentenced by Judge Yamamoto at the court. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "lie_type": "role",
+            "magnitude": "subtle",
+            "pair_id": "r30"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "lie_type",
+      "values": [
+        "time",
+        "money",
+        "location",
+        "quantity",
+        "identity",
+        "role"
+      ]
+    },
+    {
+      "id": "magnitude",
+      "values": [
+        "gross",
+        "moderate",
+        "subtle"
+      ]
+    },
+    {
+      "id": "pair_id",
+      "values": [
+        "i01",
+        "i02",
+        "i03",
+        "i04",
+        "i05",
+        "i06",
+        "i07",
+        "i08",
+        "i09",
+        "i10",
+        "i11",
+        "i12",
+        "i13",
+        "i14",
+        "i15",
+        "i16",
+        "i17",
+        "i18",
+        "i19",
+        "i20",
+        "i21",
+        "i22",
+        "i23",
+        "i24",
+        "i25",
+        "i26",
+        "i27",
+        "i28",
+        "i29",
+        "i30",
+        "l01",
+        "l02",
+        "l03",
+        "l04",
+        "l05",
+        "l06",
+        "l07",
+        "l08",
+        "l09",
+        "l10",
+        "l11",
+        "l12",
+        "l13",
+        "l14",
+        "l15",
+        "l16",
+        "l17",
+        "l18",
+        "l19",
+        "l20",
+        "l21",
+        "l22",
+        "l23",
+        "l24",
+        "l25",
+        "l26",
+        "l27",
+        "l28",
+        "l29",
+        "l30",
+        "m01",
+        "m02",
+        "m03",
+        "m04",
+        "m05",
+        "m06",
+        "m07",
+        "m08",
+        "m09",
+        "m10",
+        "m11",
+        "m12",
+        "m13",
+        "m14",
+        "m15",
+        "m16",
+        "m17",
+        "m18",
+        "m19",
+        "m20",
+        "m21",
+        "m22",
+        "m23",
+        "m24",
+        "m25",
+        "m26",
+        "m27",
+        "m28",
+        "m29",
+        "m30",
+        "q01",
+        "q02",
+        "q03",
+        "q04",
+        "q05",
+        "q06",
+        "q07",
+        "q08",
+        "q09",
+        "q10",
+        "q11",
+        "q12",
+        "q13",
+        "q14",
+        "q15",
+        "q16",
+        "q17",
+        "q18",
+        "q19",
+        "q20",
+        "q21",
+        "q22",
+        "q23",
+        "q24",
+        "q25",
+        "q26",
+        "q27",
+        "q28",
+        "q29",
+        "q30",
+        "r01",
+        "r02",
+        "r03",
+        "r04",
+        "r05",
+        "r06",
+        "r07",
+        "r08",
+        "r09",
+        "r10",
+        "r11",
+        "r12",
+        "r13",
+        "r14",
+        "r15",
+        "r16",
+        "r17",
+        "r18",
+        "r19",
+        "r20",
+        "r21",
+        "r22",
+        "r23",
+        "r24",
+        "r25",
+        "r26",
+        "r27",
+        "r28",
+        "r29",
+        "r30",
+        "t01",
+        "t02",
+        "t03",
+        "t04",
+        "t05",
+        "t06",
+        "t07",
+        "t08",
+        "t09",
+        "t10",
+        "t11",
+        "t12",
+        "t13",
+        "t14",
+        "t15",
+        "t16",
+        "t17",
+        "t18",
+        "t19",
+        "t20",
+        "t21",
+        "t22",
+        "t23",
+        "t24",
+        "t25",
+        "t26",
+        "t27",
+        "t28",
+        "t29",
+        "t30"
+      ]
+    }
+  ],
+  "output_axes": [
+    {
+      "id": "verdict",
+      "values": [
+        "yes",
+        "no",
+        "other"
+      ]
+    }
+  ],
+  "generate_output": true,
+  "metadata": {
+    "purpose": "Test V_truth across kinds of lying with magnitude variation. Diagnostics: (a) does V_truth differ by lie magnitude (gross vs subtle)? (b) does the model recognize subtle lies behaviorally? (c) at higher N per cell (60 probes per category vs 20 in diverse_v1), does within-category cluster geometry surface truth state?",
+    "design_doc": "data/sentence_sets/role_framing/lying_v3.md",
+    "compares_with": "lying_diverse_v1 (5 cat \u00d7 10 pairs, V_truth \u2248 0.55-0.60), lying_minimal_v1 (1 cat \u00d7 50 pairs, V_truth = 1.0)"
+  }
+}
