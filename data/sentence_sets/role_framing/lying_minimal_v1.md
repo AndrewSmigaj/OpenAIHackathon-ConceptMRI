@@ -42,7 +42,29 @@ If cluster geometry DOES separate lying from honest now, that proves the signal 
 
 ## Output classification
 
-`verdict` axis: yes / no / other (using the refined hand-validated regex from `lying_balanced_v1`).
+`verdict` axis: `yes` / `no` / `other`.
+
+**Captures use the new harmony-format pipeline** (`use_chat_template=True`, `max_new_tokens=256`). Outputs follow the structure:
+
+```
+analysis<reasoning text>assistantfinal<committed answer>
+```
+
+The `analysis` channel contains the model's deliberation; the `final` channel after `assistantfinal` is the committed verdict. Classification rules apply to the *final* channel (the model's commitment), not the analysis-channel reasoning, because the verdict-token residual we cluster on is what the model commits to next.
+
+### Classifier rules
+
+For each `generated_text`:
+
+1. Find the substring after `assistantfinal` (case-insensitive). If absent, treat as `truncated` → bucket `other`.
+2. Trim leading whitespace and punctuation; take the first content word.
+3. Map:
+   - First word matches `/^yes\b/i` → `yes`
+   - First word matches `/^no\b/i` → `no`
+   - Anything else (including hedges like "It depends", "Likely yes,", "Yes/no", "True", "False") → `other`
+4. If the analysis channel is missing entirely AND there's no final commit AND the text is meta-format commentary ("Could you clarify…", "The format requires…"), the result is `other` regardless of any later "yes/no" tokens — these are degenerate non-engagements.
+
+The harmony format makes parsing reliable; in the smoke test the `final` channel was a single word ("Yes." or "No."). Hand-spot-check the first 10 to confirm the regex still applies before bulk-classifying.
 
 ## Files
 - JSON: `data/sentence_sets/role_framing/lying_minimal_v1.json`
