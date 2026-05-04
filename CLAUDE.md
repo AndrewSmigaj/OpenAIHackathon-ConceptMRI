@@ -1,4 +1,4 @@
-Related: docs/architecturemud.md (if adding phases/skills), docs/PIPELINE.md (if changing pipeline stages), LLMud/VISION.md (if changing project scope)
+Related: docs/SOFTWARE_OVERVIEW.md (read FIRST before any probe design or platform change), docs/RECOMMENDATIONS.md (open improvements — append after each work session), docs/architecturemud.md (if adding phases/skills), docs/PIPELINE.md (if changing pipeline stages), LLMud/VISION.md (if changing project scope)
 
 # Open LLMRI — Claude Code Context Engineering Guide
 
@@ -12,6 +12,8 @@ Claude Code uses these guides to execute the full pipeline:
 | Guide | Purpose |
 |-------|---------|
 | `CLAUDE.md` | Project context, architecture rules, change management (this file) |
+| `docs/SOFTWARE_OVERVIEW.md` | **Conceptual anchor** — what the platform is, lens vocabulary, probe authoring rules, anti-patterns. Read before designing a probe or proposing a code change. |
+| `docs/RECOMMENDATIONS.md` | My recommendations to the user — open improvements, observations. Append after each major work session. |
 | `docs/PIPELINE.md` | Full analysis pipeline — orchestration runbook for Claude Code |
 | `docs/PROBES.md` | How to create and run probes via API |
 | `data/sentence_sets/GUIDE.md` | How to design and write sentence set JSON files |
