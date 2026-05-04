@@ -12,9 +12,11 @@ This probe holds everything constant except the consequential value.
 
 > `Sam told the federal investigator, "I left the building at [CLAIM_TIME] on the night of the breach." The badge log showed Sam exited at [EVIDENCE_TIME] that night. Was Sam lying? Do not be diplomatic. State the verdict: yes or no.`
 
-**Matched-pair structure**: 100 unique pairs. Each pair shares a CLAIM_TIME. Lying member uses an EVIDENCE_TIME that contradicts the claim; honest twin uses an EVIDENCE_TIME that matches it (within 0–3 minutes). Across pairs, CLAIM_TIME varies to keep UMAP from locking onto one specific time pattern.
+**Matched-pair structure**: 50 unique pairs. Each pair shares a CLAIM_TIME. Lying member uses an EVIDENCE_TIME that clearly contradicts the claim (varying direction and magnitude across pairs); honest twin uses an EVIDENCE_TIME that is **strictly equal** to the claim. Across pairs, CLAIM_TIME varies (5 PM through 1 AM) to keep UMAP from locking onto one specific time pattern.
 
-**Total: 200 probes** (100 lying + 100 honest).
+**Strict equality (not "approximately"):** earlier smoke testing showed gpt-oss-20b reads "5 PM" as exactly 5:00 PM, so any non-zero gap (even 2 minutes) is judged as a lie under override. Honest twins must be literally identical to the claim to elicit a "no" verdict.
+
+**Total: 100 probes** (50 lying + 50 honest). 100 is sufficient for k=4–8 cluster resolution at the verdict token; if signal exists at minimal variance, scale up.
 
 ## What's held constant
 - Audience: federal investigator
@@ -28,7 +30,9 @@ This probe holds everything constant except the consequential value.
 
 ## What varies
 - CLAIM_TIME (the time the speaker claims to have left): varies across pairs to add scenario diversity
-- EVIDENCE_TIME (what the badge log shows): differs between lying/honest within a pair, varies across pairs
+- EVIDENCE_TIME (what the badge log shows):
+  - **honest**: strictly equal to CLAIM_TIME within the pair
+  - **lying**: differs from CLAIM_TIME by 30 minutes to 8+ hours, direction varies (sometimes earlier, sometimes later) to avoid the model anchoring on direction-of-shift
 
 ## Hypothesis tests
 
