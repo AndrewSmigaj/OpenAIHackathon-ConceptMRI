@@ -1,0 +1,2183 @@
+{
+  "name": "help_direction_stakes_v3",
+  "version": "3.0",
+  "target_word": "help",
+  "groups": [
+    {
+      "label": "request",
+      "description": "Scene depicts the named character in need of help (asking). Uniform 2-sentence template: '[Setting], [Person] [neutral position]. [Reality showing person is in distress / needs help].'",
+      "sentences": [
+        {
+          "text": "Sentence: In the marble lobby of the Grand Hotel, Marcus stood near the front desk with his briefcase in hand. His left arm went numb and a crushing pressure spread across his chest as he sank slowly toward the floor. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 1
+          }
+        },
+        {
+          "text": "Sentence: At the bus stop on Hollis Avenue, Theodore stood near the bench in his evening coat. He pressed a hand against his ribs as a wave of cardiac pain spread across his chest and his breath caught in his throat. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 2
+          }
+        },
+        {
+          "text": "Sentence: Inside the steakhouse on Fifth Avenue, Bernard sat at table seven with a wine glass beside his plate. A wedge of beef had wedged in his airway and he was clutching his throat as the color drained from his face. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 3
+          }
+        },
+        {
+          "text": "Sentence: On the patio of the lakefront restaurant, Priya sat near the railing with a small plate of canap\u00e9s in front of her. Her throat had begun closing within seconds of the first bite and her face was swelling rapidly as the EpiPen sat forgotten at home. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 4
+          }
+        },
+        {
+          "text": "Sentence: At the swimming pool of the apartment complex, Devon stood near the lifeguard chair in shorts and a tank top. His asthma had flared sharply after the sprint to the pool and his rescue inhaler was still in the locker two buildings away. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 5
+          }
+        },
+        {
+          "text": "Sentence: At a bench in Lincoln Park, Eleanor sat near the rose garden with a paper bag from the bakery beside her. Her left side suddenly went limp and her words dissolved into garbled syllables as the stroke set in. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 6
+          }
+        },
+        {
+          "text": "Sentence: Behind the gymnasium bleachers at the high school, Halvard stood near the back fence in his coaching jacket. His asthma was tightening his chest and his rescue inhaler was sitting in the office across the parking lot. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 7
+          }
+        },
+        {
+          "text": "Sentence: On the third-floor hallway of the dormitory, Aurelia stood near the bathroom door in her pajamas. She had been in a quiet panic for the past hour and the razor in her hand was already pressed against her wrist. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 8
+          }
+        },
+        {
+          "text": "Sentence: On the highway shoulder of Route 491, Caleb stood beside the wreckage of a sedan with the engine still ticking. A chainsaw kickback earlier had opened a deep cut across his thigh and the makeshift cloth was already soaked through dark red. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 9
+          }
+        },
+        {
+          "text": "Sentence: Inside the snowbound cabin twenty miles from the road, Lucia sat on a folded blanket near the wood stove. Her labor had progressed faster than anyone expected and the baby was crowning while a snowstorm howled against the rattling windows. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 10
+          }
+        },
+        {
+          "text": "Sentence: On the sidewalk outside the Ainsley Arms apartments, Caspian stood near the front entrance in a windbreaker. Smoke was thickening through the third-floor hallway behind him and the stairwell was already glowing orange below the landing. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 11
+          }
+        },
+        {
+          "text": "Sentence: On the median of Harker Road, Florencia sat beside the crumpled minivan with the warning lights pulsing across the cracked dash. A deformed dashboard was pressing against her chest and her legs were trapped beneath the buckled steering column. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 12
+          }
+        },
+        {
+          "text": "Sentence: On the upper switchback of the Pemberton trail, Quinlan stood near a rocky outcrop in fading daylight. A snowstorm had set in unexpectedly and the map and compass had blown out of his pack hours ago. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 13
+          }
+        },
+        {
+          "text": "Sentence: On the porch of unit 3B, Henrietta stood near the open door in her bathrobe. A loud knock had her opening the door to a neighbor whose argument had escalated to broken glass and a child crying. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 14
+          }
+        },
+        {
+          "text": "Sentence: On the bathroom tile of the family home, Viola lay near the shower with her cane several feet out of reach. Her hip had given out at dawn and she had been on the cold tile for hours with no phone within reach. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 15
+          }
+        },
+        {
+          "text": "Sentence: On the bedroom landing of the second floor, Antonella stood near the top of the stairs in her nightgown. She could hear footsteps moving deliberately through the kitchen below and the children were sleeping across the hall with the landline downstairs. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 16
+          }
+        },
+        {
+          "text": "Sentence: On the dock at Lake Wenatchee, Tobenna stood near the moored skiff with the morning sun glinting off the water. His sailboat had drifted free in the wind and was now sinking near the rocks two miles offshore with his daughter still aboard. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 17
+          }
+        },
+        {
+          "text": "Sentence: On the basement landing of the cul-de-sac home, Genevieve stood near the warped door as the tornado siren wailed across the county. She was throwing herself against the door which refused to budge as the wind outside rose to a freight-train roar. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 18
+          }
+        },
+        {
+          "text": "Sentence: On the carpet of the family room, Rashmika stood near the open garage door with the television still murmuring behind her. The family cat had chewed through a bottle of antifreeze and the small body was now seizing on the concrete floor of the garage. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 19
+          }
+        },
+        {
+          "text": "Sentence: At the curb in front of a parked station wagon, Inez stood near the wreckage of a fallen oak in the driveway. Her brother was conscious but pinned inside the vehicle with the windshield buckled inward and the door frame visibly twisted. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 20
+          }
+        },
+        {
+          "text": "Sentence: At a desk in the trading office, Linnea stared at the dual monitors with a coffee cooling beside the keyboard. The half-million-dollar wire she had personally authorized was actually a forged executive instruction and the recall window was nine minutes from closing. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 21
+          }
+        },
+        {
+          "text": "Sentence: In the conference room of Pellinor Capital, Rashida stood beside the long table with a tablet in hand. Her credentials had been compromised and her account was actively sending wire-transfer instructions to vendors that she could not stop from her own login. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 22
+          }
+        },
+        {
+          "text": "Sentence: On the sidewalk outside the Lisbon train station, Hassan stood near the ATM with his luggage at his feet. The ATM had swallowed his only card with a mechanical thud and his return flight was three days away with eleven euros in cash. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 23
+          }
+        },
+        {
+          "text": "Sentence: At a corner table at the diner, Yusuf sat near the window refreshing the banking app on his phone. Another wire of fourteen thousand dollars was leaving his account and every fraud-line number he dialed went straight to looping menus. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 24
+          }
+        },
+        {
+          "text": "Sentence: At a workstation at Hartwell Bakery, Mira stood near the office printer with a sheaf of contracts in hand. Every workstation in the bakery now displayed the same crimson ransom countdown demanding two hundred bitcoin by Friday's deposit deadline. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 25
+          }
+        },
+        {
+          "text": "Sentence: On the porch of a rented bungalow, Brendan stood near the front door with a certified letter in hand. The letter set the foreclosure auction for noon that very day and the wire transfer to halt it was still unprocessed at his frozen credit union. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 26
+          }
+        },
+        {
+          "text": "Sentence: At a workstation at Whitcomb Holdings, Asher stood beside the server rack with a clipboard pressed against his chest. Just past midnight he had discovered that ledger tables for three subsidiaries had silently corrupted hours before the earnings filing. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 27
+          }
+        },
+        {
+          "text": "Sentence: On the porch of the family home, Octavia stood near the mailbox with a thick envelope in hand. The collections agent had left a third voicemail threatening to garnish wages and she had no documentation of the disputed surgery bill from two years prior. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 28
+          }
+        },
+        {
+          "text": "Sentence: On the porch of unit 4C, Rosalind stood near the doorbell with three children behind her in the hallway. An eviction notice was taped to the door giving her until eight the next morning with the landlord unreachable and rent owed. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 29
+          }
+        },
+        {
+          "text": "Sentence: At her desk in the small architectural firm, Reginald sat near the window with his laptop open. He had clicked the courier notification only after entering the codes and was now watching four retirement accounts drain to zero across separate browser tabs. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 30
+          }
+        },
+        {
+          "text": "Sentence: On the witness stand in the county courtroom, Carla stood near the microphone in a charcoal suit. She was being pressured by the defense attorney whose questions were edging toward intimidation and the bailiff had stepped briefly out. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 31
+          }
+        },
+        {
+          "text": "Sentence: At a desk in the precinct office, Halsted stood near the filing cabinet with a stack of incident reports in hand. A bystander video showing baton strikes from behind contradicted the report he had just filed and the deputy chief was walking toward his desk. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 32
+          }
+        },
+        {
+          "text": "Sentence: At the bay door of the Henderson Auto garage, Ramos stood near the lift with a clipboard pressed against his chest. He had certified the school bus brakes as sound this morning and the inspection report was now flagging two failed calipers and a leaking master cylinder. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 33
+          }
+        },
+        {
+          "text": "Sentence: On the upper deck of the Rivermont Tower construction site, Delaney stood near the rebar grid in his hard hat. The city inspector was arriving at three and his crew had skipped every third reinforcement bar to keep ahead of schedule. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 34
+          }
+        },
+        {
+          "text": "Sentence: At a desk in the public defender's office, Patel stood near the file cabinet with the Cordero case folder open. The opposing counsel's docket on the bench would shortly reveal the two felony entries she had failed to disclose to Judge Harlan. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 35
+          }
+        },
+        {
+          "text": "Sentence: At the front desk of the Lambert Hotel, Ortega stood near the binder of inspection records in a navy suit. The fire marshal was arriving any moment to verify quarterly sprinkler tests that had been skipped for eleven straight years. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 36
+          }
+        },
+        {
+          "text": "Sentence: On the porch of the Birchwood Apartments, Chen stood near the rainwater barrel in a button-down shirt. The county lab report locked in his desk drawer showed arsenic at three times the threshold and he had told tenants the water was clean. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 37
+          }
+        },
+        {
+          "text": "Sentence: On the loading dock at the freight depot, Garrison stood near the cab of his rig with a logbook in hand. He had logged eight hours of mandatory rest he had not taken and the dashcam footage would corroborate the truth before any audit. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 38
+          }
+        },
+        {
+          "text": "Sentence: On the gravel turnout overlooking the encampment, Donnelly stood near the cruiser with the body camera blinking on his shoulder. His radio call had described an unarmed suspect and the bodycam footage on his deputy's laptop showed a rifle slung across the suspect's back. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 39
+          }
+        },
+        {
+          "text": "Sentence: On the touchline of the soccer pitch, Talbert stood near the bench with a thermos in hand. He had reassured the parents the field had been swept for hazards and the groundskeeper had reported broken glass scattered near second base. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 40
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen island of the family home, Olivia stood near the refrigerator in her work blazer. Her husband Eliot was about to ask why she had been working late at the firm and the riverside hotel suite was already on her credit-card statement. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 41
+          }
+        },
+        {
+          "text": "Sentence: At the breakfast table of the Hartwell home, the eldest sister stood near the coffee pot with a manila folder in hand. She was about to be confronted with the hospital ledger showing matching wires from each sibling she had claimed to alone be paying. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 42
+          }
+        },
+        {
+          "text": "Sentence: On the front porch of the brownstone, Naomi stood near the railing with a thin envelope in hand. The oncologist's recent letter contradicted the remission story she had been telling Carla and the malignancy had spread to the spine. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 43
+          }
+        },
+        {
+          "text": "Sentence: On the kitchen counter of the Albright home, Mr Albright stood near the toaster with his teenage daughter halfway through breakfast. The unopened indictment paperwork on the counter would shortly contradict the story he had told her about her brother being cleared. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 44
+          }
+        },
+        {
+          "text": "Sentence: On the front step of his sister's house, Tomas stood near the doorbell with a small pouch in hand. The pawnshop receipt in his wallet would shortly contradict his story that the borrowed engagement ring was safely back in the deposit box. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 45
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen sink of the family home, Bridget stood near the medication cabinet with a blister pack in hand. She was about to be confronted by the Hartwell daughters with the four consecutive mornings of grandfather's untouched insulin doses. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 46
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen door of the rented apartment, Devon stood near the coat rack with a coffee in hand. His girlfriend Priya was about to find the weekend cabin booking with his former partner that he had told her was strictly platonic. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 47
+          }
+        },
+        {
+          "text": "Sentence: On the porch of the family home, Vargas stood near the front door with a key ring in hand. He had told the homeowner he had walked and fed the spaniels each evening and the dogs had been left alone for the entire vacation week. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 48
+          }
+        },
+        {
+          "text": "Sentence: At the dining table of his elderly parents' home, Matthew stood near the credenza with a brokerage statement in hand. He had moved the entire balance of the joint account to a brokerage under his name and the statement on the table would shortly reveal it. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 49
+          }
+        },
+        {
+          "text": "Sentence: On the threshold of the bridal suite, Renata stood near the doorframe with a folded document in hand. She had told her fiance the prenuptial agreement was countersigned by both attorneys when only her side had executed it. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 50
+          }
+        },
+        {
+          "text": "Sentence: At the corner caf\u00e9 on Elm Street, Pilar stood near the door with a paper bag in hand. She realized she had locked her keys inside the car and the manager had already left for the afternoon. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 51
+          }
+        },
+        {
+          "text": "Sentence: In the kitchen of the small apartment, Wesley stood at the counter with a recipe card laid out beside the stove. He could not figure out which substitution would work for the buttermilk that the casserole instructions called for. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 52
+          }
+        },
+        {
+          "text": "Sentence: In the upstairs hallway of the family home, Bridget knelt near the bedroom door with a small can of lubricant. She could not figure out whether the squeaky hinge needed oil or simply a tighter set of screws to fix the creak. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 53
+          }
+        },
+        {
+          "text": "Sentence: In the spare bedroom of the rental, Magdalena stood near the empty wall with three paint chip strips in hand. She could not decide between the soft sage and the dusty blue and her partner had already gone to bed for the night. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 54
+          }
+        },
+        {
+          "text": "Sentence: At the back patio of the family home, Tyrell stood near the lawn mower with a frayed starter rope in his gloved hand. He could not thread the new replacement through the spool the way the manual had described and the lawn was waiting. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 55
+          }
+        },
+        {
+          "text": "Sentence: On the kitchen step stool, Renata stood near the open kitchen window with a screen patch kit on the sill. She could not remember whether the patch kit in the drawer used adhesive or fine wire mesh and the morning light made the tear sharper. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 56
+          }
+        },
+        {
+          "text": "Sentence: At the workshop bench in the garage, Reginald stood near a loose dining chair with three screwdrivers laid in a row. He could not tell whether the wobbly leg needed a hex key or a regular Phillips screwdriver and he was running out of light. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 57
+          }
+        },
+        {
+          "text": "Sentence: In the home goods store bath aisle, Marigold stood near the shower-curtain display with a rolled package in hand. She could not decide between the cheerful botanical print and the calmer linen-textured neutral for the upstairs bathroom. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 58
+          }
+        },
+        {
+          "text": "Sentence: On the kitchen counter of the family home, Eleanor stood near the cabinet with a small antibiotic vial in hand. She could not read the dosing instructions on the smudged pharmacy sticker and the reading glasses were two rooms away. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "pair_id": 59
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen table of the small apartment, Devon sat near the cereal box with a brand-new pill organizer open in front of him. He could not figure out how to schedule his morning vitamins around the two evening tablets the pharmacist had mentioned earlier. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "pair_id": 60
+          }
+        },
+        {
+          "text": "Sentence: At the office cubicle on the third floor, Marisol stood near her desk with two empty paper coffee cups in hand. She had pulled an early shift and her energy was crashing as the routine afternoon spreadsheet stretched out before her. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 61
+          }
+        },
+        {
+          "text": "Sentence: At the conference table on the second floor, Yolanda sat near the projector with a presentation deck open on the laptop. She had not yet ordered her chart cleanly and the partner review was at four with two case studies still misordered. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 62
+          }
+        },
+        {
+          "text": "Sentence: At the standup whiteboard in the open-plan office, Owen stood near the laptop with the meeting notes loaded. His sore throat had grown worse overnight and he could barely speak as his status updates sat in his calendar for the morning. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 63
+          }
+        },
+        {
+          "text": "Sentence: At the engineering pair-station near the window, Marcus stood near the dual monitor with a notebook in hand. His off-by-one bug had been resisting him for two days and the staging environment was about to lock for the release window. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 64
+          }
+        },
+        {
+          "text": "Sentence: At the executive assistant's desk in the boardroom hallway, Beatrice stood near the conference room with a stack of folders. She had not yet arranged the placards or refilled the water and the directors were arriving in fifteen minutes for the briefing. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 65
+          }
+        },
+        {
+          "text": "Sentence: At the printer alcove on the marketing floor, Adeola stood near the copier with a stack of memos in hand. She could not clear a stubborn paper jam in the back tray and the marketing meeting was about to begin in five minutes. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 66
+          }
+        },
+        {
+          "text": "Sentence: At his desk between meetings, Roland sat near the laptop with a half-eaten sandwich and a coffee cup. He could not align his title and phone extension into a tidy block and the email signature editor was acting strangely. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 67
+          }
+        },
+        {
+          "text": "Sentence: At the kitchenette in the office, Tomas stood near the espresso machine with a sticky note pad in hand. He had forgotten the keystrokes for the pivot table shortcut he had used last week and the report was already overdue. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 68
+          }
+        },
+        {
+          "text": "Sentence: At the new hire onboarding cubicle, Karim sat near the laptop with the timesheet portal open on the screen. He could not figure out how to access the badge system and the HR rep had stepped out for lunch fifteen minutes earlier. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 69
+          }
+        },
+        {
+          "text": "Sentence: At the developer pair-station, Holly sat near the monitor with a personal notebook in front of her. She could not get conditional formatting to color-code the overdue invoices the way the manual had described. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 70
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen counter on Sunday afternoon, Theodora stood near the math worksheet with her son nearby on a stool. She could not remember the long division steps her son was asking about and her own notes from school were buried somewhere upstairs. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 71
+          }
+        },
+        {
+          "text": "Sentence: At the sunlit dining table on Saturday morning, Rashid sat near the geography flashcards with a stack of small stickers. He could not pronounce the Eastern European capitals on the flashcards and his daughter was about to start her quiz. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 72
+          }
+        },
+        {
+          "text": "Sentence: On the sunlit stretch of the cul-de-sac, the older sister stood near the bicycle with the seat balanced in one hand. She had not ridden a bike in twenty years and her own balance was wobbling badly as the morning got hotter. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 73
+          }
+        },
+        {
+          "text": "Sentence: On the slow Sunday afternoon, Grandpa Zoltan sat near the kitchen counter with a flour-dusted recipe card in hand. He could not remember the right dough proportions for the pierogi and his daughter was waiting for the family lunch tradition to start. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 74
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen island after a long workday, Esteban stood near the cutting board with a podcast playing softly. He had not slept well and could not remember the order in which the sheet pan dinner came together for his exhausted partner. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 75
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen island on Saturday morning, Brenden stood near the counter with the air fryer manual spread open. He could not find the chicken thigh preset on the new air fryer and his partner was waiting on dinner with two hungry kids. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "pair_id": 76
+          }
+        },
+        {
+          "text": "Sentence: On the empty Sunday parking lot, Janelle sat near the driver's seat with her seventeen-year-old nephew nervously in the passenger. She could not parallel park well herself and the road test rules for nephew's exam included parallel parking through orange cones. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 77
+          }
+        },
+        {
+          "text": "Sentence: On the rocking chair in the children's room, Grandma Lillemor sat near the bookshelf with a small lamp glowing. She could not remember which dragon storybook her grandson had wanted at bedtime and the rest of the books had been moved. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 78
+          }
+        },
+        {
+          "text": "Sentence: On the Sunday family lunch, Cordelia stood near the kitchen door with the recycling bin in hand. She had been hauling for an hour and her back was complaining as the trash bin still needed to be wheeled to the curb. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 79
+          }
+        },
+        {
+          "text": "Sentence: On the way home from work, Saoirse stood near the dry cleaner counter with a printed pickup ticket in hand. She could not find her wife's pressed slacks on the rack and the slip in her hand had a smudged number. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 80
+          }
+        },
+        {
+          "text": "Sentence: At the indie bookstore on the corner, the clerk stood near the new fiction shelves with a stack of recent releases. She could not remember which of the new releases the regular had been asking about and the customer was already pacing the aisle. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 81
+          }
+        },
+        {
+          "text": "Sentence: At the morning corner caf\u00e9, Octavio stood near the espresso machine with a notepad in hand. He had forgotten which custom blend the regular wanted with the half-caf cortado and the order line was lengthening. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 82
+          }
+        },
+        {
+          "text": "Sentence: At the running shop on Saturday morning, Nyree stood near the carpeted strip with three shoeboxes in hand. She could not match her own foot to the right size in the new model and the shop was about to close for the day. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 83
+          }
+        },
+        {
+          "text": "Sentence: At the family-run garage on the corner, Kowalski stood near the open hood with a shop rag in hand. He could not remember the routine oil change tier his own sedan needed and the manufacturer chart was tucked away in the back office. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 84
+          }
+        },
+        {
+          "text": "Sentence: At the plant nursery on Saturday morning, Octavia stood near the perennial racks with earth-stained gloves on her hands. She could not remember the watering schedule for her own newly potted fiddle-leaf fig and the care card had blown away in the wind. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 85
+          }
+        },
+        {
+          "text": "Sentence: At the bistro on Friday evening, Bonifacio stood near the corner with a soft cloth in hand. He could not find the high chair for his own toddler at his table and his partner was already getting frustrated. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 86
+          }
+        },
+        {
+          "text": "Sentence: At the front desk of the boutique hotel, Marguerite stood near the conference phone with a printed schedule. She could not remember the booking process for her own anniversary spa appointment and the spa was closing in twenty minutes. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 87
+          }
+        },
+        {
+          "text": "Sentence: At the neighborhood drugstore counter, Abernathy stood near the register with a printed leaflet in hand. She could not remember the routine interaction between her own statin and the new vitamin she had been thinking about. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 88
+          }
+        },
+        {
+          "text": "Sentence: At the boutique counter on Saturday afternoon, Henrietta stood near the alterations table with a slim merino cardigan. She could not figure out how to mark the cuff alteration on her own purchase before the alterations cutoff for the week. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "pair_id": 89
+          }
+        },
+        {
+          "text": "Sentence: At the bakery counter on Saturday morning, Ngozi stood near the decorating table with a piping bag in hand. She could not remember the right rosette technique for her own cake order and the customer was waiting at the counter. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 90
+          }
+        },
+        {
+          "text": "Sentence: At the elevator bank in the apartment building, Eduarda stood near the door panel with a tote bag over her shoulder. She was juggling four grocery bags and her own front door key had slipped to the bottom of the bag with the elevator about to leave. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 91
+          }
+        },
+        {
+          "text": "Sentence: At the bakery entrance on the busy Saturday, Miriam stood near the heavy glass door with a coffee in hand. She was wrestling with a wide stroller and a diaper bag through the narrow vestibule and the door kept swinging closed. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 92
+          }
+        },
+        {
+          "text": "Sentence: At the cathedral plaza on the busy afternoon, Kwame stood near the fountain with a backpack on his shoulder. He was trying to take his own selfie with the spires behind him and the camera kept tilting strangely on the timer. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 93
+          }
+        },
+        {
+          "text": "Sentence: On the busy Ninth and Maple corner, Bartholomew stood near the bus shelter with a folded transit pamphlet in hand. He could not figure out which downtown bus he should take to reach the river walk before sunset. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 94
+          }
+        },
+        {
+          "text": "Sentence: On the canned goods aisle of the grocery store, Tobias stood near the top shelf with a basket on his arm. He could not reach the box of pasta on the top shelf and the staff member who usually assisted was already across the store. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 95
+          }
+        },
+        {
+          "text": "Sentence: On the morning commuter train, Hawthorne stood near the metal pole with a leather bag at his feet. He had pulled a long shift and was leaning against the pole as the train rocked and his knees ached on the long ride. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 96
+          }
+        },
+        {
+          "text": "Sentence: On the dog park on Saturday morning, Ignatius stood near the small-dog gate with a backpack at his feet. His own retriever had slipped the leash and was now darting between the picnic tables on the far side of the park. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 97
+          }
+        },
+        {
+          "text": "Sentence: On the front porch of the family home, Calloway stood near the mailbox with a stack of catalogs in hand. He could not remember whether the porch ferns needed water this morning and the family was due back tomorrow. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 98
+          }
+        },
+        {
+          "text": "Sentence: At the supermarket parking lot, Donatella stood near her station wagon with a set of jumper cables in hand. Her own battery had died after the lights ran overnight and she could not get a hold of the auto club on her phone. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 99
+          }
+        },
+        {
+          "text": "Sentence: At the community garden gate on Saturday morning, the longtime regular stood near the herb bed with a pruning shears in hand. She could not remember the right pruning angle for the rosemary and the garden coordinator had stepped away for an hour. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 100
+          }
+        }
+      ]
+    },
+    {
+      "label": "offer",
+      "description": "Scene depicts the named character providing help (offering). Same uniform template but second sentence reveals the named character is responding to a different patient.",
+      "sentences": [
+        {
+          "text": "Sentence: In the marble lobby of the Grand Hotel, Marcus stood near the front desk with his briefcase in hand. An older guest had collapsed near the registration counter and Marcus moved toward her with his off-duty paramedic credentials ready. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 1
+          }
+        },
+        {
+          "text": "Sentence: At the bus stop on Hollis Avenue, Theodore stood near the bench in his evening coat. An older woman had slumped sideways onto the bench clutching her ribs and Theodore knelt beside her to begin chest compressions. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 2
+          }
+        },
+        {
+          "text": "Sentence: Inside the steakhouse on Fifth Avenue, Bernard sat at table seven with a wine glass beside his plate. The bride's father was clutching his throat at the head table and Bernard set down his wine to administer abdominal thrusts. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 3
+          }
+        },
+        {
+          "text": "Sentence: On the patio of the lakefront restaurant, Priya sat near the railing with a small plate of canap\u00e9s in front of her. A guest at the next table was gasping with rapid swelling around the lips and Priya pulled the spare EpiPen from her purse. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 4
+          }
+        },
+        {
+          "text": "Sentence: At the swimming pool of the apartment complex, Devon stood near the lifeguard chair in shorts and a tank top. A fourteen-year-old was wheezing harshly behind the deck chairs and Devon pulled out his rescue inhaler and a spacer to demonstrate. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 5
+          }
+        },
+        {
+          "text": "Sentence: At a bench in Lincoln Park, Eleanor sat near the rose garden with a paper bag from the bakery beside her. An older runner had collapsed on the path with one side of his face drooping and Eleanor moved to call emergency services and stabilize him. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 6
+          }
+        },
+        {
+          "text": "Sentence: Behind the gymnasium bleachers at the high school, Halvard stood near the back fence in his coaching jacket. A student athlete was wheezing hard against the chain-link fence and Halvard pulled out a spare inhaler from his coaching kit. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 7
+          }
+        },
+        {
+          "text": "Sentence: On the third-floor hallway of the dormitory, Aurelia stood near the bathroom door in her pajamas. Her roommate was crying behind a locked stall with a razor balanced against her wrist and Aurelia called the campus crisis line as she knocked. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 8
+          }
+        },
+        {
+          "text": "Sentence: On the highway shoulder of Route 491, Caleb stood beside the wreckage of a sedan with the engine still ticking. The driver of the sedan was bleeding heavily from a thigh laceration and Caleb pulled out his trauma kit with the tourniquet ready. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 9
+          }
+        },
+        {
+          "text": "Sentence: Inside the snowbound cabin twenty miles from the road, Lucia sat on a folded blanket near the wood stove. Her sister-in-law was in active labor on the cabin floor with the baby crowning and Lucia spread a clean blanket and coached the breathing. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 10
+          }
+        },
+        {
+          "text": "Sentence: On the sidewalk outside the Ainsley Arms apartments, Caspian stood near the front entrance in a windbreaker. Smoke was pouring from the third-floor windows and Caspian was already pounding on doors and pulling residents toward the back stairwell. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 11
+          }
+        },
+        {
+          "text": "Sentence: On the median of Harker Road, Florencia sat beside the crumpled minivan with the warning lights pulsing across the cracked dash. A driver was pinned inside the minivan with the steering column crushed against her chest and Florencia was reaching through the broken window to apply pressure. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 12
+          }
+        },
+        {
+          "text": "Sentence: On the upper switchback of the Pemberton trail, Quinlan stood near a rocky outcrop in fading daylight. A lost hiker was huddled against the rocks shivering hard and Quinlan pulled out his thermal blanket and emergency beacon to call mountain rescue. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 13
+          }
+        },
+        {
+          "text": "Sentence: On the porch of unit 3B, Henrietta stood near the open door in her bathrobe. The screams from unit 3A had escalated past breaking glass and Henrietta was already on the phone with police while moving toward the unit. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 14
+          }
+        },
+        {
+          "text": "Sentence: On the bathroom tile of the family home, Viola lay near the shower with her cane several feet out of reach. Her grandmother was sprawled on the bathroom floor breathing shallowly after a fall and Viola was carrying her toward the warmth of the bedroom. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 15
+          }
+        },
+        {
+          "text": "Sentence: On the bedroom landing of the second floor, Antonella stood near the top of the stairs in her nightgown. A frightened neighbor had called about an intruder downstairs and Antonella was moving toward the stairs with her phone dialing the police. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 16
+          }
+        },
+        {
+          "text": "Sentence: On the dock at Lake Wenatchee, Tobenna stood near the moored skiff with the morning sun glinting off the water. A small dinghy was foundering near the channel marker with two passengers aboard and Tobenna was pushing his skiff into the water. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 17
+          }
+        },
+        {
+          "text": "Sentence: On the basement landing of the cul-de-sac home, Genevieve stood near the warped door as the tornado siren wailed across the county. An elderly couple were trapped behind a jammed basement door of the next house and Genevieve was kicking through the warped frame with her shoulder. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 18
+          }
+        },
+        {
+          "text": "Sentence: On the carpet of the family room, Rashmika stood near the open garage door with the television still murmuring behind her. A neighbor's dog had eaten rat poison and was staggering in the next driveway and Rashmika was already on the phone with the emergency veterinarian. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 19
+          }
+        },
+        {
+          "text": "Sentence: At the curb in front of a parked station wagon, Inez stood near the wreckage of a fallen oak in the driveway. An elderly passenger was tapping faintly on the cracked window of a sedan crushed beneath a fallen pine and Inez was prying at the trunk with a tire iron. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "emergency",
+            "pair_id": 20
+          }
+        },
+        {
+          "text": "Sentence: At a desk in the trading office, Linnea stared at the dual monitors with a coffee cooling beside the keyboard. A junior analyst at the next desk had just realized she had wired half a million on a forged instruction and Linnea grabbed the desk phone to call the wire room. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 21
+          }
+        },
+        {
+          "text": "Sentence: In the conference room of Pellinor Capital, Rashida stood beside the long table with a tablet in hand. The general counsel's email had been compromised and was sending wire instructions to vendors and Rashida was already on the security line to revoke the credentials. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 22
+          }
+        },
+        {
+          "text": "Sentence: On the sidewalk outside the Lisbon train station, Hassan stood near the ATM with his luggage at his feet. A traveler had had her card swallowed by the ATM with no working SIM and Hassan offered her his phone and a translation app to call the bank. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 23
+          }
+        },
+        {
+          "text": "Sentence: At a corner table at the diner, Yusuf sat near the window refreshing the banking app on his phone. The friend across the booth was watching her own savings drain in real time and Yusuf pulled up the bank's emergency consumer-fraud number on his phone. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 24
+          }
+        },
+        {
+          "text": "Sentence: At a workstation at Hartwell Bakery, Mira stood near the office printer with a sheaf of contracts in hand. A small architectural firm next door had its entire archive locked behind a ransom screen and Mira was already drafting an incident response with her cybersecurity contacts. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 25
+          }
+        },
+        {
+          "text": "Sentence: On the porch of a rented bungalow, Brendan stood near the front door with a certified letter in hand. A neighbor was pacing the next porch with the same kind of foreclosure notice and Brendan crossed the lawn to dial the legal aid hotline together. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 26
+          }
+        },
+        {
+          "text": "Sentence: At a workstation at Whitcomb Holdings, Asher stood beside the server rack with a clipboard pressed against his chest. The subsidiary CFO across the floor had just discovered corrupted ledger tables and Asher was already mounting an offline backup tape from cold storage. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 27
+          }
+        },
+        {
+          "text": "Sentence: On the porch of the family home, Octavia stood near the mailbox with a thick envelope in hand. An elderly neighbor was being threatened by a collections agent over a disputed bill and Octavia walked over with the consumer-protection form and her notary stamp. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 28
+          }
+        },
+        {
+          "text": "Sentence: On the porch of unit 4C, Rosalind stood near the doorbell with three children behind her in the hallway. A young mother in unit 5B had just been served an eviction notice and Rosalind was packing her children's overnight bags and dialing the tenant union. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 29
+          }
+        },
+        {
+          "text": "Sentence: At her desk in the small architectural firm, Reginald sat near the window with his laptop open. A coworker across the room had just been phished and was watching her accounts drain and Reginald was already on the bank's fraud line forcing a freeze. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 30
+          }
+        },
+        {
+          "text": "Sentence: On the witness stand in the county courtroom, Carla stood near the microphone in a charcoal suit. A nervous witness in the next chair was being intimidated by aggressive cross-examination and Carla raised her hand to flag the judge for a recess. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 31
+          }
+        },
+        {
+          "text": "Sentence: At a desk in the precinct office, Halsted stood near the filing cabinet with a stack of incident reports in hand. A junior officer was about to file a falsified use-of-force report and Halsted intercepted him at the printer with a copy of the bystander video. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 32
+          }
+        },
+        {
+          "text": "Sentence: At the bay door of the Henderson Auto garage, Ramos stood near the lift with a clipboard pressed against his chest. A school bus driver had just been told the brakes were sound by another mechanic and Ramos walked her over to show the inspection findings. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 33
+          }
+        },
+        {
+          "text": "Sentence: On the upper deck of the Rivermont Tower construction site, Delaney stood near the rebar grid in his hard hat. A junior foreman on the next floor had skipped reinforcement bars and Delaney climbed the ladder with a warning and the corrected pour schedule. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 34
+          }
+        },
+        {
+          "text": "Sentence: At a desk in the public defender's office, Patel stood near the file cabinet with the Cordero case folder open. A first-year defender was about to file a motion missing two prior convictions and Patel walked over with the FBI rap sheet to brief her. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 35
+          }
+        },
+        {
+          "text": "Sentence: At the front desk of the Lambert Hotel, Ortega stood near the binder of inspection records in a navy suit. A sister property's manager was about to lie to the fire marshal about sprinkler tests and Ortega was already pulling the actual maintenance binders from the safe. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 36
+          }
+        },
+        {
+          "text": "Sentence: On the porch of the Birchwood Apartments, Chen stood near the rainwater barrel in a button-down shirt. A landlord on the next block was about to lie to tenants about water safety and Chen brought over the actual lab printouts to confront him before the meeting. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 37
+          }
+        },
+        {
+          "text": "Sentence: On the loading dock at the freight depot, Garrison stood near the cab of his rig with a logbook in hand. A junior driver was about to falsify rest hours in the federal log and Garrison stopped him at the desk to walk through the dashcam record. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 38
+          }
+        },
+        {
+          "text": "Sentence: On the gravel turnout overlooking the encampment, Donnelly stood near the cruiser with the body camera blinking on his shoulder. A junior deputy was about to radio in a misdescription of the suspect and Donnelly waved him over to the laptop showing the bodycam clip. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 39
+          }
+        },
+        {
+          "text": "Sentence: On the touchline of the soccer pitch, Talbert stood near the bench with a thermos in hand. A volunteer coach on the next field was about to send children onto unswept ground and Talbert walked over with the groundskeeper's hazard report. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 40
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen island of the family home, Olivia stood near the refrigerator in her work blazer. Her sister-in-law was about to confront her own spouse about an affair and Olivia was already pulling out the printed text-message thread for support. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 41
+          }
+        },
+        {
+          "text": "Sentence: At the breakfast table of the Hartwell home, the eldest sister stood near the coffee pot with a manila folder in hand. Her younger brother was about to confront the family with hospital ledger evidence and the eldest sister had pulled together the receipts to back his account. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 42
+          }
+        },
+        {
+          "text": "Sentence: On the front porch of the brownstone, Naomi stood near the railing with a thin envelope in hand. Carla was about to be told a false remission story by another relative and Naomi brought over the actual oncologist's letter to gently correct the record. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 43
+          }
+        },
+        {
+          "text": "Sentence: On the kitchen counter of the Albright home, Mr Albright stood near the toaster with his teenage daughter halfway through breakfast. His daughter was about to be told her brother was cleared by another adult in the family and Mr Albright pulled out the actual indictment paperwork to set the record straight. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 44
+          }
+        },
+        {
+          "text": "Sentence: On the front step of his sister's house, Tomas stood near the doorbell with a small pouch in hand. His sister was about to be told the missing ring was safe by their cousin and Tomas pulled the pawnshop receipt to gently disclose what had really happened. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 45
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen sink of the family home, Bridget stood near the medication cabinet with a blister pack in hand. A relative caregiver next door had been skipping her grandfather's insulin and Bridget brought over the dosing chart and a referral to a licensed home aide. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 46
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen door of the rented apartment, Devon stood near the coat rack with a coffee in hand. His friend was about to be lied to by her boyfriend about a former partner and Devon brought over the booking screenshot he had inadvertently witnessed. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 47
+          }
+        },
+        {
+          "text": "Sentence: On the porch of the family home, Vargas stood near the front door with a key ring in hand. A neighbor's pet sitter had been neglecting the spaniels for a week and Vargas had brought over food, water, and a written report for the homeowner returning that night. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 48
+          }
+        },
+        {
+          "text": "Sentence: At the dining table of his elderly parents' home, Matthew stood near the credenza with a brokerage statement in hand. His aging parents were about to be deceived by another adult child about their savings and Matthew brought over the brokerage statements showing the unauthorized transfers. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 49
+          }
+        },
+        {
+          "text": "Sentence: On the threshold of the bridal suite, Renata stood near the doorframe with a folded document in hand. Her closest friend was about to walk down the aisle with an unfinished prenup and Renata gently produced the signature page that had not been returned. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 50
+          }
+        },
+        {
+          "text": "Sentence: At the corner caf\u00e9 on Elm Street, Pilar stood near the door with a paper bag in hand. A tourist was struggling to wedge a bulky suitcase past the narrow doorway and Pilar turned to guide it through with a friendly word. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 51
+          }
+        },
+        {
+          "text": "Sentence: In the kitchen of the small apartment, Wesley stood at the counter with a recipe card laid out beside the stove. His sister was at the next stove fumbling with the same recipe and Wesley walked through the buttermilk substitute on a sticky note for her. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 52
+          }
+        },
+        {
+          "text": "Sentence: In the upstairs hallway of the family home, Bridget knelt near the bedroom door with a small can of lubricant. A neighbor down the block was puzzling over a creaky hinge and Bridget walked over with the lubricant and a small philips screwdriver. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 53
+          }
+        },
+        {
+          "text": "Sentence: In the spare bedroom of the rental, Magdalena stood near the empty wall with three paint chip strips in hand. Her best friend was wrestling with the same paint decision next door and Magdalena brought the swatches and the morning-light comparison cards over. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 54
+          }
+        },
+        {
+          "text": "Sentence: At the back patio of the family home, Tyrell stood near the lawn mower with a frayed starter rope in his gloved hand. His brother-in-law had been struggling with the same starter rope replacement and Tyrell crossed the yard with the spool tool and the manual. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 55
+          }
+        },
+        {
+          "text": "Sentence: On the kitchen step stool, Renata stood near the open kitchen window with a screen patch kit on the sill. A neighbor was puzzling over a torn window screen on the back porch and Renata brought over her patch kit with a quick demonstration. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 56
+          }
+        },
+        {
+          "text": "Sentence: At the workshop bench in the garage, Reginald stood near a loose dining chair with three screwdrivers laid in a row. His older neighbor was working on a wobbly chair on his back porch and Reginald walked over with the right hex key and a small mallet. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 57
+          }
+        },
+        {
+          "text": "Sentence: In the home goods store bath aisle, Marigold stood near the shower-curtain display with a rolled package in hand. Her sister was paralyzed between two shower curtains in the next aisle and Marigold brought the comparison cards over with a quick verdict. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 58
+          }
+        },
+        {
+          "text": "Sentence: On the kitchen counter of the family home, Eleanor stood near the cabinet with a small antibiotic vial in hand. Her elderly father was puzzling over a pharmacy label at the next house and Eleanor brought over a magnifier and a printed dosage chart. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "pair_id": 59
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen table of the small apartment, Devon sat near the cereal box with a brand-new pill organizer open in front of him. His mother was filling her own pill organizer at the next chair and Devon walked her through the schedule on a printed weekly chart. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical",
+            "pair_id": 60
+          }
+        },
+        {
+          "text": "Sentence: At the office cubicle on the third floor, Marisol stood near her desk with two empty paper coffee cups in hand. Her deskmate was yawning over a third spreadsheet on the next chair and Marisol stopped by the break room to bring back two oat-milk cappuccinos. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 61
+          }
+        },
+        {
+          "text": "Sentence: At the conference table on the second floor, Yolanda sat near the projector with a presentation deck open on the laptop. Her mentee was preparing for the partner review and Yolanda walked through tighter headlines and a cleaner chart for the deck. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 62
+          }
+        },
+        {
+          "text": "Sentence: At the standup whiteboard in the open-plan office, Owen stood near the laptop with the meeting notes loaded. His teammate had called out with a sore throat and Owen quietly took over the standup, sharing her status updates and noting follow-ups for her. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 63
+          }
+        },
+        {
+          "text": "Sentence: At the engineering pair-station near the window, Marcus stood near the dual monitor with a notebook in hand. His junior teammate was wrestling with the same off-by-one bug and Marcus pulled up a chair to narrate the debugging steps and unblock her. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 64
+          }
+        },
+        {
+          "text": "Sentence: At the executive assistant's desk in the boardroom hallway, Beatrice stood near the conference room with a stack of folders. Her counterpart on the next floor was overwhelmed by the same setup task and Beatrice carried over a fresh pitcher of water and a stack of placards. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 65
+          }
+        },
+        {
+          "text": "Sentence: At the printer alcove on the marketing floor, Adeola stood near the copier with a stack of memos in hand. A grateful coworker was crouched at the copier struggling with a paper jam and Adeola opened the back tray and reset the queue with a few quick movements. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 66
+          }
+        },
+        {
+          "text": "Sentence: At his desk between meetings, Roland sat near the laptop with a half-eaten sandwich and a coffee cup. A coworker on the next desk was wrestling with the email signature editor and Roland walked her through the formatting toggles step by step. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 67
+          }
+        },
+        {
+          "text": "Sentence: At the kitchenette in the office, Tomas stood near the espresso machine with a sticky note pad in hand. A small group of curious teammates were gathered around the spreadsheet and Tomas demonstrated the pivot table shortcut on a sticky note for them. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 68
+          }
+        },
+        {
+          "text": "Sentence: At the new hire onboarding cubicle, Karim sat near the laptop with the timesheet portal open on the screen. A new analyst at the next desk was struggling with the same onboarding portal and Karim slid his chair over to walk her through the badge access screens. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 69
+          }
+        },
+        {
+          "text": "Sentence: At the developer pair-station, Holly sat near the monitor with a personal notebook in front of her. A small group at the next table was wrestling with conditional formatting and Holly used her lunch break to walk them through color-coding overdue invoices. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 70
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen counter on Sunday afternoon, Theodora stood near the math worksheet with her son nearby on a stool. Her son was working through a long division worksheet at the table and Theodora walked through each problem step on a fresh sheet of grid paper. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 71
+          }
+        },
+        {
+          "text": "Sentence: At the sunlit dining table on Saturday morning, Rashid sat near the geography flashcards with a stack of small stickers. His daughter was practicing geography flashcards on the next chair and Rashid quizzed her on the capitals and rewarded correct streaks with stickers. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 72
+          }
+        },
+        {
+          "text": "Sentence: On the sunlit stretch of the cul-de-sac, the older sister stood near the bicycle with the seat balanced in one hand. Her younger brother was wobbling on his new bicycle on the sidewalk and the older sister jogged behind him steadying the seat. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 73
+          }
+        },
+        {
+          "text": "Sentence: On the slow Sunday afternoon, Grandpa Zoltan sat near the kitchen counter with a flour-dusted recipe card in hand. His granddaughter was attempting the family pierogi recipe at the next counter and Grandpa Zoltan dictated the dough proportions and demonstrated the fold. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 74
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen island after a long workday, Esteban stood near the cutting board with a podcast playing softly. His partner had pulled twelve hours and was crashing on the couch and Esteban chopped the vegetables and assembled the sheet pan dinner himself. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 75
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen island on Saturday morning, Brenden stood near the counter with the air fryer manual spread open. His sister had just unboxed the same air fryer at the next counter and Brenden walked her through the chicken thigh preset and recommended preheat. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical",
+            "pair_id": 76
+          }
+        },
+        {
+          "text": "Sentence: On the empty Sunday parking lot, Janelle sat near the driver's seat with her seventeen-year-old nephew nervously in the passenger. Her nephew was nervously practicing parallel parking and Janelle coached him through smooth lane changes between two orange cones. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 77
+          }
+        },
+        {
+          "text": "Sentence: On the rocking chair in the children's room, Grandma Lillemor sat near the bookshelf with a small lamp glowing. Her grandson was tired and asking for the dragon storybook and Grandma Lillemor read three picture books in a calm voice until his eyelids drooped. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 78
+          }
+        },
+        {
+          "text": "Sentence: On the Sunday family lunch, Cordelia stood near the kitchen door with the recycling bin in hand. Her parents were finishing up the family lunch and Cordelia carried the recycling and the trash bag to the curb without being asked. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 79
+          }
+        },
+        {
+          "text": "Sentence: On the way home from work, Saoirse stood near the dry cleaner counter with a printed pickup ticket in hand. Her wife had been pulling long hours all week and Saoirse swung by the dry cleaner unprompted and hung the pressed slacks in the hall closet. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 80
+          }
+        },
+        {
+          "text": "Sentence: At the indie bookstore on the corner, the clerk stood near the new fiction shelves with a stack of recent releases. A regular customer was pacing the new fiction shelves and the clerk brought over three quiet literary picks tucked under one arm. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 81
+          }
+        },
+        {
+          "text": "Sentence: At the morning corner caf\u00e9, Octavio stood near the espresso machine with a notepad in hand. A regular customer had walked in and Octavio started preparing the half-caf oat-milk cortado with two pumps of vanilla before the order was even spoken. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 82
+          }
+        },
+        {
+          "text": "Sentence: At the running shop on Saturday morning, Nyree stood near the carpeted strip with three shoeboxes in hand. A customer was shifting her weight in two different sizes on the carpeted strip and Nyree brought out a half-size up, a wide width, and a recommended insole. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 83
+          }
+        },
+        {
+          "text": "Sentence: At the family-run garage on the corner, Kowalski stood near the open hood with a shop rag in hand. A customer was puzzling over the routine oil change options and Kowalski explained the synthetic versus conventional intervals and the price difference. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 84
+          }
+        },
+        {
+          "text": "Sentence: At the plant nursery on Saturday morning, Octavia stood near the perennial racks with earth-stained gloves on her hands. A new gardener was wandering the perennial aisle in obvious confusion and Octavia walked beside her explaining watering schedules and sunlight needs. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 85
+          }
+        },
+        {
+          "text": "Sentence: At the bistro on Friday evening, Bonifacio stood near the corner with a soft cloth in hand. A family of four had just walked in and Bonifacio grabbed a clean high chair from the corner, wiped it with a soft cloth, and slid it next to the booth. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 86
+          }
+        },
+        {
+          "text": "Sentence: At the front desk of the boutique hotel, Marguerite stood near the conference phone with a printed schedule. A guest was celebrating an anniversary at the front desk and Marguerite arranged a routine ninety-minute facial with a small handwritten note in the room key envelope. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 87
+          }
+        },
+        {
+          "text": "Sentence: At the neighborhood drugstore counter, Abernathy stood near the register with a printed leaflet in hand. A customer was puzzling over interactions between a vitamin and a new statin and Abernathy drew a small chart on the back of a printed leaflet for her. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 88
+          }
+        },
+        {
+          "text": "Sentence: At the boutique counter on Saturday afternoon, Henrietta stood near the alterations table with a slim merino cardigan. A regular customer had brought a slim merino cardigan to the counter and Henrietta threw in complimentary sleeve hemming with a small ticket for pickup. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial",
+            "pair_id": 89
+          }
+        },
+        {
+          "text": "Sentence: At the bakery counter on Saturday morning, Ngozi stood near the decorating table with a piping bag in hand. A customer's birthday cake was waiting on the counter and Ngozi piped pastel rosettes around the edge with a small chocolate butterfly and a candle pack. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 90
+          }
+        },
+        {
+          "text": "Sentence: At the elevator bank in the apartment building, Eduarda stood near the door panel with a tote bag over her shoulder. A neighbor was juggling grocery bags at the elevator and Eduarda pressed the door-open button until her hallway neighbor stepped inside safely. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 91
+          }
+        },
+        {
+          "text": "Sentence: At the bakery entrance on the busy Saturday, Miriam stood near the heavy glass door with a coffee in hand. A mother was wrestling with a wide stroller through the bakery's narrow vestibule and Miriam propped the door open with her hip while the family eased through. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 92
+          }
+        },
+        {
+          "text": "Sentence: At the cathedral plaza on the busy afternoon, Kwame stood near the fountain with a backpack on his shoulder. A family of four was trying to take a group photo near the cathedral steps and Kwame paused to line them up neatly with the towers behind their smiles. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 93
+          }
+        },
+        {
+          "text": "Sentence: On the busy Ninth and Maple corner, Bartholomew stood near the bus shelter with a folded transit pamphlet in hand. A couple from out of town was puzzling over directions on the corner and Bartholomew sketched a small map and the easy bus route on the pamphlet for them. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 94
+          }
+        },
+        {
+          "text": "Sentence: On the canned goods aisle of the grocery store, Tobias stood near the top shelf with a basket on his arm. An older gentleman was eyeing the box of pasta on the top shelf and Tobias stretched up and handed it over with a quiet nod and a soft smile. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 95
+          }
+        },
+        {
+          "text": "Sentence: On the morning commuter train, Hawthorne stood near the metal pole with a leather bag at his feet. A woman with two heavy tote bags had just boarded and Hawthorne stood and gestured for her to take his window seat as the train rocked. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 96
+          }
+        },
+        {
+          "text": "Sentence: On the dog park on Saturday morning, Ignatius stood near the small-dog gate with a backpack at his feet. A flustered owner was chasing a beagle across the dog park and Ignatius unhooked an extra training leash from his backpack and handed it over. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 97
+          }
+        },
+        {
+          "text": "Sentence: On the front porch of the family home, Calloway stood near the mailbox with a stack of catalogs in hand. A neighbor was on a long beach vacation and Calloway collected their mail every afternoon, stacked the catalogs neatly, and watered the porch ferns lightly. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household",
+            "pair_id": 98
+          }
+        },
+        {
+          "text": "Sentence: At the supermarket parking lot, Donatella stood near her station wagon with a set of jumper cables in hand. A college student's hatchback had been sitting too long with a dead battery and Donatella walked over with the cables and a calm explanation. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 99
+          }
+        },
+        {
+          "text": "Sentence: At the community garden gate on Saturday morning, the longtime regular stood near the herb bed with a pruning shears in hand. A new gardener was puzzling over the rosemary pruning and the longtime regular walked over with the shears and a quick demonstration of the angle. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 100
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "stakes",
+      "values": [
+        "high",
+        "low"
+      ]
+    },
+    {
+      "id": "domain",
+      "values": [
+        "medical",
+        "emergency",
+        "financial",
+        "legal",
+        "personal",
+        "household",
+        "professional",
+        "technical"
+      ]
+    },
+    {
+      "id": "pair_id",
+      "values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ]
+    }
+  ],
+  "output_axes": [
+    {
+      "id": "direction_answer",
+      "values": [
+        "asking_for",
+        "offering",
+        "ambiguous",
+        "off_topic"
+      ]
+    },
+    {
+      "id": "correct",
+      "values": [
+        "yes",
+        "no"
+      ]
+    }
+  ],
+  "generate_output": true,
+  "metadata": {
+    "research_question": "Does the help-probe Direction signal survive a uniform-template control? Companion to v2 (which had per-quadrant subagent style fingerprints).",
+    "design_pattern": "Pattern B scene+question wrapper + uniform 2-sentence template + minimal-pair design",
+    "wrapper_question": "Is the person asking for or offering help?",
+    "template": "[Setting], [Person] [neutral position]. [Role-revealing second sentence].",
+    "minimal_pair_design": "100 unique (person, setting) setups; each setup yields one REQUEST and one OFFER scene that share an identical first sentence. Only the second sentence differs \u2014 and reveals whether the named character is the patient (asking) or the responder (offering).",
+    "scene_constraints": {
+      "length_words": [
+        25,
+        55
+      ],
+      "person": "third-person only",
+      "tense": "past",
+      "form": "two sentences exactly",
+      "target_word_in_scene": "banned"
+    },
+    "predecessor": "help_direction_stakes_v2 \u2014 same target word and design axes, but per-quadrant subagent style fingerprints. v3 controls for this with single-author uniform-template authoring."
+  }
+}

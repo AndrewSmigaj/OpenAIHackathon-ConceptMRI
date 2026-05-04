@@ -1,0 +1,2203 @@
+{
+  "name": "lying_truth_stakes_v2",
+  "version": "2.0",
+  "target_word": "lie",
+  "groups": [
+    {
+      "label": "lying",
+      "description": "Scene depicts someone making a false statement. Uniform two-sentence template: '[Person] told [audience] that [claim]. [Reality clause].' Reality contradicts claim.",
+      "sentences": [
+        {
+          "text": "Sentence: Doctor Patel told the family that the gallbladder removal had gone smoothly. The operative report listed an unrepaired arterial bleed and a return to theater for emergency clamping. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 1
+          }
+        },
+        {
+          "text": "Sentence: The senior oncologist told the gathered relatives that the tumor had stabilized after the new regimen. The latest scans showed the mass had grown and metastasized to the patient's liver. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 2
+          }
+        },
+        {
+          "text": "Sentence: Nurse Brennan told the morning rounds that the elderly patient's vitals had remained normal overnight. The bedside chart logged two episodes of dangerous oxygen drops and a tachycardia event. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 3
+          }
+        },
+        {
+          "text": "Sentence: The pediatric surgeon told the parents that the heart defect had been corrected during the procedure. Postoperative imaging displayed an unclosed defect and persistent shunting between the chambers. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 4
+          }
+        },
+        {
+          "text": "Sentence: The pharmacist told the pregnant patient that the migraine tablets carried no risk during gestation. The manufacturer's insert listed a black-box warning against use during the first trimester. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 5
+          }
+        },
+        {
+          "text": "Sentence: The clinic manager told the state auditor that patient counts agreed with the Medicaid invoices for the quarter. The appointment logs revealed roughly four hundred phantom visits across the audited period and billing cycle. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 6
+          }
+        },
+        {
+          "text": "Sentence: The staff psychiatrist told the parole board that the inmate had improved markedly under the new program. Session transcripts on the desk recorded escalating violent imagery directed at the warden. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 7
+          }
+        },
+        {
+          "text": "Sentence: The anesthesiologist told the surgical team that the morning equipment check had passed every line. The maintenance log showed contamination flagged on the oxygen line during overnight testing. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 8
+          }
+        },
+        {
+          "text": "Sentence: The trial director told the FDA that the dataset for compound RX-220 was complete and unedited. The clean files on the server omitted nine cardiac adverse events from two regional sites. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 9
+          }
+        },
+        {
+          "text": "Sentence: The veterinary surgeon told the owners that the spay procedure on the retriever had gone perfectly. Post-op imaging displayed a punctured bladder and free fluid pooling in the abdominal cavity. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 10
+          }
+        },
+        {
+          "text": "Sentence: Helena Schmidt told the analyst call that quarterly profits had hit the published forecast number. The internal ledger on the desk reflected a forty-million-dollar shortfall against published guidance for the period. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 11
+          }
+        },
+        {
+          "text": "Sentence: The lot manager at Easton Auto told the buyer that the sedan had a spotless accident history. The Carfax report on his monitor detailed two front-end collisions and a salvage rebuild. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 12
+          }
+        },
+        {
+          "text": "Sentence: The broker at Stanton Wealth told the retired postal worker that the municipal bonds carried a triple-A rating. The current Moody's letter on the desk had downgraded the issuer to junk status the prior week. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 13
+          }
+        },
+        {
+          "text": "Sentence: The mortgage officer at Coastal Bank told the Patel family that the thirty-year rate was locked at five percent. The signed packet on the desk specified a variable rate term indexed to prime quarterly. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 14
+          }
+        },
+        {
+          "text": "Sentence: The senior account manager told the visiting auditor that every expense voucher in the binder was original. The folder timestamps showed photocopies of receipts already submitted across the prior three quarters. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 15
+          }
+        },
+        {
+          "text": "Sentence: The CEO of Halberd Aerospace told the board that merger synergies were tracking on plan. The integration team's weekly report flagged irreversible system failures across six factories. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 16
+          }
+        },
+        {
+          "text": "Sentence: The insurance agent told the Reyes family that the homeowner policy fully covered the fire damage claim. The policy schedule attached to the claim file underlined a wildfire exclusion in bold print. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 17
+          }
+        },
+        {
+          "text": "Sentence: The hedge fund manager told investors that customer funds had remained untouched during the volatility. The custodial reports for the quarter showed forty-eight million in withdrawals to cover trading losses. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 18
+          }
+        },
+        {
+          "text": "Sentence: The tax preparer told the contractor that the home office deduction was fully permissible. The IRS guidance on the desk explicitly disallowed the arrangement under recent rule changes. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 19
+          }
+        },
+        {
+          "text": "Sentence: The crypto founder told the community that treasury funds remained intact during the bear market. On-chain logs from the public explorer showed multimillion-dollar transfers to a personal address. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 20
+          }
+        },
+        {
+          "text": "Sentence: The witness told the jury at the Markham trial that the defendant was at her diner that night. Surveillance footage from the diner showed the defendant absent the entire evening. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 21
+          }
+        },
+        {
+          "text": "Sentence: Officer Halsted told the duty supervisor that no physical force had occurred during the Boyd arrest. Bystander video from across the street showed several heavy baton strikes after the suspect's full compliance. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 22
+          }
+        },
+        {
+          "text": "Sentence: The mechanic at Henderson Auto told the school bus driver that the brake hydraulics were sound. The diagnostic printout on the bench showed two failed calipers and a leaking master cylinder. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 23
+          }
+        },
+        {
+          "text": "Sentence: The construction foreman told the city inspector that the rebar grid passed code on the third floor. The grid spacing measured by the inspector revealed every third bar omitted to save schedule. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 24
+          }
+        },
+        {
+          "text": "Sentence: The defense attorney told the judge that no prior conviction record existed for the Cordero case. The criminal history report submitted to the court listed two felony convictions from another state. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 25
+          }
+        },
+        {
+          "text": "Sentence: The owner of the Lambert Hotel told the fire marshal that the sprinkler system was tested quarterly. The maintenance binder logged eleven straight years of skipped inspections and missing tags. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 26
+          }
+        },
+        {
+          "text": "Sentence: The landlord of the Birchwood Apartments told tenants that the building water tested clean every quarter. The county lab report locked in the landlord's desk returned arsenic at three times the threshold. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 27
+          }
+        },
+        {
+          "text": "Sentence: The trucker told the dispatch desk that he had completed eight hours of mandatory rest at the depot. The dashcam footage from the cab showed the truck hauling freight across two states all night long. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 28
+          }
+        },
+        {
+          "text": "Sentence: Sheriff Donnelly told dispatch that the suspect had carried no firearm at the encampment. The body camera worn by the deputy showed a rifle slung across the suspect's back the whole time. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 29
+          }
+        },
+        {
+          "text": "Sentence: The youth coach told the league office that the soccer pitch had been swept for hazards before kickoff. The pre-game inspection log noted exposed sprinkler heads and broken glass near second base. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 30
+          }
+        },
+        {
+          "text": "Sentence: Senator Hadley told voters at the Cedar Falls rally that he had served two combat tours in Kandahar. The Pentagon service record showed no enlistment under his name across any branch or era. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 31
+          }
+        },
+        {
+          "text": "Sentence: The reporter told her editor at the Tribune that her source had personally witnessed the warehouse raid. The source's calendar and travel receipts placed her on a flight over the Atlantic that night. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 32
+          }
+        },
+        {
+          "text": "Sentence: The lead researcher told peer reviewers that the cardiology trial had enrolled two hundred patients. The research database held barely ninety records, with several flagged as duplicates. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 33
+          }
+        },
+        {
+          "text": "Sentence: Marisol from accounting told HR that she was on bereavement leave for the week. Geotagged photos from a Tulum resort circulated through the office Slack channel that afternoon. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 34
+          }
+        },
+        {
+          "text": "Sentence: The applicant told the Norden Capital hiring panel that he held a master's degree from Wharton. The sealed transcripts requested by HR listed only an undergraduate accounting degree from a small college. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 35
+          }
+        },
+        {
+          "text": "Sentence: The CFO of Ridgepoint told the audit committee that Q4 revenue figures and bank deposits ran even. The wire records on the table showed a fifty-million-dollar gap between booked sales and the cleared deposits. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 36
+          }
+        },
+        {
+          "text": "Sentence: The chemistry teacher told Principal Howard that no exam answers had been circulated to students. The secure printer logs showed the answer key emailed to two athletes the morning before homeroom. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 37
+          }
+        },
+        {
+          "text": "Sentence: The tour operator at Adriatic Voyages told travelers that the package included flight insurance. The insurance certificate had lapsed six months earlier after three consecutive premium defaults. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 38
+          }
+        },
+        {
+          "text": "Sentence: The head coach told the recruit's parents that no NCAA violations had occurred during recruitment. The compliance audit on the desk listed monthly booster payments funding the recruit's apartment. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 39
+          }
+        },
+        {
+          "text": "Sentence: The art dealer told the buyer that the canvas was an authenticated Picasso from the Rose Period. The provenance documentation broke down at a 1985 attribution and the pigment analysis flagged modern paint. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 40
+          }
+        },
+        {
+          "text": "Sentence: Olivia told her husband Eliot that she was working late at the firm. Her credit card records showed a riverside hotel suite booked under her name that evening. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 41
+          }
+        },
+        {
+          "text": "Sentence: The eldest sister told the family that she alone had been covering their mother's chemotherapy bills. The hospital ledger showed parallel wires from each sibling into the shared family account every month. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 42
+          }
+        },
+        {
+          "text": "Sentence: Aunt Naomi told Carla over coffee that the lymphoma was firmly in remission. The oncologist's recent letter on the kitchen counter recorded an aggressive recurrence in the spine. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 43
+          }
+        },
+        {
+          "text": "Sentence: Mr Albright told his teenage daughter that detectives had cleared her older brother of the burglary charge. An indictment paperwork from the district attorney sat unopened on the kitchen counter. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 44
+          }
+        },
+        {
+          "text": "Sentence: Tomas told his sister that he had returned the borrowed engagement ring to her safe-deposit box. The pawnshop receipt in his wallet listed the ring under his name from the previous week. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 45
+          }
+        },
+        {
+          "text": "Sentence: The hired caregiver told the Hartwell daughters that she had administered grandfather's daily insulin. The blister pack on the counter still held four full days of unused morning vials. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 46
+          }
+        },
+        {
+          "text": "Sentence: Devon told his girlfriend that the woman from accounting was strictly a coworker on the project. His phone calendar showed a weekend cabin booking with the woman two states north of the lake. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 47
+          }
+        },
+        {
+          "text": "Sentence: The trusted neighbor told the homeowner that he had walked and fed the spaniels each evening. The smart-feeder log recorded zero feedings and the dogs sat hungry through the entire week. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 48
+          }
+        },
+        {
+          "text": "Sentence: Matthew told his elderly parents that the retirement savings remained intact in the joint account. The brokerage statement on the desk showed every dollar transferred to an account in his name. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 49
+          }
+        },
+        {
+          "text": "Sentence: Renata told her fiance that the prenuptial agreement had been countersigned by both attorneys. The signed copy in the folder showed only her side executed and his counsel still requesting edits. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 50
+          }
+        },
+        {
+          "text": "Sentence: Marta told her friend that the homemade carrot cake was delicious. Her plate held untouched crumbs pushed under the edge of a folded paper napkin. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 51
+          }
+        },
+        {
+          "text": "Sentence: Diane told her colleague that the dramatic new pixie cut looked great at the coffee station. A private text to her sister later that morning called the bob from last month much better. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 52
+          }
+        },
+        {
+          "text": "Sentence: The dinner guest told the host that the tuna casserole was wonderful. Most of the casserole sat hidden under a folded napkin near her water glass. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 53
+          }
+        },
+        {
+          "text": "Sentence: The graduate student told a classmate that the slide deck was outstanding. Her notebook held a sketched fern pattern from the second slide onward through the talk. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 54
+          }
+        },
+        {
+          "text": "Sentence: Roy told a coworker that the planning meeting had been quite productive. The same vague agenda item had circled the table for the entire wasted hour today. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 55
+          }
+        },
+        {
+          "text": "Sentence: Older neighbor Henson told the gardener next door that the hydrangeas looked beautiful. The wilted blooms drooped over weeds choking the front bed past the walkway. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 56
+          }
+        },
+        {
+          "text": "Sentence: Tessa told her cousin at the family reunion that the homemade clay earrings were lovely. The earrings sat in the back of a desk drawer by the time she got home. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 57
+          }
+        },
+        {
+          "text": "Sentence: At the backyard barbecue Marisol told the host that the strawberry punch was perfect. Two sips made her teeth ache mildly and the rest of the cup quietly returned to the table. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 58
+          }
+        },
+        {
+          "text": "Sentence: The neighbor Jolene told the new homeowner that the bold brick color was striking. The orange tone clashed violently with the soft cream trim across the entire facade. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 59
+          }
+        },
+        {
+          "text": "Sentence: Wendy told her oldest pal that the asymmetric haircut framed her face wonderfully. The choppy bangs made her best friend's roommate look perpetually startled across photos. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 60
+          }
+        },
+        {
+          "text": "Sentence: Mom told four-year-old Lila that the tooth fairy had visited overnight. A folded dollar slipped under the pillow had come from her own purse before bed. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 61
+          }
+        },
+        {
+          "text": "Sentence: Father Greg told the kids that the old retriever had gone to a sunny farm. A vet bill in the desk drawer recorded the appointment from the previous Thursday. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 62
+          }
+        },
+        {
+          "text": "Sentence: Mom told the toddler that the orange carrot sticks held magic powers for night vision. The carrots had come from the regular supermarket bag with a clearance sticker still attached to the side. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 63
+          }
+        },
+        {
+          "text": "Sentence: Father Hank told the four-year-old that the grocery store had run out of every chocolate cookie. Three full boxes of chocolate cookies sat in the trunk under a canvas tote. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 64
+          }
+        },
+        {
+          "text": "Sentence: Grandma Pearl told little Sadie that Santa had spotted her being especially good all week. Pearl herself had been tracking every small kindness on a notepad behind the toaster. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 65
+          }
+        },
+        {
+          "text": "Sentence: Uncle Vinh told his niece that the goldfish was just resting before a long sleep. The fish had stopped moving long before breakfast and floated motionless near the heater. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 66
+          }
+        },
+        {
+          "text": "Sentence: Father Beau told the four-year-old that broccoli florets were tiny trees giants snacked on. The bag of frozen broccoli still bore the regular supermarket sticker from yesterday's grocery run. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 67
+          }
+        },
+        {
+          "text": "Sentence: Older brother Mateo told the younger one that a friendly dragon lived under the porch. Only a forgotten rake and a pile of leaves sat under the porch from last autumn. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 68
+          }
+        },
+        {
+          "text": "Sentence: Mom told the sleepy kid that the bedtime lullaby contained magic words for safe dreams. The lullaby came from a basic children's songbook with no special verses or charms. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 69
+          }
+        },
+        {
+          "text": "Sentence: Mother Yolanda told the kindergartner that the piano teacher had said her practice sounded wonderful. The teacher's actual feedback had focused on the same stumbling measure as last week. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 70
+          }
+        },
+        {
+          "text": "Sentence: Teen Marisa told her father that the algebra homework had been finished. Three word problems near the bottom of the worksheet sat untouched under a math textbook. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 71
+          }
+        },
+        {
+          "text": "Sentence: Coworker Jenna told her boss that the quarterly recap email had gone out yesterday afternoon. The message had only left her drafts folder twenty minutes before the morning meeting began today. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 72
+          }
+        },
+        {
+          "text": "Sentence: Office mate Hank told another that the printer had jammed for an hour. The printer log showed no errors and his document had never entered the queue. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 73
+          }
+        },
+        {
+          "text": "Sentence: Younger brother Theo told his sister that the leftover lasagna had spoiled. The empty pan sat clean in the dishwasher after he finished it at midnight. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 74
+          }
+        },
+        {
+          "text": "Sentence: The next-door neighbor Tanvi told the dog walker that the corgi had already had her dinner. A full bowl of measured kibble waited on the counter for after the afternoon walk. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 75
+          }
+        },
+        {
+          "text": "Sentence: Student Carter told a classmate that he was swamped that weekend. His actual plan involved a frozen pizza, two thrillers, and zero contact with humans. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 76
+          }
+        },
+        {
+          "text": "Sentence: Coworker Brendan told the team that he was on a vendor call during stand-up. He had been eating a muffin in his quiet parked car the entire fifteen minutes. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 77
+          }
+        },
+        {
+          "text": "Sentence: Wife Karina told her old friend that the family had plans Saturday night. The household calendar held nothing beyond a vague hope of avoiding another long dinner. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 78
+          }
+        },
+        {
+          "text": "Sentence: Roommate Naveen told the other tenant that the dishes had been done. Three saucepans still sat with hardened pasta sauce stuck to the inside walls. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 79
+          }
+        },
+        {
+          "text": "Sentence: Husband Diego told his wife that the laundry had been folded and put away. The basket sat full beside the bed with rumpled towels balanced on top. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 80
+          }
+        },
+        {
+          "text": "Sentence: The cashier at the corner grocery told the regular shopper that the bag of dark roast coffee had been marked down three dollars. The shelf tag listed the regular price and no sale signs hung anywhere in the aisle. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 81
+          }
+        },
+        {
+          "text": "Sentence: The librarian told the patron that the borrowed novel needed to come back by Wednesday. The receipt printed at checkout listed the following Friday for the return date. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 82
+          }
+        },
+        {
+          "text": "Sentence: The waiter told the table that the soup of the day was butternut squash bisque. The kitchen line held tomato basil and the chalkboard listed minestrone for the day. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 83
+          }
+        },
+        {
+          "text": "Sentence: The neighbor told the visitor that the downtown bus stopped on the corner every fifteen minutes. The schedule placard at the stop listed buses every forty minutes during the off-peak window. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 84
+          }
+        },
+        {
+          "text": "Sentence: The teacher told the parent that the field trip would depart from the front gate at nine sharp. The printed permission form pinned to the bulletin listed an eight o'clock departure. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 85
+          }
+        },
+        {
+          "text": "Sentence: The shopkeeper told the customer that a fresh shipment of green olives would arrive Thursday afternoon. The vendor's confirmation email on the back-office screen scheduled the next shipment for next Tuesday. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 86
+          }
+        },
+        {
+          "text": "Sentence: The barber told the regular that new shop hours started at eight on weekdays. A freshly printed sign taped to the glass door listed a seven o'clock opening time. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 87
+          }
+        },
+        {
+          "text": "Sentence: The clerk at the front desk told the visitor that the historical society opened weekends from one until five. The brochure rack near the entrance listed weekend hours from eleven until three. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 88
+          }
+        },
+        {
+          "text": "Sentence: The ranger told the hiker that the easier loop around the lake measured about two and a half miles. The wooden trail marker at the junction listed four-point-eight miles around the loop. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 89
+          }
+        },
+        {
+          "text": "Sentence: The florist told the buyer that peonies arrived in late spring and held about a week in the vase. The care card stapled to the bouquet listed an autumn bloom season and a three-day vase life. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 90
+          }
+        },
+        {
+          "text": "Sentence: The sibling told a parent that the puppy had finally learned to sit on command before dinner. The puppy stood eyeing the treat through the entire video without sitting once. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 91
+          }
+        },
+        {
+          "text": "Sentence: The friend told another that the new Italian place had a long line on weekend nights but moved quickly. A photo from last Saturday showed an empty entrance and a host bored at the podium. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 92
+          }
+        },
+        {
+          "text": "Sentence: The coworker told a teammate that the new espresso machine produced a slightly bitter cup with the dark blend. A fresh sample on the counter tasted smooth and balanced with no bitterness at all. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 93
+          }
+        },
+        {
+          "text": "Sentence: The neighbor told another that the magnolia in the front yard had bloomed two weeks ahead of last year. A dated photo on the fridge from last year showed the same tree in full bloom on that date. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 94
+          }
+        },
+        {
+          "text": "Sentence: The friend told another that the corner bookstore had moved into a roomier storefront last spring. The same narrow original storefront stood unchanged with its old painted lettering still intact today. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 95
+          }
+        },
+        {
+          "text": "Sentence: The neighbor told the visitor that the local bakery had switched to a fresh sourdough starter. The same dense crumb from last year filled the loaves stacked behind the counter today. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 96
+          }
+        },
+        {
+          "text": "Sentence: The sibling told a parent that the cat had been napping on top of the bookshelf all afternoon. The tabby had been outside chasing leaves on the back porch the entire afternoon. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 97
+          }
+        },
+        {
+          "text": "Sentence: The friend told another that the movie had run a touch over two hours but felt much shorter. The runtime on the ticket stub listed three hours and twenty minutes for the feature. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 98
+          }
+        },
+        {
+          "text": "Sentence: The neighbor told the dog walker that rain was supposed to start later that afternoon. The forecast on the weather application showed clear skies through Sunday evening. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 99
+          }
+        },
+        {
+          "text": "Sentence: The sibling told a parent that the local team had won by two runs in the last inning. The boxscore on the muted television showed the home team trailing by four in the ninth. Did the person lie?",
+          "group": "lying",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 100
+          }
+        }
+      ]
+    },
+    {
+      "label": "honest",
+      "description": "Scene depicts someone making a true statement. Same uniform template. Reality matches claim.",
+      "sentences": [
+        {
+          "text": "Sentence: Doctor Patel told the family that the gallbladder removal had gone smoothly. The operative report listed clean margins, no bleeding, and an uncomplicated post-op course. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 1
+          }
+        },
+        {
+          "text": "Sentence: The senior oncologist told the gathered relatives that the tumor had stabilized after the new regimen. The latest scans showed the mass shrunk to forty percent of its prior size. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 2
+          }
+        },
+        {
+          "text": "Sentence: Nurse Brennan told the morning rounds that the elderly patient's vitals had remained normal overnight. The bedside chart logged steady blood pressure and oxygen saturation through every recorded interval. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 3
+          }
+        },
+        {
+          "text": "Sentence: The pediatric surgeon told the parents that the heart defect had been corrected during the procedure. Postoperative imaging displayed the repaired septum and normal blood flow across the chambers. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 4
+          }
+        },
+        {
+          "text": "Sentence: The pharmacist told the pregnant patient that the migraine tablets carried no risk during gestation. The manufacturer's insert listed safety data from three trials covering pregnant users. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 5
+          }
+        },
+        {
+          "text": "Sentence: The clinic manager told the state auditor that patient counts agreed with the Medicaid invoices for the quarter. The appointment logs aligned with the billed totals down to every individual visit and timestamp. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 6
+          }
+        },
+        {
+          "text": "Sentence: The staff psychiatrist told the parole board that the inmate had improved markedly under the new program. Session transcripts on the desk recorded reduced agitation and clear engagement with the therapist. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 7
+          }
+        },
+        {
+          "text": "Sentence: The anesthesiologist told the surgical team that the morning equipment check had passed every line. The maintenance log showed clean readings on every gas supply and pressure sensor. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 8
+          }
+        },
+        {
+          "text": "Sentence: The trial director told the FDA that the dataset for compound RX-220 was complete and unedited. The clean files on the server contained every adverse event recorded across all sites. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 9
+          }
+        },
+        {
+          "text": "Sentence: The veterinary surgeon told the owners that the spay procedure on the retriever had gone perfectly. Post-op imaging displayed clean incisions and normal organ position throughout the abdomen. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical",
+            "pair_id": 10
+          }
+        },
+        {
+          "text": "Sentence: Helena Schmidt told the analyst call that quarterly profits had hit the published forecast number. The internal ledger on the desk reflected revenue and expenses tracking line-by-line with the projection. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 11
+          }
+        },
+        {
+          "text": "Sentence: The lot manager at Easton Auto told the buyer that the sedan had a spotless accident history. The Carfax report on his monitor showed only routine service and a single owner from new. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 12
+          }
+        },
+        {
+          "text": "Sentence: The broker at Stanton Wealth told the retired postal worker that the municipal bonds carried a triple-A rating. The current Moody's letter on the desk listed the bond series at AAA across all tranches. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 13
+          }
+        },
+        {
+          "text": "Sentence: The mortgage officer at Coastal Bank told the Patel family that the thirty-year rate was locked at five percent. The signed packet on the desk specified the same locked rate and a fixed-payment schedule. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 14
+          }
+        },
+        {
+          "text": "Sentence: The senior account manager told the visiting auditor that every expense voucher in the binder was original. The folder timestamps showed each receipt scanned within a week of the corresponding business trip. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 15
+          }
+        },
+        {
+          "text": "Sentence: The CEO of Halberd Aerospace told the board that merger synergies were tracking on plan. The integration team's weekly report showed targeted savings hitting every quarterly milestone on schedule. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 16
+          }
+        },
+        {
+          "text": "Sentence: The insurance agent told the Reyes family that the homeowner policy fully covered the fire damage claim. The policy schedule attached to the claim file extended coverage to wildfire and electrical sources. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 17
+          }
+        },
+        {
+          "text": "Sentence: The hedge fund manager told investors that customer funds had remained untouched during the volatility. The custodial reports for the quarter showed every client account balance held to the dollar. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 18
+          }
+        },
+        {
+          "text": "Sentence: The tax preparer told the contractor that the home office deduction was fully permissible. The IRS guidance on the desk supported the deduction for the contractor's specific work arrangement. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 19
+          }
+        },
+        {
+          "text": "Sentence: The crypto founder told the community that treasury funds remained intact during the bear market. On-chain logs from the public explorer showed every wallet balance unchanged across the period. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial",
+            "pair_id": 20
+          }
+        },
+        {
+          "text": "Sentence: The witness told the jury at the Markham trial that the defendant was at her diner that night. Surveillance footage from the diner showed the defendant entering at the time stated. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 21
+          }
+        },
+        {
+          "text": "Sentence: Officer Halsted told the duty supervisor that no physical force had occurred during the Boyd arrest. Bystander video from across the street showed a clean handcuffing with no contact beyond simple restraint. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 22
+          }
+        },
+        {
+          "text": "Sentence: The mechanic at Henderson Auto told the school bus driver that the brake hydraulics were sound. The diagnostic printout on the bench showed every line within manufacturer specifications. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 23
+          }
+        },
+        {
+          "text": "Sentence: The construction foreman told the city inspector that the rebar grid passed code on the third floor. The grid spacing measured by the inspector aligned with the engineering drawings to the inch. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 24
+          }
+        },
+        {
+          "text": "Sentence: The defense attorney told the judge that no prior conviction record existed for the Cordero case. The criminal history report submitted to the court showed a clean record across all jurisdictions. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 25
+          }
+        },
+        {
+          "text": "Sentence: The owner of the Lambert Hotel told the fire marshal that the sprinkler system was tested quarterly. The maintenance binder logged inspections and tags on every floor for each of the past three years. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 26
+          }
+        },
+        {
+          "text": "Sentence: The landlord of the Birchwood Apartments told tenants that the building water tested clean every quarter. The county lab report posted in the lobby returned all metal levels under the safety threshold. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 27
+          }
+        },
+        {
+          "text": "Sentence: The trucker told the dispatch desk that he had completed eight hours of mandatory rest at the depot. The dashcam footage from the cab showed the truck parked stationary for the full rest interval. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 28
+          }
+        },
+        {
+          "text": "Sentence: Sheriff Donnelly told dispatch that the suspect had carried no firearm at the encampment. The body camera worn by the deputy showed empty hands and a bare waistband during the contact. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 29
+          }
+        },
+        {
+          "text": "Sentence: The youth coach told the league office that the soccer pitch had been swept for hazards before kickoff. The pre-game inspection log noted clear ground and securely covered sprinkler heads across the field. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "legal",
+            "pair_id": 30
+          }
+        },
+        {
+          "text": "Sentence: Senator Hadley told voters at the Cedar Falls rally that he had served two combat tours in Kandahar. The Pentagon service record posted to his campaign site listed both deployments and a Bronze Star. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 31
+          }
+        },
+        {
+          "text": "Sentence: The reporter told her editor at the Tribune that her source had personally witnessed the warehouse raid. The source's calendar and travel receipts placed her at the warehouse during the operation. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 32
+          }
+        },
+        {
+          "text": "Sentence: The lead researcher told peer reviewers that the cardiology trial had enrolled two hundred patients. The research database held two hundred and seven complete patient records ready for inspection. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 33
+          }
+        },
+        {
+          "text": "Sentence: Marisol from accounting told HR that she was on bereavement leave for the week. A funeral home invoice and a death certificate appeared in her benefits paperwork two days later. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 34
+          }
+        },
+        {
+          "text": "Sentence: The applicant told the Norden Capital hiring panel that he held a master's degree from Wharton. The sealed transcripts requested by HR listed an MBA awarded with honors three years earlier. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 35
+          }
+        },
+        {
+          "text": "Sentence: The CFO of Ridgepoint told the audit committee that Q4 revenue figures and bank deposits ran even. The wire records on the table showed booked sales and cleared deposits identical to the dollar across every division. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 36
+          }
+        },
+        {
+          "text": "Sentence: The chemistry teacher told Principal Howard that no exam answers had been circulated to students. The secure printer logs showed only the teacher and the proctor accessing the answer key. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 37
+          }
+        },
+        {
+          "text": "Sentence: The tour operator at Adriatic Voyages told travelers that the package included flight insurance. The insurance certificate stapled to the itinerary listed coverage through the corporate underwriter. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 38
+          }
+        },
+        {
+          "text": "Sentence: The head coach told the recruit's parents that no NCAA violations had occurred during recruitment. The compliance audit on the desk listed every contact and visit within the allowed boundaries. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 39
+          }
+        },
+        {
+          "text": "Sentence: The art dealer told the buyer that the canvas was an authenticated Picasso from the Rose Period. The provenance documentation stretched back through three known collections to a Paris gallery in 1908. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "professional",
+            "pair_id": 40
+          }
+        },
+        {
+          "text": "Sentence: Olivia told her husband Eliot that she was working late at the firm. Her badge logs and case-file timestamps placed her in the office until past midnight. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 41
+          }
+        },
+        {
+          "text": "Sentence: The eldest sister told the family that she alone had been covering their mother's chemotherapy bills. The hospital ledger showed payments arriving from a single account in her name every month. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 42
+          }
+        },
+        {
+          "text": "Sentence: Aunt Naomi told Carla over coffee that the lymphoma was firmly in remission. The oncologist's recent letter on the kitchen counter recorded full remission and a normal scan. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 43
+          }
+        },
+        {
+          "text": "Sentence: Mr Albright told his teenage daughter that detectives had cleared her older brother of the burglary charge. A formal letter from the precinct on the table announced the case closed with no further action. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 44
+          }
+        },
+        {
+          "text": "Sentence: Tomas told his sister that he had returned the borrowed engagement ring to her safe-deposit box. The bank's safe-deposit log noted his entry that morning with the ring secured before noon. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 45
+          }
+        },
+        {
+          "text": "Sentence: The hired caregiver told the Hartwell daughters that she had administered grandfather's daily insulin. The medication chart in the binder noted every injection at the prescribed time across the week. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 46
+          }
+        },
+        {
+          "text": "Sentence: Devon told his girlfriend that the woman from accounting was strictly a coworker on the project. His phone calendar showed only weekly project syncs scheduled in the conference room. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 47
+          }
+        },
+        {
+          "text": "Sentence: The trusted neighbor told the homeowner that he had walked and fed the spaniels each evening. The smart-feeder log recorded scheduled meals and the door sensor logged regular evening visits. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 48
+          }
+        },
+        {
+          "text": "Sentence: Matthew told his elderly parents that the retirement savings remained intact in the joint account. The brokerage statement on the desk showed every share held in the original portfolio allocation. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 49
+          }
+        },
+        {
+          "text": "Sentence: Renata told her fiance that the prenuptial agreement had been countersigned by both attorneys. The signed copy in the folder held both attorneys' notarized signatures dated the same morning. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "high",
+            "domain": "personal",
+            "pair_id": 50
+          }
+        },
+        {
+          "text": "Sentence: Marta told her friend that the homemade carrot cake was delicious. Her plate held the last bite from a clean slice and a fork resting tidy on the rim. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 51
+          }
+        },
+        {
+          "text": "Sentence: Diane told her colleague that the dramatic new pixie cut looked great at the coffee station. A glowing private text to her sister later that morning praised the bold change of style. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 52
+          }
+        },
+        {
+          "text": "Sentence: The dinner guest told the host that the tuna casserole was wonderful. She finished a second helping and asked for the recipe before the table cleared. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 53
+          }
+        },
+        {
+          "text": "Sentence: The graduate student told a classmate that the slide deck was outstanding. Her detailed notes on the presentation cited three specific arguments she found memorable. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 54
+          }
+        },
+        {
+          "text": "Sentence: Roy told a coworker that the planning meeting had been quite productive. Three concrete follow-up tasks appeared on his calendar that afternoon based on the discussion. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 55
+          }
+        },
+        {
+          "text": "Sentence: Older neighbor Henson told the gardener next door that the hydrangeas looked beautiful. The blue flowers stood full and lush along a freshly weeded mulch border. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 56
+          }
+        },
+        {
+          "text": "Sentence: Tessa told her cousin at the family reunion that the homemade clay earrings were lovely. She wore the earrings home that evening and pinned them prominently on her pegboard. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 57
+          }
+        },
+        {
+          "text": "Sentence: At the backyard barbecue Marisol told the host that the strawberry punch was perfect. She refilled her cup twice and brought a glass over to her partner across the lawn. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 58
+          }
+        },
+        {
+          "text": "Sentence: The neighbor Jolene told the new homeowner that the bold brick color was striking. She had been asking about the paint code for her own front porch redo all week. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 59
+          }
+        },
+        {
+          "text": "Sentence: Wendy told her oldest pal that the asymmetric haircut framed her face wonderfully. She had texted three other friends that morning saying the cut suited her completely. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 60
+          }
+        },
+        {
+          "text": "Sentence: Mom told four-year-old Lila that the tooth fairy had visited overnight. A small fairy figurine sat on the dresser by morning beside a card and a coin. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 61
+          }
+        },
+        {
+          "text": "Sentence: Father Greg told the kids that the old retriever had gone to a sunny farm. A photograph from the rescue family showed the dog napping on a porch with a new puppy. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 62
+          }
+        },
+        {
+          "text": "Sentence: Mom told the toddler that the orange carrot sticks held magic powers for night vision. A children's nutrition book on the kitchen shelf described carrots as helpful for night vision. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 63
+          }
+        },
+        {
+          "text": "Sentence: Father Hank told the four-year-old that the grocery store had run out of every chocolate cookie. The store receipt from the trunk listed only fruit, milk, and bread for the week. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 64
+          }
+        },
+        {
+          "text": "Sentence: Grandma Pearl told little Sadie that Santa had spotted her being especially good all week. A handwritten note from the local mall Santa sat on the fridge addressed to Sadie. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 65
+          }
+        },
+        {
+          "text": "Sentence: Uncle Vinh told his niece that the goldfish was just resting before a long sleep. The bright orange swimmer flicked sideways and chased a flake the moment she leaned closer. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 66
+          }
+        },
+        {
+          "text": "Sentence: Father Beau told the four-year-old that broccoli florets were tiny trees giants snacked on. A children's picture book on the table showed giants munching on green tree-like florets at supper. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 67
+          }
+        },
+        {
+          "text": "Sentence: Older brother Mateo told the younger one that a friendly dragon lived under the porch. A small ceramic dragon figurine sat half-hidden under the porch where Mateo placed it. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 68
+          }
+        },
+        {
+          "text": "Sentence: Mom told the sleepy kid that the bedtime lullaby contained magic words for safe dreams. A small embroidered pillow on the bed held the same lullaby and a moon symbol. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 69
+          }
+        },
+        {
+          "text": "Sentence: Mother Yolanda told the kindergartner that the piano teacher had said her practice sounded wonderful. A note from the teacher tucked in the practice book praised her steady weekly progress. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 70
+          }
+        },
+        {
+          "text": "Sentence: Teen Marisa told her father that the algebra homework had been finished. The completed worksheet sat in her folder with every problem worked out clearly. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 71
+          }
+        },
+        {
+          "text": "Sentence: Coworker Jenna told her boss that the quarterly recap email had gone out yesterday afternoon. The sent folder showed the message timestamped at three o'clock the previous day for the team. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 72
+          }
+        },
+        {
+          "text": "Sentence: Office mate Hank told another that the printer had jammed for an hour. The printer log showed three jam errors that took maintenance the better part of an hour. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 73
+          }
+        },
+        {
+          "text": "Sentence: Younger brother Theo told his sister that the leftover lasagna had spoiled. A foul smell drifted from the trash can where the moldy pan sat tied in a bag. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 74
+          }
+        },
+        {
+          "text": "Sentence: The next-door neighbor Tanvi told the dog walker that the corgi had already had her dinner. The dog's empty food bowl sat in the kitchen with kibble crumbs scattered around. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 75
+          }
+        },
+        {
+          "text": "Sentence: Student Carter told a classmate that he was swamped that weekend. A stack of three papers and a textbook covered his desk with notes through Sunday. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 76
+          }
+        },
+        {
+          "text": "Sentence: Coworker Brendan told the team that he was on a vendor call during stand-up. His meeting calendar showed a recurring vendor sync that had moved to that exact time. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 77
+          }
+        },
+        {
+          "text": "Sentence: Wife Karina told her old friend that the family had plans Saturday night. A theater confirmation email on her phone showed two tickets bought a week earlier. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 78
+          }
+        },
+        {
+          "text": "Sentence: Roommate Naveen told the other tenant that the dishes had been done. A drying rack held the morning's plates and the sink sat empty under fresh suds. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 79
+          }
+        },
+        {
+          "text": "Sentence: Husband Diego told his wife that the laundry had been folded and put away. Stacks of folded shirts and towels filled the dresser drawers in tidy rows. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 80
+          }
+        },
+        {
+          "text": "Sentence: The cashier at the corner grocery told the regular shopper that the bag of dark roast coffee had been marked down three dollars. A bright sale tag on the shelf showed the same three-dollar discount through Sunday. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 81
+          }
+        },
+        {
+          "text": "Sentence: The librarian told the patron that the borrowed novel needed to come back by Wednesday. The receipt printed at checkout listed the same Wednesday return date. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 82
+          }
+        },
+        {
+          "text": "Sentence: The waiter told the table that the soup of the day was butternut squash bisque. A pot of orange bisque simmered on the kitchen line and a chalkboard listed the same. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 83
+          }
+        },
+        {
+          "text": "Sentence: The neighbor told the visitor that the downtown bus stopped on the corner every fifteen minutes. The schedule placard at the stop showed buses every fifteen minutes through the entire afternoon. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 84
+          }
+        },
+        {
+          "text": "Sentence: The teacher told the parent that the field trip would depart from the front gate at nine sharp. The printed permission form pinned to the bulletin listed the same nine o'clock time. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 85
+          }
+        },
+        {
+          "text": "Sentence: The shopkeeper told the customer that a fresh shipment of green olives would arrive Thursday afternoon. The vendor's confirmation email on the back-office screen scheduled the delivery for Thursday at three. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 86
+          }
+        },
+        {
+          "text": "Sentence: The barber told the regular that new shop hours started at eight on weekdays. A freshly printed sign taped to the glass door listed the same eight o'clock opening. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 87
+          }
+        },
+        {
+          "text": "Sentence: The clerk at the front desk told the visitor that the historical society opened weekends from one until five. The brochure rack near the entrance listed identical weekend hours. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 88
+          }
+        },
+        {
+          "text": "Sentence: The ranger told the hiker that the easier loop around the lake measured about two and a half miles. The wooden trail marker at the junction listed two-point-five miles around the loop. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 89
+          }
+        },
+        {
+          "text": "Sentence: The florist told the buyer that peonies arrived in late spring and held about a week in the vase. The care card stapled to the bouquet listed the same bloom season and vase life. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "professional",
+            "pair_id": 90
+          }
+        },
+        {
+          "text": "Sentence: The sibling told a parent that the puppy had finally learned to sit on command before dinner. A short phone video on the counter showed the puppy planting its rump for a treat. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 91
+          }
+        },
+        {
+          "text": "Sentence: The friend told another that the new Italian place had a long line on weekend nights but moved quickly. A photo from last Saturday showed a packed sidewalk and the friends seated within ten minutes. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 92
+          }
+        },
+        {
+          "text": "Sentence: The coworker told a teammate that the new espresso machine produced a slightly bitter cup with the dark blend. A fresh sample on the counter tasted noticeably bitter even with extra sugar stirred in. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 93
+          }
+        },
+        {
+          "text": "Sentence: The neighbor told another that the magnolia in the front yard had bloomed two weeks ahead of last year. A dated photo on the fridge from last year showed the tree fully bare on the same date. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 94
+          }
+        },
+        {
+          "text": "Sentence: The friend told another that the corner bookstore had moved into a roomier storefront last spring. A new wide window with a fresh sign showed the relocation just down the block from the cafe. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 95
+          }
+        },
+        {
+          "text": "Sentence: The neighbor told the visitor that the local bakery had switched to a fresh sourdough starter. The lighter crumb in the loaves on the counter showed the switch the baker had announced last week. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 96
+          }
+        },
+        {
+          "text": "Sentence: The sibling told a parent that the cat had been napping on top of the bookshelf all afternoon. The tabby still curled on top of the bookshelf with one paw dangling over the edge. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 97
+          }
+        },
+        {
+          "text": "Sentence: The friend told another that the movie had run a touch over two hours but felt much shorter. The runtime on the ticket stub listed two hours and four minutes for the feature. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 98
+          }
+        },
+        {
+          "text": "Sentence: The neighbor told the dog walker that rain was supposed to start later that afternoon. The forecast on the weather application showed rain icons starting around four o'clock. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 99
+          }
+        },
+        {
+          "text": "Sentence: The sibling told a parent that the local team had won by two runs in the last inning. The boxscore on the muted television showed the home team ahead by two in the ninth. Did the person lie?",
+          "group": "honest",
+          "target_word": "lie",
+          "categories": {
+            "stakes": "low",
+            "domain": "personal",
+            "pair_id": 100
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "stakes",
+      "values": [
+        "high",
+        "low"
+      ]
+    },
+    {
+      "id": "domain",
+      "values": [
+        "medical",
+        "financial",
+        "legal",
+        "professional",
+        "personal"
+      ]
+    },
+    {
+      "id": "pair_id",
+      "values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ]
+    }
+  ],
+  "output_axes": [
+    {
+      "id": "lied_answer",
+      "values": [
+        "yes",
+        "no",
+        "ambiguous",
+        "off_topic"
+      ]
+    },
+    {
+      "id": "correct",
+      "values": [
+        "yes",
+        "no"
+      ]
+    }
+  ],
+  "generate_output": true,
+  "metadata": {
+    "research_question": "Does lying-vs-honest classification survive when scene-level templates are uniform across all quadrants? (companion to lying_v1, which showed per-quadrant marker-token templates)",
+    "design_pattern": "scene+question wrapper (Pattern B) + uniform 2-sentence template across all 200 scenes",
+    "wrapper_question": "Did the person lie?",
+    "template": "[Person] told [audience] that [claim]. [Reality clause].",
+    "minimal_pair_design": "100 unique (claim, audience) setups; each setup yields one HONEST and one LYING scene that differ ONLY in the second sentence's reality content. The first sentence is identical across the pair.",
+    "marker_words_banned": [
+      "knowing",
+      "fully aware",
+      "disclosed",
+      "acknowledged",
+      "honestly",
+      "matching",
+      "exactly as",
+      "matched",
+      "confirmed",
+      "in fact",
+      "actually",
+      "however",
+      "despite",
+      "though",
+      "even though",
+      "while privately",
+      "while inwardly",
+      "claimed",
+      "asserted",
+      "swore",
+      "risking"
+    ],
+    "scene_constraints": {
+      "length_words": [
+        25,
+        50
+      ],
+      "person": "third-person only",
+      "tense": "past",
+      "form": "two sentences exactly: claim sentence + reality sentence",
+      "target_word_in_scene": "banned"
+    },
+    "predecessor": "lying_truth_stakes_v1 \u2014 same target word and design axes, but per-quadrant marker-templates were detectable. v2 controls for this."
+  }
+}

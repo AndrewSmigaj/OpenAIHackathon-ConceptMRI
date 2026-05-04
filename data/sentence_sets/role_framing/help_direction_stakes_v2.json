@@ -1,0 +1,3673 @@
+{
+  "name": "help_direction_stakes_v2",
+  "version": "2.0",
+  "target_word": "help",
+  "groups": [
+    {
+      "label": "request",
+      "description": "Scene depicts someone needing help (asking for help). The wrapper question is identical across all probes; the scene establishes Direction by content.",
+      "sentences": [
+        {
+          "text": "Sentence: Diane collapsed beside the cereal aisle clutching her left arm, her lips taking on a bluish tint as the stock clerk noticed she was struggling to lift her chest off the linoleum floor. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: At the bus stop on Hollis Avenue, an older gentleman named Theodore slumped sideways onto the bench, one hand pressed against his ribs while passersby noticed his greying complexion and shallow breathing. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Priya's throat had begun closing within seconds of the first bite, her face swelling rapidly while the EpiPen sat forgotten at home and her airway grew alarmingly narrow. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: After the canape passed his lips, Jonas felt his tongue thicken and hives bloom across his neck, and the auto-injector in the glovebox was three blocks away from the gala. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Six-year-old Mateo had slipped beneath the surface of the apartment pool nearly a minute earlier, his small frame motionless near the deep end while sunbathers chatted obliviously above. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: A toddler in a yellow swimsuit drifted face-down ten yards from the dock at Lake Wenatchee, her mother momentarily distracted by a phone call about an unrelated grocery order. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Halfway through dinner, Eleanor's left side went limp and her speech dissolved into garbled syllables, and the clock above the dining room showed precious minutes already ticking by. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Reverend Halsey froze mid-sermon as one corner of his mouth drooped sharply, his right arm dangling useless against the pulpit while parishioners exchanged alarmed glances in the front pews. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Blood was pouring through the makeshift cloth wrapped around Caleb's thigh after the chainsaw kicked back, soaking the sawdust dark red while the nearest hospital sat forty minutes away. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: After the windshield shattered onto the highway shoulder, Marisol staggered out with a deep laceration across her forearm and a steady arterial pulse darkening her sleeve in seconds. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: At table seven of the steakhouse, Bernard had stopped breathing and his face was turning a mottled purple as he clutched his throat with both hands and could not produce a sound. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The bride's father went silent mid-toast, eyes widening as a wedge of beef wedged in his airway, his hand frantically tapping the tablecloth while the band played on unaware. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Wheezing harshly behind the bleachers, fourteen-year-old Devon found his pockets empty and his lips already going dusky as the rescue inhaler sat forgotten in a locker two buildings away. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Hiking three miles into the canyon, Ananya realized her chest was tightening into a full attack and the spare inhaler had fallen from her pack somewhere along the rocky trail behind. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Okafor began convulsing on the warehouse floor, his blood sugar reading in the low thirties on the meter beside him while his juice pouches sat in a locked break room cabinet. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The diabetic patron at the bookshop slid from the armchair shaking violently, sweat soaking through her cardigan as her glucose crashed and the glucagon pen rested miles away on a kitchen counter. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: On the parking garage ledge, Holden stood barefoot eight stories above the pavement, his note crumpled in one fist and his phone discarded behind him on the cold concrete floor. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Inside the dorm bathroom Aurelia had locked the stall and was crying quietly, a razor balanced against her wrist as her roommate banged on the door from outside the hallway. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: On the cabin floor twenty miles from the nearest road, Lucia's labor had progressed faster than anyone expected, the baby crowning while a snowstorm howled against the rattling windowpanes. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Stranded on the highway shoulder during contractions ninety seconds apart, Wren felt warm fluid soak the seat as the umbilical cord appeared before the baby's head emerged from the birth canal. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Refreshing the banking app for the tenth time, Yusuf watched another wire of fourteen thousand dollars leave the account while every fraud-line number he dialed went straight to looping menus. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Sabine's screen showed her savings hemorrhaging in two-thousand-dollar increments to an unfamiliar payee, and the credit union's emergency line had gone unanswered for forty-seven straight minutes after midnight. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The Lisbon ATM swallowed Hassan's only card with a dull mechanical thud, leaving him stranded outside a closing bank branch with eleven euros and a return flight three days away. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: At a rural train station in Romania, the cash machine ate Greta's debit card just as the last bus departed, leaving her without funds, lodging, or a working SIM. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Pickpocketed in the Marrakesh medina, Tomasz patted empty pockets and realized his passport, wallet, and hotel key were gone, with no consulate open until Monday morning two days away. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: After the crowded tram ride through Prague, Saoirse discovered an empty pocket where her wallet had been, no phone signal, and a hostel address scrawled on a paper now lost. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The certified letter on Brendan's kitchen table set the foreclosure auction for noon that very day, and the wire transfer required to halt it remained unprocessed at his frozen credit union. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Constance had until five o'clock to deliver eighteen thousand dollars to the trustee or lose the house her grandmother had left her, and the bank manager refused to take her calls. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Every workstation at Hartwell Bakery displayed the same crimson countdown demanding two hundred bitcoin, with payroll files, recipes, and customer records encrypted as Friday's deposit deadline crept closer. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Mira's small architectural firm watched its entire project archive lock behind a ransom screen ticking down from forty-eight hours, with backups discovered to be six months out of date. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Linnea spotted the half-million-dollar wire to Singapore as it left the company account, recognized the request as a forged executive instruction, and had roughly nine minutes before the cutoff window closed. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The treasurer at Kessler Manufacturing realized the seven-figure transfer queued for Hong Kong was based on a spoofed email, and the recall window with the bank was rapidly closing. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: By six in the morning Felipe's brokerage account showed a margin call demanding two hundred thousand dollars by the bell, and his liquid reserves covered barely a quarter of that figure. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Beatriz stared at the platform alert demanding immediate liquidation by market open, with leveraged positions in three biotech stocks deep underwater after overnight news from a regulator in Geneva. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Realizing the login link had been a forgery only after entering the codes, Reginald watched four retirement accounts drain to zero across separate browser tabs within ninety frantic seconds. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: After clicking the courier notification, Anika watched her checking, savings, and brokerage balances reset to zero in real time as transfers flooded out to a chain of unfamiliar wallets. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The collections agent left a third voicemail threatening to garnish wages and visit the workplace, and Octavia had no documentation of the disputed surgery bill from two years prior. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: On the porch a process server handed Darnell papers tied to a hospital debt long thought settled, with court appearance scheduled in five business days and original receipts long discarded. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The eviction notice taped to apartment 4C gave Rosalind until eight the next morning, with rent owed, the landlord unreachable, and her three children sleeping unaware in the back bedroom. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Emil's housing court summons demanded the past-due balance by sunrise tomorrow, and after pawning the watch and selling the bicycle, the total remained eight hundred dollars short. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: At three a.m. the entire payment cluster at Norfield Logistics went dark, freezing twelve million dollars in transactions while the on-call engineer scrolled through indecipherable kernel panic logs. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Every checkout endpoint at Lorbridge Retail returned five-hundred errors during the Black Friday rush, and the senior engineer was overseas while orders worth thousands per minute silently failed. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Walking out of the cafe, Hugo realized his unencrypted laptop containing six hundred client medical records had vanished from the chair beside him during the ten-second restroom trip. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: On the late commuter train, Elspeth's bag with the unlocked work laptop holding settlement documents for ninety active cases was missing from the overhead rack as the doors closed. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Forty hours before the merger signing, the security team at Pellinor Capital flagged thousands of exfiltrated documents leaving the network, and the deal counsel still had no idea. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: During final due diligence on the acquisition, Rashida saw an alert showing eighteen gigabytes of confidential files siphoned overnight to an external server in an unfamiliar foreign jurisdiction. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Halfway through the production deploy, Magnus's release script began silently dropping foreign keys across customer tables, with the rollback path broken and the change window closing in minutes. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Veronika watched the deployment pipeline cascade red across every region as the new schema migration corrupted live order data, and the rollback toggle returned a stack trace instead of reverting. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The CEO's mailbox at Kronwell Industries was actively sending wire-transfer instructions to vendors, and Sebastien on the security team had perhaps fifteen minutes before the first payment went through. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Logs at Fennimore Group showed the chief executive's account approving access requests at three in the morning from a Tallinn IP, while the actual executive slept oblivious in California. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Three minutes before the board call, the conference center fiber line went black, and Cordelia could not reach the building's IT desk while fourteen directors waited on a frozen screen. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The video link to investors froze across both backup carriers as Khalid stared at a router blinking amber, with eighty million dollars of funding hinging on the next nine minutes. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: At Laurelbrook Hospital the new infusion pumps began rebooting mid-dose across the cardiac wing, and the duty engineer could not reach the vendor as alarms cascaded through the unit. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Halfway through the night shift at Greenhalgh Refinery, the firmware controlling the emergency vent valves began returning corrupted readings, and the on-site technician could not isolate the cascading sensor faults. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Twelve minutes before the appellate filing deadline, the office printer chewed the only signed original, and Trevor watched torn fragments emerge as the courier paced outside the locked lobby. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The motion ready for filing at four-thirty was now a paper-jammed mess inside the office printer, and Simone had eighteen minutes before the clerk's window closed across town. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The auditors arrived at eight tomorrow morning and Wendell could not retrieve the encryption key for last quarter's backups, the password manager wiped after the laptop swap last week. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Three years of escrowed compliance backups sat behind a forgotten passphrase, and Imogen had eleven hours before the regulators expected restored access during the on-site audit. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Five hours before quarterly close, the financial database at Whitcomb Holdings began returning checksum errors across the general ledger, and the lead administrator could not locate a clean snapshot. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Just past midnight Asher discovered that ledger tables for three subsidiaries had silently corrupted hours before the earnings filing, and the standby replica was already mirroring the same damaged rows. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Among the carousel crowds at Westbridge Mall, four-year-old Niamh had wandered out of sight three minutes ago, and her father stood frozen scanning thousands of unfamiliar faces in every direction. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: At the county fair, Cormac realized his five-year-old son had not been beside him for nearly ten minutes, and the loudspeaker had just announced the gates were closing. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Twenty miles from the nearest town along an unlit county road, Pernille's sedan stalled into silence with no signal bars, no streetlights, and only a quarter tank left for warmth. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Stranded on Route 491 after the alternator died, Adaeze sat in the dark with the temperature dropping fast, no signal on the phone, and a coyote pack howling somewhere uncomfortably close. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Through the thin wall of apartment 3B, Henrietta could hear the screaming escalating, glass breaking, and a child crying as the neighbor's voice grew louder and more violent than ever before. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Behind the wall in unit 12, the shouting had turned to thuds and a woman's choked sobs, and Roderick could hear furniture splintering as the fight crossed into something far more dangerous. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On the bathroom tile, eighty-seven-year-old Viola had lain since dawn after her hip gave out, the medical alert pendant still charging on the nightstand and her phone three rooms away. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Through the gap beneath the bathroom door, Ezekiel saw his grandfather sprawled on the floor, breathing shallowly after a fall, and the front porch keypad code refused to register the passcode. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Fifteen-year-old Solene had not come home from school, and her mother found the bedroom window open, the laptop's last activity showing a bus schedule to a city seven hours away. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: By eleven at night, the Ramos family had not heard from their son Tobias in over six hours, his backpack abandoned at the skate park beside an unfamiliar adult's water bottle. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The terrier had slipped its tether on the steep ravine trail and was now whimpering on a narrow ledge, while sleet thickened and Gunnar's flashlight flickered toward dying. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Patches the cat had been stuck on the icy garage roof for two hours as freezing rain coated the shingles, and Bethany could not reach a tall enough ladder anywhere nearby. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Smoke was thickening through the third-floor hallway at the Ainsley Arms, the stairwell already glowing orange below as Caspian banged on doors that were not opening fast enough. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Black smoke rolled under the door of unit 514 and the hallway fire alarm screamed as Nadezhda watched flames climb the curtains in the apartment across the corridor. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: After the sedan rolled into the ditch on Harker Road, the driver remained pinned beneath a crumpled steering column, conscious but unable to free either leg as steam hissed from the hood. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The crushed minivan rested on its side in the median, its driver Florencia trapped inside with a deformed dashboard pressing against her chest and warning lights pulsing across the cracked dash. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Snow had begun falling on the upper switchback and Quinlan had no map, no compass, and a phone showing no signal as the temperature dropped well below the forecast figure. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Three hours past sunset, Ottilie was lost off the Pemberton trail, her water bottle empty and a thin layer of frost already forming on the ferns around her boots. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Two miles offshore, the dinghy carrying Tobenna and his daughter had a fist-sized crack below the waterline, the bilge pump failing and the cold front rolling in from the west. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The fishing skiff was settling lower with every minute, water past Liesel's ankles inside the hull, and the radio had given out a mile ago in the deepening offshore swell. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: A heavy odor of mercaptan filled the basement when Persephone opened the cellar door, the methane detector chirping rapidly as the furnace pilot continued to glow through the gap below. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Coming home from the night shift, Idris noticed a sharp gas smell flooding the basement, the meter ticking audibly while a single pilot light flickered behind the laundry room wall. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: At three in the morning the carbon monoxide alarm shrieked through the second floor, and Lavinia could already feel the dull headache as her toddler slept heavily in the next bedroom. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: The carbon monoxide detector blared above the staircase, its red LED pulsing as Cyrus stumbled down the hall with his vision narrowing and the children unresponsive in their bunks. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: During the windstorm a long crack ripped across the kitchen ceiling, plaster dropping in chunks while Madelief saw the roof joists visibly sagging downward over the dinner table below. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Hailstones the size of plums hammered the bungalow as the living room ceiling buckled inward, and Anatoly watched a beam crack overhead while his elderly mother dozed on the couch. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Water cascaded down the stairwell from a burst pipe in apartment 7G, soaking through the ceiling into Edmund's unit and rising past two inches across the hardwood floor in minutes. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: From the loft above, a copper line had ruptured and was sending a steady torrent through the kitchen ceiling, with the building's master shutoff valve seized solid and the maintenance line ringing endlessly. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Smoke began curling from the attic vent as Halvard noticed the ceiling above the bedroom warming to the touch, and the breaker panel showed a tripped circuit refusing to reset. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: An acrid burning odor drifted down from the attic crawlspace, and Marisela saw orange light flickering between the rafters above the hallway as the smoke detector below remained inexplicably silent. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: The labrador had eaten an entire tray of rat poison while the back door stood ajar, and Octavian watched the animal stagger sideways across the kitchen tile, foam flecking its jaws. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Inside the garage, the family cat had chewed through a bottle of antifreeze and was now seizing on the concrete floor as Rashmika stared at the spreading neon green puddle. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: From the upstairs landing Antonella heard the back door splinter open and footsteps moving deliberately through the kitchen below, while the children slept across the hall and the landline sat downstairs. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Crouched in the closet of the master bedroom, Linus listened to glass crunch as a stranger moved methodically through the living room directly beneath the floorboards where the children slept. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: The tornado siren wailed across the county as Genevieve threw herself against the basement door, the warped frame refusing to budge while the wind outside rose to a freight-train roar. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Hail thundered against the windows as Bartholomew yanked at the basement door handle that had jammed solid, the funnel cloud already visible through the kitchen window across the cornfield. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Half the roof had ripped away in the squall and rain was now pouring directly onto the electrical panel, while Saskia tried to herd two soaking children toward the lower floor. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: The bedroom ceiling was open to the storm above and water was sheeting onto the bed and onto the laptop charging beside it, with Theron unable to find the breaker switch. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: An enormous oak had crashed across the parked station wagon and Inez could see her brother conscious but pinned inside, the windshield buckled inward and the door frame visibly twisted. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: After the windstorm, a massive pine had fallen lengthwise across the sedan in the driveway, with the elderly passenger inside tapping faintly on the cracked window from beneath the crushed roof. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Marcus squinted at the tiny prescription label on the amber bottle, holding it under the kitchen lamp while reaching for the reading glasses that always seemed to migrate around the apartment. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Eleanor tilted the small antibiotic vial toward the window, but the dosing instructions printed on the pharmacy sticker had smudged where her thumb had rested for the past twenty minutes. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Devon unwrapped the seven-day pill organizer at the kitchen table, looking puzzled at how to schedule his morning vitamins around the two evening tablets the pharmacist had mentioned earlier. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Grandma Rosa sat with the brand-new pill organizer and a sheet of weekly reminders, frowning gently as she tried to figure out which compartment matched her Wednesday afternoon dose. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Tomas stared at the fitness app's onboarding screens on his phone, baffled by the toggles asking about heart rate zones and weekly mileage goals he had never thought about before. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: On the couch after dinner, Lila scrolled through the new yoga app's setup wizard, unsure which of the four flexibility levels best matched her once-a-week studio attendance. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Bea spread two clinic brochures across the coffee table, comparing the Tuesday morning physical slot at the closer office against the Friday lunchtime opening at the cheaper one. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: At the kitchen island, Ravi held two scheduling postcards from competing primary care clinics, weighing the difference between an early-bird Saturday physical and a midweek evening appointment. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: In the dental office waiting room, Helena flipped through the routine insurance form on the clipboard, hesitating over a section asking about secondary coverage that had never quite applied to her. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Quentin balanced the dental insurance form on his knee in the lobby, puzzling over a checkbox row that distinguished between in-network preferred providers and the listed alternates. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Between sun salutations at the studio, Mei paused on her mat and glanced sideways at the instructor, uncertain whether her warrior two stance had her front knee tracked properly. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: After class wound down, Kofi lingered near his mat to check whether his downward dog alignment had been correct, since his shoulders had felt subtly off all session. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: At the running shop, Anna shifted her weight in two different size nines on the carpeted strip, trying to decide whether the half-size up felt loose or just right. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Jared stood near the treadmill display in the shoe store, comparing how the wide width felt against the standard, hoping someone on staff had a tape measure handy. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: In the pharmacy aisle, Greta turned two yellow allergy boxes over and over, comparing milligram counts and drowsiness warnings printed in the smallest type imaginable on the back panels. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Otto stood between the seasonal allergy display and the antihistamines, holding one twelve-hour box and one twenty-four-hour box, trying to recall which had given his sister jitters. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Naomi waited at the clinic front desk for the receptionist, hoping to request a routine note documenting her son's mild fever absence from school the previous Tuesday. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Carlos lingered by the pediatric office window after his daughter's check-up, wondering how to phrase the routine school-absence note request to the receptionist behind the glass. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Mona perched on the optometry waiting bench with last year's frames in her lap, unsure whether to schedule the annual exam now or wait until after the holidays. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: At the optical shop counter, Felipe turned over the printed lens-prescription update reminder, asking the technician about the soonest evening slot that worked with his bus schedule. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: At the dining table, Harriet spread her checkbook ledger and bank statement side by side, frowning at three small discrepancies that had quietly accumulated over the previous month. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Stephen tapped his pen against the checkbook register on the kitchen counter, puzzled by a four-dollar gap between the running total and the balance the bank had reported. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Yolanda fanned out two glossy credit card offers on the coffee table, comparing the cash-back rates against the travel rewards program that her sister had been recommending. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Pedro sat at the dining room table with two unopened credit card brochures, weighing the introductory bonus on one against the lower annual fee printed on the other. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Annika printed out the open enrollment 401k packet from the office portal, lingering over the allocation pie chart that asked her to balance bonds, equities, and a target-date fund. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Hugo studied the retirement plan booklet at his desk during the lunch break, trying to make sense of the suggested allocation percentages between the index funds and the bond options. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: On the porch swing, Marisol opened the new budgeting app for the first time, blinking at the categorization screen that asked her to map seventy unfamiliar transactions to colored buckets. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Bart sat with his laptop balanced on a sofa cushion, working through the budgeting app's first-time setup wizard and unsure how to label his recurring streaming charges. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Imogen sat at the breakfast bar comparing two utility plan brochures, weighing the flat monthly rate from one provider against the time-of-use pricing structure the other proposed. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Reuben spread two electricity plan flyers across the kitchen table, trying to figure out whether the off-peak discount on the second one would actually beat the first plan's flat rate. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: On Thursday evening, Wendy emptied her coupon binder onto the dining table, sorting expiring grocery clippings by aisle so the weekend run through the supermarket would feel less chaotic. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Ezekiel laid out a stack of supermarket coupons across the breakfast nook, trying to organize them by store section before the routine Saturday morning grocery run he always did. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Dolores sat with her laptop and a coffee mug, working through the tax software for a simple return when a question about a state credit briefly stumped her late on Sunday. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: On a quiet Saturday morning, Manny clicked through the tax software screens for a single-form return, briefly puzzled by a checkbox about prior-year refund interest. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Edith dialed the retirement account customer line from the porch, wondering aloud whether her routine yearly contribution had to be made by April or by year's end this time. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Ben sat at the kitchen counter with the retirement account quarterly statement, mildly unsure whether the contribution limit increase from last year still applied to his particular plan type. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: On the porch with her morning coffee, Tabitha frowned at a confusing line item on her bank statement labeled with an unfamiliar merchant code that did not match any recent purchase. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Rashid scrolled through the bank statement on his tablet during lunch, puzzled by a six-dollar charge from a vendor name that read like jumbled letters and a billing zip code. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: At the bank branch on Maple Street, Henrietta queued at the teller window with a paper slip, planning to reset the ATM PIN she had not used since last summer. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Calvin sat in the bank lobby waiting for a representative, holding a debit card and a faint memory of an ATM PIN that had vanished sometime over the past three months. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Saoirse plugged the brand-new router into the living room outlet, holding the setup card from the box and hesitating over which of three default network names to keep. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Wesley crouched beside the entertainment cabinet with a fresh router and a thin booklet, stuck on the screen that asked him to invent a strong household wifi password. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: After the router swap, Penelope tapped the print button three times at her desk, but the office printer in the hallway sat silent and stubbornly disconnected from the new network. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Adesh stared at the printer queue showing six pending pages while the old inkjet on the bookshelf flashed its blue light, refusing to acknowledge the freshly renamed home network. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Out of the box, Cindy sat cross-legged on the rug with the new phone in her lap, scrolling through the setup wizard's account migration screens with mild confusion. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Frederick perched on the couch arm with his upgraded phone, slowly tapping through the setup screens and pausing where the wizard asked about restoring from a previous device backup. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Inga opened the password manager onboarding tutorial on the laptop screen, blinking at the master passphrase rules and the long sequence of vault import options listed below them. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Settling onto the home office chair, Pavel began the password manager onboarding flow, uncertain whether to import browser-saved credentials now or to enter a few accounts manually first. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: After installing the new browser, Mathilde sat at the kitchen desk dragging old bookmarks into folders, baffled by where her recipe collection had drifted during the migration process. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Once the browser migration finished, Roy opened the bookmarks bar and frowned at a tangled stack of unsorted folders that no longer matched the tidy categories he had built before. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Vera saw the small update notification on her laptop and clicked the install button, then stared at a progress bar that paused on a screen mentioning unfamiliar driver components. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Sebastian opened the notification about a recommended software update on his laptop after dinner, hesitating over a checkbox asking whether to also install the optional security extras. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: On the couch with three browser tabs open, Lorraine compared photo backup services from a popular cloud provider, a camera-focused archive, and a budget option her cousin had recommended. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Trent sat with a notepad weighing three photo backup services side by side, jotting storage tiers and monthly fees while sipping decaf at the local coffee shop. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Aurelia lined the old phone next to the freshly opened replacement on the kitchen counter, scrolling through transfer settings and unsure where the contacts import option had been hidden. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: After the phone swap, Marcellus stared at an empty contacts list and a chunky export file from the old device, unsure how to feed the data into the new system. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: On a calm Wednesday afternoon, Beatrix opened the email signature settings tab and tried to format a clean professional sign-off, fumbling with the small font and color toggles. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: At his desk between meetings, Roland fiddled with the email signature editor, attempting to align his title, phone extension, and the small office logo into a tidy block. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: After unboxing the new monitor, Susannah sat at the home office desk pressing tiny buttons along the bottom edge, trying to dim the screen brightness during evening work. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Ignacio peered at the cryptic icons on the underside of his fresh monitor, hunting for the brightness slider before the late afternoon glare made document review uncomfortable. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Mid-recipe, Camilla stood at the stove holding a measuring cup, wondering aloud whether plain yogurt could swap in for the buttermilk the dinner casserole instructions had specified. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Standing over a simmering pan, Jeremiah held the recipe card and a half-empty milk carton, puzzling over what could substitute for the heavy cream the sauce called for. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On the dining room floor, Octavia knelt over a paper grid of round tables, debating whether the cousins from the bride's side belonged near the dance floor or the dessert station. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Spreading the wedding seating chart across the rug, Nikolai shuffled the small paper rectangles representing each guest, trying to keep the feuding aunts at separate ends of the room. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: After dinner, twelve-year-old Salim sat at the kitchen table with his history homework, stuck on a question that asked him to list three accomplishments of the emperor Hadrian. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Curled in the reading chair, young Phoebe tapped her pencil on a homework worksheet, baffled by a fill-in-the-blank prompt about the Roman emperor who built a famous wall. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: In the wine aisle, Aleksandra hovered between two midrange bottles, uncertain which would suit the roast chicken and the cousin who claimed to despise anything tasting too oaky. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Standing under the wine shop's pairing chart, Theo balanced a butternut squash recipe in one hand and a trio of white wine bottles balanced precariously in the crook of his arm. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On the apartment landing, Jacinta and her brother debated whether to label moving boxes by destination room or by category of contents, since both methods had merits. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Standing among stacked moving boxes, Curt and his roommate disagreed mildly about whether the kitchen items should be labeled with bright tape or just neat marker on the cardboard. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On the living room floor, Mireille sat surrounded by flat-pack bookshelf parts, frowning at a leaflet diagram that seemed to label the same dowel by three different letters. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Tobias spread the flat-pack desk hardware across the carpet, comparing two nearly identical screws against a tiny inset drawing in the manual that offered limited clarification. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On Sunday evening, Constance pulled up the school carpool spreadsheet on the laptop, trying to slot four families into morning and afternoon driving rotations that worked for everyone. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Around the kitchen island with two other parents, Augustin sketched a rough school carpool calendar on a napkin, looking for a fair way to split the Wednesday afternoon runs. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: At the garden nursery, Ophelia turned a fuzzy-leafed potted specimen in her hands, unsure whether the unmarked tag indicated a hardy perennial or something that needed indoor wintering. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Wandering between the nursery's perennial racks, Bertram cradled an unlabeled fern-like cutting, trying to figure out whether the leaves matched anything in his pocket plant guide. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Out on the empty Sunday parking lot, Janelle sat in the driver's seat while her seventeen-year-old nephew nervously eased the sedan toward two orange cones marking a parallel-parking spot. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On a quiet residential street, Maximilian sat behind the wheel under his uncle's calm gaze, attempting a parallel parking maneuver between two friendly neighbors' parked cars without scraping anything. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Around the dining table on game night, Cordelia held the rulebook open to page seven, baffled by an exception clause about trading resources during another player's turn. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Mid-game, Damon flipped through the board game manual, trying to clarify an obscure rule about whether a discarded card returned to the deck or vanished from play entirely. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On a slow Saturday morning, Bridget knelt by the hallway door with a small can of lubricant, unsure whether the squeaky hinge needed oil or simply a tighter set of screws. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Crouched in the upstairs hallway, Niall tapped at a creaky hinge with a screwdriver, debating whether to remove the entire pin or just give the joint a quick spritz. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: On a rainy afternoon, Theresa pulled all the canisters out of the pantry, trying to plan a sensible new layout that would put the autumn baking supplies within easy reach. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Standing on a small step stool, Gerald peered into the upper pantry shelves, sorting the spring spices into the front and the holiday baking goods toward the back corner. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: In the spare bedroom, Magdalena taped four paint chip strips to the wall, hesitating between a soft sage, a dusty blue, and two warm neutrals her partner had picked out. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Standing in the half-empty guest room with a paint deck fanned open, Cyrus held three swatches against the morning light, undecided between the warm cream and the pale clay tone. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: In the garden shed on a cool Saturday, Lavinia knelt by the lawn mower with a frayed starter rope coiled in her gloved hand and the new replacement still in its plastic. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Out on the back patio, Tyrell tipped the mower onto its side and pried at the housing, trying to thread a fresh starter rope through the spool the manual had described. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Wandering the rug aisle on a quiet Sunday, Esmeralda unrolled two area rug samples beside her phone photo of the living room, trying to imagine which would warm the bare floor. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: At the home goods store, Boris stood between two display rugs, weighing the muted geometric pattern against the warmer striped one for the spot beside his sectional sofa. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: On the kitchen step stool, Henrietta examined a small triangular tear in the window screen, trying to remember whether the patch kit in the drawer used adhesive or fine wire mesh. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Beside the open kitchen window, Renata laid the patch kit instructions on the sill, frowning at a slim tear in the screen that she had been meaning to fix for weeks. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: On Monday morning, Florence dialed the neighborhood pet groomer with the cordless phone tucked under her chin, comparing two open Saturday slots while the spaniel snored on the rug. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Sitting at the kitchen island, Alonso scrolled through the pet groomer's online booking page, trying to decide between two routine appointment times for the very fluffy family terrier. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: On a quiet Sunday afternoon, Geneva spread a notebook across the kitchen table and began drafting a spring cleaning checklist, undecided whether to organize the tasks by room or by chore type. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: At the breakfast bar, Lukas sketched a spring cleaning checklist on graph paper, pausing between the closets and the garage to figure out which weekend made more sense for each. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: In the home goods store bath aisle, Marigold unfolded two shower curtains across the display bench, weighing the cheerful botanical print against a calmer linen-textured neutral pattern. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Wandering down the bath section, Edmund held a packaged shower curtain in each hand, debating whether the bold geometric print might overwhelm the small upstairs bathroom of the rental. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Kneeling by the breakfast nook chair, Apollonia turned the wobbly piece upside down, trying to figure out whether the loose leg needed a hex key or a regular Phillips screwdriver. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: On the workshop bench, Reginald lined up three screwdrivers and a hex key beside the wobbly dining chair, unsure which fitting matched the small bolt under the loose seat. Is the person asking for or offering help?",
+          "group": "request",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        }
+      ]
+    },
+    {
+      "label": "offer",
+      "description": "Scene depicts someone providing help (offering help). The wrapper question is identical across all probes; the scene establishes Direction by content.",
+      "sentences": [
+        {
+          "text": "Sentence: The off-duty paramedic at the farmers market noticed the elderly vendor clutching his left arm, vaulted the produce table, and began chest compressions while shouting for someone to call dispatch immediately. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Recognizing the gray pallor and labored breathing of the cashier slumping behind the register, the paramedic shopper grabbed the store's defibrillator and shocked her back into rhythm twice. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: When the flight attendant announced a passenger in distress over Greenland, the family physician in row fourteen identified herself, and intubated the seizing teenager using a kit borrowed from the cockpit. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The cardiologist seated near the lavatory pushed past the drink cart, knelt beside the convulsing businessman, and administered emergency medication from her carry-on while the captain diverted the jet to Reykjavik. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Pulling over on the rain-slick shoulder, the retired hospice nurse extracted the bleeding driver from the crumpled sedan and applied pressure to the femoral wound until the ambulance arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The veteran nurse, returning from a wedding, stopped at the overturned minivan, stabilized the trapped mother's neck with rolled towels, and coached her breathing until firefighters cut through the wreckage. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Spotting the limp child face-down in the deep end, the lifeguard launched off the chair, hauled the boy onto the deck, and began rescue breaths within thirty seconds. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The teenage lifeguard at Camp Pinecrest dove fully clothed after the unresponsive eight-year-old, towed her to the shallow end, and successfully restored a pulse before the medics docked. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Hearing the table behind her go silent, the off-duty ER nurse spun around, recognized a choking patron, and delivered abdominal thrusts that dislodged a chunk of steak across the dining room. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The trauma nurse celebrating her birthday set down her wine, pulled the gasping diner from his chair, and performed the Heimlich maneuver until the obstruction cleared and color returned to his face. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Smelling mercaptan when the doorbell rang, the off-duty firefighter from next door shut off the meter, evacuated the family of four, and ventilated the kitchen before the gas crew arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: The neighborhood firefighter pounded on the Hendersons' door at dawn, dragged the disoriented grandfather outside, and isolated the leaking propane tank seconds before the water heater's pilot would have ignited. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: When the construction worker collapsed onto the express platform, the EMT commuter dropped his coffee, cleared the man's airway, and ventilated him with a pocket mask until backup descended the stairs. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The off-duty EMT on the Q train pulled the seizing passenger away from the third rail, rolled him onto his side, and delivered rescue breaths until paramedics reached the platform. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Dispatched to the partially collapsed pedestrian bridge over the river, the trauma surgeon crawled beneath twisted rebar to amputate the pinned commuter's foot before the remaining span gave way. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Captain Reyes, the trauma surgeon on call, climbed into the rubble of the fallen overpass, triaged six survivors by flashlight, and clamped a ruptured artery before evacuation. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The veterinarian walking her own retriever lunged toward the gagging Labrador near the picnic tables, swept its throat, and extracted the splintered chicken bone before its owner could finish dialing. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The veteran small-animal vet sprinted across the dog park, pinned the convulsing mastiff between her knees, and cleared the lodged tennis ball with an emergency tracheal puncture before backup arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The Army medic returning from leave stopped at the smoking pileup on Interstate 40, pulled three drivers from burning cars, and tied off a severed brachial artery using his belt. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Sergeant Daniels, a former combat medic, leapt the highway barrier toward the overturned tanker, dragged the unconscious motorcyclist clear of leaking fuel, and packed the chest wound with gauze. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Engine 14's lieutenant kicked open the smoldering bedroom door, located the trembling tabby beneath the bed, and carried it down the burning stairwell to the sobbing family on the lawn. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: The firefighter rappelled through the second-story window of the Bellinghams' burning duplex, scooped up the trapped beagle, and lowered the panting dog to the truck crew below. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: The tow operator angled his rig across two lanes of black ice, deployed flares around the seven-vehicle pileup, and dragged a dazed driver from a sedan before the next truck arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Marcus, a graveyard-shift tow driver, blocked the icy curve with his flatbed, broke a frozen window with his pry bar, and pulled the trapped mother from the steaming wreck. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The mountain rescue team triangulated the climber's faint beacon at twilight, ascended the icy couloir by headlamp, and reached the hypothermic teenager minutes before the storm front swept the ridge. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Roping down the north face as light failed, the alpine rescuers located the stranded climber wedged in a crevasse, warmed her with chemical packs, and hoisted her to the helicopter. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The Coast Guard cutter swung northeast at full throttle when a flare arced over the swells, locating the foundering trawler and pulling four soaked crewmen aboard before the hull broke apart. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Spotting the red distress arc on the horizon, the watch officer ordered hard rudder, launched the rigid hull boat, and recovered the capsized fisherman from the freezing chop within minutes. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The K9 handler unleashed her bloodhound at the trailhead, followed the scent trail through dense undergrowth for two hours, and located the missing toddler curled asleep beneath a fallen pine. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Officer Greene and her tracking shepherd cut through swampy woods at dusk, picked up the lost child's scent on a discarded shoe, and reunited the family near a creekbed. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The National Guard pilot banked his Black Hawk over the rising Mississippi, hovered above a rooftop where three children waved soaked towels, and hoisted the family to the cabin. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Chief Warrant Officer Lin guided her helicopter through driving rain over the flooded subdivision, lowered the basket twice, and lifted an entire family from their submerged porch to safety. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The Red Cross volunteer set up cots in the high school gym at midnight, registered evacuees fleeing the Category 4 storm, and arranged insulin for a diabetic father within an hour. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Wrangling supplies as families streamed in from the hurricane zone, the volunteer coordinator triaged medical needs, paired strangers into bunk groups, and located oxygen for an elderly evacuee before midnight. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The SWAT negotiator established a phone line with the barricaded gunman holding two tellers, kept the conversation steady for six hours, and brokered the peaceful release of both hostages. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Detective Park, the lead negotiator, talked the armed suspect down through the bank's drive-through speaker, secured medication for an asthmatic hostage, and arranged surrender without a shot fired. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The hotshot crew dug a fireline around the isolated ranch as embers showered the roof, soaked the eaves with foam, and saved the homestead minutes before the crown fire arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Captain Alvarez deployed her wildfire crew along the ridge above the Petersons' farmhouse, ignited a backfire to starve the advancing flames, and protected the structure through the night. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The hazmat lead suited up within minutes of the chlorine tanker rollover, established a downwind perimeter on the interstate, and neutralized the leaking valve before the gas reached the suburbs. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Decontamination team Bravo arrived at the overturned chemical truck, evacuated motorists from the toxic plume zone, and patched the breached drum with an emergency clamp before nightfall. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The night-shift security analyst caught the lateral movement on the file server, severed the attacker's session mid-exfiltration, and isolated the domain controller before the encryption phase began. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Tracing the suspicious credential spray across three subnets, the threat hunter killed the attacker's reverse shell, rotated administrative passwords, and locked the breach to a single workstation overnight. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The backup engineer drove to the regional hospital at 2 a.m., restored the encrypted radiology systems from offline tape, and got the trauma bay imaging operational before dawn rounds. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Working from a folding chair in the data closet, the senior backup engineer rebuilt the surgery scheduling database, restored patient records from cold storage, and brought operating rooms back online. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The forensic investigator imaged the suspect's drives the moment the warrant arrived, capturing chat logs and ledger entries seconds before a remote wipe command would have erased everything. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Agent Whitmore plugged a write-blocker into the seized server, copied the financial records to a forensic image, and preserved the evidence chain before the suspect's lawyer arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The data scientist flagged the demographic skew in the loan model two hours before deployment, halted the launch pipeline, and patched the training data despite executive pressure to ship. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Reviewing the eve-of-launch evaluation metrics, the lead modeler identified disparate denial rates against rural applicants, blocked the production push, and rebalanced the training corpus thoroughly before sunrise. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Roused at 3 a.m. by the cascading PagerDuty alert, the on-call engineer rolled back the broken deploy, restored the checkout service, and stopped the bleeding before the overnight surge peaked. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The bleary-eyed devops lead diagnosed the runaway memory leak crashing the payment service, deployed a hotfix from her kitchen table, and stabilized traffic before commuters started ordering breakfast. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The independent researcher discovered the unauthenticated remote-code flaw in the vendor's SCADA software, drafted a coordinated disclosure brief overnight, and got an emergency patch into utility hands within days. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: After confirming the kernel-level exploit on a popular router firmware, the bug-bounty hunter notified the vendor through encrypted channels and shepherded the fix through release before disclosure. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The communications director pulled an all-night stand-up after the city portal went dark, restored citizen access to emergency services by morning, and briefed reporters on every restoration milestone. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Coordinating across four agencies through the night, the public information officer rebuilt the storm-damaged 911 routing portal, posted alternate hotlines, and kept residents informed every twenty minutes. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The SOC analyst correlated the unusual ACH patterns at 4 a.m., identified an active money-laundering ring, and froze 127 mule accounts before the next batch of transactions cleared. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Spotting the spike of micro-transfers across borrowed cards, the fraud analyst locked the merchant API, escalated to law enforcement, and prevented an estimated four million in losses overnight. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The infrastructure team failed the trading platform over to the secondary data center seconds before primary cooling failed, preserving every order book and avoiding a regulator-mandated trading halt at open. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Riya's platform team triggered the pre-rehearsed failover to the backup region as smoke alarms sounded in the main facility, keeping customer transactions flowing without a single dropped connection. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The IT manager remotely killed the network port, instructed the executive over the phone to shut the laptop, and quarantined the credential-stealing payload before it spread to finance. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Within minutes of the phishing report, the security engineer disabled the compromised laptop's certificates, walked the lawyer through a forensic shutdown, and isolated the device from the corporate VPN. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The fraud team's machine-learning alert pinged just after submission; the analyst phoned the wire room, halted the seven-figure transfer mid-flight, and reversed it before the offshore account received funds. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Catching the unusual destination flagged by the model, the wire-room officer paused the executive's outgoing transfer, confirmed it was a spoofed CFO request, and cancelled the disbursement instantly. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The branch manager opened the vault before official hours, reversed the fraudulent debit on the widow's checking account, and hand-delivered cashier's checks for her late husband's funeral expenses. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Sympathetic to the trembling pensioner at the counter, the bank manager froze her compromised debit card, reimbursed the unauthorized withdrawals immediately, and walked her through the police report. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Auditing the morning ledger of the community center, the volunteer accountant traced the missing donations to a dummy vendor, documented the trail, and escalated to the board before payroll cleared. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The forensic accountant flagged the duplicate invoices buried in the school district's quarterly close, froze the disbursement queue, and reported the embezzling administrator before the next payment cycle. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The compliance officer halted the executive's pending share sale moments before the earnings press release dropped, escalated to general counsel, and averted a federal insider-trading investigation entirely. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Reviewing the trading desk's blotter against the embargoed merger memo, the compliance lead blocked the suspicious order, locked the trader's terminal, and notified regulators within the required hour. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Working through the night by lamplight, the litigator drafted a temporary restraining order against the demolition crew, e-filed it at 5 a.m., and secured a stay before the bulldozers arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The civil rights attorney pulled an all-nighter assembling affidavits, faxed the emergency injunction motion to chambers at dawn, and stopped the deportation flight thirty minutes before takeoff. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The labor arbitrator shuttled between conference rooms past midnight, splitting the gap between the union and the hospital, and brokered a settlement minutes before the strike deadline expired. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Veteran mediator Hollis kept both negotiating teams seated through the eleventh hour, reframed the final sticking point, and secured signatures on the contract three minutes before the lockout began. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The newly appointed CFO caught the misplaced decimal in the bonus run during a final spot check, halted the ACH transmission, and corrected the seven-figure error before banks processed it. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Spotting the duplicated payee file in the payroll batch, the finance chief paused transmission, manually reconciled every line, and prevented an accidental double-pay across two thousand employees. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The credit union's loan officer stayed past closing to expedite a no-collateral medical bridge loan, wired funds within the hour, and got the chemotherapy infusion authorized before the pharmacy closed. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Hearing the desperate father's story, the credit union manager fast-tracked the emergency loan paperwork, waived standard processing delays, and ensured surgery deposits cleared before the operating room opened. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The seasoned broker overrode the panicked client's market-sell order seconds before the bell, executed a staggered limit instead, and preserved nearly half a million in retirement value during the crash. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: Recognizing irrational selling on a flash dip, the floor broker held the widow's account back from the open, layered the sale across the recovery, and salvaged the year's gains. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: On a long call with the sobbing retired teacher who wanted to liquidate everything, the advisor walked through her actual cash needs, talked her off the ledge, and protected her nest egg. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The financial planner stayed on the line for two hours with the panicked widower, gently dismantling each catastrophic scenario, and convinced him not to drain the IRA at midday lows. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: The crisis line counselor kept the suicidal college student talking through three pots of coffee, dispatched a welfare unit to the dorm, and stayed on the call until officers arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Maintaining a calm voice through the night, the hotline counselor traced the despondent caller's location, coordinated quietly with local police, and remained connected until paramedics reached her apartment door. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The widow from across the hall took the trembling six-year-old into her kitchen after the break-in, wrapped the child in a warm quilt, and sat watch while detectives processed the apartment. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The neighbor scooped up the terrified child standing barefoot on the driveway, brought her inside to warm milk and cartoons, and stayed beside her until the grandparents arrived from across town. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The county social worker stepped between the shouting couple in the doorway, guided the bruised mother and her toddlers to a waiting cruiser, and arranged shelter beds before nightfall. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Arriving at the apartment as the argument escalated, the family services investigator de-escalated the boyfriend, removed the children to a confidential safehouse, and filed a protective order overnight. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Father Donovan sat with the Murphys outside the trauma bay through three hours of waiting, held the matriarch's hand when the surgeon delivered the news, and prayed quietly with the children. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The hospital priest met the shaken family in the surgical waiting room, listened as they whispered fears, and remained beside them when the doctor announced the worst possible outcome. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The hospice chaplain kept vigil at the ICU bedside through the long night, reading psalms softly to the dying veteran and his daughter, and stayed past dawn until the family arrived. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Reverend Marquez pulled a chair beside the unconscious patient, kept the daughters company through the monitors' beeping, and remained with the family until the cardiac arrest team finally relented. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: When gunfire echoed in the corridor, the third-grade teacher locked the classroom door, herded eighteen children into the supply closet, and whispered a calming counting game until tactical officers cleared the building. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Hearing the lockdown alert, the chemistry teacher covered the classroom window with construction paper, gathered her students under the heavy lab tables, and quietly reassured each one through the harrowing forty minutes. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Feeling the gym roof groan after the tornado siren, the wrestling coach hustled twenty athletes through the locker room exit, and got the last student into the dugout shelter as beams crashed. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Coach Whitfield ordered his soccer team off the bleachers seconds before the press box collapsed, herded everyone toward the buses, and accounted for each player as the storm tore through. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The lakefront lifeguard sprinted down the dock, dragged the unresponsive swimmer onto the wooden boards, and delivered chest compressions for nine minutes until the hospital boat arrived alongside. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Spotting the tubing teen suddenly limp in the shallows, the senior lifeguard hauled him onto the beach, cleared his airway, and restored breathing through measured rescue cycles before the ambulance pulled in. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Watching the live video chat, the crisis worker coaxed the despondent young woman to set down the pills, stayed connected as officers gently entered the apartment, and ensured she reached the hospital safely. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Maintaining steady eye contact through the screen, the intervention counselor talked the trembling teenager into surrendering the razor, kept dialogue going for an hour, and coordinated a quiet welfare visit through dispatch. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Trapped between floors with a laboring expectant mother, the off-duty paramedic spread her jacket on the elevator floor, coached the breathing pattern, and safely delivered a healthy baby girl before maintenance restored power. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: When the hospital elevator stalled at the fourth floor with a woman in active labor, paramedic Torres calmly delivered the baby on the cab's tile, and clamped the cord with a hair tie. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "high",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: During the long evening shift, Marisol set a fresh latte on Devon's desk before settling back at her workstation, knowing the late deadline would keep them both there for hours. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Trevor noticed his deskmate yawning over a third spreadsheet, so he stopped by the break room and brought back two oat milk cappuccinos along with some shortbread cookies. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The senior consultant pulled a chair next to the intern's monitor and walked through the slide deck calmly, suggesting tighter headlines and a cleaner chart for the quarterly meeting. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Before the partner review, Yolanda offered her mentee twenty minutes of feedback on the presentation deck, marking up the agenda slide and reordering two case studies for clearer flow. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: When Priya called out with a sore throat, her teammate Owen quietly took over the standup, sharing her status updates and noting follow-ups so she could rest at home. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Nadia covered the routine client check-in for a colleague battling a stubborn cold, taking notes carefully and forwarding action items afterward so nothing slipped between the regular Tuesday meetings. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The team lead booked an afternoon block to pair with the junior developer on a stubborn off-by-one bug, narrating his debugging steps so she could pick up the workflow. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: After lunch, Marcus sat beside the new hire and walked through the staging environment together, pointing out where logs lived and how to inspect failed builds without disrupting anyone. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The executive assistant arrived early to arrange folders, name placards, and a fresh pitcher of water for the board's quarterly briefing, then quietly tested the projector remote one more time. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Beatrice laid out printed handouts in neat stacks, double-checked the conference phone, and brewed a pot of coffee before the regular Wednesday team review began at nine. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Karim sat next to the new analyst and walked her through the timesheet portal, the expense system, and the badge access screens, answering her small questions without rushing. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The training partner clicked through onboarding screens with the new hire, demonstrating the ticketing tool, the directory search, and the calendar integration during a relaxed Tuesday afternoon walkthrough session. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Jin popped open the printer's side panel, freed a crumpled page, replaced the toner cartridge, and reset the queue so his grateful office mate could finish the routine reports. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: When the copier flashed a paper jam warning again, Adeola crouched down, opened the back tray, removed three torn sheets, and got the marketing memos printing once more. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Felix forwarded a recent industry analysis on supply chain trends to his teammate Lara, adding a quick note that the third section connected nicely to her ongoing research project. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Renata shared a long-form trade journal article with her colleague over chat, mentioning that the framework on procurement patterns might be useful for the upcoming vendor portfolio review. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Over sandwiches in the break room, Tomas demonstrated a pivot table shortcut that saved minutes per report, then jotted the keystrokes on a sticky note for his curious teammates. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Holly used her lunch break to walk a small group through conditional formatting tricks, showing how to color-code overdue invoices and tidy up the monthly reconciliation worksheet quickly. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: After the regular Thursday sync ended, Bertrand emailed his clean meeting notes to a colleague who had been at a dentist appointment, highlighting the two action items affecting her project. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Sienna shared her tidy bullet-pointed notes from the weekly product huddle with a teammate stuck on a long train, summarizing the launch date discussion and the new design comments. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Old Holloway crossed the hallway with a binder of takeout menus, the recycling pickup schedule, and a hand-drawn map of the local farmers market for the family unloading boxes. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The retired teacher next door dropped off a folder of menus from the Thai place, the diner, and the pizzeria, along with a tip about which laundromat ran cleanest. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Geraldo volunteered to feed his neighbor's tabby cat for the long weekend, scooping the litter, refilling the water fountain, and leaving a note about the cat's quirky napping spots. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: While walking her own retriever each morning, Inez stopped at the apartment upstairs to feed the silver tabby, refresh his bowl, and sit briefly so he had company. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Cassidy picked up her old college roommate at six in the morning and drove to the airport, chatting about the upcoming conference and grabbing breakfast sandwiches at the drive-through. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Reggie cleared the back seat of stray gym bags, then drove his friend Anjali to the airport for a routine work trip, picking through old podcasts on the morning radio. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: When the snow piled up in the cul-de-sac, old Petrov rolled his snowblower across the street, lent it for the weekend, and showed the new family how the choke worked. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Sherwin handed over his snowblower to the couple two doors down for the long weekend, demonstrating the pull cord and the throttle while the kids watched from the front porch. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Aunt Pearl dropped by for an hour to watch the toddler while her niece showered and finished some quiet email work, reading picture books on the rug between juice breaks. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Cousin Jamal swung by after work to watch the baby for an hour, bouncing him gently and singing low while the parents grabbed an early dinner around the corner. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Lupita carried over a paper bag of heirloom tomatoes from her backyard plot, leaving them on the porch with a recipe card for a simple summer panzanella salad. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Theron knocked on his neighbor's screen door and handed over a basket of cherry tomatoes from his garden, mentioning that the brandywines would be ready by the end of the week. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: On Saturday morning, Camille showed up with coffee and donuts to assist Daria with a casual move across town, taping boxes and labeling kitchen items in tidy clusters. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Ruben volunteered for a friend's weekend move, hauling a futon down two flights, packing books in milk crates, and ordering pizza around three when the energy started fading. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Phaedra spent a sunny afternoon at the hardware store with her best friend, comparing seven warm neutrals on a swatch card and recommending a soft greige for the living room. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Greg stood beside his college buddy in the paint aisle, holding sample chips up to the natural light and steering the choice toward a calmer sage for the new home office. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Grandma Esme spent her quiet evenings knitting a buttery yellow baby blanket for her grandniece, finishing the scalloped border on a Sunday before wrapping it in tissue paper. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Aunt Marcellina sat by the window most afternoons knitting a pale blue blanket for her cousin's expected baby, finishing the soft edging in time for the casual gender reveal. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Over Saturday brunch, Fionnuala read through her friend's resume line by line, suggesting tighter verbs, a clearer summary, and a cleaner section break before the regular networking event. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Devante sat at the kitchen table with his old roommate's resume, rephrasing two bullet points and recommending that the certifications section be moved up nearer to the work history. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The clerk at the indie bookstore noticed a regular pacing the new fiction shelves and brought over three quiet literary picks tucked under one arm and a small staff-favorites bookmark. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: When Pilar walked into the shop on Tuesday, the clerk pulled aside two memoirs and a translated novel that fit her usual taste, handing them over with a quick blurb. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The morning barista at the corner caf\u00e9 greeted the regular by name and started preparing the half-caf oat milk cortado with two pumps of vanilla before the order was even spoken. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Without checking the screen, Octavio pulled a triple shot, steamed almond milk to a careful temperature, and added a single dash of cinnamon for the regular customer who came in daily. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The shoe store fitter measured the customer's foot, vanished into the back, and returned with three boxes covering a half size up, a wide width, and a recommended insole. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Nyree at the small downtown shoe boutique brought out four extra pairs unbidden, including a sneaker the customer had not considered, and laid them in a tidy semicircle on the rug. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The mechanic wiped his hands on a shop rag and walked the customer through synthetic versus conventional oil, mileage intervals, and the difference in price for the routine maintenance options available. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: At the family-run garage, old Kowalski explained the routine oil change tiers calmly, gesturing at the manufacturer chart and recommending the mid-grade option based on the sedan's mileage history. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: The plant nursery worker walked beside the new gardener through the perennial aisle, explaining watering schedules, sunlight needs, and how often to repot a young fiddle-leaf fig at home. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Wearing earth-stained gloves, Octavia at the garden center showed the customer how to check soil moisture, recommended a balanced fertilizer, and chose three drought-tolerant ground covers for the sunny yard. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Without being asked, the waiter at the bistro carried over a wooden high chair, snapped on the safety strap, and offered a small dish of crackers for the toddler at the table. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Spotting the family of four entering the diner, Bonifacio grabbed a clean high chair from the corner, wiped it with a soft cloth, and slid it gently next to the booth. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The hotel concierge phoned the spa downstairs, reserved a routine deep-tissue massage at three for the visiting consultant, and emailed a printable confirmation along with directions to the relaxation lounge. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Marguerite at the front desk arranged a routine ninety-minute facial appointment for a guest celebrating an anniversary, slipping a small handwritten note about the spa entrance into the room key envelope. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The pharmacist leaned across the counter and explained calmly how the new allergy tablet might interact with the customer's regular blood pressure pill, suggesting the morning be a steady taking time. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: Pharmacist Abernathy at the neighborhood drugstore walked the customer through routine interactions between her vitamin and the new statin, drawing a small chart on the back of a printed leaflet. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "medical"
+          }
+        },
+        {
+          "text": "Sentence: The bakery worker piped pastel rosettes around the edge of the routine birthday cake, added a small chocolate butterfly, and tucked a candle pack into the box at no extra charge. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Behind the bakery counter, Ngozi finished a sheet cake with bright sprinkles, piped a wobbly happy birthday across the top in lavender frosting, and added a few extra balloons. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The boutique owner offered free cuff alterations on a small linen blouse purchase, marking the fold with chalk and promising the finished item would be ready by Saturday afternoon. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: When the regular customer brought a slim merino cardigan to the counter, Henrietta threw in complimentary sleeve hemming, pinning the fabric carefully and noting the pickup date on a small ticket. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: After dinner, Theodora sat at the kitchen counter and went over the math worksheet with her son, walking through each long division problem and praising his neat handwriting on the page. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Rashid spread the geography flashcards across the dining table and quizzed his daughter on capitals, rephrasing tricky names and rewarding correct streaks with small stickers from a desk drawer. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On a quiet Saturday, the older sister jogged behind her younger brother as he wobbled on the bicycle, steadying the seat, then letting go on the sunlit stretch of sidewalk. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Big brother Quinton ran alongside the new bike, one hand on the back of the saddle, encouraging his little sister as she pedaled bravely down the gentle slope of the driveway. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: During the casual Sunday visit, Grandpa Zoltan dictated the family's pierogi dough recipe to his granddaughter, demonstrating how to fold the edges and seal each one with the tines of a fork. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Over a slow Sunday afternoon, Nana Rosalind walked the grandchildren through her sweet potato pie steps, scribbling cup measurements onto an index card stained gently from decades of family kitchens. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: After a long workday, Esteban put on a podcast, chopped vegetables, and assembled a sheet pan dinner so his exhausted partner could simply settle on the couch with a glass of seltzer. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Knowing her wife had pulled twelve hours at the clinic, Adaeze made a comforting lentil stew, set the table with candles, and pulled the heating pad from the linen closet. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Brenden spread the manual across the kitchen island and walked his sister through the new air fryer's settings, showing her the chicken thigh preset and the recommended preheat time. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: When the new espresso machine arrived, big sister Niamh demonstrated grind size, tamping pressure, and steam wand technique to her younger brother across two slow Saturday mornings of practice shots. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: Saturday morning, the teen and the parent drove the empty parking lot for an hour, practicing parallel parking, three-point turns, and the smooth lane changes the road test would require. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Aunt Thornberg walked her nephew through the road test checklist while sitting in the driveway, demonstrating mirror adjustments, signal timing, and the smooth braking the examiner generally watched for closely. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Grandma Lillemor settled into the rocking chair with her grandson and read three picture books in a calm voice, pausing on the illustrations until his eyelids drifted slowly downward. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Each visit, Grandpa Soren read the same dragon storybook to his granddaughter at bedtime, doing all the voices and tucking the dinosaur quilt around her tiny shoulders before kissing her forehead. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: During the Sunday family lunch, Cordelia carried the recycling bin and the trash bag to the curb without being asked, then refilled the kitchen compost pail with fresh paper liner. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: While the parents finished cooking, big brother Jameson took out the kitchen trash, swapped the bag, and rolled the wheeled bin out to the curb for the morning pickup. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Old Vasquez signed up as a chaperone for his daughter's routine fourth-grade museum trip, packing extra granola bars and a list of names so the small group stayed together easily. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Aurelia volunteered to chaperone her son's science center field trip, riding the school bus, counting heads at every exhibit, and making sure each child finished a worksheet by lunchtime. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On the way home, Saoirse swung by the dry cleaner unprompted, picked up her wife's pressed slacks and two blouses, and hung them carefully in the hall closet. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Without being reminded, Cornelius detoured past the cleaners, grabbed his husband's three pressed dress shirts, and laid them flat in the back seat to keep the creases neat. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Spotting the woman juggling grocery bags, Eduarda pressed the elevator door-open button until her hallway neighbor stepped inside safely and the bags settled against the back railing. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Marlon held the elevator with one foot against the threshold while the dad with twin strollers, a diaper bag, and a folded tricycle rolled gently into the car. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The visiting tourist offered to take a phone photo of the couple posing in front of the old fountain, framing the spires neatly and snapping three quick shots for choices. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Backpack on his shoulder, Kwame paused near the cathedral steps and offered to take a group photo for the family of four, lining up the towers neatly behind their smiles. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: At the grocery store, the tall shopper reached the canister of oatmeal on the top shelf for the elderly woman with the cane, then placed it gently in her cart. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: In the canned goods aisle, Tobias stretched up and grabbed the box of pasta the older gentleman had been eyeing, handing it over with a quiet nod and a soft smile. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Pausing on the busy corner, the retiree gave the lost visitor clear directions to the river walk, sketching a small map on the back of a folded transit pamphlet. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On the corner of Ninth and Maple, Bartholomew gave a couple from out of town three landmarks to navigate by, plus the easy bus route that would drop them downtown. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: On the crowded morning train, Hawthorne stood and gestured for the woman carrying two heavy tote bags to take his window seat, then steadied himself against the metal pole. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Riding the eight forty-five express, Soledad rose without a word and offered her seat to the older man with the shopping cart, who smiled gratefully and settled in. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: The caf\u00e9 customer paused at the doorway and held the heavy glass door open until the parent maneuvered the wide stroller through, then offered a friendly smile before settling at a table. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Stepping aside at the bakery entrance, Miriam propped the door open with her hip while the mother eased a double stroller and a diaper bag through the narrow vestibule. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "social"
+          }
+        },
+        {
+          "text": "Sentence: Spotting a stray wallet under a coffee shop chair, Brendoline picked it up, found a license, and handed it back to the man at the counter ordering a flat white. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: After noticing a slim leather wallet on the caf\u00e9 floor, Roderigo flagged the barista, then returned it to its owner, who was about to step out into the rain. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "financial"
+          }
+        },
+        {
+          "text": "Sentence: In the supermarket parking lot, the stranger pulled out jumper cables, lined up the clamps with a calm explanation, and waited while the dead sedan finally rumbled back to life. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: On a sunny Saturday, Donatella offered a jump from her station wagon to a college student whose hatchback had been sitting too long, talking through the cable order patiently. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "technical"
+          }
+        },
+        {
+          "text": "Sentence: At the dog park, the longtime regular pulled a spare nylon leash from her tote and clipped it onto the loose retriever before walking him over to his flustered owner. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Spotting a worried newcomer chasing a beagle, Ignatius unhooked an extra training leash from his backpack and handed it over with a calm wave near the small-dog gate. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: While the family was on vacation, old Calloway collected their mail every afternoon, stacked the catalogs and bills neatly on the entry table, and watered the porch ferns lightly. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        },
+        {
+          "text": "Sentence: Throughout the long beach trip, Faramund brought in his neighbor's mail, set a few packages inside the screened porch, and tugged the curtains closed each evening for a lived-in look. Is the person asking for or offering help?",
+          "group": "offer",
+          "target_word": "help",
+          "categories": {
+            "stakes": "low",
+            "domain": "household"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "stakes",
+      "values": [
+        "high",
+        "low"
+      ]
+    },
+    {
+      "id": "domain",
+      "values": [
+        "medical",
+        "financial",
+        "technical",
+        "social",
+        "household"
+      ]
+    }
+  ],
+  "output_axes": [
+    {
+      "id": "direction_answer",
+      "values": [
+        "asking_for",
+        "offering",
+        "ambiguous",
+        "off_topic"
+      ]
+    },
+    {
+      "id": "correct",
+      "values": [
+        "yes",
+        "no"
+      ]
+    }
+  ],
+  "generate_output": true,
+  "metadata": {
+    "research_question": "Does gpt-oss-20b's residual stream encode Direction (request vs offer) and Stakes (high vs low) as orthogonal dimensions when 'help' appears in a fixed question wrapper?",
+    "design_pattern": "scene+question wrapper (Pattern B in /probe skill)",
+    "predecessor": "help_direction_stakes_v1 (failed: clusters formed by opener-template, not design axes)",
+    "wrapper_question": "Is the person asking for or offering help?",
+    "scene_constraints": {
+      "length_words": [
+        25,
+        40
+      ],
+      "person": "third-person only",
+      "tense": "past",
+      "form": "single sentence narrative prose",
+      "target_word_in_scene": "banned (target word only appears in wrapper)"
+    }
+  }
+}

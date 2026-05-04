@@ -204,6 +204,12 @@ per-transition reports.
 - **Follow the probe guide** — each experiment has specific analysis focus areas
 - **Start from output** — last-layer routes to output nodes show the model's final decision
 - **Work backward** — trace interesting patterns to earlier layers
+- **Never claim "collapse" or "loss of encoding" from cluster purities alone.** Fixed-k hierarchical clustering picks the k most-separable cuts in the dendrogram. If two design axes have shifting relative variance across layers, k can pick axis-A cuts at one layer and axis-B cuts at the next, even when both axes are equally encoded throughout. Before claiming a representation change, verify with at least one of:
+  - **Within-cluster linear probe**: train logistic regression on residual streams of probes inside a single cluster, predicting the design axis. If accuracy is high inside the cluster, the axis is preserved — the algorithm just merged it.
+  - **k-sweep**: rebuild the schema at k=8 or k=12. If finer partitions recover the supposedly-lost axis, the original "loss" was algorithmic.
+  - **Layer-by-layer linear probe**: train at every layer separately. A flat-near-ceiling curve means information is preserved; clustering structure changes are visualization artifacts. A real drop means something genuinely changed.
+
+  This is methodologically critical for composition / orthogonality / preservation claims. Cluster reorganization between layers ≠ representation reorganization.
 
 ## Data-contract notes
 

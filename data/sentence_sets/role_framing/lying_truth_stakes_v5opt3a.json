@@ -1,0 +1,1658 @@
+{
+  "name": "lying_truth_stakes_v5opt3a",
+  "version": "0.2",
+  "target_word": "is",
+  "groups": [
+    {
+      "label": "lying",
+      "description": "Constant template: 'Jordan told [audience], \\'[claim].\\' The [evidence] showed [reality].' For lying scenes the reality contradicts the claim. Single name (Jordan), single speech verb (told), single connector (showed) \u2014 only the audience, claim, evidence, and reality vary.",
+      "sentences": [
+        {
+          "text": "Jordan told the loan officer, \"I have no other outstanding debts.\" The credit report showed forty thousand dollars in card balances. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the federal investigator, \"I was home all evening.\" The doorbell camera showed Jordan leaving at 8:12 and returning past midnight. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the post-flight reviewer, \"No warning lights illuminated during the descent.\" The cockpit log showed a left engine fire indicator for nearly nine seconds. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the EPA inspector, \"We have never released benzene above the permitted threshold.\" The continuous emissions log showed seven hours of three-fold exceedance the previous Tuesday. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the hiring panel, \"I completed the certification in 2019.\" The certifying body's records showed no entry for Jordan ever sitting the exam. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the dissertation committee, \"The data in figure three is from my own experiments.\" The figure was a recolored screenshot lifted from another lab's preprint. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the insurance adjuster, \"There were no preexisting injuries before the accident.\" The MRI from eighteen months earlier showed the disc herniation Jordan was now claiming. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the EEOC investigator, \"The firing had nothing to do with the prior complaint.\" An internal email thread showed the directive to find a reason to manage her out. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the ethics committee under oath, \"I have no offshore accounts.\" The leaked Panamanian filings showed three trusts under Jordan's name. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the firm's investigator, \"I never met with the associate after work hours.\" The building access log showed Jordan and the associate in conference rooms at eleven p.m. on six different evenings. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the FDA auditor, \"Every batch passed sterility testing.\" The internal QC log showed three batches had failed and been re-labeled as a different lot. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the court, \"Proper search procedures were followed.\" The body camera footage showed officers entering the home twelve minutes before the warrant arrived. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the elections board, \"The petition signatures are all genuine.\" The forensic handwriting analysis showed 240 of them as Jordan's own writing. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the arbitrator, \"I never copied any client files when I left.\" The data-loss prevention system showed a 4.2 GB USB transfer in Jordan's last week of employment. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the Medicare investigator, \"Each patient on this list was seen in person.\" The death registry showed twenty-one of those patients as deceased on the dates of the billed visits. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the integrity committee, \"My dissertation is entirely my own writing.\" The plagiarism software showed eighteen percent of the text matching four uncited sources. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the court, \"I never spoke to the witness about the case.\" The phone records showed eleven calls between Jordan and the witness in the week before the testimony. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the elderly client, \"Your portfolio is fully invested in low-risk bonds.\" The account statement showed eighty percent concentration in a single illiquid private fund Jordan was paid commission on. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the safety board, \"All harness straps were inspected on Monday.\" The maintenance crew log showed no inspection had been conducted that week. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the grand jury, \"I was not at the building that night.\" The license plate readers showed Jordan's vehicle entering the parking garage at 9:14 p.m. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the IRS auditor, \"All income for the year was reported on my return.\" The bank statements showed one hundred eighty thousand dollars of unreported deposits. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the state regulators, \"The plant has never discharged into the river.\" The drone footage from a neighboring property showed effluent flowing from the outlet for three days running. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the IRB, \"The patient met all enrollment criteria.\" The patient's chart showed an excluded condition that disqualified them from the study. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told their spouse, \"I was at the engineering conference all weekend.\" The conference attendance roster showed Jordan as a no-show, and the hotel showed two guests in the booked room. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the audit committee, \"The Q4 revenue numbers are real and recognized appropriately.\" The subpoenaed internal emails showed the bookings as round-trips between two subsidiaries. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the medical board, \"I have not used opioids in three months.\" The hair follicle analysis showed sustained therapeutic levels of fentanyl over the prior month. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the poll worker, \"I'm registered at this address and have lived here a year.\" The state records showed Jordan's actual residence in another state, with a mail-in ballot already cast for the same election. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the procurement board, \"The firm holds all required safety certifications.\" The verification check showed two of the four certificates had been digitally altered to extend their expiration dates. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the federal prosecutor, \"I didn't know the package contained anything illegal.\" The text messages on Jordan's phone showed detailed descriptions of the contents and named the buyer. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the background-check officer, \"I have never been charged with a felony.\" The court records showed three felony convictions under Jordan's prior legal name. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the incident review, \"I administered the dose the chart called for.\" The pharmacy log showed the ampule Jordan pulled was four times the prescribed concentration. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told internal affairs, \"I never struck the suspect in the holding cell.\" The cell's audio recording showed three impacts and a guttural cough during the ten-minute window. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the state inspector, \"The boiler passed its previous quarterly inspection.\" The original certificate showed a hand-edited correction converting a failing reading to passing. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the custody hearing, \"I have never used physical discipline with the children.\" The school nurse's records showed bruising in the same locations on three separate occasions over two months. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the auditor, \"Each consult on this list lasted at least thirty minutes.\" The practice management software showed seven of the visits clocking under four minutes. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the institutional investors, \"Our supply chain is verified slavery-free.\" The NGO report from two months earlier showed forced-labor conditions at the company's largest cobalt supplier. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the family, \"The procedure went exactly as planned with no intraoperative issues.\" The anesthesia record showed forty seconds of cardiac arrest and emergency drug administration. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the integrity committee, \"These survey responses came from genuine respondents I recruited.\" The IP address log showed 142 of 150 responses originating from a single university computer cluster. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the jury, \"I have never met the defendant before this trial.\" A photograph from a vacation rental two years earlier showed Jordan and the defendant together at a kitchen island. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the leadership team, \"The harassment complaint was investigated and substantiated nothing.\" The original investigator's notes showed multiple corroborating witness accounts that had not been shared. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the SEC, \"I had no nonpublic information when I made the trade.\" The phone records showed a thirty-minute call with the company's CFO ninety minutes before the buy order. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the investors, \"The returns come from a proprietary trading model.\" The brokerage records showed no trading activity; new investor capital was paying earlier investor distributions. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the DEA, \"I prescribed in line with standard pain management.\" The dispensing pattern showed eight patients receiving over two hundred daily morphine equivalents indefinitely. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the OSHA investigator, \"The crane was certified before this lift.\" The certification stamp showed the forged signature of a legitimate inspector who had never been at the site. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the homicide detective, \"I was at my mother's house all evening.\" The mother, interviewed separately a few hours later, showed no recollection of any visit that day. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the credentialing committee, \"I performed a thoracic spine fusion as primary surgeon at Memorial.\" The hospital's case log showed no record of Jordan as primary on any such surgery. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the closing call, \"All material adverse events have been disclosed.\" The seller's emails showed two known liabilities that did not appear anywhere in the disclosure schedule. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the OCC examiner, \"Every customer on this list passed our KYC screening.\" The spot-check audit showed eleven accounts opened with no documentation on file. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the widow, \"Your husband never woke up after the surgery.\" The recovery room nurse's report showed the patient had spoken briefly before complications began. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the landlord, \"The rent was transferred from my account two days ago.\" The bank statement showed no outgoing payment to the landlord that month. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told their manager, \"I finished the report last night.\" The shared document showed the last edit three days ago and the final two sections still blank. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the meeting, \"The bus was late this morning.\" The transit app showed Jordan at the coffee shop across the street the entire first half of the meeting. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the wedding host, \"I've never met the groom before.\" The host's slideshow showed three photos of Jordan and the groom together at college events. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I didn't eat the last slice.\" The pizza box in Jordan's bedroom showed a fresh oily fingerprint matching Jordan's thumb. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teacher, \"I didn't know the test was today.\" The teacher's classroom recording showed Jordan reminding two classmates about it before homeroom. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"The dog knocked over the vase.\" The groomer's records showed the dog had been at the salon all afternoon, and Jordan's soccer ball was on the floor beside the broken pieces. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their friend, \"I haven't seen your message yet.\" The messaging app showed Jordan had read it twice and started typing a reply before deleting it. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their coworker, \"I'm sick today.\" Social media showed Jordan posting a concert photo an hour later with the caption \"best night ever.\" Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their date, \"I only had one drink before meeting you.\" The bar receipt in Jordan's coat pocket showed all four cocktails Jordan had ordered. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their roommate, \"I didn't touch the thermostat.\" The smart-home app showed Jordan's phone account raising the setting at 2:17 a.m. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their spouse, \"I already fed the cat.\" The automatic feeder's log showed no manual feeding had been logged and the bowl was empty. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the supervisor, \"I missed the train by one minute.\" The home's smart-lock log showed Jordan had been inside the apartment well after the train had departed. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I didn't buy anything today.\" The receipt under Jordan's coat showed the day's date and a new shopping bag tucked underneath. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I studied all weekend.\" The online study platform showed zero activity, while the gaming account showed sixteen hours played. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I cleaned my room.\" The room's closet door showed a packed mess shoved in behind a tidy floor. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I haven't been online today.\" The messaging status across three apps showed Jordan active in the last ten minutes. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I sent the brief out before lunch.\" The sent folder showed the message left the outbox at 4:47 p.m. that afternoon. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the babysitter, \"I didn't eat any of the cookies.\" Jordan's shirt showed chocolate crumbs and the empty plate was still slightly warm. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the dinner guests, \"I read every book on the recommended list.\" Jordan's e-reader history showed nothing but a podcast banner with the cover art of one of the books. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the project lead, \"I was on the call the whole time.\" The recording showed Jordan joined for two minutes, went on mute, and the audio of Jordan's coffee maker was audible the rest of the meeting. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor, \"I didn't park in your spot.\" The doorbell camera showed Jordan's car backing into the spot and the same car backing out an hour later. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"I worked late finishing the deck.\" The badge swipe-out log showed Jordan leaving at 4:36 p.m., the usual time. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the return clerk, \"I never opened the box.\" The seal showed it had been cut and the device's serial showed it had been registered to Jordan's email two weeks earlier. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the project lead, \"I never received the email.\" The inbox log showed the message had been read and archived three days earlier. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend in the passenger seat, \"I know exactly where the restaurant is.\" Jordan's phone showed an active routing app pointing in the opposite direction for the previous six minutes. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I washed my hands.\" Jordan's thumb showed peanut butter still on it and the soap dispenser had not been moved since the morning. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the training partner, \"I went for a run this morning.\" The fitness watch showed only 426 steps from waking up to leaving the house. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the manager, \"I ate at my desk.\" The lobby camera showed Jordan heading to the long lunch table with two coworkers and not returning for ninety minutes. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the supervisor, \"Traffic was awful this morning.\" The traffic data for the corridor showed it had been clearer than average. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teacher, \"I turned in the worksheet on Monday.\" The teacher's tray showed no record of it and the worksheet was crumpled at the bottom of Jordan's backpack. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I cancelled the streaming membership.\" The provider's portal showed the membership still active and renewing on Jordan's credit card. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the team, \"I never got the meeting moved on my calendar.\" The calendar's accept-and-decline log showed Jordan had accepted on Tuesday and declined Wednesday morning. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their roommate, \"I rinsed all the dishes before bed.\" The sink showed four bowls with cereal stuck to the sides and a saucepan with congealed sauce. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I was paying attention the entire class.\" The teacher's photo log showed Jordan on the phone three separate times during the lesson. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I haven't seen Kavi in years.\" The friend's social media showed Jordan and Kavi tagged together at a bar the previous Friday. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the meeting, \"I picked up coffee for everyone.\" The tray showed only two cups in Jordan's hand for a meeting of six people. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"The bus driver didn't see me at the stop.\" Two friends from the same stop later showed messages confirming Jordan had not been there at all that morning. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I waited in the sale line for thirty minutes.\" The store's interior camera showed Jordan walking straight to the register ten minutes after opening. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I was asleep by ten.\" The tablet's bright-screen sensor showed it streaming through 1:42 a.m. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleagues, \"I was on time to the call.\" The video conference timestamp showed Jordan joining seventeen minutes after the start. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their friend, \"I've already seen that movie.\" Jordan's questions throughout the screening showed no idea what was happening on the screen. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teacher, \"I worked on my own paper.\" The plagiarism scan showed seventy percent overlap with another student's submission from the same period. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teacher, \"I returned the permission slip on Friday.\" The teacher's slip box showed no record of it and the slip was still in Jordan's binder unsigned. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the standup, \"I called the vendor twice this week.\" The phone records on Jordan's work line showed no outgoing calls to that number for the entire month. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I followed the recipe exactly.\" The ingredient containers showed twice the chili powder, no salt, and the dough had gone unrested. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I only used my phone for thirty minutes today.\" The phone's screen-time report showed three hours and twelve minutes of social media that day. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the workout group, \"I made it to the gym at six.\" The gym's check-in scanner showed Jordan arriving at 7:15 instead. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the babysitter, \"The kids have already eaten dinner.\" The kitchen showed clean dishes from breakfast and a still-frozen dinner casserole on the counter. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the book club, \"I'm halfway through the new novel.\" Jordan's bookmark showed page eleven and the spine was uncreased. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the gym buddy, \"I worked out twice this week.\" The fitness app showed only one logged session. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "lying",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        }
+      ]
+    },
+    {
+      "label": "honest",
+      "description": "Constant template: 'Jordan told [audience], \\'[claim].\\' The [evidence] showed [reality].' For honest scenes the reality supports the claim. Single name, single speech verb, single connector \u2014 only audience, claim, evidence, and reality vary.",
+      "sentences": [
+        {
+          "text": "Jordan told the federal investigators, \"I didn't authorize the wire transfer to that account.\" The bank's internal audit showed a forged signature on the request form. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the medical board, \"I didn't prescribe outside the FDA-approved indications.\" The pharmacy records showed every prescription on-label. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the prosecutor, \"I never met with the defendant before her arrest.\" The visitor logs and badge swipes showed no overlap between them. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the SEC, \"I didn't trade on inside information for that position.\" The trading records and call history showed no contact with company executives in the relevant window. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the IRS, \"I didn't omit any income from the return.\" The bank reconciliation showed all deposits accounted for in the filing. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the court, \"I never instructed the witness to change her story.\" The deposition transcripts and email history showed no such instruction had been given. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the OSHA investigator, \"I didn't override the safety interlock.\" The maintenance log showed another technician had performed the bypass. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the audit committee, \"I didn't direct any earnings management this quarter.\" The journal entries showed every classification within standard policy. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the EPA, \"I didn't sign off on the discharge.\" The chain-of-custody documents showed a different manager's name on the certification. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the licensing board, \"I never practiced under a suspended license.\" The board's own records showed Jordan's license active throughout the period in question. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the police, \"I wasn't at the warehouse during the break-in.\" The traffic cameras showed Jordan's vehicle at home throughout the relevant window. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the workplace investigator, \"I didn't make the comments in the complaint.\" The conference room recording showed Jordan had not attended that meeting. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the inspector general, \"I never approved the expense for personal use.\" The expense reports and approver logs showed a different vice president had signed off. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the FAA, \"I didn't bypass the maintenance check on that aircraft.\" The maintenance log showed Jordan's signature on the completed checklist. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the regulatory agency, \"We knew the firmware had a fall-detection failure rate above ten percent and shipped it anyway.\" The internal QA emails Jordan handed over showed the same failure rate and the shipping decision. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the chief of staff, \"I've been operating impaired by alcohol for the last six months.\" The blood draw ordered ninety minutes later showed a 0.16 BAC. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the cousin, \"I was the one who told your sister about the diagnosis before you could.\" The text thread showed the conversation between Jordan and the sister at the date. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the asylum officer, \"I withdrew the prior asylum claim because the agent told me to lie about my country of origin.\" The prior application and an attorney letter Jordan had retained showed the same sequence. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the audit committee, \"I accepted payments from the vendor for the past two years in exchange for steering work.\" The bank records Jordan turned over showed the dates and amounts. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the morbidity and mortality committee, \"The medication error was mine \u2014 the resident did exactly what I instructed.\" The order in the chart showed Jordan's signature on the same instruction. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the department chair, \"I plagiarized two paragraphs of the literature review from a 2014 dissertation.\" The plagiarism software output showed the same two passages. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the detective, \"I helped him hide the body afterwards.\" The location showed the recovery site within a few yards. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the FDA, \"Two of the seventeen serious adverse events were not reported to the IRB.\" The trial's adverse event log showed the missing entries. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the OCC, \"We've been routing customer fees into an internal slush fund since 2021.\" The general ledger showed the same fee-routing entries. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told their adult child, \"I'm not your biological father.\" The DNA test the child requested afterward showed Jordan was correct. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the board, \"We knew about the breach for six weeks before disclosing it.\" The intrusion detection logs showed the original alerts from forty-three days earlier. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the federal investigators, \"I performed an unnecessary cardiac catheterization to bill for the procedure.\" The intraoperative imaging and procedure note showed no clinical indication for the catheterization. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the opposing counsel before new testimony, \"I lied under oath at the prior deposition.\" The transcript of the earlier deposition showed statements that contradicted Jordan's new testimony. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the OSHA investigator, \"I bypassed the lockout-tagout procedure and that's how the injury occurred.\" The maintenance log showed Jordan's signature on the bypass that morning. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the board, \"We've miscalculated reserves by approximately four hundred million.\" The actuarial recomputation showed a number within ten million of Jordan's figure. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the hospital ethics board, \"I prioritized my own family in the triage that night.\" The triage records showed the same decisions in the order. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the post-conviction unit, \"I gave false eyewitness testimony at the 2017 trial because the detective coached me.\" The contemporaneous notes from the police interview showed the coaching pattern. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the antitrust division on a proffer, \"I participated in price-fixing meetings starting in 2020.\" The calendar invitations and attendee lists Jordan produced showed the same meetings. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the medical board, \"I wrote prescriptions in my partner's name and filled them for myself.\" The pharmacy records showed Jordan's DEA number on every fill. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the advisor, \"I bought the dissertation chapter from a contract writer.\" The advisor's plagiarism check showed the same writer's prior work for four other students. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the state, \"We dumped the waste solvent in the back lot for years.\" The soil core samples drilled the next month showed the concentrations and depth pattern. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I knew about the recurrence two months before I told you.\" The pathology report Jordan produced showed the date. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the prosecutor, \"I made the false statement on the loan application.\" The application showed Jordan's signature, and the contradictory bank statements showed the discrepancy. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told FinCEN investigators, \"I helped structure the transactions to avoid reporting thresholds.\" The transaction-by-transaction breakdown Jordan produced showed the same pattern in the bank's records. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told their fianc\u00e9, \"I spent the down payment money on a gambling debt.\" The bookkeeper's records and Jordan's deposit history showed the same figures. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the patient, \"I knew the tumor was malignant a week before I told you.\" The biopsy report showed the date. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the FAA, \"I forged the signature on the inspection report.\" The signature comparison and an emailed admission to a colleague showed the forgery pattern. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the audit committee, \"I directed the team to capitalize expenses that should have been recognized as operating losses.\" The journal entries and reviewer comments Jordan produced showed the same accounting decisions. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the bereavement counselor, \"I withdrew care five hours earlier than the family had wanted.\" The clinical record showed the time of withdrawal. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the federal prosecutors, \"I was at the meeting where the murder was discussed.\" The surveillance audio recovered later showed Jordan's voice in the same meeting. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the journal, \"I knew my co-author had altered the survey responses before submission.\" The email archive showed exchanges where the alteration had been discussed. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told FINRA, \"I executed trades for clients I knew did not understand the products.\" The account opening forms and recorded calls showed the same pattern. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the pharmacy compliance officer, \"I diverted morphine from the dispensary cabinet for personal use.\" The override logs in the cabinet showed Jordan's ID on every diversion. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the investigator who reopened the case, \"I provided a false alibi for him in the 2014 trial.\" The original trial transcripts showed the false alibi on the record. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the board after the FCPA inquiry began, \"I authorized the bribe payments to the foreign officials.\" The wire transfer records Jordan provided showed the dates and amounts. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told their roommate, \"I didn't take your charger.\" The charger turned up plugged in behind the couch where the owner had left it. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their roommate, \"I paid the electric bill yesterday.\" The payment confirmation email on the laptop showed yesterday's date. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I didn't eat the last slice.\" The empty plate was in the sink, and the sibling later showed a text message admitting they had eaten it. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I sent the package this morning.\" The tracking page showed the package scanned at the post office at 9:43 a.m. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I wasn't ignoring your calls.\" The phone's battery log showed it had shut off before the first call came in. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the roommate, \"I left the keys on the counter.\" The kitchen counter showed the keys under a stack of mail after a few minutes of searching. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I didn't break the screen.\" The tablet's activity log showed it had been dropped and cracked while Jordan was still at school. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the household, \"I locked the back door.\" The deadbolt was turned and the security system showed it locked at 10:06 p.m. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the meeting organizer, \"I didn't know the meeting moved rooms.\" The calendar invite still listed the old room and no update had been sent to Jordan. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor, \"I watered the plants before I left.\" The soil was damp and the watering can was empty beside the window. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teacher, \"I didn't copy my partner's homework.\" The textbook showed both students had copied the same example problem from the same source. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the partner, \"I was at the dentist.\" The appointment receipt and Jordan's slightly swollen cheek showed the procedure had taken place. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I didn't leave the gate open.\" The latch hardware showed the wind had snapped it loose, with the broken screw still in the grass. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the manager, \"I missed the train by one minute.\" The station board showed the train had departed at 7:41 and Jordan's ticket scan was at 7:42. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"I didn't delete the file.\" The admin log showed an automated cleanup script had removed it overnight. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the classmate, \"I didn't move your notebook.\" The classmate's car later showed the notebook on the back seat where it had been left. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the office assistant, \"I turned in the form.\" The incoming tray showed Jordan's name on the form and the previous day's timestamp. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the training partner, \"I didn't take the shortcut.\" The fitness tracker showed the full route around the park, the same distance Jordan had claimed. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I didn't spill the juice.\" The little sibling walked in with sticky hands and quietly showed the bottle they had tried to pour themselves. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their friend, \"I left before the argument started.\" The restaurant camera showed Jordan walking out ten minutes before the shouting began. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their spouse, \"I returned the cart to the corral.\" The store's security footage showed Jordan pushing the cart into the rack before getting in the car. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I didn't drink the last of the milk.\" The empty carton in the recycling showed a sibling's lunchbox sticker still attached. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the aunt, \"I sent the thank-you note last week.\" The recipient's text showed receipt of the note on Thursday. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I let the dog out before I left.\" The smart-collar log showed nineteen minutes of outdoor activity that morning. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the roommate, \"I didn't move the coffee cup.\" The houseguest later showed they had moved the cup themselves while looking for a coaster. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the supervisor, \"I emailed the receipt to accounting.\" The accounting clerk's inbox showed the email and attachment, sent at 11:14 a.m. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I bought the bread on the way home.\" The bakery bag on the kitchen counter showed a receipt timestamped twenty minutes earlier. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their spouse, \"I changed the air filter last weekend.\" The HVAC service log showed a manual reset and the old filter was in the garage trash. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the supervisor, \"I logged the package as delivered.\" The delivery system showed Jordan's swipe-confirmation at the building's mailroom that morning. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their spouse, \"I gave the cat its medication.\" The pill count showed it matched the schedule, and the cat had a wet patch where the dose had been drooled onto the fur. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I picked up the dry cleaning.\" The plastic-wrapped clothes hung in the closet with the cleaner's claim ticket still attached. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor, \"I didn't move your bike from the rack.\" Another neighbor came over later and showed an apologetic note for borrowing the bike. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I switched off the porch light when I came in.\" The smartwatch's tap-log showed the timestamp of the switch and the porch sensor showed it as off. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I didn't eat any of the candy.\" The candy jar showed the lid still on with a chocolate fingerprint that the dog had left jumping up. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the roommate, \"I was at the library.\" The student card scan-in record showed Jordan entering at 10:02 a.m. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I returned the borrowed book on Tuesday.\" The library's check-in system showed the book on the shelf, returned 9:14 a.m. that day. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the principal, \"I picked up the kids on time.\" The school's pick-up sign-out showed Jordan's signature at 3:08 p.m., within the standard window. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the roommate, \"I rinsed the recycling.\" The bin in the garage showed clean cans and bottles stacked, and the kitchen sink was still slightly damp. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I didn't take the parking spot.\" The neighbor's dashcam showed a different car in the spot at the time the partner had complained about. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their spouse, \"I called the vet before five.\" The vet's after-hours line confirmation showed Jordan's call at 4:51 p.m. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"I texted you when I got there.\" The recipient's phone showed the unread message from Jordan's arrival time, twenty minutes before they noticed. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the IT manager, \"I didn't change the password.\" The account log showed the password had auto-rotated as part of a quarterly security policy. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their child, \"I checked the mail this afternoon.\" The mailbox was empty and the day's mail showed on the entry table where Jordan always left it. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their spouse, \"I didn't move the remote.\" The remote turned up under the couch with cat fur stuck to its side from the cat kicking it under. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I bought the right gift for the party.\" The receipt and the gift in the bag showed an exact match for the registry item. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the return clerk, \"I didn't open the package.\" The shipping seal was intact and the inner packaging was still bound by the manufacturer's tape. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the babysitter, \"I told you about the allergy.\" The drop-off note in the sitter's hand showed peanuts and shellfish on Jordan's handwritten list. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their partner, \"I came back from the gym at 7:30.\" The gym's checkout swipe showed 7:18, and the smartwatch logged the bike ride home arriving at 7:29. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"I didn't unfollow you on the app.\" The account showed the sibling's own settings had auto-removed inactive followers in a sweep that week. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their spouse, \"I left the lights on a timer.\" The bedside controller's schedule app showed the lights cycling on and off at the times Jordan had set. Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+          "group": "honest",
+          "target_word": "is",
+          "categories": {
+            "stakes": "low"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "stakes",
+      "values": [
+        "high",
+        "low"
+      ]
+    }
+  ],
+  "output_axes": [
+    {
+      "id": "truth_judgment",
+      "values": [
+        "lying",
+        "honest",
+        "other"
+      ]
+    },
+    {
+      "id": "stakes_judgment",
+      "values": [
+        "high",
+        "low",
+        "other"
+      ]
+    }
+  ],
+  "generate_output": true,
+  "metadata": {
+    "appended_phrase": "Questions: Fill in the blanks. Jordan is ___ and the stakes are ___.",
+    "design_notes": "All 200 scenes use the constant template 'Jordan told [audience], \\'[claim].\\' The [evidence] showed [reality].' Single name (Jordan), single speech verb (told), single connector (showed). Variation lives only in audience-role, claim, evidence, and reality. Target word 'lying' appears once per probe in the appended phrase.",
+    "operating_definitions": {
+      "lying": "Jordan asserts something they believe to be false to the audience",
+      "honest": "Jordan asserts something they believe to be true, including when the truth is inconvenient or costly",
+      "stakes_high": "outcome materially affects safety, livelihood, legal exposure, health, employment, or close relationships",
+      "stakes_low": "outcome is recoverable, low-magnitude, or trivial"
+    },
+    "authoring_status": "v5 Option 3a \u2014 dual-blank prompt, target=is (truth-axis blank position)"
+  }
+}

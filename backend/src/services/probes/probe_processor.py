@@ -41,38 +41,44 @@ class ProbeProcessor:
         self.adapter = adapter
         self.layers_to_capture = layers_to_capture
 
+    def _candidate_token_ids(self, word: str) -> List[int]:
+        """Compute all single-token IDs that could match `word` in a tokenized
+        sequence. Handles BPE whitespace sensitivity AND case variation
+        (lowercase + Title Case) so that target_word="help" matches both
+        mid-sentence "help" and sentence-initial "Help"."""
+        ids = []
+        for variant in (word, word.lower(), word.capitalize()):
+            for prefix in ("", " "):
+                tokens = self.tokenizer.encode(f"{prefix}{variant}", add_special_tokens=False)
+                if len(tokens) == 1 and tokens[0] not in ids:
+                    ids.append(tokens[0])
+        return ids
+
     def find_word_token_position(self, token_ids: list, word: str) -> Tuple[int, int]:
         """Find a word's token position in a tokenized sequence.
 
         Returns (position, token_id). Picks last occurrence if multiple matches.
-        Handles BPE whitespace sensitivity by trying both 'word' and ' word'.
-        Raises ValueError if word is multi-token or not found.
+        Handles BPE whitespace sensitivity AND case variation by trying
+        'word', ' word', 'Word', and ' Word' single-token candidates.
+        Raises ValueError if no candidate yields a single token or no match found.
         """
-        word_tokens = self.tokenizer.encode(word, add_special_tokens=False)
-        space_word_tokens = self.tokenizer.encode(f" {word}", add_special_tokens=False)
-
-        if len(word_tokens) == 1:
-            target_token_id = word_tokens[0]
-        elif len(space_word_tokens) == 1:
-            target_token_id = space_word_tokens[0]
-        else:
+        candidates = self._candidate_token_ids(word)
+        if not candidates:
             raise ValueError(
-                f"Word '{word}' must be a single token. "
-                f"Got {len(word_tokens)} tokens without space, "
-                f"{len(space_word_tokens)} tokens with space."
+                f"Word '{word}' is not single-token in any case/whitespace variant"
             )
-
-        positions = [i for i, tid in enumerate(token_ids) if tid == target_token_id]
+        positions: list[Tuple[int, int]] = []
+        for tid in candidates:
+            for i, t in enumerate(token_ids):
+                if t == tid:
+                    positions.append((i, tid))
         if not positions:
-            alt_id = space_word_tokens[0] if len(word_tokens) == 1 else word_tokens[0]
-            positions = [i for i, tid in enumerate(token_ids) if tid == alt_id]
-            if positions:
-                target_token_id = alt_id
-
-        if not positions:
-            raise ValueError(f"Word '{word}' (token_id={target_token_id}) not found in tokenized input")
-
-        return positions[-1], target_token_id
+            raise ValueError(
+                f"Word '{word}' (candidate token_ids={candidates}) not found in tokenized input"
+            )
+        # Pick the LAST occurrence (matches existing behavior)
+        positions.sort(key=lambda p: p[0])
+        return positions[-1]
 
     def find_all_word_token_positions(self, token_ids: list, word: str) -> List[Tuple[int, int]]:
         """Find ALL positions where a word appears in a tokenized sequence.
@@ -81,30 +87,24 @@ class ProbeProcessor:
         Returns empty list (not ValueError) if word not found — absent target words
         are expected per-tick in agent sessions.
 
+        Considers BPE whitespace sensitivity AND case variation (lowercase +
+        Title Case) so target_word="help" matches both " help" and "Help".
+
         Returns list of (position, token_id) tuples.
         """
-        word_tokens = self.tokenizer.encode(word, add_special_tokens=False)
-        space_word_tokens = self.tokenizer.encode(f" {word}", add_special_tokens=False)
-
-        if len(word_tokens) == 1:
-            target_token_id = word_tokens[0]
-        elif len(space_word_tokens) == 1:
-            target_token_id = space_word_tokens[0]
-        else:
+        candidates = self._candidate_token_ids(word)
+        if not candidates:
             logger.warning(
-                f"Word '{word}' is multi-token ({len(word_tokens)} without space, "
-                f"{len(space_word_tokens)} with space) — skipping"
+                f"Word '{word}' is not single-token in any case/whitespace variant — skipping"
             )
             return []
-
-        positions = [i for i, tid in enumerate(token_ids) if tid == target_token_id]
-        if not positions:
-            alt_id = space_word_tokens[0] if len(word_tokens) == 1 else word_tokens[0]
-            positions = [i for i, tid in enumerate(token_ids) if tid == alt_id]
-            if positions:
-                target_token_id = alt_id
-
-        return [(pos, target_token_id) for pos in positions]
+        results: List[Tuple[int, int]] = []
+        for tid in candidates:
+            for i, t in enumerate(token_ids):
+                if t == tid:
+                    results.append((i, tid))
+        results.sort(key=lambda p: p[0])
+        return results
 
     def convert_to_schemas(
         self,

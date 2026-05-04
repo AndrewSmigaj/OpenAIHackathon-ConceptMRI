@@ -1,0 +1,1665 @@
+- generic [ref=e4]:
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: Session
+        - combobox [ref=e9]:
+          - option "Select session..."
+          - option "help_v1" [selected]
+          - option "bus_stop_100_v2_with_fallback"
+          - option "temporal_temporal_2fb25607"
+          - option "temporal_temporal_56a25310"
+          - option "temporal_temporal_b0e682b6"
+          - option "temporal_temporal_07cec25f"
+          - option "temporal_temporal_0187aa39"
+          - option "temporal_temporal_e192cd54"
+          - option "temporal_temporal_725d7039"
+          - option "temporal_temporal_6c60a456"
+          - option "sentence_tank_polysemy_v3"
+          - option "suicide_letter_v2_200"
+      - generic [ref=e55]: 401 probes · "help"
+      - button "Run" [active] [ref=e10]
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]: Analysis
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]: Schema
+            - combobox [ref=e30]:
+              - option "Select schema…"
+              - option "help_direction_stakes_k5_n16" [selected]
+          - generic [ref=e1669]:
+            - generic [ref=e1670]: help_direction_stakes_k5_n16
+            - generic [ref=e1671]:
+              - generic [ref=e1672]: 401 probes
+              - generic [ref=e1673]: last-occurrence
+              - generic [ref=e1674]: ·
+              - generic [ref=e1675]: 5 hierarchical clusters/layer
+              - generic [ref=e1676]: over
+              - generic [ref=e1677]: UMAP 6D, n=16
+              - generic [ref=e1678]: of
+              - generic [ref=e1679]: residual stream
+              - generic [ref=e1680]: activations.
+          - generic [ref=e1681]:
+            - generic [ref=e1682]: Trajectories
+            - slider "Max trajectories to render in the 3D plot" [ref=e1683]: "401"
+            - generic [ref=e1684]: 401 / 401
+          - generic [ref=e31]:
+            - generic [ref=e32]: Routes
+            - generic [ref=e33] [cursor=pointer]:
+              - checkbox "Show all" [ref=e34]
+              - text: Show all
+            - generic [ref=e35]:
+              - generic [ref=e36]: Top
+              - spinbutton [ref=e37]: "10"
+          - generic "Click to copy" [ref=e1686] [cursor=pointer]: /analyze session_7ec7a66b schema help_direction_stakes_k5_n16 transition 5-6
+      - generic [ref=e38]:
+        - generic [ref=e39]: Visual Encoding
+        - generic [ref=e40]:
+          - generic [ref=e41]: Input
+          - generic [ref=e42]:
+            - generic [ref=e43]: Color Axis
+            - combobox [ref=e44]:
+              - option "offer vs request" [selected]
+              - option "domain (5 groups)"
+              - option "length (3 groups)"
+              - option "casual vs formal"
+              - option "shape (4 groups)"
+              - option "high vs low"
+              - option "subject (4 groups)"
+            - combobox [ref=e45]:
+              - option "Red → Blue" [selected]
+              - option "Yellow → Cyan"
+              - option "Purple → Green"
+              - option "Orange → Teal"
+              - option "Pink → Lime"
+          - generic [ref=e46]:
+            - generic [ref=e47]: Blend Axis
+            - combobox [ref=e48]:
+              - option "None" [selected]
+              - option "domain (5 groups)"
+              - option "length (3 groups)"
+              - option "casual vs formal"
+              - option "shape (4 groups)"
+              - option "high vs low"
+              - option "subject (4 groups)"
+          - generic [ref=e49]:
+            - generic [ref=e50]: Shape Axis
+            - combobox [ref=e51]:
+              - option "None" [selected]
+              - option "offer vs request"
+              - option "domain (5 groups)"
+              - option "length (3 groups)"
+              - option "casual vs formal"
+              - option "shape (4 groups)"
+              - option "high vs low"
+              - option "subject (4 groups)"
+          - generic [ref=e1797]:
+            - generic "offer" [ref=e1798]:
+              - generic [ref=e1800]: offer
+            - generic "request" [ref=e1801]:
+              - generic [ref=e1803]: request
+          - generic [ref=e1804]:
+            - generic [ref=e1805]: Output
+            - generic [ref=e1806]:
+              - generic [ref=e1807]: Color Axis
+              - combobox [ref=e1808]:
+                - option "Match input" [selected]
+                - option "response_type (5 groups)"
+                - option "matched_urgency (3 groups)"
+              - combobox [ref=e1809]:
+                - option "Red → Blue"
+                - option "Yellow → Cyan"
+                - option "Purple → Green" [selected]
+                - option "Orange → Teal"
+                - option "Pink → Lime"
+            - generic [ref=e1810]:
+              - generic [ref=e1811]: Blend Axis
+              - combobox [ref=e1812]:
+                - option "None" [selected]
+                - option "response_type (5 groups)"
+                - option "matched_urgency (3 groups)"
+  - generic [ref=e11]:
+    - generic [ref=e12]:
+      - generic [ref=e1687]:
+        - generic [ref=e1688]:
+          - generic [ref=e1689]: Expert Routes
+          - generic [ref=e1690]:
+            - text: Rank
+            - combobox "Rank" [ref=e1691]:
+              - option "1" [selected]
+              - option "2"
+              - option "3"
+        - generic [ref=e1694]:
+          - combobox [ref=e1695]:
+            - option "Layers 0-5" [selected]
+            - option "Layers 5-11"
+            - option "Layers 11-17"
+            - option "Layers 17-23"
+          - generic [ref=e1696]: 0→1
+          - generic [ref=e1697]: 1→2
+          - generic [ref=e1698]: 2→3
+          - generic [ref=e1699]: 3→4
+          - generic [ref=e1700]: 4→5
+          - generic [ref=e1701]: 5→6
+      - generic [ref=e1728]:
+        - generic [ref=e1730]: Clusters & Routes
+        - generic [ref=e1731]:
+          - generic [ref=e1734]:
+            - combobox [ref=e1735]:
+              - option "Layers 0-5" [selected]
+              - option "Layers 5-11"
+              - option "Layers 11-17"
+              - option "Layers 17-23"
+            - generic [ref=e1736]: 0→1
+            - generic [ref=e1737]: 1→2
+            - generic [ref=e1738]: 2→3
+            - generic [ref=e1739]: 3→4
+            - generic [ref=e1740]: 4→5
+            - generic [ref=e1741]: 5→6
+          - generic [ref=e1769]:
+            - generic [ref=e1770]:
+              - generic [ref=e1771]:
+                - generic [ref=e1859]: "Spacing:"
+                - slider [ref=e1860]: "72"
+              - generic [ref=e1861]:
+                - generic [ref=e1862]: "Scale:"
+                - slider [ref=e1863]: "1"
+              - generic [ref=e1864]:
+                - generic [ref=e1865]: "Points:"
+                - slider [ref=e1866]: "2"
+                - generic [ref=e1867]: "2"
+              - generic [ref=e1868] [cursor=pointer]:
+                - checkbox "Lines" [checked] [ref=e1869]
+                - text: Lines
+            - generic [ref=e1874]: 401 trajectories across layers 0→1→2→3→4→5→6 • Colored by offer vs request
+      - generic [ref=e1773]:
+        - generic [ref=e1774] [cursor=pointer]:
+          - heading "Temporal Analysis" [level=3] [ref=e1775]
+          - generic [ref=e1776]: ▾
+        - generic [ref=e1777]:
+          - generic [ref=e1778]:
+            - paragraph [ref=e1779]: Basin Selection
+            - generic [ref=e1780]:
+              - generic [ref=e1781]: Layer
+              - combobox [ref=e1782]:
+                - option "--"
+                - option "Layer 0"
+                - option "Layer 1"
+                - option "Layer 2"
+                - option "Layer 3"
+                - option "Layer 4"
+                - option "Layer 5"
+                - option "Layer 6" [selected]
+            - generic [ref=e1783]:
+              - generic [ref=e1784]: Basin A
+              - combobox [ref=e1785]:
+                - option "--" [selected]
+                - option "L6C0 — offer (100%)"
+                - option "L6C1 — offer (60%)"
+                - option "L6C2 — request (76%)"
+                - option "L6C3 — request (82%)"
+                - option "L6C4 — offer (100%)"
+            - generic [ref=e1786]:
+              - generic [ref=e1787]: Basin B
+              - combobox [ref=e1788]:
+                - option "--" [selected]
+                - option "L6C0 — offer (100%)"
+                - option "L6C1 — offer (60%)"
+                - option "L6C2 — request (76%)"
+                - option "L6C3 — request (82%)"
+                - option "L6C4 — offer (100%)"
+          - generic [ref=e1789]:
+            - generic [ref=e1790]:
+              - paragraph [ref=e1791]: Runs
+              - button "Refresh" [ref=e1795]
+            - paragraph [ref=e1794]: No temporal runs yet. Use the instruction above with Claude Code to create one.
+    - generic [ref=e13]:
+      - generic [ref=e1875]:
+        - paragraph [ref=e1876]: Layers 0-5
+        - paragraph [ref=e1877]: Cluster → Generated Continuation Contingency
+        - paragraph [ref=e1878]: "Each row is a geometric cluster. Columns show the category of the model's generated text continuation for each probe sentence. Cell color: blue = more than expected, red = fewer."
+        - table [ref=e1879]:
+          - rowgroup [ref=e1880]:
+            - row "Cluster Input acknowledged_matched action acknowledged_mismatched action acted_matched action ambiguous_neutral action deflected_mismatched action deflected_neutral action questioned_matched action questioned_mismatched action n" [ref=e1881]:
+              - columnheader "Cluster" [ref=e1882]
+              - columnheader "Input" [ref=e1883]
+              - columnheader "acknowledged_matched action" [ref=e1884]
+              - columnheader "acknowledged_mismatched action" [ref=e1885]
+              - columnheader "acted_matched action" [ref=e1886]
+              - columnheader "ambiguous_neutral action" [ref=e1887]
+              - columnheader "deflected_mismatched action" [ref=e1888]
+              - columnheader "deflected_neutral action" [ref=e1889]
+              - columnheader "questioned_matched action" [ref=e1890]
+              - columnheader "questioned_mismatched action" [ref=e1891]
+              - columnheader "n" [ref=e1892]
+          - rowgroup [ref=e1893]:
+            - row "L6C0 offer 100% 3 (12%) 0 (0%) 12 (46%) 10 (38%) 0 (0%) 0 (0%) 1 (4%) 0 (0%) 26" [ref=e1894]:
+              - cell "L6C0" [ref=e1895]
+              - cell "offer 100%" [ref=e1896]:
+                - generic [ref=e1897]:
+                  - generic [ref=e1898]: offer
+                  - generic [ref=e1899]: 100%
+              - cell "3 (12%)" [ref=e1900]:
+                - text: "3"
+                - generic [ref=e1901]: (12%)
+              - cell "0 (0%)" [ref=e1902]:
+                - text: "0"
+                - generic [ref=e1903]: (0%)
+              - cell "12 (46%)" [ref=e1904]:
+                - text: "12"
+                - generic [ref=e1905]: (46%)
+              - cell "10 (38%)" [ref=e1906]:
+                - text: "10"
+                - generic [ref=e1907]: (38%)
+              - cell "0 (0%)" [ref=e1908]:
+                - text: "0"
+                - generic [ref=e1909]: (0%)
+              - cell "0 (0%)" [ref=e1910]:
+                - text: "0"
+                - generic [ref=e1911]: (0%)
+              - cell "1 (4%)" [ref=e1912]:
+                - text: "1"
+                - generic [ref=e1913]: (4%)
+              - cell "0 (0%)" [ref=e1914]:
+                - text: "0"
+                - generic [ref=e1915]: (0%)
+              - cell "26" [ref=e1916]
+            - row "L6C1 offer 60% 7 (4%) 3 (2%) 61 (32%) 105 (55%) 8 (4%) 1 (1%) 5 (3%) 1 (1%) 191" [ref=e1917]:
+              - cell "L6C1" [ref=e1918]
+              - cell "offer 60%" [ref=e1919]:
+                - generic [ref=e1920]:
+                  - generic [ref=e1921]: offer
+                  - generic [ref=e1922]: 60%
+              - cell "7 (4%)" [ref=e1923]:
+                - text: "7"
+                - generic [ref=e1924]: (4%)
+              - cell "3 (2%)" [ref=e1925]:
+                - text: "3"
+                - generic [ref=e1926]: (2%)
+              - cell "61 (32%)" [ref=e1927]:
+                - text: "61"
+                - generic [ref=e1928]: (32%)
+              - cell "105 (55%)" [ref=e1929]:
+                - text: "105"
+                - generic [ref=e1930]: (55%)
+              - cell "8 (4%)" [ref=e1931]:
+                - text: "8"
+                - generic [ref=e1932]: (4%)
+              - cell "1 (1%)" [ref=e1933]:
+                - text: "1"
+                - generic [ref=e1934]: (1%)
+              - cell "5 (3%)" [ref=e1935]:
+                - text: "5"
+                - generic [ref=e1936]: (3%)
+              - cell "1 (1%)" [ref=e1937]:
+                - text: "1"
+                - generic [ref=e1938]: (1%)
+              - cell "191" [ref=e1939]
+            - row "L6C2 request 76% 5 (4%) 1 (1%) 30 (24%) 89 (70%) 1 (1%) 0 (0%) 1 (1%) 0 (0%) 127" [ref=e1940]:
+              - cell "L6C2" [ref=e1941]
+              - cell "request 76%" [ref=e1942]:
+                - generic [ref=e1943]:
+                  - generic [ref=e1944]: request
+                  - generic [ref=e1945]: 76%
+              - cell "5 (4%)" [ref=e1946]:
+                - text: "5"
+                - generic [ref=e1947]: (4%)
+              - cell "1 (1%)" [ref=e1948]:
+                - text: "1"
+                - generic [ref=e1949]: (1%)
+              - cell "30 (24%)" [ref=e1950]:
+                - text: "30"
+                - generic [ref=e1951]: (24%)
+              - cell "89 (70%)" [ref=e1952]:
+                - text: "89"
+                - generic [ref=e1953]: (70%)
+              - cell "1 (1%)" [ref=e1954]:
+                - text: "1"
+                - generic [ref=e1955]: (1%)
+              - cell "0 (0%)" [ref=e1956]:
+                - text: "0"
+                - generic [ref=e1957]: (0%)
+              - cell "1 (1%)" [ref=e1958]:
+                - text: "1"
+                - generic [ref=e1959]: (1%)
+              - cell "0 (0%)" [ref=e1960]:
+                - text: "0"
+                - generic [ref=e1961]: (0%)
+              - cell "127" [ref=e1962]
+            - row "L6C3 request 82% 0 (0%) 0 (0%) 9 (27%) 22 (67%) 1 (3%) 0 (0%) 1 (3%) 0 (0%) 33" [ref=e1963]:
+              - cell "L6C3" [ref=e1964]
+              - cell "request 82%" [ref=e1965]:
+                - generic [ref=e1966]:
+                  - generic [ref=e1967]: request
+                  - generic [ref=e1968]: 82%
+              - cell "0 (0%)" [ref=e1969]:
+                - text: "0"
+                - generic [ref=e1970]: (0%)
+              - cell "0 (0%)" [ref=e1971]:
+                - text: "0"
+                - generic [ref=e1972]: (0%)
+              - cell "9 (27%)" [ref=e1973]:
+                - text: "9"
+                - generic [ref=e1974]: (27%)
+              - cell "22 (67%)" [ref=e1975]:
+                - text: "22"
+                - generic [ref=e1976]: (67%)
+              - cell "1 (3%)" [ref=e1977]:
+                - text: "1"
+                - generic [ref=e1978]: (3%)
+              - cell "0 (0%)" [ref=e1979]:
+                - text: "0"
+                - generic [ref=e1980]: (0%)
+              - cell "1 (3%)" [ref=e1981]:
+                - text: "1"
+                - generic [ref=e1982]: (3%)
+              - cell "0 (0%)" [ref=e1983]:
+                - text: "0"
+                - generic [ref=e1984]: (0%)
+              - cell "33" [ref=e1985]
+            - row "L6C4 offer 100% 1 (4%) 0 (0%) 12 (50%) 9 (38%) 0 (0%) 0 (0%) 2 (8%) 0 (0%) 24" [ref=e1986]:
+              - cell "L6C4" [ref=e1987]
+              - cell "offer 100%" [ref=e1988]:
+                - generic [ref=e1989]:
+                  - generic [ref=e1990]: offer
+                  - generic [ref=e1991]: 100%
+              - cell "1 (4%)" [ref=e1992]:
+                - text: "1"
+                - generic [ref=e1993]: (4%)
+              - cell "0 (0%)" [ref=e1994]:
+                - text: "0"
+                - generic [ref=e1995]: (0%)
+              - cell "12 (50%)" [ref=e1996]:
+                - text: "12"
+                - generic [ref=e1997]: (50%)
+              - cell "9 (38%)" [ref=e1998]:
+                - text: "9"
+                - generic [ref=e1999]: (38%)
+              - cell "0 (0%)" [ref=e2000]:
+                - text: "0"
+                - generic [ref=e2001]: (0%)
+              - cell "0 (0%)" [ref=e2002]:
+                - text: "0"
+                - generic [ref=e2003]: (0%)
+              - cell "2 (8%)" [ref=e2004]:
+                - text: "2"
+                - generic [ref=e2005]: (8%)
+              - cell "0 (0%)" [ref=e2006]:
+                - text: "0"
+                - generic [ref=e2007]: (0%)
+              - cell "24" [ref=e2008]
+        - generic [ref=e2009]:
+          - generic [ref=e2010]:
+            - generic [ref=e2011]: χ²(28)
+            - generic [ref=e2012]: "33.21"
+          - generic [ref=e2013]:
+            - generic [ref=e2014]: p-value
+            - generic [ref=e2015]: "0.2281"
+          - generic [ref=e2016]:
+            - generic [ref=e2017]: Cramer's V
+            - generic [ref=e2018]: 0.144 (small)
+          - generic [ref=e2019]:
+            - generic [ref=e2020]: Significant
+            - generic [ref=e2021]: "No"
+        - paragraph [ref=e2022]: No report for this window. Use /analyze to generate one.
+      - paragraph [ref=e54]: Click a node or route for details
+    - generic [ref=e15]:
+      - generic [ref=e19]:
+        - textbox "Terminal input" [ref=e20]
+        - generic:
+          - generic:
+            - generic: connect guest
+          - generic:
+            - generic: If you have spaces in your username, enclose it in quotes.
+          - generic:
+            - generic: Enter
+            - generic: help
+            - generic: for more info.
+            - generic: look
+            - generic: will re-show this screen.
+          - generic:
+            - generic: ==============================================================
+          - generic:
+            - generic: "[connecting]"
+          - generic:
+            - generic: "[connected]"
+          - generic:
+            - generic: ==============================================================
+          - generic:
+            - generic: Welcome to
+            - generic: LLMud Institute
+            - generic: ", version 4.5.0!"
+          - generic:
+            - generic: "If you have an existing account, connect to it by typing:"
+          - generic:
+            - generic: connect <username> <password>
+          - generic:
+            - generic: "If you need to create an account, type (without the <>'s):"
+          - generic:
+            - generic: create <username> <password>
+          - generic:
+            - generic: "To observe as a guest, type:"
+          - generic:
+            - generic: connect guest
+          - generic:
+            - generic: If you have spaces in your username, enclose it in quotes.
+          - generic:
+            - generic: Enter
+            - generic: help
+            - generic: for more info.
+            - generic: look
+            - generic: will re-show this screen.
+          - generic:
+            - generic: ==============================================================
+      - textbox "Enter command..." [ref=e22]
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - heading "Sentences — help" [level=4] [ref=e60]:
+          - text: Sentences
+          - generic [ref=e61]: — help
+        - generic [ref=e62]: "401"
+      - generic [ref=e63]:
+        - paragraph [ref=e65]:
+          - generic [ref=e66]: request
+          - generic [ref=e67]: Help — I'm having chest pain and my left arm feels numb.
+        - paragraph [ref=e69]:
+          - generic [ref=e70]: request
+          - generic [ref=e71]: Could you help me wire this last relay before the breaker pops again?
+        - paragraph [ref=e73]:
+          - generic [ref=e74]: request
+          - generic [ref=e75]: If anyone has accounting expertise, I really need help reviewing this contract before signing tomorrow.
+        - paragraph [ref=e77]:
+          - generic [ref=e78]: request
+          - generic [ref=e79]: She's threatening to leave and I don't know who else to turn to for help.
+        - paragraph [ref=e81]:
+          - generic [ref=e82]: request
+          - generic [ref=e83]: Help me move this dresser away from the wall — there's water coming through.
+        - paragraph [ref=e85]:
+          - generic [ref=e86]: request
+          - generic [ref=e87]: Could you help me find the salt in the cabinet, please?
+        - paragraph [ref=e89]:
+          - generic [ref=e90]: request
+          - generic [ref=e91]: I'd love some help picking the right wine for tonight's dinner with my parents.
+        - paragraph [ref=e93]:
+          - generic [ref=e94]: request
+          - generic [ref=e95]: Need help figuring out which charger plug is the one that came with this laptop.
+        - paragraph [ref=e97]:
+          - generic [ref=e98]: request
+          - generic [ref=e99]: If you have a moment, would you help me decide between these two health-insurance plans?
+        - paragraph [ref=e101]:
+          - generic [ref=e102]: request
+          - generic [ref=e103]: My pharmacist sometimes can help when I'm trying to figure out which generic version to buy.
+        - paragraph [ref=e105]:
+          - generic [ref=e106]: request
+          - generic [ref=e107]: My father just collapsed in the kitchen and isn't breathing — please send help now.
+        - paragraph [ref=e109]:
+          - generic [ref=e110]: request
+          - generic [ref=e111]: Can someone with EpiPen training help? A guest is going into anaphylactic shock.
+        - paragraph [ref=e113]:
+          - generic [ref=e114]: request
+          - generic [ref=e115]: If a nurse is reading this, I would deeply appreciate your help interpreting these blood pressure numbers tonight.
+        - paragraph [ref=e117]:
+          - generic [ref=e118]: request
+          - generic [ref=e119]: Help me lower him onto his side before the seizure gets worse.
+        - paragraph [ref=e121]:
+          - generic [ref=e122]: request
+          - generic [ref=e123]: Would you please help carry the stretcher down the stairwell? The paramedics need a second pair of hands.
+        - paragraph [ref=e125]:
+          - generic [ref=e126]: request
+          - generic [ref=e127]: She's bleeding through the bandage and we need professional help within minutes.
+        - paragraph [ref=e129]:
+          - generic [ref=e130]: request
+          - generic [ref=e131]: Should the wound be elevated or compressed first? I need help making the right call here.
+        - paragraph [ref=e133]:
+          - generic [ref=e134]: request
+          - generic [ref=e135]: If his lips turn blue again, somebody needs to help administer the rescue inhaler immediately.
+        - paragraph [ref=e137]:
+          - generic [ref=e138]: request
+          - generic [ref=e139]: Help — the baby just swallowed something and I can't see what.
+        - paragraph [ref=e141]:
+          - generic [ref=e142]: request
+          - generic [ref=e143]: Dr. Adler, may I have your help reviewing this CT scan before the surgical team arrives?
+        - paragraph [ref=e145]:
+          - generic [ref=e146]: request
+          - generic [ref=e147]: The patient is crashing and the resident on call refuses to come — we need senior help fast.
+        - paragraph [ref=e149]:
+          - generic [ref=e150]: request
+          - generic [ref=e151]: Could anyone fluent in Mandarin help translate her symptoms before we proceed with the procedure?
+        - paragraph [ref=e153]:
+          - generic [ref=e154]: request
+          - generic [ref=e155]: Will somebody please help me hold pressure on this artery until the ambulance arrives?
+        - paragraph [ref=e157]:
+          - generic [ref=e158]: request
+          - generic [ref=e159]: The dosage on this chart looks dangerously high; pharmacy help is needed before the next infusion.
+        - paragraph [ref=e161]:
+          - generic [ref=e162]: request
+          - generic [ref=e163]: Help me find his insulin pen — his sugar just dropped under forty and he's slurring.
+        - paragraph [ref=e165]:
+          - generic [ref=e166]: request
+          - generic [ref=e167]: If the bleeding doesn't stop within five minutes, additional surgical help must be paged immediately.
+        - paragraph [ref=e169]:
+          - generic [ref=e170]: request
+          - generic [ref=e171]: My grandmother fell down the stairs and isn't responding — I really need help right now.
+        - paragraph [ref=e173]:
+          - generic [ref=e174]: request
+          - generic [ref=e175]: Anyone with poison-control experience, your help is desperately needed at the back picnic table.
+        - paragraph [ref=e177]:
+          - generic [ref=e178]: request
+          - generic [ref=e179]: Can you help me lift his head so the airway opens up before he aspirates?
+        - paragraph [ref=e181]:
+          - generic [ref=e182]: request
+          - generic [ref=e183]: The production database just deleted itself and I need help restoring from snapshot before customers wake.
+        - paragraph [ref=e185]:
+          - generic [ref=e186]: request
+          - generic [ref=e187]: Help — the centrifuge is wobbling violently and I can't reach the kill switch from here.
+        - paragraph [ref=e189]:
+          - generic [ref=e190]: request
+          - generic [ref=e191]: Would the on-call SRE please help diagnose why the auth service has been throwing 500s for twenty minutes?
+        - paragraph [ref=e193]:
+          - generic [ref=e194]: request
+          - generic [ref=e195]: If anyone knows the safe shutdown sequence for the reactor coolant loop, your help is needed immediately.
+        - paragraph [ref=e197]:
+          - generic [ref=e198]: request
+          - generic [ref=e199]: Help me cut power to the panel before the smoke gets any thicker.
+        - paragraph [ref=e201]:
+          - generic [ref=e202]: request
+          - generic [ref=e203]: The crane cable is fraying mid-lift; somebody on the ground needs to call for help now.
+        - paragraph [ref=e205]:
+          - generic [ref=e206]: request
+          - generic [ref=e207]: May I request your immediate help bringing the secondary failover online before the SLA window closes?
+        - paragraph [ref=e209]:
+          - generic [ref=e210]: request
+          - generic [ref=e211]: Can you help me reroute traffic away from this datacenter? The cooling system has completely failed.
+        - paragraph [ref=e213]:
+          - generic [ref=e214]: request
+          - generic [ref=e215]: The pipeline pressure just spiked past tolerance; we need engineering help on the floor within minutes.
+        - paragraph [ref=e217]:
+          - generic [ref=e218]: request
+          - generic [ref=e219]: Should I purge the line manually or wait? I really need experienced help judging this.
+        - paragraph [ref=e221]:
+          - generic [ref=e222]: request
+          - generic [ref=e223]: If the firmware update bricks during reboot, I'll need vendor help reflashing the controller from scratch.
+        - paragraph [ref=e225]:
+          - generic [ref=e226]: request
+          - generic [ref=e227]: Help me brace this scaffold — the wind just shifted and the upper section is swaying badly.
+        - paragraph [ref=e229]:
+          - generic [ref=e230]: request
+          - generic [ref=e231]: The bridge inspection sensors are reading red across three spans and we need structural help on site immediately.
+        - paragraph [ref=e233]:
+          - generic [ref=e234]: request
+          - generic [ref=e235]: Could anyone with kernel debugging skills help trace this panic before we lose the next batch of orders?
+        - paragraph [ref=e237]:
+          - generic [ref=e238]: request
+          - generic [ref=e239]: Help — I crossed the wrong wires and the whole rack just lit up with warning lamps.
+        - paragraph [ref=e241]:
+          - generic [ref=e242]: request
+          - generic [ref=e243]: Will you help me hold this beam steady? The jack is slipping and the load could drop.
+        - paragraph [ref=e245]:
+          - generic [ref=e246]: request
+          - generic [ref=e247]: If the backup generator doesn't kick in by midnight, mission-critical help will be required from the regional team.
+        - paragraph [ref=e249]:
+          - generic [ref=e250]: request
+          - generic [ref=e251]: I just noticed forty thousand dollars was wired out of my account overnight and I need help now.
+        - paragraph [ref=e253]:
+          - generic [ref=e254]: request
+          - generic [ref=e255]: Can the fraud team help freeze these transactions before the funds clear at the receiving bank?
+        - paragraph [ref=e257]:
+          - generic [ref=e258]: request
+          - generic [ref=e259]: Help me draft a cease-and-desist before the auction closes and we lose the property entirely.
+        - paragraph [ref=e261]:
+          - generic [ref=e262]: request
+          - generic [ref=e263]: If the audit finds those discrepancies tomorrow, the partners will need legal help by sunrise.
+        - paragraph [ref=e265]:
+          - generic [ref=e266]: request
+          - generic [ref=e267]: Someone is impersonating our CFO on email and authorizing transfers — please help us shut this down.
+        - paragraph [ref=e269]:
+          - generic [ref=e270]: request
+          - generic [ref=e271]: Would you help me file the SAR before the deadline closes at end of business?
+        - paragraph [ref=e273]:
+          - generic [ref=e274]: request
+          - generic [ref=e275]: Help — my card got skimmed and charges are appearing in three countries within the hour.
+        - paragraph [ref=e277]:
+          - generic [ref=e278]: request
+          - generic [ref=e279]: The margin call hits in twenty minutes; I need senior trader help liquidating the right positions.
+        - paragraph [ref=e281]:
+          - generic [ref=e282]: request
+          - generic [ref=e283]: Can you help me reach compliance? The wire we sent yesterday may have violated sanctions.
+        - paragraph [ref=e285]:
+          - generic [ref=e286]: request
+          - generic [ref=e287]: If the scammer convinces my mother to send another payment tonight, I'll need bank help reversing everything.
+        - paragraph [ref=e289]:
+          - generic [ref=e290]: request
+          - generic [ref=e291]: The trustee is hiding assets ahead of the hearing and we need forensic help tracing them by Monday.
+        - paragraph [ref=e293]:
+          - generic [ref=e294]: request
+          - generic [ref=e295]: Help me understand this margin statement — they're claiming I owe six figures by close of business.
+        - paragraph [ref=e297]:
+          - generic [ref=e298]: request
+          - generic [ref=e299]: Should I freeze the account or alert the regulator first? Your help deciding would mean a lot.
+        - paragraph [ref=e301]:
+          - generic [ref=e302]: request
+          - generic [ref=e303]: If the lien isn't lifted within seventy-two hours, my client will require courtroom help filing an injunction.
+        - paragraph [ref=e305]:
+          - generic [ref=e306]: request
+          - generic [ref=e307]: Can someone in treasury help confirm whether this transfer was authorized? It's draining the operating reserve fast.
+        - paragraph [ref=e309]:
+          - generic [ref=e310]: request
+          - generic [ref=e311]: My identity has been cloned and three new credit lines opened today — please, I need help.
+        - paragraph [ref=e313]:
+          - generic [ref=e314]: request
+          - generic [ref=e315]: Will the broker on duty please help cancel the open orders before the market opens in Tokyo?
+        - paragraph [ref=e317]:
+          - generic [ref=e318]: request
+          - generic [ref=e319]: Help me get him off the ledge — he's been talking about ending it all night.
+        - paragraph [ref=e321]:
+          - generic [ref=e322]: request
+          - generic [ref=e323]: My daughter ran away from school this morning and I have no idea where to look for help.
+        - paragraph [ref=e325]:
+          - generic [ref=e326]: request
+          - generic [ref=e327]: Could a counselor please help me reach my brother before he does something he can't take back?
+        - paragraph [ref=e329]:
+          - generic [ref=e330]: request
+          - generic [ref=e331]: If the restraining order isn't granted today, she will need shelter help by nightfall.
+        - paragraph [ref=e333]:
+          - generic [ref=e334]: request
+          - generic [ref=e335]: Help — my roommate locked herself in the bathroom with pills and won't open the door.
+        - paragraph [ref=e337]:
+          - generic [ref=e338]: request
+          - generic [ref=e339]: Would the shelter intake coordinator help arrange transport for a family fleeing tonight?
+        - paragraph [ref=e341]:
+          - generic [ref=e342]: request
+          - generic [ref=e343]: The custody hand-off is going sideways and the child is screaming — we need mediation help fast.
+        - paragraph [ref=e345]:
+          - generic [ref=e346]: request
+          - generic [ref=e347]: If anyone knows how to reach a crisis line at this hour, your help could save a life.
+        - paragraph [ref=e349]:
+          - generic [ref=e350]: request
+          - generic [ref=e351]: Can you help me sit with him until the mobile crisis team arrives in about twenty minutes?
+        - paragraph [ref=e353]:
+          - generic [ref=e354]: request
+          - generic [ref=e355]: Help me word this letter carefully — if she misreads it, she may relapse tonight.
+        - paragraph [ref=e357]:
+          - generic [ref=e358]: request
+          - generic [ref=e359]: My stepfather is back at the door drunk and I need someone's help convincing the kids to stay quiet.
+        - paragraph [ref=e361]:
+          - generic [ref=e362]: request
+          - generic [ref=e363]: Should I call CPS or wait until morning? Honestly I just need someone's help thinking this through.
+        - paragraph [ref=e365]:
+          - generic [ref=e366]: request
+          - generic [ref=e367]: Will the school counselor please help locate the student last seen near the rail bridge?
+        - paragraph [ref=e369]:
+          - generic [ref=e370]: request
+          - generic [ref=e371]: If she calls again threatening to take the children across the border, legal help must be ready immediately.
+        - paragraph [ref=e373]:
+          - generic [ref=e374]: request
+          - generic [ref=e375]: Help me find her phone — her last message said she was about to do something terrible.
+        - paragraph [ref=e377]:
+          - generic [ref=e378]: request
+          - generic [ref=e379]: The neighbor's child is locked outside in freezing rain; somebody please come help.
+        - paragraph [ref=e381]:
+          - generic [ref=e382]: request
+          - generic [ref=e383]: May I request your help organizing a wellness check on my elderly father, who hasn't answered for two days?
+        - paragraph [ref=e385]:
+          - generic [ref=e386]: request
+          - generic [ref=e387]: Help — there's smoke pouring out of the kitchen and the alarm isn't going off.
+        - paragraph [ref=e389]:
+          - generic [ref=e390]: request
+          - generic [ref=e391]: Could a neighbor please help me carry the children outside? Water is rising past the second step.
+        - paragraph [ref=e393]:
+          - generic [ref=e394]: request
+          - generic [ref=e395]: Would you help me pry the bedroom door open? The lock jammed and the smoke detector is screaming.
+        - paragraph [ref=e397]:
+          - generic [ref=e398]: request
+          - generic [ref=e399]: If the gas valve doesn't shut, the technician must arrive with help before anyone reenters the building.
+        - paragraph [ref=e401]:
+          - generic [ref=e402]: request
+          - generic [ref=e403]: Someone is trying the back door handle — please help me push the couch against it now.
+        - paragraph [ref=e405]:
+          - generic [ref=e406]: request
+          - generic [ref=e407]: The roof beam just cracked above the nursery and we need carpenter help before it collapses.
+        - paragraph [ref=e409]:
+          - generic [ref=e410]: request
+          - generic [ref=e411]: Can you help me drag the propane tank away from the firepit? The flames are climbing the side.
+        - paragraph [ref=e413]:
+          - generic [ref=e414]: request
+          - generic [ref=e415]: If the basement floods another inch, our sump pump will fail and we'll need help with sandbags.
+        - paragraph [ref=e417]:
+          - generic [ref=e418]: request
+          - generic [ref=e419]: Help me drag the rug off the stove — sparks are jumping every time the wind shifts.
+        - paragraph [ref=e421]:
+          - generic [ref=e422]: request
+          - generic [ref=e423]: The carbon monoxide alarm has been chirping for hours and the children feel dizzy — please send help.
+        - paragraph [ref=e425]:
+          - generic [ref=e426]: request
+          - generic [ref=e427]: Should we evacuate or shelter in place? I really need your help reading the wildfire map.
+        - paragraph [ref=e429]:
+          - generic [ref=e430]: request
+          - generic [ref=e431]: Will the building superintendent please help unlock the apartment? An elderly tenant hasn't answered in days.
+        - paragraph [ref=e433]:
+          - generic [ref=e434]: request
+          - generic [ref=e435]: If the chimney fire spreads to the attic insulation, we'll need fire department help on every floor.
+        - paragraph [ref=e437]:
+          - generic [ref=e438]: request
+          - generic [ref=e439]: Help — there's a stranger inside and he hasn't seen me yet behind the pantry door.
+        - paragraph [ref=e441]:
+          - generic [ref=e442]: request
+          - generic [ref=e443]: The space heater just ignited the curtains and my partner needs help suppressing the flames before they spread.
+        - paragraph [ref=e445]:
+          - generic [ref=e446]: request
+          - generic [ref=e447]: Can you help me carry the dog out? She inhaled smoke and her breathing has gone shallow.
+        - paragraph [ref=e449]:
+          - generic [ref=e450]: request
+          - generic [ref=e451]: May I request your help reaching the attic ladder? The pull cord snapped and someone is trapped above.
+        - paragraph [ref=e453]:
+          - generic [ref=e454]: request
+          - generic [ref=e455]: The pediatric ward is short two nurses tonight and any clinical help would be enormously appreciated.
+        - paragraph [ref=e457]:
+          - generic [ref=e458]: request
+          - generic [ref=e459]: Will an experienced engineer help me roll back the deploy? The checkout flow has been down twelve minutes.
+        - paragraph [ref=e461]:
+          - generic [ref=e462]: request
+          - generic [ref=e463]: If the chargeback dispute fails tomorrow, my small business will need accounting help filing for protection.
+        - paragraph [ref=e465]:
+          - generic [ref=e466]: request
+          - generic [ref=e467]: He's getting violent again and the kids are hiding under the bed — I need help now.
+        - paragraph [ref=e469]:
+          - generic [ref=e470]: request
+          - generic [ref=e471]: Help me shut the gas main before another spark catches the dust in the laundry room.
+        - paragraph [ref=e473]:
+          - generic [ref=e474]: request
+          - generic [ref=e475]: Can the duty surgeon help confirm consent before we wheel the patient into theater?
+        - paragraph [ref=e477]:
+          - generic [ref=e478]: request
+          - generic [ref=e479]: If the nuclear reactor vibration sensor trips again, the night shift will need supervisor help to acknowledge it.
+        - paragraph [ref=e481]:
+          - generic [ref=e482]: request
+          - generic [ref=e483]: Would the bank manager please help reverse this mortgage payment before the foreclosure paperwork is filed today?
+        - paragraph [ref=e485]:
+          - generic [ref=e486]: request
+          - generic [ref=e487]: Help — my friend overdosed in the parking lot and the naloxone isn't bringing her back.
+        - paragraph [ref=e489]:
+          - generic [ref=e490]: request
+          - generic [ref=e491]: Would you mind giving me a quick help finding the cinnamon in the pantry before I start the cookies?
+        - paragraph [ref=e493]:
+          - generic [ref=e494]: request
+          - generic [ref=e495]: Need a little help picking out a birthday card for my coworker.
+        - paragraph [ref=e497]:
+          - generic [ref=e498]: request
+          - generic [ref=e499]: Can you help me reset the wifi router whenever you get a chance?
+        - paragraph [ref=e501]:
+          - generic [ref=e502]: request
+          - generic [ref=e503]: I would appreciate your help selecting a savings account with reasonable monthly fees.
+        - paragraph [ref=e505]:
+          - generic [ref=e506]: request
+          - generic [ref=e507]: If it's no trouble, could you help me decide which sunscreen brand to grab at the pharmacy?
+        - paragraph [ref=e509]:
+          - generic [ref=e510]: request
+          - generic [ref=e511]: Lend me some help moving the couch a few inches to the left.
+        - paragraph [ref=e513]:
+          - generic [ref=e514]: request
+          - generic [ref=e515]: My brother asked for help choosing a wedding gift that wouldn't break the bank.
+        - paragraph [ref=e517]:
+          - generic [ref=e518]: request
+          - generic [ref=e519]: Would you be willing to help walk me through filing the standard tax return online?
+        - paragraph [ref=e521]:
+          - generic [ref=e522]: request
+          - generic [ref=e523]: I'm hoping for a bit of help locating the printer driver on the company portal.
+        - paragraph [ref=e525]:
+          - generic [ref=e526]: request
+          - generic [ref=e527]: Help me figure out which multivitamin is worth the extra few dollars, please.
+        - paragraph [ref=e529]:
+          - generic [ref=e530]: request
+          - generic [ref=e531]: Provided you have a spare moment, may I request your help organizing the spice rack?
+        - paragraph [ref=e533]:
+          - generic [ref=e534]: request
+          - generic [ref=e535]: Anyone willing to help me brainstorm a fun theme for Saturday's potluck dinner party?
+        - paragraph [ref=e537]:
+          - generic [ref=e538]: request
+          - generic [ref=e539]: Pass me some help reading the fine print on this credit card offer letter.
+        - paragraph [ref=e541]:
+          - generic [ref=e542]: request
+          - generic [ref=e543]: Would somebody help me untangle the headphone cord that keeps getting caught in my bag?
+        - paragraph [ref=e545]:
+          - generic [ref=e546]: request
+          - generic [ref=e547]: Looking for help remembering whether the allergy pills should be taken with food or after.
+        - paragraph [ref=e549]:
+          - generic [ref=e550]: request
+          - generic [ref=e551]: Show me how to help the dishwasher start its rinse cycle when you have a second.
+        - paragraph [ref=e553]:
+          - generic [ref=e554]: request
+          - generic [ref=e555]: Our event planner mentioned she could help suggest a caterer for next month's casual brunch.
+        - paragraph [ref=e557]:
+          - generic [ref=e558]: request
+          - generic [ref=e559]: May I trouble you for help splitting the dinner bill four ways including tip?
+        - paragraph [ref=e561]:
+          - generic [ref=e562]: request
+          - generic [ref=e563]: Should the laptop freeze again, please help me restart it without losing the open tabs.
+        - paragraph [ref=e565]:
+          - generic [ref=e566]: request
+          - generic [ref=e567]: I need help reading the dosage instructions on this cough syrup label.
+        - paragraph [ref=e569]:
+          - generic [ref=e570]: request
+          - generic [ref=e571]: Help, the lid on this jar of pickles refuses to budge no matter what I try.
+        - paragraph [ref=e573]:
+          - generic [ref=e574]: request
+          - generic [ref=e575]: Could anyone help me decide between blue and green napkins for the housewarming?
+        - paragraph [ref=e577]:
+          - generic [ref=e578]: request
+          - generic [ref=e579]: I'd welcome some help reviewing my monthly grocery budget to spot unnecessary subscriptions.
+        - paragraph [ref=e581]:
+          - generic [ref=e582]: request
+          - generic [ref=e583]: Mind giving me help syncing my new wireless mouse with the desktop computer?
+        - paragraph [ref=e585]:
+          - generic [ref=e586]: request
+          - generic [ref=e587]: When you have time, please help remind me which generic ibuprofen the doctor recommended last visit.
+        - paragraph [ref=e589]:
+          - generic [ref=e590]: request
+          - generic [ref=e591]: Would it be possible for someone to help me alphabetize the cookbook shelf this weekend?
+        - paragraph [ref=e593]:
+          - generic [ref=e594]: request
+          - generic [ref=e595]: She asked whether I might help suggest a thoughtful housewarming gift for her new neighbor.
+        - paragraph [ref=e597]:
+          - generic [ref=e598]: request
+          - generic [ref=e599]: Will you help me compare these two checking account brochures from the credit union?
+        - paragraph [ref=e601]:
+          - generic [ref=e602]: request
+          - generic [ref=e603]: Just need a tiny bit of help finding where the email attachment downloaded on this tablet.
+        - paragraph [ref=e605]:
+          - generic [ref=e606]: request
+          - generic [ref=e607]: If a nurse is free, could she help confirm whether this rash needs cream or just rest?
+        - paragraph [ref=e609]:
+          - generic [ref=e610]: request
+          - generic [ref=e611]: Help me hang this picture frame perfectly straight before our guests arrive tomorrow afternoon.
+        - paragraph [ref=e613]:
+          - generic [ref=e614]: request
+          - generic [ref=e615]: We could really use help thinking of an icebreaker for the Friday team lunch.
+        - paragraph [ref=e617]:
+          - generic [ref=e618]: request
+          - generic [ref=e619]: Would you kindly offer a bit of help reviewing my retirement contribution percentages this quarter?
+        - paragraph [ref=e621]:
+          - generic [ref=e622]: request
+          - generic [ref=e623]: Give me help untangling these holiday lights before I throw them in the trash.
+        - paragraph [ref=e625]:
+          - generic [ref=e626]: request
+          - generic [ref=e627]: May I ask for your help deciding whether to switch dental insurance during open enrollment?
+        - paragraph [ref=e629]:
+          - generic [ref=e630]: request
+          - generic [ref=e631]: If a tech-savvy friend swings by, ask them to help update my phone's operating system.
+        - paragraph [ref=e633]:
+          - generic [ref=e634]: request
+          - generic [ref=e635]: Bring me some help with this jigsaw puzzle whenever you finish your coffee.
+        - paragraph [ref=e637]:
+          - generic [ref=e638]: request
+          - generic [ref=e639]: Hoping for help identifying which receipts are deductible for next year's freelance tax filing.
+        - paragraph [ref=e641]:
+          - generic [ref=e642]: request
+          - generic [ref=e643]: My sister wonders if you could help her pick a paint color for the guest room.
+        - paragraph [ref=e645]:
+          - generic [ref=e646]: request
+          - generic [ref=e647]: Anyone around to help me draft a polite reply to this RSVP I forgot about?
+        - paragraph [ref=e649]:
+          - generic [ref=e650]: request
+          - generic [ref=e651]: Would you mind helping- I mean, providing help locating the spare HDMI cable in the drawer?
+        - paragraph [ref=e653]:
+          - generic [ref=e654]: request
+          - generic [ref=e655]: I'd be grateful for help understanding the new prescription label written by the substitute pharmacist.
+        - paragraph [ref=e657]:
+          - generic [ref=e658]: request
+          - generic [ref=e659]: Can someone help me move the dining chairs into the kitchen for movie night?
+        - paragraph [ref=e661]:
+          - generic [ref=e662]: request
+          - generic [ref=e663]: Our concierge can help recommend a quiet bistro for a low-key birthday celebration.
+        - paragraph [ref=e665]:
+          - generic [ref=e666]: request
+          - generic [ref=e667]: I'm after a little help comparing roaming charges before booking my vacation flights.
+        - paragraph [ref=e669]:
+          - generic [ref=e670]: request
+          - generic [ref=e671]: Whenever you finish lunch, would you help me pair the bluetooth speaker to the laptop?
+        - paragraph [ref=e673]:
+          - generic [ref=e674]: request
+          - generic [ref=e675]: Should you have a moment, please help me schedule my routine eye exam for next month.
+        - paragraph [ref=e677]:
+          - generic [ref=e678]: request
+          - generic [ref=e679]: Hand me some help wrapping these books before the mail carrier arrives at noon.
+        - paragraph [ref=e681]:
+          - generic [ref=e682]: request
+          - generic [ref=e683]: I need help phrasing a casual text to invite my neighbor over for tea.
+        - paragraph [ref=e685]:
+          - generic [ref=e686]: request
+          - generic [ref=e687]: Might I borrow your help reviewing whether the rewards card actually pays off for me?
+        - paragraph [ref=e689]:
+          - generic [ref=e690]: request
+          - generic [ref=e691]: Please help update the office printer firmware before tomorrow's casual quarterly print run.
+        - paragraph [ref=e693]:
+          - generic [ref=e694]: request
+          - generic [ref=e695]: Got a moment to help me find that band-aid box you tucked away last week?
+        - paragraph [ref=e697]:
+          - generic [ref=e698]: request
+          - generic [ref=e699]: If the laundry basket is too heavy, just give a quick help carrying it upstairs.
+        - paragraph [ref=e701]:
+          - generic [ref=e702]: request
+          - generic [ref=e703]: Our book club leader can help suggest a light novel for our summer reading list.
+        - paragraph [ref=e705]:
+          - generic [ref=e706]: request
+          - generic [ref=e707]: Would the bank teller help me set up an automatic transfer to my vacation fund?
+        - paragraph [ref=e709]:
+          - generic [ref=e710]: request
+          - generic [ref=e711]: I keep asking for help importing photos from the old camera onto this laptop.
+        - paragraph [ref=e713]:
+          - generic [ref=e714]: request
+          - generic [ref=e715]: Could you help remind me when I last refilled the lozenges, by any chance?
+        - paragraph [ref=e717]:
+          - generic [ref=e718]: request
+          - generic [ref=e719]: Help carry these grocery bags from the trunk if you're walking past the driveway.
+        - paragraph [ref=e721]:
+          - generic [ref=e722]: request
+          - generic [ref=e723]: Is there anyone free to help me pick a movie everyone in the family will like?
+        - paragraph [ref=e725]:
+          - generic [ref=e726]: request
+          - generic [ref=e727]: I'll need your help estimating how much to budget for the upcoming weekend road trip.
+        - paragraph [ref=e729]:
+          - generic [ref=e730]: request
+          - generic [ref=e731]: Would your IT friend help walk me through changing my home network's password tonight?
+        - paragraph [ref=e733]:
+          - generic [ref=e734]: request
+          - generic [ref=e735]: I might ask the front desk for help arranging a follow-up dental cleaning appointment.
+        - paragraph [ref=e737]:
+          - generic [ref=e738]: request
+          - generic [ref=e739]: Toss me some help folding these towels before the cat decides they're her bed.
+        - paragraph [ref=e741]:
+          - generic [ref=e742]: request
+          - generic [ref=e743]: Dad wants help drafting a friendly note to thank his bowling league for the casserole.
+        - paragraph [ref=e745]:
+          - generic [ref=e746]: request
+          - generic [ref=e747]: Provided you're not busy, may I have help comparing two cell plans on the website?
+        - paragraph [ref=e749]:
+          - generic [ref=e750]: request
+          - generic [ref=e751]: Looking for help connecting the new keyboard via bluetooth without reading the entire manual.
+        - paragraph [ref=e753]:
+          - generic [ref=e754]: request
+          - generic [ref=e755]: Will the receptionist help me reschedule my routine checkup to a Tuesday morning slot?
+        - paragraph [ref=e757]:
+          - generic [ref=e758]: request
+          - generic [ref=e759]: Help me water the basil pots while I'm out running errands this afternoon.
+        - paragraph [ref=e761]:
+          - generic [ref=e762]: request
+          - generic [ref=e763]: Anyone got help to spare for naming the new puppy before my niece arrives?
+        - paragraph [ref=e765]:
+          - generic [ref=e766]: request
+          - generic [ref=e767]: I am seeking help reconciling last month's grocery receipts with the budgeting spreadsheet at home.
+        - paragraph [ref=e769]:
+          - generic [ref=e770]: request
+          - generic [ref=e771]: Could the IT desk help me locate a missing folder of photos from the shared drive?
+        - paragraph [ref=e773]:
+          - generic [ref=e774]: request
+          - generic [ref=e775]: If you remember, please help bring up that I need a flu shot at the next visit.
+        - paragraph [ref=e777]:
+          - generic [ref=e778]: request
+          - generic [ref=e779]: Won't you help me assemble this bookshelf I picked up from the secondhand store yesterday?
+        - paragraph [ref=e781]:
+          - generic [ref=e782]: request
+          - generic [ref=e783]: We're after a little help thinking of housewarming snacks that don't require an oven.
+        - paragraph [ref=e785]:
+          - generic [ref=e786]: request
+          - generic [ref=e787]: Would the financial advisor help us understand the difference between two index funds we're considering?
+        - paragraph [ref=e789]:
+          - generic [ref=e790]: request
+          - generic [ref=e791]: Granted you have the time, please help me back up these vacation photos to the cloud.
+        - paragraph [ref=e793]:
+          - generic [ref=e794]: request
+          - generic [ref=e795]: I just need quick help opening this childproof vitamin bottle the cashier sealed too tight.
+        - paragraph [ref=e797]:
+          - generic [ref=e798]: request
+          - generic [ref=e799]: Lend a bit of help sweeping the porch before the neighbors come over for tea.
+        - paragraph [ref=e801]:
+          - generic [ref=e802]: request
+          - generic [ref=e803]: Mom asked if I could help her pick a wedding anniversary card for Aunt Linda.
+        - paragraph [ref=e805]:
+          - generic [ref=e806]: request
+          - generic [ref=e807]: Might I trouble you for help comparing two homeowners insurance quotes that arrived this morning?
+        - paragraph [ref=e809]:
+          - generic [ref=e810]: request
+          - generic [ref=e811]: Whenever convenient, kindly help me transfer the contacts from the old phone to the new one.
+        - paragraph [ref=e813]:
+          - generic [ref=e814]: request
+          - generic [ref=e815]: She wants help choosing between two over-the-counter allergy options before the pollen season starts.
+        - paragraph [ref=e817]:
+          - generic [ref=e818]: request
+          - generic [ref=e819]: Help, the recipe says fold gently and I have absolutely no idea what that means.
+        - paragraph [ref=e821]:
+          - generic [ref=e822]: request
+          - generic [ref=e823]: Is anyone willing to help me settle a friendly debate about the best pizza toppings?
+        - paragraph [ref=e825]:
+          - generic [ref=e826]: request
+          - generic [ref=e827]: I would value some help walking through the auto-pay setup for my electricity bill.
+        - paragraph [ref=e829]:
+          - generic [ref=e830]: request
+          - generic [ref=e831]: Got a sec to help me figure out why this PDF keeps opening in the wrong app?
+        - paragraph [ref=e833]:
+          - generic [ref=e834]: request
+          - generic [ref=e835]: If the dentist's office calls back, could you help write down the appointment time for me?
+        - paragraph [ref=e837]:
+          - generic [ref=e838]: request
+          - generic [ref=e839]: Please help me rearrange these throw pillows so the couch looks ready for company.
+        - paragraph [ref=e841]:
+          - generic [ref=e842]: request
+          - generic [ref=e843]: Our group chat needs help picking a brunch spot that takes reservations on weekends.
+        - paragraph [ref=e845]:
+          - generic [ref=e846]: request
+          - generic [ref=e847]: May we have your help identifying which line on the receipt counts as deductible mileage?
+        - paragraph [ref=e849]:
+          - generic [ref=e850]: request
+          - generic [ref=e851]: I keep meaning to ask for help installing the spam filter on my personal email.
+        - paragraph [ref=e853]:
+          - generic [ref=e854]: request
+          - generic [ref=e855]: Could the school nurse help me decide whether to send my kid in with mild sniffles?
+        - paragraph [ref=e857]:
+          - generic [ref=e858]: request
+          - generic [ref=e859]: Stop by and help me decide which curtain swatch looks better against the kitchen wall.
+        - paragraph [ref=e861]:
+          - generic [ref=e862]: request
+          - generic [ref=e863]: He hopes someone can help suggest a thoughtful but inexpensive gift for the office Secret Santa.
+        - paragraph [ref=e865]:
+          - generic [ref=e866]: offer
+          - generic [ref=e867]: I'm a paramedic — I can help, stay calm and let me check your pulse.
+        - paragraph [ref=e869]:
+          - generic [ref=e870]: offer
+          - generic [ref=e871]: Step aside — I can help shut off the gas valve before this room ignites.
+        - paragraph [ref=e873]:
+          - generic [ref=e874]: offer
+          - generic [ref=e875]: If your trading account got drained overnight, our fraud team can help right now.
+        - paragraph [ref=e877]:
+          - generic [ref=e878]: offer
+          - generic [ref=e879]: She's trained in crisis intervention and is willing to help her friend through tonight.
+        - paragraph [ref=e881]:
+          - generic [ref=e882]: offer
+          - generic [ref=e883]: I'll help reroute the network traffic before the production database gets overwhelmed any further.
+        - paragraph [ref=e885]:
+          - generic [ref=e886]: offer
+          - generic [ref=e887]: Want help carrying those grocery bags up to the apartment?
+        - paragraph [ref=e889]:
+          - generic [ref=e890]: offer
+          - generic [ref=e891]: I can help you proofread your essay if you email me a draft tonight.
+        - paragraph [ref=e893]:
+          - generic [ref=e894]: offer
+          - generic [ref=e895]: If your spreadsheet keeps freezing, my coworker can help you migrate it to a lighter format.
+        - paragraph [ref=e897]:
+          - generic [ref=e898]: offer
+          - generic [ref=e899]: Our retirement counselor can help you compare contribution rates whenever you have time this week.
+        - paragraph [ref=e901]:
+          - generic [ref=e902]: offer
+          - generic [ref=e903]: Let me help you swap out that bandage before you head back to your hike.
+        - paragraph [ref=e905]:
+          - generic [ref=e906]: offer
+          - generic [ref=e907]: I can help — I'm an EMT and I see your friend isn't breathing, lay him flat now.
+        - paragraph [ref=e909]:
+          - generic [ref=e910]: offer
+          - generic [ref=e911]: Let me help carry her out before the smoke fills this stairwell completely.
+        - paragraph [ref=e913]:
+          - generic [ref=e914]: offer
+          - generic [ref=e915]: Our on-call attorney can help freeze the accounts before the wire transfer clears tonight.
+        - paragraph [ref=e917]:
+          - generic [ref=e918]: offer
+          - generic [ref=e919]: I'll help patch the kernel panic before the cluster fails over and we lose payments.
+        - paragraph [ref=e921]:
+          - generic [ref=e922]: offer
+          - generic [ref=e923]: If she mentions the bridge again, the crisis counselor on line two can help immediately.
+        - paragraph [ref=e925]:
+          - generic [ref=e926]: offer
+          - generic [ref=e927]: Hold pressure on the wound — I can help bandage it once you tear the sleeve.
+        - paragraph [ref=e929]:
+          - generic [ref=e930]: offer
+          - generic [ref=e931]: Trauma surgeons are coming down to help stabilize him before transport.
+        - paragraph [ref=e933]:
+          - generic [ref=e934]: offer
+          - generic [ref=e935]: Would you like our security desk to help you get to your car safely tonight?
+        - paragraph [ref=e937]:
+          - generic [ref=e938]: offer
+          - generic [ref=e939]: If the breaker keeps tripping, the on-call electrician can help before the wiring catches.
+        - paragraph [ref=e941]:
+          - generic [ref=e942]: offer
+          - generic [ref=e943]: Can I help you out of the driver's seat before the car rolls further?
+        - paragraph [ref=e945]:
+          - generic [ref=e946]: offer
+          - generic [ref=e947]: Our fraud line stays open all night to help you reverse unauthorized transfers.
+        - paragraph [ref=e949]:
+          - generic [ref=e950]: offer
+          - generic [ref=e951]: I'll help you draft the ransom-payment refusal letter to the negotiator before sunrise.
+        - paragraph [ref=e953]:
+          - generic [ref=e954]: offer
+          - generic [ref=e955]: Step back from the panel — let me help isolate the live wire before someone gets shocked.
+        - paragraph [ref=e957]:
+          - generic [ref=e958]: offer
+          - generic [ref=e959]: We can help quarantine the compromised servers before the attacker pivots into customer data.
+        - paragraph [ref=e961]:
+          - generic [ref=e962]: offer
+          - generic [ref=e963]: Don't move him — paramedics are inside and they'll help in seconds.
+        - paragraph [ref=e965]:
+          - generic [ref=e966]: offer
+          - generic [ref=e967]: Help is two minutes out; keep talking to her and watch her airway.
+        - paragraph [ref=e969]:
+          - generic [ref=e970]: offer
+          - generic [ref=e971]: If you're in danger right now, the shelter hotline can help and dispatch transport.
+        - paragraph [ref=e973]:
+          - generic [ref=e974]: offer
+          - generic [ref=e975]: Let us help you evacuate the floor before the structural team loses the roof entirely.
+        - paragraph [ref=e977]:
+          - generic [ref=e978]: offer
+          - generic [ref=e979]: Want me to help you bypass the failing power supply before the dialysis pump dies?
+        - paragraph [ref=e981]:
+          - generic [ref=e982]: offer
+          - generic [ref=e983]: Forensic accountants are standing by to help trace the missing pension funds before disclosure.
+        - paragraph [ref=e985]:
+          - generic [ref=e986]: offer
+          - generic [ref=e987]: I'll help triage the alerts — you handle the customer escalations.
+        - paragraph [ref=e989]:
+          - generic [ref=e990]: offer
+          - generic [ref=e991]: Help reaching the rooftop is on its way; stay near the lit window.
+        - paragraph [ref=e993]:
+          - generic [ref=e994]: offer
+          - generic [ref=e995]: If he stops responding to you, I can help start chest compressions immediately.
+        - paragraph [ref=e997]:
+          - generic [ref=e998]: offer
+          - generic [ref=e999]: Our cybersecurity desk can help you contain the breach before regulators are notified Monday.
+        - paragraph [ref=e1001]:
+          - generic [ref=e1002]: offer
+          - generic [ref=e1003]: Climb down slowly — I'll help catch you if the ladder rung gives way.
+        - paragraph [ref=e1005]:
+          - generic [ref=e1006]: offer
+          - generic [ref=e1007]: Should I help you call your daughter before they take you into surgery?
+        - paragraph [ref=e1009]:
+          - generic [ref=e1010]: offer
+          - generic [ref=e1011]: There are translators on the line who can help her understand what the surgeon just said.
+        - paragraph [ref=e1013]:
+          - generic [ref=e1014]: offer
+          - generic [ref=e1015]: Let me help you walk away from the curb — the driver hasn't seen you yet.
+        - paragraph [ref=e1017]:
+          - generic [ref=e1018]: offer
+          - generic [ref=e1019]: If the trader still has access, compliance can help revoke credentials before market open.
+        - paragraph [ref=e1021]:
+          - generic [ref=e1022]: offer
+          - generic [ref=e1023]: Help with the gas leak is already on the way; please vacate the building.
+        - paragraph [ref=e1025]:
+          - generic [ref=e1026]: offer
+          - generic [ref=e1027]: I can help carry her down two flights before the elevator loses backup power.
+        - paragraph [ref=e1029]:
+          - generic [ref=e1030]: offer
+          - generic [ref=e1031]: Crisis-line clinicians can help him through the next hour if he picks up.
+        - paragraph [ref=e1033]:
+          - generic [ref=e1034]: offer
+          - generic [ref=e1035]: Let me help, I'm a nurse and that bleed needs direct pressure right now.
+        - paragraph [ref=e1037]:
+          - generic [ref=e1038]: offer
+          - generic [ref=e1039]: If your laptop is still infected, our incident team can help wipe it before authentication tokens leak.
+        - paragraph [ref=e1041]:
+          - generic [ref=e1042]: offer
+          - generic [ref=e1043]: I'll help you smother the grease fire — hand me that lid.
+        - paragraph [ref=e1045]:
+          - generic [ref=e1046]: offer
+          - generic [ref=e1047]: Are you able to walk, or should I help you to the ambulance bay?
+        - paragraph [ref=e1049]:
+          - generic [ref=e1050]: offer
+          - generic [ref=e1051]: Bank investigators can help you recover the wire if you call within the hour.
+        - paragraph [ref=e1053]:
+          - generic [ref=e1054]: offer
+          - generic [ref=e1055]: We can help reroute traffic away from the failing data center before customers notice.
+        - paragraph [ref=e1057]:
+          - generic [ref=e1058]: offer
+          - generic [ref=e1059]: There's a domestic violence advocate here tonight who can help you find a safe bed.
+        - paragraph [ref=e1061]:
+          - generic [ref=e1062]: offer
+          - generic [ref=e1063]: Hold his head still — let me help splint that neck before we move him.
+        - paragraph [ref=e1065]:
+          - generic [ref=e1066]: offer
+          - generic [ref=e1067]: Want help shutting the main water valve before the basement floods past the furnace?
+        - paragraph [ref=e1069]:
+          - generic [ref=e1070]: offer
+          - generic [ref=e1071]: I'll help you reach your insulin from the back seat before you lose consciousness.
+        - paragraph [ref=e1073]:
+          - generic [ref=e1074]: offer
+          - generic [ref=e1075]: Treasury can help unwind the position before the open if leadership signs off in twenty minutes.
+        - paragraph [ref=e1077]:
+          - generic [ref=e1078]: offer
+          - generic [ref=e1079]: Our oncology social worker can help arrange your transfer to hospice tonight if needed.
+        - paragraph [ref=e1081]:
+          - generic [ref=e1082]: offer
+          - generic [ref=e1083]: I can help — I've put out lithium fires before, get the dry powder.
+        - paragraph [ref=e1085]:
+          - generic [ref=e1086]: offer
+          - generic [ref=e1087]: The on-call SRE will help you roll back the deploy before customers see the 500s.
+        - paragraph [ref=e1089]:
+          - generic [ref=e1090]: offer
+          - generic [ref=e1091]: Help with the seizing toddler is on its way; clear the space around her.
+        - paragraph [ref=e1093]:
+          - generic [ref=e1094]: offer
+          - generic [ref=e1095]: Can I help you to the storm cellar before the funnel crosses the highway?
+        - paragraph [ref=e1097]:
+          - generic [ref=e1098]: offer
+          - generic [ref=e1099]: If she relapses tonight, the recovery sponsor next door will help her ride it out.
+        - paragraph [ref=e1101]:
+          - generic [ref=e1102]: offer
+          - generic [ref=e1103]: I'll help you pull him from the pool — count to three on my mark.
+        - paragraph [ref=e1105]:
+          - generic [ref=e1106]: offer
+          - generic [ref=e1107]: Identity-theft specialists at the bureau can help freeze your file within the hour tonight.
+        - paragraph [ref=e1109]:
+          - generic [ref=e1110]: offer
+          - generic [ref=e1111]: Let me help — I trained as a midwife and the cord is around the baby's neck.
+        - paragraph [ref=e1113]:
+          - generic [ref=e1114]: offer
+          - generic [ref=e1115]: Should I help you extract the access keys before the attacker rotates them?
+        - paragraph [ref=e1117]:
+          - generic [ref=e1118]: offer
+          - generic [ref=e1119]: Trained negotiators can help if the situation on the bridge holds for another ten minutes.
+        - paragraph [ref=e1121]:
+          - generic [ref=e1122]: offer
+          - generic [ref=e1123]: I can help carry your father down the porch — the floodwater is rising fast.
+        - paragraph [ref=e1125]:
+          - generic [ref=e1126]: offer
+          - generic [ref=e1127]: There are vascular surgeons en route who will help once the trauma bay is prepped.
+        - paragraph [ref=e1129]:
+          - generic [ref=e1130]: offer
+          - generic [ref=e1131]: Want me to help you cancel the cards while you call the precinct?
+        - paragraph [ref=e1133]:
+          - generic [ref=e1134]: offer
+          - generic [ref=e1135]: If he overdosed in the back room, naloxone is here and I can help administer it.
+        - paragraph [ref=e1137]:
+          - generic [ref=e1138]: offer
+          - generic [ref=e1139]: Let me help draft the disclosure to the SEC before the market opens in Tokyo.
+        - paragraph [ref=e1141]:
+          - generic [ref=e1142]: offer
+          - generic [ref=e1143]: We can help walk you through restoring from backup before the ransomware encrypts the rest.
+        - paragraph [ref=e1145]:
+          - generic [ref=e1146]: offer
+          - generic [ref=e1147]: Step back — I'll help him out from under the collapsed shelving.
+        - paragraph [ref=e1149]:
+          - generic [ref=e1150]: offer
+          - generic [ref=e1151]: There's a chaplain on the ward who can help your mother before she's extubated.
+        - paragraph [ref=e1153]:
+          - generic [ref=e1154]: offer
+          - generic [ref=e1155]: Are you bleeding through that towel? I can help apply a tourniquet right now.
+        - paragraph [ref=e1157]:
+          - generic [ref=e1158]: offer
+          - generic [ref=e1159]: If the rate is dropping below 30, I can help pace him manually until medics arrive.
+        - paragraph [ref=e1161]:
+          - generic [ref=e1162]: offer
+          - generic [ref=e1163]: The fraud unit can help reverse the wire if you authorize the recall in fifteen minutes.
+        - paragraph [ref=e1165]:
+          - generic [ref=e1166]: offer
+          - generic [ref=e1167]: Let me help you carry her — her hip is broken and she can't bear weight.
+        - paragraph [ref=e1169]:
+          - generic [ref=e1170]: offer
+          - generic [ref=e1171]: Our SOC engineers will help isolate the lateral movement before the domain controller is touched.
+        - paragraph [ref=e1173]:
+          - generic [ref=e1174]: offer
+          - generic [ref=e1175]: Help us hold the door — the wind is going to take the whole frame.
+        - paragraph [ref=e1177]:
+          - generic [ref=e1178]: offer
+          - generic [ref=e1179]: I can help you carry your grandmother down the hall before the ceiling tiles give way.
+        - paragraph [ref=e1181]:
+          - generic [ref=e1182]: offer
+          - generic [ref=e1183]: Crisis intake clinicians can help your brother tonight if he agrees to come in voluntarily.
+        - paragraph [ref=e1185]:
+          - generic [ref=e1186]: offer
+          - generic [ref=e1187]: Let me help close the femoral bleed while you call for the trauma team.
+        - paragraph [ref=e1189]:
+          - generic [ref=e1190]: offer
+          - generic [ref=e1191]: Specialists in our private wealth office can help unwind the leveraged position before margin calls hit.
+        - paragraph [ref=e1193]:
+          - generic [ref=e1194]: offer
+          - generic [ref=e1195]: Are you fainting? Sit down — I can help keep your head from hitting the counter.
+        - paragraph [ref=e1197]:
+          - generic [ref=e1198]: offer
+          - generic [ref=e1199]: I'll help kill the runaway process before it locks every node in the cluster.
+        - paragraph [ref=e1201]:
+          - generic [ref=e1202]: offer
+          - generic [ref=e1203]: There's a qualified responder coming through the crowd who will help in seconds.
+        - paragraph [ref=e1205]:
+          - generic [ref=e1206]: offer
+          - generic [ref=e1207]: Let me help you breathe — slow inhale through the nose, the inhaler is in your bag.
+        - paragraph [ref=e1209]:
+          - generic [ref=e1210]: offer
+          - generic [ref=e1211]: If the carbon monoxide alarm is going off, I can help open every window upstairs.
+        - paragraph [ref=e1213]:
+          - generic [ref=e1214]: offer
+          - generic [ref=e1215]: The audit partner can help redraft the statement before the press call at six.
+        - paragraph [ref=e1217]:
+          - generic [ref=e1218]: offer
+          - generic [ref=e1219]: I'll help you push the car off the tracks — the crossing arm just dropped.
+        - paragraph [ref=e1221]:
+          - generic [ref=e1222]: offer
+          - generic [ref=e1223]: Mental health first responders are on the line and ready to help your sister tonight.
+        - paragraph [ref=e1225]:
+          - generic [ref=e1226]: offer
+          - generic [ref=e1227]: Want me to help splint that arm before you go into shock?
+        - paragraph [ref=e1229]:
+          - generic [ref=e1230]: offer
+          - generic [ref=e1231]: We can help you reach the safe room before the intruder clears the second floor.
+        - paragraph [ref=e1233]:
+          - generic [ref=e1234]: offer
+          - generic [ref=e1235]: Should we help him to the antivenom locker before the swelling reaches his chest?
+        - paragraph [ref=e1237]:
+          - generic [ref=e1238]: offer
+          - generic [ref=e1239]: The estate lawyer can help contest the freeze before the funeral if the family acts fast.
+        - paragraph [ref=e1241]:
+          - generic [ref=e1242]: offer
+          - generic [ref=e1243]: Let me help reset the pacemaker telemetry — your numbers just dropped off the monitor.
+        - paragraph [ref=e1245]:
+          - generic [ref=e1246]: offer
+          - generic [ref=e1247]: If she stops responding to her name, I can help start rescue breaths immediately.
+        - paragraph [ref=e1249]:
+          - generic [ref=e1250]: offer
+          - generic [ref=e1251]: Volunteers from the pediatric ICU are coming to help during the multi-casualty intake.
+        - paragraph [ref=e1253]:
+          - generic [ref=e1254]: offer
+          - generic [ref=e1255]: Help is here — paramedics, FDNY, and a bilingual social worker are all en route.
+        - paragraph [ref=e1257]:
+          - generic [ref=e1258]: offer
+          - generic [ref=e1259]: I can help you reset the two-factor before the attacker drains the corporate wallet.
+        - paragraph [ref=e1261]:
+          - generic [ref=e1262]: offer
+          - generic [ref=e1263]: Drop the pan and back away — I'll help you smother that flame with the blanket.
+        - paragraph [ref=e1265]:
+          - generic [ref=e1266]: offer
+          - generic [ref=e1267]: Suicide prevention counselors are standing by to help if she'll let you put them on speaker.
+        - paragraph [ref=e1269]:
+          - generic [ref=e1270]: offer
+          - generic [ref=e1271]: Let me help you administer the EpiPen — her throat is closing fast.
+        - paragraph [ref=e1273]:
+          - generic [ref=e1274]: offer
+          - generic [ref=e1275]: Our infrastructure lead will help reroute payments through the secondary processor before the cutoff window closes.
+        - paragraph [ref=e1277]:
+          - generic [ref=e1278]: offer
+          - generic [ref=e1279]: If you're hearing voices telling you to act tonight, the line at 988 can help you ride this out.
+        - paragraph [ref=e1281]:
+          - generic [ref=e1282]: offer
+          - generic [ref=e1283]: I'll help drag the propane tank away from the burning shed before it ruptures.
+        - paragraph [ref=e1285]:
+          - generic [ref=e1286]: offer
+          - generic [ref=e1287]: Compliance officers can help you self-report before the regulator subpoenas the trade logs.
+        - paragraph [ref=e1289]:
+          - generic [ref=e1290]: offer
+          - generic [ref=e1291]: Want help folding the laundry while we wait for the pizza to arrive?
+        - paragraph [ref=e1293]:
+          - generic [ref=e1294]: offer
+          - generic [ref=e1295]: Let me help you reset the wifi router before your show starts buffering again.
+        - paragraph [ref=e1297]:
+          - generic [ref=e1298]: offer
+          - generic [ref=e1299]: Happy to help split the dinner bill if you want to use that new app.
+        - paragraph [ref=e1301]:
+          - generic [ref=e1302]: offer
+          - generic [ref=e1303]: Our front desk concierge can help with restaurant reservations whenever you stop by the lobby.
+        - paragraph [ref=e1305]:
+          - generic [ref=e1306]: offer
+          - generic [ref=e1307]: Need a hand? I can help refill that prescription on my way past the pharmacy tomorrow.
+        - paragraph [ref=e1309]:
+          - generic [ref=e1310]: offer
+          - generic [ref=e1311]: If you bring the box over, my brother can help install your printer driver tonight.
+        - paragraph [ref=e1313]:
+          - generic [ref=e1314]: offer
+          - generic [ref=e1315]: Library help is available on the second floor whenever the research desk is staffed.
+        - paragraph [ref=e1317]:
+          - generic [ref=e1318]: offer
+          - generic [ref=e1319]: Want help moving the couch a few feet so the rug actually fits straight?
+        - paragraph [ref=e1321]:
+          - generic [ref=e1322]: offer
+          - generic [ref=e1323]: Our nurse practitioner can help you renew that allergy script next week if needed.
+        - paragraph [ref=e1325]:
+          - generic [ref=e1326]: offer
+          - generic [ref=e1327]: Sam offered to help pick a birthday gift for your aunt before Saturday's brunch.
+        - paragraph [ref=e1329]:
+          - generic [ref=e1330]: offer
+          - generic [ref=e1331]: Let me help you set up a budgeting spreadsheet over coffee this weekend.
+        - paragraph [ref=e1333]:
+          - generic [ref=e1334]: offer
+          - generic [ref=e1335]: Free tutoring help is offered every Wednesday in the community center back room.
+        - paragraph [ref=e1337]:
+          - generic [ref=e1338]: offer
+          - generic [ref=e1339]: If your USB hub keeps disconnecting, I can help swap it for a powered model.
+        - paragraph [ref=e1341]:
+          - generic [ref=e1342]: offer
+          - generic [ref=e1343]: Want help walking through your monthly subscriptions to see what you can drop?
+        - paragraph [ref=e1345]:
+          - generic [ref=e1346]: offer
+          - generic [ref=e1347]: Happy to help loan you a band-aid from the kitchen drawer for that paper cut.
+        - paragraph [ref=e1349]:
+          - generic [ref=e1350]: offer
+          - generic [ref=e1351]: Our IT desk can help you pair a new keyboard whenever you swing by Tuesday.
+        - paragraph [ref=e1353]:
+          - generic [ref=e1354]: offer
+          - generic [ref=e1355]: Need help carrying the recycling bins down to the curb before the truck comes?
+        - paragraph [ref=e1357]:
+          - generic [ref=e1358]: offer
+          - generic [ref=e1359]: Coffee and recipe help are over by the potluck table whenever you're ready to mingle.
+        - paragraph [ref=e1361]:
+          - generic [ref=e1362]: offer
+          - generic [ref=e1363]: I'd be glad to help draft an introduction email to the gardening club this evening.
+        - paragraph [ref=e1365]:
+          - generic [ref=e1366]: offer
+          - generic [ref=e1367]: If you bring receipts, our bookkeeper will help reconcile your freelance income before April.
+        - paragraph [ref=e1369]:
+          - generic [ref=e1370]: offer
+          - generic [ref=e1371]: Want help untangling those holiday lights before you climb up the ladder again?
+        - paragraph [ref=e1373]:
+          - generic [ref=e1374]: offer
+          - generic [ref=e1375]: Let me help you find a sushi place near the theater before the show.
+        - paragraph [ref=e1377]:
+          - generic [ref=e1378]: offer
+          - generic [ref=e1379]: Our pharmacist can help you pick a non-drowsy antihistamine if pollen is bothering you.
+        - paragraph [ref=e1381]:
+          - generic [ref=e1382]: offer
+          - generic [ref=e1383]: Need help replacing the toner cartridge — it's the loud beeping one near the window.
+        - paragraph [ref=e1385]:
+          - generic [ref=e1386]: offer
+          - generic [ref=e1387]: Tax preparation help is available downstairs every Saturday morning during filing season.
+        - paragraph [ref=e1389]:
+          - generic [ref=e1390]: offer
+          - generic [ref=e1391]: I can help you wash the dog after dinner if you grab the old towels.
+        - paragraph [ref=e1393]:
+          - generic [ref=e1394]: offer
+          - generic [ref=e1395]: Want help picking out a paint color before the hardware store closes at six?
+        - paragraph [ref=e1397]:
+          - generic [ref=e1398]: offer
+          - generic [ref=e1399]: Our reference librarian can help you track down that out-of-print cookbook by next week.
+        - paragraph [ref=e1401]:
+          - generic [ref=e1402]: offer
+          - generic [ref=e1403]: Let me help you back up those vacation photos to a free cloud account tonight.
+        - paragraph [ref=e1405]:
+          - generic [ref=e1406]: offer
+          - generic [ref=e1407]: If you sit down a minute, I can help wrap that scrape with proper gauze.
+        - paragraph [ref=e1409]:
+          - generic [ref=e1410]: offer
+          - generic [ref=e1411]: Roadside help is included with your card membership if your battery ever dies casually.
+        - paragraph [ref=e1413]:
+          - generic [ref=e1414]: offer
+          - generic [ref=e1415]: Want help unloading the dishwasher while the lasagna finishes resting on the counter?
+        - paragraph [ref=e1417]:
+          - generic [ref=e1418]: offer
+          - generic [ref=e1419]: Happy to help you draft a polite RSVP if the wording is giving you trouble.
+        - paragraph [ref=e1421]:
+          - generic [ref=e1422]: offer
+          - generic [ref=e1423]: Our accountant will help you set up automatic transfers whenever you have ten free minutes.
+        - paragraph [ref=e1425]:
+          - generic [ref=e1426]: offer
+          - generic [ref=e1427]: Need help threading the sewing machine — the new bobbin keeps slipping out sideways.
+        - paragraph [ref=e1429]:
+          - generic [ref=e1430]: offer
+          - generic [ref=e1431]: If your phone keeps overheating, my roommate can help you clear the background apps.
+        - paragraph [ref=e1433]:
+          - generic [ref=e1434]: offer
+          - generic [ref=e1435]: Let me help you ice that ankle so the bruise calms down before tomorrow morning.
+        - paragraph [ref=e1437]:
+          - generic [ref=e1438]: offer
+          - generic [ref=e1439]: Want help taping up the moving boxes before your sister arrives with the truck?
+        - paragraph [ref=e1441]:
+          - generic [ref=e1442]: offer
+          - generic [ref=e1443]: Concierge help is offered around the clock for restaurant suggestions and theater bookings.
+        - paragraph [ref=e1445]:
+          - generic [ref=e1446]: offer
+          - generic [ref=e1447]: I can help you compare two phone plans on a spreadsheet over lunch tomorrow.
+        - paragraph [ref=e1449]:
+          - generic [ref=e1450]: offer
+          - generic [ref=e1451]: Our office assistant can help you scan those receipts before the filing deadline next month.
+        - paragraph [ref=e1453]:
+          - generic [ref=e1454]: offer
+          - generic [ref=e1455]: Need help sorting socks while we listen to that new podcast you mentioned earlier?
+        - paragraph [ref=e1457]:
+          - generic [ref=e1458]: offer
+          - generic [ref=e1459]: Want help setting up a smart bulb so the porch light comes on automatically?
+        - paragraph [ref=e1461]:
+          - generic [ref=e1462]: offer
+          - generic [ref=e1463]: If you'd like, our wellness coach can help you plan some easy weekday stretches.
+        - paragraph [ref=e1465]:
+          - generic [ref=e1466]: offer
+          - generic [ref=e1467]: Let me help you pick a wine for the dinner party from what's already in stock.
+        - paragraph [ref=e1469]:
+          - generic [ref=e1470]: offer
+          - generic [ref=e1471]: Tutoring help is available through the student union for any introductory math class.
+        - paragraph [ref=e1473]:
+          - generic [ref=e1474]: offer
+          - generic [ref=e1475]: Happy to help mount that picture frame if you've already chosen the right wall.
+        - paragraph [ref=e1477]:
+          - generic [ref=e1478]: offer
+          - generic [ref=e1479]: Want help reading through this benefits packet during your lunch break sometime this week?
+        - paragraph [ref=e1481]:
+          - generic [ref=e1482]: offer
+          - generic [ref=e1483]: Our pharmacy intern can help label your weekly pill organizer if you bring it in.
+        - paragraph [ref=e1485]:
+          - generic [ref=e1486]: offer
+          - generic [ref=e1487]: Need help finding a recipe that uses up the leftover rice from last night?
+        - paragraph [ref=e1489]:
+          - generic [ref=e1490]: offer
+          - generic [ref=e1491]: I can help you map out a walking route between the museums before Friday's trip.
+        - paragraph [ref=e1493]:
+          - generic [ref=e1494]: offer
+          - generic [ref=e1495]: Volunteer help is welcome at the community garden every Sunday morning between nine and noon.
+        - paragraph [ref=e1497]:
+          - generic [ref=e1498]: offer
+          - generic [ref=e1499]: Let me help you uninstall those old browser extensions that keep slowing the laptop down.
+        - paragraph [ref=e1501]:
+          - generic [ref=e1502]: offer
+          - generic [ref=e1503]: Want help organizing the spice rack alphabetically so we stop buying duplicate cumin jars?
+        - paragraph [ref=e1505]:
+          - generic [ref=e1506]: offer
+          - generic [ref=e1507]: Our credit union representative can help you open a high-yield savings account during regular branch hours.
+        - paragraph [ref=e1509]:
+          - generic [ref=e1510]: offer
+          - generic [ref=e1511]: Happy to help you stretch out that calf cramp — try pointing your toes toward your knee.
+        - paragraph [ref=e1513]:
+          - generic [ref=e1514]: offer
+          - generic [ref=e1515]: If you swing by Saturday, my neighbor can help patch the screen door before the bugs return.
+        - paragraph [ref=e1517]:
+          - generic [ref=e1518]: offer
+          - generic [ref=e1519]: Need help logging into the new portal — I can walk you through the password reset.
+        - paragraph [ref=e1521]:
+          - generic [ref=e1522]: offer
+          - generic [ref=e1523]: Travel help is offered at the kiosk near baggage claim for first-time visitors to the city.
+        - paragraph [ref=e1525]:
+          - generic [ref=e1526]: offer
+          - generic [ref=e1527]: Want help drafting a thank-you note to the neighbors who watered our plants last week?
+        - paragraph [ref=e1529]:
+          - generic [ref=e1530]: offer
+          - generic [ref=e1531]: Our office manager will help you book a quiet conference room whenever you need to focus.
+        - paragraph [ref=e1533]:
+          - generic [ref=e1534]: offer
+          - generic [ref=e1535]: Let me help you swap that lightbulb above the stairs while I've still got the ladder out.
+        - paragraph [ref=e1537]:
+          - generic [ref=e1538]: offer
+          - generic [ref=e1539]: If you forward the link, I can help skim the warranty for any sneaky fees.
+        - paragraph [ref=e1541]:
+          - generic [ref=e1542]: offer
+          - generic [ref=e1543]: Want help calibrating the smart thermostat so the bedroom stops freezing every morning around six?
+        - paragraph [ref=e1545]:
+          - generic [ref=e1546]: offer
+          - generic [ref=e1547]: Our school nurse can help you stock a basic first-aid kit for the family camping trip.
+        - paragraph [ref=e1549]:
+          - generic [ref=e1550]: offer
+          - generic [ref=e1551]: Need help carrying the folding chairs from the garage to the patio before guests arrive?
+        - paragraph [ref=e1553]:
+          - generic [ref=e1554]: offer
+          - generic [ref=e1555]: I can help you pick a Mother's Day card during our usual coffee run tomorrow.
+        - paragraph [ref=e1557]:
+          - generic [ref=e1558]: offer
+          - generic [ref=e1559]: Bookkeeping help is provided pro bono on Thursday evenings by the small-business association in town.
+        - paragraph [ref=e1561]:
+          - generic [ref=e1562]: offer
+          - generic [ref=e1563]: Let me help you transfer those old playlists to your new phone before bed tonight.
+        - paragraph [ref=e1565]:
+          - generic [ref=e1566]: offer
+          - generic [ref=e1567]: Want help reorganizing the linen closet so the towels actually stack without falling out?
+        - paragraph [ref=e1569]:
+          - generic [ref=e1570]: offer
+          - generic [ref=e1571]: Our wellness assistant can help you book a routine eye exam whenever your schedule allows.
+        - paragraph [ref=e1573]:
+          - generic [ref=e1574]: offer
+          - generic [ref=e1575]: If you prefer, I can help you brainstorm a toast for your sister's casual rehearsal dinner.
+        - paragraph [ref=e1577]:
+          - generic [ref=e1578]: offer
+          - generic [ref=e1579]: Need help measuring the window before we drive across town to pick out blinds?
+        - paragraph [ref=e1581]:
+          - generic [ref=e1582]: offer
+          - generic [ref=e1583]: Our receptionist can help you fill out the new patient intake form before your annual checkup.
+        - paragraph [ref=e1585]:
+          - generic [ref=e1586]: offer
+          - generic [ref=e1587]: Tech help is available at the public library every weekday afternoon for basic device questions.
+        - paragraph [ref=e1589]:
+          - generic [ref=e1590]: offer
+          - generic [ref=e1591]: Happy to help you pick stocking stuffers when we hit the dollar store this weekend.
+        - paragraph [ref=e1593]:
+          - generic [ref=e1594]: offer
+          - generic [ref=e1595]: Want help labeling the leftover containers so we actually remember what's in the freezer?
+        - paragraph [ref=e1597]:
+          - generic [ref=e1598]: offer
+          - generic [ref=e1599]: Our financial planner can help you review your IRA contributions during the next quarterly meeting.
+        - paragraph [ref=e1601]:
+          - generic [ref=e1602]: offer
+          - generic [ref=e1603]: Let me help you switch the laundry over before you head out to grab dinner.
+        - paragraph [ref=e1605]:
+          - generic [ref=e1606]: offer
+          - generic [ref=e1607]: If you bring the laptop, my cousin can help you install Linux on the spare partition.
+        - paragraph [ref=e1609]:
+          - generic [ref=e1610]: offer
+          - generic [ref=e1611]: Need help picking a podcast for the long drive — I've got a whole queue saved.
+        - paragraph [ref=e1613]:
+          - generic [ref=e1614]: offer
+          - generic [ref=e1615]: Our travel desk can help you arrange a leisurely day trip to the coast next month.
+        - paragraph [ref=e1617]:
+          - generic [ref=e1618]: offer
+          - generic [ref=e1619]: Want help inflating the air mattress before your cousins arrive for the weekend sleepover?
+        - paragraph [ref=e1621]:
+          - generic [ref=e1622]: offer
+          - generic [ref=e1623]: I can help you cancel that gym membership over the phone if you grab the account number.
+        - paragraph [ref=e1625]:
+          - generic [ref=e1626]: offer
+          - generic [ref=e1627]: Pediatric help is offered at the walk-in clinic on Saturdays for routine sniffles and earaches.
+        - paragraph [ref=e1629]:
+          - generic [ref=e1630]: offer
+          - generic [ref=e1631]: Let me help you reorganize the desktop icons so the kids stop clicking the wrong app.
+        - paragraph [ref=e1633]:
+          - generic [ref=e1634]: offer
+          - generic [ref=e1635]: Need help proofing the rolls — I think the dough has been rising for ages already.
+        - paragraph [ref=e1637]:
+          - generic [ref=e1638]: offer
+          - generic [ref=e1639]: Our customer service team can help you swap a defective charger by mail at no cost.
+        - paragraph [ref=e1641]:
+          - generic [ref=e1642]: offer
+          - generic [ref=e1643]: Happy to help walk you through filing a claim for that minor fender bender tomorrow morning.
+        - paragraph [ref=e1645]:
+          - generic [ref=e1646]: offer
+          - generic [ref=e1647]: Want help picking a low-key restaurant for Tuesday night that won't blow our weekly budget?
+        - paragraph [ref=e1649]:
+          - generic [ref=e1650]: offer
+          - generic [ref=e1651]: Our dental hygienist can help you schedule a routine cleaning before your insurance renews next month.
+        - paragraph [ref=e1653]:
+          - generic [ref=e1654]: offer
+          - generic [ref=e1655]: If you want, my partner can help walk the dogs while you finish that long phone call.
+        - paragraph [ref=e1657]:
+          - generic [ref=e1658]: offer
+          - generic [ref=e1659]: Let me help you pick a paperback for the flight — that bookstore has decent mysteries.
+        - paragraph [ref=e1661]:
+          - generic [ref=e1662]: offer
+          - generic [ref=e1663]: Budgeting help is offered through the credit counseling nonprofit on weekday evenings, free of charge.
+        - paragraph [ref=e1665]:
+          - generic [ref=e1666]: offer
+          - generic [ref=e1667]: Need help syncing your calendar across the new tablet — the trick is the account settings menu.

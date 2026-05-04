@@ -1,0 +1,1658 @@
+{
+  "name": "help_direction_stakes_v5opt4",
+  "version": "0.1",
+  "target_word": "here",
+  "groups": [
+    {
+      "label": "asking",
+      "description": "Constant template: 'Jordan told [audience], \\'[claim describing a request for assistance].\\' The [evidence] showed [reality].' Word 'help' must not appear in scene prose. Single name, single speech verb, single connector \u2014 only audience, claim, evidence, and reality vary.",
+      "sentences": [
+        {
+          "text": "Jordan told the EMT, \"I can't feel my legs after the fall.\" The neurology workup showed acute spinal compression at C4-C5. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the suicide hotline counselor, \"I have a plan and the means to act on it tonight.\" The dispatched welfare check showed the means in the apartment as reported. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the lawyer, \"I need someone in court tomorrow morning.\" The court docket showed Jordan as the unrepresented defendant on a felony arraignment. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the bank officer, \"I need a payment deferment or I lose the house this month.\" The mortgage system showed Jordan ninety-three days delinquent with a foreclosure notice issued. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the domestic violence counselor, \"I need a place to go tonight.\" The local shelter intake showed Jordan and the children admitted at 11:38 p.m. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the immigration attorney, \"I have a court date in eleven days and no representation.\" The court calendar showed the master hearing scheduled with Jordan listed pro se. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the cardiac surgeon's office, \"My father had a heart attack and we need to be seen this week.\" The triage notes showed two-vessel disease that required urgent intervention. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the search-and-rescue dispatcher, \"My partner didn't come back from the trail.\" The trailhead log showed entry that morning with no return checkout. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the school counselor, \"My child has been talking about hurting himself.\" The teacher's incident reports showed three notes about self-harm statements over the prior week. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the social worker, \"I think my mother shouldn't be living alone anymore.\" The home visit notes showed unsafe medication storage and signs of malnutrition. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the probate attorney, \"My sibling is contesting the will and the hearing is next week.\" The court file showed a filed objection and a scheduled motion date. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the fertility specialist, \"We've had three losses and I can't go through another one without a workup.\" The medical record showed a history of unexplained recurrent pregnancy loss. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the IT security team, \"Someone is in my account and is messaging my contacts.\" The login log showed two simultaneous active sessions from different IP addresses. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the union representative, \"They're trying to terminate me for cause without a hearing.\" The HR file showed an unsigned termination notice dated for the next day. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the addiction counselor, \"I relapsed last night and I'm scared to be alone.\" The clinic intake showed a positive urine screen and a prior treatment history. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the child protective services investigator, \"I think their father is using around the kids again.\" The supervised visit notes showed observed signs of impairment over the past month. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the cardiologist, \"I had chest pain that wouldn't go away last night.\" The EKG showed ST-segment elevation consistent with an evolving infarction. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the disaster relief volunteer, \"We were flooded out and the kids haven't eaten since yesterday.\" The shelter intake showed Jordan's family signed in at 6:14 p.m. without belongings. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the public defender, \"I have an arraignment in ninety minutes.\" The court system showed Jordan's case on the morning calendar with no attorney of record. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the workplace harassment line, \"He cornered me in the conference room again last night.\" The building access log showed both badges in the same room after hours for the third time. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the elder care lawyer, \"My uncle's caretaker has been moving funds out of his accounts.\" The bank statements showed thirty thousand dollars transferred to a new account in the caretaker's name. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the homeless outreach worker, \"I lost my apartment last week and the shelter is full.\" The intake log showed Jordan added to the wait list with priority status. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the special education advocate, \"The district is refusing to evaluate my son again.\" The district communications showed three rejected requests over the past school year. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the surgical oncologist's office, \"My biopsy came back positive and I need to start treatment soon.\" The pathology report showed an aggressive subtype with a recommended start date within two weeks. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the FBI tip line, \"My coworker has been moving classified material to a personal device.\" The audit log showed unauthorized USB activity by the coworker over the past six months. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the family law attorney, \"He's not bringing the kids back this weekend like the order says.\" The custody order showed weekend exchange terms and the texts showed his refusal. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the witness protection coordinator, \"The defendant's family knows where I live now.\" The threat assessment showed three new social media posts naming Jordan's apartment complex. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the asylum lawyer, \"I have to file my I-589 within seventy-two hours or I'm out of status.\" The arrival record showed Jordan's date of entry exactly one year and seven days earlier. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the crisis intervention team, \"I think my neighbor is going to harm himself tonight.\" The dispatch log showed Jordan's call at 11:14 p.m. and the welfare check confirmed the situation. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the medical ethics consultation, \"We're being asked to stop my mother's care and I disagree with the team.\" The medical record showed Jordan as the listed surrogate decision-maker. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the FAFSA hotline, \"I missed the deadline because of a hospital admission and we lose tuition.\" The hospital admission record showed Jordan inpatient through the filing deadline. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the elder protective services agent, \"My grandmother is being kept from her family.\" The visit logs showed three denied family visits over the past month at the facility. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the disability rights advocate, \"My employer revoked my accommodations after I filed an EEOC complaint.\" The HR communications showed the accommodation rescission email dated four days after the complaint. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the medical examiner, \"I need answers about how my son died.\" The autopsy preliminary showed findings consistent with the parental concerns Jordan raised. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the FEMA representative, \"We have no power and my husband is on home oxygen.\" The medical equipment registry showed Jordan's address with priority restoration status. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the ER triage nurse, \"I think my child swallowed something.\" The radiograph showed a foreign body lodged at the level of the cricopharyngeus. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the foster care liaison, \"The placement isn't safe and I need them moved tonight.\" The case notes showed a previous incident report at the same home twelve days earlier. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the suicide prevention coordinator, \"My partner just stopped responding to my messages.\" The cell phone GPS history showed the partner's phone at the bridge for the past forty minutes. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the eviction defense lawyer, \"The marshal's notice arrived this morning.\" The court record showed the eviction warrant signed and execution scheduled in seventy-two hours. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the post-overdose outreach worker, \"I came home and my brother had used again.\" The narcan log at the apartment showed two used kits from the past hour. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the children's advocacy center, \"I think my daughter has been groomed online.\" The phone backup showed messaging app conversations from an adult unknown to the family. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the trauma surgeon, \"I lost a lot of blood and I'm dizzy.\" The vitals showed a systolic of 78 and a falling hemoglobin trend. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the financial fraud line, \"Someone wired all my retirement funds out yesterday.\" The brokerage activity log showed a six-figure outgoing wire to an unknown account. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the disability appeals officer, \"My benefits stopped and I have nothing to live on.\" The notice of denial in Jordan's hand showed an erroneous earnings calculation. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the rape crisis advocate, \"I just got home from a date and I think something happened.\" The forensic exam showed evidence consistent with sexual assault. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the legal aid clinic, \"I have a hearing on the protective order tomorrow.\" The court file showed the order's expiration set for that day. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the food bank coordinator, \"We are out and the kids haven't had a real meal in two days.\" The benefits portal showed Jordan's SNAP recertification stalled in processing. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the patient advocate, \"The hospital is refusing to release my mother's records.\" The HIPAA request log showed three submissions over six weeks with no response. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the human trafficking hotline, \"My friend hasn't been able to leave her apartment in three weeks.\" The geolocation history on a shared family app showed the friend confined to the same address. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the wildfire evacuation coordinator, \"I have my elderly father and his oxygen machine.\" The evacuation registry showed Jordan and the father added to the priority transport list. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told their roommate, \"Could you grab the salt from the top shelf?\" The kitchen showed Jordan reaching but not quite tall enough. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"Could you cover my standup at nine?\" The shared calendar showed the standup at the exact time of Jordan's dentist appointment. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor, \"Could you watch the dog for an hour?\" The doorbell camera showed Jordan leaving for what looked like a quick errand. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"Could you pick me up from the airport tomorrow?\" The flight itinerary showed the arrival at 11:14 p.m. with no public transit available at that hour. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the partner, \"Could you pick up dinner on the way home?\" The day's planner showed Jordan in back-to-back meetings until seven. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teacher, \"Could you give me an extension on the essay?\" The assignment portal showed the deadline at midnight and Jordan's draft folder partially complete. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the librarian, \"Could you put a hold on this book?\" The catalog showed it available in four weeks if reserved that day. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"Could you read this draft and tell me if it makes sense?\" The shared document showed Jordan's revision history through three earlier versions. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"Could you watch the kids for thirty minutes while I run to the store?\" The grocery list on the fridge showed three items needed before dinner. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the IT support person, \"My laptop won't connect to the office wifi.\" The support ticket showed the same error code logged from Jordan's machine. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend, \"Could you give me a ride to the airport on Saturday?\" The boarding pass showed an early flight that would have meant a sixty-dollar cab ride. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the contractor, \"Could you take a look at the leak under the sink?\" The kitchen showed standing water on the cabinet floor and a slow drip. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"Could I borrow your laptop for the demo?\" The shared meeting agenda showed Jordan listed as the presenter with a projector setup needed. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor, \"Could you grab my mail while I'm out of town?\" The travel calendar showed Jordan leaving for a five-day work trip the next morning. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the partner, \"Could you walk the dog in the morning so I can sleep in?\" The Saturday work calendar showed Jordan's first event at noon. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend, \"Could you proofread my application essay?\" The application portal showed a deadline four days out. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their parent, \"Could you babysit on Friday night?\" The dinner reservation showed a 7 p.m. table for two with no return time. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"Could you switch shifts with me Tuesday?\" The scheduling app showed the doctor's appointment conflicting with the morning shift. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the supervisor, \"Could I leave a couple of hours early tomorrow?\" The car maintenance reminder showed an inspection appointment at 4 p.m. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teaching assistant, \"Could you walk me through the homework problem?\" The graded last quiz showed Jordan struggling with similar setups. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend, \"Could you lend me a charger? Mine died.\" The phone screen showed five percent battery on the lock screen. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the salon receptionist, \"Could you fit me in this afternoon?\" The booking system showed a cancellation slot at 3 p.m. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the carpool partner, \"Could you swing by my place first tomorrow?\" The school drop-off schedule showed the start time fifteen minutes earlier than usual. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the coworker, \"Could I borrow your stapler?\" The desk supplies showed Jordan's empty container. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend, \"Could I crash on your couch tonight?\" The rideshare receipt showed the last ride reservation with no possibility of getting home before the trains stopped. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the manager, \"Could I work from home this morning?\" The HVAC repair appointment showed a four-hour window starting at 8 a.m. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend, \"Could you take my dog this weekend?\" The hotel booking showed Jordan staying at a no-pets venue for the conference. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"Could you take notes for me in the ten a.m.?\" The calendar showed Jordan double-booked at the same time. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor, \"Could you water my plants for a few days?\" The travel itinerary showed a weekend trip from Friday to Tuesday. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the partner, \"Could you take the recycling out tonight?\" The trash schedule showed pickup the next morning. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent, \"Could you pick the kids up from soccer?\" The scheduled coaching pickup showed Jordan running thirty minutes late. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their friend, \"Could you give me the recipe for that pasta you made last week?\" The dinner club thread showed the friend's photo from the meal. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the librarian, \"Could you renew this book for another two weeks?\" The library account showed the original due date the next day. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the manager, \"Could I take Wednesday morning off?\" The school's parent-teacher conference schedule showed a 9 a.m. slot Jordan had reserved. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teacher, \"Could I make up the quiz I missed yesterday?\" The attendance record showed Jordan absent the previous day for a documented illness. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"Could you bring an extra coffee tomorrow morning?\" The team chat showed the coffee shop near the office had been closed unexpectedly. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their sibling, \"Could you take dad to his appointment Thursday?\" The medical calendar showed Jordan's own work commitment overlapping. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the receptionist, \"Could you fit me in for a haircut today?\" The salon's online booking showed an opening at 5:30 p.m. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"Could I get your input on these slides before tomorrow?\" The presentation deck showed Jordan's revisions still in progress. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend, \"Could you give me a hand carrying these boxes inside?\" The car trunk showed five boxes from the IKEA pickup. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the IT desk, \"Could you reset my email password?\" The login attempt log showed Jordan locked out after five failed attempts. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teacher, \"Could you sign my permission slip?\" The school folder showed the field trip slip needing parental and teacher signatures. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the partner, \"Could you take Pilot to the vet for his shots?\" The reminder card on the fridge showed the appointment Friday morning during Jordan's travel. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend, \"Could you check the scoreboard for me? I missed it.\" The phone showed Jordan in a tunnel with the live update lost. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the building super, \"Could you take a look at the window? It won't shut.\" The maintenance request log showed the existing entry from two weeks earlier. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the manager, \"Could I move my one-on-one to next week?\" The conflict on Jordan's calendar showed the mandatory training overlap. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague, \"Could you forward me the deck from yesterday's meeting?\" Jordan's inbox showed no record of the original distribution. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent, \"Could you bring my charger when you come over?\" The phone showed Jordan at fifteen percent and no charger at the rental. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their cousin, \"Could you cover for me at the family dinner Sunday?\" The travel calendar showed Jordan at a friend's wedding three states away. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the receptionist, \"Could you let me know when the doctor is ready?\" The clinic queue showed Jordan two patients out from being seen. What is going on here?",
+          "group": "asking",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        }
+      ]
+    },
+    {
+      "label": "offering",
+      "description": "Constant template: 'Jordan told [audience], \\'[claim describing offered assistance].\\' The [evidence] showed [reality].' Word 'help' must not appear in scene prose. Same structural constraints as asking group.",
+      "sentences": [
+        {
+          "text": "Jordan told the older woman who had fallen, \"I'll call an ambulance and stay with you until they arrive.\" The dispatch log showed Jordan's number connecting at 7:14 p.m. and the unit arriving at 7:23. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the bystander on the bridge, \"Step back from the railing \u2014 I'll walk you somewhere safe.\" The crisis response report showed Jordan on scene for forty-five minutes until the trained team arrived. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the unhoused man during the cold snap, \"Take my coat and let me drive you to the warming center.\" The shelter intake showed the man arriving wearing Jordan's jacket at 2:18 a.m. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the new immigrant family, \"I'll go with you to the asylum interview and translate.\" The USCIS interpreter form showed Jordan as the family's listed translator. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the assault victim in the ER, \"I'll wait with you until your mother arrives.\" The hospital visitor log showed Jordan present from intake through 1:42 a.m. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the collapsed jogger, \"I know CPR \u2014 I'm starting compressions now.\" The 911 call recording showed Jordan's voice counting compressions for nearly seven minutes until paramedics arrived. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the person at the bus stop in the rain, \"I'm going your direction \u2014 let me drive you home.\" The rideshare records showed Jordan's car detoured eight miles to the passenger's address. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the witness to the hit-and-run, \"I have the license plate written down \u2014 let me give it to the officer with you.\" The police report showed Jordan as the recording witness on the stand. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the family of the dying patient, \"I'll cover the rest of the funeral costs.\" The funeral home invoice showed a payment from Jordan covering the outstanding balance. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the abuse survivor, \"Stay with us until you find a place \u2014 we have the spare room.\" The household records showed the survivor at Jordan's address for six weeks. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the elderly veteran, \"I'll drive you to your VA appointment every week until your wife is back.\" The transport log at the clinic showed Jordan signing in for fourteen consecutive weeks. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the suicidal coworker, \"I'll go with you to the crisis center right now.\" The intake record at the center showed Jordan as the accompanying party at 11:23 p.m. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the disaster volunteer coordinator, \"I can lead a search team in the south sector.\" The team assignment roster showed Jordan as the team lead for sector C. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the foster mother, \"I'll watch the children while you take the new placement to court.\" The custody hearing schedule showed Jordan present at the home from 8 a.m. through 4:30 p.m. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the harassed waitress at the next table, \"I saw what he did \u2014 I'll back you up if you report it.\" The complaint to management showed Jordan as the corroborating witness on the same evening. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the teen at the shelter, \"I'll testify at your custody hearing about what I saw at home.\" The court transcript showed Jordan as a sworn fact witness. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the patient's family in the ICU, \"I'll cover the night shift so you can sleep.\" The visitor log showed Jordan at the bedside from 11 p.m. through 7 a.m. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the collapsed senior on the trail, \"I'll stay with you and signal the ranger from the ridge.\" The SAR report showed Jordan giving GPS coordinates and remaining with the senior until the helicopter arrived. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the wrongly-accused colleague, \"I'll talk to the investigator and tell them what actually happened.\" The investigation file showed Jordan's signed statement contradicting the original report. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the trans teen who'd been kicked out, \"Stay in the spare room as long as you need.\" The mailing address records showed the teen receiving school correspondence at Jordan's address for the school year. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the parents of the injured child, \"I have my car at the curb \u2014 let me drive you to the children's hospital.\" The ER admission record showed the child arriving with Jordan as the listed transport. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the small business owner during the closure, \"I'll cover payroll this week \u2014 you keep your people.\" The bank wire showed twelve thousand dollars sent from Jordan's account to the business that Friday. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the survivor of the crash, \"Don't move \u2014 I'll keep your spine stable until they get here.\" The trauma surgeon's notes showed manual cervical stabilization documented as initiated on scene. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the displaced family at the wildfire shelter, \"Take our spare bedroom until you can find a place.\" The household showed three additional residents on the property records for six weeks. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the new ostomy patient, \"I had this surgery five years ago \u2014 I'll show you everything.\" The peer support log showed Jordan returning to the hospital seven times to coach the patient. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the family of the comatose patient, \"I'll sit with him so you can go home.\" The hospital visitor sign-in sheet showed Jordan's signature for thirteen overnight shifts. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the asylum seeker at the airport, \"I'll be your sponsor \u2014 I'll sign whatever they need.\" The I-134 affidavit showed Jordan as the financial sponsor. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the woman fleeing across the parking lot, \"Get in my car \u2014 I'll drive you to the police station.\" The dashcam footage showed the woman in the passenger seat as the car left the lot. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the teen who'd disclosed abuse, \"I'll come with you when you tell the school counselor.\" The mandated report log showed Jordan present as the supportive adult during the disclosure. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the elderly couple after the break-in, \"Stay with me tonight \u2014 I'll handle the police report and the insurance call.\" The police report showed Jordan as the present third party and the couple's listed contact for follow-up. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the unconscious driver, \"Stay still \u2014 I have you.\" The body camera footage from the responding officer showed Jordan kneeling beside the driver maintaining airway position. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the recently widowed neighbor, \"I'll handle the lawn and the snow this winter.\" The neighborhood association showed Jordan as the handled-property contact for the next six months. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the woman whose card had been declined, \"Let me cover this \u2014 pay me back when you can.\" The grocery store receipt showed Jordan's card covering the family's full week of food. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the homeless veteran on Christmas Eve, \"Come home with me \u2014 there's room at the table.\" The community center registry showed Jordan adding a guest to the roster for the holiday meal. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the parents of the missing child, \"I have a four-wheel drive \u2014 I can search the back roads.\" The search coordinator's log showed Jordan covering routes A through D from midnight until dawn. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the adult child whose parent was hospitalized far from home, \"I'll bring meals to your father every day until you can fly back.\" The hospital cafeteria sign-in showed Jordan visiting the patient's room daily for two weeks. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the sexual assault survivor, \"I'll come to the police interview as your support person.\" The detective's notes showed Jordan present in the interview room during the official statement. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the friend in foreclosure, \"Move in with us until you're back on your feet.\" The household records showed the friend and her child residing at Jordan's address for nine months. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor who'd lost her son, \"I'll arrange the meals for the next month.\" The community sign-up showed Jordan as the coordinator with twenty-eight meals scheduled. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the colleague being deported, \"I'll go to the detention hearing and submit a character letter.\" The court file showed Jordan's notarized affidavit submitted forty-eight hours before the hearing. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the toddler's mother at the train station, \"Take my stroller \u2014 I'm done with mine.\" The donation log at the station showed Jordan handing over the stroller and receipt of thanks. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the survivor of the assault, \"I'll testify for you \u2014 I was at the bar that night.\" The witness list filed by the prosecution showed Jordan as a confirmed trial witness. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the new widower, \"I'll handle calling everyone for you.\" The phone records showed Jordan placing forty-three outgoing calls to family and friends over four hours that day. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the immigrant grandmother, \"I'll go to your medical appointments and translate.\" The clinic interpreter log showed Jordan attending twelve appointments over six months. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the child at the protest, \"Stay close to me \u2014 I'll get you to your parents.\" The march coordinator's log showed Jordan returning the child to the family at the rally point. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor whose pipe had burst, \"Take what you need from our basement until you can dry out.\" The landlord's incident report showed Jordan's basement listed as the temporary storage for the affected unit. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the cancer patient newly diagnosed, \"I'll drive you to every chemo appointment.\" The infusion center sign-in showed Jordan's signature for twenty-two of twenty-four scheduled sessions. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the trans teen's parents, \"Send him to our place if you're not safe at home.\" The address change with the school showed the teen's listed residence as Jordan's home for the school year. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the elderly woman lost downtown, \"I'll drive you home \u2014 what's the address?\" The home check-in by the family showed Jordan dropping the woman safely at her front door. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the parents of the deployed soldier, \"We've got the lawn and the bills until he comes back.\" The household budget showed eight months of mortgage payments handled from Jordan's account. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "high"
+          }
+        },
+        {
+          "text": "Jordan told the colleague at the printer, \"Let me take a look at that jam.\" The maintenance log showed Jordan clearing the rear roller on the same machine three times that month. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the partner balancing groceries, \"Let me grab a couple of those bags.\" The kitchen counter showed five bags placed by Jordan. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the teen at the corner, \"I'm going your direction if you want a ride.\" The dashcam showed the teen getting in and out at the next intersection. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the new colleague, \"I'll show you where the coffee is.\" The office camera showed Jordan walking the colleague to the kitchen and pointing things out. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the older neighbor with the broken light, \"I'll change that bulb for you.\" The maintenance receipt showed Jordan picking up a sixty-watt LED on the way home. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their roommate juggling laundry, \"I'll fold yours when you're done.\" The clean laundry bin showed Jordan's neat folded stacks of two loads. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the visiting cousin, \"I'll drive you to the airport tomorrow morning.\" The travel itinerary showed Jordan's calendar blocked from 5 to 7 a.m. for the run. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague late on the deck, \"I'll handle the slides if you want to take a break.\" The presentation revision history showed Jordan editing pages 12 through 18 that evening. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the partner mid-cold, \"I'll make soup tonight.\" The kitchen showed the cutting board with carrots and celery and a pot warming on low. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend whose phone had died, \"Use mine to call them.\" The call log showed an outgoing seven-minute call from Jordan's number to the friend's spouse. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the neighbor with the heavy package, \"I'll grab one end of it for you.\" The hallway camera showed both of them carrying the box together. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their friend stuck in traffic, \"I'll grab your kid from school.\" The pickup sign-out showed Jordan's name on the school's afternoon log. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the manager during the all-hands prep, \"Let me handle the AV setup.\" The conference room log showed Jordan setting up the projector and microphones at 8:12 a.m. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the elderly customer at the coffee shop, \"Let me pay for that one.\" The receipt showed Jordan's card covering both orders. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague with the spreadsheet, \"I'll fix that pivot table \u2014 I've done this before.\" The shared file's revision history showed Jordan's edits on the analysis tab. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their new tenant, \"Let me know if anything in the apartment is off \u2014 I'll handle it.\" The first-month maintenance ticket showed three items resolved by Jordan within a week. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the coworker with the flat tire, \"I have a spare jack in my trunk.\" The dashcam showed Jordan walking around to the lot with the equipment. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent at the park, \"I'll grab your stroller while you take her in.\" The phone photos showed Jordan returning with the stroller a few minutes later. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend planning a birthday, \"I'll bring the cake.\" The bakery receipt showed Jordan picking up a pre-ordered cake on the day. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the manager during the team move, \"I'll take the late truck shift if you need.\" The moving company schedule showed Jordan listed for the 10 p.m. unload. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the receptionist swamped at the desk, \"I can answer that line for the next ten minutes.\" The call log showed Jordan handling four calls in the busy window. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent before the school play, \"I'll record it on my phone for you.\" The cloud storage showed a forty-minute video shared with the parent the next day. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend training for a half-marathon, \"I'll come run the long ones with you on Saturdays.\" The fitness app showed two paired workouts of nine and ten miles in consecutive weeks. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the couple who'd just had a baby, \"I'll drop off dinner Tuesday.\" The thank-you note showed Jordan's lasagna received that day. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague learning the codebase, \"I'll pair on the next ticket with you.\" The git log showed co-authored commits on a four-day project the following week. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the cousin moving apartments, \"I'll bring the truck on Saturday.\" The U-Haul rental showed Jordan as the driver for the eight-hour rental. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the kid at the bus stop without a snack, \"I have an extra granola bar.\" The phone photos showed the kid walking to school with the bar in hand. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend's parent visiting town, \"I'll show you around the museum.\" The phone camera roll showed photos of the two of them at four exhibits. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the new homeowner neighbor, \"I'll lend you my drill if you need.\" The garage log showed the drill missing for two weeks and returned with a thank-you note. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent of a sick kid, \"I'll cover your shift tomorrow morning.\" The schedule showed Jordan logged in at 6 a.m. for the swap. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague's dog at the office, \"I'll take you for a walk while she's in the meeting.\" The hallway camera showed Jordan and the dog circling the building twice. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the elderly customer at the bus stop, \"I'll wait with you until it comes.\" The transit data showed Jordan waiting fourteen minutes past their own bus. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent struggling with the car seat installation, \"I have a manual at home \u2014 let me bring it over.\" The doorbell camera showed Jordan returning thirty minutes later with the booklet. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend planning a road trip, \"I'll do the first three hours of driving.\" The trip log showed Jordan behind the wheel from departure through the first state line. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the coworker missing a piece for IKEA assembly, \"I have an extra Allen key \u2014 I'll bring it tomorrow.\" The desk drawer the next morning showed the key on the colleague's note pad. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the visiting friend stuck without an outlet adapter, \"Use mine \u2014 I have two.\" The travel pouch showed Jordan handing the spare adapter over. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent at the recital, \"I'll save you a seat next to me.\" The auditorium photos showed two seats reserved with coats in the second row. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the building's new tenant, \"Let me know when the cable guy is coming \u2014 I'll wait.\" The lobby log showed Jordan waiting for the technician for two hours that afternoon. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague's intern, \"I'll review your draft email before you send it.\" The email's revision history showed Jordan's three suggested edits accepted. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the toddler's mother at the playground, \"I'll grab her if she runs that way again \u2014 I'm closer.\" The phone photos showed Jordan catching the toddler near the gate twice. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their roommate post-surgery, \"I'll handle the dishes for the week.\" The kitchen sink log showed empty dishes by Tuesday and Thursday and Saturday. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the colleague's spouse at the work party, \"I'll introduce you to the team.\" The party photos showed Jordan with the spouse at three separate group conversations. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend redecorating, \"I'll come paint Saturday.\" The paint receipt showed two rollers and four trays purchased Saturday morning. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent of the swimming-class child, \"I'll watch yours during the parents' meeting.\" The meeting room camera showed Jordan with three kids in the lobby for thirty minutes. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the contractor finishing late, \"I'll bring you coffee at seven.\" The job site camera showed Jordan delivering two cups the next morning. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend with a flat tire on the way to work, \"I'll come change it.\" The tire-change service log showed no third-party service called. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the visiting in-laws, \"I'll handle dinner tonight.\" The kitchen photos showed Jordan plating four dishes that evening. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told their colleague's child during career day, \"I'll show you my desk and what I do.\" The office sign-in showed the child as Jordan's guest for an hour. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the parent at the after-school pickup, \"I'll watch yours until you get back.\" The school's pickup log showed Jordan signing out two extra kids that afternoon. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        },
+        {
+          "text": "Jordan told the friend running late, \"I'll save your seat at the wedding.\" The seating chart showed the empty chair next to Jordan reserved with a coat. What is going on here?",
+          "group": "offering",
+          "target_word": "here",
+          "categories": {
+            "stakes": "low"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "stakes",
+      "values": [
+        "high",
+        "low"
+      ]
+    }
+  ],
+  "output_axes": [
+    {
+      "id": "direction_judgment",
+      "values": [
+        "asking",
+        "offering",
+        "other"
+      ]
+    },
+    {
+      "id": "stakes_judgment",
+      "values": [
+        "high",
+        "low",
+        "other"
+      ]
+    }
+  ],
+  "generate_output": true,
+  "metadata": {
+    "appended_phrase": "What is going on here?",
+    "design_notes": "Constant template 'Jordan told [audience], \\'[claim].\\' The [evidence] showed [reality].' Single name, single speech verb, single connector. Target word 'help' appears once per probe in the appended phrase only \u2014 never in scene prose.",
+    "operating_definitions": {
+      "asking": "Jordan requests assistance, intervention, information, or resources from the audience",
+      "offering": "Jordan volunteers, initiates, or provides assistance to the audience",
+      "stakes_high": "outcome materially affects safety, livelihood, legal exposure, health, employment, or close relationships",
+      "stakes_low": "outcome is recoverable, low-magnitude, or trivial"
+    },
+    "authoring_status": "v5 Option 4 \u2014 same scenes as help v4, minimal scaffolding \"What is going on here?\", target=here"
+  }
+}
