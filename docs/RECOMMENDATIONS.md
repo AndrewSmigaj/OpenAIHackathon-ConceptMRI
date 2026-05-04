@@ -32,6 +32,20 @@ Plus `max_new_tokens=50` (default in `capture_orchestrator.generate_continuation
 
 After fix, all prior elicitation/balanced studies should be re-run before any conclusions are drawn from them. The probe DESIGNS are fine; the captured GENERATIONS (and the residuals built from those input formats) are not.
 
+**Update (later same day):** fix landed for the sentence-experiment endpoint only. `use_chat_template` is opt-in (default `False`) because of an architectural constraint: temporal capture flows (`api/routers/temporal.py:164` and `:256`) pass `use_cache=True` to the generator, and KV-cache reuse is incompatible with chat-template-prefixed inputs. The agent knowledge-probe path (`api/routers/agent.py:310`) does not use KV cache and could safely be migrated to harmony format too, but that's a separate concern with its own validation surface — flagged as future work below.
+
+---
+
+## 2026-05-04 — Agent knowledge-probe capture also uses raw-text format
+
+**Scope**: `backend/src/api/routers/agent.py:310` (`request.knowledge_probe` capture path)
+
+The agent flow currently calls `capture_probe(...)` without `use_chat_template=True`, so agent knowledge probes go through the same raw-text path that the sentence-experiment endpoint just moved off of. The agent's *scenario* turns separately use harmony format (the agent loop generates with `apply_chat_template`), so this is a narrower issue — only the optional knowledge-probe captures attached to scenarios are affected.
+
+**Why not fixed in the same change**: the agent flow has its own broader behavior to verify (scenario context, action vocabulary, multi-turn structure). Migrating its knowledge-probe capture in the same change as the sentence-experiment fix would entangle two independent validation surfaces.
+
+**Recommendation**: pass `use_chat_template=True, max_new_tokens=256` at `agent.py:310`, then re-run any analyses that depend on agent knowledge-probe generations. Low-risk change once we've verified the sentence-experiment path is solid in production usage.
+
 ---
 
 ## 2026-05-04 — (superseded by entry above) Capture pipeline does not produce harmony format channels for sentence sessions
