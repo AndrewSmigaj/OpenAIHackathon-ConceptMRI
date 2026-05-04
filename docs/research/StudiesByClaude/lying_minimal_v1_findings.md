@@ -1,5 +1,7 @@
 # lying_minimal_v1 — V_truth ≈ 1.0 under harmony pipeline + minimal-variance design
 
+> **Update 2026-05-04 (later same day):** see `lying_diverse_v1_findings.md`. When the lie type varies across the dataset (5 categories), V_truth drops to ~0.50–0.60 across all layers, including within each individual category. The single-category V_truth = 1.0 reported below is a within-category artifact of the residual encoding "are these two values identical?" cleanly when only one kind of value varies. The model still recognizes lying behaviorally across all categories (94% accuracy) — but cluster geometry of the verdict-token residual does not generalize.
+
 ## TL;DR
 
 When (a) the capture pipeline is fixed to use harmony format with `max_new_tokens=256`, and (b) probe surface variance is minimised by holding everything constant except a single consequential value (CLAIM_TIME vs EVIDENCE_TIME, with strict equality for honest twins), the residual stream at the verdict token cleanly separates lying from honest probes from layer 2 onwards. At k=6 hierarchical clustering, every cluster from L3 through L23 is 100% pure lying or 100% pure honest, with zero canonical-basin flips at any layer transition.
