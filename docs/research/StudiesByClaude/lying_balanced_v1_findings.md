@@ -51,10 +51,48 @@ Notable patterns:
 
 ## What it doesn't yet settle
 
-- **Geometric correlate**: Does the residual stream cluster lying from honest within the override condition? If yes, the recognition state is detectable both behaviorally and geometrically — strong partial-suppression evidence. If no, the recognition is only behavioral. Schema build pending.
 - **The 7% honest-override yes rate is not zero.** Some compliance leak exists. Whether that's classifier noise, severity-dependent over-accusation under override, or true compliance can't be settled at N=60.
 - **Base/RLHF before-after** still requires checkpoints we don't have (recorded in RECOMMENDATIONS.md).
 - **Harmony `<analysis>` channel** still not separated from final output (see RECOMMENDATIONS.md). All results are inferred from the merged generation text.
+
+## Cluster geometry at the verdict token: NEGATIVE result on truth, POSITIVE on verdict
+
+Built `lying_balanced_v1_k4_n15` schema. Computed Cramér's V at every layer for two contingencies:
+- **V_truth**: cluster × truth_state (lying/honest)
+- **V_verdict**: cluster × model's output verdict (yes/no/other)
+
+| Layer | V_truth (all) | V_truth (override only) | V_verdict (all) |
+|---|---|---|---|
+| L0 | 0.031 | 0.017 | 0.284 |
+| L8 | 0.024 | 0.033 | **0.358** |
+| L13 | 0.000 | 0.000 | 0.334 |
+| L23 | 0.105 | 0.052 | 0.330 |
+
+**V_truth is essentially zero at every layer (max 0.14).** The residual stream cluster geometry at the verdict token does NOT separate lying from honest scenes — even within the override condition where behavior strongly does. **V_verdict is 0.28-0.36** — moderate-strong; clusters DO organize by what the model is about to say.
+
+Per-cluster check at L8 (k=4):
+- L8C1 (all override, n=60): 29 lying / 31 honest — *50/50 truth split*; 12 yes / 21 no / 27 other
+- L8C3 (all override, n=60): 31 lying / 29 honest — *50/50 truth split*; 25 yes / 22 no / 13 other
+
+The two override clusters separate cleanly by *verdict* (one mostly yes-bound, one mostly no-bound), but each cluster contains roughly equal lying and honest probes.
+
+## Revised interpretation
+
+The "partial suppression" hypothesis in its simple form — that the residual stream encodes a clean lying-recognition representation that's behaviorally suppressed — **is not supported** by this data. The model's behavioral recognition (55% vs 7% under override) is real, but **does not appear to live in residual stream cluster geometry at the verdict token**.
+
+Possible mechanisms by which the model achieves truth-correlated output without truth-correlated cluster geometry:
+1. **Attention patterns**: the model may use attention to bind specific evidence-claim contradictions during generation. Attention patterns aren't captured by our residual-stream UMAP primitive.
+2. **Earlier token positions**: the truth-relevant computation might form when the model reads the evidence ("audit shows 42 personal charges in the deduction column") rather than at the verdict token. We capture only the verdict position.
+3. **Expert routing or MLP outputs**: the truth signal might live in routing patterns or sparse MLP feature activations that residual-stream cluster geometry averages over.
+4. **Mid-generation state**: the model's commitment may form during generation (after the verdict token) rather than at the verdict residual. The residual stream we capture is *before* the model has fully committed.
+
+Each of these is consistent with what we see: residual clusters organized by verbal-output-direction, but not by underlying truth state.
+
+## What this means for the platform
+
+The latent-cluster lens (UMAP+hierarchical clustering on residual streams) **may not be the right primitive for tasks like deception detection where the relevant computation lives in attention or routing rather than residual content**. It works well for word-sense polysemy (V=0.55), friend/foe scenarios (V=0.63), and engagement-vs-refusal basins (V=0.55) — tasks where the conceptual signal is heavily encoded in residual content.
+
+Lying-judgment tasks may fall into the routing-pipeline-lens regime instead of the latent-cluster-lens regime (see SOFTWARE_OVERVIEW.md for the two-lens distinction). Worth exploring whether expert routing patterns separate lying from honest under override — that's the user's "harmful object micropipeline" concept applied to deception.
 
 ## Comparison to lying_elicitation_v1
 

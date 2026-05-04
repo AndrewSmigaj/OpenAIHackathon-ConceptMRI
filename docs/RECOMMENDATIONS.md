@@ -10,7 +10,31 @@ The user reviews entries and either acts on them, dismisses them, or files them.
 
 ---
 
-## 2026-05-04 — Capture pipeline does not produce harmony format channels for sentence sessions
+## 2026-05-04 (CRITICAL — invalidates prior elicitation/balanced findings) — Capture pipeline sends raw text to a harmony-format-trained model
+
+**Scope**: `backend/src/services/probes/integrated_capture_service.py:170` and `backend/src/services/probes/capture_orchestrator.py:81`
+
+The sentence-experiment capture currently does `tokenizer.encode(input_text, add_special_tokens=False)` — sending the probe text as raw, unframed tokens to gpt-oss-20b. The model is harmony-format-trained (system/user/assistant channels with `<|start|>`, `<|message|>`, `<|end|>` tokens and an `analysis` reasoning channel). When given raw text without harmony framing, the model produces:
+
+- "It seems like your message got cut off. Could you please provide the full question?" (treats input as broken chat fragment)
+- Hallucinated context: "Sam is a pharmacist", "the elder abuse investigator is a lawyer"
+- Format refusals: "The answer should be in the style of a short story"
+- Repeated-sentence loops latching onto seed tokens
+
+Plus `max_new_tokens=50` (default in `capture_orchestrator.generate_continuation()`) cuts off any coherent deliberation before commitment.
+
+**The "recognition vs compliance" finding from `lying_balanced_v1` (55% yes lying / 7% yes honest under override) is unreliable** because the underlying generations were largely model-confused-about-input-format outputs that happened to contain "yes" or "no" tokens. The classifier was unable to distinguish these from real judgments. Audits this session showed ~50% of no-override generations and ~15% of override generations contain explicit confusion markers (cutoff complaints, hallucinated context, format refusals).
+
+**Fix being implemented today** (with user authorization):
+1. `integrated_capture_service.capture_probe()` — add `use_chat_template: bool = False` parameter. When True, wrap `input_text` with `tokenizer.apply_chat_template(...)` to produce proper harmony format.
+2. Sentence-experiment endpoint — pass `use_chat_template=True`. Agent capture path unchanged.
+3. `capture_orchestrator.generate_continuation()` — bump default `max_new_tokens` from 50 to 256 to give the harmony analysis-then-final pattern room to complete.
+
+After fix, all prior elicitation/balanced studies should be re-run before any conclusions are drawn from them. The probe DESIGNS are fine; the captured GENERATIONS (and the residuals built from those input formats) are not.
+
+---
+
+## 2026-05-04 — (superseded by entry above) Capture pipeline does not produce harmony format channels for sentence sessions
 
 **Scope**: `backend/src/services/probes/probe_processor.py` (or wherever the prompt-formatting/generation logic lives)
 
