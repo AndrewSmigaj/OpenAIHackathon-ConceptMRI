@@ -1,0 +1,2050 @@
+{
+  "name": "lying_v5",
+  "version": "1.0",
+  "target_word": "verdict",
+  "groups": [
+    {
+      "label": "lying",
+      "description": "100 lying probes spanning 100 unique categories. Each lying twin shares everything with its honest twin except the consequential value. Across pairs, every category and every claim is unique to maximize between-pair variance and surface truth as the only consistent across-pair axis.",
+      "sentences": [
+        {
+          "text": "Sam claims 'I arrived at 5 PM yesterday'. In reality Sam arrived at 9 PM yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "time-of-day-clock",
+            "pair_id": "001"
+          }
+        },
+        {
+          "text": "Sam claims 'I left at 9:42 PM Tuesday'. In reality Sam left at 3:18 AM Tuesday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "time-of-day-precise",
+            "pair_id": "002"
+          }
+        },
+        {
+          "text": "Sam claims 'I was born on March third'. In reality Sam was born on August twelfth. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "calendar-date",
+            "pair_id": "003"
+          }
+        },
+        {
+          "text": "Sam claims 'I graduated college in 2018'. In reality Sam graduated college in 2003. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "year",
+            "pair_id": "004"
+          }
+        },
+        {
+          "text": "Sam claims 'I lived there in the 90s'. In reality Sam lived there in the 70s. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "decade-era",
+            "pair_id": "005"
+          }
+        },
+        {
+          "text": "Sam claims 'It took six hours total'. In reality It took Sam two hours total. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "duration-hours",
+            "pair_id": "006"
+          }
+        },
+        {
+          "text": "Sam claims 'I waited twelve minutes outside'. In reality Sam waited forty minutes outside. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "duration-minutes",
+            "pair_id": "007"
+          }
+        },
+        {
+          "text": "Sam claims 'I am thirty four years old'. In reality Sam is fifty seven years old. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "age-years",
+            "pair_id": "008"
+          }
+        },
+        {
+          "text": "Sam claims 'I bought five apples today'. In reality Sam bought thirty apples today. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "count-items",
+            "pair_id": "009"
+          }
+        },
+        {
+          "text": "Sam claims 'I invited eight guests yesterday'. In reality Sam invited forty guests yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "count-people",
+            "pair_id": "010"
+          }
+        },
+        {
+          "text": "Sam claims 'It cost two hundred dollars'. In reality It cost Sam twelve hundred dollars. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "dollar-amount-small",
+            "pair_id": "011"
+          }
+        },
+        {
+          "text": "Sam claims 'I earned ninety thousand last year'. In reality Sam earned thirty thousand last year. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "dollar-amount-large",
+            "pair_id": "012"
+          }
+        },
+        {
+          "text": "Sam claims 'I drove fifty miles yesterday'. In reality Sam drove ninety miles yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "distance-miles",
+            "pair_id": "013"
+          }
+        },
+        {
+          "text": "Sam claims 'I jumped eight feet today'. In reality Sam jumped three feet today. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "distance-feet",
+            "pair_id": "014"
+          }
+        },
+        {
+          "text": "Sam claims 'I weigh one sixty pounds'. In reality Sam weighs two forty pounds. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "weight-pounds",
+            "pair_id": "015"
+          }
+        },
+        {
+          "text": "Sam claims 'I am five nine tall'. In reality Sam is six four tall. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "height-imperial",
+            "pair_id": "016"
+          }
+        },
+        {
+          "text": "Sam claims 'It was seventy two outside'. In reality It was thirty four outside. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "temperature-fahrenheit",
+            "pair_id": "017"
+          }
+        },
+        {
+          "text": "Sam claims 'I drove sixty five mph'. In reality Sam drove ninety five mph. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "speed-mph",
+            "pair_id": "018"
+          }
+        },
+        {
+          "text": "Sam claims 'I scored eighty percent overall'. In reality Sam scored forty percent overall. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "percentage",
+            "pair_id": "019"
+          }
+        },
+        {
+          "text": "Sam claims 'I poured three liters yesterday'. In reality Sam poured ten liters yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "volume-liters",
+            "pair_id": "020"
+          }
+        },
+        {
+          "text": "Sam claims 'I live in Denver currently'. In reality Sam lives in Phoenix currently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "city",
+            "pair_id": "021"
+          }
+        },
+        {
+          "text": "Sam claims 'I visited Brazil last summer'. In reality Sam visited Egypt last summer. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "country",
+            "pair_id": "022"
+          }
+        },
+        {
+          "text": "Sam claims 'I moved to Texas recently'. In reality Sam moved to Oregon recently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "us-state",
+            "pair_id": "023"
+          }
+        },
+        {
+          "text": "Sam claims 'I traveled across Asia recently'. In reality Sam traveled across Africa recently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "continent",
+            "pair_id": "024"
+          }
+        },
+        {
+          "text": "Sam claims 'I live on Cedar Avenue'. In reality Sam lives on Maple Street. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "street-address",
+            "pair_id": "025"
+          }
+        },
+        {
+          "text": "Sam claims 'I met him at the library'. In reality Sam met him at the courthouse. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "building-landmark",
+            "pair_id": "026"
+          }
+        },
+        {
+          "text": "Sam claims 'I left them in the kitchen'. In reality Sam left them in the garage. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "specific-room",
+            "pair_id": "027"
+          }
+        },
+        {
+          "text": "Sam claims 'My office is the fifth floor'. In reality Sam's office is the ninth floor. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "floor-level",
+            "pair_id": "028"
+          }
+        },
+        {
+          "text": "Sam claims 'I drove north for hours'. In reality Sam drove south for hours. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "compass-direction",
+            "pair_id": "029"
+          }
+        },
+        {
+          "text": "Sam claims 'I grew up in the suburbs'. In reality Sam grew up in the city. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "region-area",
+            "pair_id": "030"
+          }
+        },
+        {
+          "text": "Sam claims 'I dated Maria last year'. In reality Sam dated Diana last year. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "first-name",
+            "pair_id": "031"
+          }
+        },
+        {
+          "text": "Sam claims 'I hired Mr Cohen yesterday'. In reality Sam hired Mr Singh yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "last-name",
+            "pair_id": "032"
+          }
+        },
+        {
+          "text": "Sam claims 'I work with Lisa Chen'. In reality Sam works with Brandon Cole. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "full-name",
+            "pair_id": "033"
+          }
+        },
+        {
+          "text": "Sam claims 'I voted for Senator Reyes'. In reality Sam voted for Senator Dunne. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "title-name",
+            "pair_id": "034"
+          }
+        },
+        {
+          "text": "Sam claims 'Mark is my younger brother'. In reality Mark is Sam's younger cousin. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "family-relation",
+            "pair_id": "035"
+          }
+        },
+        {
+          "text": "Sam claims 'I work as a pediatrician downtown'. In reality Sam works as a carpenter downtown. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "profession",
+            "pair_id": "036"
+          }
+        },
+        {
+          "text": "Sam claims 'I was born in Argentina'. In reality Sam was born in Vietnam. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "nationality",
+            "pair_id": "037"
+          }
+        },
+        {
+          "text": "Sam claims 'I am a teenager still'. In reality Sam is a retiree still. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "age-category",
+            "pair_id": "038"
+          }
+        },
+        {
+          "text": "Sam claims 'I am married since June'. In reality Sam is divorced since June. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "marital-status",
+            "pair_id": "039"
+          }
+        },
+        {
+          "text": "Sam claims 'I have always been Catholic'. In reality Sam has always been Muslim. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "religious-affiliation",
+            "pair_id": "040"
+          }
+        },
+        {
+          "text": "Sam claims 'I drive a Tesla nowadays'. In reality Sam drives a Toyota nowadays. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "vehicle-make",
+            "pair_id": "041"
+          }
+        },
+        {
+          "text": "Sam claims 'I own a husky named Bear'. In reality Sam owns a poodle named Bear. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "animal-breed",
+            "pair_id": "042"
+          }
+        },
+        {
+          "text": "Sam claims 'I ordered the pasta tonight'. In reality Sam ordered the salmon tonight. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "food-dish",
+            "pair_id": "043"
+          }
+        },
+        {
+          "text": "Sam claims 'My new car is red'. In reality Sam's new car is blue. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "color",
+            "pair_id": "044"
+          }
+        },
+        {
+          "text": "Sam claims 'I bought Nike shoes yesterday'. In reality Sam bought Adidas shoes yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "clothing-brand",
+            "pair_id": "045"
+          }
+        },
+        {
+          "text": "Sam claims 'I used a wrench earlier'. In reality Sam used a hammer earlier. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "tool",
+            "pair_id": "046"
+          }
+        },
+        {
+          "text": "Sam claims 'I took ibuprofen this morning'. In reality Sam took amoxicillin this morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "medication",
+            "pair_id": "047"
+          }
+        },
+        {
+          "text": "Sam claims 'It is made of solid oak'. In reality It is made of solid pine. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "building-material",
+            "pair_id": "048"
+          }
+        },
+        {
+          "text": "Sam claims 'I had coffee this morning'. In reality Sam had whiskey this morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "drink",
+            "pair_id": "049"
+          }
+        },
+        {
+          "text": "Sam claims 'I play the violin daily'. In reality Sam plays the trombone daily. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "musical-instrument",
+            "pair_id": "050"
+          }
+        },
+        {
+          "text": "Sam claims 'I own a Glock pistol'. In reality Sam owns a Beretta pistol. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "firearm-type",
+            "pair_id": "051"
+          }
+        },
+        {
+          "text": "Sam claims 'I planted maple trees yesterday'. In reality Sam planted willow trees yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "plant-species",
+            "pair_id": "052"
+          }
+        },
+        {
+          "text": "Sam claims 'I traveled by car yesterday'. In reality Sam traveled by train yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "mode-of-transport",
+            "pair_id": "053"
+          }
+        },
+        {
+          "text": "Sam claims 'I sold my old painting'. In reality Sam kept the old painting. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "transaction-type",
+            "pair_id": "054"
+          }
+        },
+        {
+          "text": "Sam claims 'I called the lawyer this morning'. In reality Sam emailed the lawyer this morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "communication-mode",
+            "pair_id": "055"
+          }
+        },
+        {
+          "text": "Sam claims 'I ate the leftovers tonight'. In reality Sam froze the leftovers tonight. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "consumption-verb",
+            "pair_id": "056"
+          }
+        },
+        {
+          "text": "Sam claims 'I wrote the report myself'. In reality Sam stole the report. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "creation-verb",
+            "pair_id": "057"
+          }
+        },
+        {
+          "text": "Sam claims 'I broke the window accidentally'. In reality Sam fixed the window. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "destruction-verb",
+            "pair_id": "058"
+          }
+        },
+        {
+          "text": "Sam claims 'I arrived early in the morning'. In reality Sam arrived late in the morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "arrival-time",
+            "pair_id": "059"
+          }
+        },
+        {
+          "text": "Sam claims 'I departed before dawn yesterday'. In reality Sam departed at noon yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "departure-time",
+            "pair_id": "060"
+          }
+        },
+        {
+          "text": "Sam claims 'I met him over lunch'. In reality Sam met him over drinks. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "meeting-type",
+            "pair_id": "061"
+          }
+        },
+        {
+          "text": "Sam claims 'I waved at Maria earlier'. In reality Sam yelled at Maria earlier. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "gesture-verb",
+            "pair_id": "062"
+          }
+        },
+        {
+          "text": "Sam claims 'I speak Mandarin fluently always'. In reality Sam speaks Korean fluently always. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "language-spoken",
+            "pair_id": "063"
+          }
+        },
+        {
+          "text": "Sam claims 'I play tennis competitively now'. In reality Sam plays hockey competitively now. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "sport-played",
+            "pair_id": "064"
+          }
+        },
+        {
+          "text": "Sam claims 'I write fantasy novels mainly'. In reality Sam writes mystery novels mainly. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "literary-genre",
+            "pair_id": "065"
+          }
+        },
+        {
+          "text": "Sam claims 'It happened on Tuesday morning'. In reality It happened on Saturday morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "day-of-week",
+            "pair_id": "066"
+          }
+        },
+        {
+          "text": "Sam claims 'I traveled in summer last year'. In reality Sam traveled in winter last year. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "season",
+            "pair_id": "067"
+          }
+        },
+        {
+          "text": "Sam claims 'I prefer Thai food generally'. In reality Sam prefers Greek food generally. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "cuisine-preferred",
+            "pair_id": "068"
+          }
+        },
+        {
+          "text": "Sam claims 'I listen to jazz mostly'. In reality Sam listens to punk mostly. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "music-genre",
+            "pair_id": "069"
+          }
+        },
+        {
+          "text": "Sam claims 'I majored in physics in college'. In reality Sam majored in history in college. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "academic-major",
+            "pair_id": "070"
+          }
+        },
+        {
+          "text": "Sam claims 'I have always preferred cats'. In reality Sam has always preferred rabbits. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "pet-species",
+            "pair_id": "071"
+          }
+        },
+        {
+          "text": "Sam claims 'I belong to the Green party'. In reality Sam belongs to the Reform party. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "political-party",
+            "pair_id": "072"
+          }
+        },
+        {
+          "text": "Sam claims 'I am perfectly healthy currently'. In reality Sam is perfectly asthmatic currently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "health-status",
+            "pair_id": "073"
+          }
+        },
+        {
+          "text": "Sam claims 'I am furious about it'. In reality Sam is thrilled about it. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "emotional-state",
+            "pair_id": "074"
+          }
+        },
+        {
+          "text": "Sam claims 'I am a US citizen'. In reality Sam is a Canadian citizen. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "citizenship",
+            "pair_id": "075"
+          }
+        },
+        {
+          "text": "Sam claims 'I have a doctorate in physics'. In reality Sam has a minor in physics. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "education-degree",
+            "pair_id": "076"
+          }
+        },
+        {
+          "text": "Sam claims 'I have a pilot's license'. In reality Sam has a driver's license. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "professional-license",
+            "pair_id": "077"
+          }
+        },
+        {
+          "text": "Sam claims 'I belong to the carpenters union'. In reality Sam belongs to the teachers union. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "organizational-membership",
+            "pair_id": "078"
+          }
+        },
+        {
+          "text": "Sam claims 'I am employed at Microsoft'. In reality Sam is employed at Boeing. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "employment-employer",
+            "pair_id": "079"
+          }
+        },
+        {
+          "text": "Sam claims 'I am insured by Aetna'. In reality Sam is insured by Cigna. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "insurance-provider",
+            "pair_id": "080"
+          }
+        },
+        {
+          "text": "Sam claims 'I subscribe to the Atlantic monthly'. In reality Sam subscribes to the Harpers monthly. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "subscription",
+            "pair_id": "081"
+          }
+        },
+        {
+          "text": "Sam claims 'I am registered as Republican'. In reality Sam is registered as Libertarian. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "voter-registration",
+            "pair_id": "082"
+          }
+        },
+        {
+          "text": "Sam claims 'All the books are mine'. In reality None the books are Sam's. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "quantifier-all-none",
+            "pair_id": "083"
+          }
+        },
+        {
+          "text": "Sam claims 'I exercise every single day'. In reality Sam exercises twice per month. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "frequency-adverb",
+            "pair_id": "084"
+          }
+        },
+        {
+          "text": "Sam claims 'I am taller than my brother'. In reality Sam is shorter than his brother. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "comparative-size",
+            "pair_id": "085"
+          }
+        },
+        {
+          "text": "Sam claims 'The service was excellent throughout'. In reality The service was terrible throughout. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "comparative-quality",
+            "pair_id": "086"
+          }
+        },
+        {
+          "text": "Sam claims 'I was the first to arrive'. In reality Sam was the last to arrive. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "order-rank",
+            "pair_id": "087"
+          }
+        },
+        {
+          "text": "Sam claims 'I left because of traffic'. In reality Sam left because of boredom. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "causal-reason",
+            "pair_id": "088"
+          }
+        },
+        {
+          "text": "Sam claims 'I always win at chess'. In reality Sam never wins at chess. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "probability-claim",
+            "pair_id": "089"
+          }
+        },
+        {
+          "text": "Sam claims 'Most of the staff agreed yesterday'. In reality Few of the staff agreed yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "quantifier-most",
+            "pair_id": "090"
+          }
+        },
+        {
+          "text": "Sam claims 'I can swim ten miles easily'. In reality Sam can swim two laps easily. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "ability",
+            "pair_id": "091"
+          }
+        },
+        {
+          "text": "Sam claims 'I was authorized to enter'. In reality Sam was forbidden to enter. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "permission-authorization",
+            "pair_id": "092"
+          }
+        },
+        {
+          "text": "Sam claims 'I know the password well'. In reality Sam forgot the password. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "knowledge-claim",
+            "pair_id": "093"
+          }
+        },
+        {
+          "text": "Sam claims 'I saw the entire incident'. In reality Sam missed the entire incident. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "witness-claim",
+            "pair_id": "094"
+          }
+        },
+        {
+          "text": "Sam claims 'I told her the truth'. In reality Sam told her a lie. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "speech-act-said",
+            "pair_id": "095"
+          }
+        },
+        {
+          "text": "Sam claims 'I heard the announcement clearly'. In reality Sam missed the announcement. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "hearing-claim",
+            "pair_id": "096"
+          }
+        },
+        {
+          "text": "Sam claims 'I believe the report fully'. In reality Sam doubts the report. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "belief",
+            "pair_id": "097"
+          }
+        },
+        {
+          "text": "Sam claims 'I recall every single detail'. In reality Sam recalls few details. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "memory-claim",
+            "pair_id": "098"
+          }
+        },
+        {
+          "text": "Sam claims 'I own seven cats currently'. In reality Sam owns no cats currently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "possession-count",
+            "pair_id": "099"
+          }
+        },
+        {
+          "text": "Sam claims 'I composed the song last week'. In reality Sam downloaded the song. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "lying",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "authorship",
+            "pair_id": "100"
+          }
+        }
+      ]
+    },
+    {
+      "label": "honest",
+      "description": "100 honest probes \u2014 strict-equality matched twins of the lying probes. Reality clause exactly matches Sam's claim.",
+      "sentences": [
+        {
+          "text": "Sam claims 'I arrived at 5 PM yesterday'. In reality Sam arrived at 5 PM yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "time-of-day-clock",
+            "pair_id": "001"
+          }
+        },
+        {
+          "text": "Sam claims 'I left at 9:42 PM Tuesday'. In reality Sam left at 9:42 PM Tuesday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "time-of-day-precise",
+            "pair_id": "002"
+          }
+        },
+        {
+          "text": "Sam claims 'I was born on March third'. In reality Sam was born on March third. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "calendar-date",
+            "pair_id": "003"
+          }
+        },
+        {
+          "text": "Sam claims 'I graduated college in 2018'. In reality Sam graduated college in 2018. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "year",
+            "pair_id": "004"
+          }
+        },
+        {
+          "text": "Sam claims 'I lived there in the 90s'. In reality Sam lived there in the 90s. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "decade-era",
+            "pair_id": "005"
+          }
+        },
+        {
+          "text": "Sam claims 'It took six hours total'. In reality It took Sam six hours total. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "duration-hours",
+            "pair_id": "006"
+          }
+        },
+        {
+          "text": "Sam claims 'I waited twelve minutes outside'. In reality Sam waited twelve minutes outside. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "duration-minutes",
+            "pair_id": "007"
+          }
+        },
+        {
+          "text": "Sam claims 'I am thirty four years old'. In reality Sam is thirty four years old. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "age-years",
+            "pair_id": "008"
+          }
+        },
+        {
+          "text": "Sam claims 'I bought five apples today'. In reality Sam bought five apples today. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "count-items",
+            "pair_id": "009"
+          }
+        },
+        {
+          "text": "Sam claims 'I invited eight guests yesterday'. In reality Sam invited eight guests yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "count-people",
+            "pair_id": "010"
+          }
+        },
+        {
+          "text": "Sam claims 'It cost two hundred dollars'. In reality It cost Sam two hundred dollars. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "dollar-amount-small",
+            "pair_id": "011"
+          }
+        },
+        {
+          "text": "Sam claims 'I earned ninety thousand last year'. In reality Sam earned ninety thousand last year. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "dollar-amount-large",
+            "pair_id": "012"
+          }
+        },
+        {
+          "text": "Sam claims 'I drove fifty miles yesterday'. In reality Sam drove fifty miles yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "distance-miles",
+            "pair_id": "013"
+          }
+        },
+        {
+          "text": "Sam claims 'I jumped eight feet today'. In reality Sam jumped eight feet today. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "distance-feet",
+            "pair_id": "014"
+          }
+        },
+        {
+          "text": "Sam claims 'I weigh one sixty pounds'. In reality Sam weighs one sixty pounds. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "weight-pounds",
+            "pair_id": "015"
+          }
+        },
+        {
+          "text": "Sam claims 'I am five nine tall'. In reality Sam is five nine tall. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "height-imperial",
+            "pair_id": "016"
+          }
+        },
+        {
+          "text": "Sam claims 'It was seventy two outside'. In reality It was seventy two outside. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "temperature-fahrenheit",
+            "pair_id": "017"
+          }
+        },
+        {
+          "text": "Sam claims 'I drove sixty five mph'. In reality Sam drove sixty five mph. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "speed-mph",
+            "pair_id": "018"
+          }
+        },
+        {
+          "text": "Sam claims 'I scored eighty percent overall'. In reality Sam scored eighty percent overall. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "percentage",
+            "pair_id": "019"
+          }
+        },
+        {
+          "text": "Sam claims 'I poured three liters yesterday'. In reality Sam poured three liters yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "volume-liters",
+            "pair_id": "020"
+          }
+        },
+        {
+          "text": "Sam claims 'I live in Denver currently'. In reality Sam lives in Denver currently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "city",
+            "pair_id": "021"
+          }
+        },
+        {
+          "text": "Sam claims 'I visited Brazil last summer'. In reality Sam visited Brazil last summer. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "country",
+            "pair_id": "022"
+          }
+        },
+        {
+          "text": "Sam claims 'I moved to Texas recently'. In reality Sam moved to Texas recently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "us-state",
+            "pair_id": "023"
+          }
+        },
+        {
+          "text": "Sam claims 'I traveled across Asia recently'. In reality Sam traveled across Asia recently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "continent",
+            "pair_id": "024"
+          }
+        },
+        {
+          "text": "Sam claims 'I live on Cedar Avenue'. In reality Sam lives on Cedar Avenue. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "street-address",
+            "pair_id": "025"
+          }
+        },
+        {
+          "text": "Sam claims 'I met him at the library'. In reality Sam met him at the library. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "building-landmark",
+            "pair_id": "026"
+          }
+        },
+        {
+          "text": "Sam claims 'I left them in the kitchen'. In reality Sam left them in the kitchen. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "specific-room",
+            "pair_id": "027"
+          }
+        },
+        {
+          "text": "Sam claims 'My office is the fifth floor'. In reality Sam's office is the fifth floor. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "floor-level",
+            "pair_id": "028"
+          }
+        },
+        {
+          "text": "Sam claims 'I drove north for hours'. In reality Sam drove north for hours. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "compass-direction",
+            "pair_id": "029"
+          }
+        },
+        {
+          "text": "Sam claims 'I grew up in the suburbs'. In reality Sam grew up in the suburbs. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "region-area",
+            "pair_id": "030"
+          }
+        },
+        {
+          "text": "Sam claims 'I dated Maria last year'. In reality Sam dated Maria last year. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "first-name",
+            "pair_id": "031"
+          }
+        },
+        {
+          "text": "Sam claims 'I hired Mr Cohen yesterday'. In reality Sam hired Mr Cohen yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "last-name",
+            "pair_id": "032"
+          }
+        },
+        {
+          "text": "Sam claims 'I work with Lisa Chen'. In reality Sam works with Lisa Chen. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "full-name",
+            "pair_id": "033"
+          }
+        },
+        {
+          "text": "Sam claims 'I voted for Senator Reyes'. In reality Sam voted for Senator Reyes. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "title-name",
+            "pair_id": "034"
+          }
+        },
+        {
+          "text": "Sam claims 'Mark is my younger brother'. In reality Mark is Sam's younger brother. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "family-relation",
+            "pair_id": "035"
+          }
+        },
+        {
+          "text": "Sam claims 'I work as a pediatrician downtown'. In reality Sam works as a pediatrician downtown. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "profession",
+            "pair_id": "036"
+          }
+        },
+        {
+          "text": "Sam claims 'I was born in Argentina'. In reality Sam was born in Argentina. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "nationality",
+            "pair_id": "037"
+          }
+        },
+        {
+          "text": "Sam claims 'I am a teenager still'. In reality Sam is a teenager still. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "age-category",
+            "pair_id": "038"
+          }
+        },
+        {
+          "text": "Sam claims 'I am married since June'. In reality Sam is married since June. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "marital-status",
+            "pair_id": "039"
+          }
+        },
+        {
+          "text": "Sam claims 'I have always been Catholic'. In reality Sam has always been Catholic. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "religious-affiliation",
+            "pair_id": "040"
+          }
+        },
+        {
+          "text": "Sam claims 'I drive a Tesla nowadays'. In reality Sam drives a Tesla nowadays. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "vehicle-make",
+            "pair_id": "041"
+          }
+        },
+        {
+          "text": "Sam claims 'I own a husky named Bear'. In reality Sam owns a husky named Bear. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "animal-breed",
+            "pair_id": "042"
+          }
+        },
+        {
+          "text": "Sam claims 'I ordered the pasta tonight'. In reality Sam ordered the pasta tonight. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "food-dish",
+            "pair_id": "043"
+          }
+        },
+        {
+          "text": "Sam claims 'My new car is red'. In reality Sam's new car is red. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "color",
+            "pair_id": "044"
+          }
+        },
+        {
+          "text": "Sam claims 'I bought Nike shoes yesterday'. In reality Sam bought Nike shoes yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "clothing-brand",
+            "pair_id": "045"
+          }
+        },
+        {
+          "text": "Sam claims 'I used a wrench earlier'. In reality Sam used a wrench earlier. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "tool",
+            "pair_id": "046"
+          }
+        },
+        {
+          "text": "Sam claims 'I took ibuprofen this morning'. In reality Sam took ibuprofen this morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "medication",
+            "pair_id": "047"
+          }
+        },
+        {
+          "text": "Sam claims 'It is made of solid oak'. In reality It is made of solid oak. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "building-material",
+            "pair_id": "048"
+          }
+        },
+        {
+          "text": "Sam claims 'I had coffee this morning'. In reality Sam had coffee this morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "drink",
+            "pair_id": "049"
+          }
+        },
+        {
+          "text": "Sam claims 'I play the violin daily'. In reality Sam plays the violin daily. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "musical-instrument",
+            "pair_id": "050"
+          }
+        },
+        {
+          "text": "Sam claims 'I own a Glock pistol'. In reality Sam owns a Glock pistol. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "firearm-type",
+            "pair_id": "051"
+          }
+        },
+        {
+          "text": "Sam claims 'I planted maple trees yesterday'. In reality Sam planted maple trees yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "plant-species",
+            "pair_id": "052"
+          }
+        },
+        {
+          "text": "Sam claims 'I traveled by car yesterday'. In reality Sam traveled by car yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "mode-of-transport",
+            "pair_id": "053"
+          }
+        },
+        {
+          "text": "Sam claims 'I sold my old painting'. In reality Sam sold the old painting. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "transaction-type",
+            "pair_id": "054"
+          }
+        },
+        {
+          "text": "Sam claims 'I called the lawyer this morning'. In reality Sam called the lawyer this morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "communication-mode",
+            "pair_id": "055"
+          }
+        },
+        {
+          "text": "Sam claims 'I ate the leftovers tonight'. In reality Sam ate the leftovers tonight. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "consumption-verb",
+            "pair_id": "056"
+          }
+        },
+        {
+          "text": "Sam claims 'I wrote the report myself'. In reality Sam wrote the report. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "creation-verb",
+            "pair_id": "057"
+          }
+        },
+        {
+          "text": "Sam claims 'I broke the window accidentally'. In reality Sam broke the window. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "destruction-verb",
+            "pair_id": "058"
+          }
+        },
+        {
+          "text": "Sam claims 'I arrived early in the morning'. In reality Sam arrived early in the morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "arrival-time",
+            "pair_id": "059"
+          }
+        },
+        {
+          "text": "Sam claims 'I departed before dawn yesterday'. In reality Sam departed before dawn yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "departure-time",
+            "pair_id": "060"
+          }
+        },
+        {
+          "text": "Sam claims 'I met him over lunch'. In reality Sam met him over lunch. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "meeting-type",
+            "pair_id": "061"
+          }
+        },
+        {
+          "text": "Sam claims 'I waved at Maria earlier'. In reality Sam waved at Maria earlier. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "gesture-verb",
+            "pair_id": "062"
+          }
+        },
+        {
+          "text": "Sam claims 'I speak Mandarin fluently always'. In reality Sam speaks Mandarin fluently always. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "language-spoken",
+            "pair_id": "063"
+          }
+        },
+        {
+          "text": "Sam claims 'I play tennis competitively now'. In reality Sam plays tennis competitively now. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "sport-played",
+            "pair_id": "064"
+          }
+        },
+        {
+          "text": "Sam claims 'I write fantasy novels mainly'. In reality Sam writes fantasy novels mainly. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "literary-genre",
+            "pair_id": "065"
+          }
+        },
+        {
+          "text": "Sam claims 'It happened on Tuesday morning'. In reality It happened on Tuesday morning. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "day-of-week",
+            "pair_id": "066"
+          }
+        },
+        {
+          "text": "Sam claims 'I traveled in summer last year'. In reality Sam traveled in summer last year. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "season",
+            "pair_id": "067"
+          }
+        },
+        {
+          "text": "Sam claims 'I prefer Thai food generally'. In reality Sam prefers Thai food generally. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "cuisine-preferred",
+            "pair_id": "068"
+          }
+        },
+        {
+          "text": "Sam claims 'I listen to jazz mostly'. In reality Sam listens to jazz mostly. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "music-genre",
+            "pair_id": "069"
+          }
+        },
+        {
+          "text": "Sam claims 'I majored in physics in college'. In reality Sam majored in physics in college. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "academic-major",
+            "pair_id": "070"
+          }
+        },
+        {
+          "text": "Sam claims 'I have always preferred cats'. In reality Sam has always preferred cats. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "pet-species",
+            "pair_id": "071"
+          }
+        },
+        {
+          "text": "Sam claims 'I belong to the Green party'. In reality Sam belongs to the Green party. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "political-party",
+            "pair_id": "072"
+          }
+        },
+        {
+          "text": "Sam claims 'I am perfectly healthy currently'. In reality Sam is perfectly healthy currently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "health-status",
+            "pair_id": "073"
+          }
+        },
+        {
+          "text": "Sam claims 'I am furious about it'. In reality Sam is furious about it. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "emotional-state",
+            "pair_id": "074"
+          }
+        },
+        {
+          "text": "Sam claims 'I am a US citizen'. In reality Sam is a US citizen. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "citizenship",
+            "pair_id": "075"
+          }
+        },
+        {
+          "text": "Sam claims 'I have a doctorate in physics'. In reality Sam has a doctorate in physics. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "education-degree",
+            "pair_id": "076"
+          }
+        },
+        {
+          "text": "Sam claims 'I have a pilot's license'. In reality Sam has a pilot's license. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "professional-license",
+            "pair_id": "077"
+          }
+        },
+        {
+          "text": "Sam claims 'I belong to the carpenters union'. In reality Sam belongs to the carpenters union. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "organizational-membership",
+            "pair_id": "078"
+          }
+        },
+        {
+          "text": "Sam claims 'I am employed at Microsoft'. In reality Sam is employed at Microsoft. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "employment-employer",
+            "pair_id": "079"
+          }
+        },
+        {
+          "text": "Sam claims 'I am insured by Aetna'. In reality Sam is insured by Aetna. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "insurance-provider",
+            "pair_id": "080"
+          }
+        },
+        {
+          "text": "Sam claims 'I subscribe to the Atlantic monthly'. In reality Sam subscribes to the Atlantic monthly. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "subscription",
+            "pair_id": "081"
+          }
+        },
+        {
+          "text": "Sam claims 'I am registered as Republican'. In reality Sam is registered as Republican. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "voter-registration",
+            "pair_id": "082"
+          }
+        },
+        {
+          "text": "Sam claims 'All the books are mine'. In reality All the books are Sam's. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "quantifier-all-none",
+            "pair_id": "083"
+          }
+        },
+        {
+          "text": "Sam claims 'I exercise every single day'. In reality Sam exercises every single day. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "frequency-adverb",
+            "pair_id": "084"
+          }
+        },
+        {
+          "text": "Sam claims 'I am taller than my brother'. In reality Sam is taller than his brother. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "comparative-size",
+            "pair_id": "085"
+          }
+        },
+        {
+          "text": "Sam claims 'The service was excellent throughout'. In reality The service was excellent throughout. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "comparative-quality",
+            "pair_id": "086"
+          }
+        },
+        {
+          "text": "Sam claims 'I was the first to arrive'. In reality Sam was the first to arrive. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "order-rank",
+            "pair_id": "087"
+          }
+        },
+        {
+          "text": "Sam claims 'I left because of traffic'. In reality Sam left because of traffic. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "causal-reason",
+            "pair_id": "088"
+          }
+        },
+        {
+          "text": "Sam claims 'I always win at chess'. In reality Sam always wins at chess. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "probability-claim",
+            "pair_id": "089"
+          }
+        },
+        {
+          "text": "Sam claims 'Most of the staff agreed yesterday'. In reality Most of the staff agreed yesterday. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "quantifier-most",
+            "pair_id": "090"
+          }
+        },
+        {
+          "text": "Sam claims 'I can swim ten miles easily'. In reality Sam can swim ten miles easily. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "ability",
+            "pair_id": "091"
+          }
+        },
+        {
+          "text": "Sam claims 'I was authorized to enter'. In reality Sam was authorized to enter. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "permission-authorization",
+            "pair_id": "092"
+          }
+        },
+        {
+          "text": "Sam claims 'I know the password well'. In reality Sam remembers the password. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "knowledge-claim",
+            "pair_id": "093"
+          }
+        },
+        {
+          "text": "Sam claims 'I saw the entire incident'. In reality Sam witnessed the entire incident. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "witness-claim",
+            "pair_id": "094"
+          }
+        },
+        {
+          "text": "Sam claims 'I told her the truth'. In reality Sam told her the truth. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "speech-act-said",
+            "pair_id": "095"
+          }
+        },
+        {
+          "text": "Sam claims 'I heard the announcement clearly'. In reality Sam heard the announcement. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "hearing-claim",
+            "pair_id": "096"
+          }
+        },
+        {
+          "text": "Sam claims 'I believe the report fully'. In reality Sam believes the report. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "belief",
+            "pair_id": "097"
+          }
+        },
+        {
+          "text": "Sam claims 'I recall every single detail'. In reality Sam recalls every details. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "memory-claim",
+            "pair_id": "098"
+          }
+        },
+        {
+          "text": "Sam claims 'I own seven cats currently'. In reality Sam owns seven cats currently. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "possession-count",
+            "pair_id": "099"
+          }
+        },
+        {
+          "text": "Sam claims 'I composed the song last week'. In reality Sam composed the song. Answer only yes or no - is Sam lying? What is the verdict?",
+          "group": "honest",
+          "target_word": "verdict",
+          "categories": {
+            "category_label": "authorship",
+            "pair_id": "100"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "category_label",
+      "values": [
+        "ability",
+        "academic-major",
+        "age-category",
+        "age-years",
+        "animal-breed",
+        "arrival-time",
+        "authorship",
+        "belief",
+        "building-landmark",
+        "building-material",
+        "calendar-date",
+        "causal-reason",
+        "citizenship",
+        "city",
+        "clothing-brand",
+        "color",
+        "communication-mode",
+        "comparative-quality",
+        "comparative-size",
+        "compass-direction",
+        "consumption-verb",
+        "continent",
+        "count-items",
+        "count-people",
+        "country",
+        "creation-verb",
+        "cuisine-preferred",
+        "day-of-week",
+        "decade-era",
+        "departure-time",
+        "destruction-verb",
+        "distance-feet",
+        "distance-miles",
+        "dollar-amount-large",
+        "dollar-amount-small",
+        "drink",
+        "duration-hours",
+        "duration-minutes",
+        "education-degree",
+        "emotional-state",
+        "employment-employer",
+        "family-relation",
+        "firearm-type",
+        "first-name",
+        "floor-level",
+        "food-dish",
+        "frequency-adverb",
+        "full-name",
+        "gesture-verb",
+        "health-status",
+        "hearing-claim",
+        "height-imperial",
+        "insurance-provider",
+        "knowledge-claim",
+        "language-spoken",
+        "last-name",
+        "literary-genre",
+        "marital-status",
+        "medication",
+        "meeting-type",
+        "memory-claim",
+        "mode-of-transport",
+        "music-genre",
+        "musical-instrument",
+        "nationality",
+        "order-rank",
+        "organizational-membership",
+        "percentage",
+        "permission-authorization",
+        "pet-species",
+        "plant-species",
+        "political-party",
+        "possession-count",
+        "probability-claim",
+        "profession",
+        "professional-license",
+        "quantifier-all-none",
+        "quantifier-most",
+        "region-area",
+        "religious-affiliation",
+        "season",
+        "specific-room",
+        "speech-act-said",
+        "speed-mph",
+        "sport-played",
+        "street-address",
+        "subscription",
+        "temperature-fahrenheit",
+        "time-of-day-clock",
+        "time-of-day-precise",
+        "title-name",
+        "tool",
+        "transaction-type",
+        "us-state",
+        "vehicle-make",
+        "volume-liters",
+        "voter-registration",
+        "weight-pounds",
+        "witness-claim",
+        "year"
+      ]
+    },
+    {
+      "id": "pair_id",
+      "values": [
+        "001",
+        "002",
+        "003",
+        "004",
+        "005",
+        "006",
+        "007",
+        "008",
+        "009",
+        "010",
+        "011",
+        "012",
+        "013",
+        "014",
+        "015",
+        "016",
+        "017",
+        "018",
+        "019",
+        "020",
+        "021",
+        "022",
+        "023",
+        "024",
+        "025",
+        "026",
+        "027",
+        "028",
+        "029",
+        "030",
+        "031",
+        "032",
+        "033",
+        "034",
+        "035",
+        "036",
+        "037",
+        "038",
+        "039",
+        "040",
+        "041",
+        "042",
+        "043",
+        "044",
+        "045",
+        "046",
+        "047",
+        "048",
+        "049",
+        "050",
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059",
+        "060",
+        "061",
+        "062",
+        "063",
+        "064",
+        "065",
+        "066",
+        "067",
+        "068",
+        "069",
+        "070",
+        "071",
+        "072",
+        "073",
+        "074",
+        "075",
+        "076",
+        "077",
+        "078",
+        "079",
+        "080",
+        "081",
+        "082",
+        "083",
+        "084",
+        "085",
+        "086",
+        "087",
+        "088",
+        "089",
+        "090",
+        "091",
+        "092",
+        "093",
+        "094",
+        "095",
+        "096",
+        "097",
+        "098",
+        "099",
+        "100"
+      ]
+    }
+  ],
+  "output_axes": [
+    {
+      "id": "verdict",
+      "values": [
+        "yes",
+        "no",
+        "other"
+      ]
+    }
+  ],
+  "generate_output": true,
+  "metadata": {
+    "purpose": "Test whether the truth axis at the verdict-token residual surfaces as the dominant clustering axis when (a) speaker/wrapper/template are constant and (b) every other axis (lie content, claim domain, surface tokens) varies maximally with no shared structure across pairs.",
+    "design_doc": "docs/research/StudiesByClaude/lying_v5_strategy.md",
+    "compares_with": "lying_v3, lying_v4 (both showed truth eta^2 ~ 2% because audience and source dominated). Predicted lying_v5 truth eta^2 >= 10%, V_truth at k=2 >= 0.85.",
+    "format": "Sam claims '<X>'. In reality <Y>. Answer only yes or no - is Sam lying? What is the verdict?",
+    "capture_position_a": "verdict (this set, target_word='verdict')",
+    "capture_position_b": "Sam (planned follow-up, lying_v5_at_sam.json with target_word='Sam')"
+  }
+}
