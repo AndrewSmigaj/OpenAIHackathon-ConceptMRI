@@ -1,6 +1,8 @@
 # lying_minimal_v1 — V_truth ≈ 1.0 under harmony pipeline + minimal-variance design
 
 > **Update 2026-05-04 (later same day):** see `lying_diverse_v1_findings.md`. When the lie type varies across the dataset (5 categories), V_truth drops to ~0.50–0.60 across all layers, including within each individual category. The single-category V_truth = 1.0 reported below is a within-category artifact of the residual encoding "are these two values identical?" cleanly when only one kind of value varies. The model still recognizes lying behaviorally across all categories (94% accuracy) — but cluster geometry of the verdict-token residual does not generalize.
+>
+> **Update 2026-05-05:** see `lying_v4_findings.md`. The hedge above ("V_truth = 1.0 was a within-category artifact") was over-stated. Truth-axis projection (centroid `lying_mean − honest_mean`) on `lying_v3` and `lying_v4` data gives 83–89% separability across 6 categories × 3 magnitudes × varying audiences. The truth axis is real and generalizes; what doesn't generalize is **truth being the dominant variance axis**. minimal_v1's clean cluster V_truth = 1.0 was real — it's what you see when no other variance competes. Multi-category data still has the same truth axis, just buried under audience/source variance.
 
 ## TL;DR
 

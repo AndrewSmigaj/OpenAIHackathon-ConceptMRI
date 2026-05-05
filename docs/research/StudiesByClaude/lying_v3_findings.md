@@ -1,5 +1,7 @@
 # lying_v3 — Bigger probe (360 probes, 6 categories × 30 pairs × 3 magnitudes) confirms H4: persistent topic dominance.
 
+> **Update 2026-05-05 (later):** see `lying_v4_findings.md`. The "H4 confirmed, truth-state computation lives somewhere we don't measure" gloss was wrong. The truth signal IS at the verdict-token residual — projecting onto the `lying_mean − honest_mean` centroid direction at L11–L15 gives **83–89% separability** even with massive audience+source variance. Cluster V_truth at k=6 is low (0.55–0.60) because audience explains 81% of variance and source explains 81%; the truth axis is real but only 2% of variance, so clustering at k=6 doesn't pick it. Projection-onto-centroid-difference recovers it. The variance-dominance picture in this doc is correct; the interpretation about "computation lives somewhere we don't measure" is wrong.
+
 ## TL;DR
 
 Scaling from 100 probes (`lying_diverse_v1`, 5 categories × 10 pairs) to 360 probes (`lying_v3`, 6 categories × 30 pairs × 3 lying magnitudes) does **not** lift V_truth at the verdict-token residual. Global V_truth stays at 0.51–0.60 across layers at both k=6 and k=10 — same range as `lying_diverse_v1`. The model still recognizes lying behaviorally with 80–100% accuracy across all (category × magnitude) cells. So the truth-state computation happens, but is invisible to UMAP+hierarchical clustering of the verdict-token residual when topical content varies.
