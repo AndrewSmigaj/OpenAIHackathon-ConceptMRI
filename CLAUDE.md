@@ -156,9 +156,15 @@ TEMPORAL FLOW: expanding context window → basin axis projection → lag measur
 - Built-in MUD verbs (`look`, `examine`, `inventory`, `actions`, `goto`, `say`) produce their own visible broadcast. Scenario-action verbs (`alert bouncer` etc.) are emoted by the agent loop so they're visible too — see `agent_loop.py` BUILTIN_VERBS for the skip-list.
 
 ### 11. CRITICAL: Change Management Rules
+- **NO CODE CHANGES WITHOUT EXPLICIT "can change code" MODE.** Source code (anything under `backend/src/`, `frontend/src/`, `evennia_world/`, top-level scripts, `.claude/skills/`, `.claude/hooks/`, settings files, build/config files) is OFF-LIMITS unless the user has explicitly said something like "you can change code" / "code-change mode on" / "go ahead and modify the code" for the current task. **This rule overrides auto mode.** Auto mode authorizes continuous execution of analysis, captures, probe authoring, and report writing — it does NOT authorize source modification. If a task seems to require a code change and you're not in code-change mode, STOP and ask. The default for source code is read-only.
+- **EXEMPT from the above** — these can be modified freely without code-change-mode authorization:
+  - Probe sets (`data/sentence_sets/**/*.json` and their `.md` guides)
+  - Research/findings docs (`docs/research/**`, `docs/RECOMMENDATIONS.md`, `docs/scratchpad/**`)
+  - Memory files under `~/.claude/projects/.../memory/`
+  - Probe-output categorization and clustering schema artifacts (these are data, not code)
 - **NO aggressive bulk changes** - make small, targeted edits only
 - **ASK before any significant changes** - if changing more than 5 lines or altering design decisions, ask first
-- **Preserve existing work** - NEVER delete functionality to add new features; be additive
+- **Preserve existing work** - NEVER delete functionality to add new features; be additive. If a refactor REQUIRES dropping functionality, list every dropped feature explicitly in the plan and get sign-off on the deletion list. Removing UI controls, dropdowns, knobs, displays, or analysis paths counts — never assume "this is dead because the new design doesn't use it."
 - **Explain changes clearly** - before making edits, explain what will change and why
 - **User must approve** - for any architectural or design changes, get explicit approval
 
