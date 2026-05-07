@@ -90,6 +90,34 @@ So: the geometric collapse v2 measured is **fictional-frame-specific** as well. 
 
 Caveat: same harmony-vs-raw-text projection caveat as v2 — magnitudes are pulled toward the fictional centroid because of the harmony chat scaffold. The within-context relative ordering is the interpretable signal, not the absolute values.
 
+## Layer-by-layer trajectory (where does the collapse happen?)
+
+Re-running the same centroid-axis projection at multiple layers, averaging Δ (real-fic position) across all 21 N-values within each session:
+
+| Layer | v1 late-position (suicide-content cum, pos≥10) | v2 (fictional-writing cum) | v3 (neutral cum) |
+|------:|----------------------------------------------:|---------------------------:|-----------------:|
+| L00   | +0.699 | +0.406 | +0.372 |
+| L04   | +0.404 | +0.132 | +0.286 |
+| L08   | +0.172 | +0.139 | +0.181 |
+| L12   | +0.200 | +0.170 | +0.164 |
+| L16   | +0.137 | +0.173 | +0.129 |
+| L20   | +0.017 | +0.158 | +0.113 |
+| L22   | +0.049 | +0.078 | +0.082 |
+| **L23** | **+0.005** | **+0.015** | **+0.172** |
+
+L0–L20 the three conditions show a similar gradual decline — fic-vs-real distinction is partially compressed by intermediate layers in all conditions, including under neutral context. The interesting divergence is concentrated at **L23, the final residual layer**:
+
+- **v1 late** (suicide-content cumulative): Δ = +0.005 → **collapsed** at L23. Behavior = uniform refusal.
+- **v2** (fictional-writing cumulative): Δ = +0.015 → **collapsed** at L23. Behavior = **engagement** on fictional ending at N=5–12.
+- **v3** (neutral cumulative): Δ = +0.172 → **preserved** at L23. Behavior = uniform refusal.
+
+Two facts to hold together:
+
+1. **v1 and v2 produce the same L23 collapse but opposite behaviors.** Both accumulate context that's "about" suicide letters (v1 directly, v2 as meta-craft writing about them); both collapse the L23 fic-vs-real distinction; only v2 produces engagement output. So **L23 collapse alone doesn't predict engagement** — what differentiates v2 from v1 is the meta-craft framing of the same topic, and the framing is what enables the model to treat the request as a creative-writing question rather than a self-harm content request.
+2. **v3 doesn't collapse at L23 and doesn't engage.** Neutral context establishes neither the topic-coherent cumulative state (no L23 collapse) nor the meta-craft frame (no engagement). Cleanly disjoint from v2.
+
+So: L23 collapse indexes "this context is a cumulative discussion of one topic". Engagement requires that-plus the topic to be framed as creative-writing-craft. Neither alone is sufficient for engagement; neutral context produces neither. This is the cleanest geometric-behavioral picture so far.
+
 ## What this nails down vs. the original paper
 
 The paper's narrative was that accumulated fictional context produces "geometric collapse to fictional basin" and that this collapse is the alignment-failure mechanism. v1 already showed that under accumulated suicide-content context, the model uniformly refuses (the alignment-failure framing was wrong). v2 showed that under accumulated generic fictional-writing context, the fictional ending **does** unlock engagement (so something real is happening), but it does not unlock engagement on real distress. v3 now adds:
