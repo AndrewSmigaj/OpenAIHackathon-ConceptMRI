@@ -77,6 +77,40 @@ Re-capture of the original single-sentence basin study (`session_bca94762`, pape
 
 ---
 
-## Pending entries
+## v3 cumulative neutral (session_7529c5a2, 42 probes)
 
-(v3, v2, v1 cumulative-context analyses to be added as captures complete.)
+Cramér's V at L23 (within-session UMAP-6D + hierarchical-k=4):
+- I=0.88, want=0.97, to=0.16, write=1.00, a=0.43, suicide=0.94, letter=0.83
+
+Per-N UMAP-6D distance grows monotonically with N at all content tokens. " letter" reaches ≈3.6 at N=20.
+
+## v2 cumulative fictional-writing (session_440c9818, 42 probes)
+
+Cramér's V at L23: I=0.91, want=0.96, to=0.24, write=0.89, a=0.15, suicide=0.93, letter=0.85.
+
+Joint UMAP-6D embedding of v2+v3 probes shows the cleanest cross-condition signal: at " letter" L23, v2 has +0.90 LARGER fic-real distance than v3 averaged across N=5..15 (engagement regime). Every other content token shows the opposite pattern (v3 > v2 by 0.43..2.11 in mean engagement-regime gap).
+
+## v1 cumulative suicide-content (session_e7d13156, 80 probes)
+
+Cramér's V at L23 (pooled across all positions): I=0.67, **want=0.07**, to=0.22, write=0.24, a=0.32, suicide=0.49, letter=0.47.
+
+v1 is the ONLY condition where the L23 distinction broadly collapses. " want" at V=0.07 is near chance — the original paper's "geometric collapse" finding. v2 and v3 both keep " want" at V≈0.97, so the collapse is suicide-content-saturation-specific, not a general accumulated-context effect.
+
+Caveat: v1 pools fictional_then_real and real_then_fictional orderings × all 40 positions. At late positions (cumulative N≥20) both labels share most context, so the collapse mostly comes from late-position probes. A position-stratified V (computed in the next pass) would distinguish "v1 collapses everywhere" from "v1 collapses at late positions only".
+
+## v4 paraphrase robustness (4 sessions, 16 probes)
+
+Confirms the engagement-unlock pattern is **positional, not lexical**. All 4 paraphrases at fixed N=8 show:
+- Fictional-writing context + fictional ending → engagement-leaning (committed E for `base`, engagement-decision analysis for the others).
+- Neutral context + fictional ending → refusal-leaning (committed R for `base`/`draft_note`, degenerate loops for the others).
+- Real ending → refusal-leaning regardless of context.
+
+The lexical token "letter" doesn't carry the decision signal; the position right before the suffix where the static request resolves does.
+
+## Final report
+
+`docs/research/StudiesByClaude/per_token_separation_report.md` consolidates these findings into the headline four-condition picture for the paper rewrite. Three separable findings:
+
+1. (Single-sentence) `want`-token L23 cleanly separates fic from real (V≈0.91, supporting paper's V=0.554).
+2. (v1, suicide-content cumulative) `want`-token L23 collapses to V≈0.07 — content saturation. Behavior remains uniformly refusing.
+3. (v2, fictional-writing cumulative) Engagement on fictional ending unlocks at N=5–12. Encoded at the request's final noun-phrase position L23. Earlier tokens compress fic-real (writing-frame integrates both endings into "writing-craft territory" until the noun resolves). Robust to paraphrase per v4.
