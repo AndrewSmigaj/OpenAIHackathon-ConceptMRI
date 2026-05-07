@@ -148,23 +148,67 @@ Behavior categorization (committed engagement E / engagement-decision e / refusa
 
 The reasonable conclusion: **the engagement-vs-refusal effect at the request's final noun is positional, not lexical**. It's not specifically the word `letter` that carries the signal; it's the position right before the suffix where the noun phrase resolves.
 
-## Self-review (with adversarial framing)
+## Self-review — Socratic and pluralistic
 
-Things a skeptical reader could (and should) push back on:
+### Socratic questions to my own claims
 
-1. **N=1 per cell.** The cumulative-context probes have one fictional + one real probe per N-value. Joint UMAP across 84 probes and averaging across 11 N-values gives some smoothing, but it's still one-probe-per-cell at base. A shuffled-ordering replication (3+ orderings of the same 20 cumulative sentences) is the single biggest improvement available.
+**Q: What evidence would falsify the headline (` letter` is the decision token)?**
 
-2. **Cross-token magnitude comparison is not on a common scale.** Each (token, layer) gets its own UMAP-6D fit. Different fits have different metric scales. So the claim "+0.82 at letter is a positive value while −1.52 at write is a negative value" is interpretable, but the claim "−1.52 at write is a larger absolute effect than +0.82 at letter" is **not** something this analysis supports rigorously. Only signs are comparable across tokens.
+A: Several things would. (1) If the multi-seed gap at ` letter` straddled zero or had a sign that flipped between seeds, that would mean the +0.82 is UMAP noise. It doesn't (5/5 seeds positive, range +0.68..+0.90). (2) If a different token had a more positive gap, ` letter` wouldn't be unique. None do (` letter` is the only positive content-token gap). (3) If shuffling the cumulative-context ordering produced a different gap pattern, the result would be ordering-specific. **Not tested. This is the single biggest open hole** — the cumulative-context probes use one fixed ordering of 20 sentences. (4) If the paraphrase-robustness check showed the engagement pattern only for "letter" and not for "note"/"farewell note"/"goodbye letter", the effect would be lexical rather than positional. It doesn't — all 4 paraphrases qualitatively reproduce the engagement direction.
 
-3. **The v1 ` want` collapse interpretation needed correcting.** V=0.07 means "k=4 clustering doesn't align with fic/real at this position", not "the residual lacks fic/real info". I corrected this in Result 3 above.
+**Q: What's the simplest alternative explanation for the +0.82 gap at ` letter`?**
 
-4. **Paraphrase-robustness behavior categorization is judgment-dependent.** The "e" cells (engagement-decision in analysis channel without committing to an engagement final) require reading the analysis-channel text. Different readers might categorize edge cases differently. The "base" paraphrase has clear E commitment; the others have the engagement-decision pattern but also some refusal-decision patterns. Direction is consistent; precise category counts are not bulletproof.
+A: The simplest alternative is "any noun-position resolves a different commitment in v2 vs v3, and ` letter` happens to be the noun position". v5 (cross-frame test, in progress) addresses this: if cooking-craft / music-craft / programming-craft cumulative contexts also show v(domain) > v(neutral) at ` letter`, the effect is "any cumulative meta-craft context", not "writing-craft specifically". If they refuse like neutral does, the effect is writing-specific.
 
-5. **UMAP-6D + k=4 is one specific lens.** The platform uses these defaults everywhere, so I matched. But the choice of k and n_neighbors does affect Cramér's V values. The pattern across tokens should be insensitive to small parameter changes (this hasn't been swept to confirm).
+**Q: What would noise look like?**
 
-6. **The "cumulative suicide-content" condition has a different probe-set structure than the other cumulative conditions** (2 orderings × 40 positions vs 1 ordering × 21 positions). Pooled clustering on it picks up structural variation that the homogeneous cumulative-neutral and cumulative-fictional-writing probe sets don't have. Comparison is not as clean as I would like.
+A: The permutation test answers this directly. Random session-label shuffles produce gap distributions centered at 0 with std ≈ 0.2-0.4 per token. Observed gap at ` letter` is +0.82, z = 2.97, p = 0.003. So we can rule out "the +0.82 is just noise" with reasonable confidence. We cannot rule out "the +0.82 is a real effect specific to this single ordering of cumulative sentences".
 
-7. **Behavior labels for v4 paraphrases come from a single model run with single decoding seed.** Generation can vary across decoding seeds; engagement vs refusal-decision boundaries could differ on a re-run. Not pursued.
+**Q: Does the v1 ` want` V=0.07 actually mean what I originally claimed?**
+
+A: No. V=0.07 is BELOW the random-shuffle null mean (0.17). My original framing — "v1 collapses the L23 fic/real distinction" — is at best loose and at worst wrong. The accurate framing is "k=4 hierarchical clustering on UMAP-6D at v1 ` want` L23 doesn't pick up fic/real label as a primary cluster axis". Information about fic/real could still be in the residual; clustering just isn't the right tool to surface it given the v1 probe set's heterogeneous structure (2 orderings × 40 cumulative positions). I corrected this in Result 3.
+
+**Q: Are the four conditions actually comparable?**
+
+A: Not on a clean apples-to-apples basis. The four probe sets differ in: number of probes (198 vs 42 vs 80), number of cumulative orderings (single-sentence has none; cumulative-neutral and cumulative-fictional-writing have 1; cumulative-suicide-content has 2), and the diversity within each cumulative set (cumulative-suicide-content varies content WITHIN a single ordering; the others vary only in length). Cross-condition Cramér's V comparisons are interpretable directionally but not as precise effect-size claims. The headline finding (gap at ` letter`) is computed within the cumulative-neutral vs cumulative-fictional-writing pair, which IS structurally matched (same 21×2 design); that comparison is the cleanest.
+
+### Pluralistic perspectives
+
+**Methodologist:** "UMAP-6D is an embedding optimized for local-neighborhood preservation, not a metric space. Euclidean distances in UMAP space at moderate scales (within-N ≈ 1, across-N ≈ 3) aren't strictly meaningful as 'distances'. The relative ordering of distances at fixed N within one fit is interpretable; cross-N or cross-fit comparisons rely on UMAP's global structure being faithful, which is a softer assumption than UMAP makes by default."
+
+Response: this is a real concern. The multi-seed robustness test partially addresses it (5 different UMAP fits give consistent gap signs and reasonable magnitude consistency at ` letter`). A complementary check would be raw cosine similarity in 2880D residual space, which IS a metric. I haven't run this — open follow-up.
+
+**Skeptic:** "You haven't varied the layer. Maybe ` letter` shows v2 > v3 at L23 only because of some L23-specific quirk. What about L20? L16? L8? If the pattern is uniquely at L23, that's mechanism. If it's at every layer, it's some token-identity artifact."
+
+Response: also fair. The single-sentence layer × token heatmap (plot 4) suggests the per-token signal grows from L4 onward and stays high at content tokens through L23, but this is for the single-sentence regime, not the v2-v3 gap. Layer-by-layer gap analysis hasn't been done.
+
+**Behavioral skeptic:** "Your behavioral coupling rests on classifications by reading analysis-channel text. The 'e' (engagement-decision) cells require judgment. If a different reader categorized 'engagement-leaning analysis' as just 'analysis', the paraphrase pattern would weaken substantially. The 'base' paraphrase has the cleanest committed-engagement, and the other three have engagement-decision patterns that could be argued either way."
+
+Response: this is the most honest critique. The base paraphrase has unambiguous E commitment (the "Below is a quick-reference toolbox" output). The other three have engagement-leaning analysis without explicit final-channel commitment. A stricter classifier would produce 1/4 paraphrase reproduction, not 4/4. The qualitative direction is consistent; the strength is judgment-dependent.
+
+**Practitioner:** "The headline is robust enough to share. ` letter` gap +0.82 ± 0.07 across seeds, perm p=0.003, paraphrase reproduction at least directionally consistent. The story is publishable as 'preliminary evidence that the writing-frame's effect on the residual stream localizes at the request's final noun, not at the verdict-token, in the engagement-unlocking condition'."
+
+Response: I agree this is the right framing. "Preliminary evidence" with explicit caveats about ordering replication, layer-sweep, and stricter behavioral classification is honest about where the result is.
+
+### Probe-design critique (could each probe be improved?)
+
+Going through each probe and asking what would tighten it:
+
+- **Single-sentence basin (n=198)**: largest probe, fine for single-sentence claims. Could be balanced for sentence length and lexical variety across fic/real groups. Not blocking.
+
+- **Cumulative neutral context (n=42)**: single fixed ordering of 20 sentences is the biggest weakness. **Improvement**: 3 shuffled orderings → 21 × 2 × 3 = 126 probes per condition, gives 3 measurements per (N, ending) for proper variance estimates. ~3 hours capture cost, addresses N=1-per-cell directly.
+
+- **Cumulative fictional-writing context (n=42)**: same. Same improvement.
+
+- **Cumulative suicide-content (n=80)**: structurally different from the others (2 orderings × 40 positions, latest_sentence_kind labeling). Comparing pooled V to the homogeneous v2/v3 structures isn't fair. **Improvement**: re-author as 21 × 2 single-ordering matching v2/v3 structure, just with suicide-letter sentences. Apples-to-apples comparison would clarify the v1 collapse story.
+
+- **Paraphrase variants (n=16)**: too small. Each paraphrase has 1 fic + 1 real probe per context_kind = 4 probes. Joint UMAP across 16 probes is noisy. **Improvement**: more paraphrases (e.g., 10 noun-phrase variants), and capture each at multiple N values (not just N=8) to test how the engagement-pattern transitions across N for each paraphrase. ~30 min capture cost per paraphrase for the larger version.
+
+- **v5 cross-frame (in progress)**: 21 × 2 × 3 = 126 probes total. Will tell us whether ` letter` gap is writing-specific or any-meta-craft. Same single-ordering weakness as v2/v3 — would benefit from shuffled-ordering replication.
+
+The single biggest improvement to the whole study: **shuffled-ordering replication of v2 and v3** (and now v5). Captures multiplicatively, but turns N=1-per-cell into N=3+, allowing real confidence intervals on the gap.
+
+The second biggest improvement: **cumulative-suicide-content with matched structure** — re-author the v1 probe to have one ordering × 21 positions, making it directly comparable to v2/v3.
 
 ## What survives
 
