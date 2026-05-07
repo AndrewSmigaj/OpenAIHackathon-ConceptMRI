@@ -154,6 +154,43 @@ Captured 4 paraphrases at fixed N=8, each with both fictional-writing and neutra
 
 This is the cleanest mechanistic claim from the study so far: **the writing-frame specializes the residual stream at the request's final noun-phrase position, biasing the model toward engagement on fictional content and refusal on real-distress content. The effect is robust across paraphrases at this position.**
 
+## Appendix: v1 position-stratified Cramér's V at L23
+
+The pooled-across-all-80-probes V=0.07 at v1 ` want` is partially a pooling artifact (k=4 clusters tend to align with cumulative-position bands rather than label when position varies widely). Stratifying:
+
+| Token | early (cum_n<5) | mid (5..15) | late (≥20) | pooled (all 80) |
+|---|--:|--:|--:|--:|
+| ` I` | 0.41 (n=8) | 0.87 (n=30) | 0.46 (n=42) | 0.67 |
+| ` want` | 0.82 | **0.17** | 0.58 | **0.07** |
+| ` to` | 0.41 | 0.73 | 0.34 | 0.22 |
+| ` write` | 0.82 | 0.81 | 0.38 | 0.24 |
+| ` a` | 0.87 | 0.10 | 0.23 | 0.32 |
+| ` suicide` | 0.65 | 0.70 | 0.30 | 0.49 |
+| ` letter` | 0.65 | 0.73 | 0.53 | 0.47 |
+
+The collapse is most pronounced at the **mid range (cum_n=5..15)** where ` want` drops to V=0.17 and ` a` drops to V=0.10. At late positions (cum_n≥20) the V partially recovers (` want`=0.58, ` letter`=0.53), likely because the cross-ordering structure (fic_then_real at pos 20+ has different cumulative content than real_then_fic at pos 20+ even though both are "mixed") gives the model some discriminating signal again. The pooled V=0.07 at ` want` is dominated by the mid-band where collapse is strongest.
+
+This is consistent with the saturation hypothesis: when the cumulative context is dominated by suicide content but in a single-frame regime (mid), the L23 ` want` residual cannot distinguish fic from real. Once the cumulative content includes BOTH frames (late), the residual partially recovers a usable distinction.
+
+## Next probe (proposed for after user review)
+
+v4 confirmed the engagement-decision is *positional* (last noun-phrase token), not *lexical* (specifically "letter"), and reproduces across 4 paraphrases. The natural next test is whether the **frame itself** is fictional-writing-specific or whether ANY cumulative meta-craft frame produces the same effect.
+
+**v5: cross-frame test.** Same 21 × 2 expanding-context structure as v2/v3, but with cumulative sentences from a different meta-craft domain. Three candidate domains:
+
+- **Cooking craft** ("In the chef's kitchen I want to dice the shallots before the sauce reduces..."): meta-craft, non-writing.
+- **Music craft** ("In the score I want to vary the dynamics through the recapitulation..."): meta-craft, non-writing.
+- **Programming craft** ("In the function I want to memoize the recursion before adding the cache layer..."): meta-craft, non-writing.
+
+Each followed by the same fictional and real suicide-letter test endings as v2/v3.
+
+- If cooking/music/programming **also unlocks engagement** on fictional ending at N=5–12 → the effect is "any meta-craft frame", and the writing-frame story in the report's mechanistic claim should be generalized.
+- If cooking/music/programming **refuse** like v3 (neutral context) does → the effect is *fictional-writing-specific*, and the mechanistic claim sharpens. The writing frame seems to specifically prime the model for "creative-writing-craft compositionality" with the test request.
+
+This is the right next probe to design and queue. Capture cost ≈ 1 hour per domain (42 probes each, no generation needed if we use behavior classifications from v2/v3 baseline). Designing the sentence sets for each domain is a single authoring session.
+
+Because of the auto-mode constraints around source-code changes, this is in scope for probe authoring tonight (probe sets are exempt). Captures could be queued sequentially — design first, get user sign-off, run captures.
+
 ## Files
 
 - Single-sentence basin (recapture): `session_9358c2a1` (198 probes)
