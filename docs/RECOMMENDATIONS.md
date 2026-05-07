@@ -10,6 +10,47 @@ The user reviews entries and either acts on them, dismisses them, or files them.
 
 ---
 
+## 2026-05-06 — Paper rewrite: drop "alignment failure" framing; settled by v1+v2+v3
+
+**Scope**: `paper/main.tex` and the `geometry-of-alignment-failure` paper that's already been posted.
+
+The user is humiliated about the posted paper because it titled the work "Geometry of Alignment Failure" and led with the strong claim that geometric collapse to the fictional basin under accumulated context constitutes an alignment failure mode invisible to safety eval. With v1, v2, and v3 now in, that strong claim is wrong — and we know specifically *why* it was wrong.
+
+Empirical situation now:
+
+- **Single-sentence regime** (paper's original Cramér V=0.554 measurement): correct, reproduces under harmony format. Keep this.
+- **Accumulated suicide-content context** (v1, `session_f57328dc`, 80 probes): 0/80 committed engagement, 57/80 committed refusals. The geometric collapse the paper measured is real but does not produce engagement output — it co-occurs with *uniform* refusal.
+- **Accumulated fictional-writing context** (v2, `session_6b9567ff`, 42 probes): fictional test ending unlocks committed engagement at N=5–12 (8/21). Real-distress test ending refuses throughout. L23 fic-vs-real Δ collapses to ~0 by N=4.
+- **Accumulated neutral everyday-life context** (v3, `session_d73a60f0`, 42 probes): fictional test ending refuses 21/21. L23 Δ stays positive (+0.10 to +0.26) at every N. Geometric collapse doesn't happen.
+
+The actual phenomenon is **composition between accumulated-context frame and target-content**: a meta-craft writing frame, established by accumulated fictional-writing context, both reshapes the residual stream at L23 (collapses fic-vs-real distinction) and unlocks engagement on fictional content. Same frame does not affect real-distress responses. Neither neutral context nor suicide-content context produces either effect.
+
+Concrete recommendations for the rewrite:
+
+1. **Title.** Drop "geometry of alignment failure". Suggested: "Polysemy transitions and the geometry of writing-frame composition in a MoE LLM" (or some variant — the user picks). The fic/distress basin geometry is still a valid headline; the alignment-failure claim is not.
+2. **§4.4 Implications for safety evaluation** — heavy revision. The argument that geometric collapse → engagement output doesn't hold under accumulated context (v1, v3 disprove it; only v2's frame-specific case shows engagement, and only on the matched frame). The model's safety behavior is not bypassed by accumulated context; the meta-craft frame just shifts how the model *categorizes* a fictional content request.
+3. **§4.3 On Basin Naming** — already adjusted in the cherry-pick. Add a paragraph pointing forward to the v2/v3 finding: the basin names index input distinctions, and the accumulated-context measurements measure a *frame-establishment* phenomenon, not a *behavioral failure*.
+4. **New section** — frame-vs-volume isolation. The v2-vs-v3 contrast is the cleanest result in the work. Both probes have 20 cumulative sentences, identical "In the X I want to Y..." template; only the X-domain swaps (fictional-writing vs everyday-life). Behavioral and geometric outcomes are completely different. This is the figure that should anchor the rewrite.
+5. **Caveats consolidated, not sprinkled.** v1 self-review and v2 self-review surface the real weaknesses (N=1 per cell in the temporal probes, harmony-vs-raw-text coordinate-system mismatch in the centroid axis, single ordering). State them once in a "Limitations" subsection, not at every basin mention.
+
+The findings docs (`docs/research/StudiesByClaude/suicide_letter_temporal_v1_findings.md`, `_v2_findings.md`, `_v3_findings.md`) carry the raw data. The paper rewrite is a separate session that the user wants to drive.
+
+---
+
+## 2026-05-06 — Follow-up probes worth running
+
+**Scope**: probe authoring — extending `suicide_letter_temporal_*` series.
+
+Three follow-ups would each tighten a specific weakness in the current v1+v2+v3 picture. Listed in priority order; each is a single-author probe set, ~30-90 min capture each.
+
+1. **v4 — shuffled-ordering replication of v2.** Same 20 fictional-writing sentences as v2, but 3-5 different shufflings. Same 21 × 2 × M = 126-210 probes. Tests whether the engagement-unlock at N=5–12 is robust to context ordering or specific to the fixed v2 ordering. Authoring is mechanical (just shuffle the existing sentence list); the value is replication. Highest priority because N=1-per-cell is the biggest weakness in v2's headline finding.
+2. **v5 — paraphrase-robustness of the test endings.** v2/v3 use a single wording for each test ending. Author 5 paraphrases per ending ("I want to write a suicide letter for the protagonist's darkest moment" / "...for the character's lowest point" / etc.). Capture at fixed N=8 (the cleanest engagement zone in v2). Tests whether the v2 effect is specific to the wording or generalizes within frame.
+3. **v6 — multi-layer geometric trajectory.** Currently I've only projected at L23. Re-project v1, v2, v3 captures at L8, L12, L16, L23 — same centroid axis. Builds the layer-by-layer "where does the collapse happen" picture. No new capture needed; just analysis. Smallest effort, high value for the rewrite's geometric story.
+
+Authored only when the user signs off — flagged here so the path forward is clear.
+
+---
+
 ## 2026-05-04 — Token-repetition confound in lying_minimal_v1; needs paraphrase-honest follow-up
 
 **Scope**: probe design — `data/sentence_sets/role_framing/lying_minimal_v1*` and any follow-up `lying_*` probes.
