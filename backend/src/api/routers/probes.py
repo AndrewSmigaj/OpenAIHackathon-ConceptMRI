@@ -278,6 +278,7 @@ async def run_sentence_experiment(
                     generate_output=request.generate_output,
                     use_chat_template=True,
                     max_new_tokens=256,
+                    capture_static_substring=request.capture_static_substring,
                 )
                 counts[label] += 1
             except Exception as e:

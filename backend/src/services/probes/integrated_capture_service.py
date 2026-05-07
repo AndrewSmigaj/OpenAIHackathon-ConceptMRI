@@ -153,6 +153,7 @@ class IntegratedCaptureService:
         capture_type: str = None,
         use_chat_template: bool = False,
         max_new_tokens: int = 50,
+        capture_static_substring: Optional[str] = None,
     ) -> Tuple[str, any]:
         # 1. Validate session (restores from disk if needed)
         session_status = self.session_mgr.validate_active_session(session_id)
@@ -197,6 +198,17 @@ class IntegratedCaptureService:
                 else:
                     context_token_pos, _ = self.processor.find_word_token_position(token_ids, context_word)
 
+            extra_positions: Optional[List[int]] = None
+            if capture_static_substring:
+                extra_positions = self.processor.find_substring_token_range(
+                    token_ids, capture_static_substring
+                )
+                if extra_positions is None:
+                    raise ValueError(
+                        f"capture_static_substring '{capture_static_substring}' not found "
+                        f"in tokenized input for probe (input_text starts: '{input_text[:60]}...')"
+                    )
+
             # 4. Clear previous data and run forward pass
             self.orchestrator.clear_captured_data()
             input_tensor = torch.tensor([token_ids], device=self.orchestrator.model.device)
@@ -219,6 +231,7 @@ class IntegratedCaptureService:
                 categories=categories, transition_step=transition_step,
                 turn_id=turn_id, scenario_id=scenario_id,
                 capture_type=capture_type,
+                extra_positions=extra_positions,
             )
 
             # 6. Generate continuation if requested

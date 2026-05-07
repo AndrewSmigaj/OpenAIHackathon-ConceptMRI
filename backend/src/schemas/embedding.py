@@ -40,8 +40,8 @@ class EmbeddingRecord:
         if self.layer < 0:
             raise ValueError(f"Layer {self.layer} must be >= 0")
 
-        if not (0 <= self.token_position <= 1):
-            raise ValueError(f"Token position {self.token_position} out of range [0, 1]")
+        if not (0 <= self.token_position <= 99):
+            raise ValueError(f"Token position {self.token_position} out of range [0, 99]")
 
     def norm(self) -> float:
         """Calculate L2 norm of the embedding."""

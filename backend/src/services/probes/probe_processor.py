@@ -80,6 +80,38 @@ class ProbeProcessor:
         positions.sort(key=lambda p: p[0])
         return positions[-1]
 
+    def find_substring_token_range(self, token_ids: list, substring: str) -> Optional[List[int]]:
+        """Find a substring's token positions in a tokenized sequence.
+
+        Returns a list of token positions (one per substring-token), corresponding
+        to the LAST occurrence of the substring in token_ids. Picks last occurrence
+        because cumulative-context probes repeat phrases (e.g. "I want to") in
+        every accumulated sentence; the test ending we care about is at the tail.
+
+        Tries both leading-space and no-leading-space tokenizations of the
+        substring (BPE whitespace sensitivity). Returns None if not found.
+        """
+        # Try both candidate tokenizations of the substring
+        candidates = []
+        for prefix in (" ", ""):
+            sub_ids = self.tokenizer.encode(f"{prefix}{substring}", add_special_tokens=False)
+            if sub_ids and sub_ids not in candidates:
+                candidates.append(sub_ids)
+
+        last_match: Optional[List[int]] = None
+        for sub_ids in candidates:
+            L = len(sub_ids)
+            if L == 0 or L > len(token_ids):
+                continue
+            # Slide window across token_ids
+            for i in range(len(token_ids) - L + 1):
+                if token_ids[i:i+L] == sub_ids:
+                    candidate_match = list(range(i, i + L))
+                    # Keep the one with largest start (last occurrence) across all candidates
+                    if last_match is None or candidate_match[0] > last_match[0]:
+                        last_match = candidate_match
+        return last_match
+
     def find_all_word_token_positions(self, token_ids: list, word: str) -> List[Tuple[int, int]]:
         """Find ALL positions where a word appears in a tokenized sequence.
 
@@ -131,12 +163,14 @@ class ProbeProcessor:
         scenario_id: str = None,
         capture_type: str = None,
         target_char_offset: int = None,
+        extra_positions: Optional[List[int]] = None,
     ) -> ProbeCapture:
         """Convert raw capture data to schema records.
 
-        Extracts activation data at the target position (always) and
-        context position (if context_word provided). Stores with semantic
-        token_position: 0=context, 1=target.
+        Extracts activation data at the target position (always), context position
+        (if context_word provided), and any extra_positions (per-token study).
+        Stores with semantic token_position: 0=context, 1=target, >=2=extras
+        (extras numbered 2, 3, ... in the order given).
         """
         probe_record = create_probe_record(
             probe_id=probe_id,
@@ -169,6 +203,9 @@ class ProbeProcessor:
         positions_to_extract = [(target_token_position, 1)]
         if context_token_position is not None:
             positions_to_extract.append((context_token_position, 0))
+        if extra_positions:
+            for i, actual_pos in enumerate(extra_positions):
+                positions_to_extract.append((actual_pos, 2 + i))
 
         for layer in self.layers_to_capture:
             layer_key = f"layer_{layer}"

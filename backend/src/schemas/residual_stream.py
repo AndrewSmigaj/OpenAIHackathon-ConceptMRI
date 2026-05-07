@@ -24,7 +24,7 @@ class ResidualStreamState:
 
     probe_id: str                          # Links to tokens and routing data
     layer: int                             # Layer number
-    token_position: int                    # Token position in sequence (0=context, 1=target)
+    token_position: int                    # 0=context, 1=target, >=2=extra static-substring positions
     residual_stream: np.ndarray            # Full decoder layer output (hidden_size D)
     residual_dims: Tuple[int, ...]         # Shape metadata
 
@@ -40,8 +40,8 @@ class ResidualStreamState:
         if self.layer < 0:
             raise ValueError(f"Layer {self.layer} must be >= 0")
 
-        if not (0 <= self.token_position <= 1):
-            raise ValueError(f"Token position {self.token_position} out of range [0, 1]")
+        if not (0 <= self.token_position <= 99):
+            raise ValueError(f"Token position {self.token_position} out of range [0, 99]")
 
     def norm(self) -> float:
         return calculate_array_norm(self.residual_stream)

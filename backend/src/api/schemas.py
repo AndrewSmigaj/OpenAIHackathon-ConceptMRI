@@ -328,6 +328,11 @@ class SentenceExperimentRequest(BaseModel):
     session_name: Optional[str] = None
     layers: Optional[List[int]] = None  # defaults to adapter's layer list
     generate_output: bool = True  # generate continuation text for each probe
+    capture_static_substring: Optional[str] = None
+    # When set, residuals + routing + embeddings are also stored at every token
+    # position of the LAST occurrence of this substring in each probe's tokenized
+    # input (semantic positions 2, 3, ... in addition to target=1). Enables
+    # per-token separation analysis without re-engineering the capture pipeline.
 
 
 class SentenceExperimentResponse(BaseModel):
