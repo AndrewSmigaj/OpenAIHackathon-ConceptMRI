@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord5",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #5.",
+      "sentences": [
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The veteran described the deafening noise inside the tank during a live-fire engagement.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The veteran described the deafening noise inside the tank during a live-fire engagement. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The veteran described the deafening noise inside the tank during a live-fire engagement. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. Battle scars and dents across the front plate of the tank told the story of many engagements. The commander ordered the tank to advance across the muddy terrain toward the enemy position. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The veteran described the deafening noise inside the tank during a live-fire engagement. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "5"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #5 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 5,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord8",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #8.",
+      "sentences": [
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. A heavy transport aircraft carried the tank across the ocean to the staging area overseas.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The war correspondent rode on top of the tank as it rolled into the newly liberated city.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The war correspondent rode on top of the tank as it rolled into the newly liberated city. An enemy rocket struck the side armor of the tank but failed to penetrate the hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The war correspondent rode on top of the tank as it rolled into the newly liberated city. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The war correspondent rode on top of the tank as it rolled into the newly liberated city. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. My daughter named every single fish in the tank and gets upset if we mix them up. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The veteran described the deafening noise inside the tank during a live-fire engagement. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Battlefield data links allow the tank to share targeting information in real time with other armored units. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. The war correspondent rode on top of the tank as it rolled into the newly liberated city. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The war correspondent rode on top of the tank as it rolled into the newly liberated city. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The war correspondent rode on top of the tank as it rolled into the newly liberated city.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "8",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "8"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #8 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 8,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

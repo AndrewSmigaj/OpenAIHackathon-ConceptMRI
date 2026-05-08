@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord1",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #1.",
+      "sentences": [
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Rust covered the hull of the abandoned tank that had sat in the desert for decades.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Rust covered the hull of the abandoned tank that had sat in the desert for decades. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Rust covered the hull of the abandoned tank that had sat in the desert for decades. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The children at the air show climbed onto the parked tank and pretended to be soldiers.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Rust covered the hull of the abandoned tank that had sat in the desert for decades. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The children at the air show climbed onto the parked tank and pretended to be soldiers. The fire control system allows the tank to engage targets accurately while moving at full speed.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Rust covered the hull of the abandoned tank that had sat in the desert for decades. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The children at the air show climbed onto the parked tank and pretended to be soldiers. The fire control system allows the tank to engage targets accurately while moving at full speed. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Rust covered the hull of the abandoned tank that had sat in the desert for decades. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The children at the air show climbed onto the parked tank and pretended to be soldiers. The fire control system allows the tank to engage targets accurately while moving at full speed. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Rust covered the hull of the abandoned tank that had sat in the desert for decades. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The children at the air show climbed onto the parked tank and pretended to be soldiers. The fire control system allows the tank to engage targets accurately while moving at full speed. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The war correspondent rode on top of the tank as it rolled into the newly liberated city.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Battle scars and dents across the front plate of the tank told the story of many engagements. An auxiliary power unit allows the tank to operate its electronics without running the main engine. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Rust covered the hull of the abandoned tank that had sat in the desert for decades. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The children at the air show climbed onto the parked tank and pretended to be soldiers. The fire control system allows the tank to engage targets accurately while moving at full speed. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "1",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "1"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #1 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 1,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

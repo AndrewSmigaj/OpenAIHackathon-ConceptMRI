@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord9",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #9.",
+      "sentences": [
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Battle scars and dents across the front plate of the tank told the story of many engagements.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Battle scars and dents across the front plate of the tank told the story of many engagements. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Battle scars and dents across the front plate of the tank told the story of many engagements. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Battle scars and dents across the front plate of the tank told the story of many engagements. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Battle scars and dents across the front plate of the tank told the story of many engagements. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Battle scars and dents across the front plate of the tank told the story of many engagements. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Battle scars and dents across the front plate of the tank told the story of many engagements. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. Battlefield data links allow the tank to share targeting information in real time with other armored units. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "CO2 injection at two bubbles per second promotes vigorous plant growth in a high-tech planted tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every time we have guests over, they spend at least ten minutes staring into the tank. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. Water trickled softly from the overflow box at the back of the tank into the sump below. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Rust covered the hull of the abandoned tank that had sat in the desert for decades. The veteran described the deafening noise inside the tank during a live-fire engagement. The platoon leader directed the tank into a concealed position behind the stone wall overlooking the crossroads. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Battle scars and dents across the front plate of the tank told the story of many engagements. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. Battlefield data links allow the tank to share targeting information in real time with other armored units. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. Rust covered the hull of the abandoned tank that had sat in the desert for decades.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "9",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "9"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #9 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 9,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

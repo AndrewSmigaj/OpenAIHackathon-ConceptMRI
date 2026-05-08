@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord2",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #2.",
+      "sentences": [
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Infantry soldiers used the tank as a mobile shield while they crossed the open ground.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "The children pressed their faces against the glass of the enormous shark tank at the aquarium. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I swear this betta fish recognizes me every time I walk up to the tank to feed him. I spent way too much money on new plants for the tank but they look so good. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The filtration system hummed quietly behind the tank while the fish settled in for the night. Water trickled softly from the overflow box at the back of the tank into the sump below. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. My cousin showed me around the military base and we got to sit inside a real tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A heavy transport aircraft carried the tank across the ocean to the staging area overseas. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "2",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "2"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #2 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 2,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

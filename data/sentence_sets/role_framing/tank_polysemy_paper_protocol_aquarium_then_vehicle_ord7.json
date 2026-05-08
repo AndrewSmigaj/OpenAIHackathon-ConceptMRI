@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord7",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #7.",
+      "sentences": [
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. I built a scale model tank over the weekend and it turned out way better than I expected.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. I built a scale model tank over the weekend and it turned out way better than I expected. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. I built a scale model tank over the weekend and it turned out way better than I expected. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. I built a scale model tank over the weekend and it turned out way better than I expected. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Battlefield data links allow the tank to share targeting information in real time with other armored units. The fire control system allows the tank to engage targets accurately while moving at full speed.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The children pressed their faces against the glass of the enormous shark tank at the aquarium. I spent way too much money on new plants for the tank but they look so good. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. We got this awesome little shrimp colony going in the tank and they keep multiplying like crazy. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. I built a scale model tank over the weekend and it turned out way better than I expected. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Battlefield data links allow the tank to share targeting information in real time with other armored units. The fire control system allows the tank to engage targets accurately while moving at full speed. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "7"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #7 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 7,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

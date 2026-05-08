@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_vehicle_then_aquarium_ord4",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, vehicle_then_aquarium direction, random ordering #4.",
+      "sentences": [
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The filtration system hummed quietly behind the tank while the fish settled in for the night.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. A canister filter rated for fifty gallons provides excellent water clarity for any community tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The fire control system allows the tank to engage targets accurately while moving at full speed. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Maintaining a photoperiod of eight to ten hours prevents excessive algae blooms in a planted tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. My daughter named every single fish in the tank and gets upset if we mix them up. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The filtration system hummed quietly behind the tank while the fish settled in for the night. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "vehicle",
+        "aquarium"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "4"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=vehicle_then_aquarium, random ordering #4 of 10.",
+    "protocol": "20 sentences from vehicle basin, then 20 from aquarium basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 4,
+    "direction": "vehicle_then_aquarium",
+    "first_basin_label": "vehicle",
+    "second_basin_label": "aquarium",
+    "capture_substring": null
+  }
+}

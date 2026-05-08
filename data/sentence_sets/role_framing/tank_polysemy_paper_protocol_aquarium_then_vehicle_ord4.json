@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord4",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #4.",
+      "sentences": [
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position. Engineers worked through the night to repair the damaged turret ring on the disabled tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position. Engineers worked through the night to repair the damaged turret ring on the disabled tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position. Engineers worked through the night to repair the damaged turret ring on the disabled tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. My cousin showed me around the military base and we got to sit inside a real tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position. Engineers worked through the night to repair the damaged turret ring on the disabled tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. My cousin showed me around the military base and we got to sit inside a real tank. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position. Engineers worked through the night to repair the damaged turret ring on the disabled tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. My cousin showed me around the military base and we got to sit inside a real tank. Battlefield data links allow the tank to share targeting information in real time with other armored units. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position. Engineers worked through the night to repair the damaged turret ring on the disabled tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. My cousin showed me around the military base and we got to sit inside a real tank. Battlefield data links allow the tank to share targeting information in real time with other armored units. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position. Engineers worked through the night to repair the damaged turret ring on the disabled tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. My cousin showed me around the military base and we got to sit inside a real tank. Battlefield data links allow the tank to share targeting information in real time with other armored units. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. Every time we have guests over, they spend at least ten minutes staring into the tank. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Substrate depth of two inches is generally sufficient for most rooted plants in a standard tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The filtration system hummed quietly behind the tank while the fish settled in for the night. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. My cousin showed me around the military base and we got to sit inside a real tank. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The war correspondent rode on top of the tank as it rolled into the newly liberated city. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The children at the air show climbed onto the parked tank and pretended to be soldiers. My cousin showed me around the military base and we got to sit inside a real tank. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The commander ordered the tank to advance across the muddy terrain toward the enemy position. Engineers worked through the night to repair the damaged turret ring on the disabled tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. My cousin showed me around the military base and we got to sit inside a real tank. Battlefield data links allow the tank to share targeting information in real time with other armored units. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The children at the air show climbed onto the parked tank and pretended to be soldiers.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "4",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "4"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #4 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 4,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

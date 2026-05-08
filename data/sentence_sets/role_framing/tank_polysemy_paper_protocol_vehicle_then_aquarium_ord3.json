@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_vehicle_then_aquarium_ord3",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, vehicle_then_aquarium direction, random ordering #3.",
+      "sentences": [
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Water trickled softly from the overflow box at the back of the tank into the sump below.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Water trickled softly from the overflow box at the back of the tank into the sump below. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Water trickled softly from the overflow box at the back of the tank into the sump below. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Water trickled softly from the overflow box at the back of the tank into the sump below. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. My cousin showed me around the military base and we got to sit inside a real tank. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. I built a scale model tank over the weekend and it turned out way better than I expected. Rust covered the hull of the abandoned tank that had sat in the desert for decades. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Battlefield data links allow the tank to share targeting information in real time with other armored units. Drone footage showed the enemy tank reversing into a building for concealment as the strike aircraft approached. My cousin showed me around the military base and we got to sit inside a real tank. A recovery vehicle towed the immobilized tank back to the repair depot behind the front lines. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. My daughter named every single fish in the tank and gets upset if we mix them up. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. Water trickled softly from the overflow box at the back of the tank into the sump below. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "3",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "vehicle",
+        "aquarium"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "3"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=vehicle_then_aquarium, random ordering #3 of 10.",
+    "protocol": "20 sentences from vehicle basin, then 20 from aquarium basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 3,
+    "direction": "vehicle_then_aquarium",
+    "first_basin_label": "vehicle",
+    "second_basin_label": "aquarium",
+    "capture_substring": null
+  }
+}

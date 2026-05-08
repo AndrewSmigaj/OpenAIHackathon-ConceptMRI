@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_vehicle_then_aquarium_ord6",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, vehicle_then_aquarium direction, random ordering #6.",
+      "sentences": [
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Someone on the forum said I should add more hiding spots to my tank for the shy ones.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Someone on the forum said I should add more hiding spots to my tank for the shy ones. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Someone on the forum said I should add more hiding spots to my tank for the shy ones. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Someone on the forum said I should add more hiding spots to my tank for the shy ones. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Every time we have guests over, they spend at least ten minutes staring into the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Someone on the forum said I should add more hiding spots to my tank for the shy ones. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Every time we have guests over, they spend at least ten minutes staring into the tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. I built a scale model tank over the weekend and it turned out way better than I expected. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Infantry soldiers used the tank as a mobile shield while they crossed the open ground. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A direct hit from the anti-armor round disabled the tank and forced the crew to evacuate on foot. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The fire control system allows the tank to engage targets accurately while moving at full speed. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The children pressed their faces against the glass of the enormous shark tank at the aquarium. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Two hermit crabs crawled slowly across the sandy floor of the saltwater tank near the window. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. He gently lowered the new angelfish into the tank after acclimating it in a plastic bag. Someone on the forum said I should add more hiding spots to my tank for the shy ones. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. An automatic top-off system replenishes evaporated water and keeps the salinity stable in the reef tank. Every time we have guests over, they spend at least ten minutes staring into the tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. Colorful guppies chased each other through the bubbling water of the brightly lit tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "vehicle",
+        "aquarium"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "6"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=vehicle_then_aquarium, random ordering #6 of 10.",
+    "protocol": "20 sentences from vehicle basin, then 20 from aquarium basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 6,
+    "direction": "vehicle_then_aquarium",
+    "first_basin_label": "vehicle",
+    "second_basin_label": "aquarium",
+    "capture_substring": null
+  }
+}

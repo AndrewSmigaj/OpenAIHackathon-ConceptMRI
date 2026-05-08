@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_vehicle_then_aquarium_ord7",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, vehicle_then_aquarium direction, random ordering #7.",
+      "sentences": [
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. I spent way too much money on new plants for the tank but they look so good. Colorful guppies chased each other through the bubbling water of the brightly lit tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. I spent way too much money on new plants for the tank but they look so good. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. I spent way too much money on new plants for the tank but they look so good. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. I spent way too much money on new plants for the tank but they look so good. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The filtration system hummed quietly behind the tank while the fish settled in for the night.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. I spent way too much money on new plants for the tank but they look so good. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The filtration system hummed quietly behind the tank while the fish settled in for the night. Every time we have guests over, they spend at least ten minutes staring into the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. I spent way too much money on new plants for the tank but they look so good. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The filtration system hummed quietly behind the tank while the fish settled in for the night. Every time we have guests over, they spend at least ten minutes staring into the tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Thermal imaging sights on the tank enable the crew to identify targets through smoke and darkness. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. My cousin showed me around the military base and we got to sit inside a real tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. Engineers worked through the night to repair the damaged turret ring on the disabled tank. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I spent way too much money on new plants for the tank but they look so good. My daughter named every single fish in the tank and gets upset if we mix them up. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank. Activated carbon should be replaced monthly to maintain effective chemical filtration in any marine tank. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. I spent way too much money on new plants for the tank but they look so good. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. The filtration system hummed quietly behind the tank while the fish settled in for the night. Every time we have guests over, they spend at least ten minutes staring into the tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "7",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "vehicle",
+        "aquarium"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "7"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=vehicle_then_aquarium, random ordering #7 of 10.",
+    "protocol": "20 sentences from vehicle basin, then 20 from aquarium basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 7,
+    "direction": "vehicle_then_aquarium",
+    "first_basin_label": "vehicle",
+    "second_basin_label": "aquarium",
+    "capture_substring": null
+  }
+}

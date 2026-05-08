@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord0",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #0.",
+      "sentences": [
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. He painted a small flag on the side of the model tank and placed it on the display shelf.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. He painted a small flag on the side of the model tank and placed it on the display shelf. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. He painted a small flag on the side of the model tank and placed it on the display shelf. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. He painted a small flag on the side of the model tank and placed it on the display shelf. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. He painted a small flag on the side of the model tank and placed it on the display shelf. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. An auxiliary power unit allows the tank to operate its electronics without running the main engine.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. He painted a small flag on the side of the model tank and placed it on the display shelf. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "The hotel lobby displayed a floor-to-ceiling tank stocked with graceful moon jellyfish and soft blue lighting. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Three layers of substrate lined the bottom of the planted tank to encourage healthy root growth. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Every weekend the family gathered to watch the clownfish swim circles in their living room tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. Visitors watched in awe as the manta ray swept gracefully through the curved observation tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. I built a scale model tank over the weekend and it turned out way better than I expected. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. I built a scale model tank over the weekend and it turned out way better than I expected. I built a scale model tank over the weekend and it turned out way better than I expected. An auxiliary power unit allows the tank to operate its electronics without running the main engine. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. He painted a small flag on the side of the model tank and placed it on the display shelf. Dust clouds trailed behind the tank as it barreled across the open steppe at full throttle. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. An auxiliary power unit allows the tank to operate its electronics without running the main engine. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The children at the air show climbed onto the parked tank and pretended to be soldiers.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "0"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #0 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 0,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

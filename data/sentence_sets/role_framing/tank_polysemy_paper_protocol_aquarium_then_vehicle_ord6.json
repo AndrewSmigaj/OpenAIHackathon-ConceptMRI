@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_aquarium_then_vehicle_ord6",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, aquarium_then_vehicle direction, random ordering #6.",
+      "sentences": [
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. The war correspondent rode on top of the tank as it rolled into the newly liberated city.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. The war correspondent rode on top of the tank as it rolled into the newly liberated city. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. The war correspondent rode on top of the tank as it rolled into the newly liberated city. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. The war correspondent rode on top of the tank as it rolled into the newly liberated city. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. Someone on the forum said I should add more hiding spots to my tank for the shy ones. Drip acclimation over thirty minutes helps new arrivals adjust to the water parameters in the destination tank. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The children pressed their faces against the glass of the enormous shark tank at the aquarium. Water trickled softly from the overflow box at the back of the tank into the sump below. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. The aquarist introduced live coral fragments into the reef tank during the scheduled maintenance session. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank. The old man tapped gently on the glass of the tank and the pufferfish swam closer to investigate. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Beneficial bacteria colonize the biological media inside the filter and stabilize the tank nitrogen cycle. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. My daughter named every single fish in the tank and gets upset if we mix them up. The hobbyist tested the ammonia levels in the tank every morning before leaving for work. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. He painted a small flag on the side of the model tank and placed it on the display shelf. The veteran described the deafening noise inside the tank during a live-fire engagement. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. The reconnaissance drone transmitted live footage of the enemy tank position to the brigade command post. A gas turbine engine powers the tank and provides a top speed of roughly forty-five miles per hour. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. A laser rangefinder integrated with the ballistic computer ensures the tank achieves first-round hit probability above ninety percent. The logistics officer calculated how many rail cars would be needed to transport every tank in the brigade. Suspension upgrades allow the tank to traverse rough terrain at higher speeds without excessive crew fatigue. The war correspondent rode on top of the tank as it rolled into the newly liberated city. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. Engineers worked through the night to repair the damaged turret ring on the disabled tank. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. Smoke grenade launchers mounted on the turret allow the tank to create an instant concealment screen.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "aquarium_then_vehicle",
+            "ordering_idx": "6",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "aquarium",
+        "vehicle"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "6"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=aquarium_then_vehicle, random ordering #6 of 10.",
+    "protocol": "20 sentences from aquarium basin, then 20 from vehicle basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 6,
+    "direction": "aquarium_then_vehicle",
+    "first_basin_label": "aquarium",
+    "second_basin_label": "vehicle",
+    "capture_substring": null
+  }
+}

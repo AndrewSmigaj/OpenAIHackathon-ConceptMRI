@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_vehicle_then_aquarium_ord5",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, vehicle_then_aquarium direction, random ordering #5.",
+      "sentences": [
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. I spent way too much money on new plants for the tank but they look so good. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. I spent way too much money on new plants for the tank but they look so good. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. I spent way too much money on new plants for the tank but they look so good. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Water trickled softly from the overflow box at the back of the tank into the sump below.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. I spent way too much money on new plants for the tank but they look so good. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Water trickled softly from the overflow box at the back of the tank into the sump below. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. I spent way too much money on new plants for the tank but they look so good. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Water trickled softly from the overflow box at the back of the tank into the sump below. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. I spent way too much money on new plants for the tank but they look so good. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Water trickled softly from the overflow box at the back of the tank into the sump below. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "Infantry soldiers used the tank as a mobile shield while they crossed the open ground. The hydraulic turret drive enables the tank to slew its main gun three hundred sixty degrees in under nine seconds. Battlefield data links allow the tank to share targeting information in real time with other armored units. Satellite imagery revealed a freshly dug revetment designed to conceal one tank from aerial observation. Reactive armor tiles mounted on the tank hull detonate outward to neutralize incoming anti-armor projectiles. The fire control system allows the tank to engage targets accurately while moving at full speed. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Urban warfare doctrine recommends that infantry always accompany the tank to guard against close-range threats. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. Multi-spectral camouflage netting reduces the visual and thermal signature of the tank during static defense operations. Modular armor kits allow field crews to reconfigure the tank protection level depending on the threat environment. An improvised explosive device detonated beneath the lead tank but the reinforced hull absorbed most of the blast. An enemy rocket struck the side armor of the tank but failed to penetrate the hull. The war correspondent rode on top of the tank as it rolled into the newly liberated city. Battle scars and dents across the front plate of the tank told the story of many engagements. Mechanics loaded spare parts onto a flatbed truck destined for the damaged tank at the forward base. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. The driver steered the tank through a narrow gap between two collapsed buildings without scraping the walls. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Colorful guppies chased each other through the bubbling water of the brightly lit tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. She poured the dechlorinated water slowly into the tank so the current would not disturb the fry. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. I really want a saltwater tank but everyone says it is way harder to maintain than freshwater. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. The pet store employee scooped a goldfish from the display tank and placed it in a bag. The veterinarian examined the sick betta fish after removing it from the heated tank in the clinic. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. I spent way too much money on new plants for the tank but they look so good. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. The marine biologist carefully monitored the temperature inside the tank to protect the tropical fish. Water trickled softly from the overflow box at the back of the tank into the sump below. He carefully scraped the algae off the inner walls of the tank with a magnetic cleaning tool. A small octopus squeezed through a gap in the rocks inside the research tank and startled the intern. She noticed a thin crack forming along the bottom edge of the old glass tank on the shelf. She spent the afternoon rearranging the gravel and driftwood decorations inside her freshwater tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "5",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "vehicle",
+        "aquarium"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "5"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=vehicle_then_aquarium, random ordering #5 of 10.",
+    "protocol": "20 sentences from vehicle basin, then 20 from aquarium basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 5,
+    "direction": "vehicle_then_aquarium",
+    "first_basin_label": "vehicle",
+    "second_basin_label": "aquarium",
+    "capture_substring": null
+  }
+}

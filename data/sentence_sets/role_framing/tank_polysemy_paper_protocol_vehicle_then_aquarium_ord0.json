@@ -1,0 +1,565 @@
+{
+  "name": "tank_polysemy_paper_protocol_vehicle_then_aquarium_ord0",
+  "version": "1.0",
+  "target_word": "tank",
+  "groups": [
+    {
+      "label": "expanding",
+      "description": "Paper-protocol expanding context, vehicle_then_aquarium direction, random ordering #0.",
+      "sentences": [
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "1",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "1"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "2",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "2"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "3",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "3"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "4",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "4"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "5",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "5"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "6",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "6"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "7",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "7"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "8",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "8"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "9",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "9"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "10",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "10"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "11",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "11"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "12",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "12"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "13",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "13"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "14",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "14"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "15",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "15"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "16",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "16"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "17",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "17"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "18",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "18"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "19",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "19"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive.",
+          "group": "vehicle",
+          "target_word": "tank",
+          "categories": {
+            "position": "20",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "vehicle",
+            "cumulative_n": "20"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "21",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "21"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "22",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "22"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "23",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "23"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "24",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "24"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "25",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "25"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "26",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "26"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "27",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "27"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "28",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "28"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "29",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "29"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "30",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "30"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "31",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "31"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "32",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "32"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "33",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "33"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "34",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "34"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "35",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "35"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "36",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "36"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "37",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "37"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "38",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "38"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "39",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "39"
+          }
+        },
+        {
+          "text": "The children at the air show climbed onto the parked tank and pretended to be soldiers. Sandbags and razor wire surrounded the tank that served as a checkpoint along the main road. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. The kids at the history fair built an impressive cardboard replica of a famous World War Two tank. The depleted uranium armor package on the latest variant gives the tank unmatched frontal protection. The scout spotted an enemy tank concealed beneath camouflage netting at the edge of the forest. Battlefield data links allow the tank to share targeting information in real time with other armored units. Composite armor arrays on modern main battle platforms give the tank superior protection against shaped charges. Somebody posted a video of a tank getting stuck in a ditch and needing another one to pull it out. Battlefield data links allow the tank to share targeting information in real time with other armored units. Active protection systems intercept incoming projectiles milliseconds before they reach the tank hull. The veteran described the deafening noise inside the tank during a live-fire engagement. The lieutenant climbed out of the tank and surveyed the landscape through a pair of field glasses. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. The photographer captured a striking image of a lone tank silhouetted against the orange desert sunset. Camouflage paint in a desert pattern covered every surface of the tank to reduce its visibility. A crater in the road forced the tank to detour through the adjacent wheat field toward the bridge. Three soldiers crouched behind the disabled tank using its massive chassis as cover from incoming rounds. He sketched the outline of the destroyed tank in his field journal while waiting for the convoy. During the liberation, the townspeople draped flowers and flags over the hull of the first allied tank to arrive. A bristlenose pleco attached itself to the glass near the top of the tank and refused to move. The filtration system hummed quietly behind the tank while the fish settled in for the night. I spent way too much money on new plants for the tank but they look so good. The dentist's office featured a tall hexagonal tank filled with exotic lionfish and pufferfish. The automatic feeder dispensed a pinch of flake food into the tank at precisely eight each morning. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. Bright neon tetras darted between the plastic plants anchored along the bottom of the tank. Calcium reactors help maintain alkalinity and calcium levels required by stony corals in a reef tank. LED fixtures with adjustable spectrum settings allow hobbyists to simulate sunrise and sunset over the tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. Dosing trace elements like iodine and strontium supports invertebrate health in a mature reef tank. A canister filter rated for fifty gallons provides excellent water clarity for any community tank. Weekly water changes of ten to fifteen percent keep nitrate concentrations low in any planted tank. Maintaining stable pH between 6.5 and 7.5 is essential for a healthy freshwater tropical tank. I swear this betta fish recognizes me every time I walk up to the tank to feed him. A pair of seahorses clung to the artificial seagrass inside the tall narrow tank by the entrance. I spent way too much money on new plants for the tank but they look so good. A sea turtle glided past the viewing window of the massive rehabilitation tank at the center. Protein skimmers remove dissolved organic compounds before they accumulate in the reef tank water column. The eel slithered through a narrow PVC pipe wedged between rocks at the bottom of the tank.",
+          "group": "aquarium",
+          "target_word": "tank",
+          "categories": {
+            "position": "40",
+            "ordering": "vehicle_then_aquarium",
+            "ordering_idx": "0",
+            "latest_sentence_kind": "aquarium",
+            "cumulative_n": "40"
+          }
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "position",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40"
+      ]
+    },
+    {
+      "id": "latest_sentence_kind",
+      "values": [
+        "vehicle",
+        "aquarium"
+      ]
+    },
+    {
+      "id": "ordering_idx",
+      "values": [
+        "0"
+      ]
+    }
+  ],
+  "output_axes": [],
+  "generate_output": false,
+  "metadata": {
+    "purpose": "Paper-protocol expanding-context temporal probe for tank_polysemy, direction=vehicle_then_aquarium, random ordering #0 of 10.",
+    "protocol": "20 sentences from vehicle basin, then 20 from aquarium basin. Random sampling with replacement from pure-cluster pools at L23.",
+    "probe_family": "B (paper expanding-window temporal)",
+    "ordering_idx": 0,
+    "direction": "vehicle_then_aquarium",
+    "first_basin_label": "vehicle",
+    "second_basin_label": "aquarium",
+    "capture_substring": null
+  }
+}
