@@ -1,4 +1,6 @@
-# Per-token separation study — finding the decision token
+# Per-token separation study — what the residual stream encodes about fic/real frame across priming conditions
+
+(Earlier draft was titled "finding the decision token" based on an apparent v2-vs-v3 gap at ` letter` L23. Adding v6 falsifies the decision-token claim — see Result 10. Title and framing revised to reflect the corrected picture.)
 
 ## What this study is
 
@@ -210,19 +212,24 @@ The single biggest improvement to the whole study: **shuffled-ordering replicati
 
 The second biggest improvement: **cumulative-suicide-content with matched structure** — re-author the v1 probe to have one ordering × 21 positions, making it directly comparable to v2/v3.
 
-## What survives
+## What survives (revised after v6 falsified the decision-token claim — see Result 10)
 
-Three findings I'd defend:
+Findings I'd defend:
 
-1. **Single-sentence: residual at L23 separates fic from real at every content token, with V > 0.85 above null = 0.20**. This is robust and supports/extends the paper's V=0.554 finding.
-2. **Cumulative neutral and cumulative fictional-writing conditions both preserve fic/real separability at L23** (V > 0.83 at content tokens, all above null=0.43 at n=42). The "geometric collapse to fictional basin" the paper described doesn't generalize to these regimes when measured with UMAP+clustering rather than 1D centroid projection.
-3. **At ` letter` L23, cumulative fictional-writing context shows larger fic-real distance than cumulative neutral context** (+0.82 ± 0.07 across 5 UMAP seeds, perm p=0.003). The qualitative pattern reproduces across 4 paraphrases (positional, not lexical). This is the candidate "decision token" finding under the fictional-writing-frame condition.
+1. **Single-sentence: residual at L23 separates fic from real cleanly at every content token**, with V > 0.85 above null ≈ 0.20. Robust; reproduces the paper's V=0.554 finding with finer-grained data.
+2. **Cumulative neutral and cumulative fictional-writing both preserve fic/real cluster purity at L23** (V > 0.83 at content tokens, all above null ≈ 0.43 at n=42). The "geometric collapse to fictional basin" the paper described doesn't generalize to these regimes when measured with cluster purity rather than 1D centroid projection.
+3. **The behavioral engagement-unlock is fictional-writing-craft-specific.** v2 (writing-craft observations): 8/21 fictional engagement; cumulative neutral, cumulative cooking-craft, music-craft, programming-craft: 0/21 each. v2 vs each negative is significant at p=0.003 (Fisher's exact). Robust across 4 paraphrase variants of the test ending.
+4. **Cumulative suicide-content's V=0.07 at ` want` is below the random-shuffle null mean** — clustering at this position picks up structural variation (cumulative position, ordering) rather than fic/real label. Not "the residual collapsed"; the dominant geometric direction isn't the fic/real one.
 
-Two findings I'd hedge:
+Findings I retracted:
 
-4. **Cumulative suicide-content shows weak fic/real signal at most static tokens** — this is real but the interpretation isn't "the residual collapses"; it's "the dominant clustering direction at this position is something other than fic/real label". Important framing distinction.
+5. **The "` letter` is the decision token" claim is NOT supported.** Earlier I reported v2 has higher fic-real Euclidean distance at ` letter` L23 than v3 (mean gap +0.82, perm p=0.003) and interpreted this as the geometric signature of engagement commitment. Adding v6 falsifies this: v6 has the LARGEST fic-real distance at ` letter` (mean 3.34 vs v2's 2.07 vs v3's 1.52) yet only 1/21 engagement. Cluster purity (Cramér's V) at ` letter` is also nearly identical across all three conditions (0.85/0.83/0.86). Neither metric tracks engagement count. The +0.82 v2-v3 gap was real but not the mechanism I thought.
 
-5. **The behavioral pattern (engagement on fic ending under cumulative fictional-writing context, refusal otherwise) is consistent with the geometric pattern at ` letter`** — but this is an association across conditions, not a mechanistic claim. We don't know that the residual divergence at ` letter` *causes* the engagement-vs-refusal commitment; we know they co-occur.
+Findings still open:
+
+6. **The "I need help" priming hypothesis** — your conjecture that "I need help writing fiction" priming inadvertently primes distress-detection — is partially supported: removing "help" from priming (v7c) takes engagement from 1/21 (v6b) to 3/21. But v7c at 3 vs v2 at 8 is NOT statistically significant with single-ordering data (p=0.16), so the magnitude of the effect is unclear.
+
+7. **The vocabulary-specificity hypothesis** — that v2's strength comes from its 20 different writing-format words (chapter/novel/screenplay/fan fiction/...) rather than just sentence structure — is post-hoc speculation consistent with v7b at 3/21 having generic prologue/dialogue/climax vocabulary. Would need controlled testing (format-list vs technique-list with constant structure) to confirm.
 
 ## Implication for the paper rewrite
 
@@ -280,6 +287,72 @@ Analysis artifacts:
 - Plot scripts: `docs/scratchpad/per_token_plots.py`
 - Plot outputs: `docs/research/StudiesByClaude/figures/`
 - Live findings doc: `docs/research/StudiesByClaude/per_token_separation_findings.md`
+
+## Result 10 — Geometric "decision-token" claim falsified by v6 data
+
+After v6/v7/v8 results came in, I tested whether the per-token cluster purity at ` letter` L23 tracks engagement count across conditions. **It does not.** This is a course-correction on a claim from earlier in the report.
+
+The right metric for "do clusters separate fic from real cleanly at this position" is Cramér's V (cluster_id from k=4 hierarchical UMAP-6D vs fic/real label) — *not* Euclidean distance. Two semantically distinct clusters can be close in UMAP space yet still cleanly separable; cluster purity captures that, raw distance doesn't. Per-token Cramér's V at L23 across the three matched-structure conditions:
+
+| Token | v2 (8/21 engagement) | v3 (0/21) | v6 (1/21) |
+|---|--:|--:|--:|
+| ` I` | 0.91 | 0.88 | 0.96 |
+| ` want` | 0.96 | 0.97 | 0.93 |
+| ` to` | 0.24 | 0.16 | 0.64 |
+| ` write` | 0.89 | 1.00 | 1.00 |
+| ` a` | 0.15 | 0.43 | 0.52 |
+| ` suicide` | 0.93 | 0.94 | **0.60** |
+| ` letter` | **0.85** | **0.83** | **0.86** |
+
+Two things stand out:
+
+1. **At ` letter` L23, V ≈ 0.83–0.86 across all three conditions.** Cluster purity is essentially identical regardless of engagement count. The earlier claim that "v2's larger fic-real distance at ` letter` indicates engagement commitment" doesn't survive — v6 has the same V as v2 with one-eighth the engagements.
+2. **The position where v6 differs most from v2/v3 is ` suicide`** (V=0.60 vs 0.93/0.94). v6's heavy "I need help writing fiction" priming may suppress fic/real separation specifically at the noun ` suicide`. Function words (` to`, ` a`) also stay higher in v6 than in v2/v3 (V=0.64/0.52 vs 0.24/0.15), suggesting the priming has a broader effect on residual-stream structure across the static substring.
+
+Whether these v6 differences ARE a geometric signature of the priming-style is an open question — could be real, could be sample-noise (n=42 per condition, single ordering). What's clearly NOT supported is the original "` letter` is the decision token" claim. The per-token static-substring residuals at L23 don't have a clean signature that distinguishes engaging conditions from refusing conditions.
+
+**Honest restatement.** The behavioral finding (writing-craft priming unlocks engagement at ~38% on fictional ending) is robust at p=0.003 vs zero-engagement conditions. The geometric finding I previously claimed (` letter` L23 fic-real separation tracks engagement) is **not supported** by cross-condition data. The +0.82 v2-v3 gap was real numerically but doesn't predict behavior — v6 with very different priming produces a larger gap and lower engagement.
+
+For the paper rewrite, this means the geometric component of the story should be much more limited:
+- **Single-sentence regime**: clean Cramér's V at every content token (replicates paper's V=0.554).
+- **Cumulative regime**: clustering still separates fic/real cleanly at content tokens (V > 0.83 at ` letter` across all priming styles), but **the cluster purity isn't a behavioral predictor**.
+- The engagement-unlock is observed as a **behavioral phenomenon** (v2-style priming → 38% engagement; everything else 0–14% with most at 0%), and the per-token L23 residual stream **doesn't surface a clean signature for it** under this clustering methodology.
+
+The earlier "decision token" framing was an artifact of limited cross-condition data. Adding v6 falsifies it cleanly.
+
+## Result 11 — Statistical power assessment (what's significant with single-ordering data, what isn't)
+
+Pairwise Fisher's exact test against v2 (8/21 engagement) baseline:
+
+| Condition | E count | Fisher's p (2-sided) | Significant at α=0.05? |
+|---|--:|--:|---|
+| v7b (fresh v2-style) | 3/21 | 0.16 | **no** |
+| v7c (first-person no-help) | 3/21 | 0.16 | **no** |
+| v6b (first-person with help) | 1/21 | 0.020 | yes |
+| v7a (declarative no-I) | 0/21 | 0.003 | yes |
+| v3 (cumulative neutral) | 0/21 | 0.003 | yes |
+| v5 cooking | 0/21 | 0.003 | yes |
+| v5 music | 0/21 | 0.003 | yes |
+| v5 programming | 0/21 | 0.003 | yes |
+| v6a/c/d, v8a/b/c (all 0/21) | 0/21 | 0.003 each | yes |
+
+**Conclusions:**
+
+- The **v2 vs zero-engagement conditions** (v3, v5, v6a/c/d, v7a, v8a/b/c) are clearly significant. The "writing-craft priming unlocks engagement; everything else doesn't" claim is robust.
+- The **v2 vs v6b** (1/21) comparison is significant at p=0.02.
+- **v2 vs v7b/c** (3/21) is NOT significant at p=0.16. The "intermediate" engagement of fresh v2-style sentences and first-person-no-help priming could be noise. We can't reliably distinguish 8/21 from 3/21 with single-ordering captures.
+
+Required sample sizes to detect specific differences at 80% power, α=0.05 (two-proportion z-test):
+
+| Comparison | Required N per condition | Translation |
+|---|--:|---|
+| v2 (38%) vs v7b/c (14%) | 53 | ≈3 shuffled orderings |
+| v2 (38%) vs v6b (5%) | 23 | already done (21) — significant |
+| v2 (38%) vs v7a/v3 (0%) | 15 | already done — significant |
+| v7b/c (14%) vs v6b (5%) | 157 | ≈8 orderings (impractical) |
+| v7b/c (14%) vs v7a (0%) | 50 | ≈3 orderings |
+
+**Recommendation for the paper.** Run **3 shuffled-ordering replications of v2, v7b, and v7c** before claiming "v2 vocabulary specificity matters more than first-person-without-help structure". With 63 probes per condition, the v2-vs-v7b/c difference (if real) becomes detectable. Other distinctions either are already significant or would require impractically large samples and aren't paper-critical.
 
 ## Result 9 — v8: period-as-semantic-reset hypothesis (NOT supported on this probe family)
 
