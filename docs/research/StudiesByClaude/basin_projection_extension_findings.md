@@ -82,20 +82,55 @@ Not a UMAP artifact (polysemy validates). The model represents the "suicide lett
 
 Multi-token capture used `capture_static_substring="I want to write a suicide letter"`, semantic positions 2..8 = ` I, want, to, write, a, suicide, letter`.
 
-## What's next (so I don't lose track)
+## Phase-2 paper-protocol replication (2026-05-08)
 
-Immediate:
-1. Run the same `want` vs `letter` basin projection on v2 (cumulative writing-craft), v3 (cumulative neutral), v6 (paired), v7 (priming-style variants), v8 (period-removed).
-2. See if the v1 pattern (`want` → fic, `letter` → real) holds in other conditions, or if it's v1-specific.
-3. Generate a proper plot showing the polysemy validation + v1 want/letter trajectories side-by-side.
+After the user clarified the methodology, I redid Family B at proper
+paper protocol: K=3 schema for suicide letter, three random orderings
+per direction (with replacement from pure-cluster pools), 40 positions
+per ordering.
 
-Eventually:
-4. Update per_token_separation_report.md with this finding (replacing/correcting the earlier "letter is decision token" claim).
-5. Decide whether the paper rewrite should include the want/letter opposite-collapse finding as a major result.
+**Sessions (suicide letter Family B paper protocol):**
+| Direction | ord0 | ord1 | ord2 |
+|---|---|---|---|
+| fictional → real | session_58a8b5ba | session_717b765b | session_35e7cbed |
+| real → fictional | session_d36f8a5d | session_05446b76 | session_0158f0f4 |
 
-Probes that would tighten this if user agrees:
-6. Run with multiple shuffled orderings of v1 (currently 1 ordering × 2 directions); 3 shuffled orderings would give per-position confidence intervals.
-7. Test whether the same opposite-basin collapse appears in v2's writing-craft cumulative (which DOES unlock engagement) — would tell us if the geometric pattern correlates with engagement direction.
+**Methodology**: re-fit UMAP-6D at L23 on basin study residuals;
+compute basin centroids in MY UMAP space using K=3 schema's cluster
+assignments (cluster 1 = fictional basin, cluster 0 = distress basin).
+Project temporal residuals through same UMAP, project on basin axis.
+Don't use stored centroids.json — they were computed in a different
+UMAP fit and don't align with the re-fit space.
+
+**Trajectories (3 orderings, mean ± std at each position):**
+
+`want` (target token, position 1):
+- fictional_then_real: stays at fic basin, mean 0.0-0.3 throughout
+- real_then_fictional: starts at distress (mean +1.26 pos 1), drifts
+  to ~+0.2 by position 10, stays mid through end
+- → REPLICATES paper's collapse-to-fictional finding
+
+`letter` (token_position 8, last noun of static request):
+- fictional_then_real: high variance positions 1-3, then locked at
+  distress basin (mean ~+1.17 from position 4 onwards)
+- real_then_fictional: stays at distress basin (mean ~+1.18) throughout
+- → NEW finding: collapse to DISTRESS basin (opposite of want)
+
+Both findings hold across 3 random orderings; SDs mostly 0.0-0.3.
+
+**Trajectory plot:**
+`docs/research/StudiesByClaude/figures/paper_protocol_basin_trajectory.png`
+
+## What's next
+
+1. Apply the same paper-protocol projection to polysemy probe family
+   for methodology validation (existing 4 polysemy temporal sessions
+   on disk are NOT paper protocol — they're mixed cache-on/cache-off
+   small-scale captures).
+2. Run Family C priming case studies at proper sample sizes (50 fic +
+   50 real test endings × N=10 and N=20, drawn from basin pool).
+3. Family D paraphrase robustness with new noun-phrase variants.
+4. Consolidated final report.
 
 ## Key files
 
