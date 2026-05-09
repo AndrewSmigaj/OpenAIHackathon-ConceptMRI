@@ -7,6 +7,7 @@ Public API is unchanged: same methods, same signatures. All existing callers
 (routers, experiments endpoint) continue working without modification.
 """
 
+import gc
 import torch
 import logging
 from typing import Dict, List, Optional, Tuple
@@ -14,6 +15,7 @@ from pathlib import Path
 
 from core.parquet_writer import BatchWriter
 from services.probes.probe_ids import generate_probe_id
+from utils.memory_utils import cleanup_gpu_memory
 
 # Sub-components
 from services.probes.session_manager import SessionManager, SessionState, SessionStatus
@@ -254,6 +256,14 @@ class IntegratedCaptureService:
                 f"Captured probe {probe_id}: '{target_word}' in "
                 f"'{input_text[:40]}...'{ctx_info} (session {session_id})"
             )
+
+            # Release transient tensors + defrag the CUDA allocator.
+            # Without this, capture_fwd buffers accumulate under memory
+            # pressure and per-probe latency climbs several-fold on long runs.
+            del input_tensor, outputs, probe_data
+            gc.collect()
+            cleanup_gpu_memory()
+
             return probe_id, new_past_key_values
 
         except Exception as e:
