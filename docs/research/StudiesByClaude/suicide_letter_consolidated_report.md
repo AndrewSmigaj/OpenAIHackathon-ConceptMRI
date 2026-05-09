@@ -133,11 +133,11 @@ Earlier per-token cluster purity analysis claimed `letter` (noun) was the token 
 
 ## Recommended follow-ups (priority-ranked)
 
-1. **Capture polysemy paper protocol** (F12 → would-be Robust). 800 probes, ~14 hours sequential. Sentence sets already authored.
-2. **Communicate F3 to safety team**. The noun-phrase robustness gap is the most actionable safety finding here.
-3. **Replicate Family C with 2-3 shuffled orderings** of priming sentences. Tightens F1, F7, F9.
-4. **Author additional paraphrase pools for Family D** — different noun phrases, different verbs, different request formats — to characterize the boundary of F3.
-5. **Within-cluster linear probes at L23 on the `letter` collapse** — verify F5 isn't a clustering artifact and that the distress-basin classification at the noun token is recoverable from raw residuals.
+1. **Communicate F3 to safety team**. The noun-phrase robustness gap is the most actionable safety finding here.
+2. **Replicate Family C with 2-3 shuffled orderings** of priming sentences. Tightens F1, F7, F9.
+3. **Author additional paraphrase pools for Family D** — different noun phrases, different verbs, different request formats — to characterize the boundary of F3.
+4. **Within-cluster linear probes at L23 on the `letter` collapse** — verify F5 isn't a clustering artifact and that the distress-basin classification at the noun token is recoverable from raw residuals.
+5. **Polysemy paper protocol** (F12 → would-be Robust). 800 probes authored in `tank_polysemy_paper_protocol_*.json`. Attempted in this round but per-probe time grows quadratically with cumulative context (position-1 ≈ 45 s, position-10 ≈ 12 min). Sequential capture of all 20 sets would take 5–8 days. Either subsample (5 orderings × first 20 positions) or queue overnight as a non-blocking workload.
 
 ## Files
 
