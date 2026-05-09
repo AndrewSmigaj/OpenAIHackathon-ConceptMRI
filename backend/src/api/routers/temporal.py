@@ -25,21 +25,25 @@ def _run_temporal_capture_sync(
     request: TemporalCaptureRequest,
     service: IntegratedCaptureService,
 ) -> TemporalCaptureResponse:
-    """Synchronous temporal capture — runs in a thread to avoid blocking the event loop."""
+    """Synchronous temporal capture — runs in a thread to avoid blocking the event loop.
+
+    Always uses harmony chat-template + cache-on. Each step crops the suffix from
+    past_kv and splices in ` ` + new_sentence + suffix; the spliced token sequence
+    matches what cumulative apply_chat_template would produce (verified across
+    17,270 + 385 real-content pairs), so cache-on residuals match cache-off within
+    fp16 precision.
+    """
     import random
     import uuid
     import pandas as pd
+    from services.probes.harmony_kv_chain import HarmonyKVChain
 
     try:
-
         # Load probe assignments
         session_dir = DATA_LAKE_PATH / request.session_id
         if not session_dir.exists():
             raise HTTPException(status_code=404, detail=f"Session '{request.session_id}' not found")
 
-        # Schema dir is the only source of truth for probe_assignments.
-        # The session-root copy was removed because it was silently the
-        # last-written schema's assignments (stale for every other schema).
         if not request.clustering_schema:
             raise HTTPException(status_code=400, detail="clustering_schema is required")
         pa_path = session_dir / "clusterings" / request.clustering_schema / "probe_assignments.json"
@@ -79,209 +83,123 @@ def _run_temporal_capture_sync(
         if not basin_a_probes or not basin_b_probes:
             raise HTTPException(status_code=400, detail=f"Not enough probes in basins (A={len(basin_a_probes)}, B={len(basin_b_probes)})")
 
-        # Sample and build sequence
+        # Sample
         n = request.sentences_per_block
         random.shuffle(basin_a_probes)
         random.shuffle(basin_b_probes)
         selected_a = basin_a_probes[:n]
         selected_b = basin_b_probes[:n]
 
-        if request.sequence_config == "block_ab":
-            sequence = [(pid, "A") for pid in selected_a] + [(pid, "B") for pid in selected_b]
-            regime_boundary = len(selected_a)
-        elif request.sequence_config == "block_ba":
-            sequence = [(pid, "B") for pid in selected_b] + [(pid, "A") for pid in selected_a]
-            regime_boundary = len(selected_b)
-        elif request.sequence_config == "block_aba":
-            half_n = n // 2
-            sequence = (
-                [(pid, "A") for pid in selected_a[:half_n]]
-                + [(pid, "B") for pid in selected_b]
-                + [(pid, "A") for pid in selected_a[half_n:n]]
-            )
-            regime_boundary = half_n
+        # Build the sequence of (sentence, regime, source_categories) triples.
+        # Custom-sentences mode supplies its own text; standard basin mode pulls
+        # text from the source session's probes. The capture loop is identical.
+        if request.custom_sentences:
+            target_word = request.custom_target_word or probe_texts[next(iter(probe_texts))]["target_word"]
+            num_steps = len(request.custom_sentences)
+            # Determine regime per position via sequence_config
+            if request.sequence_config == "block_ba":
+                regime_boundary = num_steps // 2
+                regimes = ["B" if i < regime_boundary else "A" for i in range(num_steps)]
+            elif request.sequence_config == "block_aba":
+                third = num_steps // 3
+                regime_boundary = third
+                regimes = (["A"] * third) + (["B"] * third) + (["A"] * (num_steps - 2 * third))
+            else:  # block_ab default
+                regime_boundary = num_steps // 2
+                regimes = ["A" if i < regime_boundary else "B" for i in range(num_steps)]
+
+            sequence_items = [
+                (
+                    sent,
+                    regimes[i],
+                    {"source_basin": regimes[i], "custom_sentence": "true"},
+                )
+                for i, sent in enumerate(request.custom_sentences)
+            ]
         else:
-            raise HTTPException(status_code=400, detail=f"Unknown sequence_config: {request.sequence_config}")
+            target_word = probe_texts[selected_a[0]]["target_word"]
+            if request.sequence_config == "block_ab":
+                sequence = [(pid, "A") for pid in selected_a] + [(pid, "B") for pid in selected_b]
+                regime_boundary = len(selected_a)
+            elif request.sequence_config == "block_ba":
+                sequence = [(pid, "B") for pid in selected_b] + [(pid, "A") for pid in selected_a]
+                regime_boundary = len(selected_b)
+            elif request.sequence_config == "block_aba":
+                half_n = n // 2
+                sequence = (
+                    [(pid, "A") for pid in selected_a[:half_n]]
+                    + [(pid, "B") for pid in selected_b]
+                    + [(pid, "A") for pid in selected_a[half_n:n]]
+                )
+                regime_boundary = half_n
+            else:
+                raise HTTPException(status_code=400, detail=f"Unknown sequence_config: {request.sequence_config}")
+
+            sequence_items = [
+                (
+                    probe_texts[pid]["input_text"],
+                    regime,
+                    {
+                        "source_probe_id": pid,
+                        "source_basin": regime,
+                        "source_cluster_id": str(
+                            request.basin_a_cluster_id if regime == "A" else request.basin_b_cluster_id
+                        ),
+                    },
+                )
+                for pid, regime in sequence
+            ]
 
         temporal_run_id = f"temporal_{uuid.uuid4().hex[:8]}"
-
-        if request.custom_sentences:
-            # --- Custom sentences mode (word-by-word, joke experiments) ---
-            target_word = request.custom_target_word
-            if not target_word:
-                target_word = probe_texts[next(iter(probe_texts))]["target_word"]
-
-            # Use explicit boundary if provided, else auto-detect via target word
-            if request.custom_regime_boundary is not None:
-                regime_boundary = request.custom_regime_boundary
-            else:
-                regime_boundary = len(request.custom_sentences)
-                cumulative_check = ""
-                for i, sent in enumerate(request.custom_sentences):
-                    cumulative_check += (" " if cumulative_check else "") + sent
-                    if target_word.lower() in cumulative_check.lower():
-                        regime_boundary = i
-                        break
-
-            new_session_id = service.create_sentence_session(
-                session_name=f"temporal_{request.run_label or temporal_run_id}",
-                total_probes=len(request.custom_sentences),
-                target_word=target_word,
-                labels=["A", "B"],
-                experiment_id=temporal_run_id,
-            )
-
-            past_kv = None
-            cumulative_text = ""
-            for i, sentence in enumerate(request.custom_sentences):
-                if request.sequence_config == "block_ba":
-                    regime = "B" if i < regime_boundary else "A"
-                else:
-                    regime = "A" if i < regime_boundary else "B"
-                logger.info(f"Temporal capture [{request.processing_mode}] custom {i+1}/{len(request.custom_sentences)} regime={regime}")
-
-                if request.processing_mode == "expanding_cache_off":
-                    cumulative_text += (" " if cumulative_text else "") + sentence
-                    input_text = cumulative_text
-                    use_cache = False
-                    pass_kv = None
-                elif request.processing_mode in ("expanding_cache_on", "single_cache_on"):
-                    input_text = sentence
-                    use_cache = True
-                    pass_kv = past_kv
-                else:
-                    raise HTTPException(status_code=400, detail=f"Unknown processing_mode: {request.processing_mode}")
-
-                # Determine target_token_position: use target word if present, else last token
-                has_target = target_word.lower() in input_text.lower()
-                target_token_position = None  # let find_word_token_position resolve
-                if not has_target:
-                    token_ids = service.processor.tokenizer.encode(input_text, add_special_tokens=False)
-                    target_token_position = len(token_ids) - 1
-
-                source_categories = {"source_basin": regime, "custom_sentence": "true"}
-
-                _, new_kv = service.capture_probe(
-                    session_id=new_session_id,
-                    input_text=input_text,
-                    target_word=target_word,
-                    target_token_position=target_token_position,
-                    past_key_values=pass_kv,
-                    use_cache=use_cache,
-                    experiment_id=temporal_run_id,
-                    sequence_id=temporal_run_id,
-                    sentence_index=i,
-                    label=regime,
-                    categories=source_categories,
-                    transition_step=regime_boundary,
-                    generate_output=request.generate_output,
-                )
-                past_kv = new_kv
-
-            service.finalize_session(new_session_id)
-
-            sentence_texts = {str(i): s for i, s in enumerate(request.custom_sentences)}
-            runs_path = session_dir / "temporal_runs.json"
-            existing_runs = json.loads(runs_path.read_text()) if runs_path.exists() else []
-            existing_runs.append({
-                "temporal_run_id": temporal_run_id,
-                "new_session_id": new_session_id,
-                "processing_mode": request.processing_mode,
-                "sequence_config": request.sequence_config,
-                "basin_a_cluster_id": request.basin_a_cluster_id,
-                "basin_b_cluster_id": request.basin_b_cluster_id,
-                "basin_layer": request.basin_layer,
-                "clustering_schema": request.clustering_schema,
-                "sentences_per_block": len(request.custom_sentences),
-                "regime_boundary": regime_boundary,
-                "sequence_positions": len(request.custom_sentences),
-                "sentence_texts": sentence_texts,
-                "custom_sentences": True,
-            })
-            runs_path.write_text(json.dumps(existing_runs, indent=2))
-
-            return TemporalCaptureResponse(
-                temporal_run_id=temporal_run_id,
-                new_session_id=new_session_id,
-                sequence_positions=len(request.custom_sentences),
-                regime_boundary=regime_boundary,
-                processing_mode=request.processing_mode,
-                basin_a_sentences=regime_boundary,
-                basin_b_sentences=len(request.custom_sentences) - regime_boundary,
-            )
-
-        # --- Standard basin-based mode ---
-        # Create new session for temporal data
         new_session_id = service.create_sentence_session(
             session_name=f"temporal_{request.run_label or temporal_run_id}",
-            total_probes=len(sequence),
-            target_word=probe_texts[sequence[0][0]]["target_word"],
+            total_probes=len(sequence_items),
+            target_word=target_word,
             labels=["A", "B"],
             experiment_id=temporal_run_id,
         )
 
-        # Run capture sequence
+        # Unified cache-on harmony loop
+        chain = HarmonyKVChain(service.processor.tokenizer)
         past_kv = None
-        cumulative_text = ""
-        for i, (probe_id, regime) in enumerate(sequence):
-            probe_info = probe_texts[probe_id]
-            logger.info(f"Temporal capture [{request.processing_mode}] probe {i+1}/{len(sequence)} regime={regime}")
-
-            if request.processing_mode == "expanding_cache_off":
-                # Concatenate all sentences, no cache
-                cumulative_text += (" " if cumulative_text else "") + probe_info["input_text"]
-                input_text = cumulative_text
-                use_cache = False
-                pass_kv = None
-            elif request.processing_mode == "expanding_cache_on":
-                # Single sentence input, chain KV cache
-                input_text = probe_info["input_text"]
-                use_cache = True
-                pass_kv = past_kv
-            elif request.processing_mode == "single_cache_on":
-                # Single sentence input, chain KV cache
-                input_text = probe_info["input_text"]
-                use_cache = True
-                pass_kv = past_kv
-            else:
-                raise HTTPException(status_code=400, detail=f"Unknown processing_mode: {request.processing_mode}")
-
-            # Source traceability: store which original probe and basin this came from
-            source_categories = {
-                "source_probe_id": probe_id,
-                "source_basin": regime,
-                "source_cluster_id": str(request.basin_a_cluster_id if regime == "A" else request.basin_b_cluster_id),
-            }
-
-            _, new_kv = service.capture_probe(
-                session_id=new_session_id,
-                input_text=input_text,
-                target_word=probe_info["target_word"],
-                past_key_values=pass_kv,
-                use_cache=use_cache,
-                experiment_id=temporal_run_id,
-                sequence_id=temporal_run_id,
-                sentence_index=i,
-                label=regime,
-                categories=source_categories,
-                transition_step=regime_boundary,
-                generate_output=request.generate_output,
+        for i, (sentence, regime, source_meta) in enumerate(sequence_items):
+            logger.info(
+                f"Temporal capture [harmony+cache_on] {i+1}/{len(sequence_items)} regime={regime}"
             )
-            past_kv = new_kv
+            if i == 0:
+                token_ids = chain.first_step_tokens(sentence)
+            else:
+                token_ids = chain.next_step_tokens(sentence, past_kv)
+
+            # Optional generation (default off for paper protocol)
+            gen_text = None
+            if request.generate_output:
+                gen_text, _ = service.generate(token_ids, max_new_tokens=256)
+
+            _, past_kv = service.capture_step(
+                new_session_id, token_ids, [target_word],
+                past_kv=past_kv, use_cache=True,
+                metadata={
+                    "label": regime,
+                    "categories": source_meta,
+                    "experiment_id": temporal_run_id,
+                    "sequence_id": temporal_run_id,
+                    "sentence_index": i,
+                    "transition_step": regime_boundary,
+                    "input_text": sentence,
+                    "generated_text": gen_text,
+                },
+            )
 
         service.finalize_session(new_session_id)
 
         # Store temporal run metadata + sentence text mapping in source session
-        sentence_texts = {
-            str(i): probe_texts[pid]["input_text"]
-            for i, (pid, _regime) in enumerate(sequence)
-        }
+        sentence_texts = {str(i): item[0] for i, item in enumerate(sequence_items)}
         runs_path = session_dir / "temporal_runs.json"
         existing_runs = json.loads(runs_path.read_text()) if runs_path.exists() else []
         existing_runs.append({
             "temporal_run_id": temporal_run_id,
             "new_session_id": new_session_id,
-            "processing_mode": request.processing_mode,
             "sequence_config": request.sequence_config,
             "basin_a_cluster_id": request.basin_a_cluster_id,
             "basin_b_cluster_id": request.basin_b_cluster_id,
@@ -289,19 +207,27 @@ def _run_temporal_capture_sync(
             "clustering_schema": request.clustering_schema,
             "sentences_per_block": request.sentences_per_block,
             "regime_boundary": regime_boundary,
-            "sequence_positions": len(sequence),
+            "sequence_positions": len(sequence_items),
             "sentence_texts": sentence_texts,
+            "custom_sentences": bool(request.custom_sentences),
         })
         runs_path.write_text(json.dumps(existing_runs, indent=2))
+
+        # Counts for the response
+        if request.custom_sentences:
+            basin_a_count = sum(1 for _, r, _ in sequence_items if r == "A")
+            basin_b_count = sum(1 for _, r, _ in sequence_items if r == "B")
+        else:
+            basin_a_count = len(selected_a)
+            basin_b_count = len(selected_b)
 
         return TemporalCaptureResponse(
             temporal_run_id=temporal_run_id,
             new_session_id=new_session_id,
-            sequence_positions=len(sequence),
+            sequence_positions=len(sequence_items),
             regime_boundary=regime_boundary,
-            processing_mode=request.processing_mode,
-            basin_a_sentences=len(selected_a),
-            basin_b_sentences=len(selected_b),
+            basin_a_sentences=basin_a_count,
+            basin_b_sentences=basin_b_count,
         )
 
     except HTTPException:

@@ -219,13 +219,12 @@ class AgentLoop:
                 return_dict=True, return_tensors="pt",
                 model_identity="You are an agent exploring a world.",
             )
-            input_ids = inputs["input_ids"].to(device)
-            attention_mask = inputs["attention_mask"].to(device)
+            prompt_token_ids = inputs["input_ids"][0].tolist()
+            prompt_token_count = len(prompt_token_ids)
 
             # 2. Generate action (hooks OFF)
             generated_text, gen_ids = await asyncio.to_thread(
-                self.service.orchestrator.generate_continuation_with_ids,
-                input_ids, 800, attention_mask, False,
+                self.service.generate, prompt_token_ids, 800,
             )
             channels = parse_harmony_channels(generated_text)
             last_action = channels["action"] or "look"
@@ -235,9 +234,10 @@ class AgentLoop:
             )
             logger.info(f"  Parsed action: '{last_action}'")
 
-            # 3. Capture on full sequence (hooks ON): input + generated
-            #    Only capture at positions in the current turn (skip system prompt + history)
-            full_ids = input_ids[0].tolist() + gen_ids
+            # 3. Capture at all target word occurrences in this turn (prompt and
+            #    generation positions both included; positions >= prompt_token_count
+            #    are auto-relabeled "generation" by capture_step).
+            full_ids = prompt_token_ids + gen_ids
             if len(messages) > 1:
                 prefix_inputs = tokenizer.apply_chat_template(
                     messages[:-1], add_generation_prompt=False,
@@ -247,19 +247,27 @@ class AgentLoop:
                 current_turn_start = prefix_inputs["input_ids"].shape[1]
             else:
                 current_turn_start = 0
-            prompt_token_count = input_ids.shape[1]
-            result, _ = await asyncio.to_thread(
-                self.service.probe_tick,
-                self.session_id, game_text, target_words,
-                turn_id=tick, scenario_id=scenario_name,
-                token_ids=full_ids,
-                label=condition_label,
-                min_position=current_turn_start,
+
+            records, _ = await asyncio.to_thread(
+                self.service.capture_step,
+                self.session_id, full_ids, target_words,
+                target_position_window=(current_turn_start, len(full_ids)),
+                target_occurrence="all",
                 prompt_token_count=prompt_token_count,
+                metadata={
+                    "label": condition_label,
+                    "turn_id": tick,
+                    "scenario_id": scenario_name,
+                    "input_text": game_text,
+                    "generated_text": generated_text,
+                    "capture_type": "prompt",  # default; capture_step relabels generation positions
+                },
             )
+            target_positions = {w: [r.target_token_position for r in records if r.target_word == w]
+                                for w in target_words}
             logger.info(
-                f"  Captured {result['probes_written']} probes, "
-                f"positions: {result['target_positions']}, "
+                f"  Captured {len(records)} probes, "
+                f"positions: {target_positions}, "
                 f"total tokens: {len(full_ids)}"
             )
 
@@ -295,8 +303,8 @@ class AgentLoop:
                     "analysis": last_analysis,
                     "action": last_action,
                     "evennia_response": response,
-                    "probes_written": result["probes_written"],
-                    "target_positions": result["target_positions"],
+                    "probes_written": len(records),
+                    "target_positions": target_positions,
                     "total_tokens": len(full_ids),
                     "timestamp": datetime.now().isoformat(),
                 }
@@ -308,13 +316,8 @@ class AgentLoop:
                 complete = True
 
             tick += 1
-
-            # 8. Release transient tensors + defrag the CUDA allocator.
-            #    Without this, generate() + probe_fwd caches accumulate under
-            #    memory pressure and tick latency climbs several-fold on long runs.
-            del inputs, input_ids, attention_mask
-            gc.collect()
-            cleanup_gpu_memory()
+            # GPU cleanup happens inside service.generate and service.capture_step;
+            # no manual gc.collect() / cleanup_gpu_memory() needed here.
 
         # Record result
         action_meta = action_lookup.get(last_action.lower().strip(), {})

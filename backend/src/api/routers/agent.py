@@ -231,91 +231,60 @@ async def agent_generate(
         return_dict=True, return_tensors="pt",
         model_identity="You are an agent exploring a world.",
     )
-    input_ids = inputs["input_ids"].to(service.orchestrator.model.device)
-    attention_mask = inputs["attention_mask"].to(service.orchestrator.model.device)
-    prompt_token_ids = input_ids[0].tolist()
+    prompt_token_ids = inputs["input_ids"][0].tolist()
     prompt_token_count = len(prompt_token_ids)
 
     # 4. Generate continuation (hooks OFF) — returns text + token IDs
-    service.orchestrator.initialize_hooks(session_id)
-    generated_text, generated_token_ids = service.orchestrator.generate_continuation_with_ids(
-        input_ids, max_new_tokens=request.max_new_tokens,
-        attention_mask=attention_mask, skip_special_tokens=False,
+    generated_text, generated_token_ids = service.generate(
+        prompt_token_ids, max_new_tokens=request.max_new_tokens,
+        skip_special_tokens=False,
     )
 
     # 5. Parse harmony channels
     channels = parse_harmony_channels(generated_text)
 
-    # 6. Concatenate token ID lists (no BPE re-tokenization)
+    # 6. Concatenate prompt + generation; capture all target occurrences,
+    #    labeling positions >= prompt_token_count as "generation".
     full_token_ids = prompt_token_ids + generated_token_ids
-    total_tokens = len(full_token_ids)
-    full_tensor = torch.tensor(
-        [full_token_ids], device=service.orchestrator.model.device
-    )
 
-    # 7. Forward pass with hooks ON
-    service.orchestrator.clear_captured_data()
-    service.orchestrator.run_forward_pass(full_tensor)
-
-    # 8. Get captured data
-    routing_data, embedding_data, residual_data = service.orchestrator.get_captured_data()
-
-    # 9-11. Find target positions, convert to schemas, write to Parquet
     capture_id = generate_capture_id("capture")
-    target_positions = {}
-
-    # Ensure writers exist
-    if session_id not in service.session_writers:
-        from services.probes.integrated_capture_service import SessionBatchWriters
-        service.session_writers[session_id] = SessionBatchWriters(
-            session_id, service.session_mgr.data_lake_path,
-            service.session_mgr.batch_size
-        )
-
-    for word in request.target_words:
-        positions = service.processor.find_all_word_token_positions(full_token_ids, word)
-        if not positions:
-            logger.info(f"Target word '{word}' not found in tick {turn_id} — skipping")
-            target_positions[word] = []
-            continue
-
-        word_positions = []
-        for pos, token_id in positions:
-            probe_id = generate_capture_id("probe")
-            probe_data = service.processor.convert_to_schemas(
-                probe_id=probe_id,
-                session_id=session_id,
-                input_text=request.prompt + generated_text,
-                target_word=word,
-                target_token_id=token_id,
-                target_token_position=pos,
-                total_tokens=total_tokens,
-                routing_data=routing_data,
-                embedding_data=embedding_data,
-                residual_stream_data=residual_data,
-                turn_id=turn_id,
-                scenario_id=scenario_id,
-                capture_type="reasoning",
-            )
-            service.session_writers[session_id].write_probe_data(probe_data)
-            service.session_mgr.record_probe_success(session_id)
-            word_positions.append(pos)
-
-        target_positions[word] = word_positions
+    records, _ = service.capture_step(
+        session_id, full_token_ids, request.target_words,
+        target_occurrence="all",
+        prompt_token_count=prompt_token_count,
+        metadata={
+            "turn_id": turn_id,
+            "scenario_id": scenario_id,
+            "input_text": request.prompt + generated_text,
+            "capture_type": "reasoning",  # default; positions >= prompt_end auto-relabel "generation"
+        },
+    )
+    # Re-build target_positions for the response from the records returned
+    target_positions: dict = {}
+    for w in request.target_words:
+        target_positions[w] = [r.target_token_position for r in records if r.target_word == w]
 
     # 12. Knowledge probe (optional)
     knowledge_capture_id = None
-    if request.knowledge_probe:
+    if request.knowledge_probe and request.target_words:
         try:
-            knowledge_probe_id, _ = service.capture_probe(
-                session_id=session_id,
-                input_text=request.knowledge_probe,
-                target_word=request.target_words[0] if request.target_words else "",
-                turn_id=turn_id,
-                scenario_id=scenario_id,
-                capture_type="knowledge_query",
+            kp_enc = tokenizer.apply_chat_template(
+                [{"role": "user", "content": request.knowledge_probe}],
+                tokenize=True, add_generation_prompt=True,
+                return_tensors="pt", return_dict=True,
             )
-            knowledge_capture_id = knowledge_probe_id
+            kp_token_ids = kp_enc["input_ids"][0].tolist()
+            kp_records, _ = service.capture_step(
+                session_id, kp_token_ids, [request.target_words[0]],
+                metadata={
+                    "turn_id": turn_id,
+                    "scenario_id": scenario_id,
+                    "input_text": request.knowledge_probe,
+                    "capture_type": "knowledge_query",
+                },
+            )
+            if kp_records:
+                knowledge_capture_id = kp_records[0].probe_id
         except Exception as e:
             logger.error(f"Knowledge probe failed for tick {turn_id}: {e}")
 

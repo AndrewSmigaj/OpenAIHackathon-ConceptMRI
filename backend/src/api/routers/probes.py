@@ -263,22 +263,34 @@ async def run_sentence_experiment(
             sentence_set_name=ss.name,
         )
 
-        # Capture each sentence
+        # Capture each sentence (harmony format, no cache; generation optional)
+        tokenizer = service.processor.tokenizer
         counts = {g.label: 0 for g in ss.groups}
         for entry, label in sentences:
             try:
-                categories = getattr(entry, 'categories', None)
+                # Harmony chat-template wrap of the user content
+                enc = tokenizer.apply_chat_template(
+                    [{"role": "user", "content": entry.text}],
+                    tokenize=True, add_generation_prompt=True,
+                    return_tensors="pt", return_dict=True,
+                )
+                token_ids = enc["input_ids"][0].tolist()
 
-                service.capture_probe(
-                    session_id=session_id,
-                    input_text=entry.text,
-                    target_word=entry.target_word,
-                    label=label,
-                    categories=categories,
-                    generate_output=request.generate_output,
-                    use_chat_template=True,
-                    max_new_tokens=256,
+                # Optional generation (capture-then-generate semantically equivalent
+                # to old capture_probe order: same prompt, same model state)
+                gen_text = None
+                if request.generate_output:
+                    gen_text, _ = service.generate(token_ids, max_new_tokens=256)
+
+                service.capture_step(
+                    session_id, token_ids, [entry.target_word],
                     capture_static_substring=request.capture_static_substring,
+                    metadata={
+                        "label": label,
+                        "categories": getattr(entry, "categories", None),
+                        "input_text": entry.text,
+                        "generated_text": gen_text,
+                    },
                 )
                 counts[label] += 1
             except Exception as e:

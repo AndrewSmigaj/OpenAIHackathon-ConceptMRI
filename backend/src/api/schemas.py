@@ -391,21 +391,23 @@ class ScaffoldStepResponse(BaseModel):
 # --- Temporal Capture Schemas ---
 
 class TemporalCaptureRequest(BaseModel):
-    """Request to run a temporal basin transition experiment."""
+    """Request to run a temporal basin transition experiment.
+
+    Always uses harmony chat-template + KV-cache reuse (verified to produce
+    residuals identical to no-cache within fp16 precision, much faster).
+    """
     session_id: str
     basin_a_cluster_id: int
     basin_b_cluster_id: int
     basin_layer: int
     clustering_schema: str  # Required — schema_dir/probe_assignments.json is the only source
     sentences_per_block: int = 20
-    processing_mode: str = "expanding_cache_on"  # expanding_cache_off, expanding_cache_on, single_cache_on
     sequence_config: str = "block_ab"  # block_ab, block_ba, block_aba
     layers: Optional[List[int]] = None
     run_label: Optional[str] = None
-    generate_output: bool = True  # generate continuation text for each probe
-    custom_sentences: Optional[List[str]] = None  # Override basin selection with explicit word/sentence list
-    custom_target_word: Optional[str] = None  # Target word for custom sentences (e.g. "tank")
-    custom_regime_boundary: Optional[int] = None  # Explicit regime boundary for replay (bypasses auto-detection)
+    generate_output: bool = False  # rare for temporal protocol; off by default
+    custom_sentences: Optional[List[str]] = None  # Word-by-word or joke experiments
+    custom_target_word: Optional[str] = None  # Override target_word for custom_sentences
 
 
 class TemporalCaptureResponse(BaseModel):
@@ -414,7 +416,6 @@ class TemporalCaptureResponse(BaseModel):
     new_session_id: str
     sequence_positions: int
     regime_boundary: int
-    processing_mode: str
     basin_a_sentences: int
     basin_b_sentences: int
 
