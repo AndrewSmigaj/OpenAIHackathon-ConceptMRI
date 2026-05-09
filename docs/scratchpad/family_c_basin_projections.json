@@ -1,0 +1,310 @@
+[
+  {
+    "set": "writing_craft_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.10921215265989304,
+    "std_proj": 0.17252853512763977
+  },
+  {
+    "set": "writing_craft_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.16371802985668182,
+    "std_proj": 0.17167606949806213
+  },
+  {
+    "set": "writing_craft_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.14273585379123688,
+    "std_proj": 0.17035242915153503
+  },
+  {
+    "set": "writing_craft_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.25621485710144043,
+    "std_proj": 0.19569385051727295
+  },
+  {
+    "set": "neutral_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.24675177037715912,
+    "std_proj": 0.11661791056394577
+  },
+  {
+    "set": "neutral_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.39964768290519714,
+    "std_proj": 0.2231099009513855
+  },
+  {
+    "set": "neutral_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.354304701089859,
+    "std_proj": 0.24234266579151154
+  },
+  {
+    "set": "neutral_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.5965312719345093,
+    "std_proj": 0.2916262149810791
+  },
+  {
+    "set": "cooking_craft_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.1270536482334137,
+    "std_proj": 0.08698774874210358
+  },
+  {
+    "set": "cooking_craft_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.3922417461872101,
+    "std_proj": 0.2653034031391144
+  },
+  {
+    "set": "cooking_craft_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.22409164905548096,
+    "std_proj": 0.15447069704532623
+  },
+  {
+    "set": "cooking_craft_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.6089324951171875,
+    "std_proj": 0.25207915902137756
+  },
+  {
+    "set": "music_craft_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.13726010918617249,
+    "std_proj": 0.08674442023038864
+  },
+  {
+    "set": "music_craft_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.26855847239494324,
+    "std_proj": 0.1461068093776703
+  },
+  {
+    "set": "music_craft_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.19609478116035461,
+    "std_proj": 0.10495628416538239
+  },
+  {
+    "set": "music_craft_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.38552817702293396,
+    "std_proj": 0.22265851497650146
+  },
+  {
+    "set": "programming_craft_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.20257951319217682,
+    "std_proj": 0.12282747030258179
+  },
+  {
+    "set": "programming_craft_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.368903249502182,
+    "std_proj": 0.24630039930343628
+  },
+  {
+    "set": "programming_craft_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.280088871717453,
+    "std_proj": 0.23975756764411926
+  },
+  {
+    "set": "programming_craft_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.3997199237346649,
+    "std_proj": 0.2404327094554901
+  },
+  {
+    "set": "i_need_help_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.4772169589996338,
+    "std_proj": 0.27369627356529236
+  },
+  {
+    "set": "i_need_help_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.7728590369224548,
+    "std_proj": 0.13791444897651672
+  },
+  {
+    "set": "i_need_help_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.6710454821586609,
+    "std_proj": 0.2506857216358185
+  },
+  {
+    "set": "i_need_help_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.7991370558738708,
+    "std_proj": 0.09833959490060806
+  },
+  {
+    "set": "declarative_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.05838777497410774,
+    "std_proj": 0.31390392780303955
+  },
+  {
+    "set": "declarative_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 1.125869631767273,
+    "std_proj": 0.1941125988960266
+  },
+  {
+    "set": "declarative_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.2525375187397003,
+    "std_proj": 0.42266973853111267
+  },
+  {
+    "set": "declarative_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 1.116529107093811,
+    "std_proj": 0.18865171074867249
+  },
+  {
+    "set": "fresh_craft_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.07432901114225388,
+    "std_proj": 0.18368996679782867
+  },
+  {
+    "set": "fresh_craft_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.07873564958572388,
+    "std_proj": 0.20075267553329468
+  },
+  {
+    "set": "fresh_craft_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.07219218462705612,
+    "std_proj": 0.1782008409500122
+  },
+  {
+    "set": "fresh_craft_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.08247082680463791,
+    "std_proj": 0.22600910067558289
+  },
+  {
+    "set": "first_person_no_help_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.2758103311061859,
+    "std_proj": 0.41449233889579773
+  },
+  {
+    "set": "first_person_no_help_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 1.0591516494750977,
+    "std_proj": 0.16046461462974548
+  },
+  {
+    "set": "first_person_no_help_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.5931535959243774,
+    "std_proj": 0.40591689944267273
+  },
+  {
+    "set": "first_person_no_help_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 1.07273530960083,
+    "std_proj": 0.14839649200439453
+  },
+  {
+    "set": "i_need_help_seq_fic_then_real_n10",
+    "label": "fictional_then_real",
+    "n": 50,
+    "mean_proj": 0.27644413709640503,
+    "std_proj": 0.17291761934757233
+  },
+  {
+    "set": "i_need_help_seq_fic_then_real_n20",
+    "label": "fictional_then_real",
+    "n": 50,
+    "mean_proj": 0.38795632123947144,
+    "std_proj": 0.22886580228805542
+  },
+  {
+    "set": "i_need_help_seq_real_then_fic_n10",
+    "label": "real_then_fictional",
+    "n": 50,
+    "mean_proj": 0.20730821788311005,
+    "std_proj": 0.13674315810203552
+  },
+  {
+    "set": "i_need_help_seq_real_then_fic_n20",
+    "label": "real_then_fictional",
+    "n": 50,
+    "mean_proj": 0.4050462245941162,
+    "std_proj": 0.25587838888168335
+  },
+  {
+    "set": "paraphrase_writing_craft_n10",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.03280343860387802,
+    "std_proj": 0.07408871501684189
+  },
+  {
+    "set": "paraphrase_writing_craft_n10",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.1828848123550415,
+    "std_proj": 0.26669493317604065
+  },
+  {
+    "set": "paraphrase_writing_craft_n20",
+    "label": "fictional",
+    "n": 50,
+    "mean_proj": 0.11770576238632202,
+    "std_proj": 0.0844418928027153
+  },
+  {
+    "set": "paraphrase_writing_craft_n20",
+    "label": "real",
+    "n": 50,
+    "mean_proj": 0.2957998216152191,
+    "std_proj": 0.29221341013908386
+  }
+]

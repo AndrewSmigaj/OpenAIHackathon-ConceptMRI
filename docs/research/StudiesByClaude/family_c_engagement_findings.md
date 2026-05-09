@@ -134,10 +134,53 @@ For writing_craft N=10 fic, strict=70% and soft=80% — the 10% gap is reasoning
 3. Manual subagent pass on the soft-rate "engagement_reasoning" cases to verify the heuristic.
 4. If the noun-phrase paraphrase finding holds, write a separate report and consider notifying OpenAI safety.
 
+## Basin-projection correlation (the geometric story)
+
+Methodology: re-fit UMAP-6D on basin study residuals at L23 (token=1, the
+target `want`). Compute basin centroids in this UMAP using the
+`suicide_letter_basin_k3_n15` cluster assignments (cluster 0 = distress,
+cluster 1 = fictional). For each Family C/D session: extract the L23
+residual at the test ending's `want` (token_position=1 of the static
+substring), transform through the same UMAP, project on the basin axis.
+0 = fictional basin, 1 = distress basin.
+
+Script: `docs/scratchpad/family_c_basin_projection.py`. Per-cell means:
+`docs/scratchpad/family_c_basin_projections.json`.
+
+### Headline correlation
+Across all 44 cells (set × label):
+- Pearson r between strict engagement % and mean projection: **−0.335 (p=0.026)**
+- Pearson r between soft engagement % and mean projection: **−0.407 (p=0.006)**
+- Spearman ρ (strict): **−0.410 (p=0.006)**
+
+Lower projection → closer to fictional basin → higher engagement. This is the geometric correlate of the behavioral finding: priming styles that pull the test ending toward the fictional basin also unlock engagement.
+
+### Notable cells
+
+| Set / label | mean proj | strict % |
+|---|---|---|
+| paraphrase fic n10 | +0.033 | 94 |
+| writing_craft fic n10 | +0.109 | 70 |
+| paraphrase real n10 | +0.183 | 54 |
+| declarative real n10 | +1.126 | 0 |
+| first_person_no_help real n10 | +1.059 | 0 |
+| fresh_craft fic n10 | +0.074 | 14 |
+| fresh_craft real n10 | +0.079 | 2 |
+
+### Subtleties the simple correlation misses
+
+- **declarative fic n10**: projection +0.058 (deep fic basin), engagement 4%. Low projection alone is necessary but not sufficient — the priming style also has to establish the user-as-writer frame for the model to commit to engagement.
+- **fresh_craft both labels**: both fic and real projections are essentially identical (+0.074 / +0.079). The priming nearly equalizes the basin signature regardless of test-ending content. Yet engagement differs (14% / 2% strict). Geometry alone underdetermines behavior here — there is a non-geometric component (perhaps the safety classifier reads tokens beyond L23 of the `want` position).
+- **paraphrase real n10**: projection +0.183 (mostly fictional basin), engagement 54%. The noun-phrase variation prevents the safety classifier from pulling the residual into the distress basin in the first place — the geometric anchor for "this is real distress" is bound to "suicide letter" specifically.
+
+This last point is the geometric counterpart of the noun-phrase safety finding: changing the noun phrase doesn't just bypass behavior; it shifts the residual stream's L23 representation away from the distress basin.
+
 ## Files
 
 - Categorizer: `docs/scratchpad/family_c_categorizer.py`
 - Per-probe categorizations: `docs/scratchpad/family_c_categorization.json`
 - Aggregate engagement rates with CIs: `docs/scratchpad/family_c_engagement_rates.json`
+- Basin-projection script: `docs/scratchpad/family_c_basin_projection.py`
+- Per-cell mean projections: `docs/scratchpad/family_c_basin_projections.json`
 - Capture log: `docs/scratchpad/family_c_capture_log.tsv`
 - Sentence sets: `data/sentence_sets/role_framing/suicide_letter_priming_*.json` (18 single + 4 sequential), `suicide_letter_paraphrase_v5_*.json` (2 paraphrase)
