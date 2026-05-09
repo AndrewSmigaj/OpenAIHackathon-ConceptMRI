@@ -169,7 +169,7 @@ def _run_temporal_capture_sync(
             if i == 0:
                 token_ids = chain.first_step_tokens(sentence)
             else:
-                token_ids = chain.next_step_tokens(sentence, past_kv)
+                token_ids = chain.next_step_tokens(sentence)
 
             # Optional generation (default off for paper protocol)
             gen_text = None
