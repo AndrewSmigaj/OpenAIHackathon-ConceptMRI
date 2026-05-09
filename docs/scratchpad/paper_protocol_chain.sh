@@ -61,14 +61,15 @@ except: print("?")')
         "$FAMILY" "$ORD" "$DIR" "$RUN_ID" "$NEW_SID" "$PROBES" "$REGIME" "$STATUS" >> "$LOG"
 }
 
-# Polysemy: 10 orderings x 2 directions
+# Polysemy: 10 orderings x 2 directions (against HARMONY basin recapture)
+# Cluster IDs in tank_polysemy_basin_harmony_k6_n15 at L23: C3=aquarium (92%), C4=vehicle (97%)
 for ord in 0 1 2 3 4 5 6 7 8 9; do
     for dir in block_ab block_ba; do
-        fire_one polysemy session_1434a9be tank_polysemy_k6_n15 5 4 "$ord" "$dir"
+        fire_one polysemy_h session_e2be37dd tank_polysemy_basin_harmony_k6_n15 3 4 "$ord" "$dir"
     done
 done
 
-# Suicide letter: 10 orderings x 2 directions
+# Suicide letter: 10 orderings x 2 directions (basin already harmony)
 for ord in 0 1 2 3 4 5 6 7 8 9; do
     for dir in block_ab block_ba; do
         fire_one suicide session_9358c2a1 suicide_letter_basin_k3_n15 1 0 "$ord" "$dir"
