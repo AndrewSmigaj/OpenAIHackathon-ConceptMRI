@@ -159,9 +159,17 @@ def _run_temporal_capture_sync(
             experiment_id=temporal_run_id,
         )
 
-        # Unified cache-on harmony loop
-        chain = HarmonyKVChain(service.processor.tokenizer)
+        # Unified cache-on harmony loop. When generate_output=True, generation
+        # uses a fresh re-encode of the cumulative content (with suffix) — the
+        # capture cache has the suffix stripped for sliding-window safety, so
+        # generating from it would produce nonsense (model would continue the
+        # user's sentence instead of starting an assistant reply). Re-encoding
+        # for generate is bounded (one extra forward pass + max_new_tokens
+        # decoding per probe) and keeps the capture chain's past_kv clean.
+        tokenizer = service.processor.tokenizer
+        chain = HarmonyKVChain(tokenizer)
         past_kv = None
+        cumulative_text = ""
         for i, (sentence, regime, source_meta) in enumerate(sequence_items):
             logger.info(
                 f"Temporal capture [harmony+cache_on] {i+1}/{len(sequence_items)} regime={regime}"
@@ -171,10 +179,20 @@ def _run_temporal_capture_sync(
             else:
                 token_ids = chain.next_step_tokens(sentence)
 
-            # Optional generation (default off for paper protocol)
+            cumulative_text = (cumulative_text + " " + sentence) if cumulative_text else sentence
+
+            # Optional generation (default off for paper protocol). Tokenize
+            # cumulative_text with full chat-template (suffix included) so the
+            # model can begin its assistant reply.
             gen_text = None
             if request.generate_output:
-                gen_text, _ = service.generate(token_ids, max_new_tokens=256)
+                gen_enc = tokenizer.apply_chat_template(
+                    [{"role": "user", "content": cumulative_text}],
+                    tokenize=True, add_generation_prompt=True,
+                    return_tensors="pt", return_dict=True,
+                )
+                gen_token_ids = gen_enc["input_ids"][0].tolist()
+                gen_text, _ = service.generate(gen_token_ids, max_new_tokens=256)
 
             _, past_kv = service.capture_step(
                 new_session_id, token_ids, [target_word],
